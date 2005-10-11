@@ -8,6 +8,113 @@ This covers the CardBus layer, and how it interacts with the PCI layer.
 
 Hm, CardBus is PCI.  I guess just PCMCIA will be covered...
 
+<nutlist longestterm="unseten">
+
+ <nutentry><term>alias</term>
+  <nutsynopsis><literal>alias</literal> 
+  [<replaceable>name</replaceable> 
+  [<replaceable>command</replaceable>]]</nutsynopsis>
+  <nutentrybody>
+   <para>Assign <emphasis>name</emphasis> 
+    as the shorthand name, or alias, for 
+    <emphasis>command</emphasis>.  If
+    <emphasis>command</emphasis> is omitted, print the 
+    alias for <emphasis>name</emphasis>; 
+    if <emphasis>name</emphasis> is also
+    omitted, print all aliases.  Aliases can be defined on the command
+    line, but they are more often stored in 
+    <literal>.cshrc</literal>
+    so that they take effect after login.  (See [cross ref deleted]
+    earlier in this chapter.)  Alias definitions can reference
+    command-line arguments, much like the history list.  Use
+    <literal>\!*</literal> to refer to all command-line
+    arguments, <literal>\!^</literal> for the first argument,
+    <literal>\!$</literal> for the last, etc.  An alias
+    <emphasis>name</emphasis> can be any valid Unix 
+    command; however, you lose the original command's meaning unless 
+    you type <emphasis>\name</emphasis>.  
+    See also <emphasis
+    role="bold">unalias</emphasis>.</para>
+
+    <refsect2><title>Examples</title> 
+    <para>Set the size for <literal>xterm</literal> 
+    windows under the X Window System:</para>
+    <programlisting>alias R 'set noglob; eval `resize`; 
+      unset noglob'</programlisting>
+    <para>Show aliases that contain the string
+     <emphasis>ls</emphasis>:</para>
+    <programlisting>alias | grep ls</programlisting>
+    <para>Run <literal>nroff</literal> 
+    on all command-line arguments:</para>
+    <programlisting>alias ms 'nroff -ms \!*'</programlisting>
+    <para>Copy the file that is named as the first argument:</para>
+    <programlisting>alias back 'cp \!^ \!^.old'</programlisting>
+    <para>Use the regular <literal>ls</literal>, 
+    not its alias:</para>
+    <programlisting>% <userinput>\ls
+      </userinput></programlisting>
+   </refsect2>
+  </nutentrybody>
+ </nutentry>
+ 
+<nutentry>
+	 <term>CONFIG_USB</term>
+<nutsynopsis>
+	Support for Host-side USB
+	<literal>alias</literal>
+	[<replaceable>name</replaceable> 
+	[<replaceable>command</replaceable>]]
+</nutsynopsis>
+depends on USB_ARCH_HAS_HCD
+
+<nutentrybody>
+   <para>Assign <emphasis>name</emphasis> 
+    as the shorthand name, or alias, for 
+    <emphasis>command</emphasis>.  If
+    <emphasis>command</emphasis> is omitted, print the 
+    alias for <emphasis>name</emphasis>; 
+    if <emphasis>name</emphasis> is also
+    omitted, print all aliases.  Aliases can be defined on the command
+    line, but they are more often stored in 
+    <literal>.cshrc</literal>
+    so that they take effect after login.  (See [cross ref deleted]
+    earlier in this chapter.)  Alias definitions can reference
+    command-line arguments, much like the history list.  Use
+    <literal>\!*</literal> to refer to all command-line
+    arguments, <literal>\!^</literal> for the first argument,
+    <literal>\!$</literal> for the last, etc.  An alias
+    <emphasis>name</emphasis> can be any valid Unix 
+    command; however, you lose the original command's meaning unless 
+    you type <emphasis>\name</emphasis>.  
+    See also <emphasis
+    role="bold">unalias</emphasis>.</para>
+
+    <refsect2><title>Examples</title> 
+    <para>Set the size for <literal>xterm</literal> 
+    windows under the X Window System:</para>
+    <programlisting>alias R 'set noglob; eval `resize`; 
+      unset noglob'</programlisting>
+    <para>Show aliases that contain the string
+     <emphasis>ls</emphasis>:</para>
+    <programlisting>alias | grep ls</programlisting>
+    <para>Run <literal>nroff</literal> 
+    on all command-line arguments:</para>
+    <programlisting>alias ms 'nroff -ms \!*'</programlisting>
+    <para>Copy the file that is named as the first argument:</para>
+    <programlisting>alias back 'cp \!^ \!^.old'</programlisting>
+    <para>Use the regular <literal>ls</literal>, 
+    not its alias:</para>
+    <programlisting>% <userinput>\ls
+      </userinput></programlisting>
+   </refsect2>
+  </nutentrybody>
+ </nutentry>
+
+</nutlist>
+
+
+
+
 </chapter>
 
 <!-- vim: set ai tw=72 : -->
