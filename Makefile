@@ -1,3 +1,5 @@
+BOOK_NAME=lkn
+
 ###################################
 # book section
 
@@ -39,27 +41,14 @@ bookhtml:
 
 VERSION=$(shell date "+%Y_%m_%d"| awk '{print $$1}')
 
-RELEASE_NAME=ldsp-$(VERSION)
-FIGURE_NAME=ldsp-figures-$(VERSION)
+RELEASE_NAME=$(BOOK_NAME)-$(VERSION)
+FIGURE_NAME=$(BOOK_NAME)-figures-$(VERSION)
 
-DISTFILES = $(shell find . \( -not -name '.' \) -print | egrep -v '(BitKeeper|SCCS)' | grep -v "\.tar\.gz" | sort ) 
 FIGURESFILES = $(shell find . \( -not -name '.' \) -print | egrep -v '(BitKeeper|SCCS)' | grep -v "\.tar\.gz" | grep -v "\.dia" | grep figures | sort ) 
 distdir := $(RELEASE_NAME)
 srcdir = .
 release: clean
-	@echo $(DISTFILES)
-	@-rm -rf $(distdir)
-	@mkdir $(distdir)
-	@-chmod 777 $(distdir)
-	@for file in $(DISTFILES); do			\
-		if test -d $$file; then			\
-			mkdir $(distdir)/$$file;	\
-		else					\
-			cp -p $$file $(distdir)/$$file;	\
-		fi;					\
-	done
-	@tar -c $(distdir) | gzip -9 > $(RELEASE_NAME).tar.gz
-	@rm -rf $(distdir)
+	git-tar-tree HEAD $(RELEASE_NAME) | gzip -9v > $(RELEASE_NAME).tar.gz
 	@echo "Built $(RELEASE_NAME).tar.gz"
 
 figure_release: clean
