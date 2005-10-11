@@ -4,6 +4,46 @@
 Kernel boot command line reference
 </title>
 
+<nutlist longestterm="unseten">
+
+
+<nutentry>
+	<term>nousb</term>
+<nutsynopsis>
+	Disable the USB subsystem
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	requires
+	<literal>USB</literal>
+	</para>
+
+	<para>
+	If this command line option is present, the USB subsystem will not be
+	initialized.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>mem</term>
+<nutsynopsis>
+	<literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	Force a specified ammount of memory to be used by the kernel.
+	</para>
+
+
+</nutentrybody>
+</nutentry>
+
+
+</nutlist>
+
+
 
 
 </chapter>
