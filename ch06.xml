@@ -1,13 +1,24 @@
 <chapter>
 
 <title>
-PCI Drivers
+Upgrading a kernel
 </title>
 
-This covers the PCI subsystem, which is needed by lots of different
-types of devices (network cards, USB controllers, SCSI controllers, fast
-serial cards, etc.)
+<para>
+retrieving the patch
+</para>
 
+<para>
+applying the patch
+</para>
+
+<para>
+updating the configuration
+</para>
+
+<para>
+building the updated kernel
+</para>
 
 </chapter>
 

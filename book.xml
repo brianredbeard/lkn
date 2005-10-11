@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE book SYSTEM "/usr/local/prod/sgml/dblite/dblite.dtd"
 [
-<!ENTITY ch00       SYSTEM "ch00.xml">
 <!ENTITY ch01       SYSTEM "ch01.xml">
 <!ENTITY ch02       SYSTEM "ch02.xml">
 <!ENTITY ch03       SYSTEM "ch03.xml">
@@ -15,11 +14,12 @@
 <!ENTITY ch11       SYSTEM "ch11.xml">
 <!ENTITY appa       SYSTEM "appa.xml">
 <!ENTITY appb       SYSTEM "appb.xml">
+<!ENTITY appc       SYSTEM "appc.xml">
 <!ENTITY gloss      SYSTEM "glossary.xml">
 ]>
 
-<book id="ldsp">
-<title>Linux Driver Subsystem Programming</title>
+<book id="lkn">
+<title>Linux Kernel in a Nutshell</title>
 
 <bookinfo>
 <edition>First</edition>
@@ -32,8 +32,8 @@
 </authorgroup>
 
 <editor>
-<firstname>Andy</firstname>
-<surname>Oram</surname>
+<firstname>David</firstname>
+<surname>Brickner</surname>
 </editor>
 
 <pagenums>300 pages (est.)</pagenums>
@@ -52,8 +52,8 @@
 &ch09;
 &ch10;
 &ch11;
-<!--&appa;-->
-<!--&appb;-->
+&appa;
+&appb;
 <!--&gloss;-->
 
 </book>

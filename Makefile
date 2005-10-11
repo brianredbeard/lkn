@@ -13,7 +13,10 @@ CHAP_SRC	:= 	ch01.xml	\
 			ch08.xml	\
 			ch09.xml	\
 			ch10.xml	\
-			ch11.xml
+			ch11.xml	\
+			appa.xml	\
+			appb.xml	\
+			appc.xml
 
 all:
 	@echo "need to tell me what to do"

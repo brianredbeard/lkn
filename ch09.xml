@@ -1,11 +1,9 @@
 <chapter>
 
 <title>
-Video / framebuffer
+Kernel boot command line reference
 </title>
 
-This covers the video/framebuffer layer, which is needed to control a
-display.
 
 
 </chapter>

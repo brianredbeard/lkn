@@ -1,15 +1,155 @@
 <chapter>
 
 <title>
-Disk Drivers
+Kernel configuration option reference
 </title>
 
-SCSI
-IDE
 
-Both SCSI and IDE are under massive change right now, but they both deal
-with talking to disk drives (and thing that look like disk drives, like
-CompactFlash storage devices.)
+<nutlist longestterm="unseten">
+
+<!--
+
+<nutentry><term>alias</term>
+  <nutsynopsis><literal>alias</literal> 
+  [<replaceable>name</replaceable> 
+  [<replaceable>command</replaceable>]]</nutsynopsis>
+  <nutentrybody>
+   <para>Assign <emphasis>name</emphasis> 
+    as the shorthand name, or alias, for 
+    <emphasis>command</emphasis>.  If
+    <emphasis>command</emphasis> is omitted, print the 
+    alias for <emphasis>name</emphasis>; 
+    if <emphasis>name</emphasis> is also
+    omitted, print all aliases.  Aliases can be defined on the command
+    line, but they are more often stored in 
+    <literal>.cshrc</literal>
+    so that they take effect after login.  (See [cross ref deleted]
+    earlier in this chapter.)  Alias definitions can reference
+    command-line arguments, much like the history list.  Use
+    <literal>\!*</literal> to refer to all command-line
+    arguments, <literal>\!^</literal> for the first argument,
+    <literal>\!$</literal> for the last, etc.  An alias
+    <emphasis>name</emphasis> can be any valid Unix 
+    command; however, you lose the original command's meaning unless 
+    you type <emphasis>\name</emphasis>.  
+    See also <emphasis
+    role="bold">unalias</emphasis>.</para>
+
+    <refsect2><title>Examples</title> 
+    <para>Set the size for <literal>xterm</literal> 
+    windows under the X Window System:</para>
+    <programlisting>alias R 'set noglob; eval `resize`; 
+      unset noglob'</programlisting>
+    <para>Show aliases that contain the string
+     <emphasis>ls</emphasis>:</para>
+    <programlisting>alias | grep ls</programlisting>
+    <para>Run <literal>nroff</literal> 
+    on all command-line arguments:</para>
+    <programlisting>alias ms 'nroff -ms \!*'</programlisting>
+    <para>Copy the file that is named as the first argument:</para>
+    <programlisting>alias back 'cp \!^ \!^.old'</programlisting>
+    <para>Use the regular <literal>ls</literal>, 
+    not its alias:</para>
+    <programlisting>% <userinput>\ls
+      </userinput></programlisting>
+   </refsect2>
+  </nutentrybody>
+ </nutentry>
+-->
+
+<nutentry>
+	<term>USB</term>
+<nutsynopsis>
+	Support for Host-side USB
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>USB_ARCH_HAS_HCD</literal>
+	</para>
+
+	<para>
+	Module Name
+	<literal>usbcore</literal>
+	</para>
+
+	<para>
+	Universal Serial Bus (USB) is a specification for a serial bus
+	subsystem which offers higher speeds and more features than the
+	traditional PC serial port.  The bus supplies power to peripherals and
+	allows for hot swapping.  Up to 127 USB peripherals can be connected to
+	a single USB host in a tree structure.
+	</para>
+
+	<para>
+	The USB host is the root of the tree, the peripherals are the leaves
+	and the inner nodes are special USB devices called hubs.  Most PCs now
+	have USB host ports, used to connect peripherals such as scanners,
+	keyboards, mice, modems, cameras, disks, flash memory, network links,
+	and printers to the PC.
+	</para>
+
+	<para>
+	Say Y here if your computer has a host-side USB port and you want to
+	use USB devices.  You then need to say Y to at least one of the Host
+	Controller Driver (HCD) options below.  Choose a USB 1.1 controller,
+	such as "UHCI HCD support" or "OHCI HCD support", and "EHCI HCD (USB
+	2.0) support" except for older systems that do not have USB 2.0
+	support.  It doesn't normally hurt to select them all if you are not
+	certain.
+	</para>
+
+	<para>
+	If your system has a device-side USB port, used in the peripheral side
+	of the USB protocol, see the "USB Gadget" framework instead.
+	</para>
+
+	<para>
+	After choosing your HCD, then select drivers for the USB peripherals
+	you'll be using.  You may want to check out the information provided in
+	<literal>Documentation/usb/</literal> and especially the links given in
+	<literal>Documentation/usb/usb-help.txt</literal>.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>USB_SERIAL</term>
+<nutsynopsis>
+	USB Serial Converter support
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>USB</literal>
+	</para>
+
+	<para>
+	Module Name
+	<literal>usbserial</literal>
+	</para>
+
+	<para>
+	Say Y here if you have a USB device that provides normal serial ports,
+	or acts like a serial device, and you want to connect it to your USB
+	bus.
+	</para>
+
+	<para>
+	Please read <literal>Documentation/usb/usb-serial.txt</literal> for
+	more information on the specifics of the different devices that are
+	supported, and on how to use them.
+	</para>
+
+
+</nutentrybody>
+</nutentry>
+
+</nutlist>
+
+
+
 
 </chapter>
 
