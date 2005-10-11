@@ -1,0 +1,14 @@
+<chapter>
+
+<title>
+IrDA Drivers
+</title>
+
+This covers all of the different IrDA layers and devices, and how it
+ties into the network stack.  IrDA is used to talk over an infra-red
+connection from a computer to some kinds of devices (like a laptop to a
+palm pilot).
+
+</chapter>
+
+<!-- vim: set ai tw=72 : -->

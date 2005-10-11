@@ -1,0 +1,212 @@
+<appendix number="2" id="XML-APP-B">
+<title>Resources</title>
+
+<para>
+There were many valuable sources of information that assisted in the creation
+of this book. The following sections list additional resources to help
+you learn even more &xml;.
+</para>
+
+<sect1 number="2.1">
+<title>Online</title>
+
+<variablelist>
+
+<varlistentry><term>XML.com</term>
+<listitem><para>The website <systemitem
+role="url">http://www.xml.com/</systemitem> is one of the most
+complete and timely sources of &xml; information and news
+around. It should be on your weekly reading list if you have any
+interest in learning or using &xml;.</para></listitem></varlistentry>
+
+<varlistentry><term>The &xml; Cover Pages</term>
+<listitem>
+<para>Edited by Robin Cover, this is one of the largest and most up-to-date lists of &xml; 
+resources. It can be found at <systemitem role="url">http://www.oasis-open.org/cover/</systemitem>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry><term>DocBook web page</term>
+<listitem><para><acronym>OASIS</acronym>, the maintainers of DocBook,
+have a web page devoted to the &xml; application at <systemitem
+role="url">http://www.oasis-open.org/docbook/</systemitem>. There, you
+will find the latest version and plenty of
+documentation.</para></listitem></varlistentry>
+
+<varlistentry><term><citetitle>A Tutorial on Character Code Issues</citetitle>, by Jukka Korpela</term>
+<listitem><para><systemitem role="url">http://www.hut.fi/~jkorpela/chars.html</systemitem></para></listitem></varlistentry>
+
+<varlistentry><term>&xsl; mailing list</term>
+<listitem><para>Signing up with the &xsl; mailing list is a great way
+to be informed of the latest developments in &xsl; and &xslt; tools
+and techniques. It's also a forum for asking questions and getting
+advice. The traffic is fairly high, so you should balance your needs
+with the high volume of messages that will be passing through your
+mailbox. To sign up, go to the web page <systemitem
+role="url">http://www.mulberrytech.com/xsl/</systemitem> and follow
+the instructions there for getting on the list.</para></listitem></varlistentry>
+
+<varlistentry><term>Apache &xml; Project</term>
+<listitem><para>This project is a part of the Apache project that
+focuses on XML technologies. It develops tools and technologies for
+using &xml; with Apache and provides feedback to standards organizations
+about &xml; implementations. Visit them at: 
+<systemitem role="url">http://xml.apache.org/</systemitem></para></listitem></varlistentry>
+
+<varlistentry><term>&xml; Developers Guide</term>
+<listitem><para>The Microsoft Developers Network's online workshop
+for &xml; and information about using &xml; with Microsoft applications.
+Visit them at: <systemitem role="url">http://msdn.microsoft.com/xml/XMLGuide/</systemitem></para></listitem></varlistentry>
+
+<varlistentry><term>Dr. Dobb's Journal</term>
+<listitem><para>Articles, resources, opinions, news, and reviews
+covering all aspects of programming. Go to: 
+<systemitem role="url">http://www.ddj.com/</systemitem> for online content, and
+subscribe to the magazine while you're there.</para></listitem></varlistentry>
+
+</variablelist>
+
+</sect1>
+<sect1 number="2.2">
+<title>Books</title>
+
+<variablelist>
+
+<varlistentry><term><citetitle>DocBook, the Definitive Guide</citetitle>, Norman Walsh and
+Leonard Muellner, O'Reilly &amp; Associates.</term>
+<listitem><para>DocBook is a popular and flexible markup language for
+technical documentation, with versions for &sgml; and &xml;. This book
+has an exhaustive, glossary-style format describing every element in
+detail. It also has lots of practical information for getting started
+using &xml; and stylesheets.</para></listitem></varlistentry>
+
+<varlistentry><term><citetitle>The &xml; Bible</citetitle>, Elliotte Rusty Harold,
+IDG Books Worldwide.</term>
+<listitem><para>A solid introduction to &xml; and a comprehensive overview
+of the &xml; landscape.</para></listitem></varlistentry>
+
+<varlistentry><term><citetitle>&xml; in a Nutshell</citetitle>, Elliotte Rusty Harold and
+W. Scott Means, O'Reilly &amp; Associates.</term>
+<listitem><para>A comprehensive desktop reference for all things &xml;.</para></listitem></varlistentry>
+
+<varlistentry><term>&html; and XHTML, the Definitive Guide, Chuck Musciano and
+Bill Kennedy, O'Reilly &amp; Associates.</term>
+<listitem><para>Updated with frequent new editions, this book is a
+very timely and comprehensive resource for learning about
+&html;.</para></listitem></varlistentry>
+
+<varlistentry><term><citetitle>Developing SGML DTDs: from Text to Model to Markup</citetitle>,
+by Eve Maler and Jeanne El Andaloussi, Prentice-Hall.</term>
+<listitem><para>A step-by-step tutorial for designing and implementing DTDs.</para></listitem></varlistentry>
+
+
+<varlistentry><term>The &sgml; Handbook, Charles F. Goldfarb, Oxford
+Press, 1995.</term>
+<listitem><para>A very complete reference for &sgml;, including an
+annotated specification. Like its
+subject, the book is complex and hefty, so beginners may not
+find it to be a good introduction.</para></listitem></varlistentry>
+
+<varlistentry><term><citetitle>Java and &xml;</citetitle>, Brett McLaughlin,
+O'Reilly &amp; Associates.</term>
+<listitem><para>Shows how to put together &xml; and the Java programming
+language to build real-world applications.</para></listitem></varlistentry>
+
+<varlistentry><term><citetitle>Building Oracle &xml; Applications</citetitle>, 
+Steve Muench, O'Reilly &amp; Associates.</term>
+<listitem><para>A detailed look at the tools that Oracle provides for &xml;
+development and how to combine the power of XML and XSLT 
+with the functionality of the Oracle database.</para></listitem></varlistentry>
+
+</variablelist>
+
+
+</sect1>
+<sect1 number="2.3">
+<title>Standards Organizations</title>
+
+<variablelist>
+<varlistentry><term>&iso;, the International Organization for Standardization</term>
+<listitem><para>A worldwide federation of national standards organizations.
+Visit them at <systemitem role="url">http://www.iso.ch/</systemitem>.</para></listitem></varlistentry>
+
+<varlistentry><term>&w3c;</term>
+<listitem><para>The World Wide Web Consortium at <systemitem role="url">http://w3c.org/</systemitem>
+oversees the specifications and guidelines for the technology of the
+World Wide Web.</para></listitem></varlistentry>
+
+<varlistentry><term>Unicode Consortium</term>
+<listitem><para>The organization responsible for defining the Unicode
+character set. Visit them at: <systemitem role="url">http://www.unicode.org/</systemitem>.</para></listitem></varlistentry>
+
+<varlistentry><term>OASIS</term>
+<listitem><para>OASIS, the Organization for the Advancement of Structured Information Standards, 
+is an international consortium that creates interoperable 
+industry specifications based on public standards such as 
+XML and SGML. Visit them at: <systemitem role="url">http://www.oasis-open.org/</systemitem>.</para></listitem></varlistentry>
+
+</variablelist>
+</sect1>
+
+
+<sect1 number="2.4">
+<title>Tools</title>
+
+<variablelist>
+
+<varlistentry><term>GNU Emacs</term>
+<listitem><para>The extraordinarily powerful text editor, and so much more.
+Learn all about it at: <systemitem role="url">http://www.gnu.org/software/emacs/emacs.html</systemitem>.</para></listitem></varlistentry>
+
+<varlistentry><term>Xalan</term>
+<listitem><para>A high-performance XSLT stylesheet processor. Fully implements
+XSLT and XLinks. Find out more about it at the Apache XML Project, 
+<systemitem role="url">http://xml.apache.org/</systemitem>.</para></listitem></varlistentry>
+
+<varlistentry><term>Xerces</term>
+<listitem><para>A fully validating parser that implements XML, DOM levels 1 and 2, and
+SAX2. Find out more about it at the Apache XML Project, 
+<systemitem role="url">http://xml.apache.org/</systemitem>.</para></listitem></varlistentry>
+
+<varlistentry><term>XT</term>
+<listitem><para>A Java implementation of XSLT. Get it at:
+<systemitem role="url">http://www.jclark.com/xml/xt.html</systemitem>.</para></listitem></varlistentry>
+
+
+</variablelist>
+
+
+</sect1>
+
+
+
+<sect1 number="2.5">
+<title>Miscellaneous</title>
+
+<variablelist>
+
+<varlistentry><term><citetitle>User Friendly</citetitle> by Illiad</term>
+<listitem><para>Starring the formidably-cute <quote>dust
+puppy</quote> and a gaggle of computer industry drones, this comic strip
+will inject much-needed jocularity into your bloodstream after a long day
+of hacking &xml;. The whole archive is available online at <systemitem
+role="url">http://www.userfriendly.org/</systemitem>, and in two books
+by O'Reilly, <citetitle>User Friendly, the Comic Strip</citetitle> and
+<citetitle>Evil Geniuses in a Nutshell</citetitle>.</para></listitem></varlistentry>
+
+<varlistentry><term><citetitle>The Cathedral and the
+Bazaar</citetitle>, Eric S. Raymond, O'Reilly &amp; Associates</term>
+<listitem><para>In this philosophical analysis and evangelical sermon
+about the grassroots computer programming movement called <quote>Open
+Source</quote>, Raymond extols the virtues of community, sharing, and
+that good feeling you get when you're working for the common
+good.</para></listitem></varlistentry>
+
+</variablelist>
+
+
+
+
+
+</sect1>
+</appendix>

@@ -1,0 +1,2843 @@
+<chapter id="LDSP-chapter-tty">
+
+<title>
+TTY Drivers
+</title>
+
+<simplesect>
+<para>
+A tty device gets its name from the very old abbreviation of
+teletypewriter, and was originally only associated with the physical or
+virtual terminal connection to a UNIX machine.  Over time, the name also
+came to mean any serial port style device, as terminal connections could
+also be created over such a connection.  The Linux tty driver core 
+lives right below the standard character driver level, and provides a
+range of features focused on providing an interface for terminal style
+devices to use.  Some examples of physical tty devices are serial ports,
+USB to serial port converters, and some types of modems that need
+special processing to work properly (the traditional WinModem style
+devices.)  The tty core also supports the virtual consoles that are
+used to log into a computer, from either the keyboard, over a network
+connection, or through a xterm session.
+</para>
+
+<para>
+The tty core is responsible for controlling both the flow of data across
+a tty device, and the format of the data.  To do this, there are a
+number of different line disciplines that can be virtually "plugged"
+into any tty device.
+</para>
+
+<figure>
+<title>tty core overview</title>
+<graphic fileref="figures/ldsp_0201.png"/>
+</figure>
+
+<para>
+As the above diagram shows, the tty core takes data from a user that is
+to be sent to a tty device.  It then passes it to a tty line discipline
+driver, which then passes it to the tty driver.  The tty driver converts
+the data into a format that can be sent to the hardware.  Data being
+received from the tty hardware flows back up through the tty driver,
+into the tty line discipline driver, and into the tty core, where it can
+be retrieved by a user.  Sometimes the tty driver will communicate
+directly to the tty core and the tty core will send data directly to the
+tty driver, but usually the tty line discipline always has a chance to
+modify the data that is sent between the two.
+</para>
+
+<para>
+From the viewpoint of the tty driver, the tty line discipline is never
+seen.  The driver can not communicate directly with the line discipline,
+nor does it realize it is even present.  The driver's job is to format
+data that is sent to it in a manner that the hardware can understand,
+and also receive data from the hardware.  The tty line discipline's job
+is to format the data received from a user, or the hardware, in a
+specific manner.  This formatting usually takes the form of a protocol
+conversion such as PPP or Bluetooth.  Line disciplines will be described
+in the next chapter.
+</para>
+
+<para>
+There are three different types of tty drivers, console drivers, serial
+type drivers, and pty drivers.  The console and pty driver has already
+been written, and will probably not need to have new drivers created that
+operate in the same manner.  This leaves any new drivers that use the
+tty core, to interact with the user and the system as a serial port
+driver.
+</para>
+<!--
+
+  AO: I can't answer the following questions, but maybe some of the
+  confusion I express later will tell you there's something I don't
+  know and you need to describe.
+
+-->
+<remark>
+Do I need more info about serial port drivers?
+</remark>
+<remark>
+About serial port hardware?
+</remark>
+<!--
+
+  AO: What I think you do need to explain is the role of the tty
+  core. You could just say something like:
+
+    While all drivers interact with kernel code, tty drivers interact
+    with an extra layer provided by the kernel, called the tty
+    core. As you will see during the chapter, the tty core takes over
+    many everyday tasks and leaves relatively little work for the
+    driver to do.
+
+  You are still using both the term "tty core" and the term "tty
+  layer," which look like the same thing to me. I'd prefer one
+  term. (If they're different, briefly describe the difference.)
+
+  I am also a little confused about where data is buffered. Your
+  examples below show that a driver declares a buffer of a certain
+  size, copies data to it, and sends the data on to its
+  destination. How can the reader determine how big to make this
+  buffer? Then can you show how to manage it, given the need to do
+  writes, flushes, etc? I think buffer management is one of the tasks
+  you should show the reader. You could describe the flip buffer here
+  and what it's for. I wonder to what extent it's true, as you say
+  later, that "it is not necessary for every tty driver to implement
+  its own buffering logic." That's just for reads, right? It can send
+  on data to the tty core.
+
+-->
+
+<para>
+There are two different places that a user can look at to determine what
+kind of tty drivers are curently loaded in the kernel, and what tty
+devices are currently present.  The /proc/tty/drivers file provides a
+list of the currently loaded tty drivers.
+This file consists of a list of the different drivers currently present,
+showing the name of the driver, the default node name, the major number
+for the driver, the number of minors used by the driver, and the type of
+the tty driver.  The following is an example of this file:
+<screen>
+usbserial            /dev/ttyUSB   188   0-254 serial
+serial               /dev/ttyS%d     4   64-67 serial
+pty_slave            /dev/pts      136   0-255 pty:slave
+pty_master           /dev/ptm      128   0-255 pty:master
+pty_slave            /dev/ttyp       3   0-255 pty:slave
+pty_master           /dev/pty        2   0-255 pty:master
+unknown              /dev/vc/%d      4    1-63 console
+/dev/vc/0            /dev/vc/0       4       0 system:vtmaster
+/dev/ptmx            /dev/ptmx       5       2 system
+/dev/console         /dev/console    5       1 system:console
+/dev/tty             /dev/tty        5       0 system:/dev/tty
+</screen>
+The /proc/tty/driver/ directory contains individual files for some of
+the tty drivers, if they implement that functionality.  The default
+serial driver creates a file in this directory that shows a lot of
+serial port specific information about the hardware.  Information on how
+to create a file in this directory will be described later.
+</para>
+
+<para>
+All tty devices currently present, as well as a list of the tty drivers
+registered with the kernel driver core, can be found in the sysfs
+/sys/class/tty directory tree.  An example of this tree is:
+<screen>
+/sys/class/tty/
+|-- devices
+`-- drivers
+    |-- pci:serial -> ../../../bus/pci/drivers/serial
+    |-- usb-serial:clie_3.5 -> ../../../bus/usb-serial/drivers/clie_3.5
+    |-- usb-serial:edgeport_1 -> ../../../bus/usb-serial/drivers/edgeport_1
+    |-- usb-serial:edgeport_2 -> ../../../bus/usb-serial/drivers/edgeport_2
+    |-- usb-serial:edgeport_4 -> ../../../bus/usb-serial/drivers/edgeport_4
+    |-- usb-serial:edgeport_8 -> ../../../bus/usb-serial/drivers/edgeport_8
+    |-- usb-serial:edgeport_ti_1 -> ../../../bus/usb-serial/drivers/edgeport_ti_1
+    |-- usb-serial:edgeport_ti_2 -> ../../../bus/usb-serial/drivers/edgeport_ti_2
+    |-- usb-serial:generic -> ../../../bus/usb-serial/drivers/generic
+    |-- usb-serial:keyspan_1 -> ../../../bus/usb-serial/drivers/keyspan_1
+    |-- usb-serial:keyspan_2 -> ../../../bus/usb-serial/drivers/keyspan_2
+    |-- usb-serial:keyspan_4 -> ../../../bus/usb-serial/drivers/keyspan_4
+    |-- usb-serial:keyspan_no_firm -> ../../../bus/usb-serial/drivers/keyspan_no_firm
+    `-- usb-serial:visor -> ../../../bus/usb-serial/drivers/visor
+</screen>
+<remark>
+FIXME, get more up to date version of this tree when tty class code
+get's better implemented, as well as a bit more explaination on how to
+have the tty driver and its devices show up here...
+</remark>
+</para>
+
+</simplesect>
+
+<sect1>
+<title>
+A small tty driver
+</title>
+
+<para>
+To explain how the tty core works, we will create a small tty driver
+that can be loaded, written to, and read from, and unloaded.
+The main data structure of any tty driver is the struct tty_driver.  It
+it used to register and unregister a tty driver with the tty core.
+</para>
+
+<para>
+The struct tty_driver contains a lot of different fields, but not all of
+them are required to be implemented.  Here is an example showing all of
+the required fields that are necessary to have a working tty driver:
+
+<programlisting>
+#define TINY_TTY_MAJOR	240	/* experimental range */
+#define TINY_TTY_MINORS	255	/* use the whole major up */
+static int tty_refcount;
+static struct tty_struct *tiny_tty[TINY_TTY_MINORS];
+static struct termios *tiny_termios[TINY_TTY_MINORS];
+static struct termios *tiny_termios_locked[TINY_TTY_MINORS];
+
+static struct tty_driver tiny_tty_driver {
+	.owner =	  THIS_MODULE,
+	.magic =	  TTY_DRIVER_MAGIC,
+	.driver_name =	  "tiny_tty",
+	.name =		  "ttty",
+	.major =	  TINY_TTY_MAJOR,
+	.num =		  TINY_TTY_MINORS,
+	.type =		  TTY_DRIVER_TYPE_SERIAL,
+	.subtype =	  SERIAL_TYPE_NORMAL,
+	.flags =	  TTY_DRIVER_REAL_RAW,
+
+	.refcount =	  &amp;tiny_refcount,
+	.table =	  tiny_tty,
+	.termios =	  tiny_termios,
+	.termios_locked = tiny_termios_locked,
+
+	.open =		  tiny_open,
+	.close =	  tiny_close,
+	.write =	  tiny_write,
+	.write_room =	  tiny_write_room,
+	};
+</programlisting>
+
+The variables and functions defined in this structure and how this
+structure is used,  will be explained throughout the rest of the
+chapter.
+</para>
+
+<sect2>
+<title>
+Registering a tty driver
+</title>
+
+<para>
+To register this driver with the tty core, the init_termios structure
+needs to be filled out, and then
+<function>tty_register_driver</function> should be called:
+
+<programlisting>
+static int __init tiny_init (void)
+{
+	/* register the tty driver */
+	tiny_tty_driver.init_termios = tty_std_termios;
+	if (tty_register_driver (&amp;tiny_tty_driver)) {
+		printk (KERN_ERR "failed to register tiny tty driver");
+		return -1;
+	return 0;
+}
+</programlisting>
+This initialization function first sets up the init_termios structure
+for the tty driver.  This structure is used to provide a sane set of
+line settings if the port is used before it is initialized by a user.
+The driver initializes the variable with a standard set of values, which
+is copied from the tty_std_termios variable.
+</para>
+
+<para>
+The struct termios structure is used to hold all of the current line
+settings for a specific port on the tty device.  These line settings
+control the current baud rate, data size, data flow settings, and many
+other values.  The different fields of this structure are as follows:
+</para>
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>
+tcflag_t c_iflag;
+</literal>
+</term>
+<listitem>
+<para>
+The input mode flags
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+tcflag_t c_oflag;
+</literal>
+</term>
+<listitem>
+<para>
+The output mode flags
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+tcflag_t c_cflag;
+</literal>
+</term>
+<listitem>
+<para>
+The control mode flags
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+tcflag_t c_lflag;
+</literal>
+</term>
+<listitem>
+<para>
+The local mode flags
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+cc_t c_line;
+</literal>
+</term>
+<listitem>
+<para>
+The line discipline type
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+cc_t c_cc[NCCS];
+</literal>
+</term>
+<listitem>
+<para>
+An array of control characters
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>
+All of the mode flags are defined as a large bitfield.  The different
+values of the modes, and what they are used for, can be seen in the
+termios man pages on any Linux system.  The kernel provides a set of
+useful macros to get at the different bits.  These macros are defined in
+the header file, include/linux/tty.h.
+</para>
+
+<para>
+To unregister the driver with the tty core, a call to
+<function>tty_unregister_driver</function> is all that is needed:
+<programlisting>
+	static void __exit tiny_exit (void)
+	{
+		tty_unregister_driver (&amp;tiny_tty_driver);
+	}
+</programlisting>
+</para>
+
+<para>
+All of the fields that were defined in the tiny_tty_driver variable are
+necessary to have a working tty driver.  The owner field is necessary in
+order to prevent the tty driver from being unloaded while the tty port
+is open.  In previous kernel versions, it was up to the tty driver
+itself to handle the module reference counting logic.  But kernel
+programmers determined that it would to be difficult to solve all of the
+different possible race conditions, and so the tty core now handles all
+of this control for the tty drivers.
+</para>
+
+<para>
+The magic variable must be set to the value TTY_DRIVER_MAGIC.  This
+field is used by the tty core to determine if it really is pointing to a
+tty driver structure.
+</para>
+
+<para>
+The driver_name and name fields look very similar, yet are used for
+different purposes.  The driver_name variable should be set to something
+short, descriptive, and unique among all other tty drivers in the
+system.  This is because it is used to describe the driver to the user
+by showing up in the /proc/tty/drivers file and in the sysfs tty class
+directory of tty drivers currently loaded.  The name field is used to
+define a name for the individual tty nodes assigned to this tty driver in the
+/dev tree.  This string is used to create a tty device by appending the number
+the tty device being used at the end of the string.  If devfs is enabled in the
+kernel, this name should include any subdirectory that the tty driver wants to
+be placed into.  As an example, the serial driver in the kernel sets the name
+field to "tts/" if devfs is enabled, and "ttyS" if it is not.  This string will
+also be displayed in the /proc/tty/drivers file.
+</para>
+
+<para>
+As was mentioned before, the /proc/tty/drivers file shows all of the
+currently registered tty drivers.  With the tiny_tty driver registered
+in the system, this file will look something like the following:
+<screen>
+$ cat /proc/tty/drivers
+tiny_tty             /dev/ttty     240   0-254 serial
+usbserial            /dev/ttyUSB   188   0-254 serial
+serial               /dev/ttyS       4  64-107 serial
+pty_slave            /dev/pts      136   0-255 pty:slave
+pty_master           /dev/ptm      128   0-255 pty:master
+pty_slave            /dev/ttyp       3   0-255 pty:slave
+pty_master           /dev/pty        2   0-255 pty:master
+unknown              /dev/vc/        4    1-63 console
+/dev/vc/0            /dev/vc/0       4       0 system:vtmaster
+/dev/ptmx            /dev/ptmx       5       2 system
+/dev/console         /dev/console    5       1 system:console
+/dev/tty             /dev/tty        5       0 system:/dev/tty
+</screen>
+</para>
+
+<para>
+Also, the sysfs directory /sys/class/tty will look something like the
+following when the tiny_tty driver is registered with the system:
+<screen>
+$ tree /sys/class/tty
+/sys/class/tty
+|-- devices
+`-- drivers
+    |-- usb-serial:clie_3.5 -&gt; ../../../bus/usb-serial/drivers/clie_3.5
+    |-- usb-serial:edgeport_1 -&gt; ../../../bus/usb-serial/drivers/edgeport_1
+    |-- usb-serial:edgeport_2 -&gt; ../../../bus/usb-serial/drivers/edgeport_2
+    |-- usb-serial:edgeport_4 -&gt; ../../../bus/usb-serial/drivers/edgeport_4
+    |-- usb-serial:edgeport_8 -&gt; ../../../bus/usb-serial/drivers/edgeport_8
+    |-- usb-serial:edgeport_ti_1 -&gt; ../../../bus/usb-serial/drivers/edgeport_ti_1
+    |-- usb-serial:edgeport_ti_2 -&gt; ../../../bus/usb-serial/drivers/edgeport_ti_2
+    |-- usb-serial:generic -&gt; ../../../bus/usb-serial/drivers/generic
+    `-- usb-serial:visor -&gt; ../../../bus/usb-serial/drivers/visor
+</screen>
+</para>
+<remark>
+FIXME, get a real dump of sysfs when the tiny tty driver is loaded.  Woah, this
+is really wrong for now...
+</remark>
+
+<para>
+The major and num variables describe what the major number for this
+driver is, and how many minors it can support, respectivly.  The type
+and subtype variables declare what type of tty driver this driver is.
+For our example, we are a serial driver of a "normal" type.  The only
+other subtype for a tty driver would be a "callout" type.  Callout
+devices were traditionally used to control the line settings of a
+device.  The data would be sent and received through one device node,
+and any line setting changes would be sent to a different device node
+which is the callout device.
+This required the use of two minor numbers for every single tty device.
+Thankfully, almost all drivers handle both the data and line settings on
+the same device node, and the callout type is rarely used for new
+drivers.
+</para>
+
+<para>
+The flags variable is used both by the tty driver and the tty core
+to indicate the current state of the driver and what kind of tty
+driver it is.  Several bitmask macros are defined that you must
+use when testing or manipulating the flags.  Three bits in the
+flags variable can be set by the driver:
+</para>
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>
+TTY_DRIVER_RESET_TERMIOS
+</literal>
+</term>
+<listitem>
+<para>
+This flag states that the tty core will reset the termios setting
+whenever the last process has closed the device.  This is useful for the
+console and pty drivers.
+For instance, suppose the user leaves a terminal in a weird state. With
+this flag set, the terminal is reset to a normal value when the user
+logs out or the process that controlled the session is killed."
+
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TTY_DRIVER_REAL_RAW
+</literal>
+</term>
+<listitem>
+<para>
+This flag states that the tty driver guarantees to send notifications of
+parity or break characters up to the line dicipline.  This allows the
+line dicipline to process received characters is a much quicker manner,
+as it will not have to inspect every character received from the tty
+driver.  Because of the speed benifits, this value is usually set for
+all tty drivers.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TTY_DRIVER_NO_DEVFS
+</literal>
+</term>
+<listitem>
+<para>
+This flag states that when the call to
+<function>tty_register_driver</function> is made,
+the tty core will not create any devfs entries for the tty devices.
+This is useful for any driver that dynamically creates and destroys the
+minor devices.  Examples of drivers that set this are
+the USB to serial drivers, the USB modem driver, the USB Bluetooth tty
+driver and a number of the standard serial port drivers.
+</para>
+
+<para>
+<!--
+
+  AO: You should say a little more about a device, probably early in
+  the chapter. If this flag is not set, does the tty core simply
+  create one device when the driver registers itself?
+
+-->
+When the tty driver later wants to register a specific tty device
+with the tty core, it must call
+<function>tty_register_device</function>, with a pointer to
+the tty driver, and the minor number of the device that has been
+created.  If this is not done, the tty core will still pass all calls to
+the tty driver, but some of the internal tty related functionality might
+not be present.  This includes /sbin/hotplug notification of new tty
+devices, and sysfs representation of the tty device.  When the tty
+device is removed from the system, the tty driver must call
+<function>tty_unregister_device</function>.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>
+The one remaining bit in this variable is controlled by the tty core,
+and is called TTY_DRIVER_INSTALLED.  This flag is set by the tty core
+after the driver has been registered and should never be set by a tty
+driver.
+</para>
+
+<para>
+Four more variables and arrays in <literal>tty_driver</literal> are
+used by the tty core to control the tty driver associated with the
+data structure:
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>
+refcount
+</literal>
+</term>
+<listitem>
+<para>
+A reference count of how many different processes currently are using
+the tty driver.  This value is checked by the tty core when the tty
+driver calls <function>tty_unregister_driver</function> to see if it is
+safe to do allow
+the driver to be unregistered.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>
+<literal>
+table
+</literal>
+</term>
+<listitem>
+<para>
+Pointer to an array of tty_struct pointers.
+This is used by the tty core to manage the individual tty devices
+controlled by the driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+termios
+</literal>
+</term>
+<term>
+<literal>
+termios_locked
+</literal>
+</term>
+<listitem>
+<para>
+Pointers to arrays of <literal>struct termios</literal> pointers.
+These variables are
+used by the tty core to store pointers to the termios values for the
+specific tty devices controlled by the driver.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>
+None of these variables should be modified by the tty driver.
+</para>
+
+</sect2>
+</sect1>
+
+<sect1>
+<title>
+tty_driver Function pointers
+</title>
+
+<para>
+Lastly, the tiny_tty driver declares four function pointers.
+</para>
+
+<sect2>
+<title>
+open and close
+</title>
+<para>
+The open
+function will be called by the tty core when a user calls open on the
+device node the tty driver is assigned to.  The tty core calls this
+with a pointer to the tty_struct structure assigned to this device, and
+a file pointer.  This field must be set by a tty driver for it to work
+properly, otherwise -ENODEV is returned to the user when open is called.
+</para>
+
+<para>
+When this open function is called, the tty driver is expected to either save
+some data within the tty_struct variable that is passed to it, or save
+the data within a static array, that can be referenced based on the
+minor number of the port.  This is necessary 
+so the tty driver will know which device is being referenced when the
+later close, write, and other functions are called.
+</para>
+
+<para>
+<!--
+
+  AO: What is being done below? Are you showing how to save the
+  information, as you advise at first, or to find out what device is
+  affected if the information wasn't saved?
+
+  gkh: I am showing how to save the information within the tty
+  structure.  I changed the wording to say that you can do one or the
+  other.
+
+-->
+The tiny tty driver saves a pointer within the tty structure, as can be
+seen with the following code:
+<programlisting>
+static int tiny_open (struct tty_struct *tty, struct file * filp)
+{
+	struct tiny_serial *tiny;
+	struct timer_list *timer;
+
+	/* get the serial object associated with this tty pointer */
+	tiny = tiny_table[minor(tty-&gt;device)];
+	if (tiny == NULL) {
+		/* first time accessing this device, let's create it */
+		tiny = kmalloc (sizeof (*tiny), GFP_KERNEL);
+		if (!tiny) {
+			return -ENOMEM;
+		}
+
+		tiny-&gt;open_count = 0;
+		tiny-&gt;timer = NULL;
+
+		tiny_table[minor(tty-&gt;device)] = tiny;
+	}
+
+	/* save our structure within the tty structure */
+	tty-&gt;driver_data = tiny;
+</programlisting>
+</para>
+
+<para>
+In this code, the tiny_serial structure is saved within the tty driver.
+This allows the tiny_write, tiny_write_room, and tiny_close functions to
+retrieve the tiny_serial structure, and manipulate it properly.
+</para>
+
+<para>
+The tiny_serial structure is defined as:
+<programlisting>
+struct tiny_serial {
+	/* number of times this port has been opened */
+        int open_count;
+};
+</programlisting>
+</para>
+
+<para>
+As we've seen, the open_count variable was initialized to 0 in the open
+call the first time the port is opened.  It will then be incremented and
+decremented as the port is used because
+the open and close functions of a tty driver can be called multiple
+times for the same device.
+This could allows one process to read data, and another to
+write data.  To handle everything correctly, a count of how many times
+the port has been opened or closed should be kept.  When the port is
+opened for the first time, any needed hardware initialization and memory
+allocation can be done.  When the port is closed for the
+last time, any needed hardware shutdown and memory cleanup can be done.
+</para>
+
+<para>
+The rest of the tiny_open function shows how to keep track of the number
+of times the device has been opened:
+<programlisting>
+	++tiny-&gt;open_count;
+	if (tiny-&gt;open_count == 1) {
+		/* this is the first time this port is opened */
+		/* do any hardware initialization needed here */
+	}
+	return 0;
+}
+</programlisting>
+</para>
+
+<para>
+The open function must return either a negative error number if
+something has happened to prevent the open from being successful, or a 0
+to indicate success.
+</para>
+
+<para>
+The close function pointer is called by the tty core when release is
+called by a user on the file handle that was previously created with a
+call to open.  This indicates that the device should be closed at this
+time.  However, since the open function can be called more than once,
+the close function also can be called more than once.  So this function
+should keep track of how many times it has been called to determine if
+the hardware should really be shut down at this time or not.  The
+tiny_tty driver does this with the following code:
+
+<programlisting>
+static void tiny_close (struct tty_struct *tty, struct file * filp)
+{
+	struct tiny_serial *tiny = tty-&gt;driver_data;
+
+	if (!tiny)
+		return;
+
+	if (!tiny-&gt;open_count) {
+		/* port was never opened */
+		return;
+	}
+
+	--tiny-&gt;open_count;
+	if (tiny-&gt;open_count &lt;= 0) {
+		/* The port is being closed by the last user. */
+		/* Do any hardware specific stuff here */
+
+		/* free up our structure */
+		kfree(tiny);
+	}
+}
+</programlisting>
+The close function has no return value, as it is not supposed to be able
+to fail.
+</para>
+</sect2>
+
+<sect2>
+<title>
+Flow of data
+</title>
+
+<para>
+The write function call is called by the user, when there is data to be
+sent to the hardware.  First the tty core receives the call, and then
+it passes the data on to the tty driver's write function.  The tty core
+tells the tty driver the size of the data being sent, and if it has been
+sent from kernel space or user space.  If the
+<literal>from_user</literal> variable is 0, the data is stored in
+kernel space and can be freely referenced by the driver. But if
+<literal>from_user</literal> is 1, the data is stored in user space, and the
+tty driver must call <function>copy_from_user</function> before it is
+able to touch the data.
+</para>
+
+<para>
+Sometimes, because of the speed and buffer capacity of the tty hardware,
+not all characters requested by the writing program can be sent at the
+moment the write function is called.  The write function should return
+the number of characters that was able to be sent to the hardware (or
+queued to be sent at a later time) so that the user program can check if
+all of the data to be written really was.  It is much easier for this
+check to be done in user space, than it is for a kernel driver to sit
+and sleep until all of the requested data is able to be sent out.
+If any errors happen during the write call, a negative error value
+should be returned instead of the number of characters that were
+written.
+</para>
+
+<para>
+The write function can be called from both interrupt context, and user
+context.  This is important to know, as the tty driver should not call
+any functions that might sleep when it is interrupt context.  These
+include any function that might possible call
+<function>schedule</function>, such as the common functions:
+<function>copy_from_user</function>, <function>kmalloc</function>, and
+<function>printk</function>.  If the tty
+driver wants to determine if it is interrupt context, you really
+want to sleep, then please check the current status by calling
+<function>in_interrupt</function>.
+</para>
+
+<para>
+This sample tiny tty driver does not connect to any real hardware, so
+its write function will only record in the kernel debug log what data
+was to be written.  It does this with the following code:
+<programlisting>
+static int tiny_write (struct tty_struct * tty,
+                       int from_user,
+		       const unsigned char *buf,
+		       int count)
+{
+	struct tiny_serial *tiny = tty-&gt;driver_data;
+	char *buffer;
+	int i;
+	int retval = -EINVAL;
+
+	if (!tiny)
+		return -ENODEV;
+
+	if (!tiny-&gt;open_count) {
+		/* port was not opened */
+		goto exit;
+	}
+
+	/* get a pointer to the data that we can use */
+	if (from_user) {
+		buffer = kmalloc (count, GFP_KERNEL);
+		if (!buffer)
+			return -ENOMEM;
+		if (copy_from_user (buffer, buf, count)) {
+			retval = -EFAULT;
+			goto exit;
+		}
+	} else {
+		buffer = (char *)buf;
+	}
+
+	/* fake sending the data out a hardware port by
+	 * writing it to the kernel debug log.
+	 */
+	printk (KERN_DEBUG "%s - ", __FUNCTION__);
+	for (i = 0; i &lt; count; ++i)
+		printk ("%02x ", buffer[i]);
+	printk ("\n");
+
+	retval = count;
+
+exit:
+	kfree (buffer);
+	return retval;
+}
+</programlisting>
+</para>
+
+<para>
+The write function can be called when the tty subsystem itself needs to
+send some data out the tty device.  This can happen if the tty driver
+does not implement the <function>put_char</function> function in the
+tty_struct.  In that case, the tty core uses the
+<function>write</function> function callback with a data size
+of 1.  This commonly happens when the tty core wants to convert a
+newline character to a line feed plus a newline character.  The biggest
+problem that can occur here, is the tty driver's write function must not
+return 0 for this kind of call.  This means that the driver must write
+that byte of data to the device, as the caller (the tty core) will not
+buffer the data and try again at a later time.  As the write function
+can not determine if it is being called in the place of
+<function>put_char</function>, even
+if only one byte of data is being sent, please try to implement the
+write function so it always writes at least one byte before returning.  A
+number of the current USB to serial tty drivers do not follow this rule,
+and because of this, some terminals types do not work properly when
+connected to them.
+</para>
+
+<para>
+The write_room function is called when the tty core wants to know how
+much room in the write buffer the tty driver has available.  This number
+will change over time as characters empty out of the write buffers, and
+as the write function is called, adding characters to the buffer.
+</para>
+
+<para>
+
+<programlisting>
+static int tiny_write_room (struct tty_struct *tty)
+{
+	struct tiny_serial *tiny = tty-&gt;driver_data;
+	int room;
+
+	if (!tiny)
+		return -ENODEV;
+
+	if (!tiny-&gt;open_count) {
+		/* port was not opened */
+		return -EINVAL;
+	}
+
+	/* calculate how much room is left in the device */
+	...
+
+	return room;
+}
+</programlisting>
+</para>
+</sect2>
+
+<sect2>
+<title>
+Other buffering functions
+</title>
+
+<para>
+The chars_in_buffer function in the tty_driver structure is not required
+in order to have a working tty driver, but it is recommended.  This
+function is called when the tty core wants to know how many characters
+are still remaining in the tty driver's write buffer to be sent out.  If
+the driver can store characters before it sends them out to the
+hardware, it should implement this function in order for the tty core to
+be able to determine if all of the data in the driver has drained out.
+</para>
+
+<para>
+Three functions in the tty_driver structure can be used to
+flush any remaining data that the driver is holding on to.  These are not required
+to be implemented, but are recommended if the tty driver can buffer data
+before it sends it to the hardware.  The first two functions are called
+flush_chars and wait_until_sent.  These functions are called when the
+tty core has sent a number of characters to the tty driver using the
+put_char function.  The flush_chars function is called when the tty core
+wants the tty driver to start sending these characters out to the
+hardware, if it hasn't already started.  This function is allowed to
+return before all of the data is sent out the hardware.  The
+wait_until_sent function works much the same way, but it must wait until
+all of the characters are sent before returning to the tty core, or
+until the passed in timeout value has expired, which ever occurance
+happens first.  The tty driver is allowed to sleep within this function
+in order to complete it.  If the timeout value passed to the
+wait_until_sent function is set to 0, then the function should wait
+until the function is finished.
+</para>
+
+<para>
+The remaining data flushing function is the flush_buffer function.  It
+is called by the tty core when the tty driver is to flush all of the
+data still in its write buffers out of memory.  Any data remaining in
+the will be lost, and not sent to the device.
+</para>
+<!--
+
+  AO: And you should have sample implementations of these functions.
+
+-->
+</sect2>
+
+<sect2>
+<title>
+No read?
+</title>
+
+<para>
+With only these functions the tiny_tty driver can be registered, a
+device node opened, data written to the device, the device node closed,
+and the driver can be unregistered and unloaded from the kernel.  But the
+tty core and <literal>tty_driver</literal> structure do not provide a
+read function; in other words; no function callback exists to get data
+from the driver to the tty core.
+</para>
+
+<para>
+Instead of a conventional read function, the tty driver is responsible
+for sending any data received from the hardware to the tty core when
+it is received.  The tty core buffers the data until it is
+asked for by the user.  Because of the buffering logic the tty core
+provides, it is not necessary for every tty driver to implement its
+own buffering logic.  The tty core will notify the tty driver when a
+user wants the driver to stop and start sending data, but if the
+internal tty buffers are full, no such notification will occur.
+<!--
+
+  AO: Define "flip buffer" here.
+
+-->
+</para>
+
+<para>
+When the open call is made to the tty driver, a pointer to a struct
+tty_struct is passed to it.  This variable describes the current tty
+port state, and contains a pointer to a struct tty_flip_buffer.  This
+flip buffer is used by the tty core to receive data from a tty driver
+and pass it on to the user.  When data is received from the hardware, it
+needs to be placed into the tty device's flip buffer.  This can be done
+with the following bit of code:
+<programlisting>
+	for (i = 0; i &lt; data_size; ++i) {
+		if (tty-&gt;flip.count &gt;= TTY_FLIPBUF_SIZE)
+			tty_flip_buffer_push(tty);
+		tty_insert_flip_char(tty, data[i], TTY_NORMAL);
+	}
+	tty_flip_buffer_push(tty);
+</programlisting>
+</para>
+
+<para>
+Characters are added to the flip buffer with a call to
+tty_insert_flip_char.  The first paramater is the tty device the data
+should be saved in, the second paramater is the character to be saved,
+and the third paramater is any flags that should be set for this
+character.  The flags value should be set to TTY_NORMAL if this is a
+normal character being received.  If this is a special type of
+character indicating an error receiveing data, it should be set to
+TTY_BREAK, TTY_FRAME, TTY_PARITY, or TTY_OVERRUN depending on the error.
+</para>
+
+<para>
+In order to "push" the data to the user, a call to
+<function>tty_flip_buffer_push</function> is made.  This function should
+also be called if the flip buffer is about to overflow, as is shown in
+this example.  So whenever data is added to the flip buffer, or when the
+flip buffer is full, the tty driver must call
+<function>tty_flip_buffer_push</function>.  If the tty driver can accept
+data at very high rates, the <literal>tty-&gt;low_latency</literal> flag
+should be set, which will cause the last call to
+<function>tty_flip_buffer_push</function> to be immediately executed
+when called.  Otherwise the <function>tty_flip_buffer_push</function>
+call will schedule itself to push the data out of the buffer at some
+later point of time in the near future.
+</para>
+</sect2>
+</sect1>
+
+<sect1>
+	<title>
+		TTY Line Settings
+	</title>
+
+	<para>
+		When a user wants to change the line settings of a tty device,
+		or retrieve the current line settings, they either make one of
+		the many different <literal>termios</literal> userspace library
+		function calls, or directly make an <literal>ioctl</literal>
+		call on the tty device node.  The tty core converts both of
+		these interfaces into a number of different tty driver function
+		callbacks and ioctl calls.
+	</para>	
+	
+	<sect2>
+		<title>
+			<literal>set_termios</literal>
+		</title>
+			
+		<para>
+			The majority of the <literal>termios</literal> userspace
+			functions are translated by the library into an ioctl
+			call to the driver node.  A large number of the
+			different tty <literal>ioctl</literal> calls are then
+			translated by the tty core into a single
+			<function>set_termios</function> function call to the
+			tty driver.  The <function>set_termios</function>
+			callback needs to determine which line settings are
+			being asked to be changed, and then make those changes
+			in the tty device.  The tty driver must be able to
+			decode all of the different settings in the termios
+			structure and react to any needed changes.  This is a
+			complicated task, as all of the line settings are packed
+			into the termios structure in a wide variety of ways.
+		</para>
+
+		<para>
+			The first thing that a <function>set_termios</function>
+			function should do, is determine if anything is actually
+			necessary to do.  This can be done with the following
+			code:
+			<programlisting>
+<![CDATA[
+	unsigned int cflag;
+
+	cflag = tty->termios->c_cflag;
+
+	/* check that they really want us to change something */
+	if (old_termios) {
+		if ((cflag == old_termios->c_cflag) &&
+		    (RELEVANT_IFLAG(tty->termios->c_iflag) ==
+		     RELEVANT_IFLAG(old_termios->c_iflag))) {
+			printk (KERN_DEBUG " - nothing to change...\n");
+			return;
+		}
+	}
+]]>
+			</programlisting>
+		</para>
+
+		<para>
+			The <literal>RELEVANT_IFLAG</literal> macro is defined as:
+			<programlisting>
+<![CDATA[ #define RELEVANT_IFLAG(iflag)	(iflag & (IGNBRK|BRKINT|IGNPAR|PARMRK|INPCK)) ]]>
+			</programlisting>
+			and is used to mask off the important bits of the cflags
+			variable.  This is then compared to the old value, and
+			see if they differ.  If not, nothing needs to be
+			changed, so we return.  Note that the old_termios
+			variable is first checked to see if it points to a valid
+			structure first, before it is accessed.  This is
+			required, as sometimes this variable will be set to
+			NULL.  Trying to access a field off of a NULL pointer
+			will cause the kernel to panic.
+		</para>
+
+		<para>
+			To look at the requested byte size, the CSIZE bitmask
+			can be used to separate out the proper bits from the
+			cflag variable.  If the size can not be determined, it
+			is customary to default to 8 data bits.  This can be
+			implemented as the following:
+<programlisting>
+	/* get the byte size */
+	switch (cflag &amp; CSIZE) {
+		case CS5:
+			printk (KERN_DEBUG " - data bits = 5\n");
+			break;
+		case CS6:
+			printk (KERN_DEBUG " - data bits = 6\n");
+			break;
+		case CS7:
+			printk (KERN_DEBUG " - data bits = 7\n");
+			break;
+		default:
+		case CS8:
+			printk (KERN_DEBUG " - data bits = 8\n");
+			break;
+	}
+</programlisting>
+</para>
+
+<para>
+To determine the requested parity value, the PARENB bitmask can be checked
+against the cflag variable to tell if any parity is to be set at all.  If so,
+the PARODD bitmask can be used to determine if the parity should be odd
+or even.  An implementation of this is:
+<programlisting>
+	/* determine the parity */
+	if (cflag &amp; PARENB)
+		if (cflag &amp; PARODD)
+			printk (KERN_DEBUG " - parity = odd\n");
+		else
+			printk (KERN_DEBUG " - parity = even\n");
+	else
+		printk (KERN_DEBUG " - parity = none\n");
+</programlisting>
+</para>
+
+<para>
+The stop bits that are requested can also be determined from the cflag
+variable using the CSTOPB bitmask.  An implemention of this is:
+<programlisting>
+	/* figure out the stop bits requested */
+	if (cflag &amp; CSTOPB)
+		printk (KERN_DEBUG " - stop bits = 2\n");
+	else
+		printk (KERN_DEBUG " - stop bits = 1\n");
+</programlisting>
+</para>
+
+<para>
+There are a two basic types of flow control, hardware and software.  To
+determine if the user is asking for hardware flow control, the CRTSCTS
+bitmask can be checked against the cflag variable.  An exmple of this is:
+<programlisting>
+	/* figure out the flow control settings */
+	if (cflag &amp; CRTSCTS)
+		printk (KERN_DEBUG " - RTS/CTS is enabled\n");
+	else
+		printk (KERN_DEBUG " - RTS/CTS is disabled\n");
+</programlisting>
+</para>
+
+<para>
+Determining the different modes of software flow control and the
+different stop and start characters is a bit more involved:
+<programlisting>
+	/* determine software flow control */
+	/* if we are implementing XON/XOFF, set the start and
+	 * stop character in the device */
+	if (I_IXOFF(tty) || I_IXON(tty)) {
+		unsigned char stop_char  = STOP_CHAR(tty);
+		unsigned char start_char = START_CHAR(tty);
+
+		/* if we are implementing INBOUND XON/XOFF */
+		if (I_IXOFF(tty))
+			printk (KERN_DEBUG " - INBOUND XON/XOFF is enabled, "
+				"XON = %2x, XOFF = %2x", start_char, stop_char);
+		else
+			printk (KERN_DEBUG" - INBOUND XON/XOFF is disabled");
+
+		/* if we are implementing OUTBOUND XON/XOFF */
+		if (I_IXON(tty))
+			printk (KERN_DEBUG" - OUTBOUND XON/XOFF is enabled, "
+				"XON = %2x, XOFF = %2x", start_char, stop_char);
+		else
+			printk (KERN_DEBUG" - OUTBOUND XON/XOFF is disabled");
+	}
+</programlisting>
+</para>
+
+<para>
+Finally, the baud rate needs to be determined.  The tty core provides
+a function, <function>tty_get_baud_rate</function>, to help do this.
+The function returns an integer indicating the requested baud rate for the
+specific tty device:
+<programlisting>
+	/* get the baud rate wanted */
+	printk (KERN_DEBUG " - baud rate = %d", tty_get_baud_rate(tty));
+</programlisting>
+</para>
+
+	<para>
+		Now that the tty driver has determined all of the different line
+		settings, it can set the hardware up properly based on these
+		values.
+	</para>
+</sect2>
+
+<sect2>
+	<title>
+		<function>tiocmget</function> and
+		<function>tiocmset</function>
+	</title>
+
+	<para>
+		In the 2.4 and older kernels, there used to be a number of tty
+		ioctls that were used to get and set the different control line
+		settings called,
+		<literal>TIOCMGET</literal>,
+		<literal>TIOCMBIS</literal>,
+		<literal>TIOCMBIC</literal>, and
+		<literal>TIOCMSET</literal>.
+		<literal>TIOCMGET</literal> was used to get the line setting
+		values of the kernel, and as of the 2.6 kernel, this ioctl call
+		has been turned into a tty driver callback function called
+		<function>tiocmget</function>.  The other three ioctls have been
+		simplified and are now represented with a single tty driver
+		callback function called <function>tiocmset</function>.
+	</para>
+
+	<para>
+		The <function>tiocmget</function> function in the tty driver is
+		called by the tty core when the core wants to know what the
+		physical values of the control lines of a specific tty device
+		currently are.  This is usually done to retrieve the values of
+		the DTR and RTS lines of a serial port.  If the tty driver can
+		not directly read the MSR or MCR registers of the serial port,
+		because the hardware does not allow this, a copy of them should
+		be kept locally.  A number of the USB to serial drivers must
+		implement this kind of "shadow" variable.  Here is how this
+		function could be implemented if a local copy of these values
+		are kept:
+<!--
+
+  AO: I asked before how you can keep a copy of values that you can't
+  read, and I still don't understand.
+
+  gkh: Some hardware is implemented such that the computer can never
+  read the value stored in it, only write to it (write only values).  If
+  the register is a bit field (which these serial port variables are),
+  in order to only modify a few bits of the register, and not modify the
+  other bits, a "shadow" variable must be used by the driver to keep
+  track of the current bits set in the register.
+  Should I explain this here?
+-->
+<programlisting>
+<![CDATA[int tiny_tiocmget (struct tty_struct *tty, struct file *file)
+{
+	struct tiny_private *tp = tty->private;
+
+	unsigned int result = 0;
+	unsigned int msr = tp->msr;
+	unsigned int mcr = tp->mcr;
+
+	result = ((mcr & MCR_DTR)  ? TIOCM_DTR  : 0) |	/* DTR is set */
+		 ((mcr & MCR_RTS)  ? TIOCM_RTS  : 0) |	/* RTS is set */
+		 ((mcr & MCR_LOOP) ? TIOCM_LOOP : 0) |	/* LOOP is set */
+		 ((msr & MSR_CTS)  ? TIOCM_CTS  : 0) |	/* CTS is set */
+		 ((msr & MSR_CD)   ? TIOCM_CAR  : 0) |	/* Carrier detect is set*/
+		 ((msr & MSR_RI)   ? TIOCM_RI   : 0) |	/* Ring Indicator is set */
+		 ((msr & MSR_DSR)  ? TIOCM_DSR  : 0);	/* DSR is set */
+
+	return result;
+}]]>
+</programlisting>
+	</para>
+
+	<para>
+		The <function>tiocmset</function> function in the tty driver is
+		called by the tty core when the core wants to set the values of
+		the control lines of a specific tty device.  The tty core tells
+		the tty driver what values to set and what to clear, by passing
+		them in two variables, <literal>set</literal> and
+		<literal>clear</literal>.  These variables contain a bitmask of
+		the lines settings that should be changed.  A bit will never be
+		asked to both be set and cleared at the same time, so it does
+		not matter which operation occurs first.  Here is an example of
+		how this function could be implemented by a tty driver:
+	
+<programlisting>
+	<![CDATA[
+int tiny_tiocmset (struct tty_struct *tty, struct file *file,
+		   unsigned int set, unsigned int clear)
+{
+	struct tiny_private *tp = tty->private;
+	unsigned int mcr = tp->mcr;
+
+	if (set & TIOCM_RTS)
+		mcr |= MCR_RTS;
+	if (set & TIOCM_DTR)
+		mcr |= MCR_RTS;
+
+	if (clear & TIOCM_RTS)
+		mcr &= ~MCR_RTS;
+	if (clear & TIOCM_DTR)
+		mcr &= ~MCR_RTS;
+
+	/* set the new MCR value in the device */
+	tp->mcr = mcr;
+	return 0;
+}]]>
+</programlisting>
+</para>
+
+
+</sect2>
+
+</sect1>
+
+<sect1>
+<title>
+Ioctls
+</title>
+
+<para>
+The ioctl function callback in the struct tty_driver is called by the
+tty core when ioctl(2) is called on the
+device node.  If the tty driver does not know how to handle the ioctl
+value passed to it, it should return -ENOIOCTLCMD, to try to let the tty
+core implement a generic version of the call.
+</para>
+
+<para>
+The 2.6 kernel defines about 70 different tty ioctls that can be
+be sent to a tty driver.  Most tty drivers do not handle all of
+these, but only a small subset of the more common ones.  Here is a list
+of the more popular tty ioctls, what they mean, and how to implement
+them:
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>
+TIOCSERGETLSR
+</literal>
+</term>
+<listitem>
+<para>
+Get the value of this tty device's line status register (LSR).
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TIOCGSERIAL
+</literal>
+</term>
+<listitem>
+<para>
+Get the serial line information.  A caller can potentially get a lot of serial line
+information from the tty device all at once in this call.
+Some programs (like setserial and dip) call
+this function to make sure that the baud rate was properly set, and to
+get general information on what type of device the tty driver
+controls.
+The caller
+passes in  a pointer to a large struct of type
+serial_struct, which the tty driver should fill
+up with the proper values.
+Here is an example of how this can be implemented:
+<programlisting>
+int tiny_ioctl (struct tty_struct *tty, struct file *file,
+		unsigned int cmd, unsigned long arg)
+{
+	struct tiny_private *tp = tty-&gt;private;
+
+	if (cmd == TIOCGSERIAL) {
+		struct serial_struct tmp;
+
+		if (!arg)
+			return -EFAULT;
+
+		memset(&amp;tmp, 0, sizeof(tmp));
+
+		tmp.type		= tp-&gt;type;
+		tmp.line		= tp-&gt;line;
+		tmp.port		= tp-&gt;port;
+		tmp.irq			= tp-&gt;irq;
+		tmp.flags		= ASYNC_SKIP_TEST | ASYNC_AUTO_IRQ;
+		tmp.xmit_fifo_size	= tp-&gt;xmit_fifo_size;
+		tmp.baud_base		= tp-&gt;baud_base;
+		tmp.close_delay		= 5*HZ;
+		tmp.closing_wait	= 30*HZ;
+		tmp.custom_divisor	= tp-&gt;custom_divisor;
+		tmp.hub6		= tp-&gt;hub6;
+		tmp.io_type		= tp-&gt;io_type;
+
+		if (copy_to_user(arg, &amp;tmp, sizeof(struct serial_struct)))
+			return -EFAULT;
+		return 0;
+	}
+	return -ENOIOCTLCMD;
+}
+</programlisting>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TIOCSSERIAL
+</literal>
+</term>
+<listitem>
+<para>
+Set the serial line information. This is the opposite of TIOCGSERIAL and
+allows the user to set the serial line status of the tty device all at
+once.  A pointer to a struct serial_struct is passed to this call, full
+of data that the tty device should now be set to.  If the tty driver
+does not implement this call, most programs will still work properly.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TIOCMIWAIT
+</literal>
+</term>
+<listitem>
+<para>
+Wait for MSR change.  The user asks for
+this ioctl in the unusual circumstances that it wants to sleep within the kernel until something happens
+to the MSR register of the tty device.  The <literal>arg</literal> parameter will contain
+the type of event that the user is waiting for.  This is commonly used
+to wait until a status line changes, signaling that more data is ready
+to be sent to the device.
+</para>
+
+<para>
+Be careful when implementing this ioctl, as almost all of the existing
+kernel drivers who do, use the
+<function>interruptible_sleep_on</function> call, which is
+unsafe to use (there are lots of nasty race conditions involved with
+it.)  Instead a wait_queue should be used to avoid these problems.
+Here's an example of how to implement this ioctl:
+<programlisting>
+int tiny_ioctl (struct tty_struct *tty, struct file *file,
+		unsigned int cmd, unsigned long arg)
+{
+	struct tiny_private *tp = tty-&gt;private;
+
+	if (cmd == TIOCMIWAIT) {
+		DECLARE_WAITQUEUE(wait, current);
+		struct async_icount cnow;
+		struct async_icount cprev;
+
+		cprev = tp-&gt;icount;
+		while (1) {
+			add_wait_queue(&amp;tp-&gt;wait, &amp;wait);
+			set_current_state(TASK_INTERRUPTIBLE);
+			schedule();
+			remove_wait_queue(&amp;tp-&gt;wait, &amp;wait);
+
+			/* see if a signal woke us up */
+			if (signal_pending(current))
+				return -ERESTARTSYS;
+
+			cnow = edge_port-&gt;icount;
+			if (cnow.rng == cprev.rng &amp;&amp; cnow.dsr == cprev.dsr &amp;&amp;
+			    cnow.dcd == cprev.dcd &amp;&amp; cnow.cts == cprev.cts)
+				return -EIO; /* no change => error */
+			if (((arg &amp; TIOCM_RNG) &amp;&amp; (cnow.rng != cprev.rng)) ||
+			    ((arg &amp; TIOCM_DSR) &amp;&amp; (cnow.dsr != cprev.dsr)) ||
+			    ((arg &amp; TIOCM_CD)  &amp;&amp; (cnow.dcd != cprev.dcd)) ||
+			    ((arg &amp; TIOCM_CTS) &amp;&amp; (cnow.cts != cprev.cts)) ) {
+				return 0;
+			}
+			cprev = cnow;
+		}
+
+	}
+	return -ENOIOCTLCMD;
+}
+</programlisting>
+Somewhere in the tty driver's code that recognizes that the MSR register
+changes, the line:
+	wake_up_interruptible(&amp;tp-&gt;wait);
+must be called for this code to work properly.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TIOCGICOUNT
+</literal>
+</term>
+<listitem>
+<para>
+Get interrupt counts.  This is called when the user wants to know how
+many serial line interrupts have happened.  If the driver has
+an interrupt handler, it should define an internal structure of
+counters to keep track of these statistics and increment the proper
+counter every time the function is
+run by the kernel.
+</para>
+
+<para>
+This ioctl call passes the kernel a pointer
+to a struct serial_icounter_struct, which should be filled by the tty
+driver.  This call is often made in conjunction with the previous
+TIOCMIWAIT ioctl call.  If the tty driver keeps track of all of these
+interrupts while the driver is operating, the code to implement this
+call can be very simple:
+<programlisting>
+int tiny_ioctl (struct tty_struct *tty, struct file *file,
+		unsigned int cmd, unsigned long arg)
+{
+	struct tiny_private *tp = tty-&gt;private;
+
+	if (cmd == TIOCGICOUNT) {
+		struct async_icount cnow = tp-&gt;icount;
+		struct serial_icounter_struct icount;
+
+		icount.cts	= cnow.cts;
+		icount.dsr	= cnow.dsr;
+		icount.rng	= cnow.rng;
+		icount.dcd	= cnow.dcd;
+		icount.rx	= cnow.rx;
+		icount.tx	= cnow.tx;
+		icount.frame	= cnow.frame;
+		icount.overrun	= cnow.overrun;
+		icount.parity	= cnow.parity;
+		icount.brk	= cnow.brk;
+		icount.buf_overrun = cnow.buf_overrun;
+
+		if (copy_to_user((void *)arg, &amp;icount, sizeof(icount)))
+			return -EFAULT;
+		return 0;
+	}
+	return -ENOIOCTLCMD;
+}
+</programlisting>
+<remark>
+No, I don't know why it is done this way, and the structure not just
+directly copied with memcpy. :)
+<!--
+
+  AO: Perhaps it's not copied because the core doesn't want the driver
+  to overwrite the reserved array, which may someday have an internal
+  use.
+
+  gkh: I don't think so, I think it's just a matter of cut-and-paste
+  from different drivers over time.  I've written a driver that uses
+  memcpy and it seems to work well, so I could modify the example, but
+  that is what people will see if they look at existing tty drivers.
+
+-->
+</remark>
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1>
+<title>
+proc and sysfs handling of tty devices
+</title>
+
+<para>
+The tty core provides a very easy way for any tty driver to have a file
+in the /proc/tty/driver directory.  If the driver defines either the
+read_proc or write_proc functions, this file will be created.  Then any
+read or write call on this file will be sent to the driver.  The formats
+of these functions is just like the standard proc file handling
+functions (see LDD for more detail).
+</para>
+
+<remark>
+Talk about sysfs stuff for tty drivers once that has settled down
+</remark>
+
+</sect1>
+
+<!--
+
+  AO: I don't believe you've shown enough of the features of the tty
+  drivers in action. You had one trivial example opening and closing,
+  plus a little writing and some important models for setting
+  information. But you describe several other tasks without showing
+  how you'd do them.
+
+-->
+
+<sect1>
+<title>
+The tty_driver structure in detail
+</title>
+
+<para>
+<!--
+
+  AO: This paragraph too is redundant.
+
+-->
+Every tty driver must create a struct tty_driver that describes
+itself and then register that structure with the tty core.  This
+structure contains a lot of different fields and callback functions
+that can be set.  As the rest of this chapter shows, not all of them are
+necessary to create a working tty driver.  Here is a list of all of the
+different fields in the structure, and how they are used by the tty
+core.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>
+struct module *owner;
+</literal>
+</term>
+<listitem>
+<para>
+The module owner for this driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int magic;
+</literal>
+</term>
+<listitem>
+<para>
+The "magic" value for this structure.  Should always be set to
+TTY_DRIVER_MAGIC.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+const char *driver_name;
+</literal>
+</term>
+<listitem>
+<para>
+Name of the driver, used in /proc/tty and sysfs.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+const char *name;
+</literal>
+</term>
+<listitem>
+<para>
+Node name of the driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int name_base;
+</literal>
+</term>
+<listitem>
+<para>
+Starting number to use when creating names for devices.  This is used when the kernel creates a
+string representation of a specific tty device assigned to the tty
+driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+short major;
+</literal>
+</term>
+<listitem>
+<para>
+Major number for the driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+short minor_start;
+</literal>
+</term>
+<listitem>
+<para>
+Starting minor number for the driver.  This is usually set to the same
+value as name_base.  Typically this value is set to 0.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+short num;
+</literal>
+</term>
+<listitem>
+<para>
+Number of minor numbers assigned to the driver.  If an entire major
+number range is used by the driver, this value should be set to 255.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+short type;
+</literal>
+</term>
+<term>
+<literal>
+short subtype;
+</literal>
+</term>
+<listitem>
+<para>
+Describe what kind of tty driver is being
+registered with the tty core.
+The value of <literal>subtype</literal> depends on the <literal>type</literal>.
+The <literal>type</literal> field can be:
+</para>
+<variablelist>
+<varlistentry>
+<term>
+<literal>
+TTY_DRIVER_TYPE_SYSTEM
+</literal>
+</term>
+<listitem>
+<para>
+This is used internally by the tty subsystem to remember that is is
+dealing with an internal tty driver.
+subtype should be set to 
+<literal>SYSTEM_TYPE_TTY</literal>, 
+<literal>SYSTEM_TYPE_CONSOLE</literal>,
+<literal>SYSTEM_TYPE_SYSCONS</literal>, or 
+<literal>SYSTEM_TYPE_SYSPTMX</literal>.  This type should not be
+used by any "normal" tty driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TTY_DRIVER_TYPE_CONSOLE
+</literal>
+</term>
+<listitem>
+<para>
+This is only used by the console driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TTY_DRIVER_TYPE_SERIAL
+</literal>
+</term>
+<listitem>
+<para>
+This is used by any serial type driver.
+subtype should be set to 
+<literal>SERIAL_TYPE_NORMAL</literal> or 
+<literal>SERIAL_TYPE_CALLOUT</literal> 
+depending on which type your driver is.  This is one of the most common
+settings for the type field.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TTY_DRIVER_TYPE_PTY
+</literal>
+</term>
+<listitem>
+<para>
+This is used by the pseudo terminal interface (pty).
+subtype needs to be set to either 
+<literal>PTY_TYPE_MASTER</literal> or
+<literal>PTY_TYPE_SLAVE</literal>.
+</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct termios init_termios;
+</literal>
+</term>
+<listitem>
+<para>
+Initial struct termios values for the device when it is created.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int flags;
+</literal>
+</term>
+<listitem>
+<para>
+Driver flags, as described previously in this chapter.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int *refcount;
+</literal>
+</term>
+<listitem>
+<para>
+Internal tty reference count.  Used by the tty core and should not be
+modified by the tty driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct proc_dir_entry *proc_entry;
+</literal>
+</term>
+<listitem>
+<para>
+This driver's /proc entry structure.  It is created by the tty core if
+the driver implements the write_proc or read_proc functions.  This field
+should not be set by the tty driver itself.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct tty_driver *other;
+</literal>
+</term>
+<listitem>
+<para>
+Pointer to a tty slave driver.  This is only used by the pty driver, and
+should not be used by any other tty driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct tty_struct **table;
+</literal>
+</term>
+<listitem>
+<para>
+Array of tty_struct pointers.  This is used by the tty core to manage
+the individual tty devices controlled by the driver and should not be
+modified by the tty driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct termios **termios;
+struct termios **termios_locked;
+</literal>
+</term>
+<listitem>
+<para>
+Pointer to an array of struct termios pointers.  This is used by the tty
+core to store a pointer to the termios values for the specific tty
+devices controlled by the driver and should not be modified by the tty
+driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void *driver_state;
+</literal>
+</term>
+<listitem>
+<para>
+Internal state of the tty driver.  Should only be used by the pty
+driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int (*open)(struct tty_struct * tty, struct file * filp);
+</literal>
+</term>
+<listitem>
+<para>
+The open function.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*close)(struct tty_struct * tty, struct file * filp);
+</literal>
+</term>
+<listitem>
+<para>
+The close function.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int  (*write)(struct tty_struct * tty, int from_user, const unsigned char *buf, int count);
+</literal>
+</term>
+<listitem>
+<para>
+The write function.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*put_char)(struct tty_struct *tty, unsigned char ch);
+</literal>
+</term>
+<listitem>
+<para>
+The single character write function.  This function is called by the tty
+core when a single character is to be written to the device.  If a tty
+driver does not define this function, the write function will be
+called instead when the tty core wants to send a single character.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*flush_chars)(struct tty_struct *tty);
+</literal>
+</term>
+<term>
+<literal>
+void (*wait_until_sent)(struct tty_struct *tty, int timeout);
+</literal>
+</term>
+<listitem>
+<para>
+The function that flushes data to the hardware.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int (*write_room)(struct tty_struct *tty);
+</literal>
+</term>
+<listitem>
+<para>
+The function that indicates how much of the buffer is free.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int (*chars_in_buffer)(struct tty_struct *tty);
+</literal>
+</term>
+<listitem>
+<para>
+The function that indicates how much of the buffer is full of data.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int (*ioctl)(struct tty_struct *tty, struct file * file, unsigned int cmd, unsigned long arg);
+</literal>
+</term>
+<listitem>
+<para>
+The ioctl function.  This function is called by the tty core when
+ioctl(2) is called on the device node.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*set_termios)(struct tty_struct *tty, struct termios * old);
+</literal>
+</term>
+<listitem>
+<para>
+The set_termios function.  This function is called by the tty core when
+the device's termios settings have been changed.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*throttle)(struct tty_struct * tty);
+</literal>
+</term>
+<term>
+<literal>
+void (*unthrottle)(struct tty_struct * tty);
+</literal>
+</term>
+<term>
+<literal>
+void (*stop)(struct tty_struct *tty);
+</literal>
+</term>
+<term>
+<literal>
+void (*start)(struct tty_struct *tty);
+</literal>
+</term>
+<listitem>
+<para>
+Data throttling functions.  These functions are used to help control
+overruns of the tty core's input buffers.  The throttle function is
+called when the tty core's input buffers are getting full.  The tty
+driver should try to signal to the device that no more characters should
+be sent to it.  The unthrottle function is called when the tty core's
+input buffers have been emptied out, and it can now accept more data.
+The tty driver should then signal to the device that data can be
+received.  The stop function and start functions are much like the
+throttle and unthrottle functions, but they signify that the tty driver
+should stop sending data to the device, and then later resume sending
+data.
+<remark>
+Should I have described these functions up in the Data Flow section?
+throttle and unthrottle are pretty common.
+<!--
+
+  AO: Yes, the important information should go in its proper place
+  with other functions in the chapter, and the material here should be
+  short like the rest.
+
+-->
+</remark>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*hangup)(struct tty_struct *tty);
+</literal>
+</term>
+<listitem>
+<para>
+The hangup function.  This function is called when the tty driver should
+hang up the tty device.  Any special hardware manipulation that should
+happen to do this should occur at this time.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*break_ctl)(struct tty_struct *tty, int state);
+</literal>
+</term>
+<listitem>
+<para>
+The line break control function.  This function is called when the tty
+driver is to turn on or off the line BREAK status on the RS-232 port.
+If state is set to -1, the BREAK status should be turned on.  If
+state is set to 0, the BREAK status should be turned off.  If this function is
+implemented by the tty driver, the tty core will handle the
+TCSBRK, TCSBRKP, TIOCSBRK, and TIOCCBRK ioctls.  Otherwise these ioctls
+will be sent to the driver to the ioctl function.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*flush_buffer)(struct tty_struct *tty);
+</literal>
+</term>
+<listitem>
+<para>
+The flush buffer and loose any remaining data function.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*set_ldisc)(struct tty_struct *tty);
+</literal>
+</term>
+<listitem>
+<para>
+The set line discipline function.  This  function is called when the tty
+core has changed the line discipline of the tty driver.  This function
+is generally not used anymore, and should not be defined by a driver.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void (*send_xchar)(struct tty_struct *tty, char ch);
+</literal>
+</term>
+<listitem>
+<para>
+Send X-type char function.  This function is used to send a high
+priority XON or XOFF character to the tty device.  The character to be
+sent is specified in the ch variable.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int (*read_proc)(char *page, char **start, off_t off, int count, int *eof, void *data);
+</literal>
+</term>
+<term>
+<literal>
+int (*write_proc)(struct file *file, const char *buffer, unsigned long count, void *data);
+</literal>
+</term>
+<listitem>
+<para>
+/proc read and write functions.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+	<term>
+		<literal>
+			int (*tiocmget)(struct tty_struct *tty, struct file *file);
+		</literal>
+	</term>
+	<listitem>
+		<para>
+			Get the current line settings of the specific tty
+			device.  If retrieved successfully from the tty device,
+			the value should be returned to the caller.
+		</para>
+	</listitem>
+</varlistentry>
+
+<varlistentry>
+	<term>
+		<literal>
+			int (*tiocmset)(struct tty_struct *tty, struct file *file, unsigned int set, unsigned int clear);
+		</literal>
+	</term>
+	<listitem>
+		<para>
+			Set the current line settings of the specific tty
+			device.  <literal>set</literal> and
+			<literal>clear</literal> contain the different line
+			settings that should either be set or cleared.
+		</para>
+	</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct tty_driver *next;
+</literal>
+</term>
+<term>
+<literal>
+struct tty_driver *prev;
+</literal>
+</term>
+<listitem>
+<para>
+Linking variables.  These variables are used by the tty core to chain
+all of the different tty drivers together, and should not be touched by
+any tty driver.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1>
+<title>
+The tty_struct structure in detail
+</title>
+
+<para>
+The tty_struct variable is used by the tty core to keep the current
+state of a specific tty port.  Almost all of its fields are to be only
+used by the tty core, with a few exceptions.  The fields that a tty
+driver can use are described here.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>
+unsigned long flags;
+</literal>
+</term>
+<listitem>
+<para>
+The current state of the tty device.  This is a bitfield variable, and
+is accessed through the following macros:
+<variablelist>
+<varlistentry>
+<term>
+<literal>
+TTY_THROTTLED
+</literal>
+</term>
+<listitem>
+<para>
+Set when the driver has had the <function>throttle</function> function
+called.  Should not be set by a tty driver, only the tty core.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_IO_ERROR
+</literal>
+</term>
+<listitem>
+<para>
+Set by the driver when it does not want any data to be read from or
+written to the driver.  If a user attempts to do this, they will receive
+an -EIO error from the kernel.  This is usually set as the device is
+shutting down.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_OTHER_CLOSED
+</literal>
+</term>
+<listitem>
+<para>
+Only used by the pty driver to notify when the port has been closed.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_EXCLUSIVE
+</literal>
+</term>
+<listitem>
+<para>
+Set by the tty core to indicate that a port is in exclusive mode, and
+can only be accessed by one user at a time.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_DEBUG
+</literal>
+</term>
+<listitem>
+<para>
+Not used anywhere in the kernel.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_DO_WRITE_WAKEUP
+</literal>
+</term>
+<listitem>
+<para>
+If this is set, the line dicipline's <function>write_wakeup</function>
+function is allowed to be called.  This is usually called at the same
+time the <function>wake_up_interruptible</function> function is called
+by the tty driver.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_PUSH
+</literal>
+</term>
+<listitem>
+<para>
+Used only internally by the default tty line discipline.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_CLOSING
+</literal>
+</term>
+<listitem>
+<para>
+Used by the tty core to keep track if a port is in the process of
+closing at that moment in time or not.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_DONT_FLIP
+</literal>
+</term>
+<listitem>
+<para>
+Used by the default tty line discipline to notify the tty core that it
+should not change the flip buffer when it is set.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_HW_COOK_OUT
+</literal>
+</term>
+<listitem>
+<para>
+If set by a tty driver, it notifies the line dicipline that it will
+"cook" the output sent to it.  If it is not set, the line dicipline will
+copy output of the driver in chunks, otherwise it has to evaluate every
+byte sent individually for line changes.  This flag should generally not
+be set by a tty driver.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_HW_COOK_IN
+</literal>
+</term>
+<listitem>
+<para>
+Almost identical to setting the <literal>TTY_DRIVER_REAL_RAW</literal>
+flag in the driver flags variable.  This flag should generally not be
+set by a tty driver.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_PTY_LOCK
+</literal>
+</term>
+<listitem>
+<para>
+Used by the pty driver to lock and unlock a port.
+</para>
+</listitem>
+
+<term>
+<literal>
+TTY_NO_WRITE_SPLIT
+</literal>
+</term>
+<listitem>
+<para>
+If this is set, the tty core will not split up writes to the tty driver
+into normal sized chunks.  This flag should not be set to prevent
+denial of service attacks on tty ports by sending large amounts of data
+to a port.
+</para>
+</listitem>
+
+</varlistentry>
+</variablelist>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct tty_flip_buffer flip;
+</literal>
+</term>
+<listitem>
+<para>
+The flip buffer for the tty device.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct tty_ldisc ldisc;
+</literal>
+</term>
+<listitem>
+<para>
+The line dicipline for the tty device
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+wait_queue_head_t write_wait;
+</literal>
+</term>
+<listitem>
+<para>
+The wait_queue for the tty writing function.  A tty driver should wake this
+up to signal when it can receive more data.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct termios *termios;
+</literal>
+</term>
+<listitem>
+<para>
+Pointer to the current termios settings for the tty device.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+unsigned char stopped:1;
+</literal>
+</term>
+<listitem>
+<para>
+Indicates whether the tty device is stopped.  The tty driver can set this value.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+unsigned char hw_stopped:1;
+</literal>
+</term>
+<listitem>
+<para>
+Indicates whether or not the tty device's hardware is stopped.  The tty driver can set
+this value.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+unsigned char low_latency:1;
+</literal>
+</term>
+<listitem>
+<para>
+Indicates whether the tty device is a low latency device, capable of receiving data at a very high
+rate of speed.  The tty driver can set this value.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+unsigned char closing:1;
+</literal>
+</term>
+<listitem>
+<para>
+Indicates whether the tty device is in the middle of closing the port.  The tty driver
+can set this value.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+struct tty_driver driver;
+</literal>
+</term>
+<listitem>
+<para>
+The current tty_driver structure that controls this tty device.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void *driver_data;
+</literal>
+</term>
+<listitem>
+<para>
+A pointer that the tty_driver can use to store data in that is local to
+the tty driver.  This variable will not be modified by the tty core.
+</para>
+</listitem>
+</varlistentry>
+
+<remark>
+Note, any other tty_struct fields need to be explained?
+</remark>
+
+</variablelist>
+
+</sect1>
+
+<!--
+
+For the bibliography section
+
+Other TTY information
+
+Vern Hoxie has written an excellent set of documentation and example
+programs for how to access serial ports from user space available at
+<ftp://scicom.alphacdc.com/pub/linux>.  The most valuable portion of
+these documents for tty driver authors is the the descriptions of the
+different ioctl(2) commands, and the history behind all of the wide
+variety of different ways to get and set tty information.
+
+-->
+
+<sect1>
+<title>
+Quick Reference
+</title>
+
+<para>
+This section provides a reference for the concepts introduced in this
+chapter.  It also explains the role of each header file that a tty
+driver needs to include.  The lists of fields in the tty_driver and
+tty_device structures, however, are not repeated here.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>
+#include &lt;linux/tty_driver.h&gt;
+</literal>
+</term>
+<listitem>
+<para>
+This header file contains the definition of struct tty_driver, and
+declares some of the different flags used in this structure.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+#include &lt;linux/tty.h&gt;
+</literal>
+</term>
+<listitem>
+<para>
+This header file contains the definition of struct tty_struct, and a
+number of different macros to access the individual values of the struct
+termios fields easily.  It also contains the function declarations of
+the tty driver core.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+#include &lt;linux/tty_flip.h&gt;
+</literal>
+</term>
+<listitem>
+<para>
+This header file contains some tty flip buffer inline functions that
+make it easier to manipulate the flip buffer structures.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+#include &lt;asm/termios.h&gt;
+</literal>
+</term>
+<listitem>
+<para>
+This header file contains the definition of struct termio for the
+specific hardware platform the kernel is built for.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+int tty_register_driver(struct tty_driver *driver);
+</literal>
+</term>
+<term>
+<literal>
+int tty_unregister_driver(struct tty_driver *driver);
+</literal>
+</term>
+<listitem>
+<para>
+Functions used to register and unregister a tty driver from
+the tty core.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void tty_insert_flip_char(struct tty_struct *tty, unsigned char ch, char flag);
+</literal>
+</term>
+<listitem>
+<para>
+Function used to insert characters into the tty device's flip buffer, to be read
+by a user.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+TTY_NORMAL
+</literal>
+</term>
+<term>
+<literal>
+TTY_BREAK
+</literal>
+</term>
+<term>
+<literal>
+TTY_FRAME
+</literal>
+</term>
+<term>
+<literal>
+TTY_PARITY
+</literal>
+</term>
+<term>
+<literal>
+TTY_OVERRUN
+</literal>
+</term>
+<listitem>
+<para>
+Different values for the flag paramater used in the
+<function>tty_insert_flip_char</function> function.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+void tty_flip_buffer_push(struct tty_struct *tty);
+</literal>
+</term>
+<listitem>
+<para>
+Function used to push the data in the current flip buffer to the user.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<function>
+void tty_register_device(struct tty_driver *driver, unsigned minor);
+</function>
+</term>
+<term>
+<function>
+void tty_unregister_device(struct tty_driver *driver, unsigned minor);
+</function>
+</term>
+<listitem>
+<para>
+Functions used to register and unregister a single tty device with the system.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>
+tty_std_termios
+</literal>
+</term>
+<listitem>
+<para>
+Variable used to initialize a termios structure with a common set of
+default line settings.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+</chapter>
+
+<!-- vim: set ai tw=80 : -->

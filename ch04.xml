@@ -1,0 +1,44 @@
+<chapter id="LDSP-chapter-input">
+
+<title>
+Input Drivers
+</title>
+
+Overall
+
+<figure>
+<title>input core overview</title>
+<graphic fileref="figures/ldsp_0401.png"/>
+</figure>
+
+Keyboards
+
+Mice
+
+Joysticks
+
+	relative vs absolute
+
+Misc
+
+LED
+
+Sounds
+
+Effects?
+
+Sample keyboard driver
+
+Sample mouse driver
+
+
+keyboard program info:
+http://www.tuxmobil.org/Mobile-Guide.db/mobile-guide-p2c1s8-ext-keys.html
+
+
+Brads good userspace tools and descriptions...
+
+
+</chapter>
+
+<!-- vim: set ai tw=72 : -->

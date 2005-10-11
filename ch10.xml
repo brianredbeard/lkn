@@ -1,0 +1,13 @@
+<chapter>
+
+<title>
+PCMCIA / CardBus
+</title>
+
+This covers the CardBus layer, and how it interacts with the PCI layer.
+
+Hm, CardBus is PCI.  I guess just PCMCIA will be covered...
+
+</chapter>
+
+<!-- vim: set ai tw=72 : -->

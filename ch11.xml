@@ -1,0 +1,16 @@
+<chapter>
+
+<title>
+Disk Drivers
+</title>
+
+SCSI
+IDE
+
+Both SCSI and IDE are under massive change right now, but they both deal
+with talking to disk drives (and thing that look like disk drives, like
+CompactFlash storage devices.)
+
+</chapter>
+
+<!-- vim: set ai tw=72 : -->

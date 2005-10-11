@@ -1,0 +1,13 @@
+<chapter>
+
+<title>
+Video / framebuffer
+</title>
+
+This covers the video/framebuffer layer, which is needed to control a
+display.
+
+
+</chapter>
+
+<!-- vim: set ai tw=72 : -->

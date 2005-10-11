@@ -1,0 +1,26 @@
+<chapter>
+
+<title>
+USB Drivers
+</title>
+
+
+This covers the USB subsystem, which is needed for many drivers that end
+up talking to different driver layers (like USB mice or keyboards.)  It
+will also cover the use of the generic USB class to handle devices that
+do not fit into any existing classes (like a USB LCD device).
+
+usbfs?  Ugh :(
+
+<para>
+<programlisting>
+<![CDATA[write(2, "Hello", 5)
+foo->x;
+dev_dbg(&check->dev, "bah-"
+	"bah\n");]]>
+</programlisting>
+</para>
+
+</chapter>
+
+<!-- vim: set ai tw=72 : -->

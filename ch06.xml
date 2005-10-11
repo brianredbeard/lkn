@@ -1,0 +1,14 @@
+<chapter>
+
+<title>
+PCI Drivers
+</title>
+
+This covers the PCI subsystem, which is needed by lots of different
+types of devices (network cards, USB controllers, SCSI controllers, fast
+serial cards, etc.)
+
+
+</chapter>
+
+<!-- vim: set ai tw=72 : -->
