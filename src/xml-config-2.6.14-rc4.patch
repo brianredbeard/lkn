@@ -1,0 +1,187 @@
+diff -Naur linux-2.6.14-rc4/scripts/kconfig/Makefile gregkh-2.6.14-rc4/scripts/kconfig/Makefile
+--- linux-2.6.14-rc4/scripts/kconfig/Makefile	2005-10-16 12:28:28.000000000 -0700
++++ gregkh-2.6.14-rc4/scripts/kconfig/Makefile	2005-10-16 11:25:11.000000000 -0700
+@@ -212,7 +212,7 @@
+ # The following requires flex/bison
+ # By default we use the _shipped versions, uncomment the following line if
+ # you are modifying the flex/bison src.
+-# LKC_GENPARSER := 1
++LKC_GENPARSER := 1
+ 
+ ifdef LKC_GENPARSER
+ 
+diff -Naur linux-2.6.14-rc4/scripts/kconfig/conf.c gregkh-2.6.14-rc4/scripts/kconfig/conf.c
+--- linux-2.6.14-rc4/scripts/kconfig/conf.c	2005-08-28 16:41:01.000000000 -0700
++++ gregkh-2.6.14-rc4/scripts/kconfig/conf.c	2005-10-16 11:49:05.000000000 -0700
+@@ -533,7 +533,7 @@
+ 		printf(_("%s: Kconfig file missing\n"), av[0]);
+ 	}
+ 	conf_parse(name);
+-	//zconfdump(stdout);
++	gregkh_confdump(stdout);
+ 	switch (input_mode) {
+ 	case set_default:
+ 		if (!defconfig_file)
+diff -Naur linux-2.6.14-rc4/scripts/kconfig/zconf.y gregkh-2.6.14-rc4/scripts/kconfig/zconf.y
+--- linux-2.6.14-rc4/scripts/kconfig/zconf.y	2005-10-16 12:28:28.000000000 -0700
++++ gregkh-2.6.14-rc4/scripts/kconfig/zconf.y	2005-10-16 12:09:23.000000000 -0700
+@@ -574,7 +574,9 @@
+ 	if (sym_is_choice(sym))
+ 		fprintf(out, "choice\n");
+ 	else
+-		fprintf(out, "config %s\n", sym->name);
++//		fprintf(out, "config %s\n", sym->name);
++		fprintf(out, "\t<term>%s</term>\n", sym->name);
++
+ 	switch (sym->type) {
+ 	case S_BOOLEAN:
+ 		fputs("  boolean\n", out);
+@@ -600,7 +602,8 @@
+ 			continue;
+ 		switch (prop->type) {
+ 		case P_PROMPT:
+-			fputs("  prompt ", out);
++			fputs("<nutsynopsis>\n\t", out);
++//			fputs("  prompt ", out);
+ 			print_quoted_string(out, prop->text);
+ 			if (!expr_is_yes(prop->visible.expr)) {
+ 				fputs(" if ", out);
+@@ -682,6 +685,138 @@
+ 	}
+ }
+ 
++void gregkh_print_symbol(FILE *out, struct menu *menu)
++{
++	struct symbol *sym = menu->sym;
++	struct property *prop;
++
++	fprintf(out, "<nutentry>\n");
++	if (sym_is_choice(sym))
++		fprintf(out, "choice\n");
++	else
++		fprintf(out, "\t<term>%s</term>\n", sym->name);
++
++	for (prop = sym->prop; prop; prop = prop->next) {
++		if (prop->menu != menu)
++			continue;
++		switch (prop->type) {
++		case P_PROMPT:
++			fprintf(out, "<nutsynopsis>\n\t");
++			print_quoted_string(out, prop->text);
++			fprintf(out, "\n</nutsynopsis>\n");
++			fprintf(out, "<nutentrybody>\n");
++			if (!expr_is_yes(prop->visible.expr)) {
++				fprintf(out, "\t<para>\n\tdepends on\n\t<literal>");
++				expr_fprint(prop->visible.expr, out);
++				fprintf(out, "</literal>\n\t</para>\n");
++			}
++			fputc('\n', out);
++			break;
++		case P_DEFAULT:
++			fprintf(out, "\t<para>\n\tdefault value\n\t<literal>");
++			expr_fprint(prop->expr, out);
++			if (!expr_is_yes(prop->visible.expr)) {
++				fputs(" if ", out);
++				expr_fprint(prop->visible.expr, out);
++			}
++			fprintf(out, "</literal>\n\t</para>\n\n");
++			fputc('\n', out);
++			break;
++		case P_CHOICE:
++			fputs("  #choice value\n", out);
++			break;
++		default:
++			fprintf(out, "  unknown prop %d!\n", prop->type);
++			break;
++		}
++	}
++
++	fprintf(out, "\t<para>\n\ttype\n\t<literal>");
++	switch (sym->type) {
++	case S_BOOLEAN:
++		fputs("boolean", out);
++		break;
++	case S_TRISTATE:
++		fputs("tristate", out);
++		break;
++	case S_STRING:
++		fputs("string", out);
++		break;
++	case S_INT:
++		fputs("integer", out);
++		break;
++	case S_HEX:
++		fputs("hex", out);
++		break;
++	default:
++		fputs("???", out);
++		break;
++	}
++	fprintf(out, "</literal>\n\t</para>\n\n");
++
++	if (sym->help) {
++		int len = strlen(sym->help);
++		while (sym->help[--len] == '\n')
++			sym->help[len] = 0;
++		fprintf(out, "\t<para>\n");
++		//fprintf(out, "  help\n%s\n", sym->help);
++		// FIXME convert help paragraphs to xml paragraphs
++		fprintf(out, "%s\n", sym->help);
++		fprintf(out, "\t</para>\n\n");
++	}
++
++	fprintf(out, "</nutentrybody>\n");
++	fprintf(out, "</nutentry>\n");
++}
++
++void gregkh_confdump(FILE *out)
++{
++	struct property *prop;
++	struct symbol *sym;
++	struct menu *menu;
++
++	menu = rootmenu.list;
++	while (menu) {
++		if ((sym = menu->sym))
++			gregkh_print_symbol(out, menu);
++		else if ((prop = menu->prompt)) {
++			switch (prop->type) {
++			case P_COMMENT:
++				fputs("\ncomment ", out);
++				print_quoted_string(out, prop->text);
++				fputs("\n", out);
++				break;
++			case P_MENU:
++				fputs("\nmenu ", out);
++				print_quoted_string(out, prop->text);
++				fputs("\n", out);
++				break;
++			default:
++				;
++			}
++			if (!expr_is_yes(prop->visible.expr)) {
++				fprintf(out, "<para>\n\tdepends on\n\t<literal>");
++				expr_fprint(prop->visible.expr, out);
++				fprintf(out, "</literal>\n\t</para>\n\n");
++			}
++			fputs("\n", out);
++		}
++
++		if (menu->list)
++			menu = menu->list;
++		else if (menu->next)
++			menu = menu->next;
++		else while ((menu = menu->parent)) {
++			if (menu->prompt && menu->prompt->type == P_MENU)
++				fputs("\nendmenu\n", out);
++			if (menu->next) {
++				menu = menu->next;
++				break;
++			}
++		}
++	}
++}
++
+ #include "lex.zconf.c"
+ #include "util.c"
+ #include "confdata.c"
