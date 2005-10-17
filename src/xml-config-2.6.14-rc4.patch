@@ -1,4 +1,3 @@
-diff -Naur linux-2.6.14-rc4/scripts/kconfig/Makefile gregkh-2.6.14-rc4/scripts/kconfig/Makefile
 --- linux-2.6.14-rc4/scripts/kconfig/Makefile	2005-10-16 12:28:28.000000000 -0700
 +++ gregkh-2.6.14-rc4/scripts/kconfig/Makefile	2005-10-16 11:25:11.000000000 -0700
 @@ -212,7 +212,7 @@
@@ -10,7 +9,6 @@ diff -Naur linux-2.6.14-rc4/scripts/kconfig/Makefile gregkh-2.6.14-rc4/scripts/k
  
  ifdef LKC_GENPARSER
  
-diff -Naur linux-2.6.14-rc4/scripts/kconfig/conf.c gregkh-2.6.14-rc4/scripts/kconfig/conf.c
 --- linux-2.6.14-rc4/scripts/kconfig/conf.c	2005-08-28 16:41:01.000000000 -0700
 +++ gregkh-2.6.14-rc4/scripts/kconfig/conf.c	2005-10-16 11:49:05.000000000 -0700
 @@ -533,7 +533,7 @@
@@ -22,9 +20,20 @@ diff -Naur linux-2.6.14-rc4/scripts/kconfig/conf.c gregkh-2.6.14-rc4/scripts/kco
  	switch (input_mode) {
  	case set_default:
  		if (!defconfig_file)
-diff -Naur linux-2.6.14-rc4/scripts/kconfig/zconf.y gregkh-2.6.14-rc4/scripts/kconfig/zconf.y
+--- linux-2.6.14-rc4/scripts/kconfig/expr.c	2005-08-28 16:41:01.000000000 -0700
++++ gregkh-2.6.14-rc4/scripts/kconfig/expr.c	2005-10-16 13:18:25.000000000 -0700
+@@ -1049,7 +1049,8 @@
+ 		break;
+ 	case E_AND:
+ 		expr_print(e->left.expr, fn, data, E_AND);
+-		fn(data, " && ");
++//		fn(data, " && ");
++		fn(data, " and ");
+ 		expr_print(e->right.expr, fn, data, E_AND);
+ 		break;
+ 	case E_CHOICE:
 --- linux-2.6.14-rc4/scripts/kconfig/zconf.y	2005-10-16 12:28:28.000000000 -0700
-+++ gregkh-2.6.14-rc4/scripts/kconfig/zconf.y	2005-10-16 12:09:23.000000000 -0700
++++ gregkh-2.6.14-rc4/scripts/kconfig/zconf.y	2005-10-16 13:43:01.000000000 -0700
 @@ -574,7 +574,9 @@
  	if (sym_is_choice(sym))
  		fprintf(out, "choice\n");
@@ -46,14 +55,39 @@ diff -Naur linux-2.6.14-rc4/scripts/kconfig/zconf.y gregkh-2.6.14-rc4/scripts/kc
  			print_quoted_string(out, prop->text);
  			if (!expr_is_yes(prop->visible.expr)) {
  				fputs(" if ", out);
-@@ -682,6 +685,138 @@
+@@ -682,6 +685,166 @@
  	}
  }
  
++void gregkh_output_help(FILE *out, char *string)
++{
++//	int length = strlen(string);
++	char *current = string;
++
++	fprintf(out, "\t");
++	while (*current) {
++		if ((current[0] == '\n') && (current[1] == '\n')) {
++			fprintf(out, "\n\t</para>\n\n\t<para>\n\t");
++			current++;
++		} else if (*current == '\n')
++			fprintf(out, "\n\t");
++		else if ((*current == '<') || (*current == '>'))
++			;
++		else if (*current == '&')
++			fprintf(out, "and");
++		else
++			fprintf(out, "%c", *current);
++		current++;
++	}
++	fprintf(out, "\n");
++	//fprintf(out, "%s\n", string);
++}
++
 +void gregkh_print_symbol(FILE *out, struct menu *menu)
 +{
 +	struct symbol *sym = menu->sym;
 +	struct property *prop;
++	int entrybody_start = 0;
 +
 +	fprintf(out, "<nutentry>\n");
 +	if (sym_is_choice(sym))
@@ -70,12 +104,12 @@ diff -Naur linux-2.6.14-rc4/scripts/kconfig/zconf.y gregkh-2.6.14-rc4/scripts/kc
 +			print_quoted_string(out, prop->text);
 +			fprintf(out, "\n</nutsynopsis>\n");
 +			fprintf(out, "<nutentrybody>\n");
++			entrybody_start = 1;
 +			if (!expr_is_yes(prop->visible.expr)) {
 +				fprintf(out, "\t<para>\n\tdepends on\n\t<literal>");
 +				expr_fprint(prop->visible.expr, out);
-+				fprintf(out, "</literal>\n\t</para>\n");
++				fprintf(out, "</literal>\n\t</para>\n\n");
 +			}
-+			fputc('\n', out);
 +			break;
 +		case P_DEFAULT:
 +			fprintf(out, "\t<para>\n\tdefault value\n\t<literal>");
@@ -85,7 +119,6 @@ diff -Naur linux-2.6.14-rc4/scripts/kconfig/zconf.y gregkh-2.6.14-rc4/scripts/kc
 +				expr_fprint(prop->visible.expr, out);
 +			}
 +			fprintf(out, "</literal>\n\t</para>\n\n");
-+			fputc('\n', out);
 +			break;
 +		case P_CHOICE:
 +			fputs("  #choice value\n", out);
@@ -119,6 +152,9 @@ diff -Naur linux-2.6.14-rc4/scripts/kconfig/zconf.y gregkh-2.6.14-rc4/scripts/kc
 +	}
 +	fprintf(out, "</literal>\n\t</para>\n\n");
 +
++	if (!entrybody_start)
++		fprintf(out, "<nutentrybody>\n");
++
 +	if (sym->help) {
 +		int len = strlen(sym->help);
 +		while (sym->help[--len] == '\n')
@@ -126,12 +162,13 @@ diff -Naur linux-2.6.14-rc4/scripts/kconfig/zconf.y gregkh-2.6.14-rc4/scripts/kc
 +		fprintf(out, "\t<para>\n");
 +		//fprintf(out, "  help\n%s\n", sym->help);
 +		// FIXME convert help paragraphs to xml paragraphs
-+		fprintf(out, "%s\n", sym->help);
++		gregkh_output_help(out, sym->help);
++//		fprintf(out, "%s\n", sym->help);
 +		fprintf(out, "\t</para>\n\n");
 +	}
 +
 +	fprintf(out, "</nutentrybody>\n");
-+	fprintf(out, "</nutentry>\n");
++	fprintf(out, "</nutentry>\n\n");
 +}
 +
 +void gregkh_confdump(FILE *out)
