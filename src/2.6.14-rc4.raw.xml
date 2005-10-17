@@ -1,4 +1,3 @@
-scripts/kconfig/conf -s arch/i386/Kconfig
 <nutentry>
 	<term>X86</term>
 	<para>
@@ -102945,6 +102944,3 @@ endmenu
 
 
 endmenu
-#
-# using defaults found in .config
-#
