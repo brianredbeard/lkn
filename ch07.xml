@@ -4,6 +4,42 @@
 Configuring a kernel
 </title>
 
+<sect1>
+<title>customizing it for the hardware on your machine</title>
+</sect1>
+
+<sect1>
+<title>building modules</title>
+</sect1>
+
+<sect1>
+<title>Common configuration options</title>
+
+<sect2>
+<title>USB</title>
+</sect2>
+
+<sect2>
+<title>power management</title>
+</sect2>
+
+<sect2>
+<title>ACPI</title>
+</sect2>
+
+<sect2>
+<title>filesystems</title>
+</sect2>
+
+<sect2>
+<title>firewire</title>
+</sect2>
+
+<sect2>
+<title>other common things that users need.</title>
+</sect2>
+
+</sect1>
 
 </chapter>
 
