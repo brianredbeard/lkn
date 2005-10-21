@@ -4,6 +4,9 @@
 Kernel boot command line reference
 </title>
 
+<sect1>
+<title>All the options</title>
+
 <nutlist longestterm="unseten">
 
 
@@ -44,7 +47,7 @@ Kernel boot command line reference
 </nutlist>
 
 
-
+</sect1>
 
 </chapter>
 

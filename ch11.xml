@@ -5,6 +5,10 @@ Kernel configuration option reference
 </title>
 
 
+<sect1>
+<title>All the options</title>
+
+
 <nutlist longestterm="unseten">
 
 <!--
@@ -152,7 +156,7 @@ Kernel configuration option reference
 </nutlist>
 
 
-
+</sect1>
 
 </chapter>
 

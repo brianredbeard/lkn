@@ -22,6 +22,7 @@ CHAP_SRC	:= 	ch01.xml	\
 
 all:
 	@echo "need to tell me what to do"
+	@echo "options are: clean check bookcheck html bookhtml"
 
 clean:
 	-rm *.html

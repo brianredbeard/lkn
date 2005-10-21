@@ -4,21 +4,21 @@
 Upgrading a kernel
 </title>
 
-<para>
-retrieving the patch
-</para>
+<sect1>
+<title>retrieving the patch</title>
+</sect1>
 
-<para>
-applying the patch
-</para>
+<sect1>
+<title>applying the patch</title>
+</sect1>
 
-<para>
-updating the configuration
-</para>
+<sect1>
+<title>updating the configuration</title>
+</sect1>
 
-<para>
-building the updated kernel
-</para>
+<sect1>
+<title>building the updated kernel</title>
+</sect1>
 
 </chapter>
 

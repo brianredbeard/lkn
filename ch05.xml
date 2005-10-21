@@ -1,10 +1,21 @@
 <chapter>
 
 <title>
-Installing a kernel
+Installing a kernel and booting with it
 </title>
 
 
-</chapter>
+<sect1>
+<title>grub</title>
+</sect1>
 
+<sect1>
+<title>lilo</title>
+</sect1>
+
+<sect1>
+<title>other boot loaders</title>
+</sect1>
+
+</chapter>
 <!-- vim: set ai tw=72 : -->

@@ -1,43 +1,28 @@
-<chapter id="LDSP-chapter-input">
+<chapter id="LKN-chapter-building">
 
 <title>
 Building a kernel
 </title>
 
-Overall
+<sect1>
+<title>use the the default configuration options</title>
+</sect1>
 
-<figure>
-<title>input core overview</title>
-<graphic fileref="figures/ldsp_0401.png"/>
-</figure>
+<sect1>
+<title>basic options to make (full coverage will be in later chapter).</title>
+</sect1>
 
-Keyboards
+<sect1>
+<title>building a kernel with the source in one place, and the output in another.</title>
+</sect1>
 
-Mice
+<sect1>
+<title>building only a portion of the kernel tree</title>
+</sect1>
 
-Joysticks
-
-	relative vs absolute
-
-Misc
-
-LED
-
-Sounds
-
-Effects?
-
-Sample keyboard driver
-
-Sample mouse driver
-
-
-keyboard program info:
-http://www.tuxmobil.org/Mobile-Guide.db/mobile-guide-p2c1s8-ext-keys.html
-
-
-Brads good userspace tools and descriptions...
-
+<sect1>
+<title>building a kernel for a different architecture</title>
+</sect1>
 
 </chapter>
 

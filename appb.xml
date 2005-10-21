@@ -4,6 +4,7 @@
 Managing changes made to a kernel source tree
 </title>
 
+<simplesect>
 <remark>
 Based on the ideas presented at http://www.linuxjournal.com/article/6183
 </remark>
@@ -12,7 +13,6 @@ Based on the ideas presented at http://www.linuxjournal.com/article/6183
 Rough cut-and-paste of original article below.
 </remark>
 
-<simplesect>
 
 <para>
 Many issues involved with Linux kernel development are different from
@@ -397,7 +397,6 @@ for the Linux USB and Linux Hot Plug PCI drivers.</p>
 -->
 
 </sect1>
-
 
 
 </chapter>
