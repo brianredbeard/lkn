@@ -4,8 +4,8 @@
  scripts/kconfig/conf.c   |    1 
  scripts/kconfig/expr.c   |    6 -
  scripts/kconfig/lkc.h    |    1 
- scripts/kconfig/zconf.y  |  196 +++++++++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 206 insertions(+), 4 deletions(-)
+ scripts/kconfig/zconf.y  |  199 +++++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 209 insertions(+), 4 deletions(-)
 
 --- lkn-2.6.14-rc5.orig/scripts/kconfig/Makefile
 +++ lkn-2.6.14-rc5/scripts/kconfig/Makefile
@@ -52,7 +52,7 @@
  	case E_CHOICE:
 --- lkn-2.6.14-rc5.orig/scripts/kconfig/zconf.y
 +++ lkn-2.6.14-rc5/scripts/kconfig/zconf.y
-@@ -682,6 +682,202 @@ void zconfdump(FILE *out)
+@@ -682,6 +682,205 @@ void zconfdump(FILE *out)
  	}
  }
  
@@ -203,6 +203,7 @@
 +	struct property *prop;
 +	struct symbol *sym;
 +	struct menu *menu;
++	int depth=2;
 +
 +	menu = rootmenu.list;
 +	while (menu) {
@@ -219,10 +220,11 @@
 +				break;
 +			case P_MENU:
 +//				fputs("\nmenu ", out);
-+				fputs("\n<sect2>\n\t<title>", out);
++				fprintf(out, "\n<sect%d>\n\t<title>", depth);
 +				gkh_print_quoted_string(out, prop->text);
 +				fputs("</title>\n<nutlist>\n", out);
 +				fputs("\n", out);
++				++depth;
 +				break;
 +			default:
 +				;
@@ -242,7 +244,8 @@
 +		else while ((menu = menu->parent)) {
 +			if (menu->prompt && menu->prompt->type == P_MENU) {
 +//				fputs("\nendmenu\n", out);
-+				fputs("\n</nutlist>\n</sect2>\n\n", out);
++				--depth;
++				fprintf(out, "\n</nutlist>\n</sect%d>\n\n", depth);
 +			}
 +			if (menu->next) {
 +				menu = menu->next;
