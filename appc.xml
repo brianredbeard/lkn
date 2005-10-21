@@ -4,6 +4,26 @@
 Creating useful bugreports
 </title>
 
+<sect1>
+<title>decoding a oops message</title>
+</sect1>
+
+<sect1>
+<title>what a kernel developer wants to see in a bug report.</title>
+</sect1>
+
+<sect1>
+<title>who to send the report to</title>
+
+<sect2>
+<title>email</title>
+</sect2>
+
+<sect2>
+<title>bugzilla.kernel.org</title>
+</sect2>
+
+</sect1>
 
 </chapter>
 
