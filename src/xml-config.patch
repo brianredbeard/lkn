@@ -1,6 +1,14 @@
---- linux-2.6.14-rc4/scripts/kconfig/Makefile	2005-10-16 12:28:28.000000000 -0700
-+++ gregkh-2.6.14-rc4/scripts/kconfig/Makefile	2005-10-16 11:25:11.000000000 -0700
-@@ -212,7 +212,7 @@
+---
+ scripts/kconfig/Makefile |    2 
+ scripts/kconfig/conf.c   |    1 
+ scripts/kconfig/expr.c   |    6 +
+ scripts/kconfig/lkc.h    |    1 
+ scripts/kconfig/zconf.y  |  156 +++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 163 insertions(+), 3 deletions(-)
+
+--- lkn-2.6.14-rc5.orig/scripts/kconfig/Makefile
++++ lkn-2.6.14-rc5/scripts/kconfig/Makefile
+@@ -212,7 +212,7 @@ $(obj)/lkc_defs.h: $(src)/lkc_proto.h
  # The following requires flex/bison
  # By default we use the _shipped versions, uncomment the following line if
  # you are modifying the flex/bison src.
@@ -9,20 +17,29 @@
  
  ifdef LKC_GENPARSER
  
---- linux-2.6.14-rc4/scripts/kconfig/conf.c	2005-08-28 16:41:01.000000000 -0700
-+++ gregkh-2.6.14-rc4/scripts/kconfig/conf.c	2005-10-16 11:49:05.000000000 -0700
-@@ -533,7 +533,7 @@
- 		printf(_("%s: Kconfig file missing\n"), av[0]);
+--- lkn-2.6.14-rc5.orig/scripts/kconfig/conf.c
++++ lkn-2.6.14-rc5/scripts/kconfig/conf.c
+@@ -534,6 +534,7 @@ int main(int ac, char **av)
  	}
  	conf_parse(name);
--	//zconfdump(stdout);
+ 	//zconfdump(stdout);
 +	gregkh_confdump(stdout);
  	switch (input_mode) {
  	case set_default:
  		if (!defconfig_file)
---- linux-2.6.14-rc4/scripts/kconfig/expr.c	2005-08-28 16:41:01.000000000 -0700
-+++ gregkh-2.6.14-rc4/scripts/kconfig/expr.c	2005-10-16 13:18:25.000000000 -0700
-@@ -1049,7 +1049,8 @@
+--- lkn-2.6.14-rc5.orig/scripts/kconfig/expr.c
++++ lkn-2.6.14-rc5/scripts/kconfig/expr.c
+@@ -1026,7 +1026,8 @@ void expr_print(struct expr *e, void (*f
+ 		if (e->left.sym->name)
+ 			fn(data, e->left.sym->name);
+ 		else
+-			fn(data, "<choice>");
++//			fn(data, "<choice>");
++			fn(data, "</literal><emphasis>choice</emphasis><literal>");
+ 		break;
+ 	case E_NOT:
+ 		fn(data, "!");
+@@ -1049,7 +1050,8 @@ void expr_print(struct expr *e, void (*f
  		break;
  	case E_AND:
  		expr_print(e->left.expr, fn, data, E_AND);
@@ -32,36 +49,14 @@
  		expr_print(e->right.expr, fn, data, E_AND);
  		break;
  	case E_CHOICE:
---- linux-2.6.14-rc4/scripts/kconfig/zconf.y	2005-10-16 12:28:28.000000000 -0700
-+++ gregkh-2.6.14-rc4/scripts/kconfig/zconf.y	2005-10-16 13:43:01.000000000 -0700
-@@ -574,7 +574,9 @@
- 	if (sym_is_choice(sym))
- 		fprintf(out, "choice\n");
- 	else
--		fprintf(out, "config %s\n", sym->name);
-+//		fprintf(out, "config %s\n", sym->name);
-+		fprintf(out, "\t<term>%s</term>\n", sym->name);
-+
- 	switch (sym->type) {
- 	case S_BOOLEAN:
- 		fputs("  boolean\n", out);
-@@ -600,7 +602,8 @@
- 			continue;
- 		switch (prop->type) {
- 		case P_PROMPT:
--			fputs("  prompt ", out);
-+			fputs("<nutsynopsis>\n\t", out);
-+//			fputs("  prompt ", out);
- 			print_quoted_string(out, prop->text);
- 			if (!expr_is_yes(prop->visible.expr)) {
- 				fputs(" if ", out);
-@@ -682,6 +685,166 @@
+--- lkn-2.6.14-rc5.orig/scripts/kconfig/zconf.y
++++ lkn-2.6.14-rc5/scripts/kconfig/zconf.y
+@@ -682,6 +682,162 @@ void zconfdump(FILE *out)
  	}
  }
  
 +void gregkh_output_help(FILE *out, char *string)
 +{
-+//	int length = strlen(string);
 +	char *current = string;
 +
 +	fprintf(out, "\t");
@@ -80,7 +75,6 @@
 +		current++;
 +	}
 +	fprintf(out, "\n");
-+	//fprintf(out, "%s\n", string);
 +}
 +
 +void gregkh_print_symbol(FILE *out, struct menu *menu)
@@ -121,7 +115,7 @@
 +			fprintf(out, "</literal>\n\t</para>\n\n");
 +			break;
 +		case P_CHOICE:
-+			fputs("  #choice value\n", out);
++			//fputs("  #choice value\n", out);
 +			break;
 +		default:
 +			fprintf(out, "  unknown prop %d!\n", prop->type);
@@ -160,10 +154,8 @@
 +		while (sym->help[--len] == '\n')
 +			sym->help[len] = 0;
 +		fprintf(out, "\t<para>\n");
-+		//fprintf(out, "  help\n%s\n", sym->help);
-+		// FIXME convert help paragraphs to xml paragraphs
++		// convert help paragraphs to xml paragraphs
 +		gregkh_output_help(out, sym->help);
-+//		fprintf(out, "%s\n", sym->help);
 +		fprintf(out, "\t</para>\n\n");
 +	}
 +
@@ -222,3 +214,13 @@
  #include "lex.zconf.c"
  #include "util.c"
  #include "confdata.c"
+--- lkn-2.6.14-rc5.orig/scripts/kconfig/lkc.h
++++ lkn-2.6.14-rc5/scripts/kconfig/lkc.h
+@@ -33,6 +33,7 @@ extern "C" {
+ 
+ int zconfparse(void);
+ void zconfdump(FILE *out);
++void gregkh_confdump(FILE *out);
+ 
+ extern int zconfdebug;
+ void zconf_starthelp(void);
