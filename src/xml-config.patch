@@ -1,10 +1,10 @@
 ---
  scripts/kconfig/Makefile |    2 
  scripts/kconfig/conf.c   |    1 
- scripts/kconfig/expr.c   |    6 +
+ scripts/kconfig/expr.c   |    6 -
  scripts/kconfig/lkc.h    |    1 
- scripts/kconfig/zconf.y  |  156 +++++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 163 insertions(+), 3 deletions(-)
+ scripts/kconfig/zconf.y  |  190 +++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 197 insertions(+), 3 deletions(-)
 
 --- lkn-2.6.14-rc5.orig/scripts/kconfig/Makefile
 +++ lkn-2.6.14-rc5/scripts/kconfig/Makefile
@@ -51,11 +51,45 @@
  	case E_CHOICE:
 --- lkn-2.6.14-rc5.orig/scripts/kconfig/zconf.y
 +++ lkn-2.6.14-rc5/scripts/kconfig/zconf.y
-@@ -682,6 +682,162 @@ void zconfdump(FILE *out)
+@@ -682,6 +682,196 @@ void zconfdump(FILE *out)
  	}
  }
  
-+void gregkh_output_help(FILE *out, char *string)
++static void gkh_print_string(FILE *out, int len, const char *str)
++{
++	while (len) {
++		if (*str == '<')
++			fputs("&lt;", out);
++		else if (*str == '>')
++			fputs("&gt;", out);
++		else if (*str == '&')
++			fputs("&amp;", out);
++		else putc(*str, out);
++		--len;
++		++str;
++	}
++}
++
++static void gkh_print_quoted_string(FILE *out, const char *str)
++{
++	const char *p;
++	int len;
++
++	putc('"', out);
++	while ((p = strchr(str, '"'))) {
++		len = p - str;
++		if (len)
++			gkh_print_string(out, len, str);
++//			fprintf(out, "%.*s", len, str);
++		fputs("\\\"", out);
++		str = p + 1;
++	}
++	//fputs(str, out);
++	gkh_print_string(out, strlen(str), str);
++	putc('"', out);
++}
++
++static void gkh_output_help(FILE *out, char *string)
 +{
 +	char *current = string;
 +
@@ -77,7 +111,7 @@
 +	fprintf(out, "\n");
 +}
 +
-+void gregkh_print_symbol(FILE *out, struct menu *menu)
++void gkh_print_symbol(FILE *out, struct menu *menu)
 +{
 +	struct symbol *sym = menu->sym;
 +	struct property *prop;
@@ -95,7 +129,7 @@
 +		switch (prop->type) {
 +		case P_PROMPT:
 +			fprintf(out, "<nutsynopsis>\n\t");
-+			print_quoted_string(out, prop->text);
++			gkh_print_quoted_string(out, prop->text);
 +			fprintf(out, "\n</nutsynopsis>\n");
 +			fprintf(out, "<nutentrybody>\n");
 +			entrybody_start = 1;
@@ -155,7 +189,7 @@
 +			sym->help[len] = 0;
 +		fprintf(out, "\t<para>\n");
 +		// convert help paragraphs to xml paragraphs
-+		gregkh_output_help(out, sym->help);
++		gkh_output_help(out, sym->help);
 +		fprintf(out, "\t</para>\n\n");
 +	}
 +
@@ -172,17 +206,17 @@
 +	menu = rootmenu.list;
 +	while (menu) {
 +		if ((sym = menu->sym))
-+			gregkh_print_symbol(out, menu);
++			gkh_print_symbol(out, menu);
 +		else if ((prop = menu->prompt)) {
 +			switch (prop->type) {
 +			case P_COMMENT:
 +				fputs("\ncomment ", out);
-+				print_quoted_string(out, prop->text);
++				gkh_print_quoted_string(out, prop->text);
 +				fputs("\n", out);
 +				break;
 +			case P_MENU:
 +				fputs("\nmenu ", out);
-+				print_quoted_string(out, prop->text);
++				gkh_print_quoted_string(out, prop->text);
 +				fputs("\n", out);
 +				break;
 +			default:
