@@ -1,3 +1,10 @@
+scripts/kconfig/conf -s arch/i386/Kconfig
+
+<sect2>
+	<title>"Linux Kernel Configuration"</title>
+<nutlist>
+
+
 <nutentry>
 	<term>X86</term>
 	<para>
@@ -129,7 +136,10 @@
 </nutentry>
 
 
-menu "Code maturity level options"
+<sect2>
+	<title>"Code maturity level options"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>EXPERIMENTAL</term>
@@ -287,9 +297,14 @@ menu "Code maturity level options"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "General setup"
+
+<sect2>
+	<title>"General setup"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>LOCALVERSION</term>
@@ -1326,9 +1341,13 @@ menu "General setup"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
+
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>TINY_SHMEM</term>
 	<para>
@@ -1367,7 +1386,10 @@ endmenu
 </nutentry>
 
 
-menu "Loadable module support"
+<sect2>
+	<title>"Loadable module support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>MODULES</term>
@@ -1588,13 +1610,17 @@ menu "Loadable module support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Processor type and features"
+
+<sect2>
+	<title>"Processor type and features"</title>
+<nutlist>
+
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Subarchitecture Type"
 </nutsynopsis>
@@ -1620,10 +1646,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1644,10 +1669,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1676,10 +1700,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1710,11 +1733,10 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
   unknown prop 6!
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1739,10 +1761,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and SMP</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and SMP</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1768,10 +1789,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and SMP</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and SMP</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1797,10 +1817,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1831,10 +1850,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and SMP</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and SMP</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1856,10 +1874,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and SMP</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and SMP</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -1941,7 +1958,6 @@ choice
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Processor family"
 </nutsynopsis>
@@ -1972,10 +1988,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2036,10 +2051,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2063,10 +2077,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2089,10 +2102,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2114,10 +2126,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2139,10 +2150,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2165,10 +2175,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2193,10 +2202,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2220,10 +2228,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2245,10 +2252,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2273,10 +2279,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2299,10 +2304,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2325,10 +2329,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2351,10 +2354,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2377,10 +2379,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2401,10 +2402,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2427,10 +2427,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2453,10 +2452,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2481,10 +2479,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2505,10 +2502,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -2535,10 +2531,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -3055,7 +3050,6 @@ choice
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Preemption Model"
 </nutsynopsis>
@@ -3081,10 +3075,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -3115,10 +3108,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -3155,10 +3147,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -3624,7 +3615,10 @@ choice
 </nutentry>
 
 
-menu "Firmware Drivers"
+<sect2>
+	<title>"Firmware Drivers"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>EDD</term>
@@ -3817,10 +3811,11 @@ menu "Firmware Drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"High Memory Support"
 </nutsynopsis>
@@ -3846,10 +3841,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -3911,10 +3905,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -3936,10 +3929,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4014,22 +4006,6 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
-comment "NUMA (NUMA-Q) requires SMP, 64GB highmem support"
-<para>
-	depends on
-	<literal>X86_NUMAQ and (!HIGHMEM64G || !SMP)</literal>
-	</para>
-
-
-
-comment "NUMA (Summit) requires SMP, 64GB highmem support, ACPI"
-<para>
-	depends on
-	<literal>X86_SUMMIT and (!HIGHMEM64G || !ACPI)</literal>
-	</para>
-
 
 <nutentry>
 	<term>HAVE_ARCH_BOOTMEM_NODE</term>
@@ -4177,7 +4153,6 @@ comment "NUMA (Summit) requires SMP, 64GB highmem support, ACPI"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Memory model"
 </nutsynopsis>
@@ -4218,10 +4193,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and (!ARCH_DISCONTIGMEM_ENABLE || ARCH_FLATMEM_ENABLE)</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and (!ARCH_DISCONTIGMEM_ENABLE || ARCH_FLATMEM_ENABLE)</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4259,10 +4233,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and ARCH_DISCONTIGMEM_ENABLE</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and ARCH_DISCONTIGMEM_ENABLE</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4297,10 +4270,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and ARCH_SPARSEMEM_ENABLE</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and ARCH_SPARSEMEM_ENABLE</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4761,7 +4733,6 @@ choice
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Timer frequency"
 </nutsynopsis>
@@ -4798,10 +4769,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4824,10 +4794,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4850,10 +4819,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4990,9 +4958,14 @@ choice
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Power management options (ACPI, APM)"
+
+<sect2>
+	<title>"Power management options (ACPI, APM)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!X86_VOYAGER</literal>
@@ -5218,7 +5191,10 @@ menu "Power management options (ACPI, APM)"
 </nutentry>
 
 
-menu "ACPI (Advanced Configuration and Power Interface) Support"
+<sect2>
+	<title>"ACPI (Advanced Configuration and Power Interface) Support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal>
@@ -6121,9 +6097,14 @@ menu "ACPI (Advanced Configuration and Power Interface) Support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "APM (Advanced Power Management) BIOS Support"
+
+<sect2>
+	<title>"APM (Advanced Power Management) BIOS Support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!X86_VOYAGER and PM and !X86_VISWS</literal>
@@ -6430,9 +6411,14 @@ menu "APM (Advanced Power Management) BIOS Support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "CPU Frequency scaling"
+
+<sect2>
+	<title>"CPU Frequency scaling"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!X86_VOYAGER</literal>
@@ -6583,7 +6569,6 @@ menu "CPU Frequency scaling"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Default CPUFreq governor"
 </nutsynopsis>
@@ -6624,11 +6609,10 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
   unknown prop 6!
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -6651,11 +6635,10 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
   unknown prop 6!
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -6839,14 +6822,6 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
-comment "CPUFreq processor drivers"
-<para>
-	depends on
-	<literal>!X86_VOYAGER and CPU_FREQ</literal>
-	</para>
-
 
 <nutentry>
 	<term>X86_ACPI_CPUFREQ</term>
@@ -7417,14 +7392,6 @@ comment "CPUFreq processor drivers"
 </nutentrybody>
 </nutentry>
 
-
-comment "shared options"
-<para>
-	depends on
-	<literal>!X86_VOYAGER and CPU_FREQ</literal>
-	</para>
-
-
 <nutentry>
 	<term>X86_ACPI_CPUFREQ_PROC_INTF</term>
 <nutsynopsis>
@@ -7498,11 +7465,18 @@ comment "shared options"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Bus options (PCI, PCMCIA, EISA, MCA, ISA)"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Bus options (PCI, PCMCIA, EISA, MCA, ISA)"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PCI</term>
@@ -7544,7 +7518,6 @@ menu "Bus options (PCI, PCMCIA, EISA, MCA, ISA)"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"PCI access mode"
 </nutsynopsis>
@@ -7593,10 +7566,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -7613,10 +7585,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -7633,10 +7604,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -7653,10 +7623,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -8265,7 +8234,10 @@ choice
 </nutentry>
 
 
-menu "PCCARD (PCMCIA/CardBus) support"
+<sect2>
+	<title>"PCCARD (PCMCIA/CardBus) support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PCCARD</term>
@@ -8498,14 +8470,6 @@ menu "PCCARD (PCMCIA/CardBus) support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "PC-card bridges"
-<para>
-	depends on
-	<literal>PCCARD</literal>
-	</para>
-
 
 <nutentry>
 	<term>YENTA</term>
@@ -8935,9 +8899,14 @@ comment "PC-card bridges"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "PCI Hotplug Support"
+
+<sect2>
+	<title>"PCI Hotplug Support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>HOTPLUG_PCI</term>
@@ -9460,11 +9429,18 @@ menu "PCI Hotplug Support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Executable file formats"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Executable file formats"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>BINFMT_ELF</term>
@@ -9798,9 +9774,14 @@ menu "Executable file formats"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Networking"
+
+<sect2>
+	<title>"Networking"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>NET</term>
@@ -9838,7 +9819,10 @@ menu "Networking"
 </nutentry>
 
 
-menu "Networking options"
+<sect2>
+	<title>"Networking options"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET</literal>
@@ -10164,7 +10148,6 @@ menu "Networking options"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Choose IP: FIB lookup algorithm (choose FIB_HASH if unsure)"
 </nutsynopsis>
@@ -10195,10 +10178,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -10219,10 +10201,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -11152,7 +11133,10 @@ choice
 </nutentry>
 
 
-menu "TCP congestion control"
+<sect2>
+	<title>"TCP congestion control"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and TCP_CONG_ADVANCED</literal>
@@ -11391,7 +11375,9 @@ menu "TCP congestion control"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>TCP_CONG_BIC</term>
 	<para>
@@ -11421,7 +11407,10 @@ endmenu
 </nutentry>
 
 
-menu "IP: Virtual Server Configuration"
+<sect2>
+	<title>"IP: Virtual Server Configuration"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and NETFILTER</literal>
@@ -11547,14 +11536,6 @@ menu "IP: Virtual Server Configuration"
 </nutentrybody>
 </nutentry>
 
-
-comment "IPVS transport protocol load balancing support"
-<para>
-	depends on
-	<literal>NET and INET and NETFILTER and IP_VS</literal>
-	</para>
-
-
 <nutentry>
 	<term>IP_VS_PROTO_TCP</term>
 <nutsynopsis>
@@ -11650,14 +11631,6 @@ comment "IPVS transport protocol load balancing support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "IPVS scheduler"
-<para>
-	depends on
-	<literal>NET and INET and NETFILTER and IP_VS</literal>
-	</para>
-
 
 <nutentry>
 	<term>IP_VS_RR</term>
@@ -11979,14 +11952,6 @@ comment "IPVS scheduler"
 </nutentrybody>
 </nutentry>
 
-
-comment "IPVS application helper"
-<para>
-	depends on
-	<literal>NET and INET and NETFILTER and IP_VS</literal>
-	</para>
-
-
 <nutentry>
 	<term>IP_VS_FTP</term>
 <nutsynopsis>
@@ -12021,7 +11986,9 @@ comment "IPVS application helper"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>IPV6</term>
 <nutsynopsis>
@@ -12482,7 +12449,10 @@ endmenu
 </nutentry>
 
 
-menu "IP: Netfilter Configuration"
+<sect2>
+	<title>"IP: Netfilter Configuration"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and NETFILTER</literal>
@@ -12838,7 +12808,7 @@ menu "IP: Netfilter Configuration"
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and INET and NETFILTER</literal>
+	<literal>NET and INET and NETFILTER and IP_NF_CONNTRACK</literal>
 	</para>
 
 	<para>
@@ -13858,7 +13828,7 @@ menu "IP: Netfilter Configuration"
 <nutentry>
 	<term>IP_NF_TARGET_ULOG</term>
 <nutsynopsis>
-	"ULOG target support"
+	"ULOG target support (OBSOLETE)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -13869,6 +13839,13 @@ menu "IP: Netfilter Configuration"
 	<para>
 	type
 	<literal>tristate</literal>
+	</para>
+
+	<para>
+	
+	This option enables the old IPv4-only "ipt_ULOG" implementation
+	which has been obsoleted by the new "nfnetlink_log" code (see
+	CONFIG_NETFILTER_NETLINK_LOG).
 	</para>
 
 	<para>
@@ -14708,9 +14685,14 @@ menu "IP: Netfilter Configuration"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "IPv6: Netfilter Configuration (EXPERIMENTAL)"
+
+<sect2>
+	<title>"IPv6: Netfilter Configuration (EXPERIMENTAL)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and IPV6 and NETFILTER and EXPERIMENTAL</literal>
@@ -15433,9 +15415,14 @@ menu "IPv6: Netfilter Configuration (EXPERIMENTAL)"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "DECnet: Netfilter Configuration"
+
+<sect2>
+	<title>"DECnet: Netfilter Configuration"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and DECNET and NETFILTER and EXPERIMENTAL</literal>
@@ -15468,9 +15455,14 @@ menu "DECnet: Netfilter Configuration"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Bridge: Netfilter Configuration"
+
+<sect2>
+	<title>"Bridge: Netfilter Configuration"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and BRIDGE and NETFILTER</literal>
@@ -16052,11 +16044,18 @@ menu "Bridge: Netfilter Configuration"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "DCCP Configuration (EXPERIMENTAL)"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"DCCP Configuration (EXPERIMENTAL)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and EXPERIMENTAL</literal>
@@ -16129,7 +16128,10 @@ menu "DCCP Configuration (EXPERIMENTAL)"
 </nutentry>
 
 
-menu "DCCP CCIDs Configuration (EXPERIMENTAL)"
+<sect2>
+	<title>"DCCP CCIDs Configuration (EXPERIMENTAL)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and IP_DCCP and EXPERIMENTAL</literal>
@@ -16197,9 +16199,14 @@ menu "DCCP CCIDs Configuration (EXPERIMENTAL)"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "DCCP Kernel Hacking"
+
+<sect2>
+	<title>"DCCP Kernel Hacking"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and EXPERIMENTAL and IP_DCCP and DEBUG_KERNEL</literal>
@@ -16263,11 +16270,18 @@ menu "DCCP Kernel Hacking"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "SCTP Configuration (EXPERIMENTAL)"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"SCTP Configuration (EXPERIMENTAL)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and INET and EXPERIMENTAL</literal>
@@ -16393,7 +16407,6 @@ menu "SCTP Configuration (EXPERIMENTAL)"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"SCTP: Cookie HMAC Algorithm"
 </nutsynopsis>
@@ -16431,10 +16444,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -16456,10 +16468,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -16481,10 +16492,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -16499,7 +16509,9 @@ choice
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>ATM</term>
 <nutsynopsis>
@@ -17661,7 +17673,6 @@ endmenu
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Packet scheduler clock source"
 </nutsynopsis>
@@ -17709,10 +17720,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -17736,10 +17746,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -17767,10 +17776,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and (X86_TSC || X86_64 || ALPHA || SPARC64 || PPC64 || IA64)</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and ((X86_TSC || X86_64) and !SMP || ALPHA || SPARC64 || PPC64 || IA64)</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -18417,7 +18425,9 @@ choice
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>NET_CLS_ROUTE</term>
 	<para>
@@ -19080,7 +19090,10 @@ endmenu
 </nutentry>
 
 
-menu "Network testing"
+<sect2>
+	<title>"Network testing"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET</literal>
@@ -19124,9 +19137,13 @@ menu "Network testing"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
+
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>HAMRADIO</term>
   unknown prop 3!
@@ -19150,14 +19167,6 @@ endmenu
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Packet Radio protocols"
-<para>
-	depends on
-	<literal>HAMRADIO and NET</literal>
-	</para>
-
 
 <nutentry>
 	<term>AX25</term>
@@ -19318,7 +19327,10 @@ comment "Packet Radio protocols"
 </nutentry>
 
 
-menu "AX.25 network device drivers"
+<sect2>
+	<title>"AX.25 network device drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>HAMRADIO and NET and AX25!=n</literal>
@@ -19751,9 +19763,13 @@ menu "AX.25 network device drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
+
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>IRDA</term>
   unknown prop 3!
@@ -19791,14 +19807,6 @@ endmenu
 
 </nutentrybody>
 </nutentry>
-
-
-comment "IrDA protocols"
-<para>
-	depends on
-	<literal>NET and IRDA</literal>
-	</para>
-
 
 <nutentry>
 	<term>IRLAN</term>
@@ -19921,14 +19929,6 @@ comment "IrDA protocols"
 </nutentrybody>
 </nutentry>
 
-
-comment "IrDA options"
-<para>
-	depends on
-	<literal>NET and IRDA</literal>
-	</para>
-
-
 <nutentry>
 	<term>IRDA_CACHE_LAST_LSAP</term>
 <nutsynopsis>
@@ -20035,15 +20035,10 @@ comment "IrDA options"
 </nutentry>
 
 
-menu "Infrared-port device drivers"
-<para>
-	depends on
-	<literal>NET and IRDA!=n</literal>
-	</para>
+<sect2>
+	<title>"Infrared-port device drivers"</title>
+<nutlist>
 
-
-
-comment "SIR device drivers"
 <para>
 	depends on
 	<literal>NET and IRDA!=n</literal>
@@ -20082,14 +20077,6 @@ comment "SIR device drivers"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Dongle support"
-<para>
-	depends on
-	<literal>NET and IRDA!=n</literal>
-	</para>
-
 
 <nutentry>
 	<term>DONGLE</term>
@@ -20379,14 +20366,6 @@ comment "Dongle support"
 </nutentrybody>
 </nutentry>
 
-
-comment "Old SIR device drivers"
-<para>
-	depends on
-	<literal>NET and IRDA!=n</literal>
-	</para>
-
-
 <nutentry>
 	<term>IRPORT_SIR</term>
 <nutsynopsis>
@@ -20421,14 +20400,6 @@ comment "Old SIR device drivers"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Old Serial dongle support"
-<para>
-	depends on
-	<literal>NET and IRDA!=n</literal>
-	</para>
-
 
 <nutentry>
 	<term>DONGLE_OLD</term>
@@ -20741,14 +20712,6 @@ comment "Old Serial dongle support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "FIR device drivers"
-<para>
-	depends on
-	<literal>NET and IRDA!=n</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_IRDA</term>
@@ -21075,9 +21038,13 @@ comment "FIR device drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
+
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>BT</term>
   unknown prop 3!
@@ -21373,7 +21340,10 @@ endmenu
 </nutentry>
 
 
-menu "Bluetooth device drivers"
+<sect2>
+	<title>"Bluetooth device drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and BT</literal>
@@ -21809,9 +21779,13 @@ menu "Bluetooth device drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
+
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>IEEE80211</term>
 <nutsynopsis>
@@ -21985,12 +21959,20 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Device Drivers"
+
+<sect2>
+	<title>"Device Drivers"</title>
+<nutlist>
 
 
-menu "Generic Driver Options"
+
+<sect2>
+	<title>"Generic Driver Options"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>STANDALONE</term>
@@ -22103,14 +22085,19 @@ menu "Generic Driver Options"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Connector - unified userspace <-> kernelspace linker"
+
+<sect2>
+	<title>"Connector - unified userspace &lt;-&gt; kernelspace linker"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>CONNECTOR</term>
 <nutsynopsis>
-	"Connector - unified userspace <-> kernelspace linker"
+	"Connector - unified userspace &lt;-&gt; kernelspace linker"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -22137,9 +22124,14 @@ menu "Connector - unified userspace <-> kernelspace linker"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Memory Technology Devices (MTD)"
+
+<sect2>
+	<title>"Memory Technology Devices (MTD)"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>MTD</term>
@@ -22512,14 +22504,6 @@ menu "Memory Technology Devices (MTD)"
 </nutentrybody>
 </nutentry>
 
-
-comment "User Modules And Translation Layers"
-<para>
-	depends on
-	<literal>MTD</literal>
-	</para>
-
-
 <nutentry>
 	<term>MTD_CHAR</term>
 <nutsynopsis>
@@ -22752,7 +22736,10 @@ comment "User Modules And Translation Layers"
 </nutentry>
 
 
-menu "RAM/ROM/Flash chip drivers"
+<sect2>
+	<title>"RAM/ROM/Flash chip drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>MTD!=n</literal>
@@ -22862,7 +22849,6 @@ menu "RAM/ROM/Flash chip drivers"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Flash cmd/query data swapping"
 </nutsynopsis>
@@ -22893,10 +22879,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -22934,10 +22919,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -22954,10 +22938,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -23708,9 +23691,14 @@ choice
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Mapping drivers for chip access"
+
+<sect2>
+	<title>"Mapping drivers for chip access"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>MTD!=n</literal>
@@ -25619,9 +25607,14 @@ menu "Mapping drivers for chip access"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Self-contained MTD device drivers"
+
+<sect2>
+	<title>"Self-contained MTD device drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>MTD!=n</literal>
@@ -25996,14 +25989,6 @@ menu "Self-contained MTD device drivers"
 </nutentrybody>
 </nutentry>
 
-
-comment "Disk-On-Chip Device Drivers"
-<para>
-	depends on
-	<literal>MTD!=n</literal>
-	</para>
-
-
 <nutentry>
 	<term>MTD_DOC2000</term>
 <nutsynopsis>
@@ -26283,9 +26268,14 @@ comment "Disk-On-Chip Device Drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "NAND Flash Device Drivers"
+
+<sect2>
+	<title>"NAND Flash Device Drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>MTD!=n</literal>
@@ -26837,11 +26827,18 @@ menu "NAND Flash Device Drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Parallel port support"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Parallel port support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PARPORT</term>
@@ -27207,9 +27204,14 @@ menu "Parallel port support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Plug and Play support"
+
+<sect2>
+	<title>"Plug and Play support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PNP</term>
@@ -27272,14 +27274,6 @@ menu "Plug and Play support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Protocols"
-<para>
-	depends on
-	<literal>PNP</literal>
-	</para>
-
 
 <nutentry>
 	<term>ISAPNP</term>
@@ -27438,9 +27432,14 @@ comment "Protocols"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Block devices"
+
+<sect2>
+	<title>"Block devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>BLK_DEV_FD</term>
@@ -27656,14 +27655,6 @@ menu "Block devices"
 </nutentrybody>
 </nutentry>
 
-
-comment "Some devices (e.g. CD jukebox) support multiple LUNs"
-<para>
-	depends on
-	<literal>ATARI and ATARI_ACSI</literal>
-	</para>
-
-
 <nutentry>
 	<term>ACSI_MULTI_LUN</term>
 <nutsynopsis>
@@ -27821,14 +27812,6 @@ comment "Some devices (e.g. CD jukebox) support multiple LUNs"
 <nutentrybody>
 </nutentrybody>
 </nutentry>
-
-
-comment "Parallel IDE high-level drivers"
-<para>
-	depends on
-	<literal>PARIDE</literal>
-	</para>
-
 
 <nutentry>
 	<term>PARIDE_PD</term>
@@ -28003,14 +27986,6 @@ comment "Parallel IDE high-level drivers"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Parallel IDE protocol modules"
-<para>
-	depends on
-	<literal>PARIDE</literal>
-	</para>
-
 
 <nutentry>
 	<term>PARIDE_ATEN</term>
@@ -29239,14 +29214,6 @@ comment "Parallel IDE protocol modules"
 </nutentrybody>
 </nutentry>
 
-
-comment "S/390 block device drivers"
-<para>
-	depends on
-	<literal>ARCH_S390</literal>
-	</para>
-
-
 <nutentry>
 	<term>BLK_DEV_XPRAM</term>
 <nutsynopsis>
@@ -29447,7 +29414,10 @@ comment "S/390 block device drivers"
 </nutentry>
 
 
-menu "IO Schedulers"
+<sect2>
+	<title>"IO Schedulers"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>IOSCHED_NOOP</term>
@@ -29552,7 +29522,9 @@ menu "IO Schedulers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>ATA_OVER_ETH</term>
 <nutsynopsis>
@@ -29578,9 +29550,14 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ATA/ATAPI/MFM/RLL support"
+
+<sect2>
+	<title>"ATA/ATAPI/MFM/RLL support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>IDE</term>
@@ -29742,14 +29719,6 @@ menu "ATA/ATAPI/MFM/RLL support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Please see Documentation/ide.txt for help/info on IDE drives"
-<para>
-	depends on
-	<literal>IDE and BLK_DEV_IDE</literal>
-	</para>
-
 
 <nutentry>
 	<term>BLK_DEV_IDE_SATA</term>
@@ -30153,14 +30122,6 @@ comment "Please see Documentation/ide.txt for help/info on IDE drives"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "IDE chipset support/bugfixes"
-<para>
-	depends on
-	<literal>IDE and BLK_DEV_IDE</literal>
-	</para>
-
 
 <nutentry>
 	<term>IDE_GENERIC</term>
@@ -31937,7 +31898,6 @@ comment "IDE chipset support/bugfixes"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Type of MPC8xx IDE interface"
 </nutsynopsis>
@@ -31968,10 +31928,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -32010,10 +31969,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -32030,10 +31988,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -32076,14 +32033,6 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Note: most of these also require special kernel boot parameters"
-<para>
-	depends on
-	<literal>IDE and BLK_DEV_IDE and IDE_CHIPSETS</literal>
-	</para>
-
 
 <nutentry>
 	<term>BLK_DEV_4DRIVES</term>
@@ -32371,9 +32320,14 @@ comment "Note: most of these also require special kernel boot parameters"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "SCSI device support"
+
+<sect2>
+	<title>"SCSI device support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>RAID_ATTRS</term>
@@ -32471,14 +32425,6 @@ menu "SCSI device support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "SCSI support type (disk, tape, CD-ROM)"
-<para>
-	depends on
-	<literal>SCSI</literal>
-	</para>
-
 
 <nutentry>
 	<term>BLK_DEV_SD</term>
@@ -32736,14 +32682,6 @@ comment "SCSI support type (disk, tape, CD-ROM)"
 </nutentrybody>
 </nutentry>
 
-
-comment "Some SCSI devices (e.g. CD jukebox) support multiple LUNs"
-<para>
-	depends on
-	<literal>SCSI</literal>
-	</para>
-
-
 <nutentry>
 	<term>SCSI_MULTI_LUN</term>
 <nutsynopsis>
@@ -32851,7 +32789,10 @@ comment "Some SCSI devices (e.g. CD jukebox) support multiple LUNs"
 </nutentry>
 
 
-menu "SCSI Transport Attributes"
+<sect2>
+	<title>"SCSI Transport Attributes"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>SCSI</literal>
@@ -32957,9 +32898,14 @@ menu "SCSI Transport Attributes"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "SCSI low-level drivers"
+
+<sect2>
+	<title>"SCSI low-level drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>SCSI!=n</literal>
@@ -33278,7 +33224,7 @@ menu "SCSI low-level drivers"
 <nutentry>
 	<term>SCSI_AIC7XXX</term>
 <nutsynopsis>
-	"Adaptec AIC7xxx Fast -> U160 support (New Driver)"
+	"Adaptec AIC7xxx Fast -&gt; U160 support (New Driver)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -34515,6 +34461,22 @@ menu "SCSI low-level drivers"
 	If unsure, say N.
 	</para>
 
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>SCSI_SATA_INTEL_COMBINED</term>
+	<para>
+	default value
+	<literal>y if SCSI and IDE=y and !BLK_DEV_IDE_SATA and (SCSI_SATA_AHCI || SCSI_ATA_PIIX)</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
 </nutentrybody>
 </nutentry>
 
@@ -37335,14 +37297,6 @@ menu "SCSI low-level drivers"
 </nutentrybody>
 </nutentry>
 
-
-comment "The following drivers are not fully supported"
-<para>
-	depends on
-	<literal>SCSI!=n and ARCH_ACORN and EXPERIMENTAL</literal>
-	</para>
-
-
 <nutentry>
 	<term>SCSI_CUMANA_1</term>
 <nutsynopsis>
@@ -38100,9 +38054,14 @@ comment "The following drivers are not fully supported"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "PCMCIA SCSI adapter support"
+
+<sect2>
+	<title>"PCMCIA SCSI adapter support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>SCSI!=n and PCMCIA!=n and MODULES</literal>
@@ -38285,11 +38244,18 @@ menu "PCMCIA SCSI adapter support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Old CD-ROM drivers (not SCSI, not IDE)"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Old CD-ROM drivers (not SCSI, not IDE)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>ISA</literal>
@@ -38740,9 +38706,14 @@ menu "Old CD-ROM drivers (not SCSI, not IDE)"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Multi-device support (RAID and LVM)"
+
+<sect2>
+	<title>"Multi-device support (RAID and LVM)"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>MD</term>
@@ -39320,9 +39291,14 @@ menu "Multi-device support (RAID and LVM)"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Fusion MPT device support"
+
+<sect2>
+	<title>"Fusion MPT device support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>FUSION</term>
@@ -39566,9 +39542,14 @@ menu "Fusion MPT device support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "IEEE 1394 (FireWire) support"
+
+<sect2>
+	<title>"IEEE 1394 (FireWire) support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>IEEE1394</term>
@@ -39607,14 +39588,6 @@ menu "IEEE 1394 (FireWire) support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Subsystem Options"
-<para>
-	depends on
-	<literal>IEEE1394</literal>
-	</para>
-
 
 <nutentry>
 	<term>IEEE1394_VERBOSEDEBUG</term>
@@ -39767,22 +39740,6 @@ comment "Subsystem Options"
 </nutentrybody>
 </nutentry>
 
-
-comment "Device Drivers"
-<para>
-	depends on
-	<literal>IEEE1394</literal>
-	</para>
-
-
-
-comment "Texas Instruments PCILynx requires I2C"
-<para>
-	depends on
-	<literal>IEEE1394 and I2C=n</literal>
-	</para>
-
-
 <nutentry>
 	<term>IEEE1394_PCILYNX</term>
 <nutsynopsis>
@@ -39845,14 +39802,6 @@ comment "Texas Instruments PCILynx requires I2C"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Protocol Drivers"
-<para>
-	depends on
-	<literal>IEEE1394</literal>
-	</para>
-
 
 <nutentry>
 	<term>IEEE1394_VIDEO1394</term>
@@ -40081,9 +40030,14 @@ comment "Protocol Drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "I2O device support"
+
+<sect2>
+	<title>"I2O device support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>I2O</term>
@@ -40378,9 +40332,14 @@ menu "I2O device support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Macintosh device drivers"
+
+<sect2>
+	<title>"Macintosh device drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>PPC || MAC</literal>
@@ -40864,9 +40823,14 @@ menu "Macintosh device drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Network device support"
+
+<sect2>
+	<title>"Network device support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>NETDEVICES</term>
@@ -41126,7 +41090,10 @@ menu "Network device support"
 </nutentry>
 
 
-menu "ARCnet devices"
+<sect2>
+	<title>"ARCnet devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES and (ISA || PCI)</literal>
@@ -41467,9 +41434,14 @@ menu "ARCnet devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "PHY device support"
+
+<sect2>
+	<title>"PHY device support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES</literal>
@@ -41525,14 +41497,6 @@ menu "PHY device support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "MII PHY device drivers"
-<para>
-	depends on
-	<literal>NETDEVICES and PHYLIB</literal>
-	</para>
-
 
 <nutentry>
 	<term>MARVELL_PHY</term>
@@ -41650,9 +41614,14 @@ comment "MII PHY device drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Ethernet (10 or 100Mbit)"
+
+<sect2>
+	<title>"Ethernet (10 or 100Mbit)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES and !UML</literal>
@@ -43750,7 +43719,10 @@ menu "Ethernet (10 or 100Mbit)"
 </nutentry>
 
 
-menu "Tulip family network device support"
+<sect2>
+	<title>"Tulip family network device support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS)</literal>
@@ -43984,7 +43956,7 @@ menu "Tulip family network device support"
 <nutentry>
 	<term>DE4X5</term>
 <nutsynopsis>
-	"Generic DECchip & DIGITAL EtherWORKS PCI/EISA"
+	"Generic DECchip &amp; DIGITAL EtherWORKS PCI/EISA"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -44175,7 +44147,9 @@ menu "Tulip family network device support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>AT1700</term>
 <nutsynopsis>
@@ -46446,9 +46420,14 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Ethernet (1000 Mbit)"
+
+<sect2>
+	<title>"Ethernet (1000 Mbit)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES and !UML</literal>
@@ -47274,9 +47253,14 @@ menu "Ethernet (1000 Mbit)"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Ethernet (10000 Mbit)"
+
+<sect2>
+	<title>"Ethernet (10000 Mbit)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES and !UML</literal>
@@ -47510,9 +47494,14 @@ menu "Ethernet (10000 Mbit)"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Token Ring devices"
+
+<sect2>
+	<title>"Token Ring devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!UML and NETDEVICES</literal>
@@ -47946,9 +47935,14 @@ menu "Token Ring devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Wireless LAN (non-hamradio)"
+
+<sect2>
+	<title>"Wireless LAN (non-hamradio)"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!UML and NETDEVICES</literal>
@@ -47958,7 +47952,7 @@ menu "Wireless LAN (non-hamradio)"
 <nutentry>
 	<term>NET_RADIO</term>
 <nutsynopsis>
-	"Wireless LAN drivers (non-hamradio) & Wireless Extensions"
+	"Wireless LAN drivers (non-hamradio) &amp; Wireless Extensions"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -47999,14 +47993,6 @@ menu "Wireless LAN (non-hamradio)"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Obsolete Wireless cards support (pre-802.11)"
-<para>
-	depends on
-	<literal>!UML and NETDEVICES and NET_RADIO and (INET || ISA || PCMCIA)</literal>
-	</para>
-
 
 <nutentry>
 	<term>STRIP</term>
@@ -48055,7 +48041,7 @@ comment "Obsolete Wireless cards support (pre-802.11)"
 <nutentry>
 	<term>ARLAN</term>
 <nutsynopsis>
-	"Aironet Arlan 655 & IC2200 DS support"
+	"Aironet Arlan 655 &amp; IC2200 DS support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -48091,7 +48077,7 @@ comment "Obsolete Wireless cards support (pre-802.11)"
 <nutentry>
 	<term>WAVELAN</term>
 <nutsynopsis>
-	"AT&T/Lucent old WaveLAN & DEC RoamAbout DS ISA support"
+	"AT&amp;T/Lucent old WaveLAN &amp; DEC RoamAbout DS ISA support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -48143,7 +48129,7 @@ comment "Obsolete Wireless cards support (pre-802.11)"
 <nutentry>
 	<term>PCMCIA_WAVELAN</term>
 <nutsynopsis>
-	"AT&T/Lucent old WaveLAN Pcmcia wireless support"
+	"AT&amp;T/Lucent old WaveLAN Pcmcia wireless support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -48199,14 +48185,6 @@ comment "Obsolete Wireless cards support (pre-802.11)"
 </nutentrybody>
 </nutentry>
 
-
-comment "Wireless 802.11 Frequency Hopping cards support"
-<para>
-	depends on
-	<literal>!UML and NETDEVICES and NET_RADIO and PCMCIA</literal>
-	</para>
-
-
 <nutentry>
 	<term>PCMCIA_RAYCS</term>
 <nutsynopsis>
@@ -48237,14 +48215,6 @@ comment "Wireless 802.11 Frequency Hopping cards support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Wireless 802.11b ISA/PCI cards support"
-<para>
-	depends on
-	<literal>!UML and NETDEVICES and NET_RADIO and (ISA || PCI || PPC_PMAC || PCMCIA)</literal>
-	</para>
-
 
 <nutentry>
 	<term>IPW2100</term>
@@ -48498,7 +48468,7 @@ comment "Wireless 802.11b ISA/PCI cards support"
 <nutentrybody>
 	<para>
 	depends on
-	<literal>!UML and NETDEVICES and NET_RADIO and ISA and (PCI || BROKEN)</literal>
+	<literal>!UML and NETDEVICES and NET_RADIO and ISA_DMA_API and (PCI || BROKEN)</literal>
 	</para>
 
 	<para>
@@ -48763,14 +48733,6 @@ comment "Wireless 802.11b ISA/PCI cards support"
 </nutentrybody>
 </nutentry>
 
-
-comment "Wireless 802.11b Pcmcia/Cardbus cards support"
-<para>
-	depends on
-	<literal>!UML and NETDEVICES and NET_RADIO and PCMCIA</literal>
-	</para>
-
-
 <nutentry>
 	<term>PCMCIA_HERMES</term>
 <nutsynopsis>
@@ -48937,14 +48899,6 @@ comment "Wireless 802.11b Pcmcia/Cardbus cards support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Prism GT/Duette 802.11(a/b/g) PCI/Cardbus support"
-<para>
-	depends on
-	<literal>!UML and NETDEVICES and NET_RADIO and PCI</literal>
-	</para>
-
 
 <nutentry>
 	<term>PRISM54</term>
@@ -49217,9 +49171,14 @@ comment "Prism GT/Duette 802.11(a/b/g) PCI/Cardbus support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "PCMCIA network device support"
+
+<sect2>
+	<title>"PCMCIA network device support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!UML and NETDEVICES and PCMCIA!=n</literal>
@@ -49562,9 +49521,14 @@ menu "PCMCIA network device support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Wan interfaces"
+
+<sect2>
+	<title>"Wan interfaces"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES</literal>
@@ -50106,14 +50070,6 @@ menu "Wan interfaces"
 </nutentrybody>
 </nutentry>
 
-
-comment "X.25/LAPB support is disabled"
-<para>
-	depends on
-	<literal>NETDEVICES and WAN and HDLC and (LAPB!=m || HDLC!=m) and LAPB!=y</literal>
-	</para>
-
-
 <nutentry>
 	<term>PCI200SYN</term>
 <nutsynopsis>
@@ -50278,22 +50234,6 @@ comment "X.25/LAPB support is disabled"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Cyclades-PC300 MLPPP support is disabled."
-<para>
-	depends on
-	<literal>NETDEVICES and WAN and HDLC and PC300 and (PPP=n || !PPP_MULTILINK || PPP_SYNC_TTY=n || !HDLC_PPP)</literal>
-	</para>
-
-
-
-comment "Refer to the file README.mlppp, provided by PC300 package."
-<para>
-	depends on
-	<literal>NETDEVICES and WAN and HDLC and PC300 and (PPP=n || !PPP_MULTILINK || PPP_SYNC_TTY=n || !HDLC_PPP)</literal>
-	</para>
-
 
 <nutentry>
 	<term>N2</term>
@@ -51074,9 +51014,14 @@ comment "Refer to the file README.mlppp, provided by PC300 package."
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ATM drivers"
+
+<sect2>
+	<title>"ATM drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES and ATM</literal>
@@ -52291,9 +52236,14 @@ menu "ATM drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "S/390 network device drivers"
+
+<sect2>
+	<title>"S/390 network device drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NETDEVICES and ARCH_S390</literal>
@@ -52497,14 +52447,6 @@ menu "S/390 network device drivers"
 </nutentrybody>
 </nutentry>
 
-
-comment "Gigabit Ethernet default settings"
-<para>
-	depends on
-	<literal>NETDEVICES and ARCH_S390 and QETH</literal>
-	</para>
-
-
 <nutentry>
 	<term>QETH_IPV6</term>
 <nutsynopsis>
@@ -52596,7 +52538,9 @@ comment "Gigabit Ethernet default settings"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>ISERIES_VETH</term>
 <nutsynopsis>
@@ -53501,9 +53445,14 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ISDN subsystem"
+
+<sect2>
+	<title>"ISDN subsystem"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>ISDN</term>
@@ -53541,7 +53490,10 @@ menu "ISDN subsystem"
 </nutentry>
 
 
-menu "Old ISDN4Linux"
+<sect2>
+	<title>"Old ISDN4Linux"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and ISDN</literal>
@@ -53804,7 +53756,10 @@ menu "Old ISDN4Linux"
 </nutentry>
 
 
-menu "ISDN feature submodules"
+<sect2>
+	<title>"ISDN feature submodules"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and ISDN_I4L and ISDN</literal>
@@ -53881,17 +53836,14 @@ menu "ISDN feature submodules"
 </nutentry>
 
 
-endmenu
-
-comment "ISDN4Linux hardware drivers"
-<para>
-	depends on
-	<literal>NET and ISDN and ISDN_I4L</literal>
-	</para>
+</nutlist>
+</sect2>
 
 
+<sect2>
+	<title>"Passive cards"</title>
+<nutlist>
 
-menu "Passive cards"
 <para>
 	depends on
 	<literal>NET and ISDN and ISDN_I4L</literal>
@@ -53934,14 +53886,6 @@ menu "Passive cards"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "D-channel protocol features"
-<para>
-	depends on
-	<literal>NET and ISDN and ISDN_I4L and ISDN_DRV_HISAX!=n</literal>
-	</para>
-
 
 <nutentry>
 	<term>HISAX_EURO</term>
@@ -54154,14 +54098,6 @@ comment "D-channel protocol features"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "HiSax supported cards"
-<para>
-	depends on
-	<literal>NET and ISDN and ISDN_I4L and ISDN_DRV_HISAX!=n</literal>
-	</para>
-
 
 <nutentry>
 	<term>HISAX_16_0</term>
@@ -54997,14 +54933,6 @@ comment "HiSax supported cards"
 </nutentrybody>
 </nutentry>
 
-
-comment "HiSax PCMCIA card service modules"
-<para>
-	depends on
-	<literal>NET and ISDN and ISDN_I4L and ISDN_DRV_HISAX</literal>
-	</para>
-
-
 <nutentry>
 	<term>HISAX_SEDLBAUER_CS</term>
 <nutsynopsis>
@@ -55099,14 +55027,6 @@ comment "HiSax PCMCIA card service modules"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "HiSax sub driver modules"
-<para>
-	depends on
-	<literal>NET and ISDN and ISDN_I4L and ISDN_DRV_HISAX</literal>
-	</para>
-
 
 <nutentry>
 	<term>HISAX_ST5481</term>
@@ -55243,9 +55163,14 @@ comment "HiSax sub driver modules"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Active cards"
+
+<sect2>
+	<title>"Active cards"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and ISDN and ISDN_I4L</literal>
@@ -55413,16 +55338,12 @@ menu "Active cards"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-comment "CAPI subsystem"
-<para>
-	depends on
-	<literal>NET and ISDN</literal>
-	</para>
-
+</nutlist>
+</sect2>
 
 <nutentry>
 	<term>ISDN_CAPI</term>
@@ -55597,15 +55518,10 @@ comment "CAPI subsystem"
 </nutentry>
 
 
-comment "CAPI hardware drivers"
-<para>
-	depends on
-	<literal>NET and ISDN and ISDN_CAPI</literal>
-	</para>
+<sect2>
+	<title>"Active AVM cards"</title>
+<nutlist>
 
-
-
-menu "Active AVM cards"
 <para>
 	depends on
 	<literal>NET and ISDN and ISDN_CAPI!=n</literal>
@@ -55824,9 +55740,14 @@ menu "Active AVM cards"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Active Eicon DIVA Server cards"
+
+<sect2>
+	<title>"Active Eicon DIVA Server cards"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET and ISDN and ISDN_CAPI!=n</literal>
@@ -55998,11 +55919,18 @@ menu "Active Eicon DIVA Server cards"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Telephony Support"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Telephony Support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PHONE</term>
@@ -56101,9 +56029,14 @@ menu "Telephony Support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Input device support"
+
+<sect2>
+	<title>"Input device support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>INPUT</term>
@@ -56152,14 +56085,6 @@ menu "Input device support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Userland interfaces"
-<para>
-	depends on
-	<literal>INPUT</literal>
-	</para>
-
 
 <nutentry>
 	<term>INPUT_MOUSEDEV</term>
@@ -56482,14 +56407,6 @@ comment "Userland interfaces"
 </nutentrybody>
 </nutentry>
 
-
-comment "Input Device Drivers"
-<para>
-	depends on
-	<literal>INPUT</literal>
-	</para>
-
-
 <nutentry>
 	<term>INPUT_KEYBOARD</term>
   unknown prop 3!
@@ -56723,7 +56640,7 @@ comment "Input Device Drivers"
 <nutentrybody>
 	<para>
 	depends on
-	<literal>INPUT and INPUT_KEYBOARD and SHARP_LOCOMO</literal>
+	<literal>INPUT and SHARP_LOCOMO and INPUT_KEYBOARD</literal>
 	</para>
 
 	<para>
@@ -57005,7 +56922,9 @@ comment "Input Device Drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>INPUT_MOUSE</term>
   unknown prop 3!
@@ -57372,7 +57291,9 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>INPUT_JOYSTICK</term>
   unknown prop 3!
@@ -58159,7 +58080,9 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>INPUT_TOUCHSCREEN</term>
   unknown prop 3!
@@ -58421,7 +58344,9 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>INPUT_MISC</term>
   unknown prop 3!
@@ -58584,9 +58509,14 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Hardware I/O ports"
+
+<sect2>
+	<title>"Hardware I/O ports"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>SERIO</term>
@@ -59245,11 +59175,18 @@ menu "Hardware I/O ports"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Character devices"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Character devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>VT</term>
@@ -60303,7 +60240,10 @@ menu "Character devices"
 </nutentry>
 
 
-menu "Serial drivers"
+<sect2>
+	<title>"Serial drivers"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>SERIAL_8250</term>
@@ -60811,9 +60751,6 @@ menu "Serial drivers"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Non-8250 serial port support"
 
 <nutentry>
 	<term>SERIAL_AMBA_PL010</term>
@@ -62809,7 +62746,9 @@ comment "Non-8250 serial port support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>UNIX98_PTYS</term>
 <nutsynopsis>
@@ -63170,7 +63109,10 @@ endmenu
 </nutentry>
 
 
-menu "IPMI"
+<sect2>
+	<title>"IPMI"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>IPMI_HANDLER</term>
@@ -63355,9 +63297,14 @@ menu "IPMI"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Watchdog Cards"
+
+<sect2>
+	<title>"Watchdog Cards"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>WATCHDOG</term>
@@ -63426,14 +63373,6 @@ menu "Watchdog Cards"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Watchdog Device Drivers"
-<para>
-	depends on
-	<literal>WATCHDOG</literal>
-	</para>
-
 
 <nutentry>
 	<term>SOFT_WATCHDOG</term>
@@ -64578,14 +64517,6 @@ comment "Watchdog Device Drivers"
 </nutentrybody>
 </nutentry>
 
-
-comment "ISA-based Watchdog Cards"
-<para>
-	depends on
-	<literal>WATCHDOG and ISA</literal>
-	</para>
-
-
 <nutentry>
 	<term>PCWATCHDOG</term>
 <nutsynopsis>
@@ -64723,14 +64654,6 @@ comment "ISA-based Watchdog Cards"
 </nutentrybody>
 </nutentry>
 
-
-comment "PCI-based Watchdog Cards"
-<para>
-	depends on
-	<literal>WATCHDOG and PCI</literal>
-	</para>
-
-
 <nutentry>
 	<term>PCIPCWATCHDOG</term>
 <nutsynopsis>
@@ -64829,14 +64752,6 @@ comment "PCI-based Watchdog Cards"
 </nutentrybody>
 </nutentry>
 
-
-comment "USB-based Watchdog Cards"
-<para>
-	depends on
-	<literal>WATCHDOG and USB</literal>
-	</para>
-
-
 <nutentry>
 	<term>USBPCWATCHDOG</term>
 <nutsynopsis>
@@ -64874,7 +64789,9 @@ comment "USB-based Watchdog Cards"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>DS1620</term>
 <nutsynopsis>
@@ -65534,7 +65451,10 @@ endmenu
 </nutentry>
 
 
-menu "Ftape, the floppy tape device driver"
+<sect2>
+	<title>"Ftape, the floppy tape device driver"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>FTAPE</term>
@@ -65712,14 +65632,6 @@ menu "Ftape, the floppy tape device driver"
 </nutentrybody>
 </nutentry>
 
-
-comment "The compressor will be built as a module only!"
-<para>
-	depends on
-	<literal>FTAPE and ZFTAPE</literal>
-	</para>
-
-
 <nutentry>
 	<term>ZFT_COMPRESSOR</term>
 	<para>
@@ -65810,7 +65722,6 @@ comment "The compressor will be built as a module only!"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Debugging output"
 </nutsynopsis>
@@ -65841,10 +65752,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -65891,10 +65801,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -65915,10 +65824,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -65939,10 +65847,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -65955,17 +65862,8 @@ choice
 </nutentrybody>
 </nutentry>
 
-
-comment "Hardware configuration"
-<para>
-	depends on
-	<literal>FTAPE</literal>
-	</para>
-
-
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Floppy tape controllers"
 </nutsynopsis>
@@ -65996,10 +65894,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -66067,10 +65964,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -66087,10 +65983,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -66107,10 +66002,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -66118,14 +66012,6 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Consult the manuals of your tape drive for the correct settings!"
-<para>
-	depends on
-	<literal>FTAPE and !FT_STD_FDC</literal>
-	</para>
-
 
 <nutentry>
 	<term>FT_FDC_BASE</term>
@@ -66396,7 +66282,9 @@ comment "Consult the manuals of your tape drive for the correct settings!"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>AGP</term>
 <nutsynopsis>
@@ -66804,7 +66692,7 @@ endmenu
 <nutentry>
 	<term>AGP_UNINORTH</term>
 <nutsynopsis>
-	"Apple UniNorth & U3 AGP support"
+	"Apple UniNorth &amp; U3 AGP support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -67010,7 +66898,6 @@ endmenu
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Intel 830M, 845G, 852GM, 855GM, 865G"
 </nutsynopsis>
@@ -67036,10 +66923,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>tristate</literal>
@@ -67063,10 +66949,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>tristate</literal>
@@ -67182,7 +67067,10 @@ choice
 </nutentry>
 
 
-menu "PCMCIA character devices"
+<sect2>
+	<title>"PCMCIA character devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>HOTPLUG and PCMCIA!=n</literal>
@@ -67222,7 +67110,9 @@ menu "PCMCIA character devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>MWAVE</term>
 <nutsynopsis>
@@ -67530,7 +67420,10 @@ endmenu
 </nutentry>
 
 
-menu "TPM devices"
+<sect2>
+	<title>"TPM devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>TCG_TPM</term>
@@ -67646,11 +67539,18 @@ menu "TPM devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "I2C support"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"I2C support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>I2C</term>
@@ -67721,7 +67621,10 @@ menu "I2C support"
 </nutentry>
 
 
-menu "I2C Algorithms"
+<sect2>
+	<title>"I2C Algorithms"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>I2C</literal>
@@ -67915,9 +67818,14 @@ menu "I2C Algorithms"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "I2C Hardware Bus support"
+
+<sect2>
+	<title>"I2C Hardware Bus support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>I2C</literal>
@@ -69273,9 +69181,14 @@ menu "I2C Hardware Bus support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Miscellaneous I2C Chip support"
+
+<sect2>
+	<title>"Miscellaneous I2C Chip support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>I2C</literal>
@@ -69618,7 +69531,9 @@ menu "Miscellaneous I2C Chip support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>I2C_DEBUG_CORE</term>
 <nutsynopsis>
@@ -69723,9 +69638,14 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Dallas's 1-wire bus"
+
+<sect2>
+	<title>"Dallas's 1-wire bus"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>W1</term>
@@ -69815,7 +69735,7 @@ menu "Dallas's 1-wire bus"
 <nutentry>
 	<term>W1_DS9490_BRIDGE</term>
 <nutsynopsis>
-	"DS9490R USB <-> W1 transport layer for 1-wire"
+	"DS9490R USB &lt;-&gt; W1 transport layer for 1-wire"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -69940,9 +69860,14 @@ menu "Dallas's 1-wire bus"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Hardware Monitoring support"
+
+<sect2>
+	<title>"Hardware Monitoring support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>HWMON</term>
@@ -71109,9 +71034,14 @@ menu "Hardware Monitoring support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Misc devices"
+
+<sect2>
+	<title>"Misc devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>IBM_ASM</term>
@@ -71159,9 +71089,14 @@ menu "Misc devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Multimedia Capabilities Port drivers"
+
+<sect2>
+	<title>"Multimedia Capabilities Port drivers"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>MCP</term>
@@ -71233,9 +71168,14 @@ menu "Multimedia Capabilities Port drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Multimedia devices"
+
+<sect2>
+	<title>"Multimedia devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>VIDEO_DEV</term>
@@ -71277,15 +71217,10 @@ menu "Multimedia devices"
 </nutentry>
 
 
-menu "Video For Linux"
-<para>
-	depends on
-	<literal>VIDEO_DEV</literal>
-	</para>
+<sect2>
+	<title>"Video For Linux"</title>
+<nutlist>
 
-
-
-comment "Video Adapters"
 <para>
 	depends on
 	<literal>VIDEO_DEV</literal>
@@ -72276,9 +72211,14 @@ comment "Video Adapters"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Radio Adapters"
+
+<sect2>
+	<title>"Radio Adapters"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>VIDEO_DEV!=n</literal>
@@ -73179,9 +73119,14 @@ menu "Radio Adapters"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Digital Video Broadcasting Devices"
+
+<sect2>
+	<title>"Digital Video Broadcasting Devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>DVB</term>
@@ -73248,14 +73193,6 @@ menu "Digital Video Broadcasting Devices"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Supported SAA7146 based PCI Adapters"
-<para>
-	depends on
-	<literal>DVB_CORE and PCI</literal>
-	</para>
-
 
 <nutentry>
 	<term>DVB_AV7110</term>
@@ -73571,14 +73508,6 @@ comment "Supported SAA7146 based PCI Adapters"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Supported USB Adapters"
-<para>
-	depends on
-	<literal>DVB_CORE and USB</literal>
-	</para>
-
 
 <nutentry>
 	<term>DVB_USB</term>
@@ -74266,14 +74195,6 @@ comment "Supported USB Adapters"
 </nutentrybody>
 </nutentry>
 
-
-comment "Supported FlexCopII (B2C2) Adapters"
-<para>
-	depends on
-	<literal>DVB_CORE and (PCI || USB)</literal>
-	</para>
-
-
 <nutentry>
 	<term>DVB_B2C2_FLEXCOP</term>
 <nutsynopsis>
@@ -74386,14 +74307,6 @@ comment "Supported FlexCopII (B2C2) Adapters"
 </nutentrybody>
 </nutentry>
 
-
-comment "Supported BT878 Adapters"
-<para>
-	depends on
-	<literal>DVB_CORE and PCI</literal>
-	</para>
-
-
 <nutentry>
 	<term>DVB_BT8XX</term>
 <nutsynopsis>
@@ -74434,14 +74347,6 @@ comment "Supported BT878 Adapters"
 </nutentrybody>
 </nutentry>
 
-
-comment "Supported Pluto2 Adapters"
-<para>
-	depends on
-	<literal>DVB_CORE and PCI</literal>
-	</para>
-
-
 <nutentry>
 	<term>DVB_PLUTO2</term>
 <nutsynopsis>
@@ -74480,23 +74385,10 @@ comment "Supported Pluto2 Adapters"
 </nutentry>
 
 
-comment "Supported DVB Frontends"
-<para>
-	depends on
-	<literal>DVB_CORE</literal>
-	</para>
+<sect2>
+	<title>"Customise DVB Frontends"</title>
+<nutlist>
 
-
-
-menu "Customise DVB Frontends"
-<para>
-	depends on
-	<literal>DVB_CORE</literal>
-	</para>
-
-
-
-comment "DVB-S (satellite) frontends"
 <para>
 	depends on
 	<literal>DVB_CORE</literal>
@@ -74663,14 +74555,6 @@ comment "DVB-S (satellite) frontends"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "DVB-T (terrestrial) frontends"
-<para>
-	depends on
-	<literal>DVB_CORE</literal>
-	</para>
-
 
 <nutentry>
 	<term>DVB_SP8870</term>
@@ -74926,14 +74810,6 @@ comment "DVB-T (terrestrial) frontends"
 </nutentrybody>
 </nutentry>
 
-
-comment "DVB-C (cable) frontends"
-<para>
-	depends on
-	<literal>DVB_CORE</literal>
-	</para>
-
-
 <nutentry>
 	<term>DVB_ATMEL_AT76C651</term>
 <nutsynopsis>
@@ -75025,14 +74901,6 @@ comment "DVB-C (cable) frontends"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "ATSC (North American/Korean Terresterial DTV) frontends"
-<para>
-	depends on
-	<literal>DVB_CORE</literal>
-	</para>
-
 
 <nutentry>
 	<term>DVB_NXT2002</term>
@@ -75157,9 +75025,13 @@ comment "ATSC (North American/Korean Terresterial DTV) frontends"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
+
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>VIDEO_SAA7146</term>
   unknown prop 6!
@@ -75264,9 +75136,14 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Graphics support"
+
+<sect2>
+	<title>"Graphics support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>FB</term>
@@ -79248,7 +79125,10 @@ menu "Graphics support"
 </nutentry>
 
 
-menu "Console display driver support"
+<sect2>
+	<title>"Console display driver support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>VT</literal>
@@ -79849,9 +79729,14 @@ menu "Console display driver support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Logo configuration"
+
+<sect2>
+	<title>"Logo configuration"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>FB || SGI_NEWPORT_CONSOLE</literal>
@@ -80166,7 +80051,9 @@ menu "Logo configuration"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>BACKLIGHT_LCD_SUPPORT</term>
   unknown prop 3!
@@ -80287,7 +80174,9 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>BACKLIGHT_CORGI</term>
 <nutsynopsis>
@@ -80318,9 +80207,14 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Sound"
+
+<sect2>
+	<title>"Sound"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>SOUND</term>
@@ -80514,7 +80408,10 @@ menu "Sound"
 </nutentry>
 
 
-menu "Advanced Linux Sound Architecture"
+<sect2>
+	<title>"Advanced Linux Sound Architecture"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n</literal>
@@ -80952,7 +80849,10 @@ menu "Advanced Linux Sound Architecture"
 </nutentry>
 
 
-menu "Generic devices"
+<sect2>
+	<title>"Generic devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n</literal>
@@ -81188,9 +81088,14 @@ menu "Generic devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ISA devices"
+
+<sect2>
+	<title>"ISA devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and ISA and ISA_DMA_API</literal>
@@ -82140,7 +82045,9 @@ menu "ISA devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>SND_AC97_CODEC</term>
   unknown prop 6!
@@ -82166,7 +82073,10 @@ endmenu
 </nutentry>
 
 
-menu "PCI devices"
+<sect2>
+	<title>"PCI devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and PCI</literal>
@@ -83565,28 +83475,17 @@ menu "PCI devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ALSA PowerMac devices"
+
+<sect2>
+	<title>"ALSA PowerMac devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and PPC</literal>
-	</para>
-
-
-
-comment "ALSA PowerMac requires I2C"
-<para>
-	depends on
-	<literal>!M68K and SOUND!=n and PPC and SND and I2C=n</literal>
-	</para>
-
-
-
-comment "ALSA PowerMac requires INPUT"
-<para>
-	depends on
-	<literal>!M68K and SOUND!=n and PPC and SND and INPUT=n</literal>
 	</para>
 
 
@@ -83657,9 +83556,14 @@ comment "ALSA PowerMac requires INPUT"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ALSA ARM devices"
+
+<sect2>
+	<title>"ALSA ARM devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and ARM</literal>
@@ -83757,9 +83661,14 @@ menu "ALSA ARM devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ALSA MIPS devices"
+
+<sect2>
+	<title>"ALSA MIPS devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and MIPS</literal>
@@ -83793,9 +83702,14 @@ menu "ALSA MIPS devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "USB devices"
+
+<sect2>
+	<title>"USB devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and USB!=n</literal>
@@ -83867,9 +83781,14 @@ menu "USB devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "PCMCIA devices"
+
+<sect2>
+	<title>"PCMCIA devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and PCMCIA</literal>
@@ -83937,9 +83856,14 @@ menu "PCMCIA devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "ALSA Sparc devices"
+
+<sect2>
+	<title>"ALSA Sparc devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and (SPARC32 || SPARC64)</literal>
@@ -84037,9 +83961,14 @@ menu "ALSA Sparc devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "GSC devices"
+
+<sect2>
+	<title>"GSC devices"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n and SND!=n and GSC</literal>
@@ -84073,11 +84002,18 @@ menu "GSC devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Open Sound System"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Open Sound System"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>!M68K and SOUND!=n</literal>
@@ -84846,14 +84782,6 @@ menu "Open Sound System"
 </nutentrybody>
 </nutentry>
 
-
-comment "Compiled-in MSND Classic support requires firmware during compilation."
-<para>
-	depends on
-	<literal>!M68K and SOUND!=n and SOUND_PRIME and SOUND_MSNDCLAS=y</literal>
-	</para>
-
-
 <nutentry>
 	<term>MSNDCLAS_HAVE_BOOT</term>
 	<para>
@@ -85045,14 +84973,6 @@ comment "Compiled-in MSND Classic support requires firmware during compilation."
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Compiled-in MSND Pinnacle support requires firmware during compilation."
-<para>
-	depends on
-	<literal>!M68K and SOUND!=n and SOUND_PRIME and SOUND_MSNDPIN=y</literal>
-	</para>
-
 
 <nutentry>
 	<term>MSNDPIN_HAVE_BOOT</term>
@@ -85278,14 +85198,6 @@ comment "Compiled-in MSND Pinnacle support requires firmware during compilation.
 </nutentrybody>
 </nutentry>
 
-
-comment "MSND Pinnacle DSP section will be configured to above parameters."
-<para>
-	depends on
-	<literal>!M68K and SOUND!=n and SOUND_PRIME and SOUND_MSNDPIN=y and MSNDPIN_NONPNP</literal>
-	</para>
-
-
 <nutentry>
 	<term>MSNDPIN_CFG</term>
 <nutsynopsis>
@@ -85316,14 +85228,6 @@ comment "MSND Pinnacle DSP section will be configured to above parameters."
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Pinnacle-specific Device Configuration (0 disables)"
-<para>
-	depends on
-	<literal>!M68K and SOUND!=n and SOUND_PRIME and SOUND_MSNDPIN=y and MSNDPIN_NONPNP</literal>
-	</para>
-
 
 <nutentry>
 	<term>MSNDPIN_MPU_IO</term>
@@ -86946,7 +86850,6 @@ comment "Pinnacle-specific Device Configuration (0 disables)"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"Audio Excel DSP 16"
 </nutsynopsis>
@@ -86972,10 +86875,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and SOUND_MSS</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and SOUND_MSS</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -86998,10 +86900,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and SOUND_SB</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and SOUND_SB</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -87277,11 +87178,18 @@ choice
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "USB support"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"USB support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>USB_ARCH_HAS_HCD</term>
@@ -87451,14 +87359,6 @@ menu "USB support"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Miscellaneous USB options"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_DEVICEFS</term>
@@ -87668,14 +87568,6 @@ comment "Miscellaneous USB options"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "USB Host Controller Drivers"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_EHCI_HCD</term>
@@ -88061,14 +87953,6 @@ comment "USB Host Controller Drivers"
 </nutentrybody>
 </nutentry>
 
-
-comment "USB Device Class drivers"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
-
 <nutentry>
 	<term>OBSOLETE_OSS_USB_DRIVER</term>
 <nutsynopsis>
@@ -88132,14 +88016,6 @@ comment "USB Device Class drivers"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "USB Bluetooth TTY can only be used with disabled Bluetooth subsystem"
-<para>
-	depends on
-	<literal>USB and BT</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_BLUETOOTH_TTY</term>
@@ -88294,14 +88170,6 @@ comment "USB Bluetooth TTY can only be used with disabled Bluetooth subsystem"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "NOTE: USB_STORAGE enables SCSI, and 'SCSI disk support' may also be needed; see USB_STORAGE Help for more information"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_STORAGE</term>
@@ -88620,14 +88488,6 @@ comment "NOTE: USB_STORAGE enables SCSI, and 'SCSI disk support' may also be nee
 </nutentrybody>
 </nutentry>
 
-
-comment "USB Input Devices"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
-
 <nutentry>
 	<term>USB_HID</term>
 <nutsynopsis>
@@ -88670,14 +88530,6 @@ comment "USB Input Devices"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Input core support is needed for USB HID input layer or HIDBP support"
-<para>
-	depends on
-	<literal>USB_HID and INPUT=n</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_HIDINPUT</term>
@@ -88859,7 +88711,10 @@ comment "Input core support is needed for USB HID input layer or HIDBP support"
 </nutentry>
 
 
-menu "USB HID Boot Protocol drivers"
+<sect2>
+	<title>"USB HID Boot Protocol drivers"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>USB!=n and USB_HID!=y</literal>
@@ -88945,7 +88800,9 @@ menu "USB HID Boot Protocol drivers"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>USB_AIPTEK</term>
 <nutsynopsis>
@@ -89393,14 +89250,6 @@ endmenu
 </nutentrybody>
 </nutentry>
 
-
-comment "USB Imaging devices"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
-
 <nutentry>
 	<term>USB_MDC800</term>
 <nutsynopsis>
@@ -89462,14 +89311,6 @@ comment "USB Imaging devices"
 </nutentrybody>
 </nutentry>
 
-
-comment "USB Multimedia devices"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
-
 <nutentry>
 	<term>USB_DABUSB</term>
 <nutsynopsis>
@@ -89502,14 +89343,6 @@ comment "USB Multimedia devices"
 
 </nutentrybody>
 </nutentry>
-
-
-comment "Video4Linux support is needed for USB Multimedia device support"
-<para>
-	depends on
-	<literal>USB and VIDEO_DEV=n</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_VICAM</term>
@@ -89925,15 +89758,10 @@ comment "Video4Linux support is needed for USB Multimedia device support"
 </nutentry>
 
 
-comment "Networking support is needed for USB Network Adapter support"
-<para>
-	depends on
-	<literal>USB and !NET</literal>
-	</para>
+<sect2>
+	<title>"USB Network Adapters"</title>
+<nutlist>
 
-
-
-menu "USB Network Adapters"
 <para>
 	depends on
 	<literal>USB and NET</literal>
@@ -90656,7 +90484,9 @@ menu "USB Network Adapters"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>USB_MON</term>
 <nutsynopsis>
@@ -90694,14 +90524,6 @@ endmenu
 
 </nutentrybody>
 </nutentry>
-
-
-comment "USB port drivers"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
 
 <nutentry>
 	<term>USB_USS720</term>
@@ -90758,7 +90580,10 @@ comment "USB port drivers"
 </nutentry>
 
 
-menu "USB Serial Converter support"
+<sect2>
+	<title>"USB Serial Converter support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>USB!=n</literal>
@@ -92080,14 +91905,8 @@ menu "USB Serial Converter support"
 </nutentry>
 
 
-endmenu
-
-comment "USB Miscellaneous drivers"
-<para>
-	depends on
-	<literal>USB</literal>
-	</para>
-
+</nutlist>
+</sect2>
 
 <nutentry>
 	<term>USB_EMI62</term>
@@ -92596,7 +92415,10 @@ comment "USB Miscellaneous drivers"
 </nutentry>
 
 
-menu "USB DSL modem support"
+<sect2>
+	<title>"USB DSL modem support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>USB</literal>
@@ -92736,9 +92558,14 @@ menu "USB DSL modem support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "USB Gadget Support"
+
+<sect2>
+	<title>"USB Gadget Support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>USB_GADGET</term>
@@ -92830,7 +92657,6 @@ menu "USB Gadget Support"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"USB Peripheral Controller"
 </nutsynopsis>
@@ -92863,11 +92689,10 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and PCI</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and PCI</literal>
 	</para>
 
   unknown prop 6!
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -92897,7 +92722,7 @@ choice
 	<term>USB_NET2280</term>
 	<para>
 	default value
-	<literal>USB_GADGET if <choice> and USB_GADGET_NET2280</literal>
+	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_NET2280</literal>
 	</para>
 
   unknown prop 6!
@@ -92918,10 +92743,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and (ARCH_PXA and PXA25x || ARCH_IXP4XX)</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and (ARCH_PXA and PXA25x || ARCH_IXP4XX)</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -92951,7 +92775,7 @@ choice
 	<term>USB_PXA2XX</term>
 	<para>
 	default value
-	<literal>USB_GADGET if <choice> and USB_GADGET_PXA2XX</literal>
+	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_PXA2XX</literal>
 	</para>
 
   unknown prop 6!
@@ -92968,22 +92792,22 @@ choice
 	<term>USB_PXA2XX_SMALL</term>
 	<para>
 	default value
-	<literal>n if <choice> and USB_GADGET_PXA2XX and USB_ETH_RNDIS</literal>
+	<literal>n if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_PXA2XX and USB_ETH_RNDIS</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>y if <choice> and USB_GADGET_PXA2XX and USB_ZERO</literal>
+	<literal>y if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_PXA2XX and USB_ZERO</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>y if <choice> and USB_GADGET_PXA2XX and USB_ETH</literal>
+	<literal>y if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_PXA2XX and USB_ETH</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>y if <choice> and USB_GADGET_PXA2XX and USB_G_SERIAL</literal>
+	<literal>y if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_PXA2XX and USB_G_SERIAL</literal>
 	</para>
 
 	<para>
@@ -93003,10 +92827,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and PCI</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and PCI</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93035,7 +92858,7 @@ choice
 	<term>USB_GOKU</term>
 	<para>
 	default value
-	<literal>USB_GADGET if <choice> and USB_GADGET_GOKU</literal>
+	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_GOKU</literal>
 	</para>
 
   unknown prop 6!
@@ -93056,10 +92879,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and ARCH_LH7A40X</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and ARCH_LH7A40X</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93076,7 +92898,7 @@ choice
 	<term>USB_LH7A40X</term>
 	<para>
 	default value
-	<literal>USB_GADGET if <choice> and USB_GADGET_LH7A40X</literal>
+	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_LH7A40X</literal>
 	</para>
 
   unknown prop 6!
@@ -93097,11 +92919,10 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and ARCH_OMAP</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and ARCH_OMAP</literal>
 	</para>
 
   unknown prop 6!
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93128,7 +92949,7 @@ choice
 	<term>USB_OMAP</term>
 	<para>
 	default value
-	<literal>USB_GADGET if <choice> and USB_GADGET_OMAP</literal>
+	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_OMAP</literal>
 	</para>
 
   unknown prop 6!
@@ -93149,7 +92970,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and USB_GADGET_OMAP and ARCH_OMAP_OTG and USB_OHCI_HCD</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and USB_GADGET_OMAP and ARCH_OMAP_OTG and USB_OHCI_HCD</literal>
 	</para>
 
 	<para>
@@ -93179,11 +93000,10 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and USB and EXPERIMENTAL</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and USB and EXPERIMENTAL</literal>
 	</para>
 
   unknown prop 6!
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93222,7 +93042,7 @@ choice
 	<term>USB_DUMMY_HCD</term>
 	<para>
 	default value
-	<literal>USB_GADGET if <choice> and USB_GADGET_DUMMY_HCD</literal>
+	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_DUMMY_HCD</literal>
 	</para>
 
   unknown prop 6!
@@ -93258,7 +93078,6 @@ choice
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"USB Gadget Drivers"
 </nutsynopsis>
@@ -93308,10 +93127,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and EXPERIMENTAL</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and EXPERIMENTAL</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93357,7 +93175,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and USB_ZERO and USB_OTG</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and USB_ZERO and USB_OTG</literal>
 	</para>
 
 	<para>
@@ -93384,10 +93202,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and NET</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and NET</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93444,12 +93261,12 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and USB_ETH and EXPERIMENTAL</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and USB_ETH and EXPERIMENTAL</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>y if <choice> and USB_ETH and EXPERIMENTAL</literal>
+	<literal>y if </literal><emphasis>choice</emphasis><literal> and USB_ETH and EXPERIMENTAL</literal>
 	</para>
 
 	<para>
@@ -93487,10 +93304,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and EXPERIMENTAL</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and EXPERIMENTAL</literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93520,10 +93336,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93552,12 +93367,12 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice> and USB_FILE_STORAGE</literal>
+	<literal></literal><emphasis>choice</emphasis><literal> and USB_FILE_STORAGE</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>n if <choice> and USB_FILE_STORAGE</literal>
+	<literal>n if </literal><emphasis>choice</emphasis><literal> and USB_FILE_STORAGE</literal>
 	</para>
 
 	<para>
@@ -93583,10 +93398,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93614,11 +93428,18 @@ choice
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "MMC/SD Card support"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"MMC/SD Card support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>MMC</term>
@@ -93787,9 +93608,14 @@ menu "MMC/SD Card support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "InfiniBand support"
+
+<sect2>
+	<title>"InfiniBand support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>INFINIBAND</term>
@@ -94016,9 +93842,14 @@ menu "InfiniBand support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "SN Devices"
+
+<sect2>
+	<title>"SN Devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>SGI_IOC4</term>
@@ -94057,11 +93888,18 @@ menu "SN Devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "File systems"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"File systems"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>EXT2_FS</term>
@@ -95376,7 +95214,10 @@ menu "File systems"
 </nutentry>
 
 
-menu "CD-ROM/DVD Filesystems"
+<sect2>
+	<title>"CD-ROM/DVD Filesystems"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>ISO9660_FS</term>
@@ -95530,9 +95371,14 @@ menu "CD-ROM/DVD Filesystems"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "DOS/FAT/NT Filesystems"
+
+<sect2>
+	<title>"DOS/FAT/NT Filesystems"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>FAT_FS</term>
@@ -95887,9 +95733,14 @@ menu "DOS/FAT/NT Filesystems"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Pseudo filesystems"
+
+<sect2>
+	<title>"Pseudo filesystems"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PROC_FS</term>
@@ -96163,9 +96014,14 @@ menu "Pseudo filesystems"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Miscellaneous filesystems"
+
+<sect2>
+	<title>"Miscellaneous filesystems"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>ADFS_FS</term>
@@ -96798,7 +96654,6 @@ menu "Miscellaneous filesystems"
 
 <nutentry>
 choice
-  #choice value
 <nutsynopsis>
 	"JFFS2 default compression mode"
 </nutsynopsis>
@@ -96834,10 +96689,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -96858,10 +96712,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -96883,10 +96736,9 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal><choice></literal>
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  #choice value
 	<para>
 	type
 	<literal>boolean</literal>
@@ -97202,9 +97054,14 @@ choice
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Network File Systems"
+
+<sect2>
+	<title>"Network File Systems"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>NET</literal>
@@ -98497,9 +98354,14 @@ menu "Network File Systems"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Partition Types"
+
+<sect2>
+	<title>"Partition Types"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PARTITION_ADVANCED</term>
@@ -99221,9 +99083,14 @@ menu "Partition Types"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Native Language Support"
+
+<sect2>
+	<title>"Native Language Support"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>NLS</term>
@@ -100410,11 +100277,18 @@ menu "Native Language Support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Profiling support"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Profiling support"</title>
+<nutlist>
+
 <para>
 	depends on
 	<literal>EXPERIMENTAL</literal>
@@ -100475,9 +100349,14 @@ menu "Profiling support"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Kernel hacking"
+
+<sect2>
+	<title>"Kernel hacking"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>PRINTK_TIME</term>
@@ -100554,7 +100433,7 @@ menu "Kernel hacking"
 <nutentry>
 	<term>LOG_BUF_SHIFT</term>
 <nutsynopsis>
-	"Kernel log buffer size (16 => 64KB, 17 => 128KB)"
+	"Kernel log buffer size (16 =&gt; 64KB, 17 =&gt; 128KB)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -101094,14 +100973,6 @@ menu "Kernel hacking"
 </nutentrybody>
 </nutentry>
 
-
-comment "Page alloc debug is incompatible with Software Suspend on i386"
-<para>
-	depends on
-	<literal>DEBUG_KERNEL and SOFTWARE_SUSPEND</literal>
-	</para>
-
-
 <nutentry>
 	<term>DEBUG_PAGEALLOC</term>
 <nutsynopsis>
@@ -101187,9 +101058,14 @@ comment "Page alloc debug is incompatible with Software Suspend on i386"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Security options"
+
+<sect2>
+	<title>"Security options"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>KEYS</term>
@@ -101660,9 +101536,14 @@ menu "Security options"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-menu "Cryptographic options"
+
+<sect2>
+	<title>"Cryptographic options"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>CRYPTO</term>
@@ -102521,7 +102402,10 @@ menu "Cryptographic options"
 </nutentry>
 
 
-menu "Hardware crypto devices"
+<sect2>
+	<title>"Hardware crypto devices"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>CRYPTO_DEV_PADLOCK</term>
@@ -102584,11 +102468,18 @@ menu "Hardware crypto devices"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
 
-endmenu
 
-menu "Library routines"
+</nutlist>
+</sect2>
+
+
+<sect2>
+	<title>"Library routines"</title>
+<nutlist>
+
 
 <nutentry>
 	<term>CRC_CCITT</term>
@@ -102813,7 +102704,9 @@ menu "Library routines"
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
 <nutentry>
 	<term>GENERIC_HARDIRQS</term>
 	<para>
@@ -102943,4 +102836,13 @@ endmenu
 </nutentry>
 
 
-endmenu
+</nutlist>
+</sect2>
+
+
+</nutlist>
+</sect2>
+
+#
+# using defaults found in .config
+#

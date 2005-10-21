@@ -9,7 +9,6 @@ Kernel configuration option reference
 <title>All the options</title>
 
 
-<nutlist longestterm="unseten">
 
 <!--
 
@@ -60,6 +59,9 @@ Kernel configuration option reference
   </nutentrybody>
  </nutentry>
 -->
+
+<!--  Good entry here, commented out for the automated stuff for now...
+<nutlist longestterm="unseten">
 
 <nutentry>
 	<term>USB</term>
@@ -149,11 +151,13 @@ Kernel configuration option reference
 
 </nutentrybody>
 </nutentry>
+-->
 
 <!-- automatic generated stuff below for all USB options as a test... -->
 
-</nutlist>
 
+
+<!-- end automated stuff -->
 
 </sect1>
 

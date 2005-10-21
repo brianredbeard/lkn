@@ -1,10 +1,11 @@
 ---
+ arch/i386/Kconfig        |    4 
  scripts/kconfig/Makefile |    2 
  scripts/kconfig/conf.c   |    1 
  scripts/kconfig/expr.c   |    6 -
  scripts/kconfig/lkc.h    |    1 
- scripts/kconfig/zconf.y  |  190 +++++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 197 insertions(+), 3 deletions(-)
+ scripts/kconfig/zconf.y  |  196 +++++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 206 insertions(+), 4 deletions(-)
 
 --- lkn-2.6.14-rc5.orig/scripts/kconfig/Makefile
 +++ lkn-2.6.14-rc5/scripts/kconfig/Makefile
@@ -51,7 +52,7 @@
  	case E_CHOICE:
 --- lkn-2.6.14-rc5.orig/scripts/kconfig/zconf.y
 +++ lkn-2.6.14-rc5/scripts/kconfig/zconf.y
-@@ -682,6 +682,196 @@ void zconfdump(FILE *out)
+@@ -682,6 +682,202 @@ void zconfdump(FILE *out)
  	}
  }
  
@@ -210,13 +211,17 @@
 +		else if ((prop = menu->prompt)) {
 +			switch (prop->type) {
 +			case P_COMMENT:
-+				fputs("\ncomment ", out);
-+				gkh_print_quoted_string(out, prop->text);
-+				fputs("\n", out);
++//				fputs("\ncomment ", out);
++//				gkh_print_quoted_string(out, prop->text);
++//				fputs("\n", out);
++				/* I don't think we want to print these at all... */
++				goto cont;
 +				break;
 +			case P_MENU:
-+				fputs("\nmenu ", out);
++//				fputs("\nmenu ", out);
++				fputs("\n<sect2>\n\t<title>", out);
 +				gkh_print_quoted_string(out, prop->text);
++				fputs("</title>\n<nutlist>\n", out);
 +				fputs("\n", out);
 +				break;
 +			default:
@@ -229,14 +234,16 @@
 +			}
 +			fputs("\n", out);
 +		}
-+
++cont:
 +		if (menu->list)
 +			menu = menu->list;
 +		else if (menu->next)
 +			menu = menu->next;
 +		else while ((menu = menu->parent)) {
-+			if (menu->prompt && menu->prompt->type == P_MENU)
-+				fputs("\nendmenu\n", out);
++			if (menu->prompt && menu->prompt->type == P_MENU) {
++//				fputs("\nendmenu\n", out);
++				fputs("\n</nutlist>\n</sect2>\n\n", out);
++			}
 +			if (menu->next) {
 +				menu = menu->next;
 +				break;
@@ -258,3 +265,20 @@
  
  extern int zconfdebug;
  void zconf_starthelp(void);
+--- lkn-2.6.14-rc5.orig/arch/i386/Kconfig
++++ lkn-2.6.14-rc5/arch/i386/Kconfig
+@@ -3,7 +3,7 @@
+ # see Documentation/kbuild/kconfig-language.txt.
+ #
+ 
+-mainmenu "Linux Kernel Configuration"
++menu "Linux Kernel Configuration"
+ 
+ config X86
+ 	bool
+@@ -1345,3 +1345,5 @@ config PC
+ 	bool
+ 	depends on X86 && !EMBEDDED
+ 	default y
++
++endmenu
