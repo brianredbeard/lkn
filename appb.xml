@@ -121,78 +121,103 @@ patch onto a clean kernel version. This can be done in the following
 steps:
 </para>
 
-<div class="orderedlist">
-<ol type="1">
+<orderedlist>
+<listitem>
+<para>
+Generate your original patch, as in the previous example.
+</para>
+</listitem>
 
-<li>
-<p>Generate your original patch, as in the previous example.</p>
-</li>
-<li>
-<p>Using the official patch from <a href="http://kernel.org" target="_top">kernel.org</a>, move the old
-kernel version forward one release:</p>
-</li>
-</ol>
-</div>
-<pre class="programlisting">
-<tt>$ cd linux-2.4.18
+<listitem>
+<para>
+Using the official patch from kernel.org, move the old kernel version
+forward one release:
+</para>
+
+<programlisting>
+$ cd linux-2.4.18
 $ patch -p1 &lt; ../patch-2.4.19
 $ cd ..
 $ mv linux-2.4.18 linux-2.4.19
-</tt>
+</programlisting>
+</listitem>
 
-</pre>
-<div class="orderedlist">
-<ol type="1">
-<li>
-<p>Move your working directory forward one release by removing your patch, then applying the new update:</p>
-</li>
-</ol>
-</div>
-<pre class="programlisting">
-<tt>$ cd linux-2.4.18-greg
+<listitem>
+<para>
+Move your working directory forward one release by removing your patch,
+then applying the new update:
+</para>
+
+<programlisting>
+$ cd linux-2.4.18-greg
 $ patch -p1 -R &lt; ../my_patch
 $ patch -p1 &lt; ../patch-2.4.19
 $ cd ..
 $ mv linux-2.4.18-greg linux-2.4.19-greg
-</tt>
-</pre>
+</programlisting>
+</listitem>
 
-<div class="orderedlist">
-<ol type="1">
-<li>
-<p>Try to apply your patch on top of the new update:</p>
-</li>
-</ol>
-</div>
-<pre class="programlisting">
-<tt>$ cd linux-2.4.19-greg
+<listitem>
+<para>
+Try to apply your patch on top of the new update:
+</para>
+
+<programlisting>
+$ cd linux-2.4.19-greg
 $ patch -p1 &lt; ../my_patch
+</programlisting>
 
-</tt>
-</pre>
-<p>If your patch does not apply cleanly, resolve all of the conflicts that are created (patch will tell you
-about these, leaving behind .rej and .orig files for you to compare and fix up manually using your favorite
-editor). This merge process can be the most difficult part if you have made changes to portions of the source
-tree that have been changed by other people.</p>
-<p>If you use this development process, I highly recommend getting the excellent patchutils set of programs
-(found at <a href="http://cyberelk.net/tim/patchutils" target="_top">cyberelk.net/tim/patchutils</a>). These
-programs enable you to manipulate text patches easily in all sorts of useful ways, and they have saved kernel
-developers many hours of tedious work.</p>
+<para>
+If your patch does not apply cleanly, resolve all of the conflicts that
+are created (patch will tell you about these, leaving behind .rej and
+.orig files for you to compare and fix up manually using your favorite
+editor). This merge process can be the most difficult part if you have
+made changes to portions of the source tree that have been changed by
+other people.
+</para>
+</listitem>
 
-<p><a href="/articles/lj/0101/6183/6183s1.html" target="_top">Directory Tip</a></p>
-</div>
-<div class="simplesect" lang="en">
-<div class="titlepage">
-<h2 class="title"><a name="N0x850ca10.0x8574134"></a>Source Code Control</h2>
-</div>
-<p>The process of kernel development using patch and diff generally works quite well. But after a while, most
-people grow tired of it and look for a different way to work that does not involve so much tedious patching
-and merging.</p>
-<p>A few years ago I discovered BitKeeper (available at <a href="http://www.bitmover.com" target="
-_top">www.bitmover.com</a>) and have been using it ever since for kernel development. It originally enabled
-me to track easily external changes to the kernel tree and allowed me to forward port my kernel changes with
-almost no effort. Now that Linus Torvalds and Marcelo Tosatti are using BitKeeper for their kernel
-development, it also allows me to send patches to them easily for inclusion into the main kernel tree.</p>
+</orderedlist>
+
+<para>
+If you use this development process, I highly recommend getting the
+excellent patchutils set of programs (found at
+http://cyberelk.net/tim/patchutils). These
+programs enable you to manipulate text patches easily in all sorts of
+useful ways, and they have saved kernel developers many hours of tedious
+work.
+</para>
+
+</sect1>
+
+<sect1>
+<title>Managing your patches with quilt</title>
+
+</sect1>
+
+
+<sect1>
+<title>Source Code Control with git</title>
+
+
+<para>
+The process of kernel development using patch and diff generally works
+quite well. But after a while, most people grow tired of it and look for
+a different way to work that does not involve so much tedious patching
+and merging.
+</para>
+
+<!--
+<para>
+A few years ago I discovered BitKeeper (available at
+http://www.bitmover.com) and have been using it ever since for kernel
+development. It originally enabled me to track easily external changes
+to the kernel tree and allowed me to forward port my kernel changes with
+almost no effort. Now that Linus Torvalds and Marcelo Tosatti are using
+BitKeeper for their kernel development, it also allows me to send
+patches to them easily for inclusion into the main kernel tree.
+</para>
+
 <p>The use of BitKeeper as a kernel development tool is one that a lot of people find contentious, given
 BitKeeper's licensing strategy. Read over the license and decide for yourself if you should use it. You also
 should go through the tutorial on the BitMover web site to familiarize yourself with the tool and some of the
@@ -369,7 +394,9 @@ for the Linux USB and Linux Hot Plug PCI drivers.</p>
 <p><a href="/articles/lj/0101/6183/6183s3.html" target="_top">Rsources</a></p>
 <div class="mediaobject"><img src="/articles/lj/0101/6183/6183aa.png"></div>
 
+-->
 
+</sect1>
 
 
 
