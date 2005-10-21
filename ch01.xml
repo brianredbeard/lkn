@@ -48,47 +48,6 @@ and class axis of a grid, providing a driver that knows how to
 communicate across a specific bus, to a specific class.
 </para>
 
-<remark>
-A nice diagram goes here looking something like this:
-<screen>
-			CLASS
-			
-		| disk	| tty	| input	| sound	| ...	
-	--------+-------+-------+-------+-------+--------
-		|	|	|	|	|
-		|	|	|	|	|
-	 PCI	|	|device	|	|device	|
-		|	|	|	|	|
-		|	|	|	|	|
-	--------+-------+-------+-------+-------+--------
-		|	|	|	|	|
-		|	|	|	|	|
-	 USB	|	|	|device	|device	|
-		|	|	|	|	|
-		|	|	|	|	|
-BUS	--------+-------+-------+-------+-------+--------
-		|	|	|	|	|
-		|	|	|	|	|
-	 IDE	|device	|	|	|	|
-		|	|	|	|	|
-		|	|	|	|	|
-	--------+-------+-------+-------+-------+--------
-		|	|	|	|	|
-		|	|	|	|	|
-	 SCSI	|device	|	|	|	|
-		|	|	|	|	|
-		|	|	|	|	|
-	--------+-------+-------+-------+-------+--------
-		|	|	|	|	|
-		|	|	|	|	|
-	 ...	|	|	|	|	|
-		|	|	|	|	|
-		|	|	|	|	|
-</screen>
-
-Should "driver" above be an actual file name for a driver?
-
-</remark>
 
 </simplesect>
 

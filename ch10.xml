@@ -4,7 +4,77 @@
 Kernel build command line reference
 </title>
 
+<simplesect>
 
+<screen>
+Cleaning targets:
+  clean           - remove most generated files but keep the config
+  mrproper        - remove all generated files + config + various backup files
+
+Configuration targets:
+  config          - Update current config utilising a line-oriented program
+  menuconfig      - Update current config utilising a menu based program
+  xconfig         - Update current config utilising a QT based front-end
+  gconfig         - Update current config utilising a GTK based front-end
+  oldconfig       - Update current config utilising a provided .config as base
+  randconfig      - New config with random answer to all options
+  defconfig       - New config with default answer to all options
+  allmodconfig    - New config selecting modules when possible
+  allyesconfig    - New config where all options are accepted with yes
+  allnoconfig     - New minimal config
+
+Other generic targets:
+  all             - Build all targets marked with [*]
+* vmlinux         - Build the bare kernel
+* modules         - Build all modules
+  modules_install - Install all modules
+  dir/            - Build all files in dir and below
+  dir/file.[ois]  - Build specified target only
+  dir/file.ko     - Build module including final link
+  rpm             - Build a kernel as an RPM package
+  tags/TAGS       - Generate tags file for editors
+  cscope          - Generate cscope index
+  kernelrelease   - Output the release version string
+
+Static analysers
+  buildcheck      - List dangling references to vmlinux discarded sections
+                    and init sections from non-init sections
+  checkstack      - Generate a list of stack hogs
+  namespacecheck  - Name space analysis on compiled kernel
+
+Kernel packaging:
+  rpm-pkg         - Build the kernel as an RPM package
+  binrpm-pkg      - Build an rpm package containing the compiled kernel
+                    and modules
+  deb-pkg         - Build the kernel as an deb package
+  tar-pkg         - Build the kernel as an uncompressed tarball
+  targz-pkg       - Build the kernel as a gzip compressed tarball
+  tarbz2-pkg      - Build the kernel as a bzip2 compressed tarball
+
+Documentation targets:
+  Linux kernel internal documentation in different formats:
+  xmldocs (XML DocBook), psdocs (Postscript), pdfdocs (PDF)
+  htmldocs (HTML), mandocs (man pages, use installmandocs to install)
+
+Architecture specific targets (i386):
+* bzImage       - Compressed kernel image (arch/i386/boot/bzImage)
+  install       - Install kernel using
+                   (your) ~/bin/installkernel or
+                   (distribution) /sbin/installkernel or
+                   install to $(INSTALL_PATH) and run lilo
+  bzdisk       - Create a boot floppy in /dev/fd0
+  fdimage      - Create a boot floppy image
+
+  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build
+  make O=dir [targets] Locate all output files in "dir", including .config
+  make C=1   [targets] Check all c source with $CHECK (sparse)
+  make C=2   [targets] Force check of all c source with $CHECK (sparse)
+
+Execute "make" or "make all" to build all targets marked with [*]
+For further info see the ./README file
+
+</screen>
+</simplesect>
 </chapter>
 
 <!-- vim: set ai tw=72 : -->
