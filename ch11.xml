@@ -1,3 +1,5 @@
+<!-- fix up the "- -" entries due to commenting out stuff -->
+
 <chapter>
 
 <title>
@@ -61,6 +63,7 @@ Kernel configuration option reference
 -->
 
 <!--  Good entry here, commented out for the automated stuff for now...
+-->
 <nutlist longestterm="unseten">
 
 <nutentry>
@@ -151,17 +154,19 @@ Kernel configuration option reference
 
 </nutentrybody>
 </nutentry>
--->
+</nutlist>
+</sect1>
 
 <!-- automatic generated stuff below for all USB options as a test... -->
 
-<sect2>
-	<title>"Linux Kernel Configuration"</title>
+<sect1>
+	<title>Linux Kernel Configuration</title>
+<!--
 <nutlist>
-
 
 <nutentry>
 	<term>X86_32</term>
+<nutentrybody>
 	<para>
 	default value
 	<literal>y</literal>
@@ -172,7 +177,6 @@ Kernel configuration option reference
 	<literal>boolean</literal>
 	</para>
 
-<nutentrybody>
 	<para>
 	This is Linux's home port.  Linux was originally native to the Intel
 	386, and runs on all the later x86 processors including the Intel
@@ -183,131 +187,10 @@ Kernel configuration option reference
 </nutentrybody>
 </nutentry>
 
-<nutentry>
-	<term>SEMAPHORE_SLEEPERS</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
+</nutlist>
+-->
 
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>X86</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>MMU</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>SBUS</term>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>UID16</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>GENERIC_ISA_DMA</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>GENERIC_IOMAP</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>ARCH_MAY_HAVE_PC_FDC</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-
-<sect3>
+<sect2>
 	<title>"Code maturity level options"</title>
 <nutlist>
 
@@ -315,7 +198,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>EXPERIMENTAL</term>
 <nutsynopsis>
-	"Prompt for development and/or incomplete code/drivers"
+	Prompt for development and/or incomplete code/drivers
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -335,11 +218,7 @@ Kernel configuration option reference
 	testing and use of these systems is welcomed. Just be aware that it
 	may not meet the normal level of reliability or it may fail to work
 	in some special cases. Detailed bug reports from people familiar
-	with the kernel internals are usually welcomed by the developers
-	(before submitting bug reports, please read the documents
-	file:README, file:MAINTAINERS, file:REPORTING-BUGS,
-	file:Documentation/BUG-HUNTING, and
-	file:Documentation/oops-tracing.txt in the kernel source).
+	with the kernel internals are usually welcomed by the developers.
 	</para>
 
 	<para>
@@ -351,10 +230,11 @@ Kernel configuration option reference
 	<para>
 	Unless you intend to help test and develop a feature or driver that
 	falls into this category, or you have a situation that requires
-	using these features, you should probably say N here, which will
-	cause the configurator to present you with fewer choices. If
-	you say Y here, you will be offered the choice of using features or
-	drivers that are currently considered to be in the alpha-test phase.
+	using these features, you should probably say <literal>NO</literal>
+	here, which will cause the configurator to present you with fewer
+	choices. If you say <literal>YES</literal> here, you will be offered
+	the choice of using features or drivers that are currently considered
+	to be in the alpha-test phase.
 	</para>
 
 </nutentrybody>
@@ -363,7 +243,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>CLEAN_COMPILE</term>
 <nutsynopsis>
-	"Select only drivers expected to compile cleanly"
+	Select only drivers expected to compile cleanly
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -382,12 +262,13 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Select this option if you don't even want to see the option
-	to configure known-broken drivers.
+	Several drivers are known to be broken in the kernel source
+	tree, and by selecting this option, you will not even be
+	prompted to be able to build them.
 	</para>
 
 	<para>
-	If unsure, say Y
+	If you are unsure about this option, say <literal>YES</literal>.
 	</para>
 
 </nutentrybody>
@@ -395,6 +276,7 @@ Kernel configuration option reference
 
 <nutentry>
 	<term>BROKEN</term>
+<nutentrybody>
 	<para>
 	default value
 	<literal>y if !CLEAN_COMPILE</literal>
@@ -405,12 +287,21 @@ Kernel configuration option reference
 	<literal>boolean</literal>
 	</para>
 
-<nutentrybody>
+	<para>
+	This option is set by the kernel build system, depending on the
+	value you selected for the <literal>CLEAN_COMPILE</literal>
+	option.  If you selected <literal>YES</literal> to that option, this
+	option will be set to <literal>NO</literal>.  If you selected
+	<literal>NO</literal> to that option, this one will be set to
+	<literal>YES</literal>.  This option is used in order to make it
+	easier for kernel developers to mark drivers as broken.
+	</para>
 </nutentrybody>
 </nutentry>
 
 <nutentry>
 	<term>BROKEN_ON_SMP</term>
+<nutentrybody>
 	<para>
 	default value
 	<literal>y if BROKEN || !SMP</literal>
@@ -421,58 +312,18 @@ Kernel configuration option reference
 	<literal>boolean</literal>
 	</para>
 
-<nutentrybody>
+	<para>
+	This option works just like the <literal>BROKEN</literal>
+	option, but enables kernel developers to mark drivers that are
+	broken only on SMP machines.
+	</para>
 </nutentrybody>
 </nutentry>
-
-<nutentry>
-	<term>LOCK_KERNEL</term>
-	<para>
-	default value
-	<literal>y if SMP || PREEMPT</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>INIT_ENV_ARG_LIMIT</term>
-	<para>
-	default value
-	<literal>32 if !USERMODE</literal>
-	</para>
-
-	<para>
-	default value
-	<literal>128 if USERMODE</literal>
-	</para>
-
-	<para>
-	type
-	<literal>integer</literal>
-	</para>
-
-<nutentrybody>
-	<para>
-	Maximum of each of the number of arguments and environment
-	variables passed to init from the kernel command line.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
 
 </nutlist>
-</sect3>
+</sect2>
 
-
-<sect3>
+<sect2>
 	<title>"General setup"</title>
 <nutlist>
 
@@ -480,7 +331,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>LOCALVERSION</term>
 <nutsynopsis>
-	"Local version - append to kernel release"
+	Local version - append to kernel release
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -493,8 +344,8 @@ Kernel configuration option reference
 	This will show up when you type uname, for example.
 	The string you set here will be appended after the contents of
 	any files with a filename matching localversion* in your
-	object and source tree, in that order.  Your total string can
-	be a maximum of 64 characters.
+	object and source tree, in that order.  Your total string length
+	can be a maximum of 64 characters.
 	</para>
 
 </nutentrybody>
@@ -503,7 +354,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>LOCALVERSION_AUTO</term>
 <nutsynopsis>
-	"Automatically append version information to the version string"
+	Automatically append version information to the version string
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -826,7 +677,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>KOBJECT_UEVENT</term>
 <nutsynopsis>
-	"Kernel Userspace Events"
+	Kernel Userspace Events
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -1055,6 +906,16 @@ Kernel configuration option reference
 
 </nutentrybody>
 </nutentry>
+</nutlist>
+
+<sect3>
+	<title>EMBEDDED</title>
+
+<para>
+	These are options that you should be very careful with...
+</para>
+
+<nutlist>
 
 <nutentry>
 	<term>EMBEDDED</term>
@@ -1510,51 +1371,10 @@ Kernel configuration option reference
 
 </nutentrybody>
 </nutentry>
-
-
 </nutlist>
+
 </sect3>
-
-
-</nutlist>
 </sect2>
-
-<nutentry>
-	<term>TINY_SHMEM</term>
-	<para>
-	default value
-	<literal>!SHMEM</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>BASE_SMALL</term>
-	<para>
-	default value
-	<literal>0 if BASE_FULL</literal>
-	</para>
-
-	<para>
-	default value
-	<literal>1 if !BASE_FULL</literal>
-	</para>
-
-	<para>
-	type
-	<literal>integer</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
 
 
 <sect2>
@@ -1784,14 +1604,13 @@ Kernel configuration option reference
 </nutlist>
 </sect2>
 
-
 <sect2>
 	<title>"Processor type and features"</title>
 <nutlist>
 
 
 <nutentry>
-choice
+	<term>FIXMEchoice</term>
 <nutsynopsis>
 	"Subarchitecture Type"
 </nutsynopsis>
@@ -3800,6 +3619,7 @@ choice
 
 </nutentrybody>
 </nutentry>
+</nutlist>
 
 
 <sect3>
@@ -3991,11 +3811,10 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
 </nutlist>
 </sect3>
 
+<!-- FIXME  
 <nutentry>
 choice
 <nutsynopsis>
@@ -4607,7 +4426,9 @@ choice
 <nutentrybody>
 </nutentrybody>
 </nutentry>
+-->
 
+<nutlist>
 <nutentry>
 	<term>MEMORY_HOTPLUG</term>
 <nutsynopsis>
@@ -4958,6 +4779,8 @@ choice
 </nutentrybody>
 </nutentry>
 
+
+
 <nutentry>
 choice
 <nutsynopsis>
@@ -5187,7 +5010,7 @@ choice
 
 </nutlist>
 </sect2>
-
+<!--
 
 <sect2>
 	<title>"Power management options (ACPI, APM)"</title>
@@ -6479,7 +6302,7 @@ choice
 	power manage devices, enter the Standby State, enter the Suspend
 	State, or take power saving steps in response to CPU Idle calls."
 	This driver will make CPU Idle calls when Linux is idle (unless this
-	feature is turned off -- see "Do CPU IDLE calls", below). This
+	feature is turned off - - see "Do CPU IDLE calls", below). This
 	should always save battery power, but more complicated APM features
 	will be dependent on your BIOS implementation. You may need to turn
 	this option off if your computer hangs at boot time when using APM
@@ -6544,7 +6367,7 @@ choice
 	the virtual console screen blanker, and won't turn off the backlight
 	when using the X Window system. This also doesn't have anything to
 	do with your VESA-compliant power-saving monitor. Further, this
-	option doesn't work for all laptops -- it might not turn off your
+	option doesn't work for all laptops - - it might not turn off your
 	backlight at all, or it might print a lot of errors to the console,
 	especially if you are using gpm.
 	</para>
@@ -6604,7 +6427,7 @@ choice
 	Normally we disable external interrupts while we are making calls to
 	the APM BIOS as a measure to lessen the effects of a badly behaving
 	BIOS implementation.  The BIOS should reenable interrupts if it
-	needs to.  Unfortunately, some BIOSes do not -- especially those in
+	needs to.  Unfortunately, some BIOSes do not - - especially those in
 	many of the newer IBM Thinkpads.  If you experience hangs when you
 	suspend, try setting this to Y.  Otherwise, say N.
 	</para>
@@ -8043,7 +7866,7 @@ choice
 	</para>
 
 	<para>
-	This feature enables a procfs file -- /proc/pci -- that provides a 
+	This feature enables a procfs file - - /proc/pci - - that provides a 
 	summary of PCI devices in the system. 
 	</para>
 
@@ -13268,7 +13091,7 @@ choice
 
 	<para>
 	 Typical usage:
-	 iptables -A INPUT -m pkttype --pkt-type broadcast -j LOG
+	 iptables -A INPUT -m pkttype - -pkt-type broadcast -j LOG
 	</para>
 
 	<para>
@@ -14163,8 +13986,8 @@ choice
 	</para>
 
 	<para>
-	iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN \
-	               -j TCPMSS --clamp-mss-to-pmtu
+	iptables -A FORWARD -p tcp - -tcp-flags SYN,RST SYN \
+	               -j TCPMSS - -clamp-mss-to-pmtu
 	</para>
 
 	<para>
@@ -16579,14 +16402,14 @@ choice
 	</para>
 
 	<para>
-	-- acknowledged error-free non-duplicated transfer of user data,
-	-- data fragmentation to conform to discovered path MTU size,
-	-- sequenced delivery of user messages within multiple streams,
+	- - acknowledged error-free non-duplicated transfer of user data,
+	- - data fragmentation to conform to discovered path MTU size,
+	- - sequenced delivery of user messages within multiple streams,
 	with an option for order-of-arrival delivery of individual user
 	messages,
-	-- optional bundling of multiple user messages into a single SCTP
+	- - optional bundling of multiple user messages into a single SCTP
 	packet, and
-	-- network-level fault tolerance through supporting of multi-
+	- - network-level fault tolerance through supporting of multi-
 	homing at either or both ends of an association."
 	</para>
 
@@ -34548,7 +34371,7 @@ choice
 
 	<para>
 	OEM	Product Name		VID :DID :SVID:SSID
-	---	------------		---- ---- ---- ----
+	- - -	- - - - - - - - - - - -		- - - - - - - - - - - - - - - -
 	Dell PERC3/QC			101E:1960:1028:0471
 	Dell PERC3/DC			101E:1960:1028:0493
 	Dell PERC3/SC			101E:1960:1028:0475
@@ -35649,7 +35472,7 @@ choice
 	<para>
 	In the PC-world and in most modern SCSI-BIOS-setups, SCSI-hard disks
 	are assigned to the drive letters, starting with the lowest SCSI-id
-	(physical number -- pun) to be drive C:, as seen from DOS and
+	(physical number - - pun) to be drive C:, as seen from DOS and
 	similar operating systems. When looking into papers describing the
 	ANSI-SCSI-standard, this assignment of drives appears to be wrong.
 	The SCSI-standard follows a hardware-hierarchy which says that id 7
@@ -37939,7 +37762,7 @@ choice
 	</para>
 
 	<para>
-	This enables support for the EcoSCSI card -- a small card that sits
+	This enables support for the EcoSCSI card - - a small card that sits
 	in the Econet socket. If you have an Acorn system with one of these,
 	say Y. If unsure, say N.
 	</para>
@@ -38934,8 +38757,8 @@ choice
 	<para>
 	This is your driver if you have an Aztech CDA268-01A, Orchid
 	CD-3110, Okano or Wearnes CDD110, Conrad TXC, or CyCD-ROM CR520 or
-	CR540 CD-ROM drive.  This driver -- just like all these CD-ROM
-	drivers -- is NOT for CD-ROM drives with IDE/ATAPI interfaces, such
+	CR540 CD-ROM drive.  This driver - - just like all these CD-ROM
+	drivers - - is NOT for CD-ROM drives with IDE/ATAPI interfaces, such
 	as Aztech CDA269-031SE. Please read the file
 	file:Documentation/cdrom/aztcd.
 	</para>
@@ -54799,8 +54622,8 @@ choice
 	<para>
 	If you want that the HiSax hardware driver sends messages to the
 	upper level of the isdn code on each AOCD (Advice Of Charge, During
-	the call -- transmission of the fee information during a call) and
-	on each AOCE (Advice Of Charge, at the End of the call --
+	the call - - transmission of the fee information during a call) and
+	on each AOCE (Advice Of Charge, at the End of the call - -
 	transmission of fee information at the end of the call), say Y here.
 	This works only in Germany.
 	</para>
@@ -58805,7 +58628,7 @@ choice
 
 	<para>
 	Say Y here if you have a Sega Master System gamepad, Sega Genesis
-	gamepad, Sega Saturn gamepad, or a Multisystem -- Atari, Amiga,
+	gamepad, Sega Saturn gamepad, or a Multisystem - - Atari, Amiga,
 	Commodore, Amstrad CPC joystick connected to your parallel port.
 	For more information on how to use the driver please read
 	file:Documentation/input/joystick-parport.txt.
@@ -58838,7 +58661,7 @@ choice
 	<para>
 	Say Y here if you have a Nintendo Entertainment System gamepad,
 	Super Nintendo Entertainment System gamepad, Nintendo 64 gamepad,
-	Sony PlayStation gamepad or a Multisystem -- Atari, Amiga,
+	Sony PlayStation gamepad or a Multisystem - - Atari, Amiga,
 	Commodore, Amstrad CPC joystick connected to your parallel port.
 	For more information on how to use the driver please read
 	file:Documentation/input/joystick-parport.txt.
@@ -58870,7 +58693,7 @@ choice
 
 	<para>
 	Say Y here if you have the TurboGraFX interface by Steffen Schwenke,
-	and want to use it with Multisystem -- Atari, Amiga, Commodore,
+	and want to use it with Multisystem - - Atari, Amiga, Commodore,
 	Amstrad CPC joystick. For more information on how to use the driver
 	please read file:Documentation/input/joystick-parport.txt.
 	</para>
@@ -60186,7 +60009,7 @@ choice
 	</para>
 
 	<para>
-	Say Y here if you have any non-standard serial boards -- boards
+	Say Y here if you have any non-standard serial boards - - boards
 	which aren't supported using the standard "dumb" serial driver.
 	This includes intelligent serial boards such as Cyclades,
 	Digiboards, etc. These are usually used for systems that need many
@@ -62977,7 +62800,7 @@ choice
 
 	<para>
 	Say Y here if you wish to use one of the serial ports as the
-	system console--the system console is the device which
+	system console- -the system console is the device which
 	receives all kernel messages and warnings and which allows
 	logins in single user mode.
 	</para>
@@ -63848,7 +63671,7 @@ choice
 
 	<para>
 	This is the parallel port equivalent of SCSI generic support (sg).
-	It is safe to say N to this -- it is not needed for normal printing
+	It is safe to say N to this - - it is not needed for normal printing
 	or parallel port CD-ROM/disk support.
 	</para>
 
@@ -86459,7 +86282,7 @@ choice
 	</para>
 
 	<para>
-	Verbose soundcard initialization -- affects the format of autoprobe
+	Verbose soundcard initialization - - affects the format of autoprobe
 	and initialization messages at boot time.
 	</para>
 
@@ -92435,8 +92258,8 @@ choice
 
 	<para>
 	Say Y here if you want to use a KL5KUSB105 - based single port
-	serial adapter. The most widely known -- and currently the only
-	tested -- device in this category is the PalmConnect USB Serial
+	serial adapter. The most widely known - - and currently the only
+	tested - - device in this category is the PalmConnect USB Serial
 	adapter sold by Palm Inc. for use with their Palm III and Palm V
 	series PDAs.
 	</para>
@@ -96405,7 +96228,7 @@ choice
 	To compile this as a module, choose M here: the module will be called
 	fat.  Note that if you compile the FAT support as a module, you
 	cannot compile any of the FAT-based file systems into the kernel
-	-- they will have to be modules as well.
+	- - they will have to be modules as well.
 	</para>
 
 </nutentrybody>
@@ -96736,7 +96559,7 @@ choice
 	It's totally cool; for example, "cat /proc/interrupts" gives
 	information about what the different IRQs are used for at the moment
 	(there is a small number of Interrupt ReQuest lines in your computer
-	that are used by the attached devices to gain the CPU's attention --
+	that are used by the attached devices to gain the CPU's attention - -
 	often a source of trouble if two devices are mistakenly configured
 	to use the same IRQ). The program procinfo to display some
 	information about your system gathered from the /proc file system.
@@ -100251,7 +100074,7 @@ choice
 	DOS/Windows partitions correctly. This does apply to the filenames
 	only, not to the file contents. You can include several codepages;
 	say Y here if you want to include the DOS codepage that is used for
-	much of Europe -- United Kingdom, Germany, Spain, Italy, and [add
+	much of Europe - - United Kingdom, Germany, Spain, Italy, and [add
 	more countries here]. It has some characters useful to many European
 	languages that are not part of the US codepage 437.
 	</para>
@@ -103861,8 +103684,9 @@ choice
 
 </nutlist>
 </sect-10>
-
+-->
 <!-- end automated stuff -->
+
 
 </sect1>
 
