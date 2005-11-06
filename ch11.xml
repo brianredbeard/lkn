@@ -7,12 +7,12 @@ Kernel configuration option reference
 </title>
 
 
+<!--
 <sect1>
 <title>All the options</title>
 
 
 
-<!--
 
 <nutentry><term>alias</term>
   <nutsynopsis><literal>alias</literal> 
@@ -63,7 +63,6 @@ Kernel configuration option reference
 -->
 
 <!--  Good entry here, commented out for the automated stuff for now...
--->
 <nutlist longestterm="unseten">
 
 <nutentry>
@@ -156,6 +155,7 @@ Kernel configuration option reference
 </nutentry>
 </nutlist>
 </sect1>
+-->
 
 <!-- automatic generated stuff below for all USB options as a test... -->
 
@@ -919,13 +919,12 @@ Kernel configuration option reference
 
 <nutentry>
 	<term>EMBEDDED</term>
-  unknown prop 3!
+<nutentrybody>
 	<para>
 	type
 	<literal>boolean</literal>
 	</para>
 
-<nutentrybody>
 	<para>
 	This option allows certain base kernel options and settings
 	to be disabled or tweaked. This is for specialized
