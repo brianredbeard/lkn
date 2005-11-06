@@ -6,7 +6,7 @@ scripts/kconfig/conf -s arch/i386/Kconfig
 
 
 <nutentry>
-	<term>X86</term>
+	<term>X86_32</term>
 	<para>
 	default value
 	<literal>y</literal>
@@ -30,6 +30,22 @@ scripts/kconfig/conf -s arch/i386/Kconfig
 
 <nutentry>
 	<term>SEMAPHORE_SLEEPERS</term>
+	<para>
+	default value
+	<literal>y</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>X86</term>
 	<para>
 	default value
 	<literal>y</literal>
@@ -136,7 +152,7 @@ scripts/kconfig/conf -s arch/i386/Kconfig
 </nutentry>
 
 
-<sect2>
+<sect3>
 	<title>"Code maturity level options"</title>
 <nutlist>
 
@@ -289,8 +305,8 @@ scripts/kconfig/conf -s arch/i386/Kconfig
 
 <nutentrybody>
 	<para>
-	This is the value of the two limits on the number of argument and of
-	env.var passed to init from the kernel command line.
+	Maximum of each of the number of arguments and environment
+	variables passed to init from the kernel command line.
 	</para>
 
 </nutentrybody>
@@ -298,10 +314,10 @@ scripts/kconfig/conf -s arch/i386/Kconfig
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
-<sect2>
+<sect3>
 	<title>"General setup"</title>
 <nutlist>
 
@@ -1342,7 +1358,7 @@ scripts/kconfig/conf -s arch/i386/Kconfig
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
 </nutlist>
@@ -2787,6 +2803,22 @@ choice
 </nutentry>
 
 <nutentry>
+	<term>X86_CMPXCHG64</term>
+	<para>
+	default value
+	<literal>y if !M386 and !M486</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
+</nutentrybody>
+</nutentry>
+
+<nutentry>
 	<term>X86_ALIGNMENT_16</term>
 	<para>
 	default value
@@ -2871,6 +2903,22 @@ choice
 	<para>
 	default value
 	<literal>y if (MWINCHIP3D || MWINCHIP2 || MWINCHIPC6) and MTRR</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>X86_TSC</term>
+	<para>
+	default value
+	<literal>y if (MWINCHIP3D || MWINCHIP2 || MCRUSOE || MEFFICEON || MCYRIXIII || MK7 || MK6 || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || M586MMX || M586TSC || MK8 || MVIAC3_2 || MGEODEGX1) and !X86_NUMAQ</literal>
 	</para>
 
 	<para>
@@ -3320,22 +3368,6 @@ choice
 </nutentry>
 
 <nutentry>
-	<term>X86_TSC</term>
-	<para>
-	default value
-	<literal>y if (MWINCHIP3D || MWINCHIP2 || MCRUSOE || MEFFICEON || MCYRIXIII || MK7 || MK6 || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || M586MMX || M586TSC || MK8 || MVIAC3_2 || MGEODEGX1) and !X86_NUMAQ</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
 	<term>X86_MCE</term>
 <nutsynopsis>
 	"Machine Check Exception"
@@ -3615,7 +3647,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect3>
 	<title>"Firmware Drivers"</title>
 <nutlist>
 
@@ -3776,12 +3808,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>X86 || X86_64</literal>
-	</para>
-
-	<para>
-	default value
-	<literal>m if X86 || X86_64</literal>
+	<literal>X86</literal>
 	</para>
 
 	<para>
@@ -3812,7 +3839,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 <nutentry>
 choice
@@ -4420,6 +4447,51 @@ choice
 	<para>
 	type
 	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>MEMORY_HOTPLUG</term>
+<nutsynopsis>
+	"Allow for memory hot-add"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>SPARSEMEM and HOTPLUG and !SOFTWARE_SUSPEND</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>SPLIT_PTLOCK_CPUS</term>
+	<para>
+	default value
+	<literal>4096 if ARM and !CPU_CACHE_VIPT</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>4096 if PARISC and DEBUG_SPINLOCK and !64BIT</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>4</literal>
+	</para>
+
+	<para>
+	type
+	<literal>integer</literal>
 	</para>
 
 <nutentrybody>
@@ -5191,7 +5263,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect3>
 	<title>"ACPI (Advanced Configuration and Power Interface) Support"</title>
 <nutlist>
 
@@ -6098,10 +6170,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
-<sect2>
+<sect3>
 	<title>"APM (Advanced Power Management) BIOS Support"</title>
 <nutlist>
 
@@ -6412,10 +6484,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
-<sect2>
+<sect3>
 	<title>"CPU Frequency scaling"</title>
 <nutlist>
 
@@ -7466,7 +7538,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
 </nutlist>
@@ -8234,7 +8306,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect3>
 	<title>"PCCARD (PCMCIA/CardBus) support"</title>
 <nutlist>
 
@@ -8615,6 +8687,35 @@ choice
 </nutentry>
 
 <nutentry>
+	<term>PCMCIA_M8XX</term>
+<nutsynopsis>
+	"MPC8xx PCMCIA support"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>PCCARD and PCMCIA and PPC</literal>
+	</para>
+
+  unknown prop 6!
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	Say Y here to include support for PowerPC 8xx series PCMCIA
+	controller.
+	</para>
+
+	<para>
+	This driver is also available as a module called m8xx_pcmcia.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
 	<term>HD64465_PCMCIA</term>
 <nutsynopsis>
 	"HD64465 host bridge support"
@@ -8900,10 +9001,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
-<sect2>
+<sect3>
 	<title>"PCI Hotplug Support"</title>
 <nutlist>
 
@@ -9430,7 +9531,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
 </nutlist>
@@ -9606,7 +9707,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>X86 and !X86_64 || ALPHA || ARM || M68K || SPARC32</literal>
+	<literal>X86_32 || ALPHA || ARM || M68K || SPARC32</literal>
 	</para>
 
 	<para>
@@ -9819,7 +9920,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect3>
 	<title>"Networking options"</title>
 <nutlist>
 
@@ -11133,7 +11234,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect4>
 	<title>"TCP congestion control"</title>
 <nutlist>
 
@@ -11376,7 +11477,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 <nutentry>
 	<term>TCP_CONG_BIC</term>
@@ -11407,7 +11508,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect4>
 	<title>"IP: Virtual Server Configuration"</title>
 <nutlist>
 
@@ -11987,7 +12088,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 <nutentry>
 	<term>IPV6</term>
@@ -12449,7 +12550,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect4>
 	<title>"IP: Netfilter Configuration"</title>
 <nutlist>
 
@@ -14686,10 +14787,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 
-<sect2>
+<sect4>
 	<title>"IPv6: Netfilter Configuration (EXPERIMENTAL)"</title>
 <nutlist>
 
@@ -15416,10 +15517,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 
-<sect2>
+<sect4>
 	<title>"DECnet: Netfilter Configuration"</title>
 <nutlist>
 
@@ -15456,10 +15557,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 
-<sect2>
+<sect4>
 	<title>"Bridge: Netfilter Configuration"</title>
 <nutlist>
 
@@ -16045,14 +16146,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
-<sect2>
+<sect3>
 	<title>"DCCP Configuration (EXPERIMENTAL)"</title>
 <nutlist>
 
@@ -16128,7 +16229,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect4>
 	<title>"DCCP CCIDs Configuration (EXPERIMENTAL)"</title>
 <nutlist>
 
@@ -16200,10 +16301,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 
-<sect2>
+<sect4>
 	<title>"DCCP Kernel Hacking"</title>
 <nutlist>
 
@@ -16271,14 +16372,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect4>
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
-<sect2>
+<sect3>
 	<title>"SCTP Configuration (EXPERIMENTAL)"</title>
 <nutlist>
 
@@ -16510,7 +16611,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 <nutentry>
 	<term>ATM</term>
@@ -17614,20 +17715,38 @@ choice
 </nutentrybody>
 </nutentry>
 
+
+<sect3>
+	<title>"QoS and/or fair queueing"</title>
+<nutlist>
+
+<para>
+	depends on
+	<literal>NET</literal>
+	</para>
+
+
 <nutentry>
 	<term>NET_SCHED</term>
-  unknown prop 3!
+<nutsynopsis>
+	"QoS and/or fair queueing"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NET</literal>
+	</para>
+
 	<para>
 	type
 	<literal>boolean</literal>
 	</para>
 
-<nutentrybody>
 	<para>
 	When the kernel has several packets to send out over a network
 	device, it has to decide which ones to send first, which ones to
-	delay, and which ones to drop. This is the job of the packet
-	scheduler, and several different algorithms for how to do this
+	delay, and which ones to drop. This is the job of the queueing
+	disciplines, several different algorithms for how to do this
 	"fairly" have been proposed.
 	</para>
 
@@ -17646,15 +17765,15 @@ choice
 	To administer these schedulers, you'll need the user-level utilities
 	from the package iproute2+tc at ftp://ftp.tux.org/pub/net/ip-routing/.
 	That package also contains some documentation; for more, check out
-	http://snafu.freedom.org/linux2.2/iproute-notes.html.
+	http://linux-net.osdl.org/index.php/Iproute2.
 	</para>
 
 	<para>
 	This Quality of Service (QoS) support will enable you to use
 	Differentiated Services (diffserv) and Resource Reservation Protocol
-	(RSVP) on your Linux router if you also say Y to "QoS support",
-	"Packet classifier API" and to some classifiers below. Documentation
-	and software is at http://diffserv.sourceforge.net/.
+	(RSVP) on your Linux router if you also say Y to the corresponding
+	classifiers below.  Documentation and software is at
+	http://diffserv.sourceforge.net/.
 	</para>
 
 	<para>
@@ -17813,7 +17932,7 @@ choice
 <nutentry>
 	<term>NET_SCH_CBQ</term>
 <nutsynopsis>
-	"CBQ packet scheduler"
+	"Class Based Queueing (CBQ)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -17828,24 +17947,19 @@ choice
 
 	<para>
 	Say Y here if you want to use the Class-Based Queueing (CBQ) packet
-	scheduling algorithm for some of your network devices.  This
-	algorithm classifies the waiting packets into a tree-like hierarchy
-	of classes; the leaves of this tree are in turn scheduled by
-	separate algorithms (called "disciplines" in this context).
+	scheduling algorithm. This algorithm classifies the waiting packets
+	into a tree-like hierarchy of classes; the leaves of this tree are
+	in turn scheduled by separate algorithms.
 	</para>
 
 	<para>
-	See the top of file:net/sched/sch_cbq.c for references about the
-	CBQ algorithm.
+	See the top of file:net/sched/sch_cbq.c for more details.
 	</para>
 
 	<para>
 	CBQ is a commonly used scheduler, so if you're unsure, you should
 	say Y here. Then say Y to all the queueing algorithms below that you
-	want to use as CBQ disciplines.  Then say Y to "Packet classifier
-	API" and say Y to all the classifiers you want to use; a classifier
-	is a routine that allows you to sort your outgoing traffic into
-	classes based on a certain criterion.
+	want to use as leaf disciplines.
 	</para>
 
 	<para>
@@ -17859,7 +17973,7 @@ choice
 <nutentry>
 	<term>NET_SCH_HTB</term>
 <nutsynopsis>
-	"HTB packet scheduler"
+	"Hierarchical Token Bucket (HTB)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -17874,13 +17988,13 @@ choice
 
 	<para>
 	Say Y here if you want to use the Hierarchical Token Buckets (HTB)
-	packet scheduling algorithm for some of your network devices. See
+	packet scheduling algorithm. See
 	http://luxik.cdi.cz/~devik/qos/htb/ for complete manual and
 	in-depth articles.
 	</para>
 
 	<para>
-	HTB is very similar to the CBQ regarding its goals however is has 
+	HTB is very similar to CBQ regarding its goals however is has
 	different properties and different algorithm.
 	</para>
 
@@ -17895,7 +18009,7 @@ choice
 <nutentry>
 	<term>NET_SCH_HFSC</term>
 <nutsynopsis>
-	"HFSC packet scheduler"
+	"Hierarchical Fair Service Curve (HFSC)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -17910,7 +18024,7 @@ choice
 
 	<para>
 	Say Y here if you want to use the Hierarchical Fair Service Curve
-	(HFSC) packet scheduling algorithm for some of your network devices.
+	(HFSC) packet scheduling algorithm.
 	</para>
 
 	<para>
@@ -17924,7 +18038,7 @@ choice
 <nutentry>
 	<term>NET_SCH_ATM</term>
 <nutsynopsis>
-	"ATM pseudo-scheduler"
+	"ATM Virtual Circuits (ATM)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -17939,10 +18053,13 @@ choice
 
 	<para>
 	Say Y here if you want to use the ATM pseudo-scheduler.  This
-	provides a framework for invoking classifiers (aka "filters"), which
-	in turn select classes of this queuing discipline.  Each class maps
-	the flow(s) it is handling to a given virtual circuit (see the top of
-	file:net/sched/sch_atm.c).
+	provides a framework for invoking classifiers, which in turn
+	select classes of this queuing discipline.  Each class maps
+	the flow(s) it is handling to a given virtual circuit.
+	</para>
+
+	<para>
+	See the top of file:net/sched/sch_atm.c) for more details.
 	</para>
 
 	<para>
@@ -17956,7 +18073,7 @@ choice
 <nutentry>
 	<term>NET_SCH_PRIO</term>
 <nutsynopsis>
-	"The simplest PRIO pseudoscheduler"
+	"Multi Band Priority Queueing (PRIO)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -17971,8 +18088,7 @@ choice
 
 	<para>
 	Say Y here if you want to use an n-band priority queue packet
-	"scheduler" for some of your network devices or as a leaf discipline
-	for the CBQ scheduling algorithm. If unsure, say Y.
+	scheduler.
 	</para>
 
 	<para>
@@ -17986,7 +18102,7 @@ choice
 <nutentry>
 	<term>NET_SCH_RED</term>
 <nutsynopsis>
-	"RED queue"
+	"Random Early Detection (RED)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18001,9 +18117,11 @@ choice
 
 	<para>
 	Say Y here if you want to use the Random Early Detection (RED)
-	packet scheduling algorithm for some of your network devices (see
-	the top of file:net/sched/sch_red.c for details and references
-	about the algorithm).
+	packet scheduling algorithm.
+	</para>
+
+	<para>
+	See the top of file:net/sched/sch_red.c for more details.
 	</para>
 
 	<para>
@@ -18017,7 +18135,7 @@ choice
 <nutentry>
 	<term>NET_SCH_SFQ</term>
 <nutsynopsis>
-	"SFQ queue"
+	"Stochastic Fairness Queueing (SFQ)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18032,10 +18150,11 @@ choice
 
 	<para>
 	Say Y here if you want to use the Stochastic Fairness Queueing (SFQ)
-	packet scheduling algorithm for some of your network devices or as a
-	leaf discipline for the CBQ scheduling algorithm (see the top of
-	file:net/sched/sch_sfq.c for details and references about the SFQ
-	algorithm).
+	packet scheduling algorithm .
+	</para>
+
+	<para>
+	See the top of file:net/sched/sch_sfq.c for more details.
 	</para>
 
 	<para>
@@ -18049,7 +18168,7 @@ choice
 <nutentry>
 	<term>NET_SCH_TEQL</term>
 <nutsynopsis>
-	"TEQL queue"
+	"True Link Equalizer (TEQL)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18064,11 +18183,12 @@ choice
 
 	<para>
 	Say Y here if you want to use the True Link Equalizer (TLE) packet
-	scheduling algorithm for some of your network devices or as a leaf
-	discipline for the CBQ scheduling algorithm. This queueing
-	discipline allows the combination of several physical devices into
-	one virtual device. (see the top of file:net/sched/sch_teql.c for
-	details).
+	scheduling algorithm. This queueing discipline allows the combination
+	of several physical devices into one virtual device.
+	</para>
+
+	<para>
+	See the top of file:net/sched/sch_teql.c for more details.
 	</para>
 
 	<para>
@@ -18082,7 +18202,7 @@ choice
 <nutentry>
 	<term>NET_SCH_TBF</term>
 <nutsynopsis>
-	"TBF queue"
+	"Token Bucket Filter (TBF)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18096,10 +18216,12 @@ choice
 	</para>
 
 	<para>
-	Say Y here if you want to use the Simple Token Bucket Filter (TBF)
-	packet scheduling algorithm for some of your network devices or as a
-	leaf discipline for the CBQ scheduling algorithm (see the top of
-	file:net/sched/sch_tbf.c for a description of the TBF algorithm).
+	Say Y here if you want to use the Token Bucket Filter (TBF) packet
+	scheduling algorithm.
+	</para>
+
+	<para>
+	See the top of file:net/sched/sch_tbf.c for more details.
 	</para>
 
 	<para>
@@ -18113,7 +18235,7 @@ choice
 <nutentry>
 	<term>NET_SCH_GRED</term>
 <nutsynopsis>
-	"GRED queue"
+	"Generic Random Early Detection (GRED)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18144,7 +18266,7 @@ choice
 <nutentry>
 	<term>NET_SCH_DSMARK</term>
 <nutsynopsis>
-	"Diffserv field marker"
+	"Differentiated Services marker (DSMARK)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18175,7 +18297,7 @@ choice
 <nutentry>
 	<term>NET_SCH_NETEM</term>
 <nutsynopsis>
-	"Network emulator"
+	"Network emulator (NETEM)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18223,8 +18345,7 @@ choice
 	</para>
 
 	<para>
-	If you say Y here, you will be able to police incoming bandwidth
-	and drop packets when this bandwidth exceeds your desired rate.
+	Say Y here if you want to use classifiers for incoming packets.
 	If unsure, say Y.
 	</para>
 
@@ -18237,114 +18358,28 @@ choice
 </nutentry>
 
 <nutentry>
-	<term>NET_QOS</term>
-<nutsynopsis>
-	"QoS support"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NET and NET_SCHED</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	Say Y here if you want to include Quality Of Service scheduling
-	features, which means that you will be able to request certain
-	rate-of-flow limits for your network devices.
-	</para>
-
-	<para>
-	This Quality of Service (QoS) support will enable you to use
-	Differentiated Services (diffserv) and Resource Reservation Protocol
-	(RSVP) on your Linux router if you also say Y to "Packet classifier
-	API" and to some classifiers below. Documentation and software is at
-	http://diffserv.sourceforge.net/.
-	</para>
-
-	<para>
-	Note that the answer to this question won't directly affect the
-	kernel: saying N will just cause the configurator to skip all
-	the questions about QoS support.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>NET_ESTIMATOR</term>
-<nutsynopsis>
-	"Rate estimator"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NET and NET_QOS</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	In order for Quality of Service scheduling to work, the current
-	rate-of-flow for a network device has to be estimated; if you say Y
-	here, the kernel will do just that.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
 	<term>NET_CLS</term>
-<nutsynopsis>
-	"Packet classifier API"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NET and NET_SCHED</literal>
-	</para>
-
 	<para>
 	type
 	<literal>boolean</literal>
 	</para>
 
-	<para>
-	The CBQ scheduling algorithm requires that network packets which are
-	scheduled to be sent out over a network device be classified
-	according to some criterion. If you say Y here, you will get a
-	choice of several different packet classifiers with the following
-	questions.
-	</para>
-
-	<para>
-	This will enable you to use Differentiated Services (diffserv) and
-	Resource Reservation Protocol (RSVP) on your Linux router.
-	Documentation and software is at
-	http://diffserv.sourceforge.net/.
-	</para>
-
+<nutentrybody>
 </nutentrybody>
 </nutentry>
 
 <nutentry>
 	<term>NET_CLS_BASIC</term>
 <nutsynopsis>
-	"Basic classifier"
+	"Elementary classification (BASIC)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18366,24 +18401,24 @@ choice
 <nutentry>
 	<term>NET_CLS_TCINDEX</term>
 <nutsynopsis>
-	"TC index classifier"
+	"Traffic-Control Index (TCINDEX)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
 	</para>
 
 	<para>
-	If you say Y here, you will be able to classify outgoing packets
-	according to the tc_index field of the skb. You will want this
-	feature if you want to implement Differentiated Services using
-	sch_dsmark. If unsure, say Y.
+	Say Y here if you want to be able to classify packets based on
+	traffic control indices. You will want this feature if you want
+	to implement Differentiated Services together with DSMARK.
 	</para>
 
 	<para>
@@ -18397,14 +18432,15 @@ choice
 <nutentry>
 	<term>NET_CLS_ROUTE4</term>
 <nutsynopsis>
-	"Routing table based classifier"
+	"Routing decision (ROUTE)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
   unknown prop 6!
 	<para>
 	type
@@ -18412,8 +18448,8 @@ choice
 	</para>
 
 	<para>
-	If you say Y here, you will be able to classify outgoing packets
-	according to the route table entry they matched. If unsure, say Y.
+	If you say Y here, you will be able to classify packets
+	according to the route table entry they matched.
 	</para>
 
 	<para>
@@ -18423,10 +18459,6 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
-</nutlist>
-</sect2>
 
 <nutentry>
 	<term>NET_CLS_ROUTE</term>
@@ -18447,22 +18479,23 @@ choice
 <nutentry>
 	<term>NET_CLS_FW</term>
 <nutsynopsis>
-	"Firewall based classifier"
+	"Netfilter mark (FW)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
 	</para>
 
 	<para>
-	If you say Y here, you will be able to classify outgoing packets
-	according to firewall criteria you specified.
+	If you say Y here, you will be able to classify packets
+	according to netfilter/firewall marks.
 	</para>
 
 	<para>
@@ -18476,22 +18509,23 @@ choice
 <nutentry>
 	<term>NET_CLS_U32</term>
 <nutsynopsis>
-	"U32 classifier"
+	"Universal 32bit comparisons w/ hashing (U32)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
 	</para>
 
 	<para>
-	If you say Y here, you will be able to classify outgoing packets
-	according to their destination address. If unsure, say Y.
+	Say Y here to be able to classify packetes using a universal
+	32bit pieces based comparison scheme.
 	</para>
 
 	<para>
@@ -18505,7 +18539,7 @@ choice
 <nutentry>
 	<term>CLS_U32_PERF</term>
 <nutsynopsis>
-	"U32 classifier performance counters"
+	"Performance counters support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18519,36 +18553,8 @@ choice
 	</para>
 
 	<para>
-	gathers stats that could be used to tune u32 classifier performance.
-	Requires a new iproute2
-	You MUST NOT turn this on if you dont have an update iproute2.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>NET_CLS_IND</term>
-<nutsynopsis>
-	"classify input device (slows things u32/fw) "
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NET and (NET_CLS_U32 || NET_CLS_FW)</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	This option will be killed eventually when a 
-	metadata action appears because it slows things a little
-	Available only for u32 and fw classifiers.
-	Requires a new iproute2
-	You MUST NOT turn this on if you dont have an update iproute2.
+	Say Y here to make u32 gather additional statistics useful for
+	fine tuning u32 classifiers.
 	</para>
 
 </nutentrybody>
@@ -18557,7 +18563,7 @@ choice
 <nutentry>
 	<term>CLS_U32_MARK</term>
 <nutsynopsis>
-	"Use nfmark as a key in U32 classifier"
+	"Netfilter marks support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18571,13 +18577,7 @@ choice
 	</para>
 
 	<para>
-	This allows you to match mark in a u32 filter.
-	Example:
-	tc filter add dev eth0 protocol ip parent 1:0 prio 5 u32 \
-	      match mark 0x0090 0xffff \
-	      match ip dst 4.4.4.4 \
-	      flowid 1:90
-	You must use a new iproute2 to use this feature.
+	Say Y here to be able to use netfilter marks as u32 key.
 	</para>
 
 </nutentrybody>
@@ -18586,14 +18586,16 @@ choice
 <nutentry>
 	<term>NET_CLS_RSVP</term>
 <nutsynopsis>
-	"Special RSVP classifier"
+	"IPv4 Resource Reservation Protocol (RSVP)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS and NET_QOS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18621,14 +18623,16 @@ choice
 <nutentry>
 	<term>NET_CLS_RSVP6</term>
 <nutsynopsis>
-	"Special RSVP classifier for IPv6"
+	"IPv6 Resource Reservation Protocol (RSVP6)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS and NET_QOS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18642,8 +18646,7 @@ choice
 
 	<para>
 	Say Y here if you want to be able to classify outgoing packets based
-	on their RSVP requests and you are using the new Internet Protocol
-	IPv6 as opposed to the older and more common IPv4.
+	on their RSVP requests and you are using the IPv6.
 	</para>
 
 	<para>
@@ -18662,9 +18665,10 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and NET_CLS</literal>
+	<literal>NET and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -18677,11 +18681,11 @@ choice
 
 	<para>
 	Extended matches are small classification helpers not worth writing
-	a separate classifier.
+	a separate classifier for.
 	</para>
 
 	<para>
-	You must have a recent version of the iproute2 tools in order to use
+	A recent version of the iproute2 package is required to use
 	extended matches.
 	</para>
 
@@ -18780,7 +18784,7 @@ choice
 <nutentry>
 	<term>NET_EMATCH_U32</term>
 <nutsynopsis>
-	"U32 hashing key"
+	"U32 key"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18857,7 +18861,7 @@ choice
 	</para>
 
 	<para>
-	Say Y here if you want to be ablt to classify packets based on
+	Say Y here if you want to be able to classify packets based on
 	textsearch comparisons.
 	</para>
 
@@ -18872,23 +18876,30 @@ choice
 <nutentry>
 	<term>NET_CLS_ACT</term>
 <nutsynopsis>
-	"Packet ACTION"
+	"Actions"
 </nutsynopsis>
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and EXPERIMENTAL and NET_CLS and NET_QOS</literal>
+	<literal>NET and EXPERIMENTAL and NET_SCHED</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
 	</para>
 
 	<para>
-	This option requires you have a new iproute2. It enables
-	tc extensions which can be used with tc classifiers.
-	  You MUST NOT turn this on if you dont have an update iproute2.
+	Say Y here if you want to use traffic control actions. Actions
+	get attached to classifiers and are invoked after a successful
+	classification. They are used to overwrite the classification
+	result, instantly drop or redirect packets, etc.
+	</para>
+
+	<para>
+	A recent version of the iproute2 package is required to use
+	extended matches.
 	</para>
 
 </nutentrybody>
@@ -18897,7 +18908,7 @@ choice
 <nutentry>
 	<term>NET_ACT_POLICE</term>
 <nutsynopsis>
-	"Policing Actions"
+	"Traffic Policing"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18911,9 +18922,14 @@ choice
 	</para>
 
 	<para>
-	If you are using a newer iproute2 select this one, otherwise use one
-	below to select a policer.
-	  You MUST NOT turn this on if you dont have an update iproute2.
+	Say Y here if you want to do traffic policing, i.e. strict
+	bandwidth limiting. This action replaces the existing policing
+	module.
+	</para>
+
+	<para>
+	To compile this code as a module, choose M here: the
+	module will be called police.
 	</para>
 
 </nutentrybody>
@@ -18922,7 +18938,7 @@ choice
 <nutentry>
 	<term>NET_ACT_GACT</term>
 <nutsynopsis>
-	"generic Actions"
+	"Generic actions"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18936,8 +18952,13 @@ choice
 	</para>
 
 	<para>
-	You must have new iproute2 to use this feature.
-	This adds simple filtering actions like drop, accept etc.
+	Say Y here to take generic actions such as dropping and
+	accepting packets.
+	</para>
+
+	<para>
+	To compile this code as a module, choose M here: the
+	module will be called gact.
 	</para>
 
 </nutentrybody>
@@ -18946,7 +18967,7 @@ choice
 <nutentry>
 	<term>GACT_PROB</term>
 <nutsynopsis>
-	"generic Actions probability"
+	"Probability support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18960,7 +18981,7 @@ choice
 	</para>
 
 	<para>
-	Allows generic actions to be randomly or deterministically used.
+	Say Y here to use the generic action randomly or deterministically.
 	</para>
 
 </nutentrybody>
@@ -18969,7 +18990,7 @@ choice
 <nutentry>
 	<term>NET_ACT_MIRRED</term>
 <nutsynopsis>
-	"Packet In/Egress redirecton/mirror Actions"
+	"Redirecting and Mirroring"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -18983,8 +19004,13 @@ choice
 	</para>
 
 	<para>
-	requires new iproute2
-	This allows packets to be mirrored or redirected to netdevices
+	Say Y here to allow packets to be mirrored or redirected to
+	other devices.
+	</para>
+
+	<para>
+	To compile this code as a module, choose M here: the
+	module will be called mirred.
 	</para>
 
 </nutentrybody>
@@ -18993,7 +19019,7 @@ choice
 <nutentry>
 	<term>NET_ACT_IPT</term>
 <nutsynopsis>
-	"iptables Actions"
+	"IPtables targets"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -19007,8 +19033,13 @@ choice
 	</para>
 
 	<para>
-	requires new iproute2
-	This allows iptables targets to be used by tc filters
+	Say Y here to be able to invoke iptables targets after succesful
+	classification.
+	</para>
+
+	<para>
+	To compile this code as a module, choose M here: the
+	module will be called ipt.
 	</para>
 
 </nutentrybody>
@@ -19017,7 +19048,7 @@ choice
 <nutentry>
 	<term>NET_ACT_PEDIT</term>
 <nutsynopsis>
-	"Generic Packet Editor Actions"
+	"Packet Editing"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -19031,32 +19062,12 @@ choice
 	</para>
 
 	<para>
-	requires new iproute2
-	This allows for packets to be generically edited
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>NET_CLS_POLICE</term>
-<nutsynopsis>
-	"Traffic policing (needed for in/egress)"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NET and NET_CLS and NET_QOS and !NET_CLS_ACT</literal>
+	Say Y here if you want to mangle the content of packets.
 	</para>
 
 	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	Say Y to support traffic policing (bandwidth limits).  Needed for
-	ingress and egress rate limiting.
+	To compile this code as a module, choose M here: the
+	module will be called pedit.
 	</para>
 
 </nutentrybody>
@@ -19065,7 +19076,7 @@ choice
 <nutentry>
 	<term>NET_ACT_SIMP</term>
 <nutsynopsis>
-	"Simple action"
+	"Simple Example (Debug)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -19079,18 +19090,108 @@ choice
 	</para>
 
 	<para>
-	You must have new iproute2 to use this feature.
-	This adds a very simple action for demonstration purposes
-	The idea is to give action authors a basic example to look at.
-	All this action will do is print on the console the configured
-	policy string followed by _ then packet count.
+	Say Y here to add a simple action for demonstration purposes.
+	It is meant as an example and for debugging purposes. It will
+	print a configured policy string followed by the packet count
+	to the console for every packet that passes by.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+	<para>
+	To compile this code as a module, choose M here: the
+	module will be called simple.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>NET_CLS_POLICE</term>
+<nutsynopsis>
+	"Traffic Policing (obsolete)"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NET and NET_SCHED and !NET_CLS_ACT</literal>
+	</para>
+
+  unknown prop 6!
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	Say Y here if you want to do traffic policing, i.e. strict
+	bandwidth limiting. This option is obsoleted by the traffic
+	policer implemented as action, it stays here for compatibility
+	reasons.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>NET_CLS_IND</term>
+<nutsynopsis>
+	"Incoming device classification"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NET and NET_SCHED and (NET_CLS_U32 || NET_CLS_FW)</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	Say Y here to extend the u32 and fw classifier to support
+	classification based on the incoming device. This option is
+	likely to disappear in favour of the metadata ematch.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>NET_ESTIMATOR</term>
+<nutsynopsis>
+	"Rate estimator"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NET and NET_SCHED</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	Say Y here to allow using rate estimators to estimate the current
+	rate-of-flow for network devices, queues, etc. This module is
+	automaticaly selected if needed but can be selected manually for
+	statstical purposes.
 	</para>
 
 </nutentrybody>
 </nutentry>
 
 
-<sect2>
+</nutlist>
+</sect3>
+
+
+<sect3>
 	<title>"Network testing"</title>
 <nutlist>
 
@@ -19138,7 +19239,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect3>
 
 
 </nutlist>
@@ -19348,6 +19449,7 @@ choice
 	<literal>HAMRADIO and NET and AX25</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -19768,7 +19870,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect1>
 
 <nutentry>
 	<term>IRDA</term>
@@ -20035,7 +20137,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect1>
 	<title>"Infrared-port device drivers"</title>
 <nutlist>
 
@@ -21037,13 +21139,40 @@ choice
 </nutentrybody>
 </nutentry>
 
+<nutentry>
+	<term>PXA_FICP</term>
+<nutsynopsis>
+	"Intel PXA2xx Internal FICP"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NET and ARCH_PXA and IRDA</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	Say Y or M here if you want to build support for the PXA2xx
+	built-in IRDA interface which can support both SIR and FIR.
+	This driver relies on platform specific helper routines so
+	available capabilities may vary from one PXA2xx target to
+	another.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
 
 </nutlist>
-</sect2>
+</sect1>
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 <nutentry>
 	<term>BT</term>
@@ -21316,7 +21445,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NET and BT and BT_L2CAP</literal>
+	<literal>NET and BT and BT_L2CAP and (BROKEN || !S390)</literal>
 	</para>
 
   unknown prop 6!
@@ -21340,7 +21469,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect0>
 	<title>"Bluetooth device drivers"</title>
 <nutlist>
 
@@ -21494,31 +21623,6 @@ choice
 
 	<para>
 	Say Y here to compile support for HCI BCSP protocol.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>BT_HCIUART_BCSP_TXCRC</term>
-<nutsynopsis>
-	"Transmit CRC with every BCSP packet"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NET and BT and BT_HCIUART_BCSP</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	If you say Y here, a 16-bit CRC checksum will be transmitted along with
-	every BCSP (BlueCore Serial Protocol) packet sent to the Bluetooth chip.
-	This increases reliability, but slightly reduces efficiency.
 	</para>
 
 </nutentrybody>
@@ -21780,11 +21884,11 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 <nutentry>
 	<term>IEEE80211</term>
@@ -21960,16 +22064,16 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-2>
 
 
-<sect2>
+<sect-2>
 	<title>"Device Drivers"</title>
 <nutlist>
 
 
 
-<sect2>
+<sect-1>
 	<title>"Generic Driver Options"</title>
 <nutlist>
 
@@ -22086,10 +22190,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Connector - unified userspace &lt;-&gt; kernelspace linker"</title>
 <nutlist>
 
@@ -22125,10 +22229,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Memory Technology Devices (MTD)"</title>
 <nutlist>
 
@@ -22736,7 +22840,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect0>
 	<title>"RAM/ROM/Flash chip drivers"</title>
 <nutlist>
 
@@ -23692,10 +23796,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Mapping drivers for chip access"</title>
 <nutlist>
 
@@ -25608,10 +25712,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Self-contained MTD device drivers"</title>
 <nutlist>
 
@@ -26269,10 +26373,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"NAND Flash Device Drivers"</title>
 <nutlist>
 
@@ -26828,14 +26932,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Parallel port support"</title>
 <nutlist>
 
@@ -27205,10 +27309,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Plug and Play support"</title>
 <nutlist>
 
@@ -27433,10 +27537,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Block devices"</title>
 <nutlist>
 
@@ -29414,7 +29518,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect0>
 	<title>"IO Schedulers"</title>
 <nutlist>
 
@@ -29521,9 +29625,140 @@ choice
 </nutentrybody>
 </nutentry>
 
+<nutentry>
+choice
+<nutsynopsis>
+	"Default I/O scheduler"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	default value
+	<literal>DEFAULT_AS</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	Select the I/O scheduler which will be used by default for all
+	block devices.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>DEFAULT_AS</term>
+<nutsynopsis>
+	"Anticipatory"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal></literal><emphasis>choice</emphasis><literal> and IOSCHED_AS</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>DEFAULT_DEADLINE</term>
+<nutsynopsis>
+	"Deadline"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal></literal><emphasis>choice</emphasis><literal> and IOSCHED_DEADLINE</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>DEFAULT_CFQ</term>
+<nutsynopsis>
+	"CFQ"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal></literal><emphasis>choice</emphasis><literal> and IOSCHED_CFQ</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>DEFAULT_NOOP</term>
+<nutsynopsis>
+	"No-op"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>DEFAULT_IOSCHED</term>
+	<para>
+	default value
+	<literal>anticipatory if DEFAULT_AS</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>deadline if DEFAULT_DEADLINE</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>cfq if DEFAULT_CFQ</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>noop if DEFAULT_NOOP</literal>
+	</para>
+
+	<para>
+	type
+	<literal>string</literal>
+	</para>
+
+<nutentrybody>
+</nutentrybody>
+</nutentry>
+
 
 </nutlist>
-</sect2>
+</sect0>
 
 <nutentry>
 	<term>ATA_OVER_ETH</term>
@@ -29551,10 +29786,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"ATA/ATAPI/MFM/RLL support"</title>
 <nutlist>
 
@@ -31541,6 +31776,140 @@ choice
 </nutentry>
 
 <nutentry>
+	<term>BLK_DEV_IDE_AU1XXX</term>
+<nutsynopsis>
+	"IDE for AMD Alchemy Au1200"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>IDE and BLK_DEV_IDE and SOC_AU1200</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+choice
+<nutsynopsis>
+	"IDE Mode for AMD Alchemy Au1200"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>IDE and BLK_DEV_IDE and SOC_AU1200 and BLK_DEV_IDE_AU1XXX</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>CONFIG_BLK_DEV_IDE_AU1XXX_PIO_DBDMA if IDE and BLK_DEV_IDE and SOC_AU1200 and BLK_DEV_IDE_AU1XXX</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>BLK_DEV_IDE_AU1XXX_PIO_DBDMA</term>
+<nutsynopsis>
+	"PIO+DbDMA IDE for AMD Alchemy Au1200"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal></literal><emphasis>choice</emphasis><literal></literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>BLK_DEV_IDE_AU1XXX_MDMA2_DBDMA</term>
+<nutsynopsis>
+	"MDMA2+DbDMA IDE for AMD Alchemy Au1200"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal></literal><emphasis>choice</emphasis><literal> and SOC_AU1200 and BLK_DEV_IDE_AU1XXX</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>BLK_DEV_IDE_AU1XXX_BURSTABLE_ON</term>
+<nutsynopsis>
+	"Enable burstable Mode on DbDMA"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>IDE and BLK_DEV_IDE and BLK_DEV_IDE_AU1XXX</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>false if IDE and BLK_DEV_IDE and BLK_DEV_IDE_AU1XXX</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	This option enable the burstable Flag on DbDMA controller
+	(cf. "AMD Alchemy 'Au1200' Processor Data Book - PRELIMINARY").
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>BLK_DEV_IDE_AU1XXX_SEQTS_PER_RQ</term>
+<nutsynopsis>
+	"Maximum transfer size (KB) per request (up to 128)"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>IDE and BLK_DEV_IDE and BLK_DEV_IDE_AU1XXX</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>128 if IDE and BLK_DEV_IDE and BLK_DEV_IDE_AU1XXX</literal>
+	</para>
+
+	<para>
+	type
+	<literal>integer</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
 	<term>IDE_ARM</term>
 	<para>
 	default value
@@ -32200,7 +32569,7 @@ choice
 	<term>BLK_DEV_IDEDMA</term>
 	<para>
 	default value
-	<literal>BLK_DEV_IDEDMA_PCI || BLK_DEV_IDEDMA_PMAC || BLK_DEV_IDEDMA_ICS if IDE and BLK_DEV_IDE</literal>
+	<literal>BLK_DEV_IDEDMA_PCI || BLK_DEV_IDEDMA_PMAC || BLK_DEV_IDEDMA_ICS || BLK_DEV_IDE_AU1XXX_MDMA2_DBDMA if IDE and BLK_DEV_IDE</literal>
 	</para>
 
 	<para>
@@ -32321,10 +32690,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"SCSI device support"</title>
 <nutlist>
 
@@ -32789,7 +33158,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect0>
 	<title>"SCSI Transport Attributes"</title>
 <nutlist>
 
@@ -32856,7 +33225,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>SCSI</literal>
+	<literal>SCSI and NET</literal>
 	</para>
 
 	<para>
@@ -32899,10 +33268,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"SCSI low-level drivers"</title>
 <nutlist>
 
@@ -32911,6 +33280,53 @@ choice
 	<literal>SCSI!=n</literal>
 	</para>
 
+
+<nutentry>
+	<term>ISCSI_TCP</term>
+<nutsynopsis>
+	"iSCSI Initiator over TCP/IP"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>SCSI and INET</literal>
+	</para>
+
+  unknown prop 6!
+  unknown prop 6!
+  unknown prop 6!
+  unknown prop 6!
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	The iSCSI Driver provides a host with the ability to access storage
+	through an IP network. The driver uses the iSCSI protocol to transport
+	SCSI requests and responses over a TCP/IP network between the host
+	(the "initiator") and "targets".  Architecturally, the iSCSI driver
+	combines with the host's TCP/IP stack, network drivers, and Network
+	Interface Card (NIC) to provide the same functions as a SCSI or a
+	Fibre Channel (FC) adapter driver with a Host Bus Adapter (HBA).
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called iscsi_tcp.
+	</para>
+
+	<para>
+	The userspace component needed to initialize the driver, documentation,
+	and sample configuration files can be found here:
+	</para>
+
+	<para>
+	http://linux-iscsi.sf.net
+	</para>
+
+</nutentrybody>
+</nutentry>
 
 <nutentry>
 	<term>SGIWD93_SCSI</term>
@@ -34249,9 +34665,9 @@ choice
 </nutentry>
 
 <nutentry>
-	<term>SCSI_SATA_PROMISE</term>
+	<term>SCSI_PDC_ADMA</term>
 <nutsynopsis>
-	"Promise SATA TX2/TX4 support"
+	"Pacific Digital ADMA support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -34265,7 +34681,7 @@ choice
 	</para>
 
 	<para>
-	This option enables support for Promise Serial ATA TX2/TX4.
+	This option enables support for Pacific Digital ADMA controllers
 	</para>
 
 	<para>
@@ -34293,6 +34709,33 @@ choice
 
 	<para>
 	This option enables support for Pacific Digital Serial ATA QStor.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>SCSI_SATA_PROMISE</term>
+<nutsynopsis>
+	"Promise SATA TX2/TX4 support"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>SCSI!=n and SCSI_SATA and PCI</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	This option enables support for Promise Serial ATA TX2/TX4.
 	</para>
 
 	<para>
@@ -34347,6 +34790,33 @@ choice
 
 	<para>
 	This option enables support for Silicon Image Serial ATA.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>SCSI_SATA_SIL24</term>
+<nutsynopsis>
+	"Silicon Image 3124/3132 SATA support"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>SCSI!=n and SCSI_SATA and PCI and EXPERIMENTAL</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	This option enables support for Silicon Image 3124/3132 Serial ATA.
 	</para>
 
 	<para>
@@ -34533,30 +35003,6 @@ choice
 	BusLogic SCSI driver. The FlashPoint SCCB Manager code is
 	substantial, so users of MultiMaster Host Adapters may wish to omit
 	it.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>SCSI_CPQFCTS</term>
-<nutsynopsis>
-	"Compaq Fibre Channel 64-bit/66Mhz HBA support"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>PCI and SCSI and BROKEN</literal>
-	</para>
-
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-	<para>
-	Say Y here to compile in support for the Compaq StorageWorks Fibre
-	Channel 64-bit/66Mhz Host Bus Adapter.
 	</para>
 
 </nutentrybody>
@@ -38055,10 +38501,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"PCMCIA SCSI adapter support"</title>
 <nutlist>
 
@@ -38245,14 +38691,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Old CD-ROM drivers (not SCSI, not IDE)"</title>
 <nutlist>
 
@@ -38707,10 +39153,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Multi-device support (RAID and LVM)"</title>
 <nutlist>
 
@@ -39292,10 +39738,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Fusion MPT device support"</title>
 <nutlist>
 
@@ -39543,10 +39989,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"IEEE 1394 (FireWire) support"</title>
 <nutlist>
 
@@ -40031,10 +40477,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"I2O device support"</title>
 <nutlist>
 
@@ -40333,10 +40779,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Macintosh device drivers"</title>
 <nutlist>
 
@@ -40824,10 +41270,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Network device support"</title>
 <nutlist>
 
@@ -41090,7 +41536,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect0>
 	<title>"ARCnet devices"</title>
 <nutlist>
 
@@ -41435,10 +41881,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"PHY device support"</title>
 <nutlist>
 
@@ -41468,31 +41914,6 @@ choice
 	Ethernet controllers are usually attached to PHY
 	devices.  This option provides infrastructure for
 	managing PHY devices.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>PHYCONTROL</term>
-<nutsynopsis>
-	"  Support for automatically handling PHY state changes"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NETDEVICES and PHYLIB</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	Adds code to perform all the work for keeping PHY link
-	state (speed/duplex/etc) up-to-date.  Also handles
-	interrupts.
 	</para>
 
 </nutentrybody>
@@ -41615,10 +42036,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Ethernet (10 or 100Mbit)"</title>
 <nutlist>
 
@@ -42686,6 +43107,31 @@ choice
 </nutentry>
 
 <nutentry>
+	<term>MIPS_SIM_NET</term>
+<nutsynopsis>
+	"MIPS simulator Network device (EXPERIMENTAL)"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>!UML and NETDEVICES and MIPS_SIM and EXPERIMENTAL</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	The MIPSNET device is a simple Ethernet network device which is
+	emulated by the MIPS Simulator.
+	If you are not using a MIPSsim or are unsure, say N.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
 	<term>SGI_O2MACE_ETH</term>
 <nutsynopsis>
 	"SGI O2 MACE Fast Ethernet support"
@@ -43719,7 +44165,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect1>
 	<title>"Tulip family network device support"</title>
 <nutlist>
 
@@ -44148,7 +44594,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect1>
 
 <nutentry>
 	<term>AT1700</term>
@@ -44770,7 +45216,7 @@ choice
 <nutentry>
 	<term>IBM_EMAC</term>
 <nutsynopsis>
-	"IBM PPC4xx EMAC driver support"
+	"PowerPC 4xx on-chip Ethernet support"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -44778,34 +45224,14 @@ choice
 	<literal>NETDEVICES and !UML and 4xx</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
-	<literal>boolean</literal>
+	<literal>tristate</literal>
 	</para>
 
 	<para>
-	This driver supports the IBM PPC4xx EMAC family of on-chip
+	This driver supports the PowerPC 4xx EMAC family of on-chip
 	Ethernet controllers.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>IBM_EMAC_ERRMSG</term>
-<nutsynopsis>
-	"Verbose error messages"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NETDEVICES and !UML and IBM_EMAC and BROKEN</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
 	</para>
 
 </nutentrybody>
@@ -44824,12 +45250,7 @@ choice
 
 	<para>
 	default value
-	<literal>128 if NETDEVICES and !UML and IBM_EMAC and IBM_EMAC4</literal>
-	</para>
-
-	<para>
-	default value
-	<literal>64 if NETDEVICES and !UML and IBM_EMAC</literal>
+	<literal>128 if NETDEVICES and !UML and IBM_EMAC</literal>
 	</para>
 
 	<para>
@@ -44853,12 +45274,7 @@ choice
 
 	<para>
 	default value
-	<literal>128 if NETDEVICES and !UML and IBM_EMAC and IBM_EMAC4</literal>
-	</para>
-
-	<para>
-	default value
-	<literal>8 if NETDEVICES and !UML and IBM_EMAC</literal>
+	<literal>64 if NETDEVICES and !UML and IBM_EMAC</literal>
 	</para>
 
 	<para>
@@ -44870,9 +45286,9 @@ choice
 </nutentry>
 
 <nutentry>
-	<term>IBM_EMAC_FGAP</term>
+	<term>IBM_EMAC_POLL_WEIGHT</term>
 <nutsynopsis>
-	"Frame gap"
+	"MAL NAPI polling weight"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -44882,7 +45298,7 @@ choice
 
 	<para>
 	default value
-	<literal>8 if NETDEVICES and !UML and IBM_EMAC</literal>
+	<literal>32 if NETDEVICES and !UML and IBM_EMAC</literal>
 	</para>
 
 	<para>
@@ -44894,9 +45310,33 @@ choice
 </nutentry>
 
 <nutentry>
-	<term>IBM_EMAC_SKBRES</term>
+	<term>IBM_EMAC_RX_COPY_THRESHOLD</term>
 <nutsynopsis>
-	"Skb reserve amount"
+	"RX skb copy threshold (bytes)"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and IBM_EMAC</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>256 if NETDEVICES and !UML and IBM_EMAC</literal>
+	</para>
+
+	<para>
+	type
+	<literal>integer</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>IBM_EMAC_RX_SKB_HEADROOM</term>
+<nutsynopsis>
+	"Additional RX skb headroom (bytes)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -44914,6 +45354,119 @@ choice
 	<literal>integer</literal>
 	</para>
 
+	<para>
+	Additional receive skb headroom. Note, that driver
+	will always reserve at least 2 bytes to make IP header
+	aligned, so usualy there is no need to add any additional
+	headroom.
+	</para>
+
+	<para>
+	If unsure, set to 0.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>IBM_EMAC_PHY_RX_CLK_FIX</term>
+<nutsynopsis>
+	"PHY Rx clock workaround"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and IBM_EMAC and (405EP || 440GX || 440EP || 440GR)</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	Enable this if EMAC attached to a PHY which doesn't generate
+	RX clock if there is no link, if this is the case, you will 
+	see "TX disable timeout" or "RX disable timeout" in the system
+	log.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>IBM_EMAC_DEBUG</term>
+<nutsynopsis>
+	"Debugging"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and IBM_EMAC</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>n if NETDEVICES and !UML and IBM_EMAC</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>IBM_EMAC_ZMII</term>
+	<para>
+	default value
+	<literal>y if NETDEVICES and !UML and IBM_EMAC and (NP405H || NP405L || 44x)</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>IBM_EMAC_RGMII</term>
+	<para>
+	default value
+	<literal>y if NETDEVICES and !UML and IBM_EMAC and 440GX</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>IBM_EMAC_TAH</term>
+	<para>
+	default value
+	<literal>y if NETDEVICES and !UML and IBM_EMAC and 440GX</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+<nutentrybody>
 </nutentrybody>
 </nutentry>
 
@@ -46359,7 +46912,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>NETDEVICES and !UML and NET_ETHERNET and 8xx and (NETTA || NETPHONE)</literal>
+	<literal>NETDEVICES and !UML and NET_ETHERNET</literal>
 	</para>
 
   unknown prop 6!
@@ -46419,12 +46972,128 @@ choice
 </nutentrybody>
 </nutentry>
 
+<nutentry>
+	<term>FEC_8XX_LXT971_PHY</term>
+<nutsynopsis>
+	"Support LXT971/LXT972 PHY"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and FEC_8XX</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>n if NETDEVICES and !UML and FEC_8XX</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>FS_ENET</term>
+<nutsynopsis>
+	"Freescale Ethernet Driver"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and NET_ETHERNET and (CPM1 || CPM2)</literal>
+	</para>
+
+  unknown prop 6!
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>FS_ENET_HAS_SCC</term>
+<nutsynopsis>
+	"Chip has an SCC usable for ethernet"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and FS_ENET and (CPM1 || CPM2)</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>y if NETDEVICES and !UML and FS_ENET and (CPM1 || CPM2)</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>FS_ENET_HAS_FCC</term>
+<nutsynopsis>
+	"Chip has an FCC usable for ethernet"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and FS_ENET and CPM2</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>y if NETDEVICES and !UML and FS_ENET and CPM2</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>FS_ENET_HAS_FEC</term>
+<nutsynopsis>
+	"Chip has an FEC usable for ethernet"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and !UML and FS_ENET and CPM1</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>y if NETDEVICES and !UML and FS_ENET and CPM1</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Ethernet (1000 Mbit)"</title>
 <nutlist>
 
@@ -47123,6 +47792,7 @@ choice
 	<literal>NETDEVICES and !UML and (85xx || 83xx)</literal>
 	</para>
 
+  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47254,10 +47924,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Ethernet (10000 Mbit)"</title>
 <nutlist>
 
@@ -47418,8 +48088,8 @@ choice
 
 	<para>
 	This driver supports the 10Gbe XFrame NIC of S2IO. 
-	For help regarding driver compilation, installation and 
-	tuning please look into ~/drivers/net/s2io/README.txt.
+	More specific information on configuring the driver is in 
+	file:Documentation/networking/s2io.txt.
 	</para>
 
 </nutentrybody>
@@ -47465,40 +48135,12 @@ choice
 </nutentrybody>
 </nutentry>
 
-<nutentry>
-	<term>2BUFF_MODE</term>
-<nutsynopsis>
-	"Use 2 Buffer Mode on Rx side."
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>NETDEVICES and !UML and S2IO</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	On enabling the 2 buffer mode, the received frame will be
-	split into 2 parts before being DMA'ed to the hosts memory.
-	The parts are the ethernet header and ethernet payload. 
-	This is useful on systems where DMA'ing to to unaligned 
-	physical memory loactions comes with a heavy price.
-	If not sure please say N.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Token Ring devices"</title>
 <nutlist>
 
@@ -47936,10 +48578,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Wireless LAN (non-hamradio)"</title>
 <nutlist>
 
@@ -49172,10 +49814,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"PCMCIA network device support"</title>
 <nutlist>
 
@@ -49522,10 +50164,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Wan interfaces"</title>
 <nutlist>
 
@@ -51015,10 +51657,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"ATM drivers"</title>
 <nutlist>
 
@@ -52237,10 +52879,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"S/390 network device drivers"</title>
 <nutlist>
 
@@ -52539,7 +53181,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 <nutentry>
 	<term>ISERIES_VETH</term>
@@ -52555,6 +53197,73 @@ choice
 	<para>
 	type
 	<literal>tristate</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>RIONET</term>
+<nutsynopsis>
+	"RapidIO Ethernet over messaging driver support"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and RAPIDIO</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>RIONET_TX_SIZE</term>
+<nutsynopsis>
+	"Number of outbound queue entries"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and RIONET</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>128 if NETDEVICES and RIONET</literal>
+	</para>
+
+	<para>
+	type
+	<literal>integer</literal>
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>RIONET_RX_SIZE</term>
+<nutsynopsis>
+	"Number of inbound queue entries"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>NETDEVICES and RIONET</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>128 if NETDEVICES and RIONET</literal>
+	</para>
+
+	<para>
+	type
+	<literal>integer</literal>
 	</para>
 
 </nutentrybody>
@@ -53446,10 +54155,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"ISDN subsystem"</title>
 <nutlist>
 
@@ -53490,7 +54199,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect0>
 	<title>"Old ISDN4Linux"</title>
 <nutlist>
 
@@ -53756,7 +54465,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect1>
 	<title>"ISDN feature submodules"</title>
 <nutlist>
 
@@ -53837,10 +54546,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect1>
 
 
-<sect2>
+<sect1>
 	<title>"Passive cards"</title>
 <nutlist>
 
@@ -55164,10 +55873,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect1>
 
 
-<sect2>
+<sect1>
 	<title>"Active cards"</title>
 <nutlist>
 
@@ -55339,11 +56048,11 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect1>
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 <nutentry>
 	<term>ISDN_CAPI</term>
@@ -55518,7 +56227,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect0>
 	<title>"Active AVM cards"</title>
 <nutlist>
 
@@ -55741,10 +56450,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
-<sect2>
+<sect0>
 	<title>"Active Eicon DIVA Server cards"</title>
 <nutlist>
 
@@ -55920,14 +56629,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect0>
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Telephony Support"</title>
 <nutlist>
 
@@ -56030,10 +56739,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 
-<sect2>
+<sect-1>
 	<title>"Input device support"</title>
 <nutlist>
 
@@ -56441,7 +57150,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>INPUT and INPUT_KEYBOARD and !PC</literal>
+	<literal>INPUT and INPUT_KEYBOARD and !X86_PC</literal>
 	</para>
 
 	<para>
@@ -56923,7 +57632,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-1>
 
 <nutentry>
 	<term>INPUT_MOUSE</term>
@@ -57292,7 +58001,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-2>
 
 <nutentry>
 	<term>INPUT_JOYSTICK</term>
@@ -58081,7 +58790,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-3>
 
 <nutentry>
 	<term>INPUT_TOUCHSCREEN</term>
@@ -58345,7 +59054,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-4>
 
 <nutentry>
 	<term>INPUT_MISC</term>
@@ -58377,7 +59086,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>INPUT and INPUT_MISC and (ALPHA || X86 || X86_64 || MIPS || PPC_PREP || PPC_CHRP || PPC_PSERIES)</literal>
+	<literal>INPUT and INPUT_MISC and (ALPHA || X86 || MIPS || PPC_PREP || PPC_CHRP || PPC_PSERIES)</literal>
 	</para>
 
 	<para>
@@ -58510,10 +59219,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"Hardware I/O ports"</title>
 <nutlist>
 
@@ -59176,14 +59885,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Character devices"</title>
 <nutlist>
 
@@ -60240,7 +60949,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"Serial drivers"</title>
 <nutlist>
 
@@ -62747,7 +63456,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>UNIX98_PTYS</term>
@@ -63109,7 +63818,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"IPMI"</title>
 <nutlist>
 
@@ -63298,10 +64007,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"Watchdog Cards"</title>
 <nutlist>
 
@@ -64790,7 +65499,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>DS1620</term>
@@ -64983,7 +65692,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>ATARI || X86 || X86_64 || ARM || GENERIC_NVRAM</literal>
+	<literal>ATARI || X86 || ARM || GENERIC_NVRAM</literal>
 	</para>
 
 	<para>
@@ -65451,7 +66160,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"Ftape, the floppy tape device driver"</title>
 <nutlist>
 
@@ -66283,7 +66992,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>AGP</term>
@@ -66351,7 +67060,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -66390,7 +67099,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -66419,7 +67128,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -66514,7 +67223,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -66539,7 +67248,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -66572,7 +67281,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -66596,7 +67305,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -66721,7 +67430,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>AGP and X86 and !X86_64</literal>
+	<literal>AGP and X86_32</literal>
 	</para>
 
 	<para>
@@ -67067,7 +67776,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"PCMCIA character devices"</title>
 <nutlist>
 
@@ -67111,7 +67820,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>MWAVE</term>
@@ -67373,7 +68082,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>X86_64 || X86 || IA64 || PPC64 || ARCH_S390</literal>
+	<literal>X86 || IA64 || PPC64 || ARCH_S390</literal>
 	</para>
 
 	<para>
@@ -67420,7 +68129,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"TPM devices"</title>
 <nutlist>
 
@@ -67540,14 +68249,47 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
+
+<nutentry>
+	<term>TELCLOCK</term>
+<nutsynopsis>
+	"Telecom clock driver for MPBL0010 ATCA SBC"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>EXPERIMENTAL</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>n if EXPERIMENTAL</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	The telecom clock device is specific to the MPBL0010 ATCA computer and
+	allows direct userspace access to the configuration of the telecom clock
+	configuration settings.  This device is used for hardware synchronization
+	across the ATCA backplane fabric.  Upon loading, the driver exports a
+	sysfs directory, /sys/devices/platform/telco_clock, with a number of
+	files for controlling the behavior of this hardware.
+	</para>
+
+</nutentrybody>
+</nutentry>
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"I2C support"</title>
 <nutlist>
 
@@ -67621,7 +68363,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"I2C Algorithms"</title>
 <nutlist>
 
@@ -67819,10 +68561,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"I2C Hardware Bus support"</title>
 <nutlist>
 
@@ -68165,11 +68907,12 @@ choice
 	<para>
 	If you say yes to this option, support will be included for the Intel
 	810/815 family of mainboard I2C interfaces.  Specifically, the 
-	following versions of the chipset is supported:
+	following versions of the chipset are supported:
 	  i810AA
 	  i810AB
 	  i810E
 	  i815
+	  i845G
 	</para>
 
 	<para>
@@ -69182,10 +69925,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"Miscellaneous I2C Chip support"</title>
 <nutlist>
 
@@ -69530,9 +70273,37 @@ choice
 </nutentrybody>
 </nutentry>
 
+<nutentry>
+	<term>RTC_X1205_I2C</term>
+<nutsynopsis>
+	"Xicor X1205 RTC chip"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>I2C and EXPERIMENTAL</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	If you say yes here you get support for the Xicor X1205 RTC chip.
+	</para>
+
+	<para>
+	This driver can also be built as a module. If so, the module
+	will be called x1205.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>I2C_DEBUG_CORE</term>
@@ -69639,10 +70410,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Dallas's 1-wire bus"</title>
 <nutlist>
 
@@ -69861,10 +70632,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Hardware Monitoring support"</title>
 <nutlist>
 
@@ -71035,10 +71806,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Misc devices"</title>
 <nutlist>
 
@@ -71090,10 +71861,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Multimedia Capabilities Port drivers"</title>
 <nutlist>
 
@@ -71169,10 +71940,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Multimedia devices"</title>
 <nutlist>
 
@@ -71217,7 +71988,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"Video For Linux"</title>
 <nutlist>
 
@@ -71928,7 +72699,6 @@ choice
   unknown prop 6!
   unknown prop 6!
   unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72212,10 +72982,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"Radio Adapters"</title>
 <nutlist>
 
@@ -73120,10 +73890,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"Digital Video Broadcasting Devices"</title>
 <nutlist>
 
@@ -74385,7 +75155,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-4>
 	<title>"Customise DVB Frontends"</title>
 <nutlist>
 
@@ -75026,11 +75796,11 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-4>
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>VIDEO_SAA7146</term>
@@ -75137,10 +75907,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Graphics support"</title>
 <nutlist>
 
@@ -76344,7 +77114,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>FB=y and (X86 || X86_64)</literal>
+	<literal>FB=y and X86</literal>
 	</para>
 
   unknown prop 6!
@@ -76937,7 +77707,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>FB and EXPERIMENTAL and PCI and X86 and !X86_64</literal>
+	<literal>FB and EXPERIMENTAL and PCI and X86_32</literal>
 	</para>
 
   unknown prop 6!
@@ -77046,7 +77816,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>FB and EXPERIMENTAL and PCI and X86 and !X86_64</literal>
+	<literal>FB and EXPERIMENTAL and PCI and X86_32</literal>
 	</para>
 
   unknown prop 6!
@@ -78676,7 +79446,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>FB=y and MACH_DECSTATION and TC</literal>
+	<literal>FB=y and TC</literal>
 	</para>
 
   unknown prop 6!
@@ -78704,7 +79474,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>FB=y and MACH_DECSTATION and TC</literal>
+	<literal>FB=y and TC</literal>
 	</para>
 
   unknown prop 6!
@@ -78732,7 +79502,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>FB=y and MACH_DECSTATION and TC</literal>
+	<literal>FB=y and TC</literal>
 	</para>
 
   unknown prop 6!
@@ -78761,7 +79531,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>FB=y and MACH_DECSTATION and TC</literal>
+	<literal>FB=y and MACH_DECSTATION</literal>
 	</para>
 
   unknown prop 6!
@@ -79125,7 +79895,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"Console display driver support"</title>
 <nutlist>
 
@@ -79183,7 +79953,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>VT and (X86 || X86_64) and VGA_CONSOLE</literal>
+	<literal>VT and X86 and VGA_CONSOLE</literal>
 	</para>
 
 	<para>
@@ -79426,7 +80196,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>VT and FRAMEBUFFER_CONSOLE</literal>
+	<literal>VT and (FRAMEBUFFER_CONSOLE || STI_CONSOLE)</literal>
 	</para>
 
 	<para>
@@ -79460,12 +80230,12 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>VT and FRAMEBUFFER_CONSOLE and FONTS</literal>
+	<literal>VT and (FRAMEBUFFER_CONSOLE || STI_CONSOLE) and FONTS</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>y if VT and FRAMEBUFFER_CONSOLE and !SPARC32 and !SPARC64 and !FONTS</literal>
+	<literal>y if VT and (FRAMEBUFFER_CONSOLE || STI_CONSOLE) and !SPARC32 and !SPARC64 and !FONTS</literal>
 	</para>
 
 	<para>
@@ -79499,12 +80269,12 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>VT and (FRAMEBUFFER_CONSOLE || SGI_NEWPORT_CONSOLE=y || USB_SISUSBVGA_CON) and FONTS</literal>
+	<literal>VT and (FRAMEBUFFER_CONSOLE || SGI_NEWPORT_CONSOLE=y || STI_CONSOLE || USB_SISUSBVGA_CON) and FONTS</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>y if VT and (FRAMEBUFFER_CONSOLE || SGI_NEWPORT_CONSOLE=y || USB_SISUSBVGA_CON) and !SPARC32 and !SPARC64 and !FONTS</literal>
+	<literal>y if VT and (FRAMEBUFFER_CONSOLE || SGI_NEWPORT_CONSOLE=y || STI_CONSOLE || USB_SISUSBVGA_CON) and !SPARC32 and !SPARC64 and !FONTS</literal>
 	</para>
 
 	<para>
@@ -79532,12 +80302,12 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>VT and FRAMEBUFFER_CONSOLE and FONTS</literal>
+	<literal>VT and (FRAMEBUFFER_CONSOLE || STI_CONSOLE) and FONTS</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>y if VT and FRAMEBUFFER_CONSOLE and !SPARC32 and !SPARC64 and !FONTS and MAC</literal>
+	<literal>y if VT and (FRAMEBUFFER_CONSOLE || STI_CONSOLE) and !SPARC32 and !SPARC64 and !FONTS and MAC</literal>
 	</para>
 
 	<para>
@@ -79730,10 +80500,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"Logo configuration"</title>
 <nutlist>
 
@@ -80052,7 +80822,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>BACKLIGHT_LCD_SUPPORT</term>
@@ -80175,7 +80945,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 <nutentry>
 	<term>BACKLIGHT_CORGI</term>
@@ -80208,10 +80978,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"Sound"</title>
 <nutlist>
 
@@ -80408,7 +81178,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-6>
 	<title>"Advanced Linux Sound Architecture"</title>
 <nutlist>
 
@@ -80849,7 +81619,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"Generic devices"</title>
 <nutlist>
 
@@ -81089,10 +81859,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"ISA devices"</title>
 <nutlist>
 
@@ -82046,7 +82816,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 <nutentry>
 	<term>SND_AC97_CODEC</term>
@@ -82073,7 +82843,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-5>
 	<title>"PCI devices"</title>
 <nutlist>
 
@@ -83476,10 +84246,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"ALSA PowerMac devices"</title>
 <nutlist>
 
@@ -83557,10 +84327,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"ALSA ARM devices"</title>
 <nutlist>
 
@@ -83662,10 +84432,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"ALSA MIPS devices"</title>
 <nutlist>
 
@@ -83703,10 +84473,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"USB devices"</title>
 <nutlist>
 
@@ -83782,10 +84552,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"PCMCIA devices"</title>
 <nutlist>
 
@@ -83857,10 +84627,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"ALSA Sparc devices"</title>
 <nutlist>
 
@@ -83962,10 +84732,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
-<sect2>
+<sect-5>
 	<title>"GSC devices"</title>
 <nutlist>
 
@@ -84003,14 +84773,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-5>
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"Open Sound System"</title>
 <nutlist>
 
@@ -87179,14 +87949,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"USB support"</title>
 <nutlist>
 
@@ -87474,7 +88244,7 @@ choice
 <nutentry>
 	<term>USB_SUSPEND</term>
 <nutsynopsis>
-	"USB suspend/resume (EXPERIMENTAL)"
+	"USB selective suspend/resume and wakeup (EXPERIMENTAL)"
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -87490,9 +88260,14 @@ choice
 	<para>
 	If you say Y here, you can use driver calls or the sysfs
 	"power/state" file to suspend or resume individual USB
-	peripherals.  There are many related features, such as
-	remote wakeup and driver-specific suspend processing, that
-	may not yet work as expected.
+	peripherals.
+	</para>
+
+	<para>
+	Also, USB "remote wakeup" signaling is supported, whereby some
+	USB devices (like keyboards and network adapters) can wake up
+	their parent hub.  That wakeup cascades up the USB tree, and
+	could wake the system from states like suspend-to-RAM.
 	</para>
 
 	<para>
@@ -88012,51 +88787,6 @@ choice
 	<para>
 	To compile this driver as a module, choose M here: the
 	module will be called audio.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>USB_BLUETOOTH_TTY</term>
-<nutsynopsis>
-	"USB Bluetooth TTY support"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>USB and BT=n</literal>
-	</para>
-
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-	<para>
-	This driver implements a nonstandard tty interface to a Bluetooth
-	device that can be used only by specialized Bluetooth HCI software.
-	</para>
-
-	<para>
-	Say Y here if you want to use OpenBT Bluetooth stack (available
-	at http://developer.axis.com/software), or other TTY based
-	Bluetooth stacks, and want to connect a USB Bluetooth device
-	to your computer's USB port.
-	</para>
-
-	<para>
-	Do *not* enable this driver if you want to use generic Linux
-	Bluetooth support.
-	</para>
-
-	<para>
-	If in doubt, say N here.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called bluetty.
 	</para>
 
 </nutentrybody>
@@ -88711,7 +89441,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-6>
 	<title>"USB HID Boot Protocol drivers"</title>
 <nutlist>
 
@@ -88801,7 +89531,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 <nutentry>
 	<term>USB_AIPTEK</term>
@@ -89758,7 +90488,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-6>
 	<title>"USB Network Adapters"</title>
 <nutlist>
 
@@ -90433,7 +91163,7 @@ choice
 	</para>
 
 	<para>
-	If you install an alternate ROM image, such as the Linux 2.6 based
+	If you install an alternate image, such as the Linux 2.6 based
 	versions of OpenZaurus, you should no longer need to support this
 	protocol.  Only the "eth-fd" or "net_fd" drivers in these devices
 	really need this non-conformant variant of CDC Ethernet (or in
@@ -90485,7 +91215,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 <nutentry>
 	<term>USB_MON</term>
@@ -90580,7 +91310,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-6>
 	<title>"USB Serial Converter support"</title>
 <nutlist>
 
@@ -91643,6 +92373,34 @@ choice
 </nutentry>
 
 <nutentry>
+	<term>USB_SERIAL_NOKIA_DKU2</term>
+<nutsynopsis>
+	"USB Nokia DKU2 Driver"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>USB!=n and USB_SERIAL</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	Say Y here if you want to use a Nokia DKU2 device.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called nokia_dku2.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
 	<term>USB_SERIAL_PL2303</term>
 <nutsynopsis>
 	"USB Prolific 2303 Single Port Serial Driver"
@@ -91906,7 +92664,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 <nutentry>
 	<term>USB_EMI62</term>
@@ -92415,7 +93173,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-6>
 	<title>"USB DSL modem support"</title>
 <nutlist>
 
@@ -92559,10 +93317,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
-<sect2>
+<sect-6>
 	<title>"USB Gadget Support"</title>
 <nutlist>
 
@@ -93429,14 +94187,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-6>
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"MMC/SD Card support"</title>
 <nutlist>
 
@@ -93607,12 +94365,40 @@ choice
 </nutentrybody>
 </nutentry>
 
+<nutentry>
+	<term>MMC_AU1X</term>
+<nutsynopsis>
+	"Alchemy AU1XX0 MMC Card Interface support"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>SOC_AU1X00 and MMC</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	This selects the AMD Alchemy(R) Multimedia card interface.
+	iIf you have a Alchemy platform with a MMC slot, say Y or M here.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"InfiniBand support"</title>
 <nutlist>
 
@@ -93841,12 +94627,42 @@ choice
 </nutentrybody>
 </nutentry>
 
+<nutentry>
+	<term>INFINIBAND_SRP</term>
+<nutsynopsis>
+	"InfiniBand SCSI RDMA Protocol"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>INFINIBAND and SCSI</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	Support for the SCSI RDMA Protocol over InfiniBand.  This
+	allows you to access storage devices that speak SRP over
+	InfiniBand.
+	</para>
+
+	<para>
+	The SRP protocol is defined by the INCITS T10 technical
+	committee.  See http://www.t10.org/.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"SN Devices"</title>
 <nutlist>
 
@@ -93889,14 +94705,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
 </nutlist>
-</sect2>
+</sect-8>
 
 
-<sect2>
+<sect-8>
 	<title>"File systems"</title>
 <nutlist>
 
@@ -94740,7 +95556,7 @@ choice
 
 	<para>
 	type
-	<literal>tristate</literal>
+	<literal>boolean</literal>
 	</para>
 
 	<para>
@@ -95214,7 +96030,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-7>
 	<title>"CD-ROM/DVD Filesystems"</title>
 <nutlist>
 
@@ -95372,10 +96188,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"DOS/FAT/NT Filesystems"</title>
 <nutlist>
 
@@ -95734,10 +96550,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"Pseudo filesystems"</title>
 <nutlist>
 
@@ -95925,7 +96741,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>X86 || IA64 || PPC64 || SPARC64 || SUPERH || X86_64 || BROKEN</literal>
+	<literal>X86 || IA64 || PPC64 || SPARC64 || SUPERH || BROKEN</literal>
 	</para>
 
 	<para>
@@ -96015,10 +96831,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"Miscellaneous filesystems"</title>
 <nutlist>
 
@@ -97055,10 +97871,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"Network File Systems"</title>
 <nutlist>
 
@@ -98355,10 +99171,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"Partition Types"</title>
 <nutlist>
 
@@ -99084,10 +99900,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
-<sect2>
+<sect-7>
 	<title>"Native Language Support"</title>
 <nutlist>
 
@@ -100278,14 +101094,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
 </nutlist>
-</sect2>
+</sect-8>
 
 
-<sect2>
+<sect-8>
 	<title>"Profiling support"</title>
 <nutlist>
 
@@ -100350,10 +101166,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-8>
 
 
-<sect2>
+<sect-8>
 	<title>"Kernel hacking"</title>
 <nutlist>
 
@@ -100716,12 +101532,12 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>BUG and (ARM || ARM26 || M32R || M68K || SPARC32 || SPARC64 || X86 and !X86_64 || FRV) and DEBUG_KERNEL and EMBEDDED</literal>
+	<literal>BUG and (ARM || ARM26 || M32R || M68K || SPARC32 || SPARC64 || X86_32 || FRV) and DEBUG_KERNEL and EMBEDDED</literal>
 	</para>
 
 	<para>
 	default value
-	<literal>!EMBEDDED if BUG and (ARM || ARM26 || M32R || M68K || SPARC32 || SPARC64 || X86 and !X86_64 || FRV)</literal>
+	<literal>!EMBEDDED if BUG and (ARM || ARM26 || M32R || M68K || SPARC32 || SPARC64 || X86_32 || FRV)</literal>
 	</para>
 
 	<para>
@@ -100827,6 +101643,33 @@ choice
 </nutentry>
 
 <nutentry>
+	<term>DEBUG_VM</term>
+<nutsynopsis>
+	"Debug VM"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>DEBUG_KERNEL</literal>
+	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	Enable this to debug the virtual-memory system.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
 	<term>FRAME_POINTER</term>
 <nutsynopsis>
 	"Compile the kernel with frame pointers"
@@ -100849,9 +101692,46 @@ choice
 
 	<para>
 	If you say Y here the resulting kernel image will be slightly larger
-	and slower, but it might give very useful debugging information
-	on some architectures or you use external debuggers.
+	and slower, but it might give very useful debugging information on
+	some architectures or if you use external debuggers.
 	If you don't debug the kernel, you can say N.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>RCU_TORTURE_TEST</term>
+<nutsynopsis>
+	"torture tests for RCU"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>DEBUG_KERNEL</literal>
+	</para>
+
+	<para>
+	default value
+	<literal>n if DEBUG_KERNEL</literal>
+	</para>
+
+	<para>
+	type
+	<literal>tristate</literal>
+	</para>
+
+	<para>
+	This option provides a kernel module that runs torture tests
+	on the RCU infrastructure.  The kernel module may be built
+	after the fact on the running kernel to be tested, if desired.
+	</para>
+
+	<para>
+	Say Y here if you want RCU torture tests to start automatically
+	at boot time (you probably don't).
+	Say M if you want the RCU torture tests to build as a module.
+	Say N if you are unsure.
 	</para>
 
 </nutentrybody>
@@ -101059,10 +101939,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-8>
 
 
-<sect2>
+<sect-8>
 	<title>"Security options"</title>
 <nutlist>
 
@@ -101537,10 +102417,10 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-8>
 
 
-<sect2>
+<sect-8>
 	<title>"Cryptographic options"</title>
 <nutlist>
 
@@ -102402,7 +103282,7 @@ choice
 </nutentry>
 
 
-<sect2>
+<sect-7>
 	<title>"Hardware crypto devices"</title>
 <nutlist>
 
@@ -102415,7 +103295,7 @@ choice
 <nutentrybody>
 	<para>
 	depends on
-	<literal>CRYPTO and X86 and !X86_64</literal>
+	<literal>CRYPTO and X86_32</literal>
 	</para>
 
 	<para>
@@ -102469,14 +103349,14 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-7>
 
 
 </nutlist>
-</sect2>
+</sect-8>
 
 
-<sect2>
+<sect-8>
 	<title>"Library routines"</title>
 <nutlist>
 
@@ -102705,7 +103585,7 @@ choice
 
 
 </nutlist>
-</sect2>
+</sect-8>
 
 <nutentry>
 	<term>GENERIC_HARDIRQS</term>
@@ -102819,29 +103699,13 @@ choice
 </nutentrybody>
 </nutentry>
 
-<nutentry>
-	<term>PC</term>
-	<para>
-	default value
-	<literal>y if X86 and !EMBEDDED</literal>
-	</para>
 
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
+</nutlist>
+</sect-9>
 
 
 </nutlist>
-</sect2>
-
-
-</nutlist>
-</sect2>
+</sect-10>
 
 #
 # using defaults found in .config
