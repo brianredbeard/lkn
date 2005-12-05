@@ -191,7 +191,7 @@ Kernel configuration option reference
 -->
 
 <sect2>
-	<title>"Code maturity level options"</title>
+	<title>Code maturity level options</title>
 <nutlist>
 
 
@@ -324,7 +324,7 @@ Kernel configuration option reference
 </sect2>
 
 <sect2>
-	<title>"General setup"</title>
+	<title>General setup</title>
 <nutlist>
 
 
@@ -391,7 +391,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>SWAP</term>
 <nutsynopsis>
-	"Support for paging of anonymous memory (swap)"
+	Support for paging of anonymous memory (swap)
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -422,7 +422,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>SYSVIPC</term>
 <nutsynopsis>
-	"System V IPC"
+	System V IPC
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -457,7 +457,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>POSIX_MQUEUE</term>
 <nutsynopsis>
-	"POSIX Message Queues"
+	POSIX Message Queues
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -496,7 +496,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>BSD_PROCESS_ACCT</term>
 <nutsynopsis>
-	"BSD Process Accounting"
+	BSD Process Accounting
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -522,7 +522,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>BSD_PROCESS_ACCT_V3</term>
 <nutsynopsis>
-	"BSD Process Accounting version 3 file format"
+	BSD Process Accounting version 3 file format
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -555,7 +555,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>SYSCTL</term>
 <nutsynopsis>
-	"Sysctl support"
+	Sysctl support
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -586,7 +586,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>AUDIT</term>
 <nutsynopsis>
-	"Auditing support"
+	Auditing support
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -617,7 +617,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>AUDITSYSCALL</term>
 <nutsynopsis>
-	"Enable system-call auditing support"
+	Enable system-call auditing support
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -639,36 +639,6 @@ Kernel configuration option reference
 	Enable low-overhead system-call auditing infrastructure that
 	can be used independently or with another kernel subsystem,
 	such as SELinux.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>HOTPLUG</term>
-<nutsynopsis>
-	"Support for hot-pluggable devices"
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	depends on
-	<literal>!ARCH_S390</literal>
-	</para>
-
-	<para>
-	default value
-	<literal>ARCH_S390</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	This option is provided for the case where no in-kernel-tree
-	modules require HOTPLUG functionality, but a module built
-	outside the kernel tree does. Such modules require Y here.
 	</para>
 
 </nutentrybody>
@@ -719,7 +689,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>IKCONFIG</term>
 <nutsynopsis>
-	"Kernel .config support"
+	Kernel .config support
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -744,7 +714,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>IKCONFIG_PROC</term>
 <nutsynopsis>
-	"Enable access to .config through /proc/config.gz"
+	Enable access to .config through /proc/config.gz
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -768,7 +738,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>CPUSETS</term>
 <nutsynopsis>
-	"Cpuset support"
+	Cpuset support
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -798,7 +768,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>INITRAMFS_SOURCE</term>
 <nutsynopsis>
-	"Initramfs source file(s)"
+	Initramfs source file(s)
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -840,7 +810,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>INITRAMFS_ROOT_UID</term>
 <nutsynopsis>
-	"User ID to map to 0 (user root)"
+	User ID to map to 0 (user root)
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -875,7 +845,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>INITRAMFS_ROOT_GID</term>
 <nutsynopsis>
-	"Group ID to map to 0 (group root)"
+	Group ID to map to 0 (group root)
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -909,36 +879,20 @@ Kernel configuration option reference
 </nutlist>
 
 <sect3>
-	<title>EMBEDDED</title>
+	<title>Configure standard kernel features (for small systems)</title>
 
 <para>
-	These are options that you should be very careful with...
+These options allow certain base kernel options and settings to be disabled or
+tweaked. This is for specialized environments which can tolerate a
+"non-standard" kernel.  Only modify these if you really know what you are doing.
 </para>
 
 <nutlist>
 
 <nutentry>
-	<term>EMBEDDED</term>
-<nutentrybody>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-	<para>
-	This option allows certain base kernel options and settings
-	to be disabled or tweaked. This is for specialized
-	environments which can tolerate a "non-standard" kernel.
-	Only use this if you really know what you are doing.
-	</para>
-
-</nutentrybody>
-</nutentry>
-
-<nutentry>
 	<term>KALLSYMS</term>
 <nutsynopsis>
-	"Load all symbols for debugging/kksymoops"
+	Load all symbols for debugging/kksymoops
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -1024,16 +978,46 @@ Kernel configuration option reference
 </nutentry>
 
 <nutentry>
-	<term>PRINTK</term>
+	<term>HOTPLUG</term>
+<nutsynopsis>
+	"Support for hot-pluggable devices"
+</nutsynopsis>
+<nutentrybody>
+	<para>
+	depends on
+	<literal>!ARCH_S390</literal>
+	</para>
+
 	<para>
 	default value
-	<literal>y</literal>
+	<literal>ARCH_S390</literal>
 	</para>
+
+	<para>
+	type
+	<literal>boolean</literal>
+	</para>
+
+	<para>
+	This option is provided for the case where no in-kernel-tree
+	modules require HOTPLUG functionality, but a module built
+	outside the kernel tree does. Such modules require Y here.
+	</para>
+
+</nutentrybody>
+</nutentry>
+
+<nutentry>
+	<term>PRINTK</term>
 
 <nutsynopsis>
 	"Enable support for printk"
 </nutsynopsis>
 <nutentrybody>
+	<para>
+	default value
+	<literal>y</literal>
+	</para>
 	<para>
 	depends on
 	<literal>EMBEDDED</literal>
@@ -1058,7 +1042,7 @@ Kernel configuration option reference
 <nutentry>
 	<term>BUG</term>
 <nutsynopsis>
-	"BUG() support"
+	BUG() support
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -1089,15 +1073,15 @@ Kernel configuration option reference
 
 <nutentry>
 	<term>BASE_FULL</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
 
 <nutsynopsis>
 	"Enable full-sized data structures for core"
 </nutsynopsis>
 <nutentrybody>
+	<para>
+	default value
+	<literal>y</literal>
+	</para>
 	<para>
 	depends on
 	<literal>EMBEDDED</literal>
@@ -1377,14 +1361,14 @@ Kernel configuration option reference
 
 
 <sect2>
-	<title>"Loadable module support"</title>
+	<title>Loadable module support</title>
 <nutlist>
 
 
 <nutentry>
 	<term>MODULES</term>
 <nutsynopsis>
-	"Enable loadable module support"
+	Enable loadable module support
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -1604,7 +1588,7 @@ Kernel configuration option reference
 </sect2>
 
 <sect2>
-	<title>"Processor type and features"</title>
+	<title>Processor type and features</title>
 <nutlist>
 
 
@@ -1725,7 +1709,6 @@ Kernel configuration option reference
 	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -3008,7 +2991,6 @@ choice
 	<literal>SMP</literal>
 	</para>
 
-  unknown prop 7!
 	<para>
 	default value
 	<literal>32 if SMP and (X86_NUMAQ || X86_SUMMIT || X86_BIGSMP || X86_ES7000)</literal>
@@ -3622,7 +3604,7 @@ choice
 
 
 <sect3>
-	<title>"Firmware Drivers"</title>
+	<title>Firmware Drivers</title>
 <nutlist>
 
 
@@ -3757,7 +3739,6 @@ choice
 	"BIOS update support for DELL systems via sysfs"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -3998,7 +3979,6 @@ choice
 	<literal>y if SMP and HIGHMEM64G and (X86_NUMAQ || X86_GENERICARCH || X86_SUMMIT and ACPI) and (X86_NUMAQ || X86_SUMMIT)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -4425,9 +4405,7 @@ choice
 <nutentrybody>
 </nutentrybody>
 </nutentry>
--->
 
-<nutlist>
 <nutentry>
 	<term>MEMORY_HOTPLUG</term>
 <nutsynopsis>
@@ -4514,7 +4492,9 @@ choice
 
 </nutentrybody>
 </nutentry>
+-->
 
+<nutlist>
 <nutentry>
 	<term>MATH_EMULATION</term>
 <nutsynopsis>
@@ -5009,18 +4989,17 @@ choice
 
 </nutlist>
 </sect2>
-<!--
 
 <sect2>
-	<title>"Power management options (ACPI, APM)"</title>
-<nutlist>
+	<title>Power management options (ACPI, APM)</title>
 
 <para>
 	depends on
 	<literal>!X86_VOYAGER</literal>
-	</para>
+</para>
 
 
+<nutlist>
 <nutentry>
 	<term>PM</term>
 <nutsynopsis>
@@ -5238,17 +5217,17 @@ choice
 <nutentrybody>
 </nutentrybody>
 </nutentry>
-
+</nutlist>
 
 <sect3>
-	<title>"ACPI (Advanced Configuration and Power Interface) Support"</title>
-<nutlist>
+	<title>ACPI (Advanced Configuration and Power Interface) Support</title>
 
 <para>
 	depends on
 	<literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal>
-	</para>
+</para>
 
+<nutlist>
 
 <nutentry>
 	<term>ACPI</term>
@@ -5261,8 +5240,6 @@ choice
 	<literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal>
@@ -5621,7 +5598,6 @@ choice
 
 <nutentry>
 	<term>ACPI_HOTPLUG_CPU</term>
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_PROCESSOR and HOTPLUG_CPU</literal>
@@ -6145,20 +6121,19 @@ choice
 </nutentrybody>
 </nutentry>
 
-
 </nutlist>
 </sect3>
 
 
 <sect3>
-	<title>"APM (Advanced Power Management) BIOS Support"</title>
-<nutlist>
+	<title>APM (Advanced Power Management) BIOS Support</title>
 
 <para>
 	depends on
 	<literal>!X86_VOYAGER and PM and !X86_VISWS</literal>
-	</para>
+</para>
 
+<nutlist>
 
 <nutentry>
 	<term>APM</term>
@@ -6458,21 +6433,19 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
 </nutlist>
 </sect3>
 
 
 <sect3>
-	<title>"CPU Frequency scaling"</title>
-<nutlist>
+	<title>CPU Frequency scaling</title>
 
 <para>
 	depends on
 	<literal>!X86_VOYAGER</literal>
-	</para>
+</para>
 
+<nutlist>
 
 <nutentry>
 	<term>CPU_FREQ</term>
@@ -6573,7 +6546,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if !X86_VOYAGER and CPU_FREQ</literal>
@@ -6617,7 +6589,7 @@ choice
 </nutentry>
 
 <nutentry>
-choice
+<term>choice</term>
 <nutsynopsis>
 	"Default CPUFreq governor"
 </nutsynopsis>
@@ -6661,7 +6633,6 @@ choice
 	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -6687,7 +6658,6 @@ choice
 	<literal></literal><emphasis>choice</emphasis><literal></literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -6883,7 +6853,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ and ACPI_PROCESSOR</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -6916,7 +6885,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ and X86_ELAN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -6955,7 +6923,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ and X86_ELAN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -6987,7 +6954,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7020,7 +6986,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7043,6 +7008,8 @@ choice
 
 <nutentry>
 	<term>X86_POWERNOW_K7_ACPI</term>
+
+<nutentrybody>
 	<para>
 	default value
 	<literal>y if !X86_VOYAGER and CPU_FREQ and X86_POWERNOW_K7 and ACPI_PROCESSOR and (X86_POWERNOW_K7!=y || ACPI_PROCESSOR!=m)</literal>
@@ -7052,8 +7019,6 @@ choice
 	type
 	<literal>boolean</literal>
 	</para>
-
-<nutentrybody>
 </nutentrybody>
 </nutentry>
 
@@ -7068,7 +7033,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7091,6 +7055,7 @@ choice
 
 <nutentry>
 	<term>X86_POWERNOW_K8_ACPI</term>
+<nutentrybody>
 	<para>
 	default value
 	<literal>y if !X86_VOYAGER and CPU_FREQ and X86_POWERNOW_K8 and ACPI_PROCESSOR and (X86_POWERNOW_K8!=y || ACPI_PROCESSOR!=m)</literal>
@@ -7100,8 +7065,6 @@ choice
 	type
 	<literal>boolean</literal>
 	</para>
-
-<nutentrybody>
 </nutentrybody>
 </nutentry>
 
@@ -7148,8 +7111,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7252,7 +7213,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7287,7 +7247,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7321,7 +7280,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7418,7 +7376,6 @@ choice
 	<literal>!X86_VOYAGER and CPU_FREQ</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -7517,15 +7474,15 @@ choice
 </nutlist>
 </sect3>
 
-
-</nutlist>
 </sect2>
 
-
 <sect2>
-	<title>"Bus options (PCI, PCMCIA, EISA, MCA, ISA)"</title>
-<nutlist>
+	<title>Bus options (PCI, PCMCIA, EISA, MCA, ISA)</title>
+<para>
+This section contains the bus specific options...
+</para>
 
+<nutlist>
 
 <nutentry>
 	<term>PCI</term>
@@ -8281,20 +8238,18 @@ choice
 
 </nutentrybody>
 </nutentry>
-
+</nutlist>
 
 <sect3>
-	<title>"PCCARD (PCMCIA/CardBus) support"</title>
+	<title>PCCARD (PCMCIA/CardBus) support</title>
+
 <nutlist>
-
-
 <nutentry>
 	<term>PCCARD</term>
 <nutsynopsis>
-	"PCCard (PCMCIA/CardBus) support"
+	PCCard (PCMCIA/CardBus) support
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -8369,7 +8324,6 @@ choice
 	<literal>PCCARD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if PCCARD</literal>
@@ -8415,7 +8369,6 @@ choice
 	<literal>PCCARD and PCMCIA and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if PCCARD and PCMCIA and EXPERIMENTAL</literal>
@@ -8531,8 +8484,6 @@ choice
 	<literal>PCCARD and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -8568,7 +8519,6 @@ choice
 	<literal>PCCARD and PCMCIA and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -8593,7 +8543,6 @@ choice
 	<literal>PCCARD and PCMCIA and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -8619,7 +8568,6 @@ choice
 	<literal>PCCARD and PCMCIA and ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -8647,7 +8595,6 @@ choice
 	<literal>PCCARD and PCMCIA and ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -8674,7 +8621,6 @@ choice
 	<literal>PCCARD and PCMCIA and PPC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -8838,7 +8784,6 @@ choice
 	<literal>PCCARD and M32R and CHIP_M32700 and PCMCIA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -8862,7 +8807,6 @@ choice
 	<literal>PCCARD and M32R and (PLAT_USRV || PLAT_M32700UT || PLAT_MAPPI2 || PLAT_MAPPI3 || PLAT_OPSPUT)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -8975,21 +8919,17 @@ choice
 <nutentrybody>
 </nutentrybody>
 </nutentry>
-
-
 </nutlist>
 </sect3>
 
 
 <sect3>
-	<title>"PCI Hotplug Support"</title>
+	<title>PCI Hotplug Support</title>
 <nutlist>
-
-
 <nutentry>
 	<term>HOTPLUG_PCI</term>
 <nutsynopsis>
-	"Support for PCI Hotplug (EXPERIMENTAL)"
+	Support for PCI Hotplug (EXPERIMENTAL)
 </nutsynopsis>
 <nutentrybody>
 	<para>
@@ -8997,7 +8937,6 @@ choice
 	<literal>PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -9505,20 +9444,15 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
 </nutlist>
 </sect3>
 
 
-</nutlist>
 </sect2>
-
 
 <sect2>
 	<title>"Executable file formats"</title>
 <nutlist>
-
 
 <nutentry>
 	<term>BINFMT_ELF</term>
@@ -9640,7 +9574,6 @@ choice
 	<literal>BINFMT_FLAT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -9850,12 +9783,10 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
 </nutlist>
 </sect2>
 
-
+<!--
 <sect2>
 	<title>"Networking"</title>
 <nutlist>
@@ -10059,7 +9990,6 @@ choice
 	<literal>NET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -11012,11 +10942,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -11044,12 +10969,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -11077,10 +10996,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -11109,7 +11024,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -12083,8 +11997,6 @@ choice
 	<literal>m if NET and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -12161,11 +12073,6 @@ choice
 	<literal>NET and INET and IPV6</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -12193,12 +12100,6 @@ choice
 	<literal>NET and INET and IPV6</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -12226,10 +12127,6 @@ choice
 	<literal>NET and INET and IPV6</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -12258,7 +12155,6 @@ choice
 	<literal>NET and INET and IPV6</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -12306,7 +12202,6 @@ choice
 
 <nutentry>
 	<term>NETFILTER</term>
-  unknown prop 3!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -13578,7 +13473,6 @@ choice
 	<literal>NET and INET and NETFILTER and IP_NF_IPTABLES</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -13796,10 +13690,6 @@ choice
 	<literal>NET and INET and NETFILTER and IP_NF_IPTABLES</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -16377,10 +16267,6 @@ choice
 	<literal>NET and INET and EXPERIMENTAL and (IPV6 || IPV6=n)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -17007,7 +16893,6 @@ choice
 	<literal>NET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -17032,7 +16917,6 @@ choice
 	<literal>NET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -17140,7 +17024,6 @@ choice
 	<literal>NET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18356,7 +18239,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18386,7 +18268,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18417,8 +18298,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18464,7 +18343,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18494,7 +18372,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18571,8 +18448,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18608,8 +18483,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18645,7 +18518,6 @@ choice
 	<literal>NET and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -18828,10 +18700,6 @@ choice
 	<literal>NET and NET_EMATCH</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -18861,7 +18729,6 @@ choice
 	<literal>NET and EXPERIMENTAL and NET_SCHED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -19096,7 +18963,6 @@ choice
 	<literal>NET and NET_SCHED and !NET_CLS_ACT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -19224,7 +19090,6 @@ choice
 
 <nutentry>
 	<term>HAMRADIO</term>
-  unknown prop 3!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -19426,7 +19291,6 @@ choice
 	<literal>HAMRADIO and NET and AX25</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -19678,7 +19542,6 @@ choice
 	<literal>HAMRADIO and NET and AX25</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -19717,7 +19580,6 @@ choice
 	<literal>HAMRADIO and NET and AX25</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -19754,7 +19616,6 @@ choice
 	<literal>HAMRADIO and NET and PARPORT and AX25</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -19788,7 +19649,6 @@ choice
 	<literal>HAMRADIO and NET and PARPORT and AX25 and !64BIT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -19851,8 +19711,6 @@ choice
 
 <nutentry>
 	<term>IRDA</term>
-  unknown prop 3!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -20837,7 +20695,6 @@ choice
 	<literal>NET and IRDA and USB and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21153,7 +21010,6 @@ choice
 
 <nutentry>
 	<term>BT</term>
-  unknown prop 3!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21318,7 +21174,6 @@ choice
 	<literal>NET and BT and BT_L2CAP</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21425,7 +21280,6 @@ choice
 	<literal>NET and BT and BT_L2CAP and (BROKEN || !S390)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21616,7 +21470,6 @@ choice
 	<literal>NET and BT and USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21677,7 +21530,6 @@ choice
 	<literal>NET and BT and USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21741,7 +21593,6 @@ choice
 	<literal>NET and BT and PCMCIA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21954,9 +21805,6 @@ choice
 	<literal>NET and IEEE80211</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -21986,8 +21834,6 @@ choice
 	<literal>NET and IEEE80211</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -22018,8 +21864,6 @@ choice
 	<literal>NET and IEEE80211</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -22120,7 +21964,6 @@ choice
 	"Hotplug firmware loading support"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -22838,7 +22681,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -22867,7 +22709,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -23410,7 +23251,6 @@ choice
 	<literal>MTD!=n and MTD_GEN_PROBE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -23437,7 +23277,6 @@ choice
 	<literal>MTD!=n and MTD_GEN_PROBE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -23529,7 +23368,6 @@ choice
 	<literal>MTD!=n and MTD_GEN_PROBE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -24144,7 +23982,6 @@ choice
 	<literal>MTD!=n and MACH_MAINSTONE and MTD_CFI_INTELEXT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -25533,11 +25370,6 @@ choice
 	<literal>MTD!=n and (SBC82xx || SBC8560)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -25563,10 +25395,6 @@ choice
 	<literal>MTD!=n and DMV182</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -25590,9 +25418,6 @@ choice
 	<literal>MTD!=n and (ARCH_BAST || MACH_VR1000)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -25669,7 +25494,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -26081,8 +25905,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -26125,8 +25947,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -26168,8 +25988,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -26198,7 +26016,6 @@ choice
 
 <nutentry>
 	<term>MTD_DOCPROBE</term>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -26374,7 +26191,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -26579,8 +26395,6 @@ choice
 	<literal>MTD!=n and MTD_NAND and SH_SOLUTION_ENGINE</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -26712,8 +26526,6 @@ choice
 	<literal>MTD!=n and MTD_NAND and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -27128,7 +26940,6 @@ choice
 	<literal>ARM and PARPORT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -27148,7 +26959,6 @@ choice
 	<literal>AMIGA and PARPORT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -27174,7 +26984,6 @@ choice
 	<literal>ZORRO and PARPORT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -27200,7 +27009,6 @@ choice
 	<literal>ATARI and PARPORT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -27242,7 +27050,6 @@ choice
 	<literal>SBUS and PARPORT and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -28916,7 +28723,6 @@ choice
 	<literal>BLK_DEV_LOOP</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -31712,7 +31518,6 @@ choice
 	<literal>IDE and BLK_DEV_IDE and BLK_DEV_IDE_PMAC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -33269,10 +33074,6 @@ choice
 	<literal>SCSI and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -33625,7 +33426,6 @@ choice
 	<literal>(PCI || EISA) and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -33956,7 +33756,6 @@ choice
 	<literal>PCI and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -35873,7 +35672,6 @@ choice
 	<literal>MCA and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -35904,7 +35702,6 @@ choice
 	<literal>GSC and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -35946,7 +35743,6 @@ choice
 	<literal>PCI and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36117,7 +35913,6 @@ choice
 	<literal>PCI and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36193,7 +35988,6 @@ choice
 	<literal>GSC and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36221,7 +36015,6 @@ choice
 	<literal>MCA and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36801,8 +36594,6 @@ choice
 	<literal>SCSI!=n and SCSI_QLA2XXX</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36826,8 +36617,6 @@ choice
 	<literal>SCSI!=n and SCSI_QLA2XXX</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36851,8 +36640,6 @@ choice
 	<literal>SCSI!=n and SCSI_QLA2XXX</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36877,8 +36664,6 @@ choice
 	<literal>SCSI!=n and SCSI_QLA2XXX</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36902,8 +36687,6 @@ choice
 	<literal>SCSI!=n and SCSI_QLA2XXX</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36928,8 +36711,6 @@ choice
 	<literal>SCSI!=n and SCSI_QLA2XXX</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -36954,7 +36735,6 @@ choice
 	<literal>PCI and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -37011,7 +36791,6 @@ choice
 	<literal>(EISA || MCA) and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -38454,7 +38233,6 @@ choice
 	<literal>ARCH_S390 and QDIO and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -39564,7 +39342,6 @@ choice
 	<literal>BLK_DEV_DM and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -39750,7 +39527,6 @@ choice
 	<literal>PCI and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -39785,7 +39561,6 @@ choice
 	<literal>PCI and SCSI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -39822,8 +39597,6 @@ choice
 	<literal>PCI and SCSI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -39865,7 +39638,6 @@ choice
 	<literal>128 if FUSION</literal>
 	</para>
 
-  unknown prop 7!
 	<para>
 	type
 	<literal>integer</literal>
@@ -39985,7 +39757,6 @@ choice
 	<literal>PCI || BROKEN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -40174,7 +39945,6 @@ choice
 	<literal>PCI and IEEE1394 and I2C</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -40305,8 +40075,6 @@ choice
 	<literal>IEEE1394 and EXPERIMENTAL and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -41427,7 +41195,6 @@ choice
 	<literal>NETDEVICES</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42112,7 +41879,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and ARM and ARCH_EBSA110</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -42185,7 +41951,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and ARM and ARCH_ACORN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42240,7 +42005,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and PPC_PMAC and PPC32</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42299,7 +42063,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and PPC_PMAC and PPC32</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42329,7 +42092,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and PPC and BROKEN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42387,7 +42149,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and ZORRO</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42417,7 +42178,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and ZORRO</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42446,7 +42206,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and ZORRO</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42478,7 +42237,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and AMIGA_PCMCIA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42534,7 +42292,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and MAC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -42626,7 +42383,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and MAC and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -42653,7 +42409,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and MVME147</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -42865,7 +42620,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and DIO</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -42961,7 +42715,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and SOC_AU1X00</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -43005,8 +42758,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and PCI and SGI_IP27 and BROKEN</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -43138,7 +42889,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and SUPERH</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43169,7 +42919,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and SBUS</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43201,7 +42950,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (SBUS || PCI)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43233,7 +42981,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and SBUS and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43263,7 +43010,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and SBUS</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43294,7 +43040,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43319,7 +43064,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43410,7 +43154,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_3COM and ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43635,7 +43378,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_3COM and (PCI || EISA)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43681,7 +43423,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_3COM and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43786,7 +43527,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_SMC and ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43818,7 +43558,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_SMC and MCA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43850,7 +43589,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_SMC and ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43891,7 +43629,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_SMC and EISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43923,8 +43660,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (ARM || REDWOOD_5 || REDWOOD_6 || M32R || SUPERH)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43960,7 +43695,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_VENDOR_SMC and (ISA || MAC and BROKEN)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -43995,8 +43729,6 @@ choice
 	<literal>NETDEVICES and !UML and ARM and NET_ETHERNET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44186,7 +43918,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS) and NET_TULIP and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44223,7 +43954,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS) and NET_TULIP and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44387,7 +44117,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS) and NET_TULIP and (PCI || EISA)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44423,8 +44152,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS) and NET_TULIP and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44451,7 +44178,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS) and NET_TULIP and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44484,7 +44210,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS) and NET_TULIP and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44547,7 +44272,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (PCI || EISA || CARDBUS) and NET_TULIP and CARDBUS and BROKEN_ON_SMP</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44584,7 +44308,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (ISA || MCA_LEGACY) and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44616,7 +44339,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (ISA || EISA || MCA)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44718,7 +44440,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44750,7 +44471,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44851,7 +44571,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44883,7 +44602,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -44971,7 +44689,6 @@ choice
 	<literal>NETDEVICES and !UML and (NET_ISA || Q40 and m and MODULES || M32R)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45104,7 +44821,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and MCA_LEGACY</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45491,8 +45207,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45524,8 +45238,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45597,8 +45309,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45670,7 +45380,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and (ISA || EISA) and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45733,7 +45442,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45882,7 +45590,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45914,7 +45621,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -45972,7 +45678,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and EISA and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46004,8 +45709,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46031,7 +45734,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46059,7 +45761,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46100,7 +45801,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and EISA and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46133,7 +45833,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and EISA and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46165,8 +45864,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46198,8 +45895,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46342,8 +46037,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46383,8 +46076,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46411,8 +46102,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46509,8 +46198,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46644,7 +46331,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_POCKET and PARPORT and X86</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46770,7 +46456,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and MACH_DECSTATION</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46892,7 +46577,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -46984,7 +46668,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_ETHERNET and (CPM1 || CPM2)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47156,7 +46839,6 @@ choice
 	<literal>NETDEVICES and !UML and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47332,7 +47014,6 @@ choice
 	<literal>NETDEVICES and !UML and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47364,7 +47045,6 @@ choice
 	<literal>NETDEVICES and !UML and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47397,7 +47077,6 @@ choice
 	<literal>NETDEVICES and !UML and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47494,8 +47173,6 @@ choice
 	<literal>NETDEVICES and !UML and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47527,7 +47204,6 @@ choice
 	<literal>NETDEVICES and !UML and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47658,9 +47334,6 @@ choice
 	<literal>NETDEVICES and !UML and NET_PCI and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -47769,7 +47442,6 @@ choice
 	<literal>NETDEVICES and !UML and (85xx || 83xx)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -48138,7 +47810,6 @@ choice
 	<literal>!UML and NETDEVICES and (PCI || ISA || MCA || CCW)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -48319,7 +47990,6 @@ choice
 	<literal>!UML and NETDEVICES and TR and (PCI || ISA and ISA_DMA_API || MCA)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -48846,7 +48516,6 @@ choice
 	<literal>!UML and NETDEVICES and NET_RADIO and PCI and IEEE80211</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -48981,7 +48650,6 @@ choice
 	<literal>!UML and NETDEVICES and IEEE80211 and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -49304,8 +48972,6 @@ choice
 	<literal>!UML and NETDEVICES and NET_RADIO and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -49479,8 +49145,6 @@ choice
 	<literal>!UML and NETDEVICES and NET_RADIO and ATMEL and PCMCIA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -49530,7 +49194,6 @@ choice
 	<literal>!UML and NETDEVICES and PCI and NET_RADIO and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -49605,8 +49268,6 @@ choice
 	<literal>!UML and NETDEVICES and NET_RADIO</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -49911,7 +49572,6 @@ choice
 	<literal>!UML and NETDEVICES and NET_PCMCIA and PCMCIA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -49941,7 +49601,6 @@ choice
 	<literal>!UML and NETDEVICES and NET_PCMCIA and PCMCIA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -50000,8 +49659,6 @@ choice
 	<literal>!UML and NETDEVICES and NET_PCMCIA and PCMCIA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -53627,7 +53284,6 @@ choice
 	<literal>NETDEVICES and PPP</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -53691,8 +53347,6 @@ choice
 	<literal>NETDEVICES and PPP</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -54547,7 +54201,6 @@ choice
 	<literal>NET and ISDN and ISDN_I4L</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -55725,7 +55378,6 @@ choice
 	<literal>NET and ISDN and ISDN_I4L and ISDN_DRV_HISAX and USB and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57095,7 +56747,6 @@ choice
 
 <nutentry>
 	<term>INPUT_KEYBOARD</term>
-  unknown prop 3!
 	<para>
 	default value
 	<literal>y if INPUT</literal>
@@ -57135,10 +56786,6 @@ choice
 	<literal>y if INPUT and INPUT_KEYBOARD</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57266,7 +56913,6 @@ choice
 	<literal>INPUT and INPUT_KEYBOARD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57297,7 +56943,6 @@ choice
 	<literal>INPUT and INPUT_KEYBOARD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57357,7 +57002,6 @@ choice
 	<literal>INPUT and INPUT_KEYBOARD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57389,7 +57033,6 @@ choice
 	<literal>INPUT and INPUT_KEYBOARD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57589,9 +57232,6 @@ choice
 	<literal>y if INPUT and INPUT_KEYBOARD and GSC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57613,7 +57253,6 @@ choice
 
 <nutentry>
 	<term>INPUT_MOUSE</term>
-  unknown prop 3!
 	<para>
 	default value
 	<literal>y if INPUT</literal>
@@ -57653,10 +57292,6 @@ choice
 	<literal>y if INPUT and INPUT_MOUSE</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57701,7 +57336,6 @@ choice
 	<literal>INPUT and INPUT_MOUSE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57933,7 +57567,6 @@ choice
 	<literal>INPUT and INPUT_MOUSE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57962,8 +57595,6 @@ choice
 	<literal>INPUT and INPUT_MOUSE and GSC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -57982,7 +57613,6 @@ choice
 
 <nutentry>
 	<term>INPUT_JOYSTICK</term>
-  unknown prop 3!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -58015,7 +57645,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58054,7 +57683,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58084,7 +57712,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58114,7 +57741,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58143,7 +57769,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58173,7 +57798,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58203,7 +57827,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58233,7 +57856,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58263,7 +57885,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58293,7 +57914,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58323,7 +57943,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58439,7 +58058,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58469,7 +58087,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58499,7 +58116,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58529,7 +58145,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58560,7 +58175,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58590,7 +58204,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58745,7 +58358,6 @@ choice
 	<literal>INPUT and INPUT_JOYSTICK</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58771,7 +58383,6 @@ choice
 
 <nutentry>
 	<term>INPUT_TOUCHSCREEN</term>
-  unknown prop 3!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -58801,7 +58412,6 @@ choice
 	<literal>INPUT and INPUT_TOUCHSCREEN and SA1100_BITSY</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58872,7 +58482,6 @@ choice
 	<literal>INPUT and INPUT_TOUCHSCREEN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58906,7 +58515,6 @@ choice
 	<literal>INPUT and INPUT_TOUCHSCREEN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -58940,7 +58548,6 @@ choice
 	<literal>INPUT and INPUT_TOUCHSCREEN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -59035,7 +58642,6 @@ choice
 
 <nutentry>
 	<term>INPUT_MISC</term>
-  unknown prop 3!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -59180,7 +58786,6 @@ choice
 	<literal>INPUT and INPUT_MISC and GSC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -59885,7 +59490,6 @@ choice
 	<literal>EMBEDDED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if !VIOCONS</literal>
@@ -60942,7 +60546,6 @@ choice
 	<literal>BROKEN || !SPARC64 and !SPARC32</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -60998,7 +60601,6 @@ choice
 	<literal>SERIAL_8250=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61449,7 +61051,6 @@ choice
 	<literal>ARM_AMBA and (BROKEN || !ARCH_VERSATILE)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -61478,7 +61079,6 @@ choice
 	<literal>SERIAL_AMBA_PL010=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61513,7 +61113,6 @@ choice
 	<literal>ARM_AMBA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -61543,7 +61142,6 @@ choice
 	<literal>SERIAL_AMBA_PL011=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61578,7 +61176,6 @@ choice
 	<literal>ARM and ARCH_CLPS711X</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -61602,7 +61199,6 @@ choice
 	<literal>SERIAL_CLPS711X=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61631,7 +61227,6 @@ choice
 	<literal>ARM and ARCH_S3C2410</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -61658,7 +61253,6 @@ choice
 	<literal>SERIAL_S3C2410=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61692,7 +61286,6 @@ choice
 	<literal>MACH_DECSTATION and 32BIT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61717,7 +61310,6 @@ choice
 	<literal>SERIAL_DZ</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61749,7 +61341,6 @@ choice
 	<literal>ARM and FOOTBRIDGE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -61775,7 +61366,6 @@ choice
 	<literal>SERIAL_21285=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61809,7 +61399,6 @@ choice
 	<literal>ARM and ARCH_CAMELOT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61834,7 +61423,6 @@ choice
 	<literal>SERIAL_UART00</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61868,7 +61456,6 @@ choice
 	<literal>PPC32 and MV64X60</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61892,7 +61479,6 @@ choice
 	<literal>SERIAL_MPSC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61916,7 +61502,6 @@ choice
 	<literal>ARM and ARCH_PXA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61941,7 +61526,6 @@ choice
 	<literal>SERIAL_PXA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -61975,7 +61559,6 @@ choice
 	<literal>ARM and ARCH_SA1100</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62002,7 +61585,6 @@ choice
 	<literal>SERIAL_SA1100</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62036,7 +61618,6 @@ choice
 	<literal>ARM and ARCH_IMX</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62061,7 +61642,6 @@ choice
 	<literal>SERIAL_IMX</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62086,8 +61666,6 @@ choice
 
 <nutentry>
 	<term>SERIAL_SUNCORE</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if SPARC32 || SPARC64</literal>
@@ -62212,7 +61790,6 @@ choice
 	<literal>PARISC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if PARISC</literal>
@@ -62253,7 +61830,6 @@ choice
 	<literal>SERIAL_MUX</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if SERIAL_MUX</literal>
@@ -62367,7 +61943,6 @@ choice
 	<literal>SGI_IP22</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -62392,7 +61967,6 @@ choice
 	<literal>SERIAL_IP22_ZILOG=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62412,7 +61986,6 @@ choice
 	<literal>V850E_MA1 || V850E_ME2 || V850E_TEG || V850E2_ANNA || V850E_AS85EP1</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if V850E_MA1 || V850E_ME2 || V850E_TEG || V850E2_ANNA || V850E_AS85EP1</literal>
@@ -62453,7 +62026,6 @@ choice
 	<literal>V850E_UART</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62473,7 +62045,6 @@ choice
 	<literal>SUPERH || H8300</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -62493,7 +62064,6 @@ choice
 	<literal>SERIAL_SH_SCI=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62513,7 +62083,6 @@ choice
 	<literal>MIPS and SOC_AU1X00</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62538,7 +62107,6 @@ choice
 	<literal>SERIAL_AU1X00</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62714,7 +62282,6 @@ choice
 	<literal>PPC_OF and PPC_PMAC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -62740,7 +62307,6 @@ choice
 	<literal>SERIAL_PMACZILOG=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62766,7 +62332,6 @@ choice
 	<literal>ARM and ARCH_LH7A40X</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -62791,7 +62356,6 @@ choice
 	<literal>SERIAL_LH7A40X=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -62825,7 +62389,6 @@ choice
 	<literal>CPM2 || 8xx</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -62850,7 +62413,6 @@ choice
 	<literal>SERIAL_CPM=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -63023,8 +62585,6 @@ choice
 	<literal>IA64_GENERIC || IA64_SGI_SN2</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -63050,7 +62610,6 @@ choice
 	<literal>PPC_MPC52xx</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -63077,7 +62636,6 @@ choice
 	<literal>SERIAL_MPC52xx=y</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -63132,7 +62690,6 @@ choice
 	<literal>PCI and (PPC_ISERIES || PPC_PSERIES)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -63168,7 +62725,6 @@ choice
 	<literal>y if M32R</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -63192,7 +62748,6 @@ choice
 	<literal>SERIAL_M32R_SIO</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -63255,7 +62810,6 @@ choice
 	<literal>HAS_TXX9_SERIAL and BROKEN</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if HAS_TXX9_SERIAL and BROKEN</literal>
@@ -63291,7 +62845,6 @@ choice
 	<literal>SERIAL_TXX9</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -63330,7 +62883,6 @@ choice
 	<literal>CPU_VR41XX</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -63356,7 +62908,6 @@ choice
 	<literal>SERIAL_VR41XX</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -63381,7 +62932,6 @@ choice
 	<literal>PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -63416,7 +62966,6 @@ choice
 	<literal>(IA64_GENERIC || IA64_SGI_SN2) and SGI_IOC4</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -63531,7 +63080,6 @@ choice
 	<literal>LEGACY_PTYS</literal>
 	</para>
 
-  unknown prop 7!
 	<para>
 	default value
 	<literal>256 if LEGACY_PTYS</literal>
@@ -67810,7 +67358,6 @@ choice
 	<literal>X86</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -68774,7 +68321,6 @@ choice
 	<literal>I2C and ISA and BROKEN_ON_SMP</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -68804,7 +68350,6 @@ choice
 	<literal>I2C and PCI and PPC_CHRP and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -68875,7 +68420,6 @@ choice
 	<literal>I2C and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69066,7 +68610,6 @@ choice
 	<literal>I2C and MIPS_ITE8172</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69097,7 +68640,6 @@ choice
 	<literal>I2C and ARCH_IXP4XX</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69127,7 +68669,6 @@ choice
 	<literal>I2C and ARCH_IXP2000</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69277,7 +68818,6 @@ choice
 	<literal>I2C and PARPORT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69321,7 +68861,6 @@ choice
 	<literal>I2C</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69368,7 +68907,6 @@ choice
 	<literal>I2C and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69402,7 +68940,6 @@ choice
 	<literal>(RPXLITE || RPXCLASSIC) and I2C</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69446,7 +68983,6 @@ choice
 	<literal>I2C and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69499,7 +69035,6 @@ choice
 	<literal>SCx200_GPIO and I2C</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69755,7 +69290,6 @@ choice
 	<literal>I2C and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69822,7 +69356,6 @@ choice
 	<literal>I2C and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -69852,7 +69385,6 @@ choice
 	<literal>I2C</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -70592,7 +70124,6 @@ choice
 	<literal>W1_DS2433</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -70709,7 +70240,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -70739,7 +70269,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -70798,7 +70327,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -70828,7 +70356,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -70858,7 +70385,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71009,7 +70535,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71039,8 +70564,6 @@ choice
 	<literal>HWMON and I2C</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71166,8 +70689,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71255,7 +70776,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71285,7 +70805,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71407,8 +70926,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71441,7 +70958,6 @@ choice
 	<literal>HWMON and I2C and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71471,7 +70987,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71502,7 +71017,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71532,7 +71046,6 @@ choice
 	<literal>HWMON and I2C and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71562,8 +71075,6 @@ choice
 	<literal>HWMON and I2C</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71652,8 +71163,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71683,7 +71192,6 @@ choice
 	<literal>HWMON and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71868,7 +71376,6 @@ choice
 	<literal>ARCH_SA1100</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -71986,13 +71493,6 @@ choice
 	<literal>VIDEO_DEV and PCI and I2C</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72372,7 +71872,6 @@ choice
 	<literal>VIDEO_DEV and I2C and SGI_IP22 and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72640,10 +72139,6 @@ choice
 	<literal>VIDEO_DEV and PCI and I2C and SOUND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72673,9 +72168,6 @@ choice
 	<literal>VIDEO_DEV and VIDEO_SAA7134 and DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72700,8 +72192,6 @@ choice
 	<literal>VIDEO_DEV and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72731,7 +72221,6 @@ choice
 	<literal>VIDEO_DEV and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72764,7 +72253,6 @@ choice
 	<literal>VIDEO_DEV and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72794,7 +72282,6 @@ choice
 	<literal>VIDEO_DEV and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72825,13 +72312,6 @@ choice
 	<literal>VIDEO_DEV and PCI and I2C and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -72861,11 +72341,6 @@ choice
 	<literal>VIDEO_DEV and VIDEO_CX88 and DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -73924,7 +73399,6 @@ choice
 	<literal>DVB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -73952,16 +73426,6 @@ choice
 	<literal>DVB_CORE and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74100,14 +73564,6 @@ choice
 	<literal>DVB_CORE and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74142,9 +73598,6 @@ choice
 	<literal>DVB_CORE and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74184,12 +73637,6 @@ choice
 	<literal>DVB_CORE and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74224,10 +73671,6 @@ choice
 	<literal>DVB_CORE and DVB_BUDGET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74267,7 +73710,6 @@ choice
 	<literal>DVB_CORE and USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74330,7 +73772,6 @@ choice
 	<literal>DVB_USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74354,7 +73795,6 @@ choice
 	<literal>DVB_USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74403,7 +73843,6 @@ choice
 	<literal>DVB_USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74439,7 +73878,6 @@ choice
 	<literal>DVB_USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74463,7 +73901,6 @@ choice
 	<literal>DVB_USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74488,8 +73925,6 @@ choice
 	<literal>DVB_USB</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74581,7 +74016,6 @@ choice
 	<literal>DVB_USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74636,11 +74070,6 @@ choice
 	<literal>DVB_CORE and USB</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74674,8 +74103,6 @@ choice
 	<literal>DVB_CORE and USB</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -74953,12 +74380,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75065,11 +74486,6 @@ choice
 	<literal>DVB_CORE and PCI and VIDEO_BT848</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75105,9 +74521,6 @@ choice
 	<literal>DVB_CORE and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75314,7 +74727,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75344,7 +74756,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75443,7 +74854,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75660,7 +75070,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75684,7 +75093,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75708,7 +75116,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75733,7 +75140,6 @@ choice
 	<literal>DVB_CORE</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75781,7 +75187,6 @@ choice
 
 <nutentry>
 	<term>VIDEO_SAA7146</term>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -75793,9 +75198,6 @@ choice
 
 <nutentry>
 	<term>VIDEO_SAA7146_VV</term>
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76137,10 +75539,6 @@ choice
 	<literal>FB and (ZORRO || PCI)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76179,10 +75577,6 @@ choice
 	<literal>FB and (AMIGA and BROKEN || PCI)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76232,10 +75626,6 @@ choice
 	<literal>FB and ARM and ARM_AMBA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76268,10 +75658,6 @@ choice
 	<literal>FB=y and ARM and (ARCH_ACORN || ARCH_CLPS7500)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76297,10 +75683,6 @@ choice
 	<literal>FB=y and ARM and ARCH_CLPS711X</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76320,10 +75702,6 @@ choice
 	<literal>FB=y and ARM and ARCH_SA1100</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76354,10 +75732,6 @@ choice
 	<literal>FB and ARM and ARCH_IMX</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76377,10 +75751,6 @@ choice
 	<literal>FB and PCI and (BROKEN || !SPARC64)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76403,9 +75773,6 @@ choice
 	<literal>y if FB=y and APOLLO</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76422,10 +75789,6 @@ choice
 	<literal>y if FB=y and Q40</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76446,7 +75809,6 @@ choice
 	<literal>FB and AMIGA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76553,10 +75915,6 @@ choice
 	<literal>FB and ZORRO and BROKEN</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76585,10 +75943,6 @@ choice
 	<literal>FB=y and ZORRO and BROKEN</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76642,10 +75996,6 @@ choice
 	<literal>FB=y and ZORRO</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76670,10 +76020,6 @@ choice
 	<literal>FB and X86</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76727,11 +76073,6 @@ choice
 	<literal>FB=y and (PPC64 || PPC_OF)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76756,11 +76097,6 @@ choice
 	<literal>FB=y and PPC_PMAC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76785,11 +76121,6 @@ choice
 	<literal>FB=y and PPC_PMAC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76814,11 +76145,6 @@ choice
 	<literal>FB=y and (MAC || PPC_PMAC)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76843,10 +76169,6 @@ choice
 	<literal>FB=y and PPC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76871,10 +76193,6 @@ choice
 	<literal>FB=y and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76894,9 +76212,6 @@ choice
 	<literal>FB=y and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -76944,10 +76259,6 @@ choice
 	<literal>FB and (X86 || PPC)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -76977,10 +76288,6 @@ choice
 	<literal>FB and PARISC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if FB and PARISC</literal>
@@ -77023,11 +76330,6 @@ choice
 	<literal>FB=y and MAC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77038,9 +76340,6 @@ choice
 
 <nutentry>
 	<term>FB_HP300</term>
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if FB=y and HP300</literal>
@@ -77066,10 +76365,6 @@ choice
 	<literal>FB and ALPHA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77094,10 +76389,6 @@ choice
 	<literal>FB=y and X86</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77156,10 +76447,6 @@ choice
 	<literal>FB and X86</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77249,10 +76536,6 @@ choice
 	<literal>FB and X86_VISWS</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77276,10 +76559,6 @@ choice
 	<literal>FB=y and (SGI_IP32 || X86_VISWS)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77368,10 +76647,6 @@ choice
 	<literal>FB=y and ((SPARC32 || SPARC64) and FB_SBUS || (SUN3 || SUN3X) and FB_SUN3)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77395,9 +76670,6 @@ choice
 	<literal>FB=y and ((SPARC32 || SPARC64) and FB_SBUS || (SUN3 || SUN3X) and FB_SUN3)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77421,9 +76693,6 @@ choice
 	<literal>FB=y and ((SPARC32 || SPARC64) and FB_SBUS || (SUN3 || SUN3X) and FB_SUN3)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77448,10 +76717,6 @@ choice
 	<literal>FB and SH_DREAMCAST</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77491,10 +76756,6 @@ choice
 	<literal>FB=y and (SUPERH || ARCH_CEIVA)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77521,13 +76782,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77590,12 +76844,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77687,12 +76935,6 @@ choice
 	<literal>FB and EXPERIMENTAL and PCI and X86_32</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77771,8 +77013,6 @@ choice
 	<literal>FB_I810 and FB_I810_GTF</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -77796,13 +77036,6 @@ choice
 	<literal>FB and EXPERIMENTAL and PCI and X86_32</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -77858,12 +77091,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78011,7 +77238,6 @@ choice
 	<literal>FB_MATROX and I2C</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78146,11 +77372,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78178,14 +77399,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78285,11 +77498,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78320,11 +77528,6 @@ choice
 	<literal>FB and (PCI || ATARI)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78464,13 +77667,6 @@ choice
 	<literal>FB and PCI and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78565,10 +77761,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78647,11 +77839,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78681,10 +77868,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78714,10 +77897,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78771,10 +77950,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78811,9 +77986,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -78862,10 +78034,6 @@ choice
 	<literal>FB and PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -79152,10 +78320,6 @@ choice
 	<literal>FB_GEODE and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -79212,9 +78376,6 @@ choice
 	<literal>FB_SBUS and SPARC64</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79239,10 +78400,6 @@ choice
 	<literal>FB_SBUS</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79267,10 +78424,6 @@ choice
 	<literal>FB_SBUS</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79295,10 +78448,6 @@ choice
 	<literal>FB_SBUS</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79323,10 +78472,6 @@ choice
 	<literal>FB_SBUS</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79370,10 +78515,6 @@ choice
 	<literal>SPARC32 and FB_PCI</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79398,10 +78539,6 @@ choice
 	<literal>FB and HD64461</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -79426,10 +78563,6 @@ choice
 	<literal>FB=y and TC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79454,10 +78587,6 @@ choice
 	<literal>FB=y and TC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79482,10 +78611,6 @@ choice
 	<literal>FB=y and TC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79511,10 +78636,6 @@ choice
 	<literal>FB=y and MACH_DECSTATION</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79540,10 +78661,6 @@ choice
 	<literal>FB=y and NINO</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79572,10 +78689,6 @@ choice
 	<literal>FB=y and (MIPS_MAGNUM_4000 || OLIVETTI_M700)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79600,10 +78713,6 @@ choice
 	<literal>FB and (M68328 || M68EZ328 || M68VZ328)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -79628,10 +78737,6 @@ choice
 	<literal>FB and ARCH_PXA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -79667,10 +78772,6 @@ choice
 	<literal>FB and PXA_SHARPSL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -79747,10 +78848,6 @@ choice
 	<literal>FB</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -79776,10 +78873,6 @@ choice
 	<literal>FB and ARCH_S3C2410</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -79839,10 +78932,6 @@ choice
 	<literal>FB</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -80126,7 +79215,6 @@ choice
 	<literal>VT and FB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -80803,7 +79891,6 @@ choice
 
 <nutentry>
 	<term>BACKLIGHT_LCD_SUPPORT</term>
-  unknown prop 3!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -81022,7 +80109,6 @@ choice
 	<literal>ATARI and SOUND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81055,7 +80141,6 @@ choice
 	<literal>PPC32 and PPC_PMAC and SOUND and I2C</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81088,7 +80173,6 @@ choice
 	<literal>(AMIGA || APUS) and SOUND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81121,7 +80205,6 @@ choice
 	<literal>Q40 and SOUND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81206,7 +80289,6 @@ choice
 
 <nutentry>
 	<term>SND_PCM</term>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81249,7 +80331,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81326,7 +80407,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81360,8 +80440,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81395,7 +80473,6 @@ choice
 	<literal>!M68K and SOUND and SND and SND_SEQUENCER</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -81429,7 +80506,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND and RTC</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81608,8 +80684,6 @@ choice
 
 <nutentry>
 	<term>SND_MPU401_UART</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81621,8 +80695,6 @@ choice
 
 <nutentry>
 	<term>SND_OPL3_LIB</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81634,8 +80706,6 @@ choice
 
 <nutentry>
 	<term>SND_OPL4_LIB</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81647,8 +80717,6 @@ choice
 
 <nutentry>
 	<term>SND_VX_LIB</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81669,8 +80737,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81705,9 +80771,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND!=n and SND_SEQUENCER</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81742,9 +80805,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81775,9 +80835,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81814,8 +80871,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81851,8 +80906,6 @@ choice
 
 <nutentry>
 	<term>SND_AD1848_LIB</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81864,8 +80917,6 @@ choice
 
 <nutentry>
 	<term>SND_CS4231_LIB</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81886,10 +80937,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA_DMA_API and SND and PNP and ISA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81919,7 +80966,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81954,8 +81000,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -81985,9 +81029,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82017,9 +81058,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82049,9 +81087,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA_DMA_API and SND and PNP and ISA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82080,10 +81115,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82113,10 +81144,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82156,10 +81183,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82189,11 +81212,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82223,10 +81241,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82256,10 +81270,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA_DMA_API and SND and PNP and ISA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82290,10 +81300,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA_DMA_API and SND and PNP and ISA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82324,10 +81330,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82357,10 +81359,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82390,10 +81388,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82423,10 +81417,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82456,10 +81446,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82489,10 +81475,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82547,9 +81529,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82579,10 +81558,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA_DMA_API and SND and PNP and ISA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82612,10 +81587,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA_DMA_API and SND and PNP and ISA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82645,7 +81616,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82675,10 +81645,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA_DMA_API and SND and PNP and ISA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82708,9 +81674,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82740,7 +81703,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82770,9 +81732,6 @@ choice
 	<literal>!M68K and SOUND!=n and ISA and ISA_DMA_API and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82797,8 +81756,6 @@ choice
 
 <nutentry>
 	<term>SND_AC97_CODEC</term>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82841,8 +81798,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82874,7 +81829,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82905,7 +81859,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82935,8 +81888,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -82971,8 +81922,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83006,8 +81955,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83042,9 +81989,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83074,7 +82018,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83134,8 +82077,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83192,9 +82133,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83223,9 +82161,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83261,8 +82196,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83292,7 +82225,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83322,7 +82254,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83351,8 +82282,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83382,7 +82311,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83411,7 +82339,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83442,7 +82369,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83472,7 +82398,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83502,9 +82427,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83534,9 +82456,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83566,8 +82485,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83597,9 +82514,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83629,7 +82543,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83660,9 +82573,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND and ISA_DMA_API</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83692,9 +82602,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83725,8 +82632,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83755,8 +82660,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83786,9 +82689,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83818,8 +82718,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83849,7 +82747,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83879,9 +82776,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83911,7 +82805,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND!=n and PCI and SND_FM801</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83942,8 +82835,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -83980,8 +82871,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84018,7 +82907,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84050,7 +82938,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84080,9 +82967,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84112,8 +82996,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84143,7 +83025,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84173,7 +83054,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84202,7 +83082,6 @@ choice
 	<literal>!M68K and SOUND!=n and PCI and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84247,8 +83126,6 @@ choice
 	<literal>!M68K and SOUND!=n and PPC and SND and I2C and INPUT and PPC_PMAC</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84328,8 +83205,6 @@ choice
 	<literal>!M68K and SOUND!=n and ARM and ARCH_SA1100 and SND and L3</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84359,8 +83234,6 @@ choice
 	<literal>!M68K and SOUND!=n and ARM and SND and ARM_AMBA</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84371,7 +83244,6 @@ choice
 
 <nutentry>
 	<term>SND_PXA2XX_PCM</term>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84392,8 +83264,6 @@ choice
 	<literal>!M68K and SOUND!=n and ARM and ARCH_PXA and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84433,9 +83303,6 @@ choice
 	<literal>!M68K and SOUND!=n and MIPS and (SOC_AU1000 || SOC_AU1100 || SOC_AU1500) and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84474,9 +83341,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND and USB</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84506,9 +83370,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND and USB and (X86 || PPC || ALPHA)</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84553,7 +83414,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND and PCMCIA and ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84583,7 +83443,6 @@ choice
 	<literal>!M68K and SOUND!=n and SND and PCMCIA and ISA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84628,8 +83487,6 @@ choice
 	<literal>!M68K and SOUND!=n and (SPARC32 || SPARC64) and SBUS and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84658,8 +83515,6 @@ choice
 	<literal>!M68K and SOUND!=n and (SPARC32 || SPARC64) and SND</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84688,8 +83543,6 @@ choice
 	<literal>!M68K and SOUND!=n and (SPARC32 || SPARC64) and SND and SBUS</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -84733,7 +83586,6 @@ choice
 	<literal>!M68K and SOUND!=n and GSC and SND</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -88256,7 +87108,6 @@ choice
 
 <nutentry>
 	<term>USB_OTG</term>
-  unknown prop 6!
 	<para>
 	default value
 	<literal>n if USB and EXPERIMENTAL</literal>
@@ -88478,7 +87329,6 @@ choice
 	<literal>USB and USB_ARCH_HAS_OHCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -88519,7 +87369,6 @@ choice
 	<literal>y if USB_OHCI_HCD and (STB03xxx || PPC_MPC52xx)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -88549,7 +87398,6 @@ choice
 	<literal>y if USB_OHCI_HCD and PCI and (STB03xxx || PPC_MPC52xx)</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -88889,7 +87737,6 @@ choice
 	<literal>USB</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -90486,7 +89333,6 @@ choice
 	<literal>USB and NET and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -90590,7 +89436,6 @@ choice
 	<literal>USB and NET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -90722,8 +89567,6 @@ choice
 	<literal>USB and NET and USB_USBNET and NET_ETHERNET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if USB and NET and USB_USBNET and NET_ETHERNET</literal>
@@ -90910,7 +89753,6 @@ choice
 	<literal>USB and NET and USB_USBNET and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -91120,8 +89962,6 @@ choice
 	<literal>USB and NET and USB_USBNET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if USB and NET and USB_USBNET</literal>
@@ -91161,7 +90001,6 @@ choice
 	<literal>USB and NET and NET_RADIO</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -91243,7 +90082,6 @@ choice
 	<literal>USB and PARPORT</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93038,7 +91876,6 @@ choice
 	<literal>VT and USB_SISUSBVGA</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93171,7 +92008,6 @@ choice
 	<literal>USB and ATM</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	default value
 	<literal>n if USB and ATM</literal>
@@ -93207,7 +92043,6 @@ choice
 	<literal>USB and USB_ATM</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93239,7 +92074,6 @@ choice
 	<literal>USB and USB_ATM</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93427,7 +92261,6 @@ choice
 	<literal></literal><emphasis>choice</emphasis><literal> and PCI</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93460,7 +92293,6 @@ choice
 	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_NET2280</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93513,7 +92345,6 @@ choice
 	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_PXA2XX</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93596,7 +92427,6 @@ choice
 	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_GOKU</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93636,7 +92466,6 @@ choice
 	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_LH7A40X</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93657,7 +92486,6 @@ choice
 	<literal></literal><emphasis>choice</emphasis><literal> and ARCH_OMAP</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93687,7 +92515,6 @@ choice
 	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_OMAP</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -93738,7 +92565,6 @@ choice
 	<literal></literal><emphasis>choice</emphasis><literal> and USB and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -93780,7 +92606,6 @@ choice
 	<literal>USB_GADGET if </literal><emphasis>choice</emphasis><literal> and USB_GADGET_DUMMY_HCD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -94763,7 +93588,6 @@ choice
 	<literal>EXT2_FS_XATTR</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -94964,7 +93788,6 @@ choice
 	<literal>EXT3_FS_XATTR</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -95258,7 +94081,6 @@ choice
 	<literal>REISERFS_FS_XATTR</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -95318,7 +94140,6 @@ choice
 	"JFS filesystem support"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -95347,7 +94168,6 @@ choice
 	<literal>JFS_FS</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -95473,7 +94293,6 @@ choice
 	"XFS filesystem support"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -96054,7 +94873,6 @@ choice
 	<literal>ISO9660_FS</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -96083,7 +94901,6 @@ choice
 	<literal>ISO9660_FS</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -96175,7 +94992,6 @@ choice
 
 <nutentry>
 	<term>FAT_FS</term>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -96239,7 +95055,6 @@ choice
 	"MSDOS fs support"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -96281,7 +95096,6 @@ choice
 	"VFAT (Windows-95) fs support"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -96379,7 +95193,6 @@ choice
 	"NTFS file system support"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -96964,8 +95777,6 @@ choice
 	"Apple Extended HFS file system support"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -96997,7 +95808,6 @@ choice
 	<literal>EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -97219,7 +96029,6 @@ choice
 	<literal>MTD</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -97363,8 +96172,6 @@ choice
 	<literal>JFFS2_FS and JFFS2_COMPRESSION_OPTIONS</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	default value
 	<literal>y if JFFS2_FS</literal>
@@ -97551,7 +96358,6 @@ choice
 	"Compressed ROM file system support (cramfs)"
 </nutsynopsis>
 <nutentrybody>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -97872,9 +96678,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -97995,7 +96798,6 @@ choice
 	<literal>NET and NFS_FS and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -98076,10 +96878,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -98166,7 +96964,6 @@ choice
 	<literal>NET and NFSD_V3</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -98193,10 +96990,6 @@ choice
 	<literal>NET and NFSD_V3 and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -98315,7 +97108,6 @@ choice
 
 <nutentry>
 	<term>NFS_ACL_SUPPORT</term>
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -98374,10 +97166,6 @@ choice
 	<literal>NET and SUNRPC and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -98412,10 +97200,6 @@ choice
 	<literal>NET and SUNRPC and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -98449,7 +97233,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -98574,7 +97357,6 @@ choice
 	<literal>NET and INET</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -98942,7 +97724,6 @@ choice
 	<literal>NET and NCP_FS</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -99081,7 +97862,6 @@ choice
 	<literal>NET and INET and EXPERIMENTAL</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -99860,7 +98640,6 @@ choice
 	<literal>PARTITION_ADVANCED</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>boolean</literal>
@@ -101234,7 +100013,6 @@ choice
 	<literal>DEBUG_KERNEL</literal>
 	</para>
 
-  unknown prop 7!
 	<para>
 	default value
 	<literal>17 if ARCH_S390</literal>
@@ -102119,8 +100897,6 @@ choice
 	<literal>SECURITY</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -102220,7 +100996,6 @@ choice
 	<literal>SECURITY_SELINUX_BOOTPARAM</literal>
 	</para>
 
-  unknown prop 7!
 	<para>
 	default value
 	<literal>1 if SECURITY_SELINUX_BOOTPARAM</literal>
@@ -102360,7 +101135,6 @@ choice
 	<literal>SECURITY_SELINUX</literal>
 	</para>
 
-  unknown prop 7!
 	<para>
 	default value
 	<literal>1 if SECURITY_SELINUX</literal>
@@ -103163,8 +101937,6 @@ choice
 	<literal>CRYPTO</literal>
 	</para>
 
-  unknown prop 6!
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -103219,7 +101991,6 @@ choice
 	<literal>CRYPTO</literal>
 	</para>
 
-  unknown prop 6!
 	<para>
 	type
 	<literal>tristate</literal>
@@ -103686,9 +102457,7 @@ choice
 -->
 <!-- end automated stuff -->
 
-
 </sect1>
 
 </chapter>
-
 <!-- vim: set ai tw=72 : -->
