@@ -93513,8 +93513,8 @@ choice
 </nutlist>
 </sect-8>
 
-
-<sect-8>
+-->
+<sect2>
 	<title>"File systems"</title>
 <nutlist>
 
@@ -94824,10 +94824,10 @@ choice
 
 </nutentrybody>
 </nutentry>
+</nutlist>
 
-
-<sect-7>
-	<title>"CD-ROM/DVD Filesystems"</title>
+<sect3>
+	<title>CD-ROM/DVD Filesystems</title>
 <nutlist>
 
 
@@ -99856,9 +99856,9 @@ choice
 </nutlist>
 </sect-8>
 
-
-<sect-8>
-	<title>"Profiling support"</title>
+-->
+<sect2>
+	<title>Profiling support</title>
 <nutlist>
 
 <para>
@@ -99922,11 +99922,10 @@ choice
 
 
 </nutlist>
-</sect-8>
+</sect2>
 
-
-<sect-8>
-	<title>"Kernel hacking"</title>
+<sect2>
+	<title>Kernel hacking</title>
 <nutlist>
 
 
@@ -100694,11 +100693,10 @@ choice
 
 
 </nutlist>
-</sect-8>
+</sect2>
 
-
-<sect-8>
-	<title>"Security options"</title>
+<sect2>
+	<title>Security options</title>
 <nutlist>
 
 
@@ -101168,13 +101166,12 @@ choice
 
 
 </nutlist>
-</sect-8>
+</sect2>
 
 
-<sect-8>
-	<title>"Cryptographic options"</title>
+<sect2>
+	<title>Cryptographic options</title>
 <nutlist>
-
 
 <nutentry>
 	<term>CRYPTO</term>
@@ -102028,12 +102025,11 @@ choice
 
 </nutentrybody>
 </nutentry>
+</nutlist>
 
-
-<sect-7>
-	<title>"Hardware crypto devices"</title>
+<sect3>
+	<title>Hardware crypto devices</title>
 <nutlist>
-
 
 <nutentry>
 	<term>CRYPTO_DEV_PADLOCK</term>
@@ -102094,18 +102090,12 @@ choice
 
 </nutentrybody>
 </nutentry>
-
-
 </nutlist>
-</sect-7>
+</sect3>
+</sect2>
 
-
-</nutlist>
-</sect-8>
-
-
-<sect-8>
-	<title>"Library routines"</title>
+<sect2>
+	<title>Library routines</title>
 <nutlist>
 
 
@@ -102199,262 +102189,10 @@ choice
 </nutentrybody>
 </nutentry>
 
-<nutentry>
-	<term>ZLIB_INFLATE</term>
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>ZLIB_DEFLATE</term>
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>GENERIC_ALLOCATOR</term>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>REED_SOLOMON</term>
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>REED_SOLOMON_ENC8</term>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>REED_SOLOMON_DEC8</term>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>REED_SOLOMON_ENC16</term>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>REED_SOLOMON_DEC16</term>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>TEXTSEARCH</term>
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>TEXTSEARCH_KMP</term>
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>TEXTSEARCH_BM</term>
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>TEXTSEARCH_FSM</term>
-	<para>
-	type
-	<literal>tristate</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
 
 </nutlist>
-</sect-8>
+</sect2>
 
-<nutentry>
-	<term>GENERIC_HARDIRQS</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>GENERIC_IRQ_PROBE</term>
-	<para>
-	default value
-	<literal>y</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>GENERIC_PENDING_IRQ</term>
-	<para>
-	default value
-	<literal>y if GENERIC_HARDIRQS and SMP</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>X86_SMP</term>
-	<para>
-	default value
-	<literal>y if SMP and !X86_VOYAGER</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>X86_HT</term>
-	<para>
-	default value
-	<literal>y if SMP and !X86_VISWS and !X86_VOYAGER</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>X86_BIOS_REBOOT</term>
-	<para>
-	default value
-	<literal>y if !X86_VISWS and !X86_VOYAGER</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-<nutentry>
-	<term>X86_TRAMPOLINE</term>
-	<para>
-	default value
-	<literal>y if X86_SMP || X86_VOYAGER and SMP</literal>
-	</para>
-
-	<para>
-	type
-	<literal>boolean</literal>
-	</para>
-
-<nutentrybody>
-</nutentrybody>
-</nutentry>
-
-
-</nutlist>
-</sect-9>
-
-
-</nutlist>
-</sect-10>
--->
 <!-- end automated stuff -->
 
 </sect1>
