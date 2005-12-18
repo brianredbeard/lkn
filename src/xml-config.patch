@@ -1,16 +1,15 @@
----
  arch/i386/Kconfig        |    4 
  scripts/kconfig/Makefile |    2 
  scripts/kconfig/conf.c   |    1 
  scripts/kconfig/expr.c   |    6 -
  scripts/kconfig/lkc.h    |    1 
- scripts/kconfig/zconf.y  |  199 +++++++++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 209 insertions(+), 4 deletions(-)
+ scripts/kconfig/zconf.y  |  218 +++++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 228 insertions(+), 4 deletions(-)
 
---- lkn-2.6.14-rc5.orig/scripts/kconfig/Makefile
-+++ lkn-2.6.14-rc5/scripts/kconfig/Makefile
-@@ -221,7 +221,7 @@ $(obj)/lkc_defs.h: $(src)/lkc_proto.h
- # The following requires flex/bison
+--- linux-2.6.15-rc5.orig/scripts/kconfig/Makefile	2005-12-18 14:50:54.000000000 -0800
++++ linux-2.6.15-rc5/scripts/kconfig/Makefile	2005-12-18 14:52:25.000000000 -0800
+@@ -230,7 +230,7 @@
+ # The following requires flex/bison/gperf
  # By default we use the _shipped versions, uncomment the following line if
  # you are modifying the flex/bison src.
 -# LKC_GENPARSER := 1
@@ -18,9 +17,9 @@
  
  ifdef LKC_GENPARSER
  
---- lkn-2.6.14-rc5.orig/scripts/kconfig/conf.c
-+++ lkn-2.6.14-rc5/scripts/kconfig/conf.c
-@@ -534,6 +534,7 @@ int main(int ac, char **av)
+--- linux-2.6.15-rc5.orig/scripts/kconfig/conf.c	2005-12-18 14:50:54.000000000 -0800
++++ linux-2.6.15-rc5/scripts/kconfig/conf.c	2005-12-18 14:52:25.000000000 -0800
+@@ -542,6 +542,7 @@
  	}
  	conf_parse(name);
  	//zconfdump(stdout);
@@ -28,9 +27,9 @@
  	switch (input_mode) {
  	case set_default:
  		if (!defconfig_file)
---- lkn-2.6.14-rc5.orig/scripts/kconfig/expr.c
-+++ lkn-2.6.14-rc5/scripts/kconfig/expr.c
-@@ -1026,7 +1026,8 @@ void expr_print(struct expr *e, void (*f
+--- linux-2.6.15-rc5.orig/scripts/kconfig/expr.c	2005-10-27 17:02:08.000000000 -0700
++++ linux-2.6.15-rc5/scripts/kconfig/expr.c	2005-12-18 14:52:25.000000000 -0800
+@@ -1026,7 +1026,8 @@
  		if (e->left.sym->name)
  			fn(data, e->left.sym->name);
  		else
@@ -40,7 +39,7 @@
  		break;
  	case E_NOT:
  		fn(data, "!");
-@@ -1049,7 +1050,8 @@ void expr_print(struct expr *e, void (*f
+@@ -1049,7 +1050,8 @@
  		break;
  	case E_AND:
  		expr_print(e->left.expr, fn, data, E_AND);
@@ -50,9 +49,9 @@
  		expr_print(e->right.expr, fn, data, E_AND);
  		break;
  	case E_CHOICE:
---- lkn-2.6.14-rc5.orig/scripts/kconfig/zconf.y
-+++ lkn-2.6.14-rc5/scripts/kconfig/zconf.y
-@@ -682,6 +682,205 @@ void zconfdump(FILE *out)
+--- linux-2.6.15-rc5.orig/scripts/kconfig/zconf.y	2005-12-18 14:50:54.000000000 -0800
++++ linux-2.6.15-rc5/scripts/kconfig/zconf.y	2005-12-18 15:31:55.000000000 -0800
+@@ -673,6 +673,224 @@
  	}
  }
  
@@ -118,39 +117,58 @@
 +	struct property *prop;
 +	int entrybody_start = 0;
 +
-+	fprintf(out, "<nutentry>\n");
++	fprintf(out, "<refentry>\n");
++	fprintf(out, "<refnamediv>\n");
 +	if (sym_is_choice(sym))
-+		fprintf(out, "choice\n");
++		; //fprintf(out, "choice\n");
 +	else
-+		fprintf(out, "\t<term>%s</term>\n", sym->name);
++		fprintf(out, "\t<refname>%s</refname>\n", sym->name);
++
++// FIXME
++// use for_each_properties and pick the properties in order that we want, that
++// way we can get the proper start and end where we need them to be.
 +
 +	for (prop = sym->prop; prop; prop = prop->next) {
 +		if (prop->menu != menu)
 +			continue;
 +		switch (prop->type) {
 +		case P_PROMPT:
-+			fprintf(out, "<nutsynopsis>\n\t");
++		case P_MENU:
++			fprintf(out, "\t<refpurpose>");
 +			gkh_print_quoted_string(out, prop->text);
-+			fprintf(out, "\n</nutsynopsis>\n");
-+			fprintf(out, "<nutentrybody>\n");
++			fprintf(out, "</refpurpose>\n");
++			fprintf(out, "</refnamediv>\n");
 +			entrybody_start = 1;
 +			if (!expr_is_yes(prop->visible.expr)) {
-+				fprintf(out, "\t<para>\n\tdepends on\n\t<literal>");
++				fprintf(out, "<refsynopsisdiv>\n");
++				fprintf(out, "\t<para role=\"depends\">Depends on <literal>");
 +				expr_fprint(prop->visible.expr, out);
-+				fprintf(out, "</literal>\n\t</para>\n\n");
++				fprintf(out, "</literal></para>\n");
++				fprintf(out, "\t<para role=\"module\">Module Name <filename>FIXME</filename></para>\n");
++				fprintf(out, "</refsynopsisdiv>\n");
 +			}
 +			break;
 +		case P_DEFAULT:
-+			fprintf(out, "\t<para>\n\tdefault value\n\t<literal>");
++			fprintf(out, "\t<para role=\"default\">Default Value <literal>");
 +			expr_fprint(prop->expr, out);
 +			if (!expr_is_yes(prop->visible.expr)) {
 +				fputs(" if ", out);
 +				expr_fprint(prop->visible.expr, out);
 +			}
-+			fprintf(out, "</literal>\n\t</para>\n\n");
++			fprintf(out, "</literal></para>\n\n");
 +			break;
 +		case P_CHOICE:
 +			//fputs("  #choice value\n", out);
++			break;
++		case P_SELECT:
++			fprintf(out, "\t<para role=\"select\">Selects <literal>");
++			expr_fprint(prop->expr, out);
++			fprintf(out, "</literal></para>\n");
++			break;
++		case P_RANGE:
++			fprintf(out, "\t<para role=\"range\">Range <literal>");
++			expr_fprint(prop->expr, out);
++			fprintf(out, "</literal></para>\n");
 +			break;
 +		default:
 +			fprintf(out, "  unknown prop %d!\n", prop->type);
@@ -158,7 +176,7 @@
 +		}
 +	}
 +
-+	fprintf(out, "\t<para>\n\ttype\n\t<literal>");
++	fprintf(out, "\t<para role=\"type\">Type <literal>");
 +	switch (sym->type) {
 +	case S_BOOLEAN:
 +		fputs("boolean", out);
@@ -179,10 +197,10 @@
 +		fputs("???", out);
 +		break;
 +	}
-+	fprintf(out, "</literal>\n\t</para>\n\n");
++	fprintf(out, "</literal></para>\n");
 +
-+	if (!entrybody_start)
-+		fprintf(out, "<nutentrybody>\n");
++	fprintf(out, "<refset1>\n");
++	fprintf(out, "\t<title>Description</title>\n");
 +
 +	if (sym->help) {
 +		int len = strlen(sym->help);
@@ -194,8 +212,8 @@
 +		fprintf(out, "\t</para>\n\n");
 +	}
 +
-+	fprintf(out, "</nutentrybody>\n");
-+	fprintf(out, "</nutentry>\n\n");
++	fprintf(out, "</refsect1>\n");
++	fprintf(out, "</refentry>\n\n");
 +}
 +
 +void gregkh_confdump(FILE *out)
@@ -258,9 +276,9 @@
  #include "lex.zconf.c"
  #include "util.c"
  #include "confdata.c"
---- lkn-2.6.14-rc5.orig/scripts/kconfig/lkc.h
-+++ lkn-2.6.14-rc5/scripts/kconfig/lkc.h
-@@ -39,6 +39,7 @@ extern "C" {
+--- linux-2.6.15-rc5.orig/scripts/kconfig/lkc.h	2005-12-18 14:50:54.000000000 -0800
++++ linux-2.6.15-rc5/scripts/kconfig/lkc.h	2005-12-18 14:52:25.000000000 -0800
+@@ -50,6 +50,7 @@
  
  int zconfparse(void);
  void zconfdump(FILE *out);
@@ -268,8 +286,8 @@
  
  extern int zconfdebug;
  void zconf_starthelp(void);
---- lkn-2.6.14-rc5.orig/arch/i386/Kconfig
-+++ lkn-2.6.14-rc5/arch/i386/Kconfig
+--- linux-2.6.15-rc5.orig/arch/i386/Kconfig	2005-12-18 14:50:32.000000000 -0800
++++ linux-2.6.15-rc5/arch/i386/Kconfig	2005-12-18 14:52:25.000000000 -0800
 @@ -3,7 +3,7 @@
  # see Documentation/kbuild/kconfig-language.txt.
  #
@@ -279,7 +297,7 @@
  
  config X86_32
  	bool
-@@ -1042,3 +1042,5 @@ config X86_TRAMPOLINE
+@@ -1055,3 +1055,5 @@
  	bool
  	depends on X86_SMP || (X86_VOYAGER && SMP)
  	default y
