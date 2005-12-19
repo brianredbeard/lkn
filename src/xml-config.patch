@@ -3,8 +3,8 @@
  scripts/kconfig/conf.c   |    1 
  scripts/kconfig/expr.c   |    6 -
  scripts/kconfig/lkc.h    |    1 
- scripts/kconfig/zconf.y  |  218 +++++++++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 228 insertions(+), 4 deletions(-)
+ scripts/kconfig/zconf.y  |  277 +++++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 287 insertions(+), 4 deletions(-)
 
 --- linux-2.6.15-rc5.orig/scripts/kconfig/Makefile	2005-12-18 14:50:54.000000000 -0800
 +++ linux-2.6.15-rc5/scripts/kconfig/Makefile	2005-12-18 14:52:25.000000000 -0800
@@ -50,8 +50,8 @@
  		break;
  	case E_CHOICE:
 --- linux-2.6.15-rc5.orig/scripts/kconfig/zconf.y	2005-12-18 14:50:54.000000000 -0800
-+++ linux-2.6.15-rc5/scripts/kconfig/zconf.y	2005-12-18 15:31:55.000000000 -0800
-@@ -673,6 +673,224 @@
++++ linux-2.6.15-rc5/scripts/kconfig/zconf.y	2005-12-18 16:58:31.000000000 -0800
+@@ -673,6 +673,283 @@
  	}
  }
  
@@ -75,7 +75,7 @@
 +	const char *p;
 +	int len;
 +
-+	putc('"', out);
++//	putc('"', out);
 +	while ((p = strchr(str, '"'))) {
 +		len = p - str;
 +		if (len)
@@ -86,7 +86,7 @@
 +	}
 +	//fputs(str, out);
 +	gkh_print_string(out, strlen(str), str);
-+	putc('"', out);
++//	putc('"', out);
 +}
 +
 +static void gkh_output_help(FILE *out, char *string)
@@ -124,10 +124,65 @@
 +	else
 +		fprintf(out, "\t<refname>%s</refname>\n", sym->name);
 +
-+// FIXME
-+// use for_each_properties and pick the properties in order that we want, that
-+// way we can get the proper start and end where we need them to be.
++	for (prop = sym->prop; prop; prop = prop->next) {
++		if (prop->menu != menu)
++			continue;
++		switch (prop->type) {
++		case P_PROMPT:
++		case P_MENU:
++			fprintf(out, "\t<refpurpose>");
++			gkh_print_quoted_string(out, prop->text);
++			fprintf(out, "</refpurpose>\n");
++			break;
++		default:
++			break;
++		}
++	}
++	fprintf(out, "</refnamediv>\n");
 +
++	fprintf(out, "<refsynopsisdiv>\n");
++	for (prop = sym->prop; prop; prop = prop->next) {
++		if (prop->menu != menu)
++			continue;
++		switch (prop->type) {
++		case P_PROMPT:
++		case P_MENU:
++			entrybody_start = 1;
++			if (!expr_is_yes(prop->visible.expr)) {
++				fprintf(out, "\t<para role=\"depends\">Depends on <literal>");
++				expr_fprint(prop->visible.expr, out);
++				fprintf(out, "</literal></para>\n");
++			}
++			break;
++		default:
++			break;
++		}
++	}
++
++	for_all_properties(sym, prop, P_SELECT) {
++		fprintf(out, "\t<para role=\"select\">Selects <literal>");
++		expr_fprint(prop->expr, out);
++		fprintf(out, "</literal></para>\n");
++	}
++
++	for_all_properties(sym, prop, P_RANGE) {
++		fprintf(out, "\t<para role=\"range\">Range <literal>");
++		expr_fprint(prop->expr, out);
++		fprintf(out, "</literal></para>\n");
++	}
++
++	for_all_properties(sym, prop, P_DEFAULT) {
++		fprintf(out, "\t<para role=\"default\">Default Value <literal>");
++		expr_fprint(prop->expr, out);
++		if (!expr_is_yes(prop->visible.expr)) {
++			fputs(" if ", out);
++			expr_fprint(prop->visible.expr, out);
++		}
++		fprintf(out, "</literal></para>\n");
++	}
++
++
++#if 0
 +	for (prop = sym->prop; prop; prop = prop->next) {
 +		if (prop->menu != menu)
 +			continue;
@@ -149,33 +204,33 @@
 +			}
 +			break;
 +		case P_DEFAULT:
-+			fprintf(out, "\t<para role=\"default\">Default Value <literal>");
-+			expr_fprint(prop->expr, out);
-+			if (!expr_is_yes(prop->visible.expr)) {
-+				fputs(" if ", out);
-+				expr_fprint(prop->visible.expr, out);
-+			}
-+			fprintf(out, "</literal></para>\n\n");
++//			fprintf(out, "\t<para role=\"default\">Default Value <literal>");
++//			expr_fprint(prop->expr, out);
++//			if (!expr_is_yes(prop->visible.expr)) {
++//				fputs(" if ", out);
++//				expr_fprint(prop->visible.expr, out);
++//			}
++//			fprintf(out, "</literal></para>\n\n");
 +			break;
 +		case P_CHOICE:
 +			//fputs("  #choice value\n", out);
 +			break;
 +		case P_SELECT:
-+			fprintf(out, "\t<para role=\"select\">Selects <literal>");
-+			expr_fprint(prop->expr, out);
-+			fprintf(out, "</literal></para>\n");
++//			fprintf(out, "\t<para role=\"select\">Selects <literal>");
++//			expr_fprint(prop->expr, out);
++//			fprintf(out, "</literal></para>\n");
 +			break;
 +		case P_RANGE:
-+			fprintf(out, "\t<para role=\"range\">Range <literal>");
-+			expr_fprint(prop->expr, out);
-+			fprintf(out, "</literal></para>\n");
++//			fprintf(out, "\t<para role=\"range\">Range <literal>");
++//			expr_fprint(prop->expr, out);
++//			fprintf(out, "</literal></para>\n");
 +			break;
 +		default:
 +			fprintf(out, "  unknown prop %d!\n", prop->type);
 +			break;
 +		}
 +	}
-+
++#endif
 +	fprintf(out, "\t<para role=\"type\">Type <literal>");
 +	switch (sym->type) {
 +	case S_BOOLEAN:
@@ -199,6 +254,10 @@
 +	}
 +	fprintf(out, "</literal></para>\n");
 +
++	fprintf(out, "\t<para role=\"module\">Module Name <filename>FIXME</filename></para>\n");
++	fprintf(out, "</refsynopsisdiv>\n");
++
++
 +	fprintf(out, "<refset1>\n");
 +	fprintf(out, "\t<title>Description</title>\n");
 +
@@ -221,7 +280,7 @@
 +	struct property *prop;
 +	struct symbol *sym;
 +	struct menu *menu;
-+	int depth=2;
++	int depth=1;
 +
 +	menu = rootmenu.list;
 +	while (menu) {
@@ -240,7 +299,7 @@
 +//				fputs("\nmenu ", out);
 +				fprintf(out, "\n<sect%d>\n\t<title>", depth);
 +				gkh_print_quoted_string(out, prop->text);
-+				fputs("</title>\n<nutlist>\n", out);
++				fputs("</title>\n", out);
 +				fputs("\n", out);
 +				++depth;
 +				break;
@@ -263,7 +322,7 @@
 +			if (menu->prompt && menu->prompt->type == P_MENU) {
 +//				fputs("\nendmenu\n", out);
 +				--depth;
-+				fprintf(out, "\n</nutlist>\n</sect%d>\n\n", depth);
++				fprintf(out, "\n</sect%d>\n\n", depth);
 +			}
 +			if (menu->next) {
 +				menu = menu->next;
