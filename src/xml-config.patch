@@ -50,7 +50,7 @@
  		break;
  	case E_CHOICE:
 --- linux-2.6.15-rc5.orig/scripts/kconfig/zconf.y	2005-12-18 14:50:54.000000000 -0800
-+++ linux-2.6.15-rc5/scripts/kconfig/zconf.y	2005-12-18 16:58:31.000000000 -0800
++++ linux-2.6.15-rc5/scripts/kconfig/zconf.y	2005-12-21 22:49:12.000000000 -0800
 @@ -673,6 +673,283 @@
  	}
  }
@@ -258,7 +258,7 @@
 +	fprintf(out, "</refsynopsisdiv>\n");
 +
 +
-+	fprintf(out, "<refset1>\n");
++	fprintf(out, "<refsect1>\n");
 +	fprintf(out, "\t<title>Description</title>\n");
 +
 +	if (sym->help) {
