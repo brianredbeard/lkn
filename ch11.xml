@@ -76331,48 +76331,10 @@ Kernel configuration option reference
 
 </sect-8>
 
-
-<sect-8>
+-->
+<sect2>
 	<title>USB support</title>
 
-
-<refentry>
-<refnamediv>
-	<refname>USB_ARCH_HAS_HCD</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if USB_ARCH_HAS_OHCI</literal></para>
-	<para role="default">Default Value <literal>y if ARM</literal></para>
-	<para role="default">Default Value <literal>PCI</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>USB_ARCH_HAS_OHCI</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if SA1111</literal></para>
-	<para role="default">Default Value <literal>y if ARCH_OMAP</literal></para>
-	<para role="default">Default Value <literal>y if ARCH_LH7A404</literal></para>
-	<para role="default">Default Value <literal>y if ARCH_S3C2410</literal></para>
-	<para role="default">Default Value <literal>y if PXA27x</literal></para>
-	<para role="default">Default Value <literal>y if STB03xxx</literal></para>
-	<para role="default">Default Value <literal>y if PPC_MPC52xx</literal></para>
-	<para role="default">Default Value <literal>y if SOC_AU1X00</literal></para>
-	<para role="default">Default Value <literal>PCI</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
 
 <refentry>
 <refnamediv>
@@ -76380,9 +76342,8 @@ Kernel configuration option reference
 	<refpurpose>Support for Host-side USB</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB_ARCH_HAS_HCD</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>usbcore</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76403,13 +76364,13 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Say Y here if your computer has a host-side USB port and you want
-	to use USB devices.  You then need to say Y to at least one of the
-	Host Controller Driver (HCD) options below.  Choose a USB 1.1
-	controller, such as "UHCI HCD support" or "OHCI HCD support",
-	and "EHCI HCD (USB 2.0) support" except for older systems that
-	do not have USB 2.0 support.  It doesn't normally hurt to select
-	them all if you are not certain.
+	Select this option here if your computer has a host-side USB
+	port and you want to use USB devices.  You then need to selet at
+	least one of the Host Controller Driver (HCD) options below.
+	Choose a USB 1.1 controller, such as "UHCI HCD support" or "OHCI
+	HCD support", and "EHCI HCD (USB 2.0) support" except for older
+	systems that do not have USB 2.0 support.  Select them all if
+	you are not certian.
 	</para>
 
 	<para>
@@ -76423,12 +76384,6 @@ Kernel configuration option reference
 	in file:Documentation/usb/ and especially the links given in
 	file:Documentation/usb/usb-help.txt.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usbcore.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -76440,16 +76395,15 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want the USB core and hub drivers to produce a bunch
-	of debug messages to the system log. Select this if you are having a
-	problem with USB support and want to see more of what is going on.
+	Select this option if you want the USB core and hub drivers to
+	write a lot of debug messages to the system log. Select this if
+	you are having a problem with USB support and want to see more
+	of what is going on.
 	</para>
-
 </refsect1>
 </refentry>
 
@@ -76461,19 +76415,19 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say Y here (and to "/proc file system support" in the "File
-	systems" section, above), you will get a file /proc/bus/usb/devices
-	which lists the devices currently connected to your USB bus or
-	busses, and for every connected device a file named
-	"/proc/bus/usb/xxx/yyy", where xxx is the bus number and yyy the
-	device number; the latter files can be used by user space programs
-	to talk directly to the device. These files are "virtual", meaning
-	they are generated on the fly and not stored on the hard drive.
+	If you select this option (and the "/proc file system support"
+	in the "File systems" section, above), you will get a file
+	/proc/bus/usb/devices which lists the devices currently
+	connected to your USB bus or busses, and for every connected
+	device a file named "/proc/bus/usb/xxx/yyy", where xxx is the
+	bus number and yyy the device number; the latter files can be
+	used by user space programs to talk directly to the device.
+	These files are "virtual", meaning they are generated on the fly
+	and not stored on the hard drive.
 	</para>
 
 	<para>
@@ -76487,12 +76441,20 @@ Kernel configuration option reference
 	</para>
 
 	<para>
+	If you do not want to mount the usbfs filesystem, access to the
+	devices can also be directly through the /dev nodes that this
+	filesystem will create if you are using a program like udev that
+	creates device nodes on the fly.
+	</para>
+
+	<para>
 	Please note that this code is completely unrelated to devfs, the
 	"/dev file system support".
 	</para>
 
 	<para>
-	Most users want to say Y here.
+	You should almost always select this option, unless you really
+	know what you are doing.
 	</para>
 
 </refsect1>
@@ -76506,7 +76468,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76534,7 +76495,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76560,7 +76520,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and PM and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76592,7 +76551,6 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>USB_SUSPEND</literal></para>
 	<para role="default">Default Value <literal>n if USB and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76619,7 +76577,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>USB_OTG</literal></para>
 	<para role="default">Default Value <literal>y if USB_OTG</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76649,7 +76606,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and PCI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ehci-hcd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76672,16 +76629,6 @@ Kernel configuration option reference
 	Controller Driver or UHCI (for Via motherboards) Host Controller
 	Driver too.
 	</para>
-
-	<para>
-	You may want to read file:Documentation/usb/ehci.txt.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ehci-hcd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -76694,7 +76641,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>USB_EHCI_HCD and EXPERIMENTAL</literal></para>
 	<para role="default">Default Value <literal>n if USB_EHCI_HCD and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76715,7 +76661,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_EHCI_HCD and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76742,7 +76687,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="default">Default Value <literal>N if USB</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>isp116x-hcd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76754,12 +76699,6 @@ Kernel configuration option reference
 	<para>
 	This driver does not support isochronous transfers.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called isp116x-hcd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -76769,10 +76708,10 @@ Kernel configuration option reference
 	<refpurpose>OHCI HCD support</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB and USB_ARCH_HAS_OHCI</literal></para>
+	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="select">Selects <literal>ISP1301_OMAP</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ohci-hcd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76786,12 +76725,6 @@ Kernel configuration option reference
 	based system where you're not sure, the "lspci -v" entry will list the
 	right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ohci-hcd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -76805,7 +76738,6 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>USB_OHCI_BIG_ENDIAN</literal></para>
 	<para role="default">Default Value <literal>y if USB_OHCI_HCD and (STB03xxx || PPC_MPC52xx)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76827,7 +76759,6 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>USB_OHCI_LITTLE_ENDIAN</literal></para>
 	<para role="default">Default Value <literal>y if USB_OHCI_HCD and PCI and (STB03xxx || PPC_MPC52xx)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76841,42 +76772,13 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>USB_OHCI_BIG_ENDIAN</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>n if USB_OHCI_HCD</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>USB_OHCI_LITTLE_ENDIAN</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>n if USB_OHCI_HCD and (STB03xxx || PPC_MPC52xx)</literal></para>
-	<para role="default">Default Value <literal>y if USB_OHCI_HCD</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>USB_UHCI_HCD</refname>
 	<refpurpose>UHCI HCD (most Intel and VIA) support</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and PCI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>uhci-hcd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76890,12 +76792,6 @@ Kernel configuration option reference
 	(like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
 	133). If unsure, say Y.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called uhci-hcd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -76908,22 +76804,16 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="default">Default Value <literal>N if USB</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sl811-hcd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	The SL811HS is a single-port USB controller that supports either
 	host side or peripheral side roles.  Enable this option if your
-	board has this chip, and you want to use it as a host controller. 
+	board has this chip, and you want to use it as a host controller.
 	If unsure, say N.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called sl811-hcd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -76936,7 +76826,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>USB_SL811_HCD and PCMCIA</literal></para>
 	<para role="default">Default Value <literal>N if USB_SL811_HCD and PCMCIA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sl811_cs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -76955,109 +76845,13 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>OBSOLETE_OSS_USB_DRIVER</refname>
-	<refpurpose>Obsolete OSS USB drivers</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB and SOUND</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	This option enables support for the obsolete USB Audio and Midi
-	drivers that are scheduled for removal in the near future since
-	there are ALSA drivers for the same hardware.
-	</para>
-
-	<para>
-	Please contact Adrian Bunk bunk@stusta.de if you had to
-	say Y here because of missing support in the ALSA drivers.
-	</para>
-
-	<para>
-	If unsure, say N.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>USB_AUDIO</refname>
-	<refpurpose>USB Audio support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB and SOUND and OBSOLETE_OSS_USB_DRIVER</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Say Y here if you want to connect USB audio equipment such as
-	speakers to your computer's USB port. You only need this if you use
-	the OSS sound driver; ALSA has its own option for usb audio support.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called audio.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>USB_MIDI</refname>
-	<refpurpose>USB MIDI support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB and SOUND and OBSOLETE_OSS_USB_DRIVER</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Say Y here if you want to connect a USB MIDI device to your
-	computer's USB port.  You only need this if you use the OSS
-	sound system; USB MIDI devices are supported by ALSA's USB
-	audio driver. This driver is for devices that comply with
-	'Universal Serial Bus Device Class Definition for MIDI Device'.
-	</para>
-
-	<para>
-	The following devices are known to work:
-	* Steinberg USB2MIDI
-	* Roland MPU64
-	* Roland PC-300
-	* Roland SC8850
-	* Roland UM-1
-	* Roland UM-2
-	* Roland UA-100
-	* Yamaha MU1000
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usb-midi.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>USB_ACM</refname>
 	<refpurpose>USB Modem (CDC ACM) support</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cdc-acm</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77072,12 +76866,6 @@ Kernel configuration option reference
 	/proc/bus/usb/devices, then your modem will not work with this
 	driver.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called cdc-acm.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -77089,7 +76877,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>usblp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77097,12 +76885,6 @@ Kernel configuration option reference
 	Say Y here if you want to connect a USB printer to your computer's
 	USB port.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usblp.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -77115,7 +76897,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="select">Selects <literal>SCSI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>usb-storage</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77133,12 +76915,6 @@ Kernel configuration option reference
 	probably also need 'SCSI device support: SCSI disk support'
 	(BLK_DEV_SD) for most USB storage devices.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usb-storage.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -77150,7 +76926,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77170,7 +76945,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77190,7 +76964,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77210,7 +76983,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE and BLK_DEV_IDE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77243,7 +77015,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77263,7 +77034,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77299,7 +77069,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77320,7 +77089,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77340,7 +77108,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77360,7 +77127,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB_STORAGE and INPUT_EVDEV and EXPERIMENTAL and !PM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77387,7 +77153,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>usbhid</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77409,12 +77175,6 @@ Kernel configuration option reference
 	<para>
 	If unsure, say Y.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usbhid.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -77570,88 +77330,6 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-7>
-	<title>USB HID Boot Protocol drivers</title>
-
-<para>
-	depends on
-	<literal>USB!=n and USB_HID!=y</literal>
-	</para>
-
-
-<refentry>
-<refnamediv>
-	<refname>USB_KBD</refname>
-	<refpurpose>USB HIDBP Keyboard (simple Boot) support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB_HID!=y and USB and INPUT</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Say Y here only if you are absolutely sure that you don't want
-	to use the generic HID driver for your USB keyboard and prefer
-	to use the keyboard in its limited Boot Protocol mode instead.
-	</para>
-
-	<para>
-	This is almost certainly not what you want.  This is mostly
-	useful for embedded applications or simple keyboards.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usbkbd.
-	</para>
-
-	<para>
-	If even remotely unsure, say N.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>USB_MOUSE</refname>
-	<refpurpose>USB HIDBP Mouse (simple Boot) support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB_HID!=y and USB and INPUT</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Say Y here only if you are absolutely sure that you don't want
-	to use the generic HID driver for your USB mouse and prefer
-	to use the mouse in its limited Boot Protocol mode instead.
-	</para>
-
-	<para>
-	This is almost certainly not what you want.  This is mostly
-	useful for embedded applications or simple mice.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usbmouse.
-	</para>
-
-	<para>
-	If even remotely unsure, say N.
-	</para>
-
-</refsect1>
-</refentry>
-
-
-</sect-7>
-
 <refentry>
 <refnamediv>
 	<refname>USB_AIPTEK</refname>
@@ -77660,7 +77338,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and INPUT</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>aiptek</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77670,12 +77348,6 @@ Kernel configuration option reference
 	(CONFIG_INPUT_MOUSEDEV) and/or "Event interface support"
 	(CONFIG_INPUT_EVDEV) as well.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called aiptek.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -77687,7 +77359,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and INPUT</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>wacom</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77696,11 +77368,6 @@ Kernel configuration option reference
 	or Graphire tablet.  Make sure to say Y to "Mouse support"
 	(CONFIG_INPUT_MOUSEDEV) and/or "Event interface support"
 	(CONFIG_INPUT_EVDEV) as well.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called wacom.
 	</para>
 
 </refsect1>
@@ -77714,7 +77381,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and INPUT</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>acecad</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -77724,12 +77391,6 @@ Kernel configuration option reference
 	(CONFIG_INPUT_MOUSEDEV) and/or "Event interface support"
 	(CONFIG_INPUT_EVDEV) as well.
 	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called acecad.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -78503,11 +78164,10 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-7>
+<sect3>
 	<title>USB Network Adapters</title>
 
 <para>
-	depends on
 	<literal>USB and NET</literal>
 	</para>
 
@@ -79128,8 +78788,9 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
-
+</sect3>
+</sect2>
+<!--
 <refentry>
 <refnamediv>
 	<refname>USB_MON</refname>
