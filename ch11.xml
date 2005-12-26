@@ -1192,124 +1192,14 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry>
-<refnamediv>
-	<refpurpose>Default I/O scheduler</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>DEFAULT_AS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Select the I/O scheduler which will be used by default for all
-	block devices.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>DEFAULT_AS</refname>
-	<refpurpose>Anticipatory</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and IOSCHED_AS=y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>DEFAULT_DEADLINE</refname>
-	<refpurpose>Deadline</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and IOSCHED_DEADLINE=y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>DEFAULT_CFQ</refname>
-	<refpurpose>CFQ</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and IOSCHED_CFQ=y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>DEFAULT_NOOP</refname>
-	<refpurpose>No-op</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>DEFAULT_IOSCHED</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>anticipatory if DEFAULT_AS</literal></para>
-	<para role="default">Default Value <literal>deadline if DEFAULT_DEADLINE</literal></para>
-	<para role="default">Default Value <literal>cfq if DEFAULT_CFQ</literal></para>
-	<para role="default">Default Value <literal>noop if DEFAULT_NOOP</literal></para>
-	<para role="type">Type <literal>string</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-
 </sect2>
 
 
 </sect1>
 
-<!--
 <sect1>
 	<title>Processor type and features</title>
 
-
-<refentry>
-<refnamediv>
-	<refpurpose>Subarchitecture Type</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>X86_PC</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
 
 <refentry>
 <refnamediv>
@@ -1584,7 +1474,8 @@ Kernel configuration option reference
 	<title>Description</title>
 </refsect1>
 </refentry>
-
+</sect1>
+<!--
 <refentry>
 <refnamediv>
 	<refpurpose>Processor family</refpurpose>
