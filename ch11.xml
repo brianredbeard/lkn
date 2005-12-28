@@ -1137,6 +1137,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
+	<para role="module">Module Name <filename>as-iosched</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -1158,6 +1159,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
+	<para role="module">Module Name <filename>deadline-iosched</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -1180,6 +1182,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
+	<para role="module">Module Name <filename>cfq-iosched</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -1192,6 +1195,24 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+<refentry>
+<refnamediv>
+	<refname></refname>
+	<refpurpose>Default I/O scheduler</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>IOSCHED_AS</literal></para>
+	<para role="type">Type <literal>choice</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is the selection for the I/O scheduler which will be used
+	by default for all block devices.
+	</para>
+
+</refsect1>
+</refentry>
 </sect2>
 
 
@@ -1203,35 +1224,31 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>X86_PC</refname>
-	<refpurpose>PC-compatible</refpurpose>
+	<refname> </refname>
+	<refpurpose>Subarchitecture Type</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Choose this option if your computer is a standard PC or compatible.
+	This is a multi-value option that defines the specific type of
+	x86 architecture that you wish to build this kernel for.  The
+	different values for this option are the following:
 	</para>
 
-</refsect1>
-</refentry>
+	<variablelist>
 
-<refentry>
-<refnamediv>
-	<refname>X86_ELAN</refname>
-	<refpurpose>AMD Elan</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>PC-Compatible <literal>X86_PC</literal></term>
+	<listitem>
+	<para>
+	Choose this option if your computer is a standard PC or compatible.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term>AMD Elan <literal>X86_ELAN</literal></term>
+	<listitem>
 	<para>
 	Select this for an AMD Elan processor.
 	</para>
@@ -1243,22 +1260,15 @@ Kernel configuration option reference
 	<para>
 	If unsure, choose "PC-compatible" instead.
 	</para>
+	<para>
+	Choose this option if your computer is a standard PC or compatible.
+	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_VOYAGER</refname>
-	<refpurpose>Voyager (NCR)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Voyager (NCR) <literal>X86_VOYAGER</literal></term>
+	<listitem>
 	<para>
 	Voyager is an MCA-based 32-way capable SMP architecture proprietary
 	to NCR Corp.  Machine classes 345x/35xx/4100/51xx are Voyager-based.
@@ -1272,94 +1282,45 @@ Kernel configuration option reference
 	If you do not specifically know you have a Voyager based machine,
 	say N here, otherwise the kernel you build will not be bootable.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_NUMAQ</refname>
-	<refpurpose>NUMAQ (IBM/Sequent)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="select">Selects <literal>NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>NUMAQ (IBM/Sequent) <literal>X86_NUMAQ</literal></term>
+	<listitem>
 	<para>
 	This option is used for getting Linux to run on a (IBM/Sequent) NUMA
 	multiquad box. This changes the way that processors are bootstrapped,
 	and uses Clustered Logical APIC addressing mode instead of Flat Logical.
-	You will need a new lynxer.elf file to flash your firmware with - send
-	email to Martin.Bligh@us.ibm.com.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_SUMMIT</refname>
-	<refpurpose>Summit/EXA (IBM x440)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and SMP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Summit/EXA (IBM x440) <literal>X86_SUMMIT</literal></term>
+	<listitem>
+	<para role="depends">Depends on <literal>SMP</literal></para>
 	<para>
 	This option is needed for IBM systems that use the Summit/EXA chipset.
 	In particular, it is needed for the x440.
 	</para>
+	</listitem>
+	</varlistentry>
 
-	<para>
-	If you don't have one of these computers, you should say N here.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_BIGSMP</refname>
-	<refpurpose>Support for other sub-arch SMP systems with more than 8 CPUs</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and SMP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Support for other sub-arch SMP systems with more than 8 CPUs <literal>X86_BIGSMP</literal></term>
+	<listitem>
+	<para role="depends">Depends on <literal>SMP</literal></para>
 	<para>
 	This option is needed for the systems that have more than 8 CPUs
 	and if the system is not of any sub-arch type above.
 	</para>
+	</listitem>
+	</varlistentry>
 
-	<para>
-	If you don't have such a system, you should say N here.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_VISWS</refname>
-	<refpurpose>SGI 320/540 (Visual Workstation)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>SGI 320/540 (Visual Workstation) <literal>X86_VISWS</literal></term>
+	<listitem>
 	<para>
 	The SGI Visual Workstation series is an IA32-based workstation
 	based on SGI systems chips with some legacy PC hardware attached.
@@ -1373,605 +1334,292 @@ Kernel configuration option reference
 	A kernel compiled for the Visual Workstation will not run on PCs
 	and vice versa. See file:Documentation/sgi-visws.txt for details.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_GENERICARCH</refname>
-	<refpurpose>Generic architecture (Summit, bigsmp, ES7000, default)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and SMP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Generic architecture (Summit, bigsmp, ES7000, default) <literal>X86_GENERICARCH</literal></term>
+	<listitem>
+	<para role="depends">Depends on <literal>SMP</literal></para>
 	<para>
-	This option compiles in the Summit, bigsmp, ES7000, default subarchitectures.
-	It is intended for a generic binary kernel.
+	This option compiles in the Summit, bigsmp, ES7000, and default
+	subarchitectures.  It is intended for a generic binary kernel.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_ES7000</refname>
-	<refpurpose>Support for Unisys ES7000 IA32 series</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and SMP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Support for Unisys ES7000 IA32 series <literal>X86_ES7000</literal></term>
+	<listitem>
+	<para role="depends">Depends on <literal>SMP</literal></para>
 	<para>
-	Support for Unisys ES7000 systems.  Say 'Y' here if this kernel is
-	supposed to run on an IA32-based Unisys ES7000 system.
-	Only choose this option if you have such a system, otherwise you
+	Support for Unisys ES7000 systems.  Say 'Y' here if this kernel
+	is supposed to run on an IA32-based Unisys ES7000 system.  Only
+	choose this option if you have such a system, otherwise you
 	should say N here.
 	</para>
+	</listitem>
+	</varlistentry>
+
+	</variablelist>
+
 
 </refsect1>
 </refentry>
 
 <refentry>
 <refnamediv>
-	<refname>ACPI_SRAT</refname>
+	<refname> </refname>
+	<refpurpose>Processor Family</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA and (X86_SUMMIT || X86_GENERICARCH)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_SUMMIT_NUMA</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA and (X86_SUMMIT || X86_GENERICARCH)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_CYCLONE_TIMER</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if X86_SUMMIT || X86_GENERICARCH</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>ES7000_CLUSTERED_APIC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if SMP and X86_ES7000 and MPENTIUMIII</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-</sect1>
-<!--
-<refentry>
-<refnamediv>
-	<refpurpose>Processor family</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_ELAN</literal></para>
-	<para role="default">Default Value <literal>M686 if !X86_ELAN</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>M386</refname>
-	<refpurpose>386</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This is the processor type of your CPU. This information is used for
-	optimizing purposes. In order to compile a kernel that can run on
-	all x86 CPU types (albeit not optimally fast), you can specify
-	"386" here.
+	This option allows you to specify the specific processory type
+	of the CPU you wish to run this kernel on.  This option will
+	cause the kernel to do different things for the specified
+	processor, and will tell the build process what the best options
+	are to pass to the compiler in order to create the most
+	efficient kernel.
 	</para>
 
 	<para>
-	The kernel will not necessarily run on earlier architectures than
-	the one you have chosen, e.g. a Pentium optimized kernel will run on
-	a PPro, but not necessarily on a i486.
+	The kernel will not necessarily run on earlier architectures
+	than the one that you choose.  For example, a Pentium optimized
+	kernel will run successfully on a Pentium Pro processor, but it
+	will not run on a i486 processor.
 	</para>
 
 	<para>
-	Here are the settings recommended for greatest speed:
-	- "386" for the AMD/Cyrix/Intel 386DX/DXL/SL/SLC/SX, Cyrix/TI
-	486DLC/DLC2, UMC 486SX-S and NexGen Nx586.  Only "386" kernels
-	will run on a 386 class machine.
-	- "486" for the AMD/Cyrix/IBM/Intel 486DX/DX2/DX4 or
+	If you do not know which of the following options below to
+	choose, selet <literal>386</literal>.
+	</para>
+
+	<para>
+	The different values for this option are the following:
+	</para>
+
+	<variablelist>
+
+	<varlistentry>
+	<term>386</term>
+	<listitem>
+	<para>
+	Choose this for a "generic" kernel, or because you have a
+	AMD/Cyrix/Intel 386DX/DXL/SL/SLC/SX, Cyrix/TI 486DLC/DLC2, UMC
+	486SX-S and NexGen Nx586 processor.  Only "386" kernels will run
+	on a 386 class machine.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term>486</term>
+	<listitem>
+	<para>
+	Select this for a 486 series processor, either Intel or one of
+	the compatible processors from AMD, Cyrix, IBM, or Intel.
+	This includes the DX, DX2, and DX4 variants along with the
 	SL/SLC/SLC2/SLC3/SX/SX2 and UMC U5D or U5S.
-	- "586" for generic Pentium CPUs lacking the TSC
-	(time stamp counter) register.
-	- "Pentium-Classic" for the Intel Pentium.
-	- "Pentium-MMX" for the Intel Pentium MMX.
-	- "Pentium-Pro" for the Intel Pentium Pro.
-	- "Pentium-II" for the Intel Pentium II or pre-Coppermine Celeron.
-	- "Pentium-III" for the Intel Pentium III or Coppermine Celeron.
-	- "Pentium-4" for the Intel Pentium 4 or P4-based Celeron.
-	- "K6" for the AMD K6, K6-II and K6-III (aka K6-3D).
-	- "Athlon" for the AMD K7 family (Athlon/Duron/Thunderbird).
-	- "Crusoe" for the Transmeta Crusoe series.
-	- "Efficeon" for the Transmeta Efficeon series.
-	- "Winchip-C6" for original IDT Winchip.
-	- "Winchip-2" for IDT Winchip 2.
-	- "Winchip-2A" for IDT Winchips with 3dNow! capabilities.
-	- "GeodeGX1" for Geode GX1 (Cyrix MediaGX).
-	- "CyrixIII/VIA C3" for VIA Cyrix III or VIA C3.
-	- "VIA C3-2 for VIA C3-2 "Nehemiah" (model 9 and above).
 	</para>
+	</listitem>
+	</varlistentry>
 
+	<varlistentry>
+	<term>586/K5/5x86/6x86/6x86MX</term>
+	<listitem>
 	<para>
-	If you don't know what to do, choose "386".
+	Select this for an 586 or 686 series processor such as the AMD
+	K5, the Cyrix 5x86, 6x86, or 6x86MX.  This selection does not
+	assume that the processor has the RDTSC (Read Time Stamp
+	Counter) instruction.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>M486</refname>
-	<refpurpose>486</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Select this for a 486 series processor, either Intel or one of the
-	compatible processors from AMD, Cyrix, IBM, or Intel.  Includes DX,
-	DX2, and DX4 variants; also SL/SLC/SLC2/SLC3/SX/SX2 and UMC U5D or
-	U5S.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>M586</refname>
-	<refpurpose>586/K5/5x86/6x86/6x86MX</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Select this for an 586 or 686 series processor such as the AMD K5,
-	the Cyrix 5x86, 6x86 and 6x86MX.  This choice does not
-	assume the RDTSC (Read Time Stamp Counter) instruction.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>M586TSC</refname>
-	<refpurpose>Pentium-Classic</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Pentium-Classic</term>
+	<listitem>
 	<para>
 	Select this for a Pentium Classic processor with the RDTSC (Read
 	Time Stamp Counter) instruction for benchmarking.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>M586MMX</refname>
-	<refpurpose>Pentium-MMX</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Pentium-MMX</term>
+	<listitem>
 	<para>
-	Select this for a Pentium with the MMX graphics/multimedia
-	extended instructions.
+	Select this for a Pentium processor with the MMX
+	graphics/multimedia extended instructions.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>M686</refname>
-	<refpurpose>Pentium-Pro</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Pentium-Pro</term>
+	<listitem>
 	<para>
-	Select this for Intel Pentium Pro chips.  This enables the use of
-	Pentium Pro extended instructions, and disables the init-time guard
-	against the f00f bug found in earlier Pentiums.
+	Select this for Intel Pentium Pro processor.  This enables the
+	use of Pentium Pro extended instructions, and disables the
+	init-time guard against the f00f bug found in earlier Pentiums.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MPENTIUMII</refname>
-	<refpurpose>Pentium-II/Celeron(pre-Coppermine)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Pentium-II/Celeron(pre-Coppermine)</term>
+	<listitem>
 	<para>
-	Select this for Intel chips based on the Pentium-II and
+	Select this for Intel processors based on the Pentium-II and
 	pre-Coppermine Celeron core.  This option enables an unaligned
 	copy optimization, compiles the kernel with optimization flags
-	tailored for the chip, and applies any applicable Pentium Pro
+	tailored for the processor, and applies any applicable Pentium Pro
 	optimizations.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MPENTIUMIII</refname>
-	<refpurpose>Pentium-III/Celeron(Coppermine)/Pentium-III Xeon</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Pentium-III/Celeron(Coppermine)/Pentium-III Xeon</term>
+	<listitem>
 	<para>
-	Select this for Intel chips based on the Pentium-III and
+	Select this for Intel processors based on the Pentium-III and
 	Celeron-Coppermine core.  This option enables use of some
 	extended prefetch instructions in addition to the Pentium II
 	extensions.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MPENTIUMM</refname>
-	<refpurpose>Pentium M</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Pentium M</term>
+	<listitem>
 	<para>
-	Select this for Intel Pentium M (not Pentium-4 M)
-	notebook chips.
+	Select this for Intel Pentium M (not Pentium-4 M) notebook
+	processors.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MPENTIUM4</refname>
-	<refpurpose>Pentium-4/Celeron(P4-based)/Pentium-4 M/Xeon</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Pentium-4/Celeron(P4-based)/Pentium-4 M/Xeon</term>
+	<listitem>
 	<para>
-	Select this for Intel Pentium 4 chips.  This includes the
-	Pentium 4, P4-based Celeron and Xeon, and Pentium-4 M
-	(not Pentium M) chips.  This option enables compile flags
-	optimized for the chip, uses the correct cache shift, and
+	Select this for Intel Pentium 4 processors.  This includes the
+	Pentium 4, P4-based Celeron and Xeon, and Pentium-4 M (not
+	Pentium M) processors.  This option enables compile flags
+	optimized for the processor, uses the correct cache shift, and
 	applies any applicable Pentium III optimizations.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MK6</refname>
-	<refpurpose>K6/K6-II/K6-III</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>K6/K6-II/K6-III</term>
+	<listitem>
 	<para>
-	Select this for an AMD K6-family processor.  Enables use of
-	some extended instructions, and passes appropriate optimization
-	flags to GCC.
+	Select this for an AMD K6-family processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MK7</refname>
-	<refpurpose>Athlon/Duron/K7</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Athlon/Duron/K7</term>
+	<listitem>
 	<para>
-	Select this for an AMD Athlon K7-family processor.  Enables use of
-	some extended instructions, and passes appropriate optimization
-	flags to GCC.
+	Select this for an AMD Athlon K7-family processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MK8</refname>
-	<refpurpose>Opteron/Athlon64/Hammer/K8</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Opteron/Athlon64/Hammer/K8</term>
+	<listitem>
 	<para>
-	Select this for an AMD Opteron or Athlon64 Hammer-family processor.  Enables
-	use of some extended instructions, and passes appropriate optimization
-	flags to GCC.
+	Select this for an AMD Opteron or Athlon64 Hammer-family processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MCRUSOE</refname>
-	<refpurpose>Crusoe</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Crusoe</term>
+	<listitem>
 	<para>
-	Select this for a Transmeta Crusoe processor.  Treats the processor
-	like a 586 with TSC, and sets some GCC optimization flags (like a
-	Pentium Pro with no alignment requirements).
+	Select this for a Transmeta Crusoe processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MEFFICEON</refname>
-	<refpurpose>Efficeon</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Efficeon</term>
+	<listitem>
 	<para>
 	Select this for a Transmeta Efficeon processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MWINCHIPC6</refname>
-	<refpurpose>Winchip-C6</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Winchip-C6</term>
+	<listitem>
 	<para>
-	Select this for an IDT Winchip C6 chip.  Linux and GCC
-	treat this chip as a 586TSC with some extended instructions
-	and alignment requirements.
+	Select this for an IDT Winchip C6 processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MWINCHIP2</refname>
-	<refpurpose>Winchip-2</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Winchip-2</term>
+	<listitem>
 	<para>
-	Select this for an IDT Winchip-2.  Linux and GCC
-	treat this chip as a 586TSC with some extended instructions
-	and alignment requirements.
+	Select this for an IDT Winchip-2 processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MWINCHIP3D</refname>
-	<refpurpose>Winchip-2A/Winchip-3</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Winchip-2A/Winchip-3</term>
+	<listitem>
 	<para>
-	Select this for an IDT Winchip-2A or 3.  Linux and GCC
-	treat this chip as a 586TSC with some extended instructions
-	and alignment reqirements.  Also enable out of order memory
-	stores for this CPU, which can increase performance of some
-	operations.
+	Select this for an IDT Winchip-2A or 3 processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MGEODEGX1</refname>
-	<refpurpose>GeodeGX1</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>GeodeGX1</term>
+	<listitem>
 	<para>
-	Select this for a Geode GX1 (Cyrix MediaGX) chip.
+	Select this for a Geode GX1 (Cyrix MediaGX) processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MCYRIXIII</refname>
-	<refpurpose>CyrixIII/VIA-C3</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>CyrixIII/VIA-C3</term>
+	<listitem>
 	<para>
-	Select this for a Cyrix III or C3 chip.  Presently Linux and GCC
-	treat this chip as a generic 586. Whilst the CPU is 686 class,
-	it lacks the cmov extension which gcc assumes is present when
-	generating 686 code.
-	Note that Nehemiah (Model 9) and above will not boot with this
-	kernel due to them lacking the 3DNow! instructions used in earlier
-	incarnations of the CPU.
+	Select this for a Cyrix III or C3 processor.  Note that VIA
+	Nehemiah (Model 9) and above processors will not boot with this
+	kernel due to them lacking the 3DNow! instructions used in
+	earlier incarnations of the processor.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>MVIAC3_2</refname>
-	<refpurpose>VIA C3-2 (Nehemiah)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>VIA C3-2 (Nehemiah)</term>
+	<listitem>
 	<para>
-	Select this for a VIA C3 "Nehemiah". Selecting this enables usage
-	of SSE and tells gcc to treat the CPU as a 686.
-	Note, this kernel will not boot on older (pre model 9) C3s.
+	Select this for a VIA C3 "Nehemiah" processor.  Note, this
+	kernel will not boot on older (pre model 9) VIA C3 processors.
 	</para>
+	</listitem>
+	</varlistentry>
 
+	</variablelist>
 </refsect1>
 </refentry>
 
@@ -1983,307 +1631,26 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_ELAN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Instead of just including optimizations for the selected
-	x86 variant (e.g. PII, Crusoe or Athlon), include some more
-	generic optimizations as well. This will make the kernel
-	perform better on x86 CPUs other than that selected.
+	Instead of just including optimizations for the selected x86
+	variant (e.g. PII, Crusoe or Athlon), include some more generic
+	optimizations as well. This will make the kernel perform better
+	on x86 CPUs other than the specific one that was selected at
+	build time.
 	</para>
 
 	<para>
-	This is really intended for distributors who need more
-	generic optimizations.
+	This option is really intended for distributors who need more
+	generic optimizations and need to ship one prebuilt kernel that
+	will work the best on all different processors.
 	</para>
 
 </refsect1>
 </refentry>
 
-<refentry>
-<refnamediv>
-	<refname>X86_CMPXCHG</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_XADD</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_L1_CACHE_SHIFT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>7 if MPENTIUM4 || X86_GENERIC</literal></para>
-	<para role="default">Default Value <literal>4 if X86_ELAN || M486 || M386</literal></para>
-	<para role="default">Default Value <literal>5 if MWINCHIP3D || MWINCHIP2 || MWINCHIPC6 || MCRUSOE || MEFFICEON || MCYRIXIII || MK6 || MPENTIUMIII || MPENTIUMII || M686 || M586MMX || M586TSC || M586 || MVIAC3_2 || MGEODEGX1</literal></para>
-	<para role="default">Default Value <literal>6 if MK7 || MK8 || MPENTIUMM</literal></para>
-	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>RWSEM_GENERIC_SPINLOCK</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>RWSEM_XCHGADD_ALGORITHM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>GENERIC_CALIBRATE_DELAY</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_PPRO_FENCE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if M686 || M586MMX || M586TSC || M586 || M486 || M386 || MGEODEGX1</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_F00F_BUG</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if M586MMX || M586TSC || M586 || M486 || M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_WP_WORKS_OK</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_INVLPG</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_BSWAP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_POPAD_OK</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_CMPXCHG64</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !M386 and !M486</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_ALIGNMENT_16</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if MWINCHIP3D || MWINCHIP2 || MWINCHIPC6 || MCYRIXIII || X86_ELAN || MK6 || M586MMX || M586TSC || M586 || M486 || MVIAC3_2 || MGEODEGX1</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_GOOD_APIC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if MK7 || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || M586MMX || MK8 || MEFFICEON</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_INTEL_USERCOPY</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M586MMX || X86_GENERIC || MK8 || MK7 || MEFFICEON</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_USE_PPRO_CHECKSUM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if MWINCHIP3D || MWINCHIP2 || MWINCHIPC6 || MCYRIXIII || MK7 || MK6 || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || MK8 || MVIAC3_2 || MEFFICEON</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_USE_3DNOW</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if MCYRIXIII || MK7</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_OOSTORE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if (MWINCHIP3D || MWINCHIP2 || MWINCHIPC6) and MTRR</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_TSC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if (MWINCHIP3D || MWINCHIP2 || MCRUSOE || MEFFICEON || MCYRIXIII || MK7 || MK6 || MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || M586MMX || M586TSC || MK8 || MVIAC3_2 || MGEODEGX1) and !X86_NUMAQ</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
 
 <refentry>
 <refnamediv>
@@ -2292,7 +1659,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2313,26 +1679,11 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>HPET_EMULATE_RTC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if HPET_TIMER and RTC=y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>SMP</refname>
 	<refpurpose>Symmetric multi-processing support</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2388,7 +1739,6 @@ Kernel configuration option reference
 	<para role="default">Default Value <literal>32 if SMP and (X86_NUMAQ || X86_SUMMIT || X86_BIGSMP || X86_ES7000)</literal></para>
 	<para role="default">Default Value <literal>8 if SMP</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2415,7 +1765,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SMP</literal></para>
 	<para role="default">Default Value <literal>off if SMP</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2431,30 +1780,30 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
+	<refname></refname>
 	<refpurpose>Preemption Model</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>PREEMPT_NONE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="type">Type <literal>choice</literal></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
-</refsect1>
-</refentry>
+	<para>
+	Preemption defines if the kernel should be interrupted in the
+	middle of doing a task or not.  This can be useful for certian
+	types of workloads as described below.
+	</para>
 
-<refentry>
-<refnamediv>
-	<refname>PREEMPT_NONE</refname>
-	<refpurpose>No Forced Preemption (Server)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<para>
+	The different values for this option are the following:
+	</para>
+
+	<variablelist>
+
+	<varlistentry>
+	<term>No Forced Preemption (Server) <literal>PREEMPT_NONE</literal></term>
+	<listitem>
 	<para>
 	This is the traditional Linux preemption model, geared towards
 	throughput. It will still provide good latencies most of the
@@ -2468,22 +1817,12 @@ Kernel configuration option reference
 	raw processing power of the kernel, irrespective of scheduling
 	latencies.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>PREEMPT_VOLUNTARY</refname>
-	<refpurpose>Voluntary Kernel Preemption (Desktop)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Voluntary Kernel Preemption (Desktop) <literal>PREEMPT_VOLUNTARY</literal></term>
+	<listitem>
 	<para>
 	This option reduces the latency of the kernel by adding more
 	"explicit preemption points" to the kernel code. These new
@@ -2493,35 +1832,24 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	This allows reaction to interactive events by allowing a
-	low priority process to voluntarily preempt itself even if it
-	is in kernel mode executing a system call. This allows
-	applications to run more 'smoothly' even when the system is
-	under load.
+	This allows reaction to interactive events by allowing a low
+	priority process to voluntarily preempt itself even if it is in
+	kernel mode executing a system call. This allows applications to
+	run more 'smoothly' even when the system is under load.
 	</para>
 
 	<para>
 	Select this if you are building a kernel for a desktop system.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>PREEMPT</refname>
-	<refpurpose>Preemptible Kernel (Low-Latency Desktop)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Preemptible Kernel (Low-Latency Desktop) <literal>PREEMPT</literal></term>
+	<listitem>
 	<para>
-	This option reduces the latency of the kernel by making
-	all kernel code (that is not executing in a critical section)
+	This option reduces the latency of the kernel by making all
+	kernel code (that is not executing in a critical section)
 	preemptible.  This allows reaction to interactive events by
 	permitting a low priority process to be preempted involuntarily
 	even if it is in kernel mode executing a system call and would
@@ -2536,9 +1864,14 @@ Kernel configuration option reference
 	embedded system with latency requirements in the milliseconds
 	range.
 	</para>
+	</listitem>
+	</varlistentry>
+
+	</variablelist>
 
 </refsect1>
 </refentry>
+
 
 <refentry>
 <refnamediv>
@@ -2549,7 +1882,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SMP || PREEMPT</literal></para>
 	<para role="default">Default Value <literal>y if SMP || PREEMPT</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2574,7 +1906,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!SMP and !X86_VISWS and !X86_VOYAGER</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2600,7 +1931,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>X86_UP_APIC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2621,55 +1951,12 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>X86_LOCAL_APIC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if X86_UP_APIC || (X86_VISWS || SMP) and !X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_IO_APIC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if X86_UP_IOAPIC || SMP and !X86_VISWS and !X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_VISWS_APIC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if X86_VISWS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>X86_MCE</refname>
 	<refpurpose>Machine Check Exception</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2699,7 +1986,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>X86_MCE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>non-fatal</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2725,13 +2012,12 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>X86_MCE and (X86_UP_APIC || SMP) and !X86_VISWS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Enabling this feature will cause a message to be printed when the P4
-	enters thermal throttling.
+	Enabling this feature will cause a message to be printed to the
+	kernel log when the P4 enters thermal throttling.
 	</para>
 
 </refsect1>
@@ -2744,7 +2030,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>toshiba</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2776,7 +2062,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>i8k</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2817,7 +2103,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>X86</literal></para>
 	<para role="default">Default Value <literal>n if X86</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2850,7 +2135,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>microcode</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2869,11 +2154,6 @@ Kernel configuration option reference
 	http://www.urbanmyth.org/microcode/.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called microcode.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2884,7 +2164,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>msr</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2906,7 +2186,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpuid</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2933,7 +2213,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL and !IA64</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>edd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2961,7 +2241,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EFI</literal></para>
 	<para role="default">Default Value <literal>n if EFI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>efivars</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -2995,7 +2275,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>ACPI and EFI and IA64</literal></para>
 	<para role="default">Default Value <literal>y if ACPI and EFI and IA64</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>pcdp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3039,7 +2319,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>X86</literal></para>
 	<para role="select">Selects <literal>FW_LOADER</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>dell_rbu</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3062,7 +2342,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>dcdbas</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3092,47 +2372,32 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
+	<refname></refname>
 	<refpurpose>High Memory Support</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>NOHIGHMEM</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>NOHIGHMEM</refname>
-	<refpurpose>off</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="type">Type <literal>choice</literal></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Linux can use up to 64 Gigabytes of physical memory on x86 systems.
-	However, the address space of 32-bit x86 processors is only 4
-	Gigabytes large. That means that, if you have a large amount of
-	physical memory, not all of it can be "permanently mapped" by the
-	kernel. The physical memory that's not permanently mapped is called
-	"high memory".
+	Linux can use up to 64 Gigabytes of physical memory on x86
+	systems.  However, the address space of 32-bit x86 processors is
+	only 4 Gigabytes large. That means that, if you have a large
+	amount of physical memory, not all of it can be "permanently
+	mapped" by the kernel. The physical memory that's not
+	permanently mapped is called "high memory".
 	</para>
 
 	<para>
-	If you are compiling a kernel which will never run on a machine with
-	more than 1 Gigabyte total physical RAM, answer "off" here (default
-	choice and suitable for most users). This will result in a "3GB/1GB"
-	split: 3GB are mapped so that each process sees a 3GB virtual memory
-	space and the remaining part of the 4GB virtual memory space is used
-	by the kernel to permanently map as much physical memory as
-	possible.
+	If you are compiling a kernel which will never run on a machine
+	with more than 1 Gigabyte total physical RAM, answer "off" here
+	(default choice and suitable for most users). This will result
+	in a "3GB/1GB" split: 3GB are mapped so that each process sees a
+	3GB virtual memory space and the remaining part of the 4GB
+	virtual memory space is used by the kernel to permanently map as
+	much physical memory as possible.
 	</para>
 
 	<para>
@@ -3145,302 +2410,109 @@ Kernel configuration option reference
 	selection turns Intel PAE (Physical Address Extension) mode on.
 	PAE implements 3-level paging on IA32 processors. PAE is fully
 	supported by Linux, PAE mode is implemented on all recent Intel
-	processors (Pentium Pro and better). NOTE: If you say "64GB" here,
-	then the kernel will not boot on CPUs that don't support PAE!
+	processors (Pentium Pro and better). NOTE: If you say "64GB"
+	here, then the kernel will not boot on CPUs that don't support
+	PAE!
 	</para>
 
 	<para>
-	The actual amount of total physical memory will either be
-	auto detected or can be forced by using a kernel command line option
-	such as "mem=256M". (Try "man bootparam" or see the documentation of
-	your boot loader (lilo or loadlin) about how to pass options to the
-	kernel at boot time.)
+	The actual amount of total physical memory will either be auto
+	detected or can be forced by using a kernel command line option
+	such as "mem=256M". (Try "man bootparam" or see the
+	documentation of your boot loader (lilo or loadlin) about how to
+	pass options to the kernel at boot time.)
 	</para>
 
 	<para>
 	If unsure, say "off".
 	</para>
 
-</refsect1>
-</refentry>
+	<para>
+	The different options for this value are:
+	</para>
 
-<refentry>
-<refnamediv>
-	<refname>HIGHMEM4G</refname>
-	<refpurpose>4GB</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<variablelist>
+
+	<varlistentry>
+	<term>off <literal>NOHIGHMEM</literal></term>
+	<listitem>
+	<para>
+	This disables high memory support in the kernel, and should be
+	selected if you are unsure about the other values for this
+	option.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term>4GB <literal>HIGHMEM4G</literal></term>
+	<listitem>
 	<para>
 	Select this if you have a 32-bit processor and between 1 and 4
 	gigabytes of physical RAM.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HIGHMEM64G</refname>
-	<refpurpose>64GB</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>64GB <literal>HIGHMEM64G</literal></term>
+	<listitem>
 	<para>
 	Select this if you have a 32-bit processor and more than 4
 	gigabytes of physical RAM.
 	</para>
+	</listitem>
+	</varlistentry>
 
+	</variablelist>
 </refsect1>
 </refentry>
 
 <refentry>
 <refnamediv>
-	<refname>HIGHMEM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if HIGHMEM64G || HIGHMEM4G</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_PAE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if HIGHMEM64G</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>NUMA</refname>
-	<refpurpose>Numa Memory Allocation and Scheduler Support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SMP and HIGHMEM64G and (X86_NUMAQ || X86_GENERICARCH || X86_SUMMIT and ACPI)</literal></para>
-	<para role="select">Selects <literal>SPARSEMEM_STATIC</literal></para>
-	<para role="default">Default Value <literal>n if SMP and HIGHMEM64G and (X86_NUMAQ || X86_GENERICARCH || X86_SUMMIT and ACPI) and X86_PC</literal></para>
-	<para role="default">Default Value <literal>y if SMP and HIGHMEM64G and (X86_NUMAQ || X86_GENERICARCH || X86_SUMMIT and ACPI) and (X86_NUMAQ || X86_SUMMIT)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HAVE_ARCH_BOOTMEM_NODE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>ARCH_HAVE_MEMORY_PRESENT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if DISCONTIGMEM</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>NEED_NODE_MEMMAP_SIZE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if DISCONTIGMEM || SPARSEMEM</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HAVE_ARCH_ALLOC_REMAP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>ARCH_DISCONTIGMEM_ENABLE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>ARCH_DISCONTIGMEM_DEFAULT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>ARCH_SPARSEMEM_ENABLE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>ARCH_SELECT_MEMORY_MODEL</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if ARCH_SPARSEMEM_ENABLE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>SELECT_MEMORY_MODEL</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if EXPERIMENTAL || ARCH_SELECT_MEMORY_MODEL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
+	<refname></refname>
 	<refpurpose>Memory model</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal>SELECT_MEMORY_MODEL</literal></para>
-	<para role="default">Default Value <literal>DISCONTIGMEM_MANUAL if SELECT_MEMORY_MODEL and ARCH_DISCONTIGMEM_DEFAULT</literal></para>
-	<para role="default">Default Value <literal>SPARSEMEM_MANUAL if SELECT_MEMORY_MODEL and ARCH_SPARSEMEM_DEFAULT</literal></para>
-	<para role="default">Default Value <literal>FLATMEM_MANUAL if SELECT_MEMORY_MODEL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>FLATMEM_MANUAL</refname>
-	<refpurpose>Flat Memory</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and (!ARCH_DISCONTIGMEM_ENABLE || ARCH_FLATMEM_ENABLE)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="type">Type <literal>choice</literal></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This option allows you to change some of the ways that
-	Linux manages its memory internally.  Most users will
-	only have one option here: FLATMEM.  This is normal
-	and a correct option.
+	This choice allows you to pick the specific way that the kernel
+	will manage its memory internally.  Almost all users will only
+	have one option here, <literal>FLATMEM</literal>.  This is the
+	normal type of memory management and is correct.  Some users who
+	have chosen different type of options (like NUMA and memory
+	hotplug) will have a number of different choices to select from
+	here.
 	</para>
 
 	<para>
-	Some users of more advanced features like NUMA and
-	memory hotplug may have different options here.
-	DISCONTIGMEM is an more mature, better tested system,
-	but is incompatible with memory hotplug and may suffer
-	decreased performance over SPARSEMEM.  If unsure between
-	"Sparse Memory" and "Discontiguous Memory", choose
-	"Discontiguous Memory".
+	If you are unsure about this option, choose "Flat Memory".  If
+	you are unsure between the "Sparse Memory" and "Discontiguous
+	Memory" options, choose "Discontiguous Memory".
 	</para>
 
 	<para>
-	If unsure, choose this option (Flat Memory) over any other.
+	The different options for this value are:
 	</para>
 
-</refsect1>
-</refentry>
+	<variablelist>
 
-<refentry>
-<refnamediv>
-	<refname>DISCONTIGMEM_MANUAL</refname>
-	<refpurpose>Discontiguous Memory</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and ARCH_DISCONTIGMEM_ENABLE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Flat Memory <literal>FLATMEM</literal></term>
+	<listitem>
+	<para>
+	This is the default option and should be selected if you are
+	unsure.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term>Discontiguous Memory <literal>DISCONTIGMEM</literal></term>
+	<listitem>
 	<para>
 	This option provides enhanced support for discontiguous
 	memory systems, over FLATMEM.  These systems have holes
@@ -3454,26 +2526,12 @@ Kernel configuration option reference
 	<para>
 	Many NUMA configurations will have this as the only option.
 	</para>
+	</listitem>
+	</varlistentry>
 
-	<para>
-	If unsure, choose "Flat Memory" over this option.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>SPARSEMEM_MANUAL</refname>
-	<refpurpose>Sparse Memory</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and ARCH_SPARSEMEM_ENABLE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>Sparse Memory <literal>SPARSEMEM</literal></term>
+	<listitem>
 	<para>
 	This will be the only option for some systems, including
 	memory hotplug systems.  This is normal.
@@ -3485,124 +2543,11 @@ Kernel configuration option reference
 	performance benefits, along with decreased code complexity,
 	but it is newer, and more experimental.
 	</para>
+	</listitem>
+	</varlistentry>
 
-	<para>
-	If unsure, choose "Discontiguous Memory" or "Flat Memory"
-	over this option.
-	</para>
+	</variablelist>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>DISCONTIGMEM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !SELECT_MEMORY_MODEL and ARCH_DISCONTIGMEM_ENABLE || DISCONTIGMEM_MANUAL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>SPARSEMEM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if SPARSEMEM_MANUAL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>FLATMEM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !DISCONTIGMEM and !SPARSEMEM || FLATMEM_MANUAL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>FLAT_NODE_MEM_MAP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !SPARSEMEM</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>NEED_MULTIPLE_NODES</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if DISCONTIGMEM || NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HAVE_MEMORY_PRESENT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if ARCH_HAVE_MEMORY_PRESENT || SPARSEMEM</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>SPARSEMEM_STATIC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>n</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>SPARSEMEM_EXTREME</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if SPARSEMEM and !SPARSEMEM_STATIC</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -3614,40 +2559,15 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>SPARSEMEM and HOTPLUG and !SOFTWARE_SUSPEND</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
-</refsect1>
-</refentry>
+	<para>
+	This option allows you to add memory to a running system, if
+	your hardware allows it.  It does not allow you to remove memory
+	from a running system.
+	</para>
 
-<refentry>
-<refnamediv>
-	<refname>SPLIT_PTLOCK_CPUS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>4096 if ARM and !CPU_CACHE_VIPT</literal></para>
-	<para role="default">Default Value <literal>4096 if PARISC and !PA20</literal></para>
-	<para role="default">Default Value <literal>4</literal></para>
-	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HAVE_ARCH_EARLY_PFN_TO_NID</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NUMA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -3659,7 +2579,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HIGHMEM4G || HIGHMEM64G</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3680,7 +2599,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3724,7 +2642,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3783,7 +2700,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>ACPI</literal></para>
 	<para role="default">Default Value <literal>n if ACPI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3816,7 +2732,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SMP and X86_IO_APIC</literal></para>
 	<para role="default">Default Value <literal>y if SMP and X86_IO_APIC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3830,20 +2745,6 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>BOOT_IOREMAP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if (X86_SUMMIT || X86_GENERICARCH) and NUMA || X86 and EFI</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>REGPARM</refname>
 	<refpurpose>Use register arguments (EXPERIMENTAL)</refpurpose>
 </refnamediv>
@@ -3851,7 +2752,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="default">Default Value <literal>n if EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3879,7 +2779,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PROC_FS</literal></para>
 	<para role="default">Default Value <literal>y if PROC_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -3896,7 +2795,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	If unsure, say Y. Only embedded should say N here.
+	If unsure, say Y. Only embedded users should say N here.
 	</para>
 
 </refsect1>
@@ -3904,104 +2803,66 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
+	<refname></refname>
 	<refpurpose>Timer frequency</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="default">Default Value <literal>HZ_250</literal></para>
+	<para role="default">Default Value <literal>250</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Allows the configuration of the timer frequency. It is customary
-	to have the timer interrupt run at 1000 HZ but 100 HZ may be more
-	beneficial for servers and NUMA systems that do not need to have
-	a fast response for user interaction and that may experience bus
-	contention and cacheline bounces as a result of timer interrupts.
-	Note that the timer interrupt occurs on each processor in an SMP
-	environment leading to NR_CPUS * HZ number of timer interrupts
-	per second.
+	This option allows the configuration of the timer frequency. It
+	is customary to have the timer interrupt run at 1000 HZ but 100
+	HZ may be more beneficial for servers and NUMA systems that do
+	not need to have a fast response for user interaction and that
+	may experience bus contention and cacheline bounces as a result
+	of timer interrupts.  Note that the timer interrupt occurs on
+	each processor in an SMP environment leading to NR_CPUS * HZ
+	number of timer interrupts per second.
 	</para>
 
-</refsect1>
-</refentry>
+	<para>
+	The different values allowed for this option are:
+	</para>
 
-<refentry>
-<refnamediv>
-	<refname>HZ_100</refname>
-	<refpurpose>100 HZ</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<variablelist>
+
+	<varlistentry>
+	<term>100 HZ</term>
+	<listitem>
 	<para>
 	100 HZ is a typical choice for servers, SMP and NUMA systems
 	with lots of processors that may show reduced performance if
 	too many timer interrupts are occurring.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HZ_250</refname>
-	<refpurpose>250 HZ</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>250 HZ</term>
+	<listitem>
 	<para>
 	250 HZ is a good compromise choice allowing server performance
 	while also showing good interactive responsiveness even
 	on SMP and NUMA systems.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HZ_1000</refname>
-	<refpurpose>1000 HZ</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>1000 HZ</term>
+	<listitem>
 	<para>
 	1000 HZ is the preferred choice for desktop systems and other
 	systems requiring fast interactive responses to events.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
+	</variablelist>
 
-<refentry>
-<refnamediv>
-	<refname>HZ</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>100 if HZ_100</literal></para>
-	<para role="default">Default Value <literal>250 if HZ_250</literal></para>
-	<para role="default">Default Value <literal>1000 if HZ_1000</literal></para>
-	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -4014,7 +2875,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
 	<para role="default">Default Value <literal>0x100000</literal></para>
 	<para role="type">Type <literal>hex</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4040,7 +2900,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4074,7 +2933,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EMBEDDED and EXPERIMENTAL and HIGHMEM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4088,14 +2946,8 @@ Kernel configuration option reference
 
 </sect1>
 
-
 <sect1>
 	<title>Power management options (ACPI, APM)</title>
-
-<para>
-	depends on
-	<literal>!X86_VOYAGER</literal>
-	</para>
 
 
 <refentry>
@@ -4106,7 +2958,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !IA64_HP_SIM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4145,7 +2996,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and PM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4168,14 +3018,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This option enables verbose debugging support in the Power Management
-	code. This is helpful when debugging and reporting various PM bugs, 
-	like suspend support.
+	code. This is helpful when debugging and reporting various PM
+	bugs, like suspend support.
 	</para>
 
 </refsect1>
@@ -4189,14 +3038,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and (PM and SWAP and X86 and (!SMP || SUSPEND_SMP) || (FVR || PPC32) and !SMP)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Enable the possibility of suspending the machine.
 	It doesn't need APM.
-	You may suspend your machine by 'swsusp' or 'shutdown -z time' 
+	You may suspend your machine by 'swsusp' or 'shutdown -z time'
 	(patch for sysvinit needed). 
 	</para>
 
@@ -4233,19 +3081,18 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and SOFTWARE_SUSPEND</literal></para>
 	<para role="default">Default Value <literal> if !X86_VOYAGER and SOFTWARE_SUSPEND</literal></para>
 	<para role="type">Type <literal>string</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	The default resume partition is the partition that the suspend-
-	to-disk implementation will look for a suspended disk image. 
+	to-disk implementation will look for a suspended disk image.
 	</para>
 
 	<para>
-	The partition specified here will be different for almost every user. 
-	It should be a valid swap partition (at least for now) that is turned
-	on before suspending. 
+	The partition specified here will be different for almost every
+	user.  It should be a valid swap partition (at least for now)
+	that is turned on before suspending.
 	</para>
 
 	<para>
@@ -4253,16 +3100,16 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	      resume=/dev/other device 
+	      resume=/dev/other device
 	</para>
 
 	<para>
-	which will set the resume partition to the device specified. 
+	which will set the resume partition to the device specified.
 	</para>
 
 	<para>
 	Note there is currently not a way to specify which device to save the
-	suspended image to. It will simply pick the first available swap 
+	suspended image to. It will simply pick the first available swap
 	device.
 	</para>
 
@@ -4278,7 +3125,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and SOFTWARE_SUSPEND and CRYPTO and (CRYPTO_AES=y || CRYPTO_AES_586=y || CRYPTO_AES_X86_64=y)</literal></para>
 	<para role="default">Default Value <literal> if !X86_VOYAGER and SOFTWARE_SUSPEND and CRYPTO and (CRYPTO_AES=y || CRYPTO_AES_586=y || CRYPTO_AES_X86_64=y)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4296,29 +3142,9 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry>
-<refnamediv>
-	<refname>SUSPEND_SMP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !X86_VOYAGER and HOTPLUG_CPU and X86 and PM</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
 
 <sect2>
 	<title>ACPI (Advanced Configuration and Power Interface) Support</title>
-
-<para>
-	depends on
-	<literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal>
-	</para>
-
 
 <refentry>
 <refnamediv>
@@ -4331,30 +3157,29 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>PCI</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Advanced Configuration and Power Interface (ACPI) support for 
+	Advanced Configuration and Power Interface (ACPI) support for
 	Linux requires an ACPI compliant platform (hardware/firmware),
 	and assumes the presence of OS-directed configuration and power
-	management (OSPM) software.  This option will enlarge your 
+	management (OSPM) software.  This option will enlarge your
 	kernel by about 70K.
 	</para>
 
 	<para>
-	Linux ACPI provides a robust functional replacement for several 
+	Linux ACPI provides a robust functional replacement for several
 	legacy configuration and power management interfaces, including
-	the Plug-and-Play BIOS specification (PnP BIOS), the 
-	MultiProcessor Specification (MPS), and the Advanced Power 
-	Management (APM) specification.  If both ACPI and APM support 
+	the Plug-and-Play BIOS specification (PnP BIOS), the
+	MultiProcessor Specification (MPS), and the Advanced Power
+	Management (APM) specification.  If both ACPI and APM support
 	are configured, whichever is loaded first shall be used.
 	</para>
 
 	<para>
-	The ACPI SourceForge project contains the latest source code, 
-	documentation, tools, mailing list subscription, and other 
+	The ACPI SourceForge project contains the latest source code,
+	documentation, tools, mailing list subscription, and other
 	information.  This project is available at:
 	http://sourceforge.net/projects/acpi
 	</para>
@@ -4366,10 +3191,9 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	ACPI is an open industry specification co-developed by Compaq, 
-	Intel, Microsoft, Phoenix, and Toshiba.  The specification is 
-	available at:
-	http://www.acpi.info
+	ACPI is an open industry specification co-developed by Compaq,
+	Intel, Microsoft, Phoenix, and Toshiba.  The specification is
+	available at: http://www.acpi.info
 	</para>
 
 </refsect1>
@@ -4384,26 +3208,25 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86 and (!SMP || SUSPEND_SMP) and PM</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86 and (!SMP || SUSPEND_SMP) and PM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This option adds support for ACPI suspend states. 
+	This option adds support for ACPI suspend states.
 	</para>
 
 	<para>
-	With this option, you will be able to put the system "to sleep". 
-	Sleep states are low power states for the system and devices. All
-	of the system operating state is saved to either memory or disk
-	(depending on the state), to allow the system to resume operation
-	quickly at your request.
+	With this option, you will be able to put the system "to sleep".
+	Sleep states are low power states for the system and devices.
+	All of the system operating state is saved to either memory or
+	disk (depending on the state), to allow the system to resume
+	operation quickly at your request.
 	</para>
 
 	<para>
 	Although this option sounds really nifty, barely any of the device
-	drivers have been converted to the new driver model and hence few
-	have proper power management support. 
+	drivers have been converted to the new driver model and hence
+	few have proper power management support.
 	</para>
 
 	<para>
@@ -4416,20 +3239,6 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>ACPI_SLEEP_PROC_FS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_SLEEP and PROC_FS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>ACPI_SLEEP_PROC_SLEEP</refname>
 	<refpurpose>/proc/acpi/sleep (deprecated)</refpurpose>
 </refnamediv>
@@ -4437,7 +3246,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_SLEEP_PROC_FS</literal></para>
 	<para role="default">Default Value <literal>n if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_SLEEP_PROC_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4458,7 +3266,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ac</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4480,13 +3288,13 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>battery</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This driver adds support for battery information through
-	/proc/acpi/battery. If you have a mobile system with a battery, 
+	/proc/acpi/battery. If you have a mobile system with a battery,
 	say Y.
 	</para>
 
@@ -4502,7 +3310,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>button</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4525,7 +3333,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>video</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4551,7 +3359,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and EXPERIMENTAL and X86</literal></para>
 	<para role="default">Default Value <literal>n if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and EXPERIMENTAL and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>hotkey</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4572,13 +3380,14 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>fan</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This driver adds support for ACPI fan devices, allowing user-mode 
-	applications to perform basic fan control (on, off, status).
+	This driver adds support for ACPI fan devices, allowing
+	user-mode applications to perform basic fan control (on, off,
+	status).
 	</para>
 
 </refsect1>
@@ -4593,7 +3402,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>processor</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4609,21 +3418,6 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>ACPI_HOTPLUG_CPU</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="select">Selects <literal>ACPI_CONTAINER</literal></para>
-	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_PROCESSOR and HOTPLUG_CPU</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>ACPI_THERMAL</refname>
 	<refpurpose>Thermal Zone</refpurpose>
 </refnamediv>
@@ -4631,7 +3425,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_PROCESSOR</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_PROCESSOR</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>thermal</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4647,22 +3441,6 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>ACPI_NUMA</refname>
-	<refpurpose>NUMA support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and NUMA and (IA64 || X86_64)</literal></para>
-	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and NUMA and (IA64 || X86_64) and (IA64_GENERIC || IA64_SGI_SN2)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>ACPI_ASUS</refname>
 	<refpurpose>ASUS/Medion Laptop Extras</refpurpose>
 </refnamediv>
@@ -4670,7 +3448,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>asus_acpi</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4719,7 +3497,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ibm_acpi</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4747,7 +3525,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>toshiba_acpi</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4795,7 +3573,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and !STANDALONE</literal></para>
 	<para role="default">Default Value <literal>n if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and !STANDALONE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4816,7 +3593,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_CUSTOM_DSDT</literal></para>
 	<para role="default">Default Value <literal> if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and ACPI_CUSTOM_DSDT</literal></para>
 	<para role="type">Type <literal>string</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4836,7 +3612,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="default">Default Value <literal>0 if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4863,7 +3638,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="default">Default Value <literal>n if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4883,13 +3657,12 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This driver is required on some systems for the proper operation of
-	the battery and thermal drivers.  If you are compiling for a 
+	the battery and thermal drivers.  If you are compiling for a
 	mobile system, say Y.
 	</para>
 
@@ -4903,7 +3676,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4917,7 +3689,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4938,7 +3709,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86 and !X86_64</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and X86 and !X86_64</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4972,7 +3742,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and EXPERIMENTAL</literal></para>
 	<para role="default">Default Value <literal>ACPI_HOTPLUG_MEMORY || ACPI_HOTPLUG_CPU || ACPI_HOTPLUG_IO if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>container</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5000,7 +3770,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and MEMORY_HOTPLUG</literal></para>
 	<para role="default">Default Value <literal>n if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86) and ACPI and MEMORY_HOTPLUG</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>acpi_memhotplug</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5008,21 +3778,15 @@ Kernel configuration option reference
 	This driver adds supports for ACPI Memory Hotplug.  This driver
 	provides support for fielding notifications on ACPI memory
 	devices (PNP0C80) which represent memory ranges that may be
-	onlined or offlined during runtime.  
+	onlined or offlined during runtime.
 	</para>
 
 	<para>
 	Enabling this driver assumes that your platform hardware
 	and firmware have support for hot-plugging physical memory. If
-	your system does not support physically adding or ripping out 
-	memory DIMMs at some platfrom defined granularity (individually 
+	your system does not support physically adding or ripping out
+	memory DIMMs at some platfrom defined granularity (individually
 	or as a bank) at runtime, then you need not enable this driver.
-	</para>
-
-	<para>
-	If one selects "m," this driver can be loaded using the following
-	command: 
-	      $modprobe acpi_memhotplug 
 	</para>
 
 </refsect1>
@@ -5035,12 +3799,6 @@ Kernel configuration option reference
 <sect2>
 	<title>APM (Advanced Power Management) BIOS Support</title>
 
-<para>
-	depends on
-	<literal>!X86_VOYAGER and PM and !X86_VISWS</literal>
-	</para>
-
-
 <refentry>
 <refnamediv>
 	<refname>APM</refname>
@@ -5049,7 +3807,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and PM and PM_LEGACY</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>apm</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5123,11 +3881,6 @@ Kernel configuration option reference
 	12) exchange the motherboard.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called apm.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -5139,7 +3892,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM and !X86_VISWS and APM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5160,7 +3912,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM and !X86_VISWS and APM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5191,7 +3942,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM and !X86_VISWS and APM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5216,7 +3966,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM and !X86_VISWS and APM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5243,7 +3992,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM and !X86_VISWS and APM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5271,7 +4019,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM and !X86_VISWS and APM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5295,7 +4042,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and PM and !X86_VISWS and APM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5311,15 +4057,10 @@ Kernel configuration option reference
 
 </sect2>
 
-
+</sect1>
+<!--
 <sect2>
 	<title>CPU Frequency scaling</title>
-
-<para>
-	depends on
-	<literal>!X86_VOYAGER</literal>
-	</para>
-
 
 <refentry>
 <refnamediv>
@@ -5329,13 +4070,12 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	CPU Frequency scaling allows you to change the clock speed of 
-	CPUs on the fly. This is a nice method to save power, because 
+	CPU Frequency scaling allows you to change the clock speed of
+	CPUs on the fly. This is a nice method to save power, because
 	the lower the CPU clock speed, the less power the CPU consumes.
 	</para>
 
@@ -16932,7 +15672,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HAMRADIO and NET and AX25 and SCC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -16957,7 +15696,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HAMRADIO and NET and AX25 and SCC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -17265,7 +16003,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -17288,7 +16025,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -17313,7 +16049,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -17353,7 +16088,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84353,7 +83087,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84377,7 +83110,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NFS_V3</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84403,7 +83135,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and NFS_FS and EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>RPCSEC_GSS_KRB5</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84432,7 +83163,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NFS_FS and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -88990,7 +87720,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>CRYPTO_DEV_PADLOCK</literal></para>
 	<para role="default">Default Value <literal>y if CRYPTO_DEV_PADLOCK</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -89257,107 +87986,7 @@ Kernel configuration option reference
 
 </sect-9>
 
-<refentry>
-<refnamediv>
-	<refname>GENERIC_HARDIRQS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>GENERIC_IRQ_PROBE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>GENERIC_PENDING_IRQ</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if GENERIC_HARDIRQS and SMP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_SMP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if SMP and !X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_HT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if SMP and !X86_VISWS and !X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_BIOS_REBOOT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !X86_VISWS and !X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>X86_TRAMPOLINE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if X86_SMP || X86_VOYAGER and SMP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-
 </sect-10>
-
 
 </sect-11>
 
