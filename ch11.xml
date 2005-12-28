@@ -37,9 +37,12 @@ Kernel configuration option reference
 	in some special cases. Detailed bug reports from people familiar
 	with the kernel internals are usually welcomed by the developers
 	(before submitting bug reports, please read the documents
-	file:README, file:MAINTAINERS, file:REPORTING-BUGS,
-	file:Documentation/BUG-HUNTING, and
-	file:Documentation/oops-tracing.txt in the kernel source).
+	<filename>README</filename>,
+	<filename>MAINTAINERS</filename>,
+	<filename>REPORTING-BUGS</filename>,
+	<filename>Documentation/BUG-HUNTING</filename>, and
+	<filename>Documentation/oops-tracing.txt</filename> in the
+	kernel source tree).
 	</para>
 
 	<para>
@@ -244,11 +247,12 @@ Kernel configuration option reference
 	<para>
 	If you say Y here, a user level program will be able to instruct the
 	kernel (via a special system call) to write process accounting
-	information to a file: whenever a process exits, information about
+	information to a file whenever a process exits, information about
 	that process will be appended to the file by the kernel.  The
 	information includes things such as creation time, owning user,
 	command name, memory usage, controlling terminal etc. (the complete
-	list is in the struct acct in file:include/linux/acct.h).  It is
+	list is in the struct acct in
+	<filename>include/linux/acct.h</filename>).  It is
 	up to the user level program to do useful things with this
 	information.  This is generally a good idea, so say Y.
 	</para>
@@ -297,8 +301,8 @@ Kernel configuration option reference
 	interface consists of a system call, but if you say Y to "/proc
 	file system support", a tree of modifiable sysctl entries will be
 	generated beneath the /proc/sys directory. They are explained in the
-	files in file:Documentation/sysctl/.  Note that enabling this
-	option will enlarge the kernel by at least 8 KB.
+	files in <filename>Documentation/sysctl/</filename>.  Note that
+	enabling this option will enlarge the kernel by at least 8 KB.
 	</para>
 
 	<para>
@@ -502,7 +506,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	See file:Documentation/early-userspace/README for more details.
+	See <filename>Documentation/early-userspace/README</filename>
+	for more details.
 	</para>
 
 	<para>
@@ -1332,7 +1337,8 @@ Kernel configuration option reference
 
 	<para>
 	A kernel compiled for the Visual Workstation will not run on PCs
-	and vice versa. See file:Documentation/sgi-visws.txt for details.
+	and vice versa. See
+	<filename>Documentation/sgi-visws.txt</filename> for details.
 	</para>
 	</listitem>
 	</varlistentry>
@@ -1715,10 +1721,10 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	See also the file:Documentation/smp.txt,
-	file:Documentation/i386/IO-APIC.txt,
-	file:Documentation/nmi_watchdog.txt and the SMP-HOWTO available at
-	http://www.tldp.org/docs.html#howto.
+	See also the files <filename>Documentation/smp.txt</filename>,
+	<filename>Documentation/i386/IO-APIC.txt</filename>,
+	<filename>Documentation/nmi_watchdog.txt</filename> and the
+	SMP-HOWTO available at http://www.tldp.org/docs.html#howto.
 	</para>
 
 	<para>
@@ -2328,7 +2334,8 @@ Kernel configuration option reference
 	DELL system. Note you need a Dell OpenManage or Dell Update package (DUP)
 	supporting application to comunicate with the BIOS regarding the new
 	image for the image update to take effect.
-	See file:Documentation/dell_rbu.txt for more details on the driver.
+	See the file, <filename>Documentation/dell_rbu.txt</filename>
+	for more details on the driver.
 	</para>
 
 </refsect1>
@@ -2354,8 +2361,9 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	See file:Documentation/dcdbas.txt for more details on the driver
-	and the Dell systems on which Dell systems management software makes
+	See the file, <filename>Documentation/dcdbas.txt</filename> for more
+	details on the driver and the Dell systems on which Dell systems
+	management software makes
 	use of this driver.
 	</para>
 
@@ -2624,7 +2632,8 @@ Kernel configuration option reference
 
 	<para>
 	More information about the internals of the Linux math coprocessor
-	emulation can be found in file:arch/i386/math-emu/README.
+	emulation can be found in the file
+	<filename>arch/i386/math-emu/README</filename>.
 	</para>
 
 	<para>
@@ -2685,7 +2694,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	See file:Documentation/mtrr.txt for more information.
+	See the file <filename>Documentation/mtrr.txt</filename> for
+	more information.
 	</para>
 
 </refsect1>
@@ -3066,7 +3076,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For more information take a look at file:Documentation/power/swsusp.txt.
+	For more information take a look at the file,
+	<filename>Documentation/power/swsusp.txt</filename>.
 	</para>
 
 </refsect1>
@@ -3505,7 +3516,8 @@ Kernel configuration option reference
 	This is a Linux ACPI driver for the IBM ThinkPad laptops. It adds
 	support for Fn-Fx key combinations, Bluetooth control, video
 	output switching, ThinkLight control, UltraBay eject and more.
-	For more information about this driver see file:Documentation/ibm-acpi.txt
+	For more information about this driver see the file
+	<filename>Documentation/ibm-acpi.txt</filename>
 	and http://ibm-acpi.sf.net/ .
 	</para>
 
@@ -3832,7 +3844,8 @@ Kernel configuration option reference
 
 	<para>
 	In order to use APM, you will need supporting software. For location
-	and more information, read file:Documentation/pm.txt and the
+	and more information, read the file,
+	<filename>Documentation/pm.txt</filename> and the
 	Battery Powered Linux mini-HOWTO, available from
 	http://www.tldp.org/docs.html#howto.
 	</para>
@@ -4057,8 +4070,6 @@ Kernel configuration option reference
 
 </sect2>
 
-</sect1>
-<!--
 <sect2>
 	<title>CPU Frequency scaling</title>
 
@@ -4098,27 +4109,12 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>CPU_FREQ_TABLE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>m if !X86_VOYAGER and CPU_FREQ</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>CPU_FREQ_DEBUG</refname>
 	<refpurpose>Enable CPUfreq debugging</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4130,7 +4126,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To get value, add 
+	To get value, add
 	     1 to activate CPUfreq core debugging,
 	     2 to activate CPUfreq drivers debugging, and
 	     4 to activate CPUfreq governor debugging
@@ -4149,7 +4145,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpufreq_stats</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4169,7 +4165,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and CPU_FREQ_STAT</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4183,6 +4178,7 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
+	<refname></refname>
 	<refpurpose>Default CPUFreq governor</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
@@ -4190,7 +4186,6 @@ Kernel configuration option reference
 	<para role="default">Default Value <literal>CPU_FREQ_DEFAULT_GOV_USERSPACE if !X86_VOYAGER and CPU_FREQ and (CPU_FREQ_SA1100 || CPU_FREQ_SA1110)</literal></para>
 	<para role="default">Default Value <literal>CPU_FREQ_DEFAULT_GOV_PERFORMANCE if !X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4208,10 +4203,8 @@ Kernel configuration option reference
 	<refpurpose>performance</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_GOV_PERFORMANCE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4230,16 +4223,14 @@ Kernel configuration option reference
 	<refpurpose>userspace</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_GOV_USERSPACE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Use the CPUFreq governor 'userspace' as default. This allows
-	you to set the CPU frequency manually or when an userspace 
+	you to set the CPU frequency manually or when an userspace
 	program shall be able to set the CPU dynamically without having
 	to enable the userspace governor manually.
 	</para>
@@ -4255,7 +4246,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpufreq_performance</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4279,7 +4270,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpufreq_powersave</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4303,14 +4294,14 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpufreq_userspace</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Enable this cpufreq governor when you either want to set the
 	CPU frequency manually or when an userspace program shall
-	be able to set the CPU dynamically, like on LART 
+	be able to set the CPU dynamically, like on LART
 	http://www.lart.tudelft.nl/
 	</para>
 
@@ -4333,17 +4324,16 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpufreq_ondemand</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	'ondemand' - This driver adds a dynamic cpufreq policy governor.
-	The governor does a periodic polling and 
-	changes frequency based on the CPU utilization.
-	The support for this governor depends on CPU capability to
-	do fast frequency switching (i.e, very low latency frequency
-	transitions). 
+	The governor does a periodic polling and changes frequency based
+	on the CPU utilization.  The support for this governor depends
+	on CPU capability to do fast frequency switching (i.e, very low
+	latency frequency transitions).
 	</para>
 
 	<para>
@@ -4365,24 +4355,25 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpufreq_conservative</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	'conservative' - this driver is rather similar to the 'ondemand'
-	governor both in its source code and its purpose, the difference is
-	its optimisation for better suitability in a battery powered
-	environment.  The frequency is gracefully increased and decreased
-	rather than jumping to 100% when speed is required.
+	governor both in its source code and its purpose, the difference
+	is its optimisation for better suitability in a battery powered
+	environment.  The frequency is gracefully increased and
+	decreased rather than jumping to 100% when speed is required.
 	</para>
 
 	<para>
-	If you have a desktop machine then you should really be considering
-	the 'ondemand' governor instead, however if you are using a laptop,
-	PDA or even an AMD64 based computer (due to the unacceptable
-	step-by-step latency issues between the minimum and maximum frequency
-	transitions in the CPU) you will probably want to use this governor.
+	If you have a desktop machine then you should really be
+	considering the 'ondemand' governor instead, however if you are
+	using a laptop, PDA or even an AMD64 based computer (due to the
+	unacceptable step-by-step latency issues between the minimum and
+	maximum frequency transitions in the CPU) you will probably want
+	to use this governor.
 	</para>
 
 	<para>
@@ -4405,7 +4396,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and ACPI_PROCESSOR</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>acpi-cpufreq</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4434,7 +4425,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and X86_ELAN</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>elanfreq</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4469,7 +4460,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and X86_ELAN</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sc520_freq</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4497,7 +4488,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>powernow-k6</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4526,7 +4517,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>powernow-k7</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4552,7 +4543,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and CPU_FREQ and X86_POWERNOW_K7 and ACPI_PROCESSOR and (X86_POWERNOW_K7!=y || ACPI_PROCESSOR!=m)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4568,7 +4558,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>powernow-k8</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4594,7 +4584,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and CPU_FREQ and X86_POWERNOW_K8 and ACPI_PROCESSOR and (X86_POWERNOW_K8!=y || ACPI_PROCESSOR!=m)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4609,7 +4598,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>gx-suspmod</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4639,7 +4628,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="select">Selects <literal>X86_SPEEDSTEP_CENTRINO_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>speedstep-centrino</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4671,7 +4660,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and X86_SPEEDSTEP_CENTRINO and ACPI_PROCESSOR and (X86_SPEEDSTEP_CENTRINO!=y || ACPI_PROCESSOR!=m)</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and CPU_FREQ and X86_SPEEDSTEP_CENTRINO and ACPI_PROCESSOR and (X86_SPEEDSTEP_CENTRINO!=y || ACPI_PROCESSOR!=m)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4697,7 +4685,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and X86_SPEEDSTEP_CENTRINO</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and CPU_FREQ and X86_SPEEDSTEP_CENTRINO</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4722,7 +4709,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>speedstep-ich</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4753,14 +4740,14 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>speedstep-smi</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This adds the CPUFreq driver for certain mobile Intel Pentium III
-	(Coppermine), all mobile Intel Pentium III-M (Tualatin)  
-	on systems which have an Intel 440BX/ZX/MX southbridge.
+	This adds the CPUFreq driver for certain mobile Intel Pentium
+	III (Coppermine), all mobile Intel Pentium III-M (Tualatin) on
+	systems which have an Intel 440BX/ZX/MX southbridge.
 	</para>
 
 	<para>
@@ -4783,7 +4770,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>p4-clockmod</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4811,7 +4798,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpufreq-nforce2</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4839,7 +4826,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>longrun</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4868,14 +4855,13 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
 	<para role="select">Selects <literal>CPU_FREQ_TABLE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>longhaul</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This adds the CPUFreq driver for VIA Samuel/CyrixIII, 
-	VIA Cyrix Samuel/C3, VIA Cyrix Ezra and VIA Cyrix Ezra-T 
-	processors.
+	This adds the CPUFreq driver for VIA Samuel/CyrixIII, VIA Cyrix
+	Samuel/C3, VIA Cyrix Ezra, and VIA Cyrix Ezra-T processors.
 	</para>
 
 	<para>
@@ -4897,7 +4883,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and PROC_FS and (X86_ACPI_CPUFREQ || X86_SPEEDSTEP_CENTRINO_ACPI || X86_POWERNOW_K7_ACPI || X86_POWERNOW_K8_ACPI)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4916,36 +4901,22 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>X86_SPEEDSTEP_LIB</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>X86_SPEEDSTEP_ICH || X86_SPEEDSTEP_SMI || X86_P4_CLOCKMOD if !X86_VOYAGER and CPU_FREQ</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>X86_SPEEDSTEP_RELAXED_CAP_CHECK</refname>
 	<refpurpose>Relaxed speedstep capability checks</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ and (X86_SPEEDSTEP_SMI || X86_SPEEDSTEP_ICH)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Don't perform all checks for a speedstep capable system which would 
-	normally be done. Some ancient or strange systems, though speedstep 
-	capable, don't always indicate that they are speedstep capable. This 
-	option lets the probing code bypass some of those checks if the
-	parameter "relaxed_check=1" is passed to the module.
+	Don't perform all checks for a speedstep capable system which
+	would normally be done. Some ancient or strange systems, though
+	speedstep capable, don't always indicate that they are speedstep
+	capable. This option lets the probing code bypass some of those
+	checks if the parameter "relaxed_check=1" is passed to the
+	module.
 	</para>
 
 </refsect1>
@@ -4956,7 +4927,6 @@ Kernel configuration option reference
 
 
 </sect1>
-
 
 <sect1>
 	<title>Bus options (PCI, PCMCIA, EISA, MCA, ISA)</title>
@@ -4971,7 +4941,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS</literal></para>
 	<para role="default">Default Value <literal>y if !X86_VOYAGER and X86_VISWS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -4994,13 +4963,13 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
+	<refname></refname>
 	<refpurpose>PCI access mode</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCI and !X86_VISWS</literal></para>
 	<para role="default">Default Value <literal>PCI_GOANY if PCI and !X86_VISWS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="type">Type <literal>choice</literal></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5022,108 +4991,46 @@ Kernel configuration option reference
 	work. If unsure, go with the default, which is "Any".
 	</para>
 
-</refsect1>
-</refentry>
+	<para>
+	The different values allowed for this option are:
+	</para>
 
-<refentry>
-<refnamediv>
-	<refname>PCI_GOBIOS</refname>
-	<refpurpose>BIOS</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+	<variablelist>
 
-<refentry>
-<refnamediv>
-	<refname>PCI_GOMMCONFIG</refname>
-	<refpurpose>MMConfig</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+	<varlistentry>
+	<term>BIOS <literal>PCI_BIOS</literal></term>
+	<listitem>
+	<para>
+	</para>
+	</listitem>
+	</varlistentry>
 
-<refentry>
-<refnamediv>
-	<refname>PCI_GODIRECT</refname>
-	<refpurpose>Direct</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+	<varlistentry>
+	<term>MMConfig <literal>PCI_MMCONFIG</literal></term>
+	<listitem>
+	<para>
+	</para>
+	</listitem>
+	</varlistentry>
 
-<refentry>
-<refnamediv>
-	<refname>PCI_GOANY</refname>
-	<refpurpose>Any</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+	<varlistentry>
+	<term>Direct <literal>PCI_DIRECT</literal></term>
+	<listitem>
+	<para>
+	</para>
+	</listitem>
+	</varlistentry>
 
-<refentry>
-<refnamediv>
-	<refname>PCI_BIOS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if !X86_VISWS and PCI and (PCI_GOBIOS || PCI_GOANY)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+	<varlistentry>
+	<term>Any</term>
+	<listitem>
+	<para>
+	</para>
+	</listitem>
+	</varlistentry>
 
-<refentry>
-<refnamediv>
-	<refname>PCI_DIRECT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if PCI and (PCI_GODIRECT || PCI_GOANY || X86_VISWS)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+	</variablelist>
 
-<refentry>
-<refnamediv>
-	<refname>PCI_MMCONFIG</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if PCI and ACPI and (PCI_GOMMCONFIG || PCI_GOANY)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -5135,7 +5042,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5186,7 +5092,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI_PCIE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5210,7 +5115,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCI and (X86_LOCAL_APIC and X86_IO_APIC || IA64)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5236,25 +5140,26 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This feature enables a procfs file,  /proc/pci , that provides a 
-	summary of PCI devices in the system. 
+	This feature enables a procfs file,  /proc/pci , that provides a
+	summary of PCI devices in the system.
 	</para>
 
 	<para>
-	This feature has been deprecated as of v2.5.53, in favor of using the 
-	tool lspci(8). This feature may be removed at a future date. 
+	This feature has been deprecated as of the 2.5.53 kernel
+	release, in favor of using the tool lspci(8). This feature may
+	be removed at a future date.
 	</para>
 
 	<para>
-	lspci can provide the same data, as well as much more. lspci is a part of
-	the pci-utils package, which should be installed by your distribution. 
-	See file:Documentation/Changes for information on where to get the latest
-	version. 
+	lspci can provide the same data, as well as much more. lspci is
+	a part of the pci-utils package, which should be installed by
+	your distribution.  See
+	<filename>Documentation/Changes</filename> for
+	information on where to get the latest version.
 	</para>
 
 	<para>
@@ -5272,7 +5177,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCI and DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5296,7 +5200,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5311,7 +5214,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5334,7 +5236,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>ISA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5370,7 +5271,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>X86_PC and EISA</literal></para>
 	<para role="default">Default Value <literal>n if X86_PC and EISA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5396,7 +5296,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!PARISC and PCI and EISA</literal></para>
 	<para role="default">Default Value <literal>y if !PARISC and PCI and EISA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5422,7 +5321,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EISA and (ALPHA || X86_PC)</literal></para>
 	<para role="default">Default Value <literal>y if EISA and (ALPHA || X86_PC)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5448,7 +5346,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EISA</literal></para>
 	<para role="default">Default Value <literal>y if EISA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5480,7 +5377,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>!X86_VISWS and !X86_VOYAGER</literal></para>
 	<para role="default">Default Value <literal>y if X86_VOYAGER</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5502,7 +5398,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>MCA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5523,7 +5418,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>MCA_LEGACY and PROC_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5572,7 +5466,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>SMP and HOTPLUG and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5629,7 +5522,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCCARD</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5707,7 +5599,6 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>FW_LOADER</literal></para>
 	<para role="default">Default Value <literal>y if PCCARD and PCMCIA and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5735,7 +5626,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and PCMCIA</literal></para>
 	<para role="default">Default Value <literal>y if PCCARD and PCMCIA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5766,7 +5656,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and PCI</literal></para>
 	<para role="default">Default Value <literal>y if PCCARD and PCI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6043,7 +5932,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y if PCCARD and ISA and !ARCH_SA1100 and !ARCH_CLPS711X</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6059,7 +5947,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and M32R and CHIP_M32700 and PCMCIA</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6079,7 +5966,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and M32R and (PLAT_USRV || PLAT_M32700UT || PLAT_MAPPI2 || PLAT_MAPPI3 || PLAT_OPSPUT)</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6099,7 +5985,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and M32R_CFC</literal></para>
 	<para role="default">Default Value <literal>1 if PCCARD and M32R_CFC and (PLAT_USRV || PLAT_M32700UT || PLAT_MAPPI2 || PLAT_MAPPI3 || PLAT_OPSPUT)</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6296,7 +6181,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI_COMPAQ</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6408,7 +6292,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6520,7 +6403,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI_SHPC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6544,7 +6426,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI_SHPC and !ACPI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6643,7 +6524,6 @@ Kernel configuration option reference
 
 </sect1>
 
-
 <sect1>
 	<title>Executable file formats</title>
 
@@ -6657,7 +6537,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>MMU</literal></para>
 	<para role="default">Default Value <literal>y if MMU</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6699,7 +6578,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>FRV</literal></para>
 	<para role="default">Default Value <literal>y if FRV</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6726,7 +6604,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!MMU || SUPERH</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>binfmt_flat</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6746,7 +6624,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>BINFMT_FLAT</literal></para>
 	<para role="select">Selects <literal>ZLIB_INFLATE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6765,7 +6642,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>BINFMT_FLAT</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6784,7 +6660,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>X86_32 || ALPHA || ARM || M68K || SPARC32</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>binfmt_aout</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6825,7 +6701,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>ALPHA and BINFMT_AOUT</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6846,7 +6721,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>ALPHA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>binfmt_em86</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6878,7 +6753,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PARISC and HPUX</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>binfmt_som</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6897,7 +6772,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>binfmt_misc</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6938,11 +6813,10 @@ Kernel configuration option reference
 
 </sect1>
 
-
 <sect1>
 	<title>Networking</title>
 
-
+<!--
 <refentry>
 <refnamediv>
 	<refname>NET</refname>
@@ -6950,7 +6824,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -7027,7 +6900,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and PACKET</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -7084,7 +6956,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -17781,16 +17652,16 @@ Kernel configuration option reference
 
 </refsect1>
 </refentry>
+-->
+
+</sect1>
 
 
-</sect-3>
-
-
-<sect-3>
+<sect1>
 	<title>Device Drivers</title>
 
 
-
+<!--
 <sect-2>
 	<title>Generic Driver Options</title>
 
@@ -74651,9 +74522,6 @@ Kernel configuration option reference
 
 </sect-8>
 
--->
-<sect1>
-	<title>remove me</title>
 
 <sect2>
 	<title>USB support</title>
@@ -77112,8 +76980,9 @@ Kernel configuration option reference
 
 
 </sect3>
+
 </sect2>
-<!--
+
 <refentry>
 <refnamediv>
 	<refname>USB_MON</refname>
@@ -80131,13 +80000,12 @@ Kernel configuration option reference
 
 </sect-8>
 
+-->
+</sect1>
 
-</sect-9>
 
-
-<sect-9>
+<sect1>
 	<title>File systems</title>
-
 
 <refentry>
 <refnamediv>
@@ -80176,7 +80044,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXT2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80202,7 +80069,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EXT2_FS_XATTR</literal></para>
 	<para role="select">Selects <literal>FS_POSIX_ACL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80231,7 +80097,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXT2_FS_XATTR</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80258,7 +80123,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXT2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80273,20 +80137,6 @@ Kernel configuration option reference
 	or if unsure, say N.
 	</para>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>FS_XIP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if EXT2_FS_XIP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -80351,7 +80201,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EXT3_FS</literal></para>
 	<para role="default">Default Value <literal>y if EXT3_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80381,7 +80230,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EXT3_FS_XATTR</literal></para>
 	<para role="select">Selects <literal>FS_POSIX_ACL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80410,7 +80258,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXT3_FS_XATTR</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80469,7 +80316,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>JBD</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80489,21 +80335,6 @@ Kernel configuration option reference
 	"echo 0  /proc/sys/fs/jbd-debug".
 	</para>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>FS_MBCACHE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if (EXT2_FS_XATTR || EXT3_FS_XATTR) and (EXT2_FS=y || EXT3_FS=y)</literal></para>
-	<para role="default">Default Value <literal>m if (EXT2_FS_XATTR || EXT3_FS_XATTR) and (EXT2_FS=m || EXT3_FS=m)</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -80566,7 +80397,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>REISERFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80593,7 +80423,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>REISERFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80617,7 +80446,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>REISERFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80643,7 +80471,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>REISERFS_FS_XATTR</literal></para>
 	<para role="select">Selects <literal>FS_POSIX_ACL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80672,7 +80499,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>REISERFS_FS_XATTR</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80724,7 +80550,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFS_FS</literal></para>
 	<para role="select">Selects <literal>FS_POSIX_ACL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80753,7 +80578,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>JFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80780,7 +80604,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>JFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80802,7 +80625,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>JFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80811,20 +80633,6 @@ Kernel configuration option reference
 	to be made available to the user in the /proc/fs/jfs/ directory.
 	</para>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>FS_POSIX_ACL</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>n</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -80867,27 +80675,12 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>XFS_EXPORT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if XFS_FS and EXPORTFS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>XFS_QUOTA</refname>
 	<refpurpose>XFS Quota support</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>XFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80919,7 +80712,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>XFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80946,7 +80738,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>XFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80975,7 +80766,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>XFS_FS and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80993,11 +80783,8 @@ Kernel configuration option reference
 
 	<para>
 	This feature is unsupported at this time, is not yet fully
-	functional, and may cause serious problems.
-	</para>
-
-	<para>
-	If unsure, say N.
+	functional, and may cause serious problems, so it should only be
+	selected if you know what you are doing.
 	</para>
 
 </refsect1>
@@ -81076,7 +80863,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81108,7 +80894,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81170,20 +80955,6 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>QUOTACTL</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if XFS_QUOTA || QUOTA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>DNOTIFY</refname>
 	<refpurpose>Dnotify support</refpurpose>
 </refnamediv>
@@ -81191,7 +80962,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81328,7 +81098,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-8>
+<sect2>
 	<title>CD-ROM/DVD Filesystems</title>
 
 
@@ -81372,7 +81142,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>ISO9660_FS</literal></para>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81397,7 +81166,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>ISO9660_FS</literal></para>
 	<para role="select">Selects <literal>ZLIB_INFLATE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81410,20 +81178,6 @@ Kernel configuration option reference
 	able to read such compressed CD-ROMs.
 	</para>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>ZISOFS_FS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>ISO9660_FS if ZISOFS</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -81457,25 +81211,9 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry>
-<refnamediv>
-	<refname>UDF_NLS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if UDF_FS=m and NLS || UDF_FS=y and NLS=y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+</sect2>
 
-
-</sect-8>
-
-
-<sect-8>
+<sect2>
 	<title>DOS/FAT/NT Filesystems</title>
 
 
@@ -81626,7 +81364,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>MSDOS_FS || VFAT_FS</literal></para>
 	<para role="default">Default Value <literal>437 if MSDOS_FS || VFAT_FS</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81648,7 +81385,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>VFAT_FS</literal></para>
 	<para role="default">Default Value <literal>iso8859-1 if VFAT_FS</literal></para>
 	<para role="type">Type <literal>string</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81810,10 +81546,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>Pseudo filesystems</title>
 
 
@@ -81824,7 +81560,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81875,7 +81610,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PROC_FS and MMU and !ARM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81890,7 +81624,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PROC_FS and EMBEDDED and EXPERIMENTAL and CRASH_DUMP</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81910,7 +81643,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81954,7 +81686,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81984,7 +81715,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>X86 || IA64 || PPC64 || SPARC64 || SUPERH || BROKEN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81998,7 +81728,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>HUGETLBFS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82012,7 +81741,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82027,11 +81755,6 @@ Kernel configuration option reference
 	tmpfs.
 	</para>
 
-	<para>
-	To compile this as a module, choose M here: the module will be called
-	ramfs.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -82042,7 +81765,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>relayfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82052,23 +81775,13 @@ Kernel configuration option reference
 	amounts of data from kernel space to user space.
 	</para>
 
-	<para>
-	To compile this code as a module, choose M here: the module will be
-	called relayfs.
-	</para>
-
-	<para>
-	If unsure, say N.
-	</para>
-
 </refsect1>
 </refentry>
 
+</sect2>
 
-</sect-8>
 
-
-<sect-8>
+<sect2>
 	<title>Miscellaneous filesystems</title>
 
 
@@ -82080,7 +81793,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>adfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82100,11 +81813,6 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this code as a module, choose M here: the module will be
-	called adfs.
-	</para>
-
-	<para>
 	If unsure, say N.
 	</para>
 
@@ -82119,7 +81827,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>ADFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82180,7 +81887,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>hfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82189,11 +81896,6 @@ Kernel configuration option reference
 	floppy disks and hard drive partitions with full read-write access.
 	Please read file:fs/hfs/HFS.txt to learn about the available mount
 	options.
-	</para>
-
-	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called hfs.
 	</para>
 
 </refsect1>
@@ -82236,7 +81938,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>befs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82258,11 +81960,6 @@ Kernel configuration option reference
 	If you don't know what this is about, say N.
 	</para>
 
-	<para>
-	To compile this as a module, choose M here: the module will be
-	called befs.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -82274,13 +81971,12 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>BEFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	If you say Y here, you can use the 'debug' mount option to enable
-	debugging output from the driver. 
+	debugging output from the befs module.
 	</para>
 
 </refsect1>
@@ -82294,7 +81990,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>bfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82315,8 +82011,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this as a module, choose M here: the module will be called
-	bfs.  Note that the file system of your root partition (the one
+	Note that the file system of your root partition (the one
 	containing the directory /) cannot be compiled as a module.
 	</para>
 
@@ -82331,7 +82026,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>efs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82345,11 +82040,6 @@ Kernel configuration option reference
 	This implementation only offers read-only access. If you don't know
 	what all this is about, it's safe to say N. For more information
 	about EFS see its home page at http://aeschi.ch.eu.org/efs/.
-	</para>
-
-	<para>
-	To compile the EFS file system support as a module, choose M here: the
-	module will be called efs.
 	</para>
 
 </refsect1>
@@ -82386,7 +82076,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFFS_FS</literal></para>
 	<para role="default">Default Value <literal>0 if JFFS_FS</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82405,7 +82094,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>JFFS_FS and PROC_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82454,7 +82142,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFFS2_FS</literal></para>
 	<para role="default">Default Value <literal>0 if JFFS2_FS</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82486,7 +82173,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFFS2_FS</literal></para>
 	<para role="default">Default Value <literal>y if JFFS2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82514,7 +82200,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFFS2_FS and EXPERIMENTAL</literal></para>
 	<para role="default">Default Value <literal>n if JFFS2_FS and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82544,7 +82229,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFFS2_FS</literal></para>
 	<para role="default">Default Value <literal>n if JFFS2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82574,7 +82258,6 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>ZLIB_DEFLATE</literal></para>
 	<para role="default">Default Value <literal>y if JFFS2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82601,7 +82284,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFFS2_FS and JFFS2_COMPRESSION_OPTIONS</literal></para>
 	<para role="default">Default Value <literal>y if JFFS2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82621,7 +82303,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>JFFS2_FS and JFFS2_COMPRESSION_OPTIONS</literal></para>
 	<para role="default">Default Value <literal>n if JFFS2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82634,13 +82315,13 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
+	<refname></refname>
 	<refpurpose>JFFS2 default compression mode</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>JFFS2_FS and JFFS2_COMPRESSION_OPTIONS</literal></para>
 	<para role="default">Default Value <literal>JFFS2_CMODE_PRIORITY if JFFS2_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82649,65 +82330,42 @@ Kernel configuration option reference
 	the available compression modes. Don't touch if unsure.
 	</para>
 
-</refsect1>
-</refentry>
+	<para>
+	The different values for this option are the following:
+	</para>
 
-<refentry>
-<refnamediv>
-	<refname>JFFS2_CMODE_NONE</refname>
-	<refpurpose>no compression</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<variablelist>
+
+	<varlistentry>
+	<term>no compression <literal>JFFS2_CMODE_NONE</literal></term>
+	<listitem>
 	<para>
 	Uses no compression.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>JFFS2_CMODE_PRIORITY</refname>
-	<refpurpose>priority</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>priority <literal>JFFS2_CMODE_PRIORITY</literal></term>
+	<listitem>
 	<para>
 	Tries the compressors in a predefinied order and chooses the first
 	successful one.
 	</para>
+	</listitem>
+	</varlistentry>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>JFFS2_CMODE_SIZE</refname>
-	<refpurpose>size (EXPERIMENTAL)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
+	<varlistentry>
+	<term>size (EXPERIMENTAL) <literal>JFFS2_CMODE_SIZE</literal></term>
+	<listitem>
 	<para>
 	Tries all compressors and chooses the one which has the smallest
 	result.
 	</para>
+	</listitem>
+	</varlistentry>
 
+	</variablelist>
 </refsect1>
 </refentry>
 
@@ -82719,7 +82377,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>ZLIB_INFLATE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cramfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82737,9 +82395,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this as a module, choose M here: the module will be called
-	cramfs.  Note that the root file system (the one containing the
-	directory /) cannot be compiled as a module.
+	Note that the root file system (the one containing the directory
+	/) cannot be compiled as a module.
 	</para>
 
 	<para>
@@ -82756,7 +82413,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>freevxfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82774,10 +82431,6 @@ Kernel configuration option reference
 	the actual driver.
 	</para>
 
-	<para>
-	To compile this as a module, choose M here: the module will be
-	called freevxfs.  If unsure, say N.
-	</para>
 
 </refsect1>
 </refentry>
@@ -82789,7 +82442,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>hpfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82803,11 +82456,6 @@ Kernel configuration option reference
 	file:Documentation/filesystems/hpfs.txt.
 	</para>
 
-	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called hpfs.  If unsure, say N.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -82818,7 +82466,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>qnx4</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82832,36 +82480,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called qnx4.
-	</para>
-
-	<para>
 	If you don't know whether you need it, then you don't need it:
-	answer N.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>QNX4FS_RW</refname>
-	<refpurpose>QNX4FS write support (DANGEROUS)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>QNX4FS_FS and EXPERIMENTAL and BROKEN</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Say Y if you want to test write support for QNX4 file systems.
-	</para>
-
-	<para>
-	It's currently broken, so for now:
 	answer N.
 	</para>
 
@@ -82875,7 +82494,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sysv</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82916,11 +82535,6 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this as a module, choose M here: the module will be called
-	sysv.
-	</para>
-
-	<para>
 	If you haven't heard about all of this before, it's safe to say N.
 	</para>
 
@@ -82934,7 +82548,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ufs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82973,11 +82587,6 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile the UFS file system support as a module, choose M here: the
-	module will be called ufs.
-	</para>
-
-	<para>
 	If you haven't heard about all of this before, it's safe to say N.
 	</para>
 
@@ -82992,7 +82601,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>UFS_FS and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83005,16 +82613,11 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>Network File Systems</title>
-
-<para>
-	depends on
-	<literal>NET</literal>
-	</para>
 
 
 <refentry>
@@ -83028,7 +82631,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>SUNRPC</literal></para>
 	<para role="select">Selects <literal>NFS_ACL_SUPPORT</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83054,11 +82657,6 @@ Kernel configuration option reference
 	<para>
 	If you say Y here, you should have said Y to TCP/IP networking also.
 	This option would enlarge your kernel by about 27 KB.
-	</para>
-
-	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called nfs.
 	</para>
 
 	<para>
@@ -83209,7 +82807,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>EXPORTFS</literal></para>
 	<para role="select">Selects <literal>NFS_ACL_SUPPORT</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nfsd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83240,24 +82838,6 @@ Kernel configuration option reference
 	http://www.tldp.org/docs.html#howto.
 	</para>
 
-	<para>
-	To compile the NFS server support as a module, choose M here: the
-	module will be called nfsd.  If unsure, say N.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>NFSD_V2_ACL</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -83269,7 +82849,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NFSD</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83290,7 +82869,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and NFSD_V3</literal></para>
 	<para role="select">Selects <literal>NFSD_V2_ACL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83316,7 +82894,6 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CRYPTO</literal></para>
 	<para role="select">Selects <literal>FS_POSIX_ACL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83339,7 +82916,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and NFSD</literal></para>
 	<para role="default">Default Value <literal>y if NET and NFSD</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83360,7 +82936,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NFS_FS=y and IP_PNP</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83378,100 +82953,6 @@ Kernel configuration option reference
 	Most people say N here.
 	</para>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>LOCKD</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>LOCKD_V4</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NET and (NFSD_V3 || NFS_V3)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>EXPORTFS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>NFS_ACL_SUPPORT</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="select">Selects <literal>FS_POSIX_ACL</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>NFS_COMMON</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NET and (NFSD || NFS_FS)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>SUNRPC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>SUNRPC_GSS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -83551,7 +83032,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and INET</literal></para>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>smbfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83580,11 +83061,6 @@ Kernel configuration option reference
 	Macs is on the WWW at http://www.eats.com/linux_mac_win.html.
 	</para>
 
-	<para>
-	To compile the SMB support as a module, choose M here: the module will
-	be called smbfs.  Most people say N, however.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -83596,7 +83072,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and SMB_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83628,7 +83103,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and SMB_NLS_DEFAULT</literal></para>
 	<para role="default">Default Value <literal>cp437 if NET and SMB_NLS_DEFAULT</literal></para>
 	<para role="type">Type <literal>string</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83665,29 +83139,31 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	This is the client VFS module for the Common Internet File System
-	(CIFS) protocol which is the successor to the Server Message Block 
-	(SMB) protocol, the native file sharing mechanism for most early
-	PC operating systems.  The CIFS protocol is fully supported by 
-	file servers such as Windows 2000 (including Windows 2003, NT 4  
-	and Windows XP) as well by Samba (which provides excellent CIFS
-	server support for Linux and many other operating systems). Limited
-	support for Windows ME and similar servers is provided as well. 
-	You must use the smbfs client filesystem to access older SMB servers
-	such as OS/2 and DOS.
+	This is the client VFS module for the Common Internet File
+	System (CIFS) protocol which is the successor to the Server
+	Message Block (SMB) protocol, the native file sharing mechanism
+	for most early PC operating systems.  The CIFS protocol is fully
+	supported by file servers such as Windows 2000 (including
+	Windows 2003, NT 4  and Windows XP) as well by Samba (which
+	provides excellent CIFS server support for Linux and many other
+	operating systems). Limited support for Windows ME and similar
+	servers is provided as well.  You must use the smbfs client
+	filesystem to access older SMB servers such as OS/2 and DOS.
 	</para>
 
 	<para>
-	The intent of the cifs module is to provide an advanced
-	network file system client for mounting to CIFS compliant servers, 
-	including support for dfs (hierarchical name space), secure per-user
-	session establishment, safe distributed caching (oplock), optional
-	packet signing, Unicode and other internationalization improvements, 
-	and optional Winbind (nsswitch) integration. You do not need to enable
-	cifs if running only a (Samba) server. It is possible to enable both
-	smbfs and cifs (e.g. if you are using CIFS for accessing Windows 2003
-	and Samba 3 servers, and smbfs for accessing old servers). If you need 
-	to mount to Samba or Windows from this machine, say Y.
+	The intent of the cifs module is to provide an advanced network
+	file system client for mounting to CIFS compliant servers,
+	including support for dfs (hierarchical name space), secure
+	per-user session establishment, safe distributed caching
+	(oplock), optional packet signing, Unicode and other
+	internationalization improvements, and optional Winbind
+	(nsswitch) integration. You do not need to enable cifs if
+	running only a (Samba) server. It is possible to enable both
+	smbfs and cifs (e.g. if you are using CIFS for accessing Windows
+	2003 and Samba 3 servers, and smbfs for accessing old servers).
+	If you need to mount to Samba or Windows from this machine, say
+	Y.
 	</para>
 
 </refsect1>
@@ -83701,7 +83177,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and CIFS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83721,7 +83196,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and CIFS_STATS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83750,7 +83224,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and CIFS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83781,7 +83254,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and CIFS_XATTR</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83806,7 +83278,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and CIFS and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83836,7 +83307,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and CIFS_EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>CONNECTOR</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83859,7 +83329,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and (IPX!=n || INET)</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ncpfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83884,8 +83354,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this as a module, choose M here: the module will be called
-	ncpfs.  Say N unless you are connected to a Novell network.
+	Say N unless you are connected to a Novell network.
 	</para>
 
 </refsect1>
@@ -83899,7 +83368,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83920,7 +83388,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83940,7 +83407,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83962,7 +83428,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83983,7 +83448,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84005,7 +83469,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84043,7 +83506,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84069,7 +83531,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and NCP_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84095,7 +83556,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and INET</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>coda</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84118,11 +83579,6 @@ Kernel configuration option reference
 	home page http://www.coda.cs.cmu.edu/.
 	</para>
 
-	<para>
-	To compile the coda client support as a module, choose M here: the
-	module will be called coda.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -84134,7 +83590,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and CODA_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84188,19 +83643,6 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>RXRPC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>9P_FS</refname>
 	<refpurpose>Plan 9 Resource Sharing Support (9P2000) (Experimental)</refpurpose>
 </refnamediv>
@@ -84228,10 +83670,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>Partition Types</title>
 
 
@@ -84242,7 +83684,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84274,7 +83715,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if ARCH_ACORN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84294,7 +83734,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and ACORN_PARTITION</literal></para>
 	<para role="default">Default Value <literal>y if ARCH_ACORN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84315,7 +83754,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and ACORN_PARTITION</literal></para>
 	<para role="default">Default Value <literal>y if ARCH_ACORN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84331,7 +83769,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and ACORN_PARTITION</literal></para>
 	<para role="default">Default Value <literal>y if ARCH_ACORN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84352,7 +83789,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and ACORN_PARTITION</literal></para>
 	<para role="default">Default Value <literal>y if ARCH_ACORN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84375,7 +83811,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and ACORN_PARTITION</literal></para>
 	<para role="default">Default Value <literal>y if ARCH_ACORN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84396,7 +83831,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and ACORN_PARTITION</literal></para>
 	<para role="default">Default Value <literal>y if ARCH_ACORN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84418,7 +83852,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if ALPHA</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84439,7 +83872,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if AMIGA || AFFS_FS=y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84460,7 +83892,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if ATARI</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84480,7 +83911,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and ARCH_S390</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84502,7 +83932,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if MAC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84523,7 +83952,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84542,7 +83970,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and MSDOS_PARTITION</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84568,7 +83995,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and MSDOS_PARTITION</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84589,7 +84015,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and MSDOS_PARTITION</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84612,7 +84037,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED and MSDOS_PARTITION</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84649,7 +84073,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84691,7 +84114,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>LDM_PARTITION</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84717,7 +84139,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if SGI_IP22 || SGI_IP27 || (MACH_JAZZ || SNI_RM200_PCI) and !CPU_LITTLE_ENDIAN</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84738,7 +84159,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if MACH_DECSTATION</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84760,7 +84180,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="default">Default Value <literal>y if SPARC32 || SPARC64 || SUN3 || SUN3X</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84789,7 +84208,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PARTITION_ADVANCED</literal></para>
 	<para role="select">Selects <literal>CRC32</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84803,10 +84221,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>Native Language Support</title>
 
 
@@ -84817,7 +84235,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_base</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84832,11 +84250,6 @@ Kernel configuration option reference
 	If unsure, say Y.
 	</para>
 
-	<para>
-	To compile this code as a module, choose M here: the module
-	will be called nls_base.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -84849,7 +84262,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="default">Default Value <literal>iso8859-1 if NLS</literal></para>
 	<para role="type">Type <literal>string</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85835,20 +85247,13 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
+
+</sect1>
 
 
-</sect-9>
-
-
-<sect-9>
+<sect1>
 	<title>Instrumentation Support</title>
-
-<para>
-	depends on
-	<literal>EXPERIMENTAL</literal>
-	</para>
-
 
 <refentry>
 <refnamediv>
@@ -85858,7 +85263,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85903,7 +85307,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85918,11 +85321,9 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect1>
 
-</sect-9>
-
-
-<sect-9>
+<sect1>
 	<title>Kernel hacking</title>
 
 
@@ -85933,7 +85334,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85955,7 +85355,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85975,7 +85374,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and !UML</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86007,7 +85405,6 @@ Kernel configuration option reference
 	<para role="default">Default Value <literal>15 if SMP</literal></para>
 	<para role="default">Default Value <literal>14</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86034,7 +85431,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="default">Default Value <literal>y if DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86069,7 +85465,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and PROC_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86094,7 +85489,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86116,7 +85510,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and PREEMPT</literal></para>
 	<para role="default">Default Value <literal>y if DEBUG_KERNEL and PREEMPT</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86138,7 +85531,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86160,7 +85552,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86180,7 +85571,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86200,7 +85590,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and HIGHMEM</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86221,7 +85610,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>BUG and (ARM || ARM26 || M32R || M68K || SPARC32 || SPARC64 || X86_32 || FRV) and DEBUG_KERNEL and EMBEDDED</literal></para>
 	<para role="default">Default Value <literal>!EMBEDDED if BUG and (ARM || ARM26 || M32R || M68K || SPARC32 || SPARC64 || X86_32 || FRV)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86242,7 +85630,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86267,7 +85654,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and PARISC</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86293,7 +85679,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and SYSFS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86318,7 +85703,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86342,7 +85726,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and (X86 || CRIS || M68K || M68KNOMMU || FRV || UML)</literal></para>
 	<para role="default">Default Value <literal>y if DEBUG_KERNEL and (X86 || CRIS || M68K || M68KNOMMU || FRV || UML) and DEBUG_INFO and UML</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86394,7 +85777,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>EMBEDDED and DEBUG_KERNEL</literal></para>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86422,7 +85804,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86442,7 +85823,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86466,7 +85846,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL and !SOFTWARE_SUSPEND</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86487,7 +85866,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86502,39 +85880,9 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry>
-<refnamediv>
-	<refname>X86_FIND_SMP_CONFIG</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if X86_LOCAL_APIC || X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+</sect1>
 
-<refentry>
-<refnamediv>
-	<refname>X86_MPPARSE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if X86_LOCAL_APIC and !X86_VISWS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-
-</sect-9>
-
-
-<sect-9>
+<sect1>
 	<title>Security options</title>
 
 
@@ -86545,7 +85893,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86582,7 +85929,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>KEYS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86609,7 +85955,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>SYSFS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86638,7 +85983,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>SECURITY</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86738,7 +86082,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SECURITY and NET and INET</literal></para>
 	<para role="default">Default Value <literal>n if SECURITY and NET and INET</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86763,7 +86106,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SECURITY_SELINUX</literal></para>
 	<para role="default">Default Value <literal>n if SECURITY_SELINUX</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86793,7 +86135,6 @@ Kernel configuration option reference
 	<para role="range">Range <literal>[0 1]</literal></para>
 	<para role="default">Default Value <literal>1 if SECURITY_SELINUX_BOOTPARAM</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86822,7 +86163,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SECURITY_SELINUX</literal></para>
 	<para role="default">Default Value <literal>n if SECURITY_SELINUX</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86852,7 +86192,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SECURITY_SELINUX</literal></para>
 	<para role="default">Default Value <literal>y if SECURITY_SELINUX</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86878,7 +86217,6 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>SECURITY_SELINUX</literal></para>
 	<para role="default">Default Value <literal>y if SECURITY_SELINUX</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86901,7 +86239,6 @@ Kernel configuration option reference
 	<para role="range">Range <literal>[0 1]</literal></para>
 	<para role="default">Default Value <literal>1 if SECURITY_SELINUX</literal></para>
 	<para role="type">Type <literal>integer</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86926,11 +86263,10 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect1>
 
-</sect-9>
 
-
-<sect-9>
+<sect1>
 	<title>Cryptographic options</title>
 
 
@@ -86941,7 +86277,6 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86960,7 +86295,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -87321,23 +86655,23 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	AES cipher algorithms (FIPS-197). AES uses the Rijndael 
+	AES cipher algorithms (FIPS-197). AES uses the Rijndael
 	algorithm.
 	</para>
 
 	<para>
 	Rijndael appears to be consistently a very good performer in
-	both hardware and software across a wide range of computing 
-	environments regardless of its use in feedback or non-feedback 
-	modes. Its key setup time is excellent, and its key agility is 
-	good. Rijndael's very low memory requirements make it very well 
-	suited for restricted-space environments, in which it also 
-	demonstrates excellent performance. Rijndael's operations are 
-	among the easiest to defend against power and timing attacks.	
+	both hardware and software across a wide range of computing
+	environments regardless of its use in feedback or non-feedback
+	modes. Its key setup time is excellent, and its key agility is
+	good. Rijndael's very low memory requirements make it very well
+	suited for restricted-space environments, in which it also
+	demonstrates excellent performance. Rijndael's operations are
+	among the easiest to defend against power and timing attacks.
 	</para>
 
 	<para>
-	The AES specifies three key sizes: 128, 192 and 256 bits	  
+	The AES specifies three key sizes: 128, 192 and 256 bits.
 	</para>
 
 	<para>
@@ -87360,23 +86694,23 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	AES cipher algorithms (FIPS-197). AES uses the Rijndael 
+	AES cipher algorithms (FIPS-197). AES uses the Rijndael
 	algorithm.
 	</para>
 
 	<para>
 	Rijndael appears to be consistently a very good performer in
-	both hardware and software across a wide range of computing 
-	environments regardless of its use in feedback or non-feedback 
-	modes. Its key setup time is excellent, and its key agility is 
-	good. Rijndael's very low memory requirements make it very well 
-	suited for restricted-space environments, in which it also 
-	demonstrates excellent performance. Rijndael's operations are 
-	among the easiest to defend against power and timing attacks.	
+	both hardware and software across a wide range of computing
+	environments regardless of its use in feedback or non-feedback
+	modes. Its key setup time is excellent, and its key agility is
+	good. Rijndael's very low memory requirements make it very well
+	suited for restricted-space environments, in which it also
+	demonstrates excellent performance. Rijndael's operations are
+	among the easiest to defend against power and timing attacks.
 	</para>
 
 	<para>
-	The AES specifies three key sizes: 128, 192 and 256 bits	  
+	The AES specifies three key sizes: 128, 192 and 256 bits
 	</para>
 
 	<para>
@@ -87399,23 +86733,23 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	AES cipher algorithms (FIPS-197). AES uses the Rijndael 
+	AES cipher algorithms (FIPS-197). AES uses the Rijndael
 	algorithm.
 	</para>
 
 	<para>
 	Rijndael appears to be consistently a very good performer in
-	both hardware and software across a wide range of computing 
-	environments regardless of its use in feedback or non-feedback 
-	modes. Its key setup time is excellent, and its key agility is 
-	good. Rijndael's very low memory requirements make it very well 
-	suited for restricted-space environments, in which it also 
-	demonstrates excellent performance. Rijndael's operations are 
-	among the easiest to defend against power and timing attacks.	
+	both hardware and software across a wide range of computing
+	environments regardless of its use in feedback or non-feedback
+	modes. Its key setup time is excellent, and its key agility is
+	good. Rijndael's very low memory requirements make it very well
+	suited for restricted-space environments, in which it also
+	demonstrates excellent performance. Rijndael's operations are
+	among the easiest to defend against power and timing attacks.
 	</para>
 
 	<para>
-	The AES specifies three key sizes: 128, 192 and 256 bits	  
+	The AES specifies three key sizes: 128, 192 and 256 bits.
 	</para>
 
 	<para>
@@ -87574,7 +86908,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Anubis is a variable key length cipher which can use keys from 
+	Anubis is a variable key length cipher which can use keys from
 	128 bits to 320 bits in length.  It was evaluated as a entrant
 	in the NESSIE competition.
 	</para>
@@ -87679,7 +87013,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-8>
+<sect2>
 	<title>Hardware crypto devices</title>
 
 
@@ -87696,10 +87030,10 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Some VIA processors come with an integrated crypto engine
-	(so called VIA PadLock ACE, Advanced Cryptography Engine)
-	that provides instructions for very fast {en,de}cryption 
-	with some algorithms.
+	Some VIA processors come with an integrated crypto engine (so
+	called VIA PadLock ACE, Advanced Cryptography Engine) that
+	provides instructions for very fast {en,de}cryption with some
+	algorithms.
 	</para>
 
 	<para>
@@ -87730,14 +87064,10 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect2>
+</sect1>
 
-</sect-8>
-
-
-</sect-9>
-
-
-<sect-9>
+<sect1>
 	<title>Library routines</title>
 
 
@@ -87827,173 +87157,10 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry>
-<refnamediv>
-	<refname>ZLIB_INFLATE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
+</sect1>
 
-<refentry>
-<refnamediv>
-	<refname>ZLIB_DEFLATE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>GENERIC_ALLOCATOR</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>REED_SOLOMON</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>REED_SOLOMON_ENC8</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>REED_SOLOMON_DEC8</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>REED_SOLOMON_ENC16</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>REED_SOLOMON_DEC16</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>TEXTSEARCH</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>TEXTSEARCH_KMP</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>TEXTSEARCH_BM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>TEXTSEARCH_FSM</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-
-</sect-9>
-
-</sect-10>
-
-</sect-11>
-
--->
 <!-- end automated stuff -->
 
-</sect1>
 
 </chapter>
 <!-- vim: set ai tw=72 : -->
