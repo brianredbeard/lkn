@@ -5063,22 +5063,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI and PCIEPORTBUS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>pciehp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you have a motherboard that supports PCI Express Native
-	Hotplug
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called pciehp.
-	</para>
-
-	<para>
-	When in doubt, say N.
+	Select this item if you have a motherboard that supports PCI Express
+	Native Hotplug.
 	</para>
 
 </refsect1>
@@ -5437,7 +5428,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>!X86_VOYAGER</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>scx200</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5448,11 +5439,6 @@ Kernel configuration option reference
 
 	<para>
 	If you don't know what to do here, say N.
-	</para>
-
-	<para>
-	This support is also available as a module.  If compiled as a
-	module, it will be called scx200.
 	</para>
 
 </refsect1>
@@ -5494,7 +5480,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>HOTPLUG</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>pcmcia_core</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5504,11 +5490,6 @@ Kernel configuration option reference
 	modems or hard drives often used with laptops computers.  There are
 	actually two varieties of these cards: 16 bit PCMCIA and 32 bit
 	CardBus cards.
-	</para>
-
-	<para>
-	To compile this driver as modules, choose M here: the
-	module will be called pcmcia_core.
 	</para>
 
 </refsect1>
@@ -5561,7 +5542,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CRC32</literal></para>
 	<para role="default">Default Value <literal>y if PCCARD</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>pcmcia</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5575,11 +5556,6 @@ Kernel configuration option reference
 	To use 16-bit PCMCIA cards, you will need supporting software in
 	most cases. (see the file file:Documentation/Changes for
 	location and details).
-	</para>
-
-	<para>
-	To compile this driver as modules, choose M here: the
-	module will be called pcmcia.
 	</para>
 
 	<para>
@@ -5688,20 +5664,15 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CARDBUS</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>yenta_socket</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This option enables support for CardBus host bridges.  Virtually
-	all modern PCMCIA bridges are CardBus compatible.  A "bridge" is 
-	the hardware inside your computer that PCMCIA cards are plugged 
+	all modern PCMCIA bridges are CardBus compatible.  A "bridge" is
+	the hardware inside your computer that PCMCIA cards are plugged
 	into.
-	</para>
-
-	<para>
-	To compile this driver as modules, choose M here: the
-	module will be called yenta_socket.
 	</para>
 
 	<para>
@@ -5720,7 +5691,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and PCMCIA and PCI</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>pd6729</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5741,7 +5712,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and PCMCIA and PCI</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>i82092</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5763,7 +5734,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and PCMCIA and ISA</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>i82365</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5787,7 +5758,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and PCMCIA and ISA</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>tcic</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5810,7 +5781,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCCARD and PCMCIA and PPC and 8xx</literal></para>
 	<para role="select">Selects <literal>PCCARD_NONSTATIC</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>m8xx_pcmcia</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5819,40 +5790,6 @@ Kernel configuration option reference
 	controller.
 	</para>
 
-	<para>
-	This driver is also available as a module called m8xx_pcmcia.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>HD64465_PCMCIA</refname>
-	<refpurpose>HD64465 host bridge support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCCARD and HD64465 and PCMCIA</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>PCMCIA_AU1X00</refname>
-	<refpurpose>Au1x00 pcmcia support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCCARD and SOC_AU1X00 and PCMCIA</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -5864,7 +5801,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCCARD and ARM and ARCH_SA1100 and PCMCIA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sa1100_cs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5872,10 +5809,6 @@ Kernel configuration option reference
 	Say Y here to include support for SA11x0-based PCMCIA or CF
 	sockets, found on HP iPAQs, Yopy, and other StrongARM(R)/
 	Xscale(R) embedded machines.
-	</para>
-
-	<para>
-	This driver is also available as a module called sa1100_cs.
 	</para>
 
 </refsect1>
@@ -5889,7 +5822,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCCARD and ARM and ARCH_SA1100 and SA1111 and PCMCIA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sa1111_cs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5897,10 +5830,6 @@ Kernel configuration option reference
 	Say Y  here to include support for SA1111-based PCMCIA or CF
 	sockets, found on the Jornada 720, Graphicsmaster and other
 	StrongARM(R)/Xscale(R) embedded machines.
-	</para>
-
-	<para>
-	This driver is also available as a module called sa1111_cs.
 	</para>
 
 </refsect1>
@@ -5914,7 +5843,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCCARD and ARM and ARCH_PXA and PCMCIA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>pxa2xx_cs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -5922,19 +5851,6 @@ Kernel configuration option reference
 	Say Y here to include support for the PXA2xx PCMCIA controller
 	</para>
 
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>PCMCIA_PROBE</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if PCCARD and ISA and !ARCH_SA1100 and !ARCH_CLPS711X</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
@@ -5997,43 +5913,13 @@ Kernel configuration option reference
 
 <refentry>
 <refnamediv>
-	<refname>PCMCIA_VRC4171</refname>
-	<refpurpose>NEC VRC4171 Card Controllers support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCCARD and VRC4171 and PCMCIA</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
-	<refname>PCMCIA_VRC4173</refname>
-	<refpurpose>NEC VRC4173 CARDU support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCCARD and CPU_VR41XX and PCI and PCMCIA</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
-<refentry>
-<refnamediv>
 	<refname>OMAP_CF</refname>
 	<refpurpose>OMAP CompactFlash Controller</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>PCCARD and PCMCIA and ARCH_OMAP16XX</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>omap_cf</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6044,20 +5930,6 @@ Kernel configuration option reference
 
 </refsect1>
 </refentry>
-
-<refentry>
-<refnamediv>
-	<refname>PCCARD_NONSTATIC</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
 
 </sect2>
 
@@ -6075,20 +5947,14 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>PCI and EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>HOTPLUG</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>pci_hotplug</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you have a motherboard with a PCI Hotplug controller.
-	This allows you to add and remove PCI cards while the machine is
-	powered up and running.  The file system pcihpfs must be mounted
-	in order to interact with any PCI Hotplug controllers.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called pci_hotplug.
+	Select this option if you have a motherboard with a PCI Hotplug
+	controller.  This allows you to add and remove PCI cards while
+	the machine is powered up and running.
 	</para>
 
 	<para>
@@ -6106,7 +5972,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>fakephp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6133,11 +5999,6 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called fakephp.
-	</para>
-
-	<para>
 	When in doubt, say N.
 	</para>
 
@@ -6152,18 +6013,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI and X86 and PCI_BIOS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpqphp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if you have a motherboard with a Compaq PCI Hotplug
 	controller.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called cpqphp.
 	</para>
 
 	<para>
@@ -6205,18 +6061,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI and X86_IO_APIC and X86 and PCI_BIOS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ibmphp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if you have a motherboard with a IBM PCI Hotplug
 	controller.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ibmphp.
 	</para>
 
 	<para>
@@ -6234,18 +6085,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>ACPI and HOTPLUG_PCI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>acpiphp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if you have a system that supports PCI Hotplug using
 	ACPI.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called acpiphp.
 	</para>
 
 	<para>
@@ -6263,18 +6109,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI_ACPI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>acpiphp_ibm</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if you have an IBM system that supports PCI Hotplug using
 	ACPI.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called acpiphp_ibm.
 	</para>
 
 	<para>
@@ -6315,18 +6156,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI and HOTPLUG_PCI_CPCI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpcihp_zt5550</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if you have an Performance Technologies (formerly Intel,
 	formerly just Ziatech) Ziatech ZT5550 CompactPCI system card.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called cpcihp_zt5550.
 	</para>
 
 	<para>
@@ -6344,7 +6180,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI and HOTPLUG_PCI_CPCI and X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cpcihp_generic</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -6352,11 +6188,6 @@ Kernel configuration option reference
 	Say Y here if you have a CompactPCI system card that exposes the #ENUM
 	hotswap signal as a bit in a system register that can be read through
 	standard port I/O.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called cpcihp_generic.
 	</para>
 
 	<para>
@@ -6374,18 +6205,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>shpchp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if you have a motherboard with a SHPC PCI Hotplug
 	controller.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called shpchp.
 	</para>
 
 	<para>
@@ -6407,7 +6233,7 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want to use the polling mechanism for hot-plug 
+	Say Y here if you want to use the polling mechanism for hot-plug
 	events for early platform testing.
 	</para>
 
@@ -6430,8 +6256,8 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here for AMD SHPC. You have to select this option if you are 
-	using this driver on platform with AMD SHPC.
+	Say Y here for AMD SHPC. You have to select this option if you
+	are using this driver on platform with AMD SHPC.
 	</para>
 
 </refsect1>
@@ -6445,17 +6271,12 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI and PPC_PSERIES and PPC64 and !HOTPLUG_PCI_FAKE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>rpaphp</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if you have a a RPA system that supports PCI Hotplug.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called rpaphp.
 	</para>
 
 	<para>
@@ -6473,18 +6294,13 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI_RPA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>rpadlpar_io</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say Y here if your system supports Dynamic Logical Partitioning
 	for I/O slots.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called rpadlpar_io.
 	</para>
 
 	<para>
@@ -6502,7 +6318,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>HOTPLUG_PCI and (IA64_SGI_SN2 || IA64_GENERIC)</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sgi_hotplug</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80014,7 +79830,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ext2</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80147,7 +79963,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ext3</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80183,10 +79999,9 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called ext3.  Be aware however that the file system
-	of your root partition (the one containing the directory /) cannot
-	be compiled as a module, and so this may be dangerous.
+	If you wish to build ext3 as a module, be aware that the file
+	system of your root partition (the one containing the directory
+	/) cannot be compiled as a module, and so this may be dangerous.
 	</para>
 
 </refsect1>
@@ -80283,7 +80098,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>EXT3_FS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>jbd</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80300,9 +80115,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this device as a module, choose M here: the module will be
-	called jbd.  If you are compiling ext3 into the kernel, you cannot
-	compile this code as a module.
+	If you are compiling ext3 into the kernel, you cannot compile
+	this code as a module.
 	</para>
 
 </refsect1>
@@ -80345,45 +80159,23 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>reiserfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Stores not just filenames but the files themselves in a balanced
-	tree.  Uses journaling.
-	</para>
-
-	<para>
-	Balanced trees are more efficient than traditional file system
-	architectural foundations.
+	Reiserfs is a journaling filesystem that uses balanced trees,
+	which makes it more efficient than traditional file systems for
+	some types of files.
 	</para>
 
 	<para>
 	In general, ReiserFS is as fast as ext2, but is very efficient with
-	large directories and small files.  Additional patches are needed
-	for NFS and quotas, please see http://www.namesys.com/ for links.
+	large directories and small files.
 	</para>
 
 	<para>
-	It is more easily extended to have features currently found in
-	database and keyword search systems than block allocation based file
-	systems are.  The next version will be so extended, and will support
-	plugins consistent with our motto ``It takes more than a license to
-	make source code open.''
-	</para>
-
-	<para>
-	Read http://www.namesys.com/ to learn more about reiserfs.
-	</para>
-
-	<para>
-	Sponsored by Threshold Networks, Emusic.com, and Bigstorage.com.
-	</para>
-
-	<para>
-	If you like it, you can pay us to add new features to it that you
-	need, buy a support contract, or pay us to port it to another OS.
+	Please see http://www.namesys.com/ to learn more about reiserfs.
 	</para>
 
 </refsect1>
@@ -80403,13 +80195,15 @@ Kernel configuration option reference
 	<para>
 	If you set this to Y, then ReiserFS will perform every check it can
 	possibly imagine of its internal consistency throughout its
-	operation.  It will also go substantially slower.  More than once we
-	have forgotten that this was on, and then gone despondent over the
-	latest benchmarks.:-) Use of this option allows our team to go all
-	out in checking for consistency when debugging without fear of its
-	effect on end users.  If you are on the verge of sending in a bug
-	report, say Y and you might get a useful error message.  Almost
-	everyone should say N.
+	operation.  It will also go substantially slower, so be careful
+	if you enable this and forget about it and wonder why things are
+	going so slow.
+	</para>
+
+	<para>
+	This option should only be enabled if you want to work on the
+	Reiserfs code, or think you have found a bug in it and want to
+	send a bug report to the developers.
 	</para>
 
 </refsect1>
@@ -80525,13 +80319,14 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>jfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This is a port of IBM's Journaled Filesystem .  More information is
-	available in the file file:Documentation/filesystems/jfs.txt.
+	This is a port of IBM's Journaled Filesystem.  More information is
+	available in the file
+	<filename>Documentation/filesystems/jfs.txt</filename>.
 	</para>
 
 	<para>
@@ -80644,7 +80439,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>EXPORTFS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>xfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80652,9 +80447,9 @@ Kernel configuration option reference
 	XFS is a high performance journaling filesystem which originated
 	on the SGI IRIX platform.  It is completely multi-threaded, can
 	support large files and large filesystems, extended attributes,
-	variable block sizes, is extent based, and makes extensive use of
-	Btrees (directories, extents, free space) to aid both performance
-	and scalability.
+	variable block sizes, is extent based, and makes extensive use
+	of Btrees (directories, extents, free space) to aid both
+	performance and scalability.
 	</para>
 
 	<para>
@@ -80664,10 +80459,10 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called xfs.  Be aware, however, that if the file
-	system of your root partition is compiled as a module, you'll need
-	to use an initial ramdisk (initrd) to boot.
+	If you want to build this filesystem as a module, be aware, that
+	if the file system of your root partition is compiled as a
+	module, you'll need to use an initial ramdisk (initrd or
+	initramfs) to be able to boot successfully.
 	</para>
 
 </refsect1>
@@ -80797,7 +80592,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>minix</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80813,10 +80608,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called minix.  Note that the file system of your root
-	partition (the one containing the directory /) cannot be compiled as
-	a module.
+	Note that the file system of your root partition (the one
+	containing the directory /) cannot be compiled as a module.
 	</para>
 
 </refsect1>
@@ -80829,7 +80622,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>romfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80838,13 +80631,6 @@ Kernel configuration option reference
 	initial ram disks of installation disks, but it could be used for
 	other read-only media as well.  Read
 	file:Documentation/filesystems/romfs.txt for details.
-	</para>
-
-	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called romfs.  Note that the file system of your
-	root partition (the one containing the directory /) cannot be a
-	module.
 	</para>
 
 	<para>
@@ -80920,7 +80706,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>QUOTA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>quota_v1</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80941,7 +80727,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>QUOTA</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>quota_v2</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -80986,7 +80772,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>autofs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81010,11 +80796,6 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this support as a module, choose M here: the module will be
-	called autofs.
-	</para>
-
-	<para>
 	If you are not a part of a fairly large, distributed network, you
 	probably do not need an automounter, and can say N here.
 	</para>
@@ -81029,7 +80810,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>autofs4</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81044,12 +80825,6 @@ Kernel configuration option reference
 	To use the automounter you need the user-space tools from
 	ftp://ftp.kernel.org/pub/linux/daemons/autofs/v4/; you also
 	want to answer Y to "NFS file system support", below.
-	</para>
-
-	<para>
-	To compile this support as a module, choose M here: the module will be
-	called autofs4.  You will need to add "alias autofs autofs4" to your
-	modules configuration file.
 	</para>
 
 	<para>
@@ -81069,7 +80844,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>fuse</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81109,7 +80884,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>isofs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81123,11 +80898,6 @@ Kernel configuration option reference
 	file:Documentation/filesystems/isofs.txt and the CD-ROM-HOWTO,
 	available from http://www.tldp.org/docs.html#howto), thereby
 	enlarging your kernel by about 27 KB; otherwise say N.
-	</para>
-
-	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called isofs.
 	</para>
 
 </refsect1>
@@ -81188,7 +80958,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>udf</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81197,11 +80967,6 @@ Kernel configuration option reference
 	you intend to mount DVD discs or CDRW's written in packet mode, or
 	if written to by other UDF utilities, such as DirectCD.
 	Please read file:Documentation/filesystems/udf.txt.
-	</para>
-
-	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called udf.
 	</para>
 
 	<para>
@@ -81224,7 +80989,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>fat</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81270,10 +81035,9 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this as a module, choose M here: the module will be called
-	fat.  Note that if you compile the FAT support as a module, you
-	cannot compile any of the FAT-based file systems into the kernel,
-	they will have to be modules as well.
+	Note that if you compile the FAT support as a module, you cannot
+	compile any of the FAT-based file systems into the kernel, they
+	will have to be modules as well.
 	</para>
 
 </refsect1>
@@ -81287,7 +81051,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>FAT_FS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>msdos</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81314,8 +81078,7 @@ Kernel configuration option reference
 	<para>
 	This option will enlarge your kernel by about 7 KB. If unsure,
 	answer Y. This will only work if you said Y to "DOS FAT fs support"
-	as well. To compile this as a module, choose M here: the module will
-	be called msdos.
+	as well.
 	</para>
 
 </refsect1>
@@ -81329,7 +81092,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>FAT_FS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>vfat</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81345,11 +81108,6 @@ Kernel configuration option reference
 	works if you said Y to the "DOS FAT fs support" above.  Please read
 	the file file:Documentation/filesystems/vfat.txt for details.  If
 	unsure, say Y.
-	</para>
-
-	<para>
-	To compile this as a module, choose M here: the module will be called
-	vfat.
 	</para>
 
 </refsect1>
@@ -81409,7 +81167,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>ntfs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81442,11 +81200,6 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called ntfs.
-	</para>
-
-	<para>
 	If you are not using Windows NT, 2000, XP or 2003 in addition to
 	Linux on your computer it is safe to say N.
 	</para>
@@ -81462,7 +81215,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NTFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81501,7 +81253,6 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NTFS_FS</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81847,7 +81598,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>affs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -81868,11 +81619,6 @@ Kernel configuration option reference
 	(http://www.freiburg.linux.de/~uae/).
 	If you want to do this, you will also need to say Y or M to "Loop
 	device support", above.
-	</para>
-
-	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called affs.  If unsure, say N.
 	</para>
 
 </refsect1>
@@ -81910,7 +81656,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="select">Selects <literal>NLS_UTF8</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>hfsplus</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82053,7 +81799,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>MTD</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>jffs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82114,7 +81860,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>MTD</literal></para>
 	<para role="select">Selects <literal>CRC32</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>jffs2</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -82968,7 +82714,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CRYPTO_MD5</literal></para>
 	<para role="select">Selects <literal>CRYPTO_DES</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>rpcsec_gss_krb5</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83002,7 +82748,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CRYPTO_MD5</literal></para>
 	<para role="select">Selects <literal>CRYPTO_DES</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>rpcsec_gss_spkm3</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83134,7 +82880,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and INET</literal></para>
 	<para role="select">Selects <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cifs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83621,7 +83367,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>NET and INET and EXPERIMENTAL</literal></para>
 	<para role="select">Selects <literal>RXRPC</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>afs</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -83649,7 +83395,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NET and INET and EXPERIMENTAL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>9p2000</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84295,7 +84041,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp437</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84321,7 +84067,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp737</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84347,7 +84093,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp775</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84374,7 +84120,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp850</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84406,7 +84152,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp852</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84435,7 +84181,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp855</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84460,7 +84206,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp857</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84485,7 +84231,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp860</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84510,7 +84256,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp861</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84535,7 +84281,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp862</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84560,7 +84306,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp863</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84586,7 +84332,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp864</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84611,7 +84357,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp865</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84637,7 +84383,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp866</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84663,7 +84409,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp869</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84688,7 +84434,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp936</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84714,7 +84460,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp950</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84740,7 +84486,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp932</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84767,7 +84513,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp949</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84792,7 +84538,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp874</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84817,7 +84563,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-8</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84840,7 +84586,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp1250</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84865,7 +84611,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_cp1251</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84891,7 +84637,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_ascii</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84912,7 +84658,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-1</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84938,7 +84684,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-2</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84963,7 +84709,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-3</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -84987,7 +84733,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-4</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85011,7 +84757,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-5</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85036,7 +84782,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-6</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85059,7 +84805,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-7</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85082,7 +84828,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-9</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85106,7 +84852,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-13</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85130,7 +84876,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-14</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85155,7 +84901,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_iso8859-15</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85185,7 +84931,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_koi8-r</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85208,7 +84954,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_koi8-u</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85231,7 +84977,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>NLS</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>nls_utf8</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85282,7 +85028,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>EXPERIMENTAL and PROFILING</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>oprofile</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -85748,7 +85494,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>DEBUG_KERNEL</literal></para>
 	<para role="default">Default Value <literal>n if DEBUG_KERNEL</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>rcutorture</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86004,7 +85750,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>SECURITY</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>capability</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86024,7 +85770,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>USB and SECURITY</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>root_plug</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86056,7 +85802,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>CRYPTO</literal></para>
 	<para role="select">Selects <literal>CRYPTO_SHA1</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>seclvl</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86314,7 +86060,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>crypto_null</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86333,7 +86079,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>md4</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86352,7 +86098,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>md5</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86371,7 +86117,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sha1</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86390,7 +86136,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO and ARCH_S390</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sha1_z990</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86409,7 +86155,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sha256</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86433,7 +86179,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>sha512</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86462,7 +86208,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>wp512</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86491,7 +86237,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>tgr192</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86521,7 +86267,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>des</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86540,7 +86286,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO and ARCH_S390</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>des_z990</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86559,7 +86305,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>blowfish</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86589,7 +86335,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>twofish</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86620,7 +86366,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>serpent</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86650,7 +86396,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO and !X86 and !UML_X86</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>aes</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86689,7 +86435,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO and (X86 || UML_X86) and !64BIT</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>aes-i586</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86728,7 +86474,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO and (X86 || UML_X86) and 64BIT</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>aes-x86_64</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86767,7 +86513,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cast5</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86787,7 +86533,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>cast6</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86807,7 +86553,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>tea</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86843,7 +86589,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>arc4</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86869,7 +86615,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>khazad</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86899,7 +86645,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>anubis</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86932,7 +86678,7 @@ Kernel configuration option reference
 	<para role="select">Selects <literal>ZLIB_INFLATE</literal></para>
 	<para role="select">Selects <literal>ZLIB_DEFLATE</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>deflate</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86956,7 +86702,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>michael_mic</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -86979,7 +86725,7 @@ Kernel configuration option reference
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="select">Selects <literal>LIBCRC32C</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>crc32c</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -87001,7 +86747,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>tcrypt</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -87025,7 +86771,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="depends">Depends on <literal>CRYPTO and X86_32</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>padlock</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -87078,7 +86824,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>crc-ccitt</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -87099,7 +86845,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>crc16</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -87121,7 +86867,7 @@ Kernel configuration option reference
 <refsynopsisdiv>
 	<para role="default">Default Value <literal>y</literal></para>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>crc32</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
@@ -87142,7 +86888,7 @@ Kernel configuration option reference
 </refnamediv>
 <refsynopsisdiv>
 	<para role="type">Type <literal>tristate</literal></para>
-	<para role="module">Module Name <filename>FIXME</filename></para>
+	<para role="module">Module Name <filename>libcrc32c</filename></para>
 </refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
