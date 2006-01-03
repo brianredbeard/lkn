@@ -57261,8 +57261,7 @@ Kernel configuration option reference
 
 </sect2>
 
-<!--
-<sect-7>
+<sect2>
 	<title>I2C support</title>
 
 
@@ -57331,7 +57330,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>I2C Algorithms</title>
 
 <para>
@@ -57499,10 +57498,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 
-<sect-6>
+<sect3>
 	<title>I2C Hardware Bus support</title>
 
 <para>
@@ -58679,10 +58678,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 
-<sect-6>
+<sect3>
 	<title>Miscellaneous I2C Chip support</title>
 
 <para>
@@ -59003,7 +59002,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -59093,10 +59092,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect2>
 
 
-<sect-7>
+<sect2>
 	<title>Dallas's 1-wire bus</title>
 
 
@@ -59285,10 +59284,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect2>
 
 
-<sect-7>
+<sect2>
 	<title>Hardware Monitoring support</title>
 
 
@@ -60299,10 +60298,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect2>
 
 
-<sect-7>
+<sect2>
 	<title>Misc devices</title>
 
 
@@ -60340,7 +60339,6 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	
 	If unsure, say N.
 	</para>
 
@@ -60348,10 +60346,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect2>
 
 
-<sect-7>
+<sect2>
 	<title>Multimedia Capabilities Port drivers</title>
 
 
@@ -60415,10 +60413,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect2>
 
 
-<sect-7>
+<sect2>
 	<title>Multimedia devices</title>
 
 
@@ -60462,7 +60460,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>Video For Linux</title>
 
 <para>
@@ -61657,10 +61655,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 
-<sect-6>
+<sect3>
 	<title>Radio Adapters</title>
 
 <para>
@@ -62423,10 +62421,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 
-<sect-6>
+<sect3>
 	<title>Digital Video Broadcasting Devices</title>
 
 
@@ -63511,7 +63509,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-5>
+<sect4>
 	<title>Customise DVB Frontends</title>
 
 <para>
@@ -64067,10 +64065,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-5>
+</sect4>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -64194,10 +64192,9 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect2>
 
-
-<sect-7>
+<sect2>
 	<title>Graphics support</title>
 
 
@@ -67428,7 +67425,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>Console display driver support</title>
 
 <para>
@@ -67942,10 +67939,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 
-<sect-6>
+<sect3>
 	<title>Logo configuration</title>
 
 <para>
@@ -68166,7 +68163,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -68271,8 +68268,6 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
-
 <refentry>
 <refnamediv>
 	<refname>BACKLIGHT_CORGI</refname>
@@ -68295,10 +68290,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>Sound</title>
 
 
@@ -68480,7 +68475,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-7>
+<sect3>
 	<title>Advanced Linux Sound Architecture</title>
 
 <para>
@@ -68889,7 +68884,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect4>
 	<title>Generic devices</title>
 
 <para>
@@ -69115,10 +69110,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>ISA devices</title>
 
 <para>
@@ -69964,10 +69959,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>PCI devices</title>
 
 <para>
@@ -71193,10 +71188,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>ALSA PowerMac devices</title>
 
 <para>
@@ -71260,10 +71255,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>ALSA ARM devices</title>
 
 <para>
@@ -71353,10 +71348,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>ALSA MIPS devices</title>
 
 <para>
@@ -71387,10 +71382,10 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-
-</sect-6>
-
-
+</sect4>
+</sect3>
+</sect2>
+<!--
 <sect-6>
 	<title>USB devices</title>
 
