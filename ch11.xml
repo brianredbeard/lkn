@@ -17477,8 +17477,7 @@ Kernel configuration option reference
 	<title>Device Drivers</title>
 
 
-<!--
-<sect-2>
+<sect2>
 	<title>Generic Driver Options</title>
 
 
@@ -17577,10 +17576,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Connector - unified userspace &lt;-&gt; kernelspace linker</title>
 
 
@@ -17631,10 +17630,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Memory Technology Devices (MTD)</title>
 
 
@@ -18190,7 +18189,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-1>
+<sect3>
 	<title>RAM/ROM/Flash chip drivers</title>
 
 <para>
@@ -18959,10 +18958,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>Mapping drivers for chip access</title>
 
 <para>
@@ -20590,10 +20589,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>Self-contained MTD device drivers</title>
 
 <para>
@@ -21153,10 +21152,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>NAND Flash Device Drivers</title>
 
 <para>
@@ -21628,10 +21627,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>OneNAND Flash Device Drivers</title>
 
 <para>
@@ -21723,13 +21722,13 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Parallel port support</title>
 
 
@@ -22053,10 +22052,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Plug and Play support</title>
 
 
@@ -22247,10 +22246,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Block devices</title>
 
 
@@ -23966,10 +23965,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>ATA/ATAPI/MFM/RLL support</title>
 
 
@@ -26501,10 +26500,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>SCSI device support</title>
 
 
@@ -26916,7 +26915,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-1>
+<sect3>
 	<title>SCSI Transport Attributes</title>
 
 <para>
@@ -27008,10 +27007,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>SCSI low-level drivers</title>
 
 <para>
@@ -31419,10 +31418,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>PCMCIA SCSI adapter support</title>
 
 <para>
@@ -31587,13 +31586,13 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Old CD-ROM drivers (not SCSI, not IDE)</title>
 
 <para>
@@ -32002,10 +32001,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Multi-device support (RAID and LVM)</title>
 
 
@@ -32521,10 +32520,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Fusion MPT device support</title>
 
 
@@ -32740,10 +32739,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>IEEE 1394 (FireWire) support</title>
 
 
@@ -33158,10 +33157,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>I2O device support</title>
 
 
@@ -33410,10 +33409,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Macintosh device drivers</title>
 
 <para>
@@ -33883,10 +33882,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Network device support</title>
 
 
@@ -34124,7 +34123,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-1>
+<sect3>
 	<title>ARCnet devices</title>
 
 <para>
@@ -34423,10 +34422,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>PHY device support</title>
 
 <para>
@@ -34552,10 +34551,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>Ethernet (10 or 100Mbit)</title>
 
 <para>
@@ -36388,7 +36387,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect0>
+<sect4>
 	<title>Tulip family network device support</title>
 
 <para>
@@ -36762,8 +36761,7 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-
-</sect0>
+</sect4>
 
 <refentry>
 <refnamediv>
@@ -38879,11 +38877,10 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect3>
 
-</sect-1>
 
-
-<sect-1>
+<sect2>
 	<title>Ethernet (1000 Mbit)</title>
 
 <para>
@@ -39612,10 +39609,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect2>
 
 
-<sect-1>
+<sect2>
 	<title>Ethernet (10000 Mbit)</title>
 
 <para>
@@ -39803,10 +39800,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect2>
 
 
-<sect-1>
+<sect2>
 	<title>Token Ring devices</title>
 
 <para>
@@ -40194,10 +40191,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect2>
 
 
-<sect-1>
+<sect2>
 	<title>Wireless LAN (non-hamradio)</title>
 
 <para>
@@ -41298,10 +41295,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect2>
 
 
-<sect-1>
+<sect2>
 	<title>PCMCIA network device support</title>
 
 <para>
@@ -41602,10 +41599,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect2>
 
 
-<sect-1>
+<sect2>
 	<title>Wan interfaces</title>
 
 <para>
@@ -42921,10 +42918,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect2>
 
 
-<sect-1>
+<sect2>
 	<title>ATM drivers</title>
 
 <para>
@@ -43973,10 +43970,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect2>
 
 
-<sect-1>
+<sect2>
 	<title>S/390 network device drivers</title>
 
 <para>
@@ -44230,8 +44227,7 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-
-</sect-1>
+</sect2>
 
 <refentry>
 <refnamediv>
@@ -45096,10 +45092,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>ISDN subsystem</title>
 
 
@@ -45135,7 +45131,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-1>
+<sect3>
 	<title>Old ISDN4Linux</title>
 
 <para>
@@ -45364,7 +45360,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect0>
+<sect4>
 	<title>ISDN feature submodules</title>
 
 <para>
@@ -45435,10 +45431,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect0>
+</sect4>
 
 
-<sect0>
+<sect4>
 	<title>Passive cards</title>
 
 <para>
@@ -46565,10 +46561,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect0>
+</sect4>
 
 
-<sect0>
+<sect4>
 	<title>Active cards</title>
 
 <para>
@@ -46713,11 +46709,9 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect4>
 
-</sect0>
-
-
-</sect-1>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -46866,7 +46860,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-1>
+<sect3>
 	<title>Active AVM cards</title>
 
 <para>
@@ -47051,10 +47045,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-<sect-1>
+<sect3>
 	<title>Active Eicon DIVA Server cards</title>
 
 <para>
@@ -47200,13 +47194,13 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-1>
+</sect3>
 
 
-</sect-2>
+</sect2>
 
 
-<sect-2>
+<sect2>
 	<title>Telephony Support</title>
 
 
@@ -47299,10 +47293,9 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
+</sect2>
 
-
-<sect-2>
+<sect2>
 	<title>Input device support</title>
 
 
@@ -48033,8 +48026,6 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-2>
-
 <refentry>
 <refnamediv>
 	<refname>INPUT_MOUSE</refname>
@@ -48351,8 +48342,6 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-
-</sect-3>
 
 <refentry>
 <refnamediv>
@@ -49043,8 +49032,6 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-4>
-
 <refentry>
 <refnamediv>
 	<refname>INPUT_TOUCHSCREEN</refname>
@@ -49277,8 +49264,6 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-5>
-
 <refentry>
 <refnamediv>
 	<refname>INPUT_MISC</refname>
@@ -49449,10 +49434,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
-
-
-<sect-6>
+<sect3>
 	<title>Hardware I/O ports</title>
 
 
@@ -50009,13 +49991,13 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 
-</sect-7>
+</sect2>
 
 
-<sect-7>
+<sect2>
 	<title>Character devices</title>
 
 
@@ -50931,7 +50913,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>Serial drivers</title>
 
 
@@ -53069,7 +53051,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -53387,7 +53369,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>IPMI</title>
 
 
@@ -53550,10 +53532,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 
-<sect-6>
+<sect3>
 	<title>Watchdog Cards</title>
 
 
@@ -54856,7 +54838,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -55441,7 +55423,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>Ftape, the floppy tape device driver</title>
 
 
@@ -56143,7 +56125,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -56802,7 +56784,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>PCMCIA character devices</title>
 
 <para>
@@ -56894,7 +56876,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -57147,7 +57129,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-6>
+<sect3>
 	<title>TPM devices</title>
 
 
@@ -57249,7 +57231,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -57277,9 +57259,9 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect2>
 
-
+<!--
 <sect-7>
 	<title>I2C support</title>
 
