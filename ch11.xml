@@ -71383,10 +71383,8 @@ Kernel configuration option reference
 </refentry>
 
 </sect4>
-</sect3>
-</sect2>
-<!--
-<sect-6>
+
+<sect4>
 	<title>USB devices</title>
 
 <para>
@@ -71452,10 +71450,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>PCMCIA devices</title>
 
 <para>
@@ -71517,10 +71515,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>ALSA Sparc devices</title>
 
 <para>
@@ -71608,10 +71606,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
 
 
-<sect-6>
+<sect4>
 	<title>GSC devices</title>
 
 <para>
@@ -71643,13 +71641,11 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-6>
+</sect4>
+</sect3>
 
 
-</sect-7>
-
-
-<sect-7>
+<sect3>
 	<title>Open Sound System</title>
 
 <para>
@@ -74310,11 +74306,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect3>
 
 
-</sect-8>
-
+</sect2>
 
 <sect2>
 	<title>USB support</title>
@@ -76774,7 +76769,6 @@ Kernel configuration option reference
 
 </sect3>
 
-</sect2>
 
 <refentry>
 <refnamediv>
@@ -76857,7 +76851,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-7>
+<sect3>
 	<title>USB Serial Converter support</title>
 
 <para>
@@ -78027,7 +78021,7 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect3>
 
 <refentry>
 <refnamediv>
@@ -78476,7 +78470,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-7>
+<sect3>
 	<title>USB DSL modem support</title>
 
 <para>
@@ -78598,10 +78592,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect3>
 
 
-<sect-7>
+<sect3>
 	<title>USB Gadget Support</title>
 
 
@@ -79356,13 +79350,13 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-7>
+</sect3>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>MMC/SD Card support</title>
 
 
@@ -79533,10 +79527,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>InfiniBand support</title>
 
 
@@ -79755,10 +79749,10 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
 
-<sect-8>
+<sect2>
 	<title>SN Devices</title>
 
 
@@ -79791,9 +79785,8 @@ Kernel configuration option reference
 </refentry>
 
 
-</sect-8>
+</sect2>
 
--->
 </sect1>
 
 
