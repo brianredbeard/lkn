@@ -6632,7 +6632,6 @@ Kernel configuration option reference
 <sect1>
 	<title>Networking</title>
 
-<!--
 <refentry>
 <refnamediv>
 	<refname>NET</refname>
@@ -14996,7 +14995,7 @@ Kernel configuration option reference
 </sect2>
 
 
-</sect1>
+<sect2>
 
 <refentry>
 <refnamediv>
@@ -15168,7 +15167,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect1>
+<sect3>
 	<title>AX.25 network device drivers</title>
 
 <para>
@@ -15553,11 +15552,12 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect3>
 
-</sect1>
+</sect2>
 
 
-</sect0>
+<sect2>
 
 <refentry>
 <refnamediv>
@@ -15795,7 +15795,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect0>
+<sect3>
 	<title>Infrared-port device drivers</title>
 
 <para>
@@ -16683,11 +16683,11 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect3>
+</sect2>
 
-</sect0>
 
-
-</sect-1>
+<sect2>
 
 <refentry>
 <refnamediv>
@@ -16951,7 +16951,7 @@ Kernel configuration option reference
 </refentry>
 
 
-<sect-1>
+<sect3>
 	<title>Bluetooth device drivers</title>
 
 <para>
@@ -17311,11 +17311,10 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
+</sect3>
+</sect2>
 
-</sect-1>
-
-
-</sect-2>
+<sect2>
 
 <refentry>
 <refnamediv>
@@ -17468,7 +17467,8 @@ Kernel configuration option reference
 
 </refsect1>
 </refentry>
--->
+
+</sect2>
 
 </sect1>
 
