@@ -1,4 +1,4 @@
-<chapter>
+<appendix id="LKN-appendix-programming">
 
 <title>
 Becoming a kernel programmer
@@ -20,6 +20,6 @@ Becoming a kernel programmer
 <title>kernel janitor project</title>
 </sect1>
 
-</chapter>
+</appendix>
 
 <!-- vim: set ai tw=72 : -->

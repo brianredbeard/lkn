@@ -1,6 +1,6 @@
 <!-- fix up the "- -" entries due to commenting out stuff -->
 
-<chapter>
+<chapter id="LKN-config">
 
 <title>
 Kernel configuration option reference

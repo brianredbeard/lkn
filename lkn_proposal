@@ -25,6 +25,7 @@ Proposed chapter outline:
 
 - Introduction or Foreword from some other kernel developer
 - Kernel History and Background (just a few pages)
+- Requirements to build a kernel
 - Retrieving the kernel source
 - Building a kernel
 	- use the the default configuration options

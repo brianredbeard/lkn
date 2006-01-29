@@ -1,4 +1,4 @@
-<chapter>
+<appendix id="LKN-appendix-making-changes">
 
 <title>
 Managing changes made to a kernel source tree
@@ -399,6 +399,6 @@ for the Linux USB and Linux Hot Plug PCI drivers.</p>
 </sect1>
 
 
-</chapter>
+</appendix>
 
 <!-- vim: set ai tw=72 : -->

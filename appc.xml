@@ -1,4 +1,4 @@
-<chapter>
+<appendix id="LKN-appendix-bugreports">
 
 <title>
 Creating useful bugreports
@@ -25,6 +25,6 @@ Creating useful bugreports
 
 </sect1>
 
-</chapter>
+</appendix>
 
 <!-- vim: set ai tw=72 : -->

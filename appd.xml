@@ -1,4 +1,4 @@
-<chapter>
+<appendix id="LKN-appendix-utils">
 
 <title>
 Helpful Utilities
@@ -32,7 +32,7 @@ to:
    they are not present on the machine already.
  - it checks the GPG signatures of the tarball and patches to verify
    that it has downloaded a correct file.
-   
+
 Ketchup can be found at:
 	http://www.selenic.com/ketchup/
 and has documentation
@@ -51,6 +51,6 @@ and has documentation
 <title>quilt</title>
 </sect1>
 
-</chapter>
+</appendix>
 
 <!-- vim: set ai tw=72 : -->
