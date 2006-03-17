@@ -1,0 +1,88 @@
+Proposed Linux Kernel in a Nutshell chapter outline:
+
+- Introduction or Foreword from some other kernel developer
+- Kernel History and Background (just a few pages)
+- Requirements to build a kernel
+- Retrieving the kernel source
+- Building a kernel
+	- use the the default configuration options
+	- basic options to make (full coverage will be in later
+	  chapter).
+	- building a kernel with the source in one place, and the output
+	  in another.
+	- building only a portion of the kernel tree
+	- building a kernel for a different architecture
+- Installing a built kernel and booting with it
+	- grub
+	- lilo
+	- other boot loaders
+- Upgrading the kernel to the next version
+	- retrieving the patch
+	- applying the patch
+	- updating the configuration
+	- building the updated kernel
+- Configuring a kernel
+	- text methods
+		- make config
+		- make oldconfig
+		- make menuconfig
+	- graphical methods
+		- make xconfig
+		- make gconfig
+- Recipies for creating configurations
+	- Disks
+		- USB storage
+		- SATA
+		- cdrom burning
+	- Devices
+		- USB
+		- firewire / ieee1394
+		- PCI hotplug
+		- PCMCIA
+	- CPU
+		- processor types
+		- suspend
+		- cpu frequency scaling
+		- ACPI
+		- SMP
+		- different memory models
+		- Preemption
+	- Network stuff
+		- Netfilter
+		- network drivers
+		- Irda
+		- wireless
+	- Filesystems
+		- RAID
+		- LVM
+		- DM
+		- Samba
+		- Journaling filesystems
+		- OCFS2
+	- Security
+		- SELinux
+		- BSD Secure Levels
+	- Kernel debugging
+- Customizing the initramfs / initrd image
+- Kernel boot command line reference
+- Kernel build command line reference
+- Kernel configuration option reference
+	- will be only the most "important" ones, and will be the bulk
+	  of the book (although the previous chapters will not be
+	  "light".)
+
+Appendixes:
+ - Becoming a kernel programmer
+ 	- basics of creating a patch
+	- how to submit a valid patch and to whom
+ 	- kernelnewbies
+	- kernel janitor project
+- Managing changes made to a kernel source tree
+	- based on the ideas presented at
+	  http://www.linuxjournal.com/article/6183
+- Creating useful bug reports
+	- decoding a oops message
+	- what a kernel developer wants to see in a bug report.
+	- who to send the report to.
+		- email
+		- bugzilla.kernel.org
