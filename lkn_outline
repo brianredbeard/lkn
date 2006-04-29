@@ -39,6 +39,7 @@ Proposed Linux Kernel in a Nutshell chapter outline:
 		- firewire / ieee1394
 		- PCI hotplug
 		- PCMCIA
+		- Sound (ALSA)
 	- CPU
 		- processor types
 		- suspend
