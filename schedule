@@ -1,6 +1,26 @@
-Aug 31	1/2 kernel option material
-Sep 19	2/2 kernel option material
-Oct 10	1/2 non-kernel option chapters
-Nov 7	2/2 non-kernel option chapters
-Nov 21	final copy ready for technical review
-	
+old one:
+	Aug 31	1/2 kernel option material
+	Sep 19	2/2 kernel option material
+	Oct 10	1/2 non-kernel option chapters
+	Nov 7	2/2 non-kernel option chapters
+	Nov 21	final copy ready for technical review
+
+New one:
+
+
+May 1 - start
+2 recipes / 5 config options a day @ 26 recipes and 100 options == 4 weeks.
+June 1 - all done with config and recipies
+ different chapters/sections, 1 wk each:
+  - command line options
+  - build options
+  - history
+  - building kernel
+  - installing
+  - upgrading
+  - configuring
+  - initramfs/initrd (2 wks, might be tough)
+
+  + OLS time off (1 1/2 weeks)
+
+August 31 - done
