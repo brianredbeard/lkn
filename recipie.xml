@@ -1,5 +1,24 @@
 <chapter id="LKN-recipie">
 
+<!--
+AO: Some general notes to remember:
+
+I think it could get tiresome to keep saying "Then..." or "Also..."
+I think you can just list steps. Readers will assume the steps are
+done in order. Sometimes, readers may even want to skip around, so
+order is not that important (for xconfig and menuconfig builds). I
+did keep one "Also" below because it seemed to fit in well.
+
+Avoid future tense; talk about what the kernel does in the present
+(even though it will happen in the future, after building and
+booting).
+
+Refer to options such as "SCSI disk support" without any "the." You
+can also say 'the "SCSI disk support" option' but there's no need to
+add that extra text.
+-->
+
+
 <title>
 Kernel Configuration Recipies
 </title>
@@ -25,26 +44,26 @@ order for the device to be mounted properly:
 		SCSI Device Support
 			<*> SCSI disk support
 
-Then, enable USB support for the kernel:
+Enable USB support for the kernel:
 	Device Drivers
 		USB Support
 			<M> Support for Host-side USB
 
-As well as the USB Host controllers which will enable USB to work
-properly on the machine:
+Also enable the USB Host controllers that allow USB to work properly on
+the machine:
 	Device Drivers
 		USB Support
 		---   USB Host Controller Drivers
 		<M>   EHCI HCD (USB 2.0) support
 		<M>   OHCI HCD support
 		<M>   UHCI HCD (most Intel and VIA) support
-Then enable USB Storage support:
+Enable USB Storage support:
 	Device Drivers
 		USB Support
 		<M> USB Mass Storage support
 
-If you wish, there are a number of specific USB storage devices listed
-as separate configuration items, as they do not follow the standard USB
+A number of specific USB storage devices are listed as separate
+configuration items, as they do not follow the standard USB
 specification and require special code.  If you have one of these
 devices, please enable support for them.
 
