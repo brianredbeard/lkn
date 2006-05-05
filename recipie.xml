@@ -17,6 +17,64 @@ Refer to options such as "SCSI disk support" without any "the." You
 can also say 'the "SCSI disk support" option' but there's no need to
 add that extra text.
 -->
+<!--
+
+  AO: A couple more general notes:
+
+About "which" and "that."  You should use "which" for an extra clause
+that isn't strictly needed for the sentence to make sense.  If the
+clause could be removed and the sentence would still work, use
+"which." Also use commas around the clause, as shown here:
+
+        I can't stand being outside when my neighber uses a
+        gas-powered lawn mower, which runs at about 110 decibels.
+
+When the clause is required, use "that" and no commas:
+
+        I can't stand being outside when my neighber uses a
+        gas-powered lawn mower that runs at about 110 decibels.
+
+(In other words, I can tolerate other kinds of gas-powered lawn mowers.)
+
+To use English-teacher jargon, one uses "that" for descriptive clauses and "which" for restrictive ones.
+
+The British tend to use "which" a lot where American usage is "that."
+
+...
+
+Using "such as" and "like": this is not very important, but our style
+guide distinguishes between these. If you are citing EXAMPLES of
+something, use "such as." For instance:
+
+	Large companies such as IBM and Hewlett Packard promote
+	Linux...
+
+Reserve "like" for more metaphorical situations; these are NOT
+examples.
+
+	People treat the claims of these large companies like
+	politicians.
+
+...
+
+The word "only." Very important and valuable, but I like to use it in
+the right place as defined by English experts. Most writers aren't
+sticklers as much as I am, but I think doing it right really makes
+things clear for the reader.  The rule is: "Use 'only' before the word
+that it modifies." Here are two sentences that show how the location
+of "only" makes a difference:
+
+	This network layer only reads the headers on the packets.
+	This network layer reads only the headers on the packets.
+
+The first sentence implies, "The layer reads the headers but does not
+create or write them." The second sentence implies, "The layer reads
+headers but not the contents of the data (for the purposes of
+check-summing, etc.)." Probably the writer in this case wants the
+latter meaning. But many writers would write the first sentence, which
+is formally incorrect and could confuse the reader.
+
+-->
 
 
 <title>
@@ -27,6 +85,31 @@ Kernel Configuration Recipes
 <sect1>
 <title>Disks</title>
 
+<simplesect>
+
+<!--
+
+  AO: We should have a little text between sect1 and sect2, although
+  it's not absolutely required in a reference work. I just put in some
+  junk that I thought might set a context; you can change it.
+
+-->
+
+<para>
+
+Most disks can now be detected and configured by the distribution, and
+if you add new hardware later it can be detected and configured by the
+<command>kudzu</command> daemon.
+<!--
+
+  AO: Worth mentioning HAL and plug-and-play?
+
+-->
+But people who build their own systems around Linux or have unusual
+hardware needs can use the kernel configuration options in this section.
+</para>
+
+</simplesect>
 
 <sect2>
 <title>USB storage</title>
@@ -34,9 +117,36 @@ Kernel Configuration Recipes
 <para>
 A USB Storage device is in reality a USB SCSI device that talks over a
 USB connection.  Because of this, the SCSI subsystem must be enabled:
+</para>
+
+<!--
+
+  AO: I'll ask design and tools whether they have a better suggestion
+  to replace the mess below. I do want to find something that looks
+  nicer than pre-formatted code output, although at this stage we
+  might want to save time by just wrapping all kernel options in
+  <programlisting> tags.
+
+-->
+
+<listsimple>
+<listitem><para>
 	Device Drivers
+</para>
+<listsimple>
+<listitem><para>
 		SCSI Device Support
-			<*> SCSI Device Support
+</para>
+<listsimple>
+<listitem><para>
+			&lt;*&gt; SCSI Device Support
+</para>
+</listitem>
+</listitem>
+</listitem>
+</listsimple>
+</listsimple>
+</listsimple>
 
 Also in the SCSI system, the "SCSI disk support" must be enabled in
 order for the device to be mounted properly:
@@ -61,6 +171,7 @@ the machine:
 		<M>   EHCI HCD (USB 2.0) support
 		<M>   OHCI HCD support
 		<M>   UHCI HCD (most Intel and VIA) support
+
 Enable USB Storage support:
 	Device Drivers
 		USB Support
@@ -73,11 +184,14 @@ devices, please enable support for them.
 </sect2>
 
 <sect2>
-<title>SATA</title>
-SATA disks use a kernel library called libata which handles most of the
+<title>Serial ATA (SATA)</title>
+
+<para>
+SATA disks use a kernel library called <emphasis>libata</emphasis> that handles most of the
 SATA specific functionality.  That library uses the SCSI layer to talk
 to the block layer, so many different kernel options need to be enabled
 in order for SATA disks to work properly.
+</para>
 
 Enable PCI support for the kernel:
 	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
@@ -120,7 +234,7 @@ SATA driver:
 <title>USB</title>
 
 Linux supports a vast array of different USB devices.  To enable USB
-support, you must enable support for a USB controller which drives the
+support, you must enable support for a USB controller, which drives the
 USB connection on the machine:
 
 Enable PCI support for the kernel:
@@ -146,9 +260,20 @@ majority of them are under the main USB driver section:
 	Device Drivers
 		USB Support
 
-But some, like USB video and DVB and sound devices are listed in the
+<!--
+
+  AO: I think it's a good idea to put names of menu items in <literal>
+  tags. That's because some names may be long phrases that look odd
+  when dropped in a sentence; they need a font change. On the other
+  hand, something such "main USB driver section" is a generic
+  reference to USB; it's safe to leave that in plain font. Use what
+  feels right in each case.
+
+-->
+
+But some, such as USB video and DVB and sound devices are listed in the
 section controlling all of these types of devices.  For example, the USB
-sound driver can be found under the Sound menu:
+sound driver can be found under the <literal>Sound</literal> menu:
 	Device drivers
 		Sound
 			<*> Sound card support
@@ -161,9 +286,9 @@ sound driver can be found under the Sound menu:
 <sect2>
 <title>IEEE 1394 (FireWire)</title>
 
-IEEE 1394 is commonly known by the other name of "Firewire", and is a
-highspeed bus that is used to connect external devices, much like USB
-is.
+IEEE 1394 is commonly known by the name Firewire, under which Apple
+computer publicized it. It is a
+highspeed bus that connects external devices, much as USB does.
 
 Enable PCI support for the kernel:
 	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
@@ -196,7 +321,7 @@ And enable the specific type of Firewire devices that you have:
 
 </sect2>
 
-<sect2>
+<sect2 id="lkn_pci_hotplug">
 <title>PCI hotplug</title>
 
 PCI hotplug systems are becoming more popular with the use of
@@ -230,11 +355,18 @@ As well as the PCI Express controller:
 </sect2>
 
 <sect2>
-PCMCIA
+<title>PCMCIA</title>
 
-PCMCIA and CardBus device support is in almost every laptop made.  Newer
-laptops are switching to the ExpressCard format (see PCI Hotplug
-recipie).
+<!--
+
+  AO: Let's make sure to do cross-references in a way that will
+  translate during conversion; see what I did with xref.
+
+-->
+
+PCMCIA and CardBus device support is in almost every laptop manufactured.  Newer
+laptops, however, are switching to the ExpressCard format (see the PCI Hotplug
+recipe in <xref linkend="lkn_pci_hotplug" />).
 
 Enable PCI support for the kernel:
 	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
