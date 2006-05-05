@@ -20,7 +20,7 @@ add that extra text.
 
 
 <title>
-Kernel Configuration Recipies
+Kernel Configuration Recipes
 </title>
 
 
@@ -44,6 +44,10 @@ order for the device to be mounted properly:
 		SCSI Device Support
 			<*> SCSI disk support
 
+Enable PCI support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+
 Enable USB support for the kernel:
 	Device Drivers
 		USB Support
@@ -66,15 +70,204 @@ A number of specific USB storage devices are listed as separate
 configuration items, as they do not follow the standard USB
 specification and require special code.  If you have one of these
 devices, please enable support for them.
-
 </sect2>
 
 <sect2>
 <title>SATA</title>
+SATA disks use a kernel library called libata which handles most of the
+SATA specific functionality.  That library uses the SCSI layer to talk
+to the block layer, so many different kernel options need to be enabled
+in order for SATA disks to work properly.
+
+Enable PCI support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+
+Enable the SCSI subsystem:
+	Device Drivers
+		SCSI Device Support
+			<*> SCSI Device Support
+
+Also in the SCSI system, the "SCSI disk support" must be enabled in
+order for the device to be mounted properly:
+	Device Drivers
+		SCSI Device Support
+			<*> SCSI disk support
+
+The SATA options are under the "SCSI low-level drivers" section:
+	Device Drivers
+		SCSI Device Support
+			SCSI low-level drivers
+				<*> Serial ATA (SATA) support
+
+In that section, enable the specific SATA controller type that you have.
+For example, most motherboards from Intel would require the PIIX/ICH
+SATA driver:
+	Device Drivers
+		SCSI Device Support
+			SCSI low-level drivers
+				<*> Serial ATA (SATA) support
+				<*>   Intel PIIX/ICH SATA support
+
+
 </sect2>
 
 <sect2>
 <title>Burning a CDROM</title>
+</sect2>
+
+<sect2>
+<title>USB</title>
+
+Linux supports a vast array of different USB devices.  To enable USB
+support, you must enable support for a USB controller which drives the
+USB connection on the machine:
+
+Enable PCI support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+
+Enable USB support for the kernel:
+	Device Drivers
+		USB Support
+			<M> Support for Host-side USB
+
+Enable the specific USB Host controllers for your machine (it is safe to
+enable them all if you do not know which you have):
+	Device Drivers
+		USB Support
+		---   USB Host Controller Drivers
+		<M>   EHCI HCD (USB 2.0) support
+		<M>   OHCI HCD support
+		<M>   UHCI HCD (most Intel and VIA) support
+
+Individual USB devices also need their drivers to be enabled.  A large
+majority of them are under the main USB driver section:
+	Device Drivers
+		USB Support
+
+But some, like USB video and DVB and sound devices are listed in the
+section controlling all of these types of devices.  For example, the USB
+sound driver can be found under the Sound menu:
+	Device drivers
+		Sound
+			<*> Sound card support
+				<*> Advanced Linux Sound Architecture
+					USB Devices
+						<M> USB Audio/MIDI driver
+
+</sect2>
+
+<sect2>
+<title>IEEE 1394 (FireWire)</title>
+
+IEEE 1394 is commonly known by the other name of "Firewire", and is a
+highspeed bus that is used to connect external devices, much like USB
+is.
+
+Enable PCI support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+
+Enable IEEE 1394 support for the kernel:
+	Device Drivers
+		IEEE 1394 (FireWire) support
+			<*> IEEE 1394 (FireWire) support
+
+Enable the specific type of Firewire host controller that you have:
+	Device Drivers
+		IEEE 1394 (FireWire) support
+			<*> IEEE 1394 (FireWire) support
+			---   Device Drivers
+			<M>   Texas Instruments PCILynx support
+			<M>   OHCI-1394 support
+
+And enable the specific type of Firewire devices that you have:
+	Device Drivers
+		IEEE 1394 (FireWire) support
+			<*> IEEE 1394 (FireWire) support
+			---   Protocol Drivers
+			<M>   OHCI-1394 Video support
+			<M>   SBP-2 support (Harddisks etc.)
+			[ ]     Enable Phys DMA support for SBP2 (Debug)
+			<M>   Ethernet over 1394
+			<M>   OHCI-DV I/O support
+			<M>   Raw IEEE1394 I/O support
+
+</sect2>
+
+<sect2>
+<title>PCI hotplug</title>
+
+PCI hotplug systems are becoming more popular with the use of
+ExpressCard and laptop docking stations.
+
+Enable PCI support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+
+Enable PCI Hotplug support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+		PCI Hotplug Support
+			<M> Support for PCI Hotplug (EXPERIMENTAL)
+
+There is a wide range of different types of PCI Hotplug controllers.
+For most laptops and for ExpressCard support, enable the ACPI
+controller:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+		PCI Hotplug Support
+			<M> Support for PCI Hotplug (EXPERIMENTAL)
+			<M>   ACPI PCI Hotplug driver
+
+As well as the PCI Express controller:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+		[*] PCI Express Support
+		<M>   PCI Express Hotplug driver
+
+</sect2>
+
+<sect2>
+PCMCIA
+
+PCMCIA and CardBus device support is in almost every laptop made.  Newer
+laptops are switching to the ExpressCard format (see PCI Hotplug
+recipie).
+
+Enable PCI support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		[*] PCI Support
+
+Enable PCCARD support for the kernel:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		PCCARD (PCMCIA/CardBus) support
+			<M> PCCard (PCMCIA/CardBus) support
+
+Enable both PCMCIA and CardBus support to cover the widest range of
+devices:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		PCCARD (PCMCIA/CardBus) support
+			<M> PCCard (PCMCIA/CardBus) support
+			<M>   16-bit PCMCIA support
+			[*]   32-bit CardBus support
+
+Enable the card bridge type for your laptop.  The most common one is the
+"yenta-like" controller:
+	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+		PCCARD (PCMCIA/CardBus) support
+			<M> PCCard (PCMCIA/CardBus) support
+			<M>   CardBus yenta-compatible bridge support
+			< >   Cirrus PD6729 compatible bridge support
+			< >   i82092 compatible bridge support
+			< >   i82365 compatible bridge support
+			< >   Databook TCIC host bridge support
+
+</sect2>
+
+<sect2>
+Sound (ALSA)
 </sect2>
 
 </sect1>
