@@ -102,25 +102,37 @@ support a few of the more common types of disk controllers.
 
 </simplesect>
 
-<sect2>
+<sect2 id="lkn_usb_storage">
 <title>USB storage</title>
+
+<para>
+To use a USB storage device (commonly referred to as USB "flash"
+devices) USB support must be fist working properly.  Refer to the recipe
+in <xref linkend="lkn_usb" /> for how to do this.
+</para>
+
+<para>
+A USB storage device can be identified by using the
+<literal>lsusb</literal> program.  If the following command sequence
+produces the expected result, a USB storage device is present on the
+system:
+<!-- gkh -
+	What is the proper formatting for typing things on the command
+	line and the result?
+-->
+<screen>
+$ /usr/sbin/lsusb -v | grep Storage
+      bInterfaceClass         8 Mass Storage
+</screen>
+</para>
 
 <para>
 A USB Storage device is in reality a USB SCSI device that talks over a
 USB connection.  Because of this, the SCSI subsystem must be enabled:
-<!--
-
-  AO: I'll ask design and tools whether they have a better suggestion
-  to replace the mess below. I do want to find something that looks
-  nicer than pre-formatted code output, although at this stage we
-  might want to save time by just wrapping all kernel options in
-  <programlisting> tags.
-
--->
 <screen>
 Device Drivers
 	SCSI Device Support
-		<*> SCSI Device Support
+		[*] SCSI Device Support
 </screen>
 
 Also in the SCSI system, the "SCSI disk support" must be enabled in
@@ -128,9 +140,129 @@ order for the device to be mounted properly:
 <screen>
 Device Drivers
 	SCSI Device Support
-		<*> SCSI disk support
+		[*] SCSI disk support
 </screen>
 
+Enable USB Storage support:
+<screen>
+Device Drivers
+	USB Support
+	[M] USB Mass Storage support
+</screen>
+
+A number of specific USB storage devices are listed as separate
+configuration items, as they do not follow the standard USB
+specification and require special code.  If you have one of these
+devices, please enable support for them.
+</para>
+</sect2>
+
+<sect2 id="lkn_sata">
+<title>Serial ATA (SATA)</title>
+
+<para>
+SATA is a type of disk controller that is the successor to the IDE bus.
+To determine if you have a SATA disk controller on the system, run the
+following command:
+<screen>
+$ /usr/sbin/lspci | grep SATA
+00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some SATA devices.
+</para>
+
+<para>
+SATA disks use a kernel library called <emphasis>libata</emphasis> that handles most of the
+SATA specific functionality.  That library uses the SCSI layer to talk
+to the block layer, so many different kernel options need to be enabled
+in order for SATA disks to work properly.
+Enable PCI support for the kernel:
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	[*] PCI Support
+</screen>
+
+Enable the SCSI subsystem:
+<screen>
+Device Drivers
+	SCSI Device Support
+		[*] SCSI Device Support
+</screen>
+
+Also in the SCSI system, the "SCSI disk support" must be enabled in
+order for the device to be mounted properly:
+<screen>
+Device Drivers
+	SCSI Device Support
+		[*] SCSI disk support
+</screen>
+
+The SATA options are under the "SCSI low-level drivers" section:
+<screen>
+Device Drivers
+	SCSI Device Support
+		SCSI low-level drivers
+			[*] Serial ATA (SATA) support
+</screen>
+
+In that section, enable the specific SATA controller type that you have.
+Look at the output of the above mentioned <literal>lspci</literal>
+command for a list of the types of SATA controllers that are present on
+your system.  For example, most motherboards from Intel would require the PIIX/ICH
+SATA driver (as the above example showed.)
+<screen>
+Device Drivers
+	SCSI Device Support
+		SCSI low-level drivers
+			[*] Serial ATA (SATA) support
+			[*]   Intel PIIX/ICH SATA support
+</screen>
+
+
+</para>
+</sect2>
+
+<sect2 id="lkn_burn_cdrom">
+<title>Burning a CDROM</title>
+</sect2>
+
+</sect1>
+
+<sect1>
+<title>Devices</title>
+
+<simplesect>
+Linux supports a vast range of different types of devices (more than any
+other operating system ever has).  This section shows how to enable
+some of the more common types of devices.
+</simplesect>
+
+<sect2 id="lkn_usb">
+<title>USB</title>
+
+<para>
+Linux supports lots of different types of USB devices.  To enable USB
+support, you must first enable support for a USB controller, which
+drives the USB connection on the machine.
+</para>
+
+<para>
+To determine if your machine has a USB controller present, and which type
+is is, run the following command:
+<screen>
+$ /usr/sbin/lspci | grep USB
+00:1d.0 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #1 (rev 02)
+00:1d.1 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #2 (rev 02)
+00:1d.2 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #3 (rev 02)
+00:1d.3 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #4 (rev 02)
+00:1d.7 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB2 EHCI Controller (rev 02)
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some USB controllers.
+</para>
+
+<para>
 Enable PCI support for the kernel:
 <screen>
 Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
@@ -141,111 +273,26 @@ Enable USB support for the kernel:
 <screen>
 Device Drivers
 	USB Support
-		<M> Support for Host-side USB
+		[M] Support for Host-side USB
 </screen>
 
-Also enable the USB Host controllers that allow USB to work properly on
-the machine:
+Enable the specific USB Host controllers for your machine (it is safe to
+enable them all if you do not know which you have):
 <screen>
 Device Drivers
 	USB Support
 	---   USB Host Controller Drivers
-	<M>   EHCI HCD (USB 2.0) support
-	<M>   OHCI HCD support
-	<M>   UHCI HCD (most Intel and VIA) support
+	[M]   EHCI HCD (USB 2.0) support
+	[M]   OHCI HCD support
+	[M]   UHCI HCD (most Intel and VIA) support
 </screen>
-
-Enable USB Storage support:
-<screen>
-Device Drivers
-	USB Support
-	<M> USB Mass Storage support
-</screen>
-
-A number of specific USB storage devices are listed as separate
-configuration items, as they do not follow the standard USB
-specification and require special code.  If you have one of these
-devices, please enable support for them.
-</para>
-</sect2>
-
-<sect2>
-<title>Serial ATA (SATA)</title>
-
-<para>
-SATA disks use a kernel library called <emphasis>libata</emphasis> that handles most of the
-SATA specific functionality.  That library uses the SCSI layer to talk
-to the block layer, so many different kernel options need to be enabled
-in order for SATA disks to work properly.
-</para>
-
-Enable PCI support for the kernel:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
-
-Enable the SCSI subsystem:
-	Device Drivers
-		SCSI Device Support
-			<*> SCSI Device Support
-
-Also in the SCSI system, the "SCSI disk support" must be enabled in
-order for the device to be mounted properly:
-	Device Drivers
-		SCSI Device Support
-			<*> SCSI disk support
-
-The SATA options are under the "SCSI low-level drivers" section:
-	Device Drivers
-		SCSI Device Support
-			SCSI low-level drivers
-				<*> Serial ATA (SATA) support
-
-In that section, enable the specific SATA controller type that you have.
-For example, most motherboards from Intel would require the PIIX/ICH
-SATA driver:
-	Device Drivers
-		SCSI Device Support
-			SCSI low-level drivers
-				<*> Serial ATA (SATA) support
-				<*>   Intel PIIX/ICH SATA support
-
-
-</sect2>
-
-<sect2>
-<title>Burning a CDROM</title>
-</sect2>
-
-<sect2>
-<title>USB</title>
-
-Linux supports a vast array of different USB devices.  To enable USB
-support, you must enable support for a USB controller, which drives the
-USB connection on the machine:
-
-Enable PCI support for the kernel:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
-
-Enable USB support for the kernel:
-	Device Drivers
-		USB Support
-			<M> Support for Host-side USB
-
-Enable the specific USB Host controllers for your machine (it is safe to
-enable them all if you do not know which you have):
-	Device Drivers
-		USB Support
-		---   USB Host Controller Drivers
-		<M>   EHCI HCD (USB 2.0) support
-		<M>   OHCI HCD support
-		<M>   UHCI HCD (most Intel and VIA) support
 
 Individual USB devices also need their drivers to be enabled.  A large
 majority of them are under the main USB driver section:
-	Device Drivers
-		USB Support
-
+<screen>
+Device Drivers
+	USB Support
+</screen>
 <!--
 
   AO: I think it's a good idea to put names of menu items in <literal>
@@ -260,88 +307,135 @@ majority of them are under the main USB driver section:
 But some, such as USB video and DVB and sound devices are listed in the
 section controlling all of these types of devices.  For example, the USB
 sound driver can be found under the <literal>Sound</literal> menu:
-	Device drivers
-		Sound
-			<*> Sound card support
-				<*> Advanced Linux Sound Architecture
-					USB Devices
-						<M> USB Audio/MIDI driver
+<screen>
+Device drivers
+	Sound
+		[*] Sound card support
+			[*] Advanced Linux Sound Architecture
+				USB Devices
+					[M] USB Audio/MIDI driver
+</screen>
+</para>
 
 </sect2>
 
-<sect2>
+<sect2 id="lkn_firewire">
 <title>IEEE 1394 (FireWire)</title>
 
-IEEE 1394 is commonly known by the name Firewire, under which Apple
+<para>
+IEEE 1394 is commonly known by the name FireWire, under which Apple
 computer publicized it. It is a
 highspeed bus that connects external devices, much as USB does.
+</para>
 
+<para>
+To determine if your machine has a FireWire controller present, and which type
+is is, run the following command:
+<screen>
+$ /usr/sbin/lspci | grep FireWire
+06:0c.0 FireWire (IEEE 1394): Texas Instruments TSB43AB22/A IEEE-1394a-2000 Controller (PHY/Link)
+06:0d.2 FireWire (IEEE 1394): Creative Labs SB Audigy FireWire Port (rev 04)
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some FireWire controllers.
+</para>
+
+<para>
 Enable PCI support for the kernel:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	[*] PCI Support
+</screen>
 
 Enable IEEE 1394 support for the kernel:
-	Device Drivers
-		IEEE 1394 (FireWire) support
-			<*> IEEE 1394 (FireWire) support
+<screen>
+Device Drivers
+	IEEE 1394 (FireWire) support
+		[*] IEEE 1394 (FireWire) support
+</screen>
 
 Enable the specific type of Firewire host controller that you have:
-	Device Drivers
-		IEEE 1394 (FireWire) support
-			<*> IEEE 1394 (FireWire) support
-			---   Device Drivers
-			<M>   Texas Instruments PCILynx support
-			<M>   OHCI-1394 support
+<screen>
+Device Drivers
+	IEEE 1394 (FireWire) support
+		[*] IEEE 1394 (FireWire) support
+		---   Device Drivers
+		[M]   Texas Instruments PCILynx support
+		[M]   OHCI-1394 support
+
+</screen>
 
 And enable the specific type of Firewire devices that you have:
-	Device Drivers
-		IEEE 1394 (FireWire) support
-			<*> IEEE 1394 (FireWire) support
-			---   Protocol Drivers
-			<M>   OHCI-1394 Video support
-			<M>   SBP-2 support (Harddisks etc.)
-			[ ]     Enable Phys DMA support for SBP2 (Debug)
-			<M>   Ethernet over 1394
-			<M>   OHCI-DV I/O support
-			<M>   Raw IEEE1394 I/O support
-
+<screen>
+Device Drivers
+	IEEE 1394 (FireWire) support
+		[*] IEEE 1394 (FireWire) support
+		---   Protocol Drivers
+		[M]   OHCI-1394 Video support
+		[M]   SBP-2 support (Harddisks etc.)
+		[ ]     Enable Phys DMA support for SBP2 (Debug)
+		[M]   Ethernet over 1394
+		[M]   OHCI-DV I/O support
+		[M]   Raw IEEE1394 I/O support
+</screen>
+</para>
 </sect2>
 
 <sect2 id="lkn_pci_hotplug">
 <title>PCI hotplug</title>
 
+<para>
 PCI hotplug systems are becoming more popular with the use of
 ExpressCard and laptop docking stations.
+</para>
 
+<para>
+To determine if your machine has a ExpressCard controller present, and
+which type is is, run the following command:
+<screen>
+FIXME!!!
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some controllers.
+</para>
+
+<para>
 Enable PCI support for the kernel:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
-
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	[*] PCI Support
+</screen>
 Enable PCI Hotplug support for the kernel:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
-		PCI Hotplug Support
-			<M> Support for PCI Hotplug (EXPERIMENTAL)
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	[*] PCI Support
+	PCI Hotplug Support
+		[M] Support for PCI Hotplug (EXPERIMENTAL)
+</screen>
 
 There is a wide range of different types of PCI Hotplug controllers.
 For most laptops and for ExpressCard support, enable the ACPI
 controller:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
-		PCI Hotplug Support
-			<M> Support for PCI Hotplug (EXPERIMENTAL)
-			<M>   ACPI PCI Hotplug driver
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	[*] PCI Support
+	PCI Hotplug Support
+		[M] Support for PCI Hotplug (EXPERIMENTAL)
+		[M]   ACPI PCI Hotplug driver
+</screen>
 
 As well as the PCI Express controller:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
-		[*] PCI Express Support
-		<M>   PCI Express Hotplug driver
-
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	[*] PCI Support
+	[*] PCI Express Support
+	[M]   PCI Express Hotplug driver
+</screen>
+</para>
 </sect2>
 
-<sect2>
-<title>PCMCIA</title>
+<sect2 id="lkn_pcmcia">
+<title>PCMCIA / CardBus</title>
 
 <!--
 
@@ -349,44 +443,174 @@ As well as the PCI Express controller:
   translate during conversion; see what I did with xref.
 
 -->
-
+<para>
 PCMCIA and CardBus device support is in almost every laptop manufactured.  Newer
 laptops, however, are switching to the ExpressCard format (see the PCI Hotplug
 recipe in <xref linkend="lkn_pci_hotplug" />).
+</para>
 
+<para>
+To determine if your machine has a PCMCIA controller present, and which
+type is is, run the following command:
+<screen>
+FIXME!!!
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some controllers.
+</para>
+
+<para>
 Enable PCI support for the kernel:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		[*] PCI Support
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	[*] PCI Support
+</screen>
 
 Enable PCCARD support for the kernel:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		PCCARD (PCMCIA/CardBus) support
-			<M> PCCard (PCMCIA/CardBus) support
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	PCCARD (PCMCIA/CardBus) support
+		[M] PCCard (PCMCIA/CardBus) support
+</screen>
 
 Enable both PCMCIA and CardBus support to cover the widest range of
 devices:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		PCCARD (PCMCIA/CardBus) support
-			<M> PCCard (PCMCIA/CardBus) support
-			<M>   16-bit PCMCIA support
-			[*]   32-bit CardBus support
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	PCCARD (PCMCIA/CardBus) support
+		[M] PCCard (PCMCIA/CardBus) support
+		[M]   16-bit PCMCIA support
+		[*]   32-bit CardBus support
+</screen>
 
 Enable the card bridge type for your laptop.  The most common one is the
 "yenta-like" controller:
-	Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
-		PCCARD (PCMCIA/CardBus) support
-			<M> PCCard (PCMCIA/CardBus) support
-			<M>   CardBus yenta-compatible bridge support
-			< >   Cirrus PD6729 compatible bridge support
-			< >   i82092 compatible bridge support
-			< >   i82365 compatible bridge support
-			< >   Databook TCIC host bridge support
-
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+	PCCARD (PCMCIA/CardBus) support
+		[M] PCCard (PCMCIA/CardBus) support
+		[M]   CardBus yenta-compatible bridge support
+		[ ]   Cirrus PD6729 compatible bridge support
+		[ ]   i82092 compatible bridge support
+		[ ]   i82365 compatible bridge support
+		[ ]   Databook TCIC host bridge support
+</screen>
+</para>
 </sect2>
 
-<sect2>
-Sound (ALSA)
+<sect2 id="sound">
+<title>Sound (ALSA)</title>
+
+<para>
+</para>
 </sect2>
+
+</sect1>
+
+<sect1>
+<title>CPU</title>
+
+<sect2 id="processor">
+<title>processor types</title>
+</sect2>
+
+<sect2 id="suspend">
+<title>suspend</title>
+</sect2>
+
+<sect2 id="cpufreq">
+<title>cpu frequency scaling</title>
+</sect2>
+
+<sect2 id="acpi">
+<title>ACPI</title>
+</sect2>
+
+<sect2 id="smp">
+<title>SMP</title>
+</sect2>
+
+<sect2 id="mm">
+<title>different memory models</title>
+</sect2>
+
+<sect2 id="preempt">
+<title>Preemption</title>
+</sect2>
+
+</sect1>
+
+<sect1>
+<title>Networking</title>
+
+<sect2 id="netfilter">
+<title>Netfilter</title>
+</sect2>
+
+<sect2 id="netdrv">
+<title>network drivers</title>
+</sect2>
+
+<sect2 id="irda">
+<title>Irda</title>
+</sect2>
+
+<sect2 id="wireless">
+<title>wireless</title>
+</sect2>
+
+</sect1>
+
+<sect1>
+<title>Filesystems</title>
+<simplesect>
+</simplesect>
+
+<sect2 id="raid">
+<title>RAID</title>
+</sect2>
+
+<sect2 id="lvm">
+<title>LVM</title>
+</sect2>
+
+<sect2 id="dm">
+<title>DM</title>
+</sect2>
+
+<sect2 id="samba">
+<title>Samba</title>
+</sect2>
+
+<sect2 id="journal_fs">
+<title>Journaling filesystems</title>
+</sect2>
+
+<sect2 id="ocfs2">
+<title>OCFS2</title>
+</sect2>
+
+</sect1>
+
+<sect1>
+<title>Security</title>
+
+<simplesect>
+</simplesect>
+
+<sect2 id="selinux">
+<title>SELinux</title>
+</sect2>
+
+<!--  If this makes it into the kernel tree, uncomment this section...
+<sect2 id="apparmor">
+<title>AppArmor</title>
+-->
+
+</sect1>
+
+<sect1>
+<title>Kernel debugging</title>
 
 </sect1>
 
