@@ -1,10 +1,10 @@
 Proposed Linux Kernel in a Nutshell chapter outline:
 
-- Introduction or Foreword from some other kernel developer
-- Kernel History and Background (just a few pages)
-- Requirements to build a kernel
-- Retrieving the kernel source
-- Building a kernel
+ 1 - Introduction or Foreword from some other kernel developer
+ 2 - Kernel History and Background (just a few pages)
+ 3 - Requirements to build a kernel
+ 4 - Retrieving the kernel source
+ 5 - Building a kernel
 	- use the the default configuration options
 	- basic options to make (full coverage will be in later
 	  chapter).
@@ -12,16 +12,16 @@ Proposed Linux Kernel in a Nutshell chapter outline:
 	  in another.
 	- building only a portion of the kernel tree
 	- building a kernel for a different architecture
-- Installing a built kernel and booting with it
+ 6 - Installing a built kernel and booting with it
 	- grub
 	- lilo
 	- other boot loaders
-- Upgrading the kernel to the next version
+ 7 - Upgrading the kernel to the next version
 	- retrieving the patch
 	- applying the patch
 	- updating the configuration
 	- building the updated kernel
-- Configuring a kernel
+ 8 - Configuring a kernel
 	- text methods
 		- make config
 		- make oldconfig
@@ -29,7 +29,7 @@ Proposed Linux Kernel in a Nutshell chapter outline:
 	- graphical methods
 		- make xconfig
 		- make gconfig
-- Recipies for creating configurations
+ 9 - Recipies for creating configurations
 	- Disks
 		- USB storage
 		- SATA
@@ -64,10 +64,10 @@ Proposed Linux Kernel in a Nutshell chapter outline:
 		- SELinux
 		- BSD Secure Levels
 	- Kernel debugging
-- Customizing the initramfs / initrd image
-- Kernel boot command line reference
-- Kernel build command line reference
-- Kernel configuration option reference
+10 - Customizing the initramfs / initrd image
+11 - Kernel boot command line reference
+12 - Kernel build command line reference
+13 - Kernel configuration option reference
 	- will be only the most "important" ones, and will be the bulk
 	  of the book (although the previous chapters will not be
 	  "light".)

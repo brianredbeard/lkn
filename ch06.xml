@@ -1,25 +1,21 @@
-<chapter id="LKN-upgrading">
+<chapter id="LKN-installing">
 
 <title>
-Upgrading a kernel
+Installing a kernel and booting with it
 </title>
 
+
 <sect1>
-<title>retrieving the patch</title>
+<title>grub</title>
 </sect1>
 
 <sect1>
-<title>applying the patch</title>
+<title>lilo</title>
 </sect1>
 
 <sect1>
-<title>updating the configuration</title>
-</sect1>
-
-<sect1>
-<title>building the updated kernel</title>
+<title>other boot loaders</title>
 </sect1>
 
 </chapter>
-
 <!-- vim: set ai tw=72 : -->

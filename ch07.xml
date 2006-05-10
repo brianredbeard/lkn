@@ -1,44 +1,23 @@
-<chapter id="LKN-configuring">
+<chapter id="LKN-upgrading">
 
 <title>
-Configuring a kernel
+Upgrading a kernel
 </title>
 
 <sect1>
-<title>customizing it for the hardware on your machine</title>
+<title>retrieving the patch</title>
 </sect1>
 
 <sect1>
-<title>building modules</title>
+<title>applying the patch</title>
 </sect1>
 
 <sect1>
-<title>Common configuration options</title>
+<title>updating the configuration</title>
+</sect1>
 
-<sect2>
-<title>USB</title>
-</sect2>
-
-<sect2>
-<title>power management</title>
-</sect2>
-
-<sect2>
-<title>ACPI</title>
-</sect2>
-
-<sect2>
-<title>filesystems</title>
-</sect2>
-
-<sect2>
-<title>firewire</title>
-</sect2>
-
-<sect2>
-<title>other common things that users need.</title>
-</sect2>
-
+<sect1>
+<title>building the updated kernel</title>
 </sect1>
 
 </chapter>

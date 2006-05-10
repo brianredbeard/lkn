@@ -16,6 +16,8 @@ CHAP_SRC	:= 	ch01.xml	\
 			ch09.xml	\
 			ch10.xml	\
 			ch11.xml	\
+			ch12.xml	\
+			ch13.xml	\
 			appa.xml	\
 			appb.xml	\
 			appc.xml	\
