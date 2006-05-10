@@ -502,6 +502,62 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 <title>Sound (ALSA)</title>
 
 <para>
+ALSA (Advanced Linux Sound Architecture) is the second type of sound
+system for the Linux kernel.  The first type of sound system (OSS) has
+been depreciated and almost all of the older drivers have been removed
+from the kernel source tree.
+</para>
+
+<para>
+To determine which type of sound controller is present in your machine,
+and what type it is, run the following command:
+<screen>
+$ /usr/sbin/lspci | grep -i audio
+00:1f.5 Multimedia audio controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) AC'97 Audio Controller (rev 02)
+06:0d.0 Multimedia audio controller: Creative Labs SB Audigy (rev 04)
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some FireWire controllers.
+</para>
+
+<para>
+Enable basic sound support:
+<screen>
+Device Drivers
+	Sound
+		[M] Sound Card Support
+</screen>
+Enable ALSA:
+<screen>
+Device Drivers
+	Sound
+		[M] Sound Card Support
+			[M] Advanced Linux Sound Architecture
+</screen>
+There are a number of different base ALSA options, such as support for
+the older <literal>OSS</literal> sound protocol.  If you have older
+applications, you should enable these options:
+<screen>
+Device Drivers
+	Sound
+		[M] Sound Card Support
+			[M] Advanced Linux Sound Architecture
+			[M]   OSS Mixer API
+			[M]   OSS PCM (digital audio) API
+			[ ]     OSS PCM (digital audio) API - Include plugin system
+</screen>
+
+Enable the specific type of sound device that you have.  PCI sound cards
+are under the PCI submenu:
+<screen>
+Device Drivers
+	Sound
+		[M] Sound Card Support
+			[M] Advanced Linux Sound Architecture
+			    PCI Devices
+</screen>
+
+
 </para>
 </sect2>
 
