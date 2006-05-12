@@ -668,6 +668,108 @@ Device Drivers
 <sect1>
 <title>Kernel debugging</title>
 
+<simplesect>
+<para>
+There are a wide range of different kernel options that can help in
+debugging what is going on within the kernel.  Below is a list of some
+of the more common one that can be useful for discovering new things
+about how the kernel works, or help find potential problems within the
+current kernel source code.
+</para>
+
+</simplesect>
+
+<sect2 id="debug_printk">
+<title>Kernel log timestamps</title>
+
+<para>
+The kernel outputs a wide range of messages to its log file.  These
+messages can be seen by looking at the system log file (usually located
+in <literal>/var/log/messages</literal>, or can be seen by running the
+program, <literal>dmesg</literal>.  Sometimes it is useful to see
+exactly when those messages were created (<literal>dmesg</literal> does
+not show any time values, and the time resolution of
+<literal>/var/log/messages</literal> is only to the nearest second.)
+The kernel can put a timestamp on each message that is accurate down to
+the smallest measurable kernel time value (usually in the microsecond
+range.)
+</para>
+
+<para>
+To enable timestamp options on kernel messages:
+<screen>
+Kernel hacking
+	[*] Show timing information on printks
+</screen>
+</para>
+
+</sect2>
+
+<sect2 id="sysrq">
+<title>Magic SysRq keys</title>
+
+<para>
+The <literal>SysRq</literal> key on the keyboard can be used to control
+the kernel in a wide range of different ways, while the kernel is
+running, or if it has crashed.
+</para>
+
+<para>
+To enable this option:
+<screen>
+Kernel hacking
+	[*] Magic SysRq key
+</screen>
+</para>
+
+<para>
+For a full description of the different actions that can be triggered by
+this option, please see the file,
+<literal>Documentation/sysrq.txt</literal> in the kernel source tree.
+</para>
+</sect2>
+
+<sect2 id="debug">
+<title>General Kernel Debugging</title>
+
+</sect2>
+
+<sect2 id="debugfs">
+<title>Debug Filesystem</title>
+
+<para>
+There is a ram-based filesystem that is availble to output a lot of
+different debugging information.  This filesystem is called
+<literal>debugfs</literal> and can be enabled by:
+<screen>
+Kernel hacking
+	[*] Debug filesystem
+</screen>
+</para>
+
+<para>
+After enabling this option and booting the rebuilt kernel, the directory
+<literal>/sys/kernel/debug</literal> will be created automatically by
+the kernel as a location for the user to mount
+<literal>debugfs</literal> there.  This can be done by hand by:
+<screen>
+$ mount -t debugfs none /sys/kernel/debug
+</screen>
+or have the filesystem mounted automatically at boot time by adding the
+following line to the <literal>/etc/fstab</literal> file:
+<screen>
+debugfs /sys/kernel/debug debugfs 0 0
+</screen>
+</para>
+
+<para>
+After mounting <literal>debugfs</literal>, there is a large number of
+different directories and files <literal>/sys/kernel/debug/</literal>
+directory.  These can be used to help debug different kernel subsystems,
+or just looked at to see what is happening to the system as it runs.
+</para>
+</sect2>
+
 </sect1>
 
 
