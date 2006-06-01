@@ -1,5 +1,15 @@
 <chapter id="LKN-recipie">
 
+
+<!--
+
+  AO: Most of the commands you show should be run as root, right? We
+  should show the root prompt as #, not $. This is a subtle little
+  convention, but one a lot of readers will recognize. It's also being
+  a little more realistic, since those are default prompts.
+
+-->
+
 <!--
 AO: Some general notes to remember:
 
@@ -95,8 +105,8 @@ Kernel Configuration Recipes
 
 -->
 <para>
-There are a wide range of different disk types that is supported by the
-Linux kernel.  This section shows how to make sure the kernel can
+The Linux kernel supports a wide range of different disk types.
+This section shows how to make sure the kernel can
 support a few of the more common types of disk controllers.
 </para>
 
@@ -107,7 +117,7 @@ support a few of the more common types of disk controllers.
 
 <para>
 To use a USB storage device (commonly referred to as USB "flash"
-devices) USB support must be fist working properly.  Refer to the recipe
+devices) USB support must be first working properly.  Refer to the recipe
 in <xref linkend="lkn_usb" /> for how to do this.
 </para>
 
@@ -116,17 +126,33 @@ A USB storage device can be identified by using the
 <literal>lsusb</literal> program.  If the following command sequence
 produces the expected result, a USB storage device is present on the
 system:
+</para>
+
 <!-- gkh -
 	What is the proper formatting for typing things on the command
 	line and the result?
 -->
 <screen>
-$ /usr/sbin/lsusb -v | grep Storage
+$ <userinput>/usr/sbin/lsusb -v | grep Storage</userinput>
       bInterfaceClass         8 Mass Storage
 </screen>
-</para>
+
+<!--
+
+  AO: I don't want to add a lot of extra work for you, but it occurred
+  to me when looking at the HTML output that a lot of instructions
+  might look better as numbered lists. Try it out. Would it be a lot
+  of work to use numbered lists as I've done in this one example?
+
+-->
 
 <para>
+Enable it as follows.
+</para>
+
+<orderedlist>
+
+<listitem><para>
 A USB Storage device is in reality a USB SCSI device that talks over a
 USB connection.  Because of this, the SCSI subsystem must be enabled:
 <screen>
@@ -134,7 +160,9 @@ Device Drivers
 	SCSI Device Support
 		[*] SCSI Device Support
 </screen>
+</para></listitem>
 
+<listitem><para>
 Also in the SCSI system, the "SCSI disk support" must be enabled in
 order for the device to be mounted properly:
 <screen>
@@ -142,14 +170,20 @@ Device Drivers
 	SCSI Device Support
 		[*] SCSI disk support
 </screen>
+</para></listitem>
 
+<listitem><para>
 Enable USB Storage support:
 <screen>
 Device Drivers
 	USB Support
 	[M] USB Mass Storage support
 </screen>
+</para></listitem>
 
+</orderedlist>
+
+<para>
 A number of specific USB storage devices are listed as separate
 configuration items, as they do not follow the standard USB
 specification and require special code.  If you have one of these
@@ -165,7 +199,7 @@ SATA is a type of disk controller that is the successor to the IDE bus.
 To determine if you have a SATA disk controller on the system, run the
 following command:
 <screen>
-$ /usr/sbin/lspci | grep SATA
+$ <userinput>/usr/sbin/lspci | grep SATA</userinput>
 00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
 </screen>
 Note that your response will probably not match identically, all that is
@@ -190,7 +224,7 @@ Device Drivers
 		[*] SCSI Device Support
 </screen>
 
-Also in the SCSI system, the "SCSI disk support" must be enabled in
+Also in the SCSI system, the "SCSI disk support" option must be enabled in
 order for the device to be mounted properly:
 <screen>
 Device Drivers
@@ -235,7 +269,7 @@ Device Drivers
 <simplesect>
 Linux supports a vast range of different types of devices (more than any
 other operating system ever has).  This section shows how to enable
-some of the more common types of devices.
+some of the more common types.
 </simplesect>
 
 <sect2 id="lkn_usb">
@@ -251,7 +285,7 @@ drives the USB connection on the machine.
 To determine if your machine has a USB controller present, and which type
 is is, run the following command:
 <screen>
-$ /usr/sbin/lspci | grep USB
+$ <userinput>/usr/sbin/lspci | grep USB</userinput>
 00:1d.0 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #1 (rev 02)
 00:1d.1 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #2 (rev 02)
 00:1d.2 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #3 (rev 02)
@@ -317,6 +351,21 @@ Device drivers
 </screen>
 </para>
 
+<!--
+
+  AO: I thought it would be nice to point readers to the next step,
+  should they need it. Would it load the book down too much to put
+  "next step" paragraphs like this in?
+
+-->
+
+<para>
+
+If you want to insert USB storage devices (USB flash), look now at
+<xref linkend="lkn_usb_storage" />.
+
+</para>
+
 </sect2>
 
 <sect2 id="lkn_firewire">
@@ -324,19 +373,25 @@ Device drivers
 
 <para>
 IEEE 1394 is commonly known by the name FireWire, under which Apple
-computer publicized it. It is a
+Computer publicized it. It is a
 highspeed bus that connects external devices, much as USB does.
 </para>
 
 <para>
-To determine if your machine has a FireWire controller present, and which type
+<!--
+
+  AO: Notice how I use "whether" instead of "if" when you're trying to
+  determine whether something is true. A minor nit.
+
+-->
+To determine whether your machine has a FireWire controller present, and which type
 is is, run the following command:
 <screen>
-$ /usr/sbin/lspci | grep FireWire
+$ <userinput>/usr/sbin/lspci | grep FireWire</userinput>
 06:0c.0 FireWire (IEEE 1394): Texas Instruments TSB43AB22/A IEEE-1394a-2000 Controller (PHY/Link)
 06:0d.2 FireWire (IEEE 1394): Creative Labs SB Audigy FireWire Port (rev 04)
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that's
 important is that the command shows some FireWire controllers.
 </para>
 
@@ -390,12 +445,12 @@ ExpressCard and laptop docking stations.
 </para>
 
 <para>
-To determine if your machine has a ExpressCard controller present, and
+To determine whether your machine has a ExpressCard controller present, and
 which type is is, run the following command:
 <screen>
 FIXME!!!
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that's
 important is that the command shows some controllers.
 </para>
 
@@ -450,12 +505,12 @@ recipe in <xref linkend="lkn_pci_hotplug" />).
 </para>
 
 <para>
-To determine if your machine has a PCMCIA controller present, and which
+To determine whether your machine has a PCMCIA controller present, and which
 type is is, run the following command:
 <screen>
 FIXME!!!
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that's
 important is that the command shows some controllers.
 </para>
 
@@ -502,8 +557,8 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 <title>Sound (ALSA)</title>
 
 <para>
-ALSA (Advanced Linux Sound Architecture) is the second type of sound
-system for the Linux kernel.  The first type of sound system (OSS) has
+ALSA (Advanced Linux Sound Architecture) is the current sound
+system for the Linux kernel.  An earlier sound system (OSS) has
 been depreciated and almost all of the older drivers have been removed
 from the kernel source tree.
 </para>
@@ -512,11 +567,11 @@ from the kernel source tree.
 To determine which type of sound controller is present in your machine,
 and what type it is, run the following command:
 <screen>
-$ /usr/sbin/lspci | grep -i audio
+$ <userinput>/usr/sbin/lspci | grep -i audio</userinput>
 00:1f.5 Multimedia audio controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) AC'97 Audio Controller (rev 02)
 06:0d.0 Multimedia audio controller: Creative Labs SB Audigy (rev 04)
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that's
 important is that the command shows some FireWire controllers.
 </para>
 
@@ -671,7 +726,7 @@ Device Drivers
 <simplesect>
 <para>
 There are a wide range of different kernel options that can help in
-debugging what is going on within the kernel.  Below is a list of some
+debugging what is going on within the kernel.  Following is a list of some
 of the more common one that can be useful for discovering new things
 about how the kernel works, or help find potential problems within the
 current kernel source code.
@@ -685,12 +740,17 @@ current kernel source code.
 <para>
 The kernel outputs a wide range of messages to its log file.  These
 messages can be seen by looking at the system log file (usually located
-in <literal>/var/log/messages</literal>, or can be seen by running the
-program, <literal>dmesg</literal>.  Sometimes it is useful to see
-exactly when those messages were created (<literal>dmesg</literal> does
-not show any time values, and the time resolution of
-<literal>/var/log/messages</literal> is only to the nearest second.)
-The kernel can put a timestamp on each message that is accurate down to
+in <filename>/var/log/messages</filename>, or can be seen by running the
+<command>dmesg</command> command.
+</para>
+
+<para>
+Sometimes it is useful to see exactly when those messages were created .
+<command>dmesg</command>, however, does not put any timestamps on the
+events it shows, and the time resolution of
+<literal>/var/log/messages</literal> is only to the nearest
+second. 
+You can configure the kernel to assign each message a timestamp that is accurate down to
 the smallest measurable kernel time value (usually in the microsecond
 range.)
 </para>
@@ -710,7 +770,7 @@ Kernel hacking
 
 <para>
 The <literal>SysRq</literal> key on the keyboard can be used to control
-the kernel in a wide range of different ways, while the kernel is
+the kernel in a wide range of different ways while the kernel is
 running, or if it has crashed.
 </para>
 
@@ -725,7 +785,7 @@ Kernel hacking
 <para>
 For a full description of the different actions that can be triggered by
 this option, please see the file,
-<literal>Documentation/sysrq.txt</literal> in the kernel source tree.
+<filename>Documentation/sysrq.txt</filename> in the kernel source tree.
 </para>
 </sect2>
 
@@ -738,7 +798,7 @@ this option, please see the file,
 <title>Debug Filesystem</title>
 
 <para>
-There is a ram-based filesystem that is availble to output a lot of
+A RAM-based filesystem can be used to output a lot of
 different debugging information.  This filesystem is called
 <literal>debugfs</literal> and can be enabled by:
 <screen>
@@ -748,24 +808,25 @@ Kernel hacking
 </para>
 
 <para>
-After enabling this option and booting the rebuilt kernel, the directory
-<literal>/sys/kernel/debug</literal> will be created automatically by
-the kernel as a location for the user to mount
-<literal>debugfs</literal> there.  This can be done by hand by:
+After you enable this option and booting the rebuilt kernel, it
+creates the directory
+<filename>/sys/kernel/debug</filename> as a location for the user to mount
+the <literal>debugfs</literal> filesystem. Do this manually by:
 <screen>
-$ mount -t debugfs none /sys/kernel/debug
+$ <userinput>mount -t debugfs none /sys/kernel/debug</userinput>
 </screen>
 or have the filesystem mounted automatically at boot time by adding the
-following line to the <literal>/etc/fstab</literal> file:
+following line to the <filename>/etc/fstab</filename> file:
 <screen>
 debugfs /sys/kernel/debug debugfs 0 0
 </screen>
 </para>
 
 <para>
-After mounting <literal>debugfs</literal>, there is a large number of
-different directories and files <literal>/sys/kernel/debug/</literal>
-directory.  These can be used to help debug different kernel subsystems,
+After you mount <literal>debugfs</literal>, a large number of
+different directories and files will turn up in the <literal>/sys/kernel/debug/</literal>
+directory. These are all virtual and dynamically generated by the
+kernel, like the files in <literal>procfs</literal> or <literal>sysfs</literal>. These can be used to help debug different kernel subsystems,
 or just looked at to see what is happening to the system as it runs.
 </para>
 </sect2>
