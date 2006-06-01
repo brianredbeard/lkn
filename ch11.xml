@@ -36,7 +36,9 @@ Kernel boot command line reference
 </nutsynopsis>
 <nutentrybody>
 	<para>
-	Force a specified ammount of memory to be used by the kernel.
+	Force a specified amount of memory to be used by the
+	kernel. <emphasis>nn</emphasis> is measured in units of... [Is
+	this one of those k, m, g-modified values?]
 	</para>
 
 
