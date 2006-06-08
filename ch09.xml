@@ -8,6 +8,9 @@
   convention, but one a lot of readers will recognize. It's also being
   a little more realistic, since those are default prompts.
 
+  gkh: No, you can run lspci and lsusb just fine as a user.  The only
+       thing that is needed to be done as root is install the kernel,
+       nothing else.
 -->
 
 <!--
@@ -152,17 +155,20 @@ Enable it as follows.
 
 <orderedlist>
 
-<listitem><para>
+<listitem>
+<para>
 A USB Storage device is in reality a USB SCSI device that talks over a
 USB connection.  Because of this, the SCSI subsystem must be enabled:
 <screen>
 Device Drivers
-	SCSI Device Support
-		[*] SCSI Device Support
+    SCSI Device Support
+        [*] SCSI Device Support
 </screen>
-</para></listitem>
+</para>
+</listitem>
 
-<listitem><para>
+<listitem>
+<para>
 Also in the SCSI system, the "SCSI disk support" must be enabled in
 order for the device to be mounted properly:
 <screen>
@@ -170,7 +176,8 @@ Device Drivers
 	SCSI Device Support
 		[*] SCSI disk support
 </screen>
-</para></listitem>
+</para>
+</listitem>
 
 <listitem><para>
 Enable USB Storage support:
@@ -189,6 +196,61 @@ configuration items, as they do not follow the standard USB
 specification and require special code.  If you have one of these
 devices, please enable support for them.
 </para>
+</sect2>
+
+<sect2 id="lkn_ide">
+<title>IDE Disks</title>
+
+<para>
+IDE disks are the most common type of PC disk controllers.
+To determine if you have a IDE disk controller on the system, run the
+following command:
+<screen>
+$ <userinput>/usr/sbin/lspci | grep IDE</userinput>
+00:1f.1 IDE interface: Intel Corporation 82801EB/ER (ICH5/ICH5R) IDE Controller (rev 02)
+00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some an IDE Controller (the first
+device in the above example.)  If you only show a SATA controller, please
+see <xref linkend="lkn_sata" />.
+</para>
+
+<para>
+Enable PCI support for the kernel:
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+    [*] PCI Support
+</screen>
+
+Enable the IDE subsystem, and IDE support:
+<screen>
+Device Drivers
+    [*] ATA/ATAPI/MFM/RLL support
+    [*]   Enhanced IDE/MFM/RLL disk/cdrom/tape/floppy support
+</screen>
+
+In the ATA system, the specific type of IDE controller that you have must
+be enabled in order for it to work properly.  To provide a good backup
+incase you choose the wrong type, select the "generic" IDE controller:
+<screen>
+Device Drivers
+    ATA/ATAPI/MFM/RLL support
+        [*]     generic/default IDE chipset support
+</screen>
+
+Enable the different PCI IDE controllers:
+<screen>
+Device Drivers
+    ATA/ATAPI/MFM/RLL support
+        [*]     PCI IDE chipset support
+</screen>
+
+This opens up a wide submenu of the different IDE controller types.  Select
+the proper one based on the name of the device you found in the original
+step.
+</para>
+
 </sect2>
 
 <sect2 id="lkn_sata">
@@ -259,6 +321,48 @@ Device Drivers
 
 <sect2 id="lkn_burn_cdrom">
 <title>Burning a CDROM</title>
+
+<para>
+Burning a CDROM is very simple on Linux.  If your kernel can support
+reading from a CDROM, then it can also support burning from it.  There are
+two different ways to enable CDROM support in Linux:
+</para>
+
+<sect3>
+<title>IDE CDROM drives</title>
+
+<para>
+IDE CDROM drives are controlled by the same IDE controller as your main IDE
+disk drives.  Make sure the IDE controller is properly supported as
+described in <xref linkend="lkn_ide" />.  If that is properly supported,
+then the IDE CDROM drive needs no other kernel configuration in order to
+properly use it.
+</para>
+
+</sect3>
+
+<sect3>
+<title>SCSI / SATA CDROM drives</title>
+
+<para>
+SATA and SCSI cdrom drives are controlled by the same controller as your
+main disk drives.  Make sure the SATA or SCSI controller is properly
+supported.  For SATA disks, see <xref linkend="lkn_sata" />.
+</para>
+
+<para>
+To support SATA or SCSI CDROM drives, the SCSI cdrom driver must be
+enabled:
+<screen>
+Device Drivers
+	SCSI Device Support
+		[*] SCSI CDROM support
+</screen>
+
+Once that is enabled, the SATA or SCSI CDROM drive will work properly.
+</para>
+
+</sect3>
 </sect2>
 
 </sect1>
@@ -579,37 +683,37 @@ important is that the command shows some FireWire controllers.
 Enable basic sound support:
 <screen>
 Device Drivers
-	Sound
-		[M] Sound Card Support
+    Sound
+        [M] Sound Card Support
 </screen>
 Enable ALSA:
 <screen>
 Device Drivers
-	Sound
-		[M] Sound Card Support
-			[M] Advanced Linux Sound Architecture
+    Sound
+        [M] Sound Card Support
+            [M] Advanced Linux Sound Architecture
 </screen>
 There are a number of different base ALSA options, such as support for
 the older <literal>OSS</literal> sound protocol.  If you have older
 applications, you should enable these options:
 <screen>
 Device Drivers
-	Sound
-		[M] Sound Card Support
-			[M] Advanced Linux Sound Architecture
-			[M]   OSS Mixer API
-			[M]   OSS PCM (digital audio) API
-			[ ]     OSS PCM (digital audio) API - Include plugin system
+    Sound
+        [M] Sound Card Support
+            [M] Advanced Linux Sound Architecture
+            [M]   OSS Mixer API
+            [M]   OSS PCM (digital audio) API
+            [ ]     OSS PCM (digital audio) API - Include plugin system
 </screen>
 
 Enable the specific type of sound device that you have.  PCI sound cards
 are under the PCI submenu:
 <screen>
 Device Drivers
-	Sound
-		[M] Sound Card Support
-			[M] Advanced Linux Sound Architecture
-			    PCI Devices
+    Sound
+        [M] Sound Card Support
+            [M] Advanced Linux Sound Architecture
+                PCI Devices
 </screen>
 
 
@@ -759,7 +863,7 @@ range.)
 To enable timestamp options on kernel messages:
 <screen>
 Kernel hacking
-	[*] Show timing information on printks
+    [*] Show timing information on printks
 </screen>
 </para>
 
@@ -778,7 +882,7 @@ running, or if it has crashed.
 To enable this option:
 <screen>
 Kernel hacking
-	[*] Magic SysRq key
+    [*] Magic SysRq key
 </screen>
 </para>
 
@@ -787,11 +891,6 @@ For a full description of the different actions that can be triggered by
 this option, please see the file,
 <filename>Documentation/sysrq.txt</filename> in the kernel source tree.
 </para>
-</sect2>
-
-<sect2 id="debug">
-<title>General Kernel Debugging</title>
-
 </sect2>
 
 <sect2 id="debugfs">
@@ -803,7 +902,7 @@ different debugging information.  This filesystem is called
 <literal>debugfs</literal> and can be enabled by:
 <screen>
 Kernel hacking
-	[*] Debug filesystem
+    [*] Debug filesystem
 </screen>
 </para>
 
@@ -826,9 +925,40 @@ debugfs /sys/kernel/debug debugfs 0 0
 After you mount <literal>debugfs</literal>, a large number of
 different directories and files will turn up in the <literal>/sys/kernel/debug/</literal>
 directory. These are all virtual and dynamically generated by the
-kernel, like the files in <literal>procfs</literal> or <literal>sysfs</literal>. These can be used to help debug different kernel subsystems,
-or just looked at to see what is happening to the system as it runs.
+kernel, like the files in <literal>procfs</literal> or
+<literal>sysfs</literal>. These can be used to help debug different kernel
+subsystems, or just looked at to see what is happening to the system as it
+runs.
 </para>
+</sect2>
+
+<sect2 id="debug">
+<title>General Kernel Debugging</title>
+
+<para>
+Here are a range of other good kernel configuration options that you might
+wish to enable if you want to help kernel developers debug different
+problems, or just learn more about how the kernel works by looking at the
+messages that these options print out.  Note that if you enable almost any
+of these options, the kernel will slow down a small ammount, so if you
+notice any decrease in performance, you might wish to disable these
+options.
+<screen>
+Kernel hacking
+    [*] Kernel debugging
+    [*]   Detect Soft Lockups
+    [ ]   Collect scheduler statistics
+    [*]   Debug slab memory allocations
+    [*]     Memory leak debugging
+    [*]   Mutex debugging, deadlock detection
+    [*]   Spinlock debugging
+    [*]   Sleep-inside-spinlock checking
+    [ ]   kobject debugging
+    [ ]   Highmem debugging
+    [ ]   Compile the kernel with debug info
+</screen>
+</para>
+
 </sect2>
 
 </sect1>
