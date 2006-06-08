@@ -364,7 +364,6 @@ Once that is enabled, the SATA or SCSI CDROM drive will work properly.
 
 </sect3>
 </sect2>
-
 </sect1>
 
 <sect1>
@@ -725,13 +724,138 @@ Device Drivers
 <sect1>
 <title>CPU</title>
 
+<simplesect>
+
+<para>
+If you wish to have the Linux kernel to run the fastest for your specific
+processor and hardware type, there are a few different options that you can
+set to get the last bit of performance out of the hardware.  This section
+will show some of the different processor specific options that you can
+tune for your processor.
+</para>
+
+</simplesect>
+
 <sect2 id="processor">
 <title>processor types</title>
+
+<para>
+There are a wide range of specific processor options that are available to
+be changed in the Linux kernel.  The most important one is specifying the
+exact type of CPU you are using this kernel for.  To determine the type of
+processor you are using, run the following command:
+<screen>
+$ <userinput>cat /proc/cpuinfo  | grep "model name"</userinput>
+model name      : Intel(R) Xeon(TM) CPU 3.20GHz
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows the model name of the processor present
+on the system.
+</para>
+
+<para>
+Select the subarchitecture type of the processor:
+<screen>
+Processor type and features
+    Subarchitecture Type
+        (X) PC-compatible
+        ( ) AMD Elan
+        ( ) Voyager (NCR)
+        ( ) NUMAQ (IBM/Sequent)
+        ( ) Summit/EXA (IBM x440)
+        ( ) Support for other sub-arch SMP systems with more than 8 CPUs
+        ( ) SGI 320/540 (Visual Workstation)
+        ( ) Generic architecture (Summit, bigsmp, ES7000, default)
+        ( ) Support for Unisys ES7000 IA32 series
+</screen>
+Only if you have a machine of the other types in the above list should you
+select anything other than the <literal>PC-compatible</literal> option.
+However, if you wish to create a single kernel that will run on all of the above
+types of machines, then select the <literal>Generic architecture</literal>
+option.
+</para>
+
+<para>
+Select the processor family type.  The <literal>PC-compatible</literal>
+option needs to be first selected from the above options for this submenu
+to be able to be selected:
+<screen>
+Processor type and features
+    Processor family
+        ( ) 386
+        ( ) 486
+        ( ) 586/K5/5x86/6x86/6x86MX
+        ( ) Pentium-Classic
+        ( ) Pentium-MMX
+        ( ) Pentium-Pro
+        ( ) Pentium-II/Celeron(pre-Coppermine)
+        ( ) Pentium-III/Celeron(Coppermine)/Pentium-III Xeon
+        ( ) Pentium M
+        (X) Pentium-4/Celeron(P4-based)/Pentium-4 M/Xeon
+        ( ) K6/K6-II/K6-III
+        ( ) Athlon/Duron/K7
+        ( ) Opteron/Athlon64/Hammer/K8
+        ( ) Crusoe
+        ( ) Efficeon
+        ( ) Winchip-C6
+        ( ) Winchip-2
+        ( ) Winchip-2A/Winchip-3
+        ( ) GeodeGX1
+        ( ) Geode GX/LX
+        ( ) CyrixIII/VIA-C3
+        ( ) VIA C3-2 (Nehemiah)
+        ( ) Generic x86 support
+</screen>
+The help option for this configuration value provides a lot of description
+about how to pick the proper processor type depending on what processor you
+have, and what range of machines you wish the kernel to run on.  Please
+refer to that for more detail.
+</para>
+
+
 </sect2>
 
 <sect2 id="suspend">
-<title>suspend</title>
+<title>Suspend</title>
+
+<para>
+The Linux kernel has the ability to suspend itself to disk allowing you to
+disconnect the power, and then at a later time, power up and resume exactly
+where the machine was when it was suspended.  This functionality is very
+useful on laptops that run Linux.
+</para>
+
+<para>
+Enable this by selecting:
+<screen>
+Power management options (ACPI, APM)
+    [*] Software Suspend
+</screen>
+
+The kernel needs to know where to save off the suspended kernel image, and
+then later where to resume it from.  This is usually a kernel swap
+partition on the disk.  To specify which partition this should be:
+<screen>
+Power management options (ACPI, APM)
+    (/dev/hda3) Default resume partition
+</screen>
+Note: make sure you specify the proper partition to suspend the machine to,
+and do not use a partition that is being used by the system for data.  This
+partition name can be found by running the following command:
+<screen>
+$ <userinput>/sbin/swapon -s | grep dev | cut -f 1 -d ' '</userinput>
+/dev/hda3
+</screen>
+Use the output of the above command in this kernel configuration option,
+and on the kernel boot line where it specifies the kernel should be resumed
+from.  See the configuration help for this option for more information
+about how to specify the resume partition and how to suspend the kernel.
+</para>
+
 </sect2>
+
+
+
 
 <sect2 id="cpufreq">
 <title>cpu frequency scaling</title>
