@@ -858,7 +858,67 @@ about how to specify the resume partition and how to suspend the kernel.
 
 
 <sect2 id="cpufreq">
-<title>cpu frequency scaling</title>
+<title>CPU Frequency Scaling</title>
+
+<para>
+Most modern processors have the feature to slow down the internal clock of
+processor in order to conserve power and battery life.  Linux supports this
+ability and offers a wide range of different type of power "governors".
+Different governors implement different heursitcs in order to determine how
+to speed up and slow down the processor depending on the system load and
+other variables.
+</para>
+
+<para>
+Enable the basic frequency scaling functionality:
+<screen>
+Power management options (ACPI, APM)
+    [*] CPU Frequency scaling
+</screen>
+
+Select the different type of frequency governors you wish to use:
+<screen>
+Power management options (ACPI, APM)
+    [*] CPU Frequency scaling
+    [*]   'performance' governor
+    [*]   'powersave' governor
+    [*]   'userspace' governor for userspace frequency scaling
+    [*]   'ondemand' cpufreq policy governor
+    [*]   'conservative' cpufreq governor
+</screen>
+
+Select the default governor you wish to have running when the maching
+boots:
+<screen>
+Power management options (ACPI, APM)
+    [*] CPU Frequency scaling
+          Default CPUFreq governor (performance)
+</screen>
+
+Select the specific processor type the machine has.  For details on how to
+determine the processor type of the machine, see
+<xref linkend="processor" /> for how to do this.
+
+<screen>
+Power management options (ACPI, APM)
+    [*] CPU Frequency scaling
+    ---   CPUFreq processor drivers
+    [ ]   ACPI Processor P-States driver
+    [ ]   AMD Mobile K6-2/K6-3 PowerNow!
+    [ ]   AMD Mobile Athlon/Duron PowerNow!
+    [ ]   AMD Opteron/Athlon64 PowerNow!
+    [ ]   Cyrix MediaGX/NatSemi Geode Suspend Modulation
+    [*]   Intel Enhanced SpeedStep
+    [*]     Use ACPI tables to decode valid frequency/voltage pairs
+    [*]     Built-in tables for Banias CPUs
+    [ ]   Intel Speedstep on ICH-M chipsets (ioport interface)
+    [ ]   Intel SpeedStep on 440BX/ZX/MX chipsets (SMI interface)
+    [ ]   Intel Pentium 4 clock modulation
+    [ ]   nVidia nForce2 FSB changing
+    [ ]   Transmeta LongRun
+</screen>
+</para>
+
 </sect2>
 
 <sect2 id="acpi">
