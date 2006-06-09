@@ -737,7 +737,7 @@ tune for your processor.
 </simplesect>
 
 <sect2 id="processor">
-<title>processor types</title>
+<title>Processor Types</title>
 
 <para>
 There are a wide range of specific processor options that are available to
@@ -812,6 +812,64 @@ have, and what range of machines you wish the kernel to run on.  Please
 refer to that for more detail.
 </para>
 
+</sect2>
+
+<sect2 id="smp">
+<title>SMP</title>
+
+<para>
+If the machine you are using for Linux contains more than one CPU, or a
+Hyperthreaded or Dual Core CPU, then you should select the multiprocessor
+option for the Linux kernel in order to take advantage of the additional
+processors.
+</para>
+
+<para>
+Enable multiprocessing:
+<screen>
+Processor type and features
+    [*] Symmetric multi-processing support
+</screen>
+</para>
+
+</sect2>
+
+<sect2 id="preempt">
+<title>Preemption</title>
+
+<para>
+Systems running as a server have very different workload requirements than
+those being used as a desktop for video and audio applicatons.  The kernel
+allows different modes of "preemption" in order to handle these different
+workloads.  Preemption is the ability of the kernel to interrupt itself
+while it is doing something else, in order to work on something with a
+higher priority, like updating a sound or video program.
+</para>
+
+<para>
+To change the different preemption model:
+<screen>
+Processor type and features
+    Preemption Model
+        (X) No Forced Preemption (Server)
+	( ) Voluntary Kernel Preemption (Desktop)
+	( ) Preemptible Kernel (Low-Latency Desktop)
+</screen>
+</para>
+
+<para>
+If you wish to make the kernel even more responsive to higher priority
+tasks than the general preemption option provides, you can also interrupt
+one of the main internal kernel locks:
+<screen>
+Processor type and features
+    [*] Preempt The Big Kernel Lock
+</screen>
+This option will only be able to be selected if you have already selected
+either the <literal>Preemptable Kernel</literal> or <literal>Symmetric
+multi-processing support</literal> options.
+</para>
+
 
 </sect2>
 
@@ -853,8 +911,6 @@ about how to specify the resume partition and how to suspend the kernel.
 </para>
 
 </sect2>
-
-
 
 
 <sect2 id="cpufreq">
@@ -921,20 +977,17 @@ Power management options (ACPI, APM)
 
 </sect2>
 
+<sect2 id="mm">
+<title>Different Memory <odels</title>
+
+<para>
+Linux on Intel 32bit hardware has the ability to access up to 64
+</para>
+
+</sect2>
+
 <sect2 id="acpi">
 <title>ACPI</title>
-</sect2>
-
-<sect2 id="smp">
-<title>SMP</title>
-</sect2>
-
-<sect2 id="mm">
-<title>different memory models</title>
-</sect2>
-
-<sect2 id="preempt">
-<title>Preemption</title>
 </sect2>
 
 </sect1>
