@@ -551,13 +551,8 @@ ExpressCard and laptop docking stations.
 </para>
 
 <para>
-To determine whether your machine has a ExpressCard controller present, and
-which type is is, run the following command:
-<screen>
-FIXME!!!
-</screen>
-Note that your response will probably not match identically; all that's
-important is that the command shows some controllers.
+To determine whether your machine has an ExpressCard controller present look
+at the hardware to see if an ExpressCard card can be plugged into it.
 </para>
 
 <para>
