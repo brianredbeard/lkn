@@ -2378,7 +2378,7 @@ Kernel configuration option reference
 
 </sect2>
 
-<refentry>
+<refentry id="CONFIG_NOHIGHMEM">
 <refnamediv>
 	<refname></refname>
 	<refpurpose>High Memory Support</refpurpose>
