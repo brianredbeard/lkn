@@ -801,10 +801,10 @@ Processor type and features
         ( ) VIA C3-2 (Nehemiah)
         ( ) Generic x86 support
 </screen>
-The help option for this configuration value provides a lot of description
-about how to pick the proper processor type depending on what processor you
-have, and what range of machines you wish the kernel to run on.  Please
-refer to that for more detail.
+For more details on this configuration item, please refer to
+<xref linkend="CONFIG_M386" /> for a full description of how to pick
+the proper processor type depending on what processor you have, and what
+range of machines you wish the kernel to run on.
 </para>
 
 </sect2>
@@ -901,7 +901,7 @@ $ <userinput>/sbin/swapon -s | grep dev | cut -f 1 -d ' '</userinput>
 </screen>
 Use the output of the above command in this kernel configuration option,
 and on the kernel boot line where it specifies the kernel should be resumed
-from.  See the configuration help for this option for more information
+from.  See <xref linkend="CONFIG_SOFTWARE_SUSPEND" /> for more information
 about how to specify the resume partition and how to suspend the kernel.
 </para>
 
@@ -1012,6 +1012,47 @@ Processor type and features
 
 <sect2 id="acpi">
 <title>ACPI</title>
+<para>
+On almost all modern Intel based systems, ACPI is required in order for the
+machine to work properly.  ACPI is a standard that allows the BIOS of the
+computer to work with the operating system in order to access the hardware
+in an indirect manner, hopefully allowing less operating system specfic
+code to be written to handle a wide range of different devices.  It also
+provides a facility for how to help suspend and resume a machine and
+control the speed of the processor and fans, so if you have a laptop, it is
+recommended that you enable this option.  For more details on acpi, refer
+to <xref linkend="CONFIG_ACPI" />.
+</para>
+
+<para>
+To enable ACPI:
+<screen>
+Power management options (ACPI, APM)
+    ACPI (Advanced Configuration and Power Interface) Support
+        [*] ACPI Support
+</screen>
+
+There are a wide range of different ACPI "drivers" that control different
+types of ACPI devices.  You should enable the specific ones that you have
+on your machine:
+<screen>
+Power management options (ACPI, APM)
+    ACPI (Advanced Configuration and Power Interface) Support
+        [*] ACPI Support
+        [*]   AC Adapter
+        [*]   Battery
+        [*]   Button
+        [*]   Video
+        [*]   Generic Hotkey (EXPERIMENTAL)
+        [*]   Fan
+        [*]   Processor
+        [*]     Thermal Zone
+        [ ]   ASUS/Medion Laptop Extras
+        [ ]   IBM ThinkPad Laptop Extras
+        [ ]   Toshiba Laptop Extras
+</screen>
+</para>
+
 </sect2>
 
 </sect1>
@@ -1110,14 +1151,13 @@ in <filename>/var/log/messages</filename>, or can be seen by running the
 </para>
 
 <para>
-Sometimes it is useful to see exactly when those messages were created .
+Sometimes it is useful to see exactly when those messages were created.
 <command>dmesg</command>, however, does not put any timestamps on the
 events it shows, and the time resolution of
 <literal>/var/log/messages</literal> is only to the nearest
-second. 
-You can configure the kernel to assign each message a timestamp that is accurate down to
-the smallest measurable kernel time value (usually in the microsecond
-range.)
+second.  You can configure the kernel to assign each message a timestamp
+that is accurate down to the smallest measurable kernel time value (usually
+in the microsecond range.)
 </para>
 
 <para>
