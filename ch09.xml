@@ -364,15 +364,18 @@ Once that is enabled, the SATA or SCSI CDROM drive will work properly.
 
 </sect3>
 </sect2>
+
 </sect1>
 
 <sect1>
 <title>Devices</title>
 
 <simplesect>
+<para>
 Linux supports a vast range of different types of devices (more than any
 other operating system ever has).  This section shows how to enable
 some of the more common types.
+</para>
 </simplesect>
 
 <sect2 id="lkn_usb">
@@ -1060,20 +1063,158 @@ Power management options (ACPI, APM)
 <sect1 id="lkn_network">
 <title>Networking</title>
 
+<simplesect>
+<para>
+Networking is required for almost all machines today, and Linux supports
+almost every different networking option availble.  Here we are going to
+show only a few of the wide variety that are present.
+</para>
+
+<para>
+For all networking options, including different drivers, the main network
+config option must be enabled:
+<screen>
+Networking
+    [*] Networking support
+</screen>
+</para>
+
+<para>
+Also the TCP/IP option should be selected so that the machine can talk to
+other machines on the internet:
+<screen>
+Networking
+    [*] Networking support
+          Networking options
+              [*] TCP/IP networking
+</screen>
+</para>
+</simplesect>
+
 <sect2 id="netfilter">
 <title>Netfilter</title>
+
+<para>
+The netfilter portion of the Linux kernel is a framework for filtering and
+manipulating all network packets that pass through the machine.  It is
+commonly used if you wish to enable a firewall on the machine to protect it
+from different systems on the internet, or if you wish to use the machine
+to act as a proxy for other machines on the network.  For more details on
+what netfilter is good for please see <xref linkend="CONFIG_NETFILTER" />.
+</para>
+
+<para>
+To enable the main netfilter option:
+<screen>
+Networking
+    [*] Networking support
+          Networking options
+              [*] Network packet filtering (replaces ipchains)
+</screen>
+</para>
+
+<para>
+It is recommended that you enable the netfilter netlink interface and the
+Xtables support when using netlink:
+<screen>
+Networking
+    [*] Networking support
+          Networking options
+              [*] Network packet filtering (replaces ipchains)
+                    Core Netfilter Configuration
+                        [*] Netfilter netlink interface
+                        [*] Netfilter Xtables support (required for ip_tables)
+</screen>
+</para>
+
+<para>
+The different protocols that you wish to filter should also be enabled:
+<screen>
+Networking
+    [*] Networking support
+          Networking options
+              [*] Network packet filtering (replaces ipchains)
+                    IP: Netfilter Configuration
+                        [M] Connection tracking (required for masq/NAT)
+                        [ ]   Connection tracking flow accounting
+                        [ ]   Connection mark tracking support
+                        [ ]   Connection tracking events (EXPERIMENTAL)
+                        [ ]   SCTP protocol connection tracking support (EXPERIMENTAL)
+                        [M]   FTP protocol support
+                        [ ]   IRC protocol support
+                        [ ]   NetBIOS name service protocol support (EXPERIMENTAL)
+                        [M]   TFTP protocol support
+                        [ ]   Amanda backup protocol support
+                        [ ]   PPTP protocol support
+                        [ ]   H.323 protocol support (EXPERIMENTAL)
+</screen>
+</para>
 </sect2>
 
 <sect2 id="netdrv">
-<title>network drivers</title>
+<title>Network Drivers</title>
+
+<para>
+Linux supports a wide array of different types of networking devices.  The
+most common one is a PCI network device, which an ethernet cable is
+connected into.
+To determine if you have a PCI network device on the system, and what type
+it is, run the following command:
+<screen>
+$ <userinput>/usr/sbin/lspci | grep Ethernet</userinput>
+03:0c.0 Ethernet controller: D-Link System Inc RTL8139 Ethernet (rev 10)
+03:0e.0 Ethernet controller: Intel Corporation 82545GM Gigabit Ethernet Controller (rev 04)
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some PCI Ethernet devices.
+</para>
+
+<para>
+Enable PCI support for the kernel:
+<screen>
+Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+    [*] PCI Support
+</screen>
+</para>
+
+<para>
+Enable basic network device support:
+<screen>
+Device Drivers
+    Network device support
+        [*] Network device support
+</screen>
+</para>
+
+<para>
+Then comes the fun task of finding the specific device drivers for your
+hardware.  The most common place to find Ethernet devices for modern
+hardware, is in the gigabit section of the driver selection:
+<screen>
+Device Drivers
+    Network device support
+        [*] Network device support
+            Ethernet (1000 Mbit)
+</screen>
+Some older ethernet devices will be found in the 10 and 100 Mbit section:
+<screen>
+Device Drivers
+    Network device support
+        [*] Network device support
+            Ethernet (10 or 100 Mbit)
+</screen>
+Look through those sections to find the proper driver for your specific
+devices.
+</para>
+
 </sect2>
 
 <sect2 id="irda">
-<title>Irda</title>
+<title>IrDA</title>
 </sect2>
 
 <sect2 id="wireless">
-<title>wireless</title>
+<title>Wireless</title>
 </sect2>
 
 </sect1>
@@ -1081,6 +1222,8 @@ Power management options (ACPI, APM)
 <sect1>
 <title>Filesystems</title>
 <simplesect>
+<para>
+</para>
 </simplesect>
 
 <sect2 id="raid">
@@ -1113,10 +1256,12 @@ Power management options (ACPI, APM)
 <title>Security</title>
 
 <simplesect>
+<para>
 The Linux kernel provides the ability to run with different types of
 security models built into it.  Right now there are only a few different
 models that come with the default kernel source tree, but more are working
 on getting accepted.
+</para>
 </simplesect>
 
 <sect2 id="capabilities">
