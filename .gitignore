@@ -1,3 +1,4 @@
 *.html
 *.swp
 *.tar.gz
+src/linux-2.6.*
