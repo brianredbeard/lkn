@@ -1211,6 +1211,72 @@ devices.
 
 <sect2 id="irda">
 <title>IrDA</title>
+
+<para>
+IrDA is an infrared protocol used by a number of laptops and PDAs to
+communicate very short distances.  It is prevelant on older hardware, with
+newer hardware using Bluetooth to communicate instead
+<xref linkend="bluetooth" />.  For more details about IrDA, please refer to
+<xref linkend="CONFIG_IRDA" />.
+</para>
+
+<para>
+IrDA is a network protocol, so it can be found under the networking main
+menu:
+<screen>
+Networking
+    [*] Networking support
+    [*]   IrDA (infrared) subsystem support
+</screen>
+</para>
+
+<para>
+There are a number of different IrDA protocols that can be selected,
+depending on the type of device you wish to communicate with, and the
+program used to do the communication:
+<screen>
+Networking
+    [*] Networking support
+        --- IrDA (infrared) subsystem support
+        ---   IrDA protocols
+        [*]   IrLAN protocol (NEW)
+        [*]   IrCOMM protocol (NEW)
+        [*]   Ultra (connectionless) protocol (NEW)
+</screen>
+</para>
+
+<para>
+There are a wide range of different types of IrDA devices, some are serial,
+some PCI, and others based on USB.  To select the specific type of IrDA
+device that you have, choose it under the driver submenu for IrDA:
+<screen>
+Networking
+    [*] Networking support
+        --- IrDA (infrared) subsystem support
+              Infrared-port device drivers
+              --- SIR device drivers
+              [ ] IrTTY (uses Linux serial driver)
+              --- Dongle support
+              --- Old SIR device drivers
+              --- Old Serial dongle support
+              --- FIR device drivers
+              [ ] IrDA USB dongles
+              [ ] SigmaTel STIr4200 bridge (EXPERIMENTAL)
+              [ ] NSC PC87108/PC87338
+              [ ] Winbond W83977AF (IR)
+              [ ] Toshiba Type-O IR Port
+              [ ] SMSC IrCC (EXPERIMENTAL)
+              [ ] ALi M5123 FIR (EXPERIMENTAL)
+              [ ] VLSI 82C147 SIR/MIR/FIR (EXPERIMENTAL)
+              [ ] VIA VT8231/VT1211 SIR/MIR/FIR
+</screen>
+</para>
+
+
+</sect2>
+
+<sect2 id="bluetooth">
+<title>Bluetooth</title>
 </sect2>
 
 <sect2 id="wireless">
