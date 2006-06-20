@@ -6,9 +6,26 @@
  scripts/kconfig/zconf.y  |  277 +++++++++++++++++++++++++++++++++++++++++++++++
  6 files changed, 287 insertions(+), 4 deletions(-)
 
---- linux-2.6.15-rc5.orig/scripts/kconfig/Makefile	2005-12-18 14:50:54.000000000 -0800
-+++ linux-2.6.15-rc5/scripts/kconfig/Makefile	2005-12-18 14:52:25.000000000 -0800
-@@ -230,7 +230,7 @@
+--- linux-2.6.17.orig/arch/i386/Kconfig
++++ linux-2.6.17/arch/i386/Kconfig
+@@ -3,7 +3,7 @@
+ # see Documentation/kbuild/kconfig-language.txt.
+ #
+ 
+-mainmenu "Linux Kernel Configuration"
++menu "Linux Kernel Configuration"
+ 
+ config X86_32
+ 	bool
+@@ -1130,3 +1130,5 @@ config X86_TRAMPOLINE
+ config KTIME_SCALAR
+ 	bool
+ 	default y
++
++endmenu
+--- linux-2.6.17.orig/scripts/kconfig/Makefile
++++ linux-2.6.17/scripts/kconfig/Makefile
+@@ -231,7 +231,7 @@ $(obj)/lkc_defs.h: $(src)/lkc_proto.h
  # The following requires flex/bison/gperf
  # By default we use the _shipped versions, uncomment the following line if
  # you are modifying the flex/bison src.
@@ -17,9 +34,9 @@
  
  ifdef LKC_GENPARSER
  
---- linux-2.6.15-rc5.orig/scripts/kconfig/conf.c	2005-12-18 14:50:54.000000000 -0800
-+++ linux-2.6.15-rc5/scripts/kconfig/conf.c	2005-12-18 14:52:25.000000000 -0800
-@@ -542,6 +542,7 @@
+--- linux-2.6.17.orig/scripts/kconfig/conf.c
++++ linux-2.6.17/scripts/kconfig/conf.c
+@@ -542,6 +542,7 @@ int main(int ac, char **av)
  	}
  	conf_parse(name);
  	//zconfdump(stdout);
@@ -27,9 +44,9 @@
  	switch (input_mode) {
  	case set_default:
  		if (!defconfig_file)
---- linux-2.6.15-rc5.orig/scripts/kconfig/expr.c	2005-10-27 17:02:08.000000000 -0700
-+++ linux-2.6.15-rc5/scripts/kconfig/expr.c	2005-12-18 14:52:25.000000000 -0800
-@@ -1026,7 +1026,8 @@
+--- linux-2.6.17.orig/scripts/kconfig/expr.c
++++ linux-2.6.17/scripts/kconfig/expr.c
+@@ -1026,7 +1026,8 @@ void expr_print(struct expr *e, void (*f
  		if (e->left.sym->name)
  			fn(data, e->left.sym->name);
  		else
@@ -39,7 +56,7 @@
  		break;
  	case E_NOT:
  		fn(data, "!");
-@@ -1049,7 +1050,8 @@
+@@ -1049,7 +1050,8 @@ void expr_print(struct expr *e, void (*f
  		break;
  	case E_AND:
  		expr_print(e->left.expr, fn, data, E_AND);
@@ -49,9 +66,19 @@
  		expr_print(e->right.expr, fn, data, E_AND);
  		break;
  	case E_CHOICE:
---- linux-2.6.15-rc5.orig/scripts/kconfig/zconf.y	2005-12-18 14:50:54.000000000 -0800
-+++ linux-2.6.15-rc5/scripts/kconfig/zconf.y	2005-12-21 22:49:12.000000000 -0800
-@@ -673,6 +673,283 @@
+--- linux-2.6.17.orig/scripts/kconfig/lkc.h
++++ linux-2.6.17/scripts/kconfig/lkc.h
+@@ -50,6 +50,7 @@ struct kconf_id {
+ 
+ int zconfparse(void);
+ void zconfdump(FILE *out);
++void gregkh_confdump(FILE *out);
+ 
+ extern int zconfdebug;
+ void zconf_starthelp(void);
+--- linux-2.6.17.orig/scripts/kconfig/zconf.y
++++ linux-2.6.17/scripts/kconfig/zconf.y
+@@ -673,6 +673,283 @@ void zconfdump(FILE *out)
  	}
  }
  
@@ -335,30 +362,3 @@
  #include "lex.zconf.c"
  #include "util.c"
  #include "confdata.c"
---- linux-2.6.15-rc5.orig/scripts/kconfig/lkc.h	2005-12-18 14:50:54.000000000 -0800
-+++ linux-2.6.15-rc5/scripts/kconfig/lkc.h	2005-12-18 14:52:25.000000000 -0800
-@@ -50,6 +50,7 @@
- 
- int zconfparse(void);
- void zconfdump(FILE *out);
-+void gregkh_confdump(FILE *out);
- 
- extern int zconfdebug;
- void zconf_starthelp(void);
---- linux-2.6.15-rc5.orig/arch/i386/Kconfig	2005-12-18 14:50:32.000000000 -0800
-+++ linux-2.6.15-rc5/arch/i386/Kconfig	2005-12-18 14:52:25.000000000 -0800
-@@ -3,7 +3,7 @@
- # see Documentation/kbuild/kconfig-language.txt.
- #
- 
--mainmenu "Linux Kernel Configuration"
-+menu "Linux Kernel Configuration"
- 
- config X86_32
- 	bool
-@@ -1055,3 +1055,5 @@
- 	bool
- 	depends on X86_SMP || (X86_VOYAGER && SMP)
- 	default y
-+
-+endmenu
