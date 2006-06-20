@@ -608,13 +608,8 @@ recipe in <xref linkend="lkn_pci_hotplug" />).
 </para>
 
 <para>
-To determine whether your machine has a PCMCIA controller present, and which
-type is is, run the following command:
-<screen>
-FIXME!!!
-</screen>
-Note that your response will probably not match identically; all that's
-important is that the command shows some controllers.
+To determine whether your machine has a PCMCIA controller present look at
+the hardware to see if a PCMCIA card can be plugged into it.
 </para>
 
 <para>
@@ -978,10 +973,39 @@ Power management options (ACPI, APM)
 </sect2>
 
 <sect2 id="mm">
-<title>Different Memory <odels</title>
+<title>Different Memory Models</title>
 
 <para>
-Linux on Intel 32bit hardware has the ability to access up to 64
+Linux on Intel 32bit hardware has the ability to access up to 64 Gigabytes
+of memory, but the address space of the 32bit processor is only 4 Gigabytes
+big.  To work around this limitation, Linux can handle this by mapping the
+additional memory into another area and then switch to it for when other
+tasks need it.  But if your machine has a smaller ammount of memory, it is
+easier for Linux to not have to worry about handling the bigger areas, so
+it is benificial to tell the kernel how much memory you are wanting it to
+support.  For a more detailed description of this option, please see
+<xref linkend="CONFIG_NOHIGHMEM" /> and the additional configuration item
+describing sparse memory at <xref linkend="CONFIG_FLATMEM_MANUAL" />.
+</para>
+
+<para>
+Linux supports three different memory models for 32bit Intel processors,
+depending on the memory available:
+
+<itemizedlist>
+<listitem><para>Under one Gigabyte of physical memory</para></listitem>
+<listitem><para>Between one and four Gigabytes of physical memory.</para></listitem>
+<listitem><para>Greater than four Gigabytes of physical memory.</para></listitem>
+</itemizedlist>
+
+To select the ammount of memory:
+<screen>
+Processor type and features
+    High Memory Support
+        (X) off
+        ( ) 4GB
+        ( ) 64GB
+</screen>
 </para>
 
 </sect2>
