@@ -1277,10 +1277,129 @@ Networking
 
 <sect2 id="bluetooth">
 <title>Bluetooth</title>
+
+<para>
+Bluetooth is a wireless technology that was created to replace IrDA to talk
+between devices over a very short distance.  For more details about
+Bluetooth, and the different layers that make up the protocol, please see
+<xref linkend="CONFIG_BT" />.
+</para>
+
+<para>
+Bluetooth is a network protocol, so it can be found under the networking
+main menu:
+<screen>
+Networking
+    [*] Networking support
+    [*]   Bluetooth subsystem support
+</screen>
+</para>
+
+<para>
+There is two main protocol selections for Bluetooth.  Both of these should
+be enabled in order to work with all types of Bluetooth devices:
+<screen>
+Networking
+    [*] Networking support
+        --- Bluetooth subsystem support
+        [*]   L2CAP protocol support
+        [*]   SCO links support
+</screen>
+</para>
+
+<para>
+There are relativly few individual Bluetooth devices drivers available, due
+to almost all devices following the Bluetooth specification which details
+how devices should operate.  These drivers must be selected in order for
+Bluetooth to work with the device:
+<screen>
+Networking
+    [*] Networking support
+        --- Bluetooth subsystem support
+            Bluetooth device drivers
+                [M] HCI USB driver
+                [*]   SCO (voice) support
+                [ ] HCI UART driver
+                [M] HCI BCM203x USB driver
+                [M] HCI BPA10x USB driver
+                [ ] HCI BlueFRITZ! USB driver
+                [ ] HCI DTL1 (PC Card) driver
+                [ ] HCI BT3C (PC Card) driver
+                [ ] HCI BlueCard (PC Card) driver
+                [ ] HCI UART (PC Card) device driver
+                [ ] HCI VHCI (Virtual HCI device) driver
+</screen>
+</para>
+
 </sect2>
 
 <sect2 id="wireless">
 <title>Wireless</title>
+
+<para>
+Wireless networking is very popular with almost all modern laptops having a
+builtin wireless network device.  Linux supports a wide range of wireless
+drivers, with more being added every week.
+To determine if you have a PCI wireless device on the system, and what type
+it is, run the following command:
+<screen>
+$ <userinput>/usr/sbin/lspci | grep -i wireless</userinput>
+06:05.0 Network controller: Intel Corporation PRO/Wireless 2915ABG MiniPCI Adapter (rev 05)
+</screen>
+Note that your response will probably not match identically, all that is
+important is that the command shows some PCI Wireless devices.
+</para>
+
+<para>
+To enable wireless support in Linux, the IEEE 802.11 network configuration
+option must be enabled (802.11 is the number of the wireless specification
+that all devices follow.)
+<screen>
+Networking
+    [*] Networking support
+    [*]   Generic IEEE 802.11 Networking Stack
+</screen>
+</para>
+
+<para>
+Also enable the different 802.11 protocol options, and the "Software MAC"
+option to provide full support for all different types of wireless devices
+in Linux:
+<screen>
+Networking
+    [*] Networking support
+    [*]   Generic IEEE 802.11 Networking Stack
+    [*]     IEEE 802.11 WEP encryption (802.1x)
+    [M]     IEEE 802.11i CCMP support
+    [M]     IEEE 802.11i TKIP encryption
+    [M]     Software MAC add-on to the IEEE 802.11 networking stack
+</screen>
+</para>
+
+<para>
+Support for the different PCI types of wireless network devices are found
+under the Network driver section of the configuration:
+<screen>
+Device Drivers
+    Network device support
+        Wireless LAN (non-hamradio)
+            [*] Wireless LAN drivers (non-hamradio) &amp; Wireless Extensions
+            [*]   Wireless Extension API over RtNetlink
+</screen>
+There is a wide range of different PCI drivers in this section, select the
+proper one depending on the device you have.
+</para>
+
+<para>
+The USB wireless networking device drivers are in a different section of
+the configuration:
+<screen>
+Device Drivers
+    USB Support
+        USB Network Adapters
+</screen>
+</para>
+
 </sect2>
 
 </sect1>
