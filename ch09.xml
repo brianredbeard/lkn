@@ -1057,7 +1057,7 @@ Power management options (ACPI, APM)
 
 </sect1>
 
-<sect1>
+<sect1 id="lkn_network">
 <title>Networking</title>
 
 <sect2 id="netfilter">
@@ -1113,10 +1113,88 @@ Power management options (ACPI, APM)
 <title>Security</title>
 
 <simplesect>
+The Linux kernel provides the ability to run with different types of
+security models built into it.  Right now there are only a few different
+models that come with the default kernel source tree, but more are working
+on getting accepted.
 </simplesect>
+
+<sect2 id="capabilities">
+<title>Default Linux Capabilities</title>
+
+<para>
+The standard type of security model for Linux is the "capability" model.
+You should always select this option unless you really want to run an
+insecure kernel for some reason.
+</para>
+
+<para>
+To enable it:
+<screen>
+Security options
+    [*] Enable different security models
+    [*]   Default Linux Capabilities
+</screen>
+</para>
+</sect2>
 
 <sect2 id="selinux">
 <title>SELinux</title>
+
+<para>
+A very popular security model is called SELinux.  This model is supported
+by a number of different Linux distributions.  For more details about this
+option, please see <xref linkend="CONFIG_SECURITY_SELINUX" />.
+</para>
+
+<para>
+SELinux requires that the networking option be enabled.  See
+<xref linkend="lkn_network" /> for how to enable this.
+</para>
+
+<para>
+SELinux also requires that audit be enabled in the kernel configuration.
+To do this:
+<screen>
+General setup
+    [*] Auditing support
+</screen>
+</para>
+
+<para>
+Also, the networking security option must be enabled:
+<screen>
+Security options
+    [*] Enable different security models
+    [*]   Socket and Networking Security Hooks
+</screen>
+</para>
+
+<para>
+Now it is possible to select the SELinux option:
+<screen>
+Security options
+    [*] Enable different security models
+    [*] NSA SELinux Support
+</screen>
+</para>
+
+<para>
+There are also a number of individual SELinux options that you might wish
+to enable.  Please see the help for the different items for more
+descriptions on what they do in <xref linkend="CONFIG_SECURITY_SELINUX" />.
+<screen>
+Security options
+    [*] Enable different security models
+    [*] NSA SELinux Support
+    [ ]   NSA SELinux boot parameter
+    [ ]   NSA SELinux runtime disable
+    [*]   NSA SELinux Development Support
+    [*]   NSA SELinux AVC Statistics
+    (1)   NSA SELinux checkreqprot default value
+</screen>
+</para>
+
 </sect2>
 
 <!--  If this makes it into the kernel tree, uncomment this section...
