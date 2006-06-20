@@ -1406,33 +1406,177 @@ Device Drivers
 
 <sect1>
 <title>Filesystems</title>
+
 <simplesect>
 <para>
+Linux supports a wide range of traditional file system types and a number
+of different types of filesystems (volume managers, clustered filesystems,
+etc.)  The traditional file system types (normal or journaled) can be
+selected from the main File System configuration menu:
+<screen>
+File Systems
+    [*] Second extended fs support
+    [*] Ext3 journalling file system support
+    [ ] Reiserfs support
+    [ ] JFS filesystem support
+    [ ] XFS filesystem support
+</screen>
+</para>
+
+<para>
+This section will show a few of the non-traditional file system types that
+Linux supports, and how to enable them.
 </para>
 </simplesect>
 
 <sect2 id="raid">
 <title>RAID</title>
+
+<para>
+RAID offers up the option of combining numerous disks together so that they
+look like one logical disk.  This can help in providing ways of providing
+redundancy, or speed by spreading the data across different disk platters.
+Linux supports both hardware and software RAID.  Hardware raid is handled
+by the disk controller, without any help needed from the kernel.  For more
+information about software RAID in Linux, please see 
+<xref linkend="CONFIG_BLK_DEV_MD" />.
+</para>
+
+<para>
+Software RAID is controlled by the kernel, and can be selected as a build
+option:
+<screen>
+Device Drivers
+    Multi-device support (RAID and LVM)
+        [*] Multiple devices driver support (RAID and LVM)
+        [*]   RAID support
+</screen>
+</para>
+
+<para>
+There are many different types of RAID configurations.  At least one of
+them needs to be selected in order for RAID to work properly:
+<screen>
+Device Drivers
+    Multi-device support (RAID and LVM)
+        [*] Multiple devices driver support (RAID and LVM)
+        [*]   RAID support
+        [*]     Linear (append) mode
+        [*]     RAID-0 (striping) mode
+        [*]     RAID-1 (mirroring) mode
+        [*]     RAID-10 (mirrored striping) mode (EXPERIMENTAL)
+        [*]     RAID-4/RAID-5 mode
+        [*]     RAID-6 mode
+</screen>
+</para>
+
 </sect2>
 
 <sect2 id="lvm">
-<title>LVM</title>
+<title>Logical Volume Manager and Device Mapper</title>
+
+<para>
+Much like RAID, LVM (Logical Volume Manager) allows the user to combine
+different block devices to look like one logical device.  However it does
+not work on a device level like RAID, but on a block and sector mapping.
+It allows different portions of different disks to be combined together to
+look like one large block device to the user.  To do this, the kernel uses
+something called Device Mapper (DM).  For more information about the
+details of Device Mapper, please refer to <xref linkend="CONFIG_BLK_DEV_DM" />.
+</para>
+
+<para>
+To enable Device Mapper support in the kernel:
+<screen>
+Device Drivers
+    Multi-device support (RAID and LVM)
+        [*] Multiple devices driver support (RAID and LVM)
+        [*]   Device mapper support
+</screen>
+</para>
+
+<para>
+There are a number of helper modules that work with Device Mapper to
+provide additional functionality.  You should enable them if you wish to
+encrypt your devices, or allow snapshot functionality:
+<screen>
+Device Drivers
+    Multi-device support (RAID and LVM)
+        [*] Multiple devices driver support (RAID and LVM)
+        [*]   Device mapper support
+        [*]     Crypt target support
+        [*]     Snapshot target (EXPERIMENTAL)
+        [*]     Mirror target (EXPERIMENTAL)
+        [*]     Zero target (EXPERIMENTAL)
+        [*]     Multipath target (EXPERIMENTAL)
+</screen>
+</para>
+
 </sect2>
 
-<sect2 id="dm">
-<title>DM</title>
-</sect2>
 
 <sect2 id="samba">
-<title>Samba</title>
-</sect2>
+<title>SAMBA</title>
 
-<sect2 id="journal_fs">
-<title>Journaling filesystems</title>
+<para>
+SAMBA is a program that allows Linux users to access Windows machines
+nativly accross the network, providing a way to share drives and devices in
+a transparent manner.  It also allows Linux to work as a Windows server,
+allowing Windows clients to connect to it thinking that it is a real
+Windows machine.
+</para>
+
+<para>
+There are two different filesystems that allow a Linux machine to connect
+with a Windows machine, the SMB filesystem and the CIFS filesystem.  For
+the ability to connect to older Windows for Workgroups or Windows 95 or 98
+machines, select the SMB filesystem:
+<screen>
+File systems
+    Network File Systems
+        [*] SMB file system support (to mount Windows shares etc.)
+</screen>
+</para>
+
+<para>
+For the ability to connect to newer Windows machines, the CIFS filesystem
+is recommended to be used instead:
+<screen>
+File systems
+    Network File Systems
+        [*] CIFS support
+</screen>
+</para>
+
+<para>
+For more details on the differences between these two filesystems, and when
+one should be used instead of the other, please see
+<xref linkend="CONFIG_SMB_FS" /> and
+<xref linkend="CONFIG_CIFS" />.
+</para>
+
 </sect2>
 
 <sect2 id="ocfs2">
 <title>OCFS2</title>
+
+<para>
+OCFS2 is a cluster filesystem from Oracle that works for large network
+instalations and small local systems at the same time.  It is recommended
+to use this filesystem when using large databases, like Oracle or DB2, as
+it can be moved over time to different backing disks across the network
+quite easily as more storage is needed.  For more details about OCFS2,
+please refer to <xref linkend="CONFIG_OCFS2_FS" />.
+</para>
+
+<para>
+To enable the filesystem:
+<screen>
+File Systems
+    [*] OCFS2 file system support
+</screen>
+</para>
+
 </sect2>
 
 </sect1>
