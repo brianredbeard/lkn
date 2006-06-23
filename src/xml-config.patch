@@ -3,8 +3,8 @@
  scripts/kconfig/conf.c   |    1 
  scripts/kconfig/expr.c   |    6 
  scripts/kconfig/lkc.h    |    1 
- scripts/kconfig/zconf.y  |  336 +++++++++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 346 insertions(+), 4 deletions(-)
+ scripts/kconfig/zconf.y  |  338 +++++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 348 insertions(+), 4 deletions(-)
 
 --- linux-2.6.17.orig/arch/i386/Kconfig
 +++ linux-2.6.17/arch/i386/Kconfig
@@ -78,7 +78,7 @@
  void zconf_starthelp(void);
 --- linux-2.6.17.orig/scripts/kconfig/zconf.y
 +++ linux-2.6.17/scripts/kconfig/zconf.y
-@@ -673,6 +673,342 @@ void zconfdump(FILE *out)
+@@ -673,6 +673,344 @@ void zconfdump(FILE *out)
  	}
  }
  
@@ -249,7 +249,9 @@
 +	}
 +
 +	for_all_properties(sym, prop, P_DEFAULT) {
-+		if (prop->expr->type == E_SYMBOL && strlen(prop->expr->left.sym->name) == 0)
++		if ((prop->expr->type == E_SYMBOL) &&
++		    ((strlen(prop->expr->left.sym->name) == 0) ||
++		     (!prop->expr->left.sym->name)))
 +			;
 +		else {
 +			fprintf(out, "\t<para role=\"default\">Default Value <literal>");
