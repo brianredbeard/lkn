@@ -2212,6 +2212,6 @@ CONFIG_SECURITY_SELINUX=y
 #
 # Cryptographic options
 #
-CONFIG_CRYPTO=y
+#CONFIG_CRYPTO=y
 
 

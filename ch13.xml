@@ -4750,23 +4750,6 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_CRYPTO">
-<refnamediv>
-	<refname>CRYPTO</refname>
-	<refpurpose>Cryptographic API</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	This option provides the core Cryptographic API.
-	</para>
-
-</refsect1>
-</refentry>
-
 <!-- end automated stuff -->
 
 
