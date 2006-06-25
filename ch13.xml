@@ -33,9 +33,11 @@ Kernel configuration option reference
 	in some special cases. Detailed bug reports from people familiar
 	with the kernel internals are usually welcomed by the developers
 	(before submitting bug reports, please read the documents
-	file:README, file:MAINTAINERS, file:REPORTING-BUGS,
-	file:Documentation/BUG-HUNTING, and
-	file:Documentation/oops-tracing.txt in the kernel source).
+	<filename>README</filename>,
+	<filename>MAINTAINERS</filename>,
+	<filename>REPORTING-BUGS</filename>,
+	<filename>Documentation/BUG-HUNTING</filename>, and
+	<filename>Documentation/oops-tracing.txt</filename> in the kernel source).
 	</para>
 
 	<para>
@@ -322,10 +324,12 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	See also the file:Documentation/smp.txt,
-	file:Documentation/i386/IO-APIC.txt,
-	file:Documentation/nmi_watchdog.txt and the SMP-HOWTO available at
-	http://www.tldp.org/docs.html#howto.
+	See also the
+	<filename>Documentation/smp.txt</filename>,
+	<filename>Documentation/i386/IO-APIC.txt</filename>,
+	<filename>Documentation/nmi_watchdog.txt</filename> and the
+	<filename>SMP-HOWTO</filename> available at
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -815,65 +819,6 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_HZ_100">
-<refnamediv>
-	<refname>HZ_100</refname>
-	<refpurpose>100 HZ</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	100 HZ is a typical choice for servers, SMP and NUMA systems
-	with lots of processors that may show reduced performance if
-	too many timer interrupts are occurring.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_HZ_250">
-<refnamediv>
-	<refname>HZ_250</refname>
-	<refpurpose>250 HZ</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	250 HZ is a good compromise choice allowing server performance
-	while also showing good interactive responsiveness even
-	on SMP and NUMA systems.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_HZ_1000">
-<refnamediv>
-	<refname>HZ_1000</refname>
-	<refpurpose>1000 HZ</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	1000 HZ is the preferred choice for desktop systems and other
-	systems requiring fast interactive responses to events.
-	</para>
-
-</refsect1>
-</refentry>
-
 <refentry id="CONFIG_KEXEC">
 <refnamediv>
 	<refname>KEXEC</refname>
@@ -1000,7 +945,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For more information take a look at file:Documentation/power/swsusp.txt.
+	For more information take a look at
+	<filename>Documentation/power/swsusp.txt</filename>.
 	</para>
 
 </refsect1>
@@ -1092,9 +1038,10 @@ Kernel configuration option reference
 
 	<para>
 	In order to use APM, you will need supporting software. For location
-	and more information, read file:Documentation/pm.txt and the
+	and more information, read
+	<filename>Documentation/pm.txt</filename> and the
 	Battery Powered Linux mini-HOWTO, available from
-	http://www.tldp.org/docs.html#howto.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -1173,7 +1120,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For details, take a look at file:Documentation/cpu-freq.
+	For details, take a look at
+	<filename>Documentation/cpu-freq</filename>.
 	</para>
 
 	<para>
@@ -1291,7 +1239,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For details, take a look at file:Documentation/cpu-freq/.
+	For details, take a look at
+	<filename>Documentation/cpu-freq/</filename>.
 	</para>
 
 	<para>
@@ -1469,7 +1418,8 @@ Kernel configuration option reference
 
 	<para>
 	To use 16-bit PCMCIA cards, you will need supporting software in
-	most cases. (see the file file:Documentation/Changes for
+	most cases. (see the file
+	<filename>Documentation/Changes</filename> for
 	location and details).
 	</para>
 
@@ -1568,7 +1518,8 @@ Kernel configuration option reference
 	should consider updating your networking tools too because changes
 	in the kernel and the tools often go hand in hand. The tools are
 	contained in the package net-tools, the location and version number
-	of which are given in file:Documentation/Changes.
+	of which are given in
+	<filename>Documentation/Changes</filename>.
 	</para>
 
 	<para>
@@ -1641,11 +1592,11 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	If you say Y here and also to "/proc file system support" and
+	If you say Y here and also to "<filename>/proc</filename> file system support" and
 	"Sysctl support" below, you can change various aspects of the
 	behavior of the TCP/IP code by writing to the (virtual) files in
-	/proc/sys/net/ipv4/*; the options are explained in the file
-	file:Documentation/networking/ip-sysctl.txt.
+	<filename>/proc/sys/net/ipv4/*</filename>; the options are explained in the file
+	<filename>Documentation/networking/ip-sysctl.txt</filename>.
 	</para>
 
 	<para>
@@ -1788,7 +1739,7 @@ Kernel configuration option reference
 	Various modules exist for netfilter which replace the previous
 	masquerading (ipmasqadm), packet filtering (ipchains), transparent
 	proxying, and portforwarding mechanisms. Please see
-	file:Documentation/Changes under "iptables" for the location of
+	<filename>Documentation/Changes</filename> under "iptables" for the location of
 	these packages.
 	</para>
 
@@ -1885,9 +1836,9 @@ Kernel configuration option reference
 	<para>
 	To use Linux support for the IrDA (tm) protocols, you will also need
 	some user-space utilities like irattach.  For more information, see
-	the file file:Documentation/networking/irda.txt.  You also want to
-	read the IR-HOWTO, available at
-	http://www.tldp.org/docs.html#howto.
+	the file <filename>Documentation/networking/irda.txt</filename>.
+	You also want to read the IR-HOWTO, available at
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -2154,8 +2105,8 @@ Kernel configuration option reference
 	drive, PLIP link (Parallel Line Internet Protocol is mainly used to
 	create a mini network by connecting the parallel ports of two local
 	machines) etc., then you need to say Y here; please read
-	file:Documentation/parport.txt and
-	file:drivers/parport/BUGS-parport.
+	<filename>Documentation/parport.txt</filename> and
+	<filename>drivers/parport/BUGS-parport</filename>.
 	</para>
 
 	<para>
@@ -2171,7 +2122,7 @@ Kernel configuration option reference
 	the module will be called parport.
 	If you have more than one parallel port and want to specify which
 	port and IRQ to be used by this driver at module load time, take a
-	look at file:Documentation/parport.txt.
+	look at <filename>Documentation/parport.txt</filename>.
 	</para>
 
 	<para>
@@ -2257,7 +2208,7 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	Say Y here if you would like support for ISA Plug and Play devices.
-	Some information is in file:Documentation/isapnp.txt.
+	Some information is in <filename>Documentation/isapnp.txt</filename>.
 	</para>
 
 	<para>
@@ -2436,7 +2387,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For further information, please read file:Documentation/ide.txt.
+	For further information, please read <filename>Documentation/ide.txt</filename>.
 	</para>
 
 	<para>
@@ -2468,10 +2419,10 @@ Kernel configuration option reference
 	Useful information about large (540 MB) IDE disks, multiple
 	interfaces, what to do if ATA/IDE devices are not automatically
 	detected, sound card ATA/IDE ports, module support, and other
-	topics, is contained in file:Documentation/ide.txt. For detailed
+	topics, is contained in <filename>Documentation/ide.txt</filename>. For detailed
 	information about hard drives, consult the Disk-HOWTO and the
 	Multi-Disk-HOWTO, available from
-	http://www.tldp.org/docs.html#howto.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -2482,7 +2433,7 @@ Kernel configuration option reference
 
 	<para>
 	To compile this driver as a module, choose M here and read
-	file:Documentation/ide.txt. The module will be called ide-mod.
+	<filename>Documentation/ide.txt</filename>. The module will be called ide-mod.
 	Do not compile this driver as a module if your root file system (the
 	one containing the directory /) is located on an IDE device.
 	</para>
@@ -2718,7 +2669,8 @@ Kernel configuration option reference
 	along with other IDE devices, as "hdb" or "hdc", or something
 	similar, and will be mapped to a character device such as "ht0"
 	(check the boot messages with dmesg).  Be sure to consult the
-	file:drivers/ide/ide-tape.c and file:Documentation/ide.txt files
+	<filename>drivers/ide/ide-tape.c</filename> and
+	<filename>Documentation/ide.txt</filename> files
 	for usage information.
 	</para>
 
@@ -2867,7 +2819,7 @@ Kernel configuration option reference
 
 	<para>
 	To compile this driver as a module, choose M here and read
-	file:Documentation/scsi/scsi.txt.
+	<filename>Documentation/scsi/scsi.txt</filename>.
 	The module will be called scsi_mod.
 	</para>
 
@@ -2901,7 +2853,7 @@ Kernel configuration option reference
 
 	<para>
 	To compile this driver as a module, choose M here and read
-	file:Documentation/scsi/scsi.txt.
+	<filename>Documentation/scsi/scsi.txt</filename>.
 	The module will be called sd_mod.
 	</para>
 
@@ -2929,14 +2881,14 @@ Kernel configuration option reference
 	<para>
 	If you want to use a SCSI tape drive under Linux, say Y and read the
 	SCSI-HOWTO, available from
-	http://www.tldp.org/docs.html#howto, and
-	file:Documentation/scsi/st.txt in the kernel source.  This is NOT
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, and
+	<filename>Documentation/scsi/st.txt</filename> in the kernel source.  This is NOT
 	for SCSI CD-ROMs.
 	</para>
 
 	<para>
 	To compile this driver as a module, choose M here and read
-	file:Documentation/scsi/scsi.txt. The module will be called st.
+	<filename>Documentation/scsi/scsi.txt</filename>. The module will be called st.
 	</para>
 
 </refsect1>
@@ -2963,7 +2915,7 @@ Kernel configuration option reference
 	tapes (QIC-157) and can be driven by the standard driver st.
 	For more information, you may have a look at the SCSI-HOWTO
 	http://www.tldp.org/docs.html#howto  and
-	file:Documentation/scsi/osst.txt  in the kernel source.
+	<filename>Documentation/scsi/osst.txt</filename> in the kernel source.
 	More info on the OnStream driver may be found on
 	http://linux1.onstream.nl/test/
 	Please also have a look at the standard st docu, as most of it
@@ -2972,7 +2924,7 @@ Kernel configuration option reference
 
 	<para>
 	To compile this driver as a module, choose M here and read
-	file:Documentation/scsi/scsi.txt. The module will be called osst.
+	<filename>Documentation/scsi/scsi.txt</filename>. The module will be called osst.
 	</para>
 
 </refsect1>
@@ -2998,7 +2950,7 @@ Kernel configuration option reference
 
 	<para>
 	To compile this driver as a module, choose M here and read
-	file:Documentation/scsi/scsi.txt.
+	<filename>Documentation/scsi/scsi.txt</filename>.
 	The module will be called sr_mod.
 	</para>
 
@@ -3025,20 +2977,22 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For scanners, look at SANE (http://www.mostang.com/sane/). For CD
-	writer software look at Cdrtools
-	(http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html)
+	For scanners, look at SANE
+	<systemitem class="url">http://www.mostang.com/sane/</systemitem>.
+	For CD writer software look at Cdrtools
+	<systemitem class="url">http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html</systemitem>
 	and for burning a "disk at once": CDRDAO
-	(http://cdrdao.sourceforge.net/). Cdparanoia is a high
-	quality digital reader of audio CDs (http://www.xiph.org/paranoia/).
+	<systemitem class="url">http://cdrdao.sourceforge.net/</systemitem>.
+	Cdparanoia is a high quality digital reader of audio CDs
+	<systemitem class="url">http://www.xiph.org/paranoia/</systemitem>.
 	For other devices, it's possible that you'll have to write the
 	driver software yourself. Please read the file
-	file:Documentation/scsi/scsi-generic.txt for more information.
+	<filename>Documentation/scsi/scsi-generic.txt</filename> for more information.
 	</para>
 
 	<para>
 	To compile this driver as a module, choose M here and read
-	file:Documentation/scsi/scsi.txt. The module will be called sg.
+	<filename>Documentation/scsi/scsi.txt</filename>. The module will be called sg.
 	</para>
 
 	<para>
@@ -3065,14 +3019,14 @@ Kernel configuration option reference
 	don't need this for those tiny 6-slot cdrom changers.  Media
 	changers are listed as "Type: Medium Changer" in /proc/scsi/scsi.
 	If you have such hardware and want to use it with linux, say Y
-	here.  Check file:Documentation/scsi-changer.txt for details.
+	here.  Check <filename>Documentation/scsi-changer.txt</filename> for details.
 	</para>
 
 	<para>
 	If you want to compile this as a module ( = code which can be
 	inserted in and removed from the running kernel whenever you want),
-	say M here and read file:Documentation/modules.txt and
-	file:Documentation/scsi.txt. The module will be called ch.o.
+	say M here and read <filename>Documentation/modules.txt</filename> and
+	<filename>Documentation/scsi.txt</filename>. The module will be called ch.o.
 	If unsure, say N.
 	</para>
 
@@ -3391,7 +3345,7 @@ Kernel configuration option reference
 	If you have such an adapter and would like to use it, say Y or M and
 	read the Token-Ring mini-HOWTO, available from
 	http://www.tldp.org/docs.html#howto and the file
-	file:Documentation/networking/smctr.txt.
+	<filename>Documentation/networking/smctr.txt</filename>.
 	</para>
 
 	<para>
@@ -3473,7 +3427,7 @@ Kernel configuration option reference
 	To use PPP, you need an additional program called pppd as described
 	in the PPP-HOWTO, available at
 	http://www.tldp.org/docs.html#howto.  Make sure that you have
-	the version of pppd recommended in file:Documentation/Changes.
+	the version of pppd recommended in <filename>Documentation/Changes</filename>.
 	The PPP option enlarges your kernel by about 16 KB.
 	</para>
 
@@ -3492,7 +3446,7 @@ Kernel configuration option reference
 	If you said Y to "Version information on all symbols" above, then
 	you cannot compile the PPP driver into the kernel; you can then only
 	compile it as a module. To compile this driver as a module, choose M
-	here and read file:Documentation/networking/net-modules.txt.
+	here and read <filename>Documentation/networking/net-modules.txt</filename>.
 	The module will be called ppp_generic.
 	</para>
 
@@ -3607,7 +3561,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	More information is available: file:Documentation/input/input.txt
+	More information is available: <filename>Documentation/input/input.txt</filename>
 	</para>
 
 	<para>
@@ -3876,7 +3830,7 @@ Kernel configuration option reference
 	I2C (pronounce: I-square-C) is a slow serial bus protocol used in
 	many micro controller applications and developed by Philips.  SMBus,
 	or System Management Bus is a subset of the I2C protocol.  More
-	information is contained in the directory file:Documentation/i2c/,
+	information is contained in the directory <filename>Documentation/i2c/</filename>,
 	especially in the file called "summary" there.
 	</para>
 
@@ -4083,7 +4037,7 @@ Kernel configuration option reference
 
 	<para>
 	You need an utility program called fbset to make full use of frame
-	buffer devices. Please read file:Documentation/fb/framebuffer.txt
+	buffer devices. Please read <filename>Documentation/fb/framebuffer.txt</filename>
 	and the Framebuffer-HOWTO at
 	http://www.tahallah.demon.co.uk/programming/prog.html for more
 	information.
@@ -4175,10 +4129,10 @@ Kernel configuration option reference
 	You want to read the Sound-HOWTO, available from
 	http://www.tldp.org/docs.html#howto. General information about
 	the modular sound system is contained in the files
-	file:Documentation/sound/oss/Introduction.  The file
-	file:Documentation/sound/oss/README.OSS contains some slightly
+	<filename>Documentation/sound/oss/Introduction</filename>.  The file
+	<filename>Documentation/sound/oss/README.OSS</filename> contains some slightly
 	outdated but still useful information as well.  Newer sound
-	driver documentation is found in file:Documentation/sound/alsa/*.
+	driver documentation is found in <filename>Documentation/sound/alsa/*</filename>.
 	</para>
 
 	<para>
@@ -4187,7 +4141,7 @@ Kernel configuration option reference
 	http://www.roestock.demon.co.uk/isapnptools/), then you need to
 	compile the sound card support as a module and load that module
 	after the PnP configuration is finished.  To do this, choose M here
-	and read file:Documentation/sound/oss/README.modules; the module
+	and read <filename>Documentation/sound/oss/README.modules</filename>; the module
 	will be called soundcore.
 	</para>
 
@@ -4296,8 +4250,8 @@ Kernel configuration option reference
 	<para>
 	After choosing your HCD, then select drivers for the USB peripherals
 	you'll be using.  You may want to check out the information provided
-	in file:Documentation/usb/ and especially the links given in
-	file:Documentation/usb/usb-help.txt.
+	in <filename>Documentation/usb/</filename> and especially the links given in
+	<filename>Documentation/usb/usb-help.txt</filename>.
 	</para>
 
 	<para>
@@ -4340,7 +4294,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	You may want to read file:Documentation/usb/ehci.txt.
+	You may want to read <filename>Documentation/usb/ehci.txt</filename>.
 	</para>
 
 	<para>
@@ -4465,7 +4419,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Please read file:Documentation/usb/usb-serial.txt for more
+	Please read <filename>Documentation/usb/usb-serial.txt</filename> for more
 	information on the specifics of the different devices that are
 	supported, and on how to use them.
 	</para>
@@ -4754,7 +4708,7 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	This is a port of IBM's Journaled Filesystem .  More information is
-	available in the file file:Documentation/filesystems/jfs.txt.
+	available in the file <filename>Documentation/filesystems/jfs.txt</filename>.
 	</para>
 
 	<para>
@@ -4926,7 +4880,7 @@ Kernel configuration option reference
 
 	<para>
 	To use the automounter you need the user-space tools from the autofs
-	package; you can find the location in file:Documentation/Changes.
+	package; you can find the location in <filename>Documentation/Changes</filename>.
 	You also want to answer Y to "NFS file system support", below.
 	</para>
 
@@ -4971,8 +4925,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	See file:Documentation/filesystems/fuse.txt for more information.
-	See file:Documentation/Changes for needed library/utility version.
+	See <filename>Documentation/filesystems/fuse.txt</filename> for more information.
+	See <filename>Documentation/Changes</filename> for needed library/utility version.
 	</para>
 
 	<para>
@@ -5003,8 +4957,9 @@ Kernel configuration option reference
 	access them just like any other Unix directory.  Currently, this
 	works only if the Windows machines use TCP/IP as the underlying
 	transport protocol, and not NetBEUI.  For details, read
-	file:Documentation/filesystems/smbfs.txt and the SMB-HOWTO,
-	available from http://www.tldp.org/docs.html#howto.
+	<filename>Documentation/filesystems/smbfs.txt</filename> and the SMB-HOWTO,
+	available from
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -5174,7 +5129,7 @@ Kernel configuration option reference
 	by pressing various keys while holding SysRq (Alt+PrintScreen). It
 	also works on a serial console (on PC hardware at least), if you
 	send a BREAK and then within 5 seconds a command keypress. The
-	keys are documented in file:Documentation/sysrq.txt. Don't say Y
+	keys are documented in <filename>Documentation/sysrq.txt</filename>. Don't say Y
 	unless you really know what this hack does.
 	</para>
 
