@@ -341,7 +341,7 @@ Kernel configuration option reference
 	<refpurpose>386</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -476,7 +476,7 @@ Kernel configuration option reference
 	<refpurpose>No Forced Preemption (Server)</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -504,7 +504,7 @@ Kernel configuration option reference
 	<refpurpose>Voluntary Kernel Preemption (Desktop)</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -538,7 +538,7 @@ Kernel configuration option reference
 	<refpurpose>Preemptible Kernel (Low-Latency Desktop)</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -595,7 +595,7 @@ Kernel configuration option reference
 	<refpurpose>off</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -654,7 +654,7 @@ Kernel configuration option reference
 	<refpurpose>4GB</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -673,7 +673,7 @@ Kernel configuration option reference
 	<refpurpose>64GB</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and X86_CMPXCHG64</literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and X86_CMPXCHG64</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -692,7 +692,7 @@ Kernel configuration option reference
 	<refpurpose>Flat Memory</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and (!ARCH_DISCONTIGMEM_ENABLE and !ARCH_SPARSEMEM_ENABLE || ARCH_FLATMEM_ENABLE)</literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and (!ARCH_DISCONTIGMEM_ENABLE and !ARCH_SPARSEMEM_ENABLE || ARCH_FLATMEM_ENABLE)</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -727,7 +727,7 @@ Kernel configuration option reference
 	<refpurpose>Discontiguous Memory</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and ARCH_DISCONTIGMEM_ENABLE</literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and ARCH_DISCONTIGMEM_ENABLE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -759,7 +759,7 @@ Kernel configuration option reference
 	<refpurpose>Sparse Memory</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and ARCH_SPARSEMEM_ENABLE</literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and ARCH_SPARSEMEM_ENABLE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -821,7 +821,7 @@ Kernel configuration option reference
 	<refpurpose>100 HZ</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -841,7 +841,7 @@ Kernel configuration option reference
 	<refpurpose>250 HZ</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -861,7 +861,7 @@ Kernel configuration option reference
 	<refpurpose>1000 HZ</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
 <refsect1>
@@ -1189,7 +1189,7 @@ Kernel configuration option reference
 	<refpurpose>performance</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="select">Selects <literal>CPU_FREQ_GOV_PERFORMANCE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
@@ -1210,7 +1210,7 @@ Kernel configuration option reference
 	<refpurpose>userspace</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
-	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="depends">Depends on <emphasis>choice</emphasis></para>
 	<para role="select">Selects <literal>CPU_FREQ_GOV_USERSPACE</literal></para>
 	<para role="type">Type <literal>boolean</literal></para>
 </refsynopsisdiv>
