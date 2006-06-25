@@ -1,0 +1,5291 @@
+bison -l -b scripts/kconfig/zconf -p zconf scripts/kconfig/zconf.y
+cp scripts/kconfig/zconf.tab.c scripts/kconfig/zconf.tab.c_shipped
+  HOSTCC  scripts/kconfig/zconf.tab.o
+  HOSTLD  scripts/kconfig/conf
+scripts/kconfig/conf -s arch/i386/Kconfig
+<refentry id="CONFIG_EXPERIMENTAL">
+<refnamediv>
+	<refname>EXPERIMENTAL</refname>
+	<refpurpose>Prompt for development and/or incomplete code/drivers</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Some of the various things that Linux supports (such as network
+	drivers, file systems, network protocols, etc.) can be in a state
+	of development where the functionality, stability, or the level of
+	testing is not yet high enough for general use. This is usually
+	known as the "alpha-test" phase among developers. If a feature is
+	currently in alpha-test, then the developers usually discourage
+	uninformed widespread use of this feature by the general public to
+	avoid "Why doesn't this work?" type mail messages. However, active
+	testing and use of these systems is welcomed. Just be aware that it
+	may not meet the normal level of reliability or it may fail to work
+	in some special cases. Detailed bug reports from people familiar
+	with the kernel internals are usually welcomed by the developers
+	(before submitting bug reports, please read the documents
+	file:README, file:MAINTAINERS, file:REPORTING-BUGS,
+	file:Documentation/BUG-HUNTING, and
+	file:Documentation/oops-tracing.txt in the kernel source).
+	</para>
+
+	<para>
+	This option will also make obsoleted drivers available. These are
+	drivers that have been replaced by something else, and/or are
+	scheduled to be removed in a future kernel release.
+	</para>
+
+	<para>
+	Unless you intend to help test and develop a feature or driver that
+	falls into this category, or you have a situation that requires
+	using these features, you should probably say N here, which will
+	cause the configurator to present you with fewer choices. If
+	you say Y here, you will be offered the choice of using features or
+	drivers that are currently considered to be in the alpha-test phase.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_LOCALVERSION">
+<refnamediv>
+	<refname>LOCALVERSION</refname>
+	<refpurpose>Local version - append to kernel release</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>string</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Append an extra string to the end of your kernel version.
+	This will show up when you type uname, for example.
+	The string you set here will be appended after the contents of
+	any files with a filename matching localversion* in your
+	object and source tree, in that order.  Your total string can
+	be a maximum of 64 characters.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_AUDIT">
+<refnamediv>
+	<refname>AUDIT</refname>
+	<refpurpose>Auditing support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Enable auditing infrastructure that can be used with another
+	kernel subsystem, such as SELinux (which requires this for
+	logging of avc messages output).  Does not do system-call
+	auditing without CONFIG_AUDITSYSCALL.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IKCONFIG">
+<refnamediv>
+	<refname>IKCONFIG</refname>
+	<refpurpose>Kernel .config support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option enables the complete Linux kernel ".config" file
+	contents to be saved in the kernel. It provides documentation
+	of which kernel options are used in a running kernel or in an
+	on-disk kernel.  This information can be extracted from the kernel
+	image file with the script scripts/extract-ikconfig and used as
+	input to rebuild the current kernel or to build another kernel.
+	It can also be extracted from a running kernel by reading
+	/proc/config.gz if enabled (below).
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_EMBEDDED">
+<refnamediv>
+	<refname>EMBEDDED</refname>
+	<refpurpose>Configure standard kernel features (for small systems)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option allows certain base kernel options and settings
+	to be disabled or tweaked. This is for specialized
+	environments which can tolerate a "non-standard" kernel.
+	Only use this if you really know what you are doing.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_KALLSYMS">
+<refnamediv>
+	<refname>KALLSYMS</refname>
+	<refpurpose>Load all symbols for debugging/kksymoops</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here to let the kernel print out symbolic crash information and
+	symbolic stack backtraces. This increases the size of the kernel
+	somewhat, as all symbols have to be loaded into the kernel image.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_MODULES">
+<refnamediv>
+	<refname>MODULES</refname>
+	<refpurpose>Enable loadable module support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Kernel modules are small pieces of compiled code which can
+	be inserted in the running kernel, rather than being
+	permanently built into the kernel.  You use the "modprobe"
+	tool to add (and sometimes remove) them.  If you say Y here,
+	many parts of the kernel can be built as modules (by
+	answering M instead of Y where indicated): this is most
+	useful for infrequently used options which are not required
+	for booting.  For more information, see the man pages for
+	modprobe, lsmod, modinfo, insmod and rmmod.
+	</para>
+
+	<para>
+	If you say Y here, you will need to run "make
+	modules_install" to put the modules under /lib/modules/
+	where modprobe can find them (you may need to be root to do
+	this).
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IOSCHED_NOOP">
+<refnamediv>
+	<refname>IOSCHED_NOOP</refname>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The no-op I/O scheduler is a minimal scheduler that does basic merging
+	and sorting. Its main uses include non-disk based block devices like
+	memory devices, and specialised software or hardware environments
+	that do their own scheduling and require only minimal assistance from
+	the kernel.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IOSCHED_AS">
+<refnamediv>
+	<refname>IOSCHED_AS</refname>
+	<refpurpose>Anticipatory I/O scheduler</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The anticipatory I/O scheduler is the default disk scheduler. It is
+	generally a good choice for most environments, but is quite large and
+	complex when compared to the deadline I/O scheduler, it can also be
+	slower in some cases especially some database loads.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IOSCHED_DEADLINE">
+<refnamediv>
+	<refname>IOSCHED_DEADLINE</refname>
+	<refpurpose>Deadline I/O scheduler</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The deadline I/O scheduler is simple and compact, and is often as
+	good as the anticipatory I/O scheduler, and in some database
+	workloads, better. In the case of a single process performing I/O to
+	a disk at any one time, its behaviour is almost identical to the
+	anticipatory I/O scheduler and so is a good choice.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IOSCHED_CFQ">
+<refnamediv>
+	<refname>IOSCHED_CFQ</refname>
+	<refpurpose>CFQ I/O scheduler</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The CFQ I/O scheduler tries to distribute bandwidth equally
+	among all processes in the system. It should provide a fair
+	working environment, suitable for desktop systems.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SMP">
+<refnamediv>
+	<refname>SMP</refname>
+	<refpurpose>Symmetric multi-processing support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This enables support for systems with more than one CPU. If you have
+	a system with only one CPU, like most personal computers, say N. If
+	you have a system with more than one CPU, say Y.
+	</para>
+
+	<para>
+	If you say N here, the kernel will run on single and multiprocessor
+	machines, but will use only one CPU of a multiprocessor machine. If
+	you say Y here, the kernel will run on many, but not all,
+	singleprocessor machines. On a singleprocessor machine, the kernel
+	will run faster if you say N here.
+	</para>
+
+	<para>
+	Note that if you say Y here and choose architecture "586" or
+	"Pentium" under "Processor family", the kernel will not work on 486
+	architectures. Similarly, multiprocessor kernels for the "PPro"
+	architecture may not work on all Pentium based boards.
+	</para>
+
+	<para>
+	People using multiprocessor machines who say Y here should also say
+	Y to "Enhanced Real Time Clock Support", below. The "Advanced Power
+	Management" code will be disabled if you say Y here.
+	</para>
+
+	<para>
+	See also the file:Documentation/smp.txt,
+	file:Documentation/i386/IO-APIC.txt,
+	file:Documentation/nmi_watchdog.txt and the SMP-HOWTO available at
+	http://www.tldp.org/docs.html#howto.
+	</para>
+
+	<para>
+	If you don't know what to do here, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_M386">
+<refnamediv>
+	<refname>M386</refname>
+	<refpurpose>386</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is the processor type of your CPU. This information is used for
+	optimizing purposes. In order to compile a kernel that can run on
+	all x86 CPU types (albeit not optimally fast), you can specify
+	"386" here.
+	</para>
+
+	<para>
+	The kernel will not necessarily run on earlier architectures than
+	the one you have chosen, e.g. a Pentium optimized kernel will run on
+	a PPro, but not necessarily on a i486.
+	</para>
+
+	<para>
+	Here are the settings recommended for greatest speed:
+	- "386" for the AMD/Cyrix/Intel 386DX/DXL/SL/SLC/SX, Cyrix/TI
+	486DLC/DLC2, UMC 486SX-S and NexGen Nx586.  Only "386" kernels
+	will run on a 386 class machine.
+	- "486" for the AMD/Cyrix/IBM/Intel 486DX/DX2/DX4 or
+	SL/SLC/SLC2/SLC3/SX/SX2 and UMC U5D or U5S.
+	- "586" for generic Pentium CPUs lacking the TSC
+	(time stamp counter) register.
+	- "Pentium-Classic" for the Intel Pentium.
+	- "Pentium-MMX" for the Intel Pentium MMX.
+	- "Pentium-Pro" for the Intel Pentium Pro.
+	- "Pentium-II" for the Intel Pentium II or pre-Coppermine Celeron.
+	- "Pentium-III" for the Intel Pentium III or Coppermine Celeron.
+	- "Pentium-4" for the Intel Pentium 4 or P4-based Celeron.
+	- "K6" for the AMD K6, K6-II and K6-III (aka K6-3D).
+	- "Athlon" for the AMD K7 family (Athlon/Duron/Thunderbird).
+	- "Crusoe" for the Transmeta Crusoe series.
+	- "Efficeon" for the Transmeta Efficeon series.
+	- "Winchip-C6" for original IDT Winchip.
+	- "Winchip-2" for IDT Winchip 2.
+	- "Winchip-2A" for IDT Winchips with 3dNow! capabilities.
+	- "GeodeGX1" for Geode GX1 (Cyrix MediaGX).
+	- "Geode GX/LX" For AMD Geode GX and LX processors.
+	- "CyrixIII/VIA C3" for VIA Cyrix III or VIA C3.
+	- "VIA C3-2 for VIA C3-2 "Nehemiah" (model 9 and above).
+	</para>
+
+	<para>
+	If you don't know what to do, choose "386".
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_X86_GENERIC">
+<refnamediv>
+	<refname>X86_GENERIC</refname>
+	<refpurpose>Generic x86 support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_ELAN</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Instead of just including optimizations for the selected
+	x86 variant (e.g. PII, Crusoe or Athlon), include some more
+	generic optimizations as well. This will make the kernel
+	perform better on x86 CPUs other than that selected.
+	</para>
+
+	<para>
+	This is really intended for distributors who need more
+	generic optimizations.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NR_CPUS">
+<refnamediv>
+	<refname>NR_CPUS</refname>
+	<refpurpose>Maximum number of CPUs (2-255)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SMP</literal></para>
+	<para role="range">Range <literal>[2 255]</literal></para>
+	<para role="default">Default Value <literal>32 if SMP and (X86_NUMAQ || X86_SUMMIT || X86_BIGSMP || X86_ES7000)</literal></para>
+	<para role="default">Default Value <literal>8 if SMP</literal></para>
+	<para role="type">Type <literal>integer</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This allows you to specify the maximum number of CPUs which this
+	kernel will support.  The maximum supported value is 255 and the
+	minimum value which makes sense is 2.
+	</para>
+
+	<para>
+	This is purely to save memory - each supported CPU adds
+	approximately eight kilobytes to the kernel image.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SCHED_SMT">
+<refnamediv>
+	<refname>SCHED_SMT</refname>
+	<refpurpose>SMT (Hyperthreading) scheduler support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SMP</literal></para>
+	<para role="default">Default Value <literal>off if SMP</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	SMT scheduler support improves the CPU scheduler's decision making
+	when dealing with Intel Pentium 4 chips with HyperThreading at a
+	cost of slightly increased overhead in some places. If unsure say
+	N here.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PREEMPT_NONE">
+<refnamediv>
+	<refname>PREEMPT_NONE</refname>
+	<refpurpose>No Forced Preemption (Server)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is the traditional Linux preemption model, geared towards
+	throughput. It will still provide good latencies most of the
+	time, but there are no guarantees and occasional longer delays
+	are possible.
+	</para>
+
+	<para>
+	Select this option if you are building a kernel for a server or
+	scientific/computation system, or if you want to maximize the
+	raw processing power of the kernel, irrespective of scheduling
+	latencies.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PREEMPT_VOLUNTARY">
+<refnamediv>
+	<refname>PREEMPT_VOLUNTARY</refname>
+	<refpurpose>Voluntary Kernel Preemption (Desktop)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option reduces the latency of the kernel by adding more
+	"explicit preemption points" to the kernel code. These new
+	preemption points have been selected to reduce the maximum
+	latency of rescheduling, providing faster application reactions,
+	at the cost of slighly lower throughput.
+	</para>
+
+	<para>
+	This allows reaction to interactive events by allowing a
+	low priority process to voluntarily preempt itself even if it
+	is in kernel mode executing a system call. This allows
+	applications to run more 'smoothly' even when the system is
+	under load.
+	</para>
+
+	<para>
+	Select this if you are building a kernel for a desktop system.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PREEMPT">
+<refnamediv>
+	<refname>PREEMPT</refname>
+	<refpurpose>Preemptible Kernel (Low-Latency Desktop)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option reduces the latency of the kernel by making
+	all kernel code (that is not executing in a critical section)
+	preemptible.  This allows reaction to interactive events by
+	permitting a low priority process to be preempted involuntarily
+	even if it is in kernel mode executing a system call and would
+	otherwise not be about to reach a natural preemption point.
+	This allows applications to run more 'smoothly' even when the
+	system is under load, at the cost of slighly lower throughput
+	and a slight runtime overhead to kernel code.
+	</para>
+
+	<para>
+	Select this if you are building a kernel for a desktop or
+	embedded system with latency requirements in the milliseconds
+	range.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PREEMPT_BKL">
+<refnamediv>
+	<refname>PREEMPT_BKL</refname>
+	<refpurpose>Preempt The Big Kernel Lock</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SMP || PREEMPT</literal></para>
+	<para role="default">Default Value <literal>y if SMP || PREEMPT</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option reduces the latency of the kernel by making the
+	big kernel lock preemptible.
+	</para>
+
+	<para>
+	Say Y here if you are building a kernel for a desktop system.
+	Say N if you are unsure.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NOHIGHMEM">
+<refnamediv>
+	<refname>NOHIGHMEM</refname>
+	<refpurpose>off</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Linux can use up to 64 Gigabytes of physical memory on x86 systems.
+	However, the address space of 32-bit x86 processors is only 4
+	Gigabytes large. That means that, if you have a large amount of
+	physical memory, not all of it can be "permanently mapped" by the
+	kernel. The physical memory that's not permanently mapped is called
+	"high memory".
+	</para>
+
+	<para>
+	If you are compiling a kernel which will never run on a machine with
+	more than 1 Gigabyte total physical RAM, answer "off" here (default
+	choice and suitable for most users). This will result in a "3GB/1GB"
+	split: 3GB are mapped so that each process sees a 3GB virtual memory
+	space and the remaining part of the 4GB virtual memory space is used
+	by the kernel to permanently map as much physical memory as
+	possible.
+	</para>
+
+	<para>
+	If the machine has between 1 and 4 Gigabytes physical RAM, then
+	answer "4GB" here.
+	</para>
+
+	<para>
+	If more than 4 Gigabytes is used then answer "64GB" here. This
+	selection turns Intel PAE (Physical Address Extension) mode on.
+	PAE implements 3-level paging on IA32 processors. PAE is fully
+	supported by Linux, PAE mode is implemented on all recent Intel
+	processors (Pentium Pro and better). NOTE: If you say "64GB" here,
+	then the kernel will not boot on CPUs that don't support PAE!
+	</para>
+
+	<para>
+	The actual amount of total physical memory will either be
+	auto detected or can be forced by using a kernel command line option
+	such as "mem=256M". (Try "man bootparam" or see the documentation of
+	your boot loader (lilo or loadlin) about how to pass options to the
+	kernel at boot time.)
+	</para>
+
+	<para>
+	If unsure, say "off".
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HIGHMEM4G">
+<refnamediv>
+	<refname>HIGHMEM4G</refname>
+	<refpurpose>4GB</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Select this if you have a 32-bit processor and between 1 and 4
+	gigabytes of physical RAM.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HIGHMEM64G">
+<refnamediv>
+	<refname>HIGHMEM64G</refname>
+	<refpurpose>64GB</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and X86_CMPXCHG64</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Select this if you have a 32-bit processor and more than 4
+	gigabytes of physical RAM.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_FLATMEM_MANUAL">
+<refnamediv>
+	<refname>FLATMEM_MANUAL</refname>
+	<refpurpose>Flat Memory</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and (!ARCH_DISCONTIGMEM_ENABLE and !ARCH_SPARSEMEM_ENABLE || ARCH_FLATMEM_ENABLE)</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option allows you to change some of the ways that
+	Linux manages its memory internally.  Most users will
+	only have one option here: FLATMEM.  This is normal
+	and a correct option.
+	</para>
+
+	<para>
+	Some users of more advanced features like NUMA and
+	memory hotplug may have different options here.
+	DISCONTIGMEM is an more mature, better tested system,
+	but is incompatible with memory hotplug and may suffer
+	decreased performance over SPARSEMEM.  If unsure between
+	"Sparse Memory" and "Discontiguous Memory", choose
+	"Discontiguous Memory".
+	</para>
+
+	<para>
+	If unsure, choose this option (Flat Memory) over any other.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_DISCONTIGMEM_MANUAL">
+<refnamediv>
+	<refname>DISCONTIGMEM_MANUAL</refname>
+	<refpurpose>Discontiguous Memory</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and ARCH_DISCONTIGMEM_ENABLE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option provides enhanced support for discontiguous
+	memory systems, over FLATMEM.  These systems have holes
+	in their physical address spaces, and this option provides
+	more efficient handling of these holes.  However, the vast
+	majority of hardware has quite flat address spaces, and
+	can have degraded performance from extra overhead that
+	this option imposes.
+	</para>
+
+	<para>
+	Many NUMA configurations will have this as the only option.
+	</para>
+
+	<para>
+	If unsure, choose "Flat Memory" over this option.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SPARSEMEM_MANUAL">
+<refnamediv>
+	<refname>SPARSEMEM_MANUAL</refname>
+	<refpurpose>Sparse Memory</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal> and ARCH_SPARSEMEM_ENABLE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This will be the only option for some systems, including
+	memory hotplug systems.  This is normal.
+	</para>
+
+	<para>
+	For many other systems, this will be an alternative to
+	"Discontiguous Memory".  This option provides some potential
+	performance benefits, along with decreased code complexity,
+	but it is newer, and more experimental.
+	</para>
+
+	<para>
+	If unsure, choose "Discontiguous Memory" or "Flat Memory"
+	over this option.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SECCOMP">
+<refnamediv>
+	<refname>SECCOMP</refname>
+	<refpurpose>Enable seccomp to safely compute untrusted bytecode</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PROC_FS</literal></para>
+	<para role="default">Default Value <literal>y if PROC_FS</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This kernel feature is useful for number crunching applications
+	that may need to compute untrusted bytecode during their
+	execution. By using pipes or other transports made available to
+	the process as file descriptors supporting the read/write
+	syscalls, it's possible to isolate those applications in
+	their own address space using seccomp. Once seccomp is
+	enabled via /proc/pid/seccomp, it cannot be disabled
+	and the task is only allowed to execute a few safe syscalls
+	defined by each seccomp mode.
+	</para>
+
+	<para>
+	If unsure, say Y. Only embedded should say N here.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HZ_100">
+<refnamediv>
+	<refname>HZ_100</refname>
+	<refpurpose>100 HZ</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	100 HZ is a typical choice for servers, SMP and NUMA systems
+	with lots of processors that may show reduced performance if
+	too many timer interrupts are occurring.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HZ_250">
+<refnamediv>
+	<refname>HZ_250</refname>
+	<refpurpose>250 HZ</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	250 HZ is a good compromise choice allowing server performance
+	while also showing good interactive responsiveness even
+	on SMP and NUMA systems.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HZ_1000">
+<refnamediv>
+	<refname>HZ_1000</refname>
+	<refpurpose>1000 HZ</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	1000 HZ is the preferred choice for desktop systems and other
+	systems requiring fast interactive responses to events.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_KEXEC">
+<refnamediv>
+	<refname>KEXEC</refname>
+	<refpurpose>kexec system call (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	kexec is a system call that implements the ability to shutdown your
+	current kernel, and to start another kernel.  It is like a reboot
+	but it is indepedent of the system firmware.   And like a reboot
+	you can start any kernel with it, not just Linux.
+	</para>
+
+	<para>
+	The name comes from the similiarity to the exec system call.
+	</para>
+
+	<para>
+	It is an ongoing process to be certain the hardware in a machine
+	is properly shutdown, so do not be surprised if this code does not
+	initially work for you.  It may help to enable device hotplugging
+	support.  As of this writing the exact hardware interface is
+	strongly in flux, so no good recommendation can be made.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HOTPLUG_CPU">
+<refnamediv>
+	<refname>HOTPLUG_CPU</refname>
+	<refpurpose>Support for hot-pluggable CPUs (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SMP and HOTPLUG and EXPERIMENTAL and !X86_VOYAGER</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here to experiment with turning CPUs off and on, and to
+	enable suspend on SMP systems. CPUs can be controlled through
+	/sys/devices/system/cpu.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PM">
+<refnamediv>
+	<refname>PM</refname>
+	<refpurpose>Power Management support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and !IA64_HP_SIM</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	"Power Management" means that parts of your computer are shut
+	off or put into a power conserving "sleep" mode if they are not
+	being used.  There are two competing standards for doing this: APM
+	and ACPI.  If you want to use either one, say Y here and then also
+	to the requisite support below.
+	</para>
+
+	<para>
+	Power Management is most important for battery powered laptop
+	computers; if you have a laptop, check out the Linux Laptop home
+	page on the WWW at http://www.linux-on-laptops.com/ or
+	Tuxmobil - Linux on Mobile Computers at http://www.tuxmobil.org/
+	and the Battery Powered Linux mini-HOWTO, available from
+	http://www.tldp.org/docs.html#howto.
+	</para>
+
+	<para>
+	Note that, even if you say N here, Linux on the x86 architecture
+	will issue the hlt instruction if nothing is to be done, thereby
+	sending the processor to sleep and saving power.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SOFTWARE_SUSPEND">
+<refnamediv>
+	<refname>SOFTWARE_SUSPEND</refname>
+	<refpurpose>Software Suspend</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and (PM and SWAP and X86 and (!SMP || SUSPEND_SMP) || (FRV || PPC32) and !SMP)</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Enable the possibility of suspending the machine.
+	It doesn't need ACPI or APM.
+	You may suspend your machine by 'swsusp' or 'shutdown -z time' 
+	(patch for sysvinit needed). 
+	</para>
+
+	<para>
+	It creates an image which is saved in your active swap. Upon next
+	boot, pass the 'resume=/dev/swappartition' argument to the kernel to
+	have it detect the saved image, restore memory state from it, and
+	continue to run as before. If you do not want the previous state to
+	be reloaded, then use the 'noresume' kernel argument. However, note
+	that your partitions will be fsck'd and you must re-mkswap your swap
+	partitions. It does not work with swap files.
+	</para>
+
+	<para>
+	Right now you may boot without resuming and then later resume but
+	in meantime you cannot use those swap partitions/files which were
+	involved in suspending. Also in this case there is a risk that buffers
+	on disk won't match with saved ones.
+	</para>
+
+	<para>
+	For more information take a look at file:Documentation/power/swsusp.txt.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_ACPI">
+<refnamediv>
+	<refname>ACPI</refname>
+	<refpurpose>ACPI Support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal></para>
+	<para role="select">Selects <literal>PM</literal></para>
+	<para role="select">Selects <literal>PCI</literal></para>
+	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Advanced Configuration and Power Interface (ACPI) support for 
+	Linux requires an ACPI compliant platform (hardware/firmware),
+	and assumes the presence of OS-directed configuration and power
+	management (OSPM) software.  This option will enlarge your 
+	kernel by about 70K.
+	</para>
+
+	<para>
+	Linux ACPI provides a robust functional replacement for several 
+	legacy configuration and power management interfaces, including
+	the Plug-and-Play BIOS specification (PnP BIOS), the 
+	MultiProcessor Specification (MPS), and the Advanced Power 
+	Management (APM) specification.  If both ACPI and APM support 
+	are configured, whichever is loaded first shall be used.
+	</para>
+
+	<para>
+	The ACPI SourceForge project contains the latest source code, 
+	documentation, tools, mailing list subscription, and other 
+	information.  This project is available at:
+	http://sourceforge.net/projects/acpi
+	</para>
+
+	<para>
+	Linux support for ACPI is based on Intel Corporation's ACPI
+	Component Architecture (ACPI CA).  For more information see:
+	http://developer.intel.com/technology/iapc/acpi
+	</para>
+
+	<para>
+	ACPI is an open industry specification co-developed by Compaq, 
+	Intel, Microsoft, Phoenix, and Toshiba.  The specification is 
+	available at:
+	http://www.acpi.info
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_APM">
+<refnamediv>
+	<refname>APM</refname>
+	<refpurpose>APM (Advanced Power Management) BIOS support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and PM</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	APM is a BIOS specification for saving power using several different
+	techniques. This is mostly useful for battery powered laptops with
+	APM compliant BIOSes. If you say Y here, the system time will be
+	reset after a RESUME operation, the /proc/apm device will provide
+	battery status information, and user-space programs will receive
+	notification of APM "events" (e.g. battery status change).
+	</para>
+
+	<para>
+	If you select "Y" here, you can disable actual use of the APM
+	BIOS by passing the "apm=off" option to the kernel at boot time.
+	</para>
+
+	<para>
+	Note that the APM support is almost completely disabled for
+	machines with more than one CPU.
+	</para>
+
+	<para>
+	In order to use APM, you will need supporting software. For location
+	and more information, read file:Documentation/pm.txt and the
+	Battery Powered Linux mini-HOWTO, available from
+	http://www.tldp.org/docs.html#howto.
+	</para>
+
+	<para>
+	This driver does not spin down disk drives (see the hdparm(8)
+	manpage ("man 8 hdparm") for that), and it doesn't turn off
+	VESA-compliant "green" monitors.
+	</para>
+
+	<para>
+	This driver does not support the TI 4000M TravelMate and the ACER
+	486/DX4/75 because they don't have compliant BIOSes. Many "green"
+	desktop machines also don't have compliant BIOSes, and this driver
+	may cause those machines to panic during the boot phase.
+	</para>
+
+	<para>
+	Generally, if you don't have a battery in your machine, there isn't
+	much point in using this driver and you should say N. If you get
+	random kernel OOPSes or reboots that don't seem to be related to
+	anything, try disabling/enabling this option (or disabling/enabling
+	APM in your BIOS).
+	</para>
+
+	<para>
+	Some other things you should try when experiencing seemingly random,
+	"weird" problems:
+	</para>
+
+	<para>
+	1) make sure that you have enough swap space and that it is
+	enabled.
+	2) pass the "no-hlt" option to the kernel
+	3) switch on floating point emulation in the kernel and pass
+	the "no387" option to the kernel
+	4) pass the "floppy=nodma" option to the kernel
+	5) pass the "mem=4M" option to the kernel (thereby disabling
+	all but the first 4 MB of RAM)
+	6) make sure that the CPU is not over clocked.
+	7) read the sig11 FAQ at http://www.bitwizard.nl/sig11/
+	8) disable the cache from your BIOS settings
+	9) install a fan for the video card or exchange video RAM
+	10) install a better fan for the CPU
+	11) exchange RAM chips
+	12) exchange the motherboard.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called apm.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ">
+<refnamediv>
+	<refname>CPU_FREQ</refname>
+	<refpurpose>CPU Frequency scaling</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	CPU Frequency scaling allows you to change the clock speed of 
+	CPUs on the fly. This is a nice method to save power, because 
+	the lower the CPU clock speed, the less power the CPU consumes.
+	</para>
+
+	<para>
+	Note that this driver doesn't automatically change the CPU
+	clock speed, you need to either enable a dynamic cpufreq governor
+	(see below) after boot, or use a userspace tool.
+	</para>
+
+	<para>
+	For details, take a look at file:Documentation/cpu-freq.
+	</para>
+
+	<para>
+	If in doubt, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE">
+<refnamediv>
+	<refname>CPU_FREQ_DEFAULT_GOV_PERFORMANCE</refname>
+	<refpurpose>performance</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="select">Selects <literal>CPU_FREQ_GOV_PERFORMANCE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Use the CPUFreq governor 'performance' as default. This sets
+	the frequency statically to the highest frequency supported by
+	the CPU.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE">
+<refnamediv>
+	<refname>CPU_FREQ_DEFAULT_GOV_USERSPACE</refname>
+	<refpurpose>userspace</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal></literal><emphasis>choice</emphasis><literal></literal></para>
+	<para role="select">Selects <literal>CPU_FREQ_GOV_USERSPACE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Use the CPUFreq governor 'userspace' as default. This allows
+	you to set the CPU frequency manually or when an userspace 
+	program shall be able to set the CPU dynamically without having
+	to enable the userspace governor manually.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ_GOV_PERFORMANCE">
+<refnamediv>
+	<refname>CPU_FREQ_GOV_PERFORMANCE</refname>
+	<refpurpose>'performance' governor</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This cpufreq governor sets the frequency statically to the
+	highest available CPU frequency.
+	</para>
+
+	<para>
+	If in doubt, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ_GOV_POWERSAVE">
+<refnamediv>
+	<refname>CPU_FREQ_GOV_POWERSAVE</refname>
+	<refpurpose>'powersave' governor</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This cpufreq governor sets the frequency statically to the
+	lowest available CPU frequency.
+	</para>
+
+	<para>
+	If in doubt, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ_GOV_USERSPACE">
+<refnamediv>
+	<refname>CPU_FREQ_GOV_USERSPACE</refname>
+	<refpurpose>'userspace' governor for userspace frequency scaling</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Enable this cpufreq governor when you either want to set the
+	CPU frequency manually or when an userspace program shall
+	be able to set the CPU dynamically, like on LART 
+	http://www.lartmaker.nl/.
+	</para>
+
+	<para>
+	For details, take a look at file:Documentation/cpu-freq/.
+	</para>
+
+	<para>
+	If in doubt, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ_GOV_ONDEMAND">
+<refnamediv>
+	<refname>CPU_FREQ_GOV_ONDEMAND</refname>
+	<refpurpose>'ondemand' cpufreq policy governor</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	'ondemand' - This driver adds a dynamic cpufreq policy governor.
+	The governor does a periodic polling and 
+	changes frequency based on the CPU utilization.
+	The support for this governor depends on CPU capability to
+	do fast frequency switching (i.e, very low latency frequency
+	transitions). 
+	</para>
+
+	<para>
+	For details, take a look at linux/Documentation/cpu-freq.
+	</para>
+
+	<para>
+	If in doubt, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CPU_FREQ_GOV_CONSERVATIVE">
+<refnamediv>
+	<refname>CPU_FREQ_GOV_CONSERVATIVE</refname>
+	<refpurpose>'conservative' cpufreq governor</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	'conservative' - this driver is rather similar to the 'ondemand'
+	governor both in its source code and its purpose, the difference is
+	its optimisation for better suitability in a battery powered
+	environment.  The frequency is gracefully increased and decreased
+	rather than jumping to 100% when speed is required.
+	</para>
+
+	<para>
+	If you have a desktop machine then you should really be considering
+	the 'ondemand' governor instead, however if you are using a laptop,
+	PDA or even an AMD64 based computer (due to the unacceptable
+	step-by-step latency issues between the minimum and maximum frequency
+	transitions in the CPU) you will probably want to use this governor.
+	</para>
+
+	<para>
+	For details, take a look at linux/Documentation/cpu-freq.
+	</para>
+
+	<para>
+	If in doubt, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PCI">
+<refnamediv>
+	<refname>PCI</refname>
+	<refpurpose>PCI support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS</literal></para>
+	<para role="default">Default Value <literal>y if !X86_VOYAGER and X86_VISWS</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Find out whether you have a PCI motherboard. PCI is the name of a
+	bus system, i.e. the way the CPU talks to the other stuff inside
+	your box. Other bus systems are ISA, EISA, MicroChannel (MCA) or
+	VESA. If you have PCI, say Y, otherwise N.
+	</para>
+
+	<para>
+	The PCI-HOWTO, available from
+	http://www.tldp.org/docs.html#howto, contains valuable
+	information about which PCI hardware does work under Linux and which
+	doesn't.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_ISA">
+<refnamediv>
+	<refname>ISA</refname>
+	<refpurpose>ISA support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Find out whether you have ISA slots on your motherboard.  ISA is the
+	name of a bus system, i.e. the way the CPU talks to the other stuff
+	inside your box.  Other bus systems are PCI, EISA, MicroChannel
+	(MCA) or VESA.  ISA is an older system, now being displaced by PCI;
+	newer boards don't support it.  If you have ISA, say Y, otherwise N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PCCARD">
+<refnamediv>
+	<refname>PCCARD</refname>
+	<refpurpose>PCCard (PCMCIA/CardBus) support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="select">Selects <literal>HOTPLUG</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you want to attach PCMCIA- or PC-cards to your Linux
+	computer.  These are credit-card size devices such as network cards,
+	modems or hard drives often used with laptops computers.  There are
+	actually two varieties of these cards: 16 bit PCMCIA and 32 bit
+	CardBus cards.
+	</para>
+
+	<para>
+	To compile this driver as modules, choose M here: the
+	module will be called pcmcia_core.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PCMCIA">
+<refnamediv>
+	<refname>PCMCIA</refname>
+	<refpurpose>16-bit PCMCIA support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PCCARD</literal></para>
+	<para role="select">Selects <literal>CRC32</literal></para>
+	<para role="default">Default Value <literal>y if PCCARD</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option enables support for 16-bit PCMCIA cards. Most older
+	PC-cards are such 16-bit PCMCIA cards, so unless you know you're
+	only using 32-bit CardBus cards, say Y or M here.
+	</para>
+
+	<para>
+	To use 16-bit PCMCIA cards, you will need supporting software in
+	most cases. (see the file file:Documentation/Changes for
+	location and details).
+	</para>
+
+	<para>
+	To compile this driver as modules, choose M here: the
+	module will be called pcmcia.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CARDBUS">
+<refnamediv>
+	<refname>CARDBUS</refname>
+	<refpurpose>32-bit CardBus support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PCCARD and PCI</literal></para>
+	<para role="default">Default Value <literal>y if PCCARD and PCI</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	CardBus is a bus mastering architecture for PC-cards, which allows
+	for 32 bit PC-cards (the original PCMCIA standard specifies only
+	a 16 bit wide bus). Many newer PC-cards are actually CardBus cards.
+	</para>
+
+	<para>
+	To use 32 bit PC-cards, you also need a CardBus compatible host
+	bridge. Virtually all modern PCMCIA bridges do this, and most of
+	them are "yenta-compatible", so say Y or M there, too.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HOTPLUG_PCI">
+<refnamediv>
+	<refname>HOTPLUG_PCI</refname>
+	<refpurpose>Support for PCI Hotplug (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PCI and EXPERIMENTAL</literal></para>
+	<para role="select">Selects <literal>HOTPLUG</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you have a motherboard with a PCI Hotplug controller.
+	This allows you to add and remove PCI cards while the machine is
+	powered up and running.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called pci_hotplug.
+	</para>
+
+	<para>
+	When in doubt, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NET">
+<refnamediv>
+	<refname>NET</refname>
+	<refpurpose>Networking support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Unless you really know what you are doing, you should say Y here.
+	The reason is that some programs need kernel networking support even
+	when running on a stand-alone machine that isn't connected to any
+	other computer.
+	</para>
+
+	<para>
+	If you are upgrading from an older kernel, you
+	should consider updating your networking tools too because changes
+	in the kernel and the tools often go hand in hand. The tools are
+	contained in the package net-tools, the location and version number
+	of which are given in file:Documentation/Changes.
+	</para>
+
+	<para>
+	For a general introduction to Linux networking, it is highly
+	recommended to read the NET-HOWTO, available from
+	http://www.tldp.org/docs.html#howto.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_UNIX">
+<refnamediv>
+	<refname>UNIX</refname>
+	<refpurpose>Unix domain sockets</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you say Y here, you will include support for Unix domain sockets;
+	sockets are the standard Unix mechanism for establishing and
+	accessing network connections.  Many commonly used programs such as
+	the X Window system and syslog use these sockets even if your
+	machine is not connected to any network.  Unless you are working on
+	an embedded system or something similar, you therefore definitely
+	want to say Y here.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the module will be
+	called unix.  Note that several important services won't work
+	correctly if you say M here and then neglect to load the module.
+	</para>
+
+	<para>
+	Say Y unless you know what you are doing.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_INET">
+<refnamediv>
+	<refname>INET</refname>
+	<refpurpose>TCP/IP networking</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	These are the protocols used on the Internet and on most local
+	Ethernets. It is highly recommended to say Y here (this will enlarge
+	your kernel by about 144 KB), since some programs (e.g. the X window
+	system) use TCP/IP even if your machine is not connected to any
+	other computer. You will get the so-called loopback device which
+	allows you to ping yourself (great fun, that!).
+	</para>
+
+	<para>
+	For an excellent introduction to Linux networking, please read the
+	Linux Networking HOWTO, available from
+	http://www.tldp.org/docs.html#howto.
+	</para>
+
+	<para>
+	If you say Y here and also to "/proc file system support" and
+	"Sysctl support" below, you can change various aspects of the
+	behavior of the TCP/IP code by writing to the (virtual) files in
+	/proc/sys/net/ipv4/*; the options are explained in the file
+	file:Documentation/networking/ip-sysctl.txt.
+	</para>
+
+	<para>
+	Short answer: say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IP_ADVANCED_ROUTER">
+<refnamediv>
+	<refname>IP_ADVANCED_ROUTER</refname>
+	<refpurpose>IP: advanced router</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and INET</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you intend to run your Linux box mostly as a router, i.e. as a
+	computer that forwards and redistributes network packets, say Y; you
+	will then be presented with several options that allow more precise
+	control about the routing process.
+	</para>
+
+	<para>
+	The answer to this question won't directly affect the kernel:
+	answering N will just cause the configurator to skip all the
+	questions about advanced routing.
+	</para>
+
+	<para>
+	Note that your box can only act as a router if you enable IP
+	forwarding in your kernel; you can do that by saying Y to "/proc
+	file system support" and "Sysctl support" below and executing the
+	line
+	</para>
+
+	<para>
+	echo "1"  /proc/sys/net/ipv4/ip_forward
+	</para>
+
+	<para>
+	at boot time after the /proc file system has been mounted.
+	</para>
+
+	<para>
+	If you turn on IP forwarding, you will also get the rp_filter, which
+	automatically rejects incoming packets if the routing table entry
+	for their source address doesn't match the network interface they're
+	arriving on. This has security advantages because it prevents the
+	so-called IP spoofing, however it can pose problems if you use
+	asymmetric routing (packets from you to a host take a different path
+	than packets from that host to you) or if you operate a non-routing
+	host which has several IP addresses on different interfaces. To turn
+	rp_filter off use:
+	</para>
+
+	<para>
+	echo 0  /proc/sys/net/ipv4/conf/device/rp_filter
+	or
+	echo 0  /proc/sys/net/ipv4/conf/all/rp_filter
+	</para>
+
+	<para>
+	If unsure, say N here.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NETFILTER">
+<refnamediv>
+	<refname>NETFILTER</refname>
+	<refpurpose>Network packet filtering (replaces ipchains)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Netfilter is a framework for filtering and mangling network packets
+	that pass through your Linux box.
+	</para>
+
+	<para>
+	The most common use of packet filtering is to run your Linux box as
+	a firewall protecting a local network from the Internet. The type of
+	firewall provided by this kernel support is called a "packet
+	filter", which means that it can reject individual network packets
+	based on type, source, destination etc. The other kind of firewall,
+	a "proxy-based" one, is more secure but more intrusive and more
+	bothersome to set up; it inspects the network traffic much more
+	closely, modifies it and has knowledge about the higher level
+	protocols, which a packet filter lacks. Moreover, proxy-based
+	firewalls often require changes to the programs running on the local
+	clients. Proxy-based firewalls don't need support by the kernel, but
+	they are often combined with a packet filter, which only works if
+	you say Y here.
+	</para>
+
+	<para>
+	You should also say Y here if you intend to use your Linux box as
+	the gateway to the Internet for a local network of machines without
+	globally valid IP addresses. This is called "masquerading": if one
+	of the computers on your local network wants to send something to
+	the outside, your box can "masquerade" as that computer, i.e. it
+	forwards the traffic to the intended outside destination, but
+	modifies the packets to make it look like they came from the
+	firewall box itself. It works both ways: if the outside host
+	replies, the Linux box will silently forward the traffic to the
+	correct local computer. This way, the computers on your local net
+	are completely invisible to the outside world, even though they can
+	reach the outside and can receive replies. It is even possible to
+	run globally visible servers from within a masqueraded local network
+	using a mechanism called portforwarding. Masquerading is also often
+	called NAT (Network Address Translation).
+	</para>
+
+	<para>
+	Another use of Netfilter is in transparent proxying: if a machine on
+	the local network tries to connect to an outside host, your Linux
+	box can transparently forward the traffic to a local server,
+	typically a caching proxy server.
+	</para>
+
+	<para>
+	Yet another use of Netfilter is building a bridging firewall. Using
+	a bridge with Network packet filtering enabled makes iptables "see"
+	the bridged traffic. For filtering on the lower network and Ethernet
+	protocols over the bridge, use ebtables (under bridge netfilter
+	configuration).
+	</para>
+
+	<para>
+	Various modules exist for netfilter which replace the previous
+	masquerading (ipmasqadm), packet filtering (ipchains), transparent
+	proxying, and portforwarding mechanisms. Please see
+	file:Documentation/Changes under "iptables" for the location of
+	these packages.
+	</para>
+
+	<para>
+	Make sure to say N to "Fast switching" below if you intend to say Y
+	here, as Fast switching currently bypasses netfilter.
+	</para>
+
+	<para>
+	Chances are that you should say Y here if you compile a kernel which
+	will run as a router and N for regular hosts. If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NET_SCHED">
+<refnamediv>
+	<refname>NET_SCHED</refname>
+	<refpurpose>QoS and/or fair queueing</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	When the kernel has several packets to send out over a network
+	device, it has to decide which ones to send first, which ones to
+	delay, and which ones to drop. This is the job of the queueing
+	disciplines, several different algorithms for how to do this
+	"fairly" have been proposed.
+	</para>
+
+	<para>
+	If you say N here, you will get the standard packet scheduler, which
+	is a FIFO (first come, first served). If you say Y here, you will be
+	able to choose from among several alternative algorithms which can
+	then be attached to different network devices. This is useful for
+	example if some of your network devices are real time devices that
+	need a certain minimum data flow rate, or if you need to limit the
+	maximum data flow rate for traffic which matches specified criteria.
+	This code is considered to be experimental.
+	</para>
+
+	<para>
+	To administer these schedulers, you'll need the user-level utilities
+	from the package iproute2+tc at ftp://ftp.tux.org/pub/net/ip-routing/.
+	That package also contains some documentation; for more, check out
+	http://linux-net.osdl.org/index.php/Iproute2.
+	</para>
+
+	<para>
+	This Quality of Service (QoS) support will enable you to use
+	Differentiated Services (diffserv) and Resource Reservation Protocol
+	(RSVP) on your Linux router if you also say Y to the corresponding
+	classifiers below.  Documentation and software is at
+	http://diffserv.sourceforge.net/.
+	</para>
+
+	<para>
+	If you say Y here and to "/proc file system" below, you will be able
+	to read status information about packet schedulers from the file
+	/proc/net/psched.
+	</para>
+
+	<para>
+	The available schedulers are listed in the following questions; you
+	can say Y to as many as you like. If unsure, say N now.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IRDA">
+<refnamediv>
+	<refname>IRDA</refname>
+	<refpurpose>IrDA (infrared) subsystem support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="select">Selects <literal>CRC_CCITT</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you want to build support for the IrDA (TM) protocols.
+	The Infrared Data Associations (tm) specifies standards for wireless
+	infrared communication and is supported by most laptops and PDA's.
+	</para>
+
+	<para>
+	To use Linux support for the IrDA (tm) protocols, you will also need
+	some user-space utilities like irattach.  For more information, see
+	the file file:Documentation/networking/irda.txt.  You also want to
+	read the IR-HOWTO, available at
+	http://www.tldp.org/docs.html#howto.
+	</para>
+
+	<para>
+	If you want to exchange bits of data (vCal, vCard) with a PDA, you
+	will need to install some OBEX application, such as OpenObex :
+	http://sourceforge.net/projects/openobex/
+	</para>
+
+	<para>
+	To compile this support as a module, choose M here: the module will
+	be called irda.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IRLAN">
+<refnamediv>
+	<refname>IRLAN</refname>
+	<refpurpose>IrLAN protocol</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you want to build support for the IrLAN protocol.
+	To compile it as a module, choose M here: the module will be called
+	irlan.  IrLAN emulates an Ethernet and makes it possible to put up
+	a wireless LAN using infrared beams.
+	</para>
+
+	<para>
+	The IrLAN protocol can be used to talk with infrared access points
+	like the HP NetbeamIR, or the ESI JetEye NET.  You can also connect
+	to another Linux machine running the IrLAN protocol for ad-hoc
+	networking!
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IRNET">
+<refnamediv>
+	<refname>IRNET</refname>
+	<refpurpose>IrNET protocol</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and IRDA and PPP</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you want to build support for the IrNET protocol.
+	To compile it as a module, choose M here: the module will be
+	called irnet.  IrNET is a PPP driver, so you will also need a
+	working PPP subsystem (driver, daemon and config)...
+	</para>
+
+	<para>
+	IrNET is an alternate way to transfer TCP/IP traffic over IrDA.  It
+	uses synchronous PPP over a set of point to point IrDA sockets.  You
+	can use it between Linux machine or with W2k.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IRCOMM">
+<refnamediv>
+	<refname>IRCOMM</refname>
+	<refpurpose>IrCOMM protocol</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you want to build support for the IrCOMM protocol.
+	To compile it as modules, choose M here: the modules will be
+	called ircomm and ircomm_tty.
+	IrCOMM implements serial port emulation, and makes it possible to
+	use all existing applications that understands TTY's with an
+	infrared link.  Thus you should be able to use application like PPP,
+	minicom and others.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IRDA_ULTRA">
+<refnamediv>
+	<refname>IRDA_ULTRA</refname>
+	<refpurpose>Ultra (connectionless) protocol</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here to support the connectionless Ultra IRDA protocol.
+	Ultra allows to exchange data over IrDA with really simple devices
+	(watch, beacon) without the overhead of the IrDA protocol (no handshaking,
+	no management frames, simple fixed header).
+	Ultra is available as a special socket : socket(AF_IRDA, SOCK_DGRAM, 1);
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BT">
+<refnamediv>
+	<refname>BT</refname>
+	<refpurpose>Bluetooth subsystem support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Bluetooth is low-cost, low-power, short-range wireless technology.
+	It was designed as a replacement for cables and other short-range
+	technologies like IrDA.  Bluetooth operates in personal area range
+	that typically extends up to 10 meters.  More information about
+	Bluetooth can be found at http://www.bluetooth.com/.
+	</para>
+
+	<para>
+	Linux Bluetooth subsystem consist of several layers:
+	   Bluetooth Core (HCI device and connection manager, scheduler)
+	   HCI Device drivers (Interface to the hardware)
+	   SCO Module (SCO audio links)
+	   L2CAP Module (Logical Link Control and Adaptation Protocol)
+	   RFCOMM Module (RFCOMM Protocol)  
+	   BNEP Module (Bluetooth Network Encapsulation Protocol)
+	   CMTP Module (CAPI Message Transport Protocol)
+	   HIDP Module (Human Interface Device Protocol)
+	</para>
+
+	<para>
+	Say Y here to compile Bluetooth support into the kernel or say M to
+	compile it as module (bluetooth).
+	</para>
+
+	<para>
+	To use Linux Bluetooth subsystem, you will need several user-space
+	utilities like hciconfig and hcid.  These utilities and updates to
+	Bluetooth kernel modules are provided in the BlueZ packages.
+	For more information, see http://www.bluez.org/.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IEEE80211">
+<refnamediv>
+	<refname>IEEE80211</refname>
+	<refpurpose>Generic IEEE 802.11 Networking Stack</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option enables the hardware independent IEEE 802.11
+	networking stack.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_STANDALONE">
+<refnamediv>
+	<refname>STANDALONE</refname>
+	<refpurpose>Select only drivers that don't need compile-time external firmware</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Select this option if you don't have magic firmware for drivers that
+	need it.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PREVENT_FIRMWARE_BUILD">
+<refnamediv>
+	<refname>PREVENT_FIRMWARE_BUILD</refname>
+	<refpurpose>Prevent firmware from being built</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say yes to avoid building firmware. Firmware is usually shipped
+	with the driver, and only when updating the firmware a rebuild
+	should be made.
+	If unsure say Y here.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_MTD">
+<refnamediv>
+	<refname>MTD</refname>
+	<refpurpose>Memory Technology Device (MTD) support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Memory Technology Devices are flash, RAM and similar chips, often
+	used for solid state file systems on embedded devices. This option
+	will provide the generic support for MTD drivers to register
+	themselves with the kernel and for potential users of MTD devices
+	to enumerate the devices which are present and obtain a handle on
+	them. It will also allow you to select individual drivers for
+	particular hardware and users of MTD devices. If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PARPORT">
+<refnamediv>
+	<refname>PARPORT</refname>
+	<refpurpose>Parallel port support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you want to use devices connected to your machine's parallel port
+	(the connector at the computer with 25 holes), e.g. printer, ZIP
+	drive, PLIP link (Parallel Line Internet Protocol is mainly used to
+	create a mini network by connecting the parallel ports of two local
+	machines) etc., then you need to say Y here; please read
+	file:Documentation/parport.txt and
+	file:drivers/parport/BUGS-parport.
+	</para>
+
+	<para>
+	For extensive information about drivers for many devices attaching
+	to the parallel port see http://www.torque.net/linux-pp.html on
+	the WWW.
+	</para>
+
+	<para>
+	It is possible to share a single parallel port among several devices
+	and it is safe to compile all the corresponding drivers into the
+	kernel. To compile parallel port support as a module, choose M here:
+	the module will be called parport.
+	If you have more than one parallel port and want to specify which
+	port and IRQ to be used by this driver at module load time, take a
+	look at file:Documentation/parport.txt.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PARPORT_PC">
+<refnamediv>
+	<refname>PARPORT_PC</refname>
+	<refpurpose>PC-style hardware</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PARPORT and (!SPARC64 || PCI) and !SPARC32 and !M32R and !FRV</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	You should say Y here if you have a PC-style parallel port. All
+	IBM PC compatible computers and some Alphas have PC-style
+	parallel ports.  PA-RISC owners should only say Y here if they
+	have a SuperIO parallel port.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called parport_pc.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PNP">
+<refnamediv>
+	<refname>PNP</refname>
+	<refpurpose>Plug and Play support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>ISA || ACPI</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Plug and Play (PnP) is a standard for peripherals which allows those
+	peripherals to be configured by software, e.g. assign IRQ's or other
+	parameters. No jumpers on the cards are needed, instead the values
+	are provided to the cards from the BIOS, from the operating system,
+	or using a user-space utility.
+	</para>
+
+	<para>
+	Say Y here if you would like Linux to configure your Plug and Play
+	devices. You should then also say Y to all of the protocols below.
+	Alternatively, you can say N here and configure your PnP devices
+	using user space utilities such as the isapnptools package.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_ISAPNP">
+<refnamediv>
+	<refname>ISAPNP</refname>
+	<refpurpose>ISA Plug and Play support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PNP and ISA</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you would like support for ISA Plug and Play devices.
+	Some information is in file:Documentation/isapnp.txt.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PNPBIOS">
+<refnamediv>
+	<refname>PNPBIOS</refname>
+	<refpurpose>Plug and Play BIOS support (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PNP and ISA and X86 and EXPERIMENTAL</literal></para>
+	<para role="default">Default Value <literal>n if PNP and ISA and X86 and EXPERIMENTAL</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Linux uses the PNPBIOS as defined in "Plug and Play BIOS
+	Specification Version 1.0A May 5, 1994" to autodetect built-in
+	mainboard resources (e.g. parallel port resources).
+	</para>
+
+	<para>
+	Some features (e.g. event notification, docking station information,
+	ISAPNP services) are not currently implemented.
+	</para>
+
+	<para>
+	If you would like the kernel to detect and allocate resources to
+	your mainboard devices (on some systems they are disabled by the
+	BIOS) say Y here.  Also the PNPBIOS can help prevent resource
+	conflicts between mainboard devices and other bus devices.
+	</para>
+
+	<para>
+	Note: ACPI is expected to supersede PNPBIOS some day, currently it
+	co-exists nicely.  If you have a non-ISA system that supports ACPI,
+	you probably don't need PNPBIOS support.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PNPBIOS_PROC_FS">
+<refnamediv>
+	<refname>PNPBIOS_PROC_FS</refname>
+	<refpurpose>Plug and Play BIOS /proc interface</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PNPBIOS and PROC_FS</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you say Y here and to "/proc file system support", you will be
+	able to directly access the PNPBIOS.  This includes resource
+	allocation, ESCD, and other PNPBIOS services.  Using this
+	interface is potentially dangerous because the PNPBIOS driver will
+	not be notified of any resource changes made by writing directly.
+	Also some buggy systems will fault when accessing certain features
+	in the PNPBIOS /proc interface (e.g. "boot" configs).
+	</para>
+
+	<para>
+	See the latest pcmcia-cs (stand-alone package) for a nice set of
+	PNPBIOS /proc interface tools (lspnp and setpnp).
+	</para>
+
+	<para>
+	Unless you are debugging or have other specific reasons, it is
+	recommended that you say N here.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PNPACPI">
+<refnamediv>
+	<refname>PNPACPI</refname>
+	<refpurpose>Plug and Play ACPI support (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PNP and ACPI and EXPERIMENTAL</literal></para>
+	<para role="default">Default Value <literal>y if PNP and ACPI and EXPERIMENTAL</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Linux uses the PNPACPI to autodetect built-in
+	mainboard resources (e.g. parallel port resources).
+	</para>
+
+	<para>
+	Some features (e.g. real hotplug) are not currently
+	implemented.
+	</para>
+
+	<para>
+	If you would like the kernel to detect and allocate resources to
+	your mainboard devices (on some systems they are disabled by the
+	BIOS) say Y here.  Also the PNPACPI can help prevent resource
+	conflicts between mainboard devices and other bus devices.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IDE">
+<refnamediv>
+	<refname>IDE</refname>
+	<refpurpose>ATA/ATAPI/MFM/RLL support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you say Y here, your kernel will be able to manage low cost mass
+	storage units such as ATA/(E)IDE and ATAPI units. The most common
+	cases are IDE hard drives and ATAPI CD-ROM drives.
+	</para>
+
+	<para>
+	If your system is pure SCSI and doesn't use these interfaces, you
+	can say N here.
+	</para>
+
+	<para>
+	Integrated Disk Electronics (IDE aka ATA-1) is a connecting standard
+	for mass storage units such as hard disks. It was designed by
+	Western Digital and Compaq Computer in 1984. It was then named
+	ST506. Quite a number of disks use the IDE interface.
+	</para>
+
+	<para>
+	AT Attachment (ATA) is the superset of the IDE specifications.
+	ST506 was also called ATA-1.
+	</para>
+
+	<para>
+	Fast-IDE is ATA-2 (also named Fast ATA), Enhanced IDE (EIDE) is
+	ATA-3. It provides support for larger disks (up to 8.4GB by means of
+	the LBA standard), more disks (4 instead of 2) and for other mass
+	storage units such as tapes and cdrom. UDMA/33 (aka UltraDMA/33) is
+	ATA-4 and provides faster (and more CPU friendly) transfer modes
+	than previous PIO (Programmed processor Input/Output) from previous
+	ATA/IDE standards by means of fast DMA controllers.
+	</para>
+
+	<para>
+	ATA Packet Interface (ATAPI) is a protocol used by EIDE tape and
+	CD-ROM drives, similar in many respects to the SCSI protocol.
+	</para>
+
+	<para>
+	SMART IDE (Self Monitoring, Analysis and Reporting Technology) was
+	designed in order to prevent data corruption and disk crash by
+	detecting pre hardware failure conditions (heat, access time, and
+	the like...). Disks built since June 1995 may follow this standard.
+	The kernel itself doesn't manage this; however there are quite a
+	number of user programs such as smart that can query the status of
+	SMART parameters from disk drives.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called ide.
+	</para>
+
+	<para>
+	For further information, please read file:Documentation/ide.txt.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDE">
+<refnamediv>
+	<refname>BLK_DEV_IDE</refname>
+	<refpurpose>Enhanced IDE/MFM/RLL disk/cdrom/tape/floppy support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you say Y here, you will use the full-featured IDE driver to
+	control up to ten ATA/IDE interfaces, each being able to serve a
+	"master" and a "slave" device, for a total of up to twenty ATA/IDE
+	disk/cdrom/tape/floppy drives.
+	</para>
+
+	<para>
+	Useful information about large (540 MB) IDE disks, multiple
+	interfaces, what to do if ATA/IDE devices are not automatically
+	detected, sound card ATA/IDE ports, module support, and other
+	topics, is contained in file:Documentation/ide.txt. For detailed
+	information about hard drives, consult the Disk-HOWTO and the
+	Multi-Disk-HOWTO, available from
+	http://www.tldp.org/docs.html#howto.
+	</para>
+
+	<para>
+	To fine-tune ATA/IDE drive/interface parameters for improved
+	performance, look for the hdparm package at
+	ftp://ibiblio.org/pub/Linux/system/hardware/.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here and read
+	file:Documentation/ide.txt. The module will be called ide-mod.
+	Do not compile this driver as a module if your root file system (the
+	one containing the directory /) is located on an IDE device.
+	</para>
+
+	<para>
+	If you have one or more IDE drives, say Y or M here. If your system
+	has no IDE drives, or if memory requirements are really tight, you
+	could say N here, and select the "Old hard disk driver" below
+	instead to save about 13 KB of memory in the kernel.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDE_SATA">
+<refnamediv>
+	<refname>BLK_DEV_IDE_SATA</refname>
+	<refpurpose>Support for SATA (deprecated; conflicts with libata SATA driver)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
+	<para role="default">Default Value <literal>n if IDE and BLK_DEV_IDE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	There are two drivers for Serial ATA controllers.
+	</para>
+
+	<para>
+	The main driver, "libata", exists inside the SCSI subsystem
+	and supports most modern SATA controllers.
+	</para>
+
+	<para>
+	The IDE driver (which you are currently configuring) supports
+	a few first-generation SATA controllers.
+	</para>
+
+	<para>
+	In order to eliminate conflicts between the two subsystems,
+	this config option enables the IDE driver's SATA support.
+	Normally this is disabled, as it is preferred that libata
+	supports SATA controllers, and this (IDE) driver supports
+	PATA controllers.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_HD_IDE">
+<refnamediv>
+	<refname>BLK_DEV_HD_IDE</refname>
+	<refpurpose>Use old disk-only driver on primary interface</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and (X86 || SH_MPC1211)</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	There are two drivers for MFM/RLL/IDE disks.  Most people use just
+	the new enhanced driver by itself.  This option however installs the
+	old hard disk driver to control the primary IDE/disk interface in
+	the system, leaving the new enhanced IDE driver to take care of only
+	the 2nd/3rd/4th IDE interfaces.  Doing this will prevent you from
+	having an IDE/ATAPI CD-ROM or tape drive connected to the primary
+	IDE interface.  Choosing this option may be useful for older systems
+	which have MFM/RLL/ESDI controller+drives at the primary port
+	address (0x1f0), along with IDE drives at the secondary/3rd/4th port
+	addresses.
+	</para>
+
+	<para>
+	Normally, just say N here; you will then use the new driver for all
+	4 interfaces.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDEDISK">
+<refnamediv>
+	<refname>BLK_DEV_IDEDISK</refname>
+	<refpurpose>Include IDE/ATA-2 DISK support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This will include enhanced support for MFM/RLL/IDE hard disks.  If
+	you have a MFM/RLL/IDE disk, and there is no special reason to use
+	the old hard disk driver instead, say Y.  If you have an SCSI-only
+	system, you can say N here.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called ide-disk.
+	Do not compile this driver as a module if your root file system
+	(the one containing the directory /) is located on the IDE disk.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IDEDISK_MULTI_MODE">
+<refnamediv>
+	<refname>IDEDISK_MULTI_MODE</refname>
+	<refpurpose>Use multi-mode by default</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you get this error, try to say Y here:
+	</para>
+
+	<para>
+	hda: set_multmode: status=0x51 { DriveReady SeekComplete Error }
+	hda: set_multmode: error=0x04 { DriveStatusError }
+	</para>
+
+	<para>
+	If in doubt, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDECS">
+<refnamediv>
+	<refname>BLK_DEV_IDECS</refname>
+	<refpurpose>PCMCIA IDE support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and PCMCIA</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Support for Compact Flash cards, outboard IDE disks, tape drives,
+	and CD-ROM drives connected through a PCMCIA card.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDECD">
+<refnamediv>
+	<refname>BLK_DEV_IDECD</refname>
+	<refpurpose>Include IDE/ATAPI CDROM support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you have a CD-ROM drive using the ATAPI protocol, say Y. ATAPI is
+	a newer protocol used by IDE CD-ROM and TAPE drives, similar to the
+	SCSI protocol. Most new CD-ROM drives use ATAPI, including the
+	NEC-260, Mitsumi FX400, Sony 55E, and just about all non-SCSI
+	double(2X) or better speed drives.
+	</para>
+
+	<para>
+	If you say Y here, the CD-ROM drive will be identified at boot time
+	along with other IDE devices, as "hdb" or "hdc", or something
+	similar (check the boot messages with dmesg). If this is your only
+	CD-ROM drive, you can say N to all other CD-ROM options, but be sure
+	to say Y or M to "ISO 9660 CD-ROM file system support".
+	</para>
+
+	<para>
+	Note that older versions of LILO (LInux LOader) cannot properly deal
+	with IDE/ATAPI CD-ROMs, so install LILO 16 or higher, available from
+	http://lilo.go.dyndns.org/.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called ide-cd.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDETAPE">
+<refnamediv>
+	<refname>BLK_DEV_IDETAPE</refname>
+	<refpurpose>Include IDE/ATAPI TAPE support (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and EXPERIMENTAL</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you have an IDE tape drive using the ATAPI protocol, say Y.
+	ATAPI is a newer protocol used by IDE tape and CD-ROM drives,
+	similar to the SCSI protocol.  If you have an SCSI tape drive
+	however, you can say N here.
+	</para>
+
+	<para>
+	You should also say Y if you have an OnStream DI-30 tape drive; this
+	will not work with the SCSI protocol, until there is support for the
+	SC-30 and SC-50 versions.
+	</para>
+
+	<para>
+	If you say Y here, the tape drive will be identified at boot time
+	along with other IDE devices, as "hdb" or "hdc", or something
+	similar, and will be mapped to a character device such as "ht0"
+	(check the boot messages with dmesg).  Be sure to consult the
+	file:drivers/ide/ide-tape.c and file:Documentation/ide.txt files
+	for usage information.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called ide-tape.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDEFLOPPY">
+<refnamediv>
+	<refname>BLK_DEV_IDEFLOPPY</refname>
+	<refpurpose>Include IDE/ATAPI FLOPPY support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you have an IDE floppy drive which uses the ATAPI protocol,
+	answer Y.  ATAPI is a newer protocol used by IDE CD-ROM/tape/floppy
+	drives, similar to the SCSI protocol.
+	</para>
+
+	<para>
+	The LS-120 and the IDE/ATAPI Iomega ZIP drive are also supported by
+	this driver. For information about jumper settings and the question
+	of when a ZIP drive uses a partition table, see
+	http://www.win.tue.nl/~aeb/linux/zip/zip-1.html.
+	(ATAPI PD-CD/CDR drives are not supported by this driver; support
+	for PD-CD/CDR drives is available if you answer Y to
+	"SCSI emulation support", below).
+	</para>
+
+	<para>
+	If you say Y here, the FLOPPY drive will be identified along with
+	other IDE devices, as "hdb" or "hdc", or something similar (check
+	the boot messages with dmesg).
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called ide-floppy.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_IDESCSI">
+<refnamediv>
+	<refname>BLK_DEV_IDESCSI</refname>
+	<refpurpose>SCSI emulation support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	WARNING: ide-scsi is no longer needed for cd writing applications!
+	The 2.6 kernel supports direct writing to ide-cd, which eliminates
+	the need for ide-scsi + the entire scsi stack just for writing a
+	cd. The new method is more efficient in every way.
+	</para>
+
+	<para>
+	This will provide SCSI host adapter emulation for IDE ATAPI devices,
+	and will allow you to use a SCSI device driver instead of a native
+	ATAPI driver.
+	</para>
+
+	<para>
+	This is useful if you have an ATAPI device for which no native
+	driver has been written (for example, an ATAPI PD-CD drive);
+	you can then use this emulation together with an appropriate SCSI
+	device driver. In order to do this, say Y here and to "SCSI support"
+	and "SCSI generic support", below. You must then provide the kernel
+	command line "hdx=ide-scsi" (try "man bootparam" or see the
+	documentation of your boot loader (lilo or loadlin) about how to
+	pass options to the kernel at boot time) for devices if you want the
+	native EIDE sub-drivers to skip over the native support, so that
+	this SCSI emulation can be used instead.
+	</para>
+
+	<para>
+	Note that this option does NOT allow you to attach SCSI devices to a
+	box that doesn't have a SCSI host adapter installed.
+	</para>
+
+	<para>
+	If both this SCSI emulation and native ATAPI support are compiled
+	into the kernel, the native support will be used.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IDE_GENERIC">
+<refnamediv>
+	<refname>IDE_GENERIC</refname>
+	<refpurpose>generic/default IDE chipset support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
+	<para role="default">Default Value <literal>y if IDE and BLK_DEV_IDE</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SCSI">
+<refnamediv>
+	<refname>SCSI</refname>
+	<refpurpose>SCSI device support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or
+	any other SCSI device under Linux, say Y and make sure that you know
+	the name of your SCSI host adapter (the card inside your computer
+	that "speaks" the SCSI protocol, also called SCSI controller),
+	because you will be asked for it.
+	</para>
+
+	<para>
+	You also need to say Y here if you have a device which speaks
+	the SCSI protocol.  Examples of this include the parallel port
+	version of the IOMEGA ZIP drive, USB storage devices, Fibre
+	Channel, FireWire storage and the IDE-SCSI emulation driver.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here and read
+	file:Documentation/scsi/scsi.txt.
+	The module will be called scsi_mod.
+	</para>
+
+	<para>
+	However, do not compile this as a module if your root file system
+	(the one containing the directory /) is located on a SCSI device.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_SD">
+<refnamediv>
+	<refname>BLK_DEV_SD</refname>
+	<refpurpose>SCSI disk support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you want to use SCSI hard disks, Fibre Channel disks,
+	USB storage or the SCSI or parallel port version of
+	the IOMEGA ZIP drive, say Y and read the SCSI-HOWTO,
+	the Disk-HOWTO and the Multi-Disk-HOWTO, available from
+	http://www.tldp.org/docs.html#howto. This is NOT for SCSI
+	CD-ROMs.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here and read
+	file:Documentation/scsi/scsi.txt.
+	The module will be called sd_mod.
+	</para>
+
+	<para>
+	Do not compile this driver as a module if your root file system
+	(the one containing the directory /) is located on a SCSI disk.
+	In this case, do not compile the driver for your SCSI host adapter
+	(below) as a module either.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CHR_DEV_ST">
+<refnamediv>
+	<refname>CHR_DEV_ST</refname>
+	<refpurpose>SCSI tape support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you want to use a SCSI tape drive under Linux, say Y and read the
+	SCSI-HOWTO, available from
+	http://www.tldp.org/docs.html#howto, and
+	file:Documentation/scsi/st.txt in the kernel source.  This is NOT
+	for SCSI CD-ROMs.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here and read
+	file:Documentation/scsi/scsi.txt. The module will be called st.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CHR_DEV_OSST">
+<refnamediv>
+	<refname>CHR_DEV_OSST</refname>
+	<refpurpose>SCSI OnStream SC-x0 tape support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The OnStream SC-x0 SCSI tape drives can not be driven by the
+	standard st driver, but instead need this special osst driver and
+	use the  /dev/osstX char device nodes (major 206).  Via usb-storage
+	and ide-scsi, you may be able to drive the USB-x0 and DI-x0 drives
+	as well.  Note that there is also a second generation of OnStream
+	tape drives (ADR-x0) that supports the standard SCSI-2 commands for
+	tapes (QIC-157) and can be driven by the standard driver st.
+	For more information, you may have a look at the SCSI-HOWTO
+	http://www.tldp.org/docs.html#howto  and
+	file:Documentation/scsi/osst.txt  in the kernel source.
+	More info on the OnStream driver may be found on
+	http://linux1.onstream.nl/test/
+	Please also have a look at the standard st docu, as most of it
+	applies to osst as well.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here and read
+	file:Documentation/scsi/scsi.txt. The module will be called osst.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_SR">
+<refnamediv>
+	<refname>BLK_DEV_SR</refname>
+	<refpurpose>SCSI CDROM support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you want to use a SCSI or FireWire CD-ROM under Linux,
+	say Y and read the SCSI-HOWTO and the CDROM-HOWTO at
+	http://www.tldp.org/docs.html#howto. Also make sure to say
+	Y or M to "ISO 9660 CD-ROM file system support" later.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here and read
+	file:Documentation/scsi/scsi.txt.
+	The module will be called sr_mod.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CHR_DEV_SG">
+<refnamediv>
+	<refname>CHR_DEV_SG</refname>
+	<refpurpose>SCSI generic support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you want to use SCSI scanners, synthesizers or CD-writers or just
+	about anything having "SCSI" in its name other than hard disks,
+	CD-ROMs or tapes, say Y here. These won't be supported by the kernel
+	directly, so you need some additional software which knows how to
+	talk to these devices using the SCSI protocol:
+	</para>
+
+	<para>
+	For scanners, look at SANE (http://www.mostang.com/sane/). For CD
+	writer software look at Cdrtools
+	(http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html)
+	and for burning a "disk at once": CDRDAO
+	(http://cdrdao.sourceforge.net/). Cdparanoia is a high
+	quality digital reader of audio CDs (http://www.xiph.org/paranoia/).
+	For other devices, it's possible that you'll have to write the
+	driver software yourself. Please read the file
+	file:Documentation/scsi/scsi-generic.txt for more information.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here and read
+	file:Documentation/scsi/scsi.txt. The module will be called sg.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CHR_DEV_SCH">
+<refnamediv>
+	<refname>CHR_DEV_SCH</refname>
+	<refpurpose>SCSI media changer support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is a driver for SCSI media changers.  Most common devices are
+	tape libraries and MOD/CDROM jukeboxes.  *Real* jukeboxes, you
+	don't need this for those tiny 6-slot cdrom changers.  Media
+	changers are listed as "Type: Medium Changer" in /proc/scsi/scsi.
+	If you have such hardware and want to use it with linux, say Y
+	here.  Check file:Documentation/scsi-changer.txt for details.
+	</para>
+
+	<para>
+	If you want to compile this as a module ( = code which can be
+	inserted in and removed from the running kernel whenever you want),
+	say M here and read file:Documentation/modules.txt and
+	file:Documentation/scsi.txt. The module will be called ch.o.
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SCSI_MULTI_LUN">
+<refnamediv>
+	<refname>SCSI_MULTI_LUN</refname>
+	<refpurpose>Probe all LUNs on each SCSI device</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you have a SCSI device that supports more than one LUN (Logical
+	Unit Number), e.g. a CD jukebox, and only one LUN is detected, you
+	can say Y here to force the SCSI driver to probe for multiple LUNs.
+	A SCSI device with multiple LUNs acts logically like multiple SCSI
+	devices. The vast majority of SCSI devices have only one LUN, and
+	so most people can say N here. The max_luns boot/module parameter 
+	allows to override this setting.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SCSI_SATA">
+<refnamediv>
+	<refname>SCSI_SATA</refname>
+	<refpurpose>Serial ATA (SATA) support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This driver family supports Serial ATA host controllers
+	and devices.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_MD">
+<refnamediv>
+	<refname>MD</refname>
+	<refpurpose>Multiple devices driver support (RAID and LVM)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Support multiple physical spindles through a single logical device.
+	Required for RAID and logical volume management.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_MD">
+<refnamediv>
+	<refname>BLK_DEV_MD</refname>
+	<refpurpose>RAID support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>MD</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This driver lets you combine several hard disk partitions into one
+	logical block device. This can be used to simply append one
+	partition to another one or to combine several redundant hard disks
+	into a RAID1/4/5 device so as to provide protection against hard
+	disk failures. This is called "Software RAID" since the combining of
+	the partitions is done by the kernel. "Hardware RAID" means that the
+	combining is done by a dedicated controller; if you have such a
+	controller, you do not need to say Y here.
+	</para>
+
+	<para>
+	More information about Software RAID on Linux is contained in the
+	Software RAID mini-HOWTO, available from
+	http://www.tldp.org/docs.html#howto. There you will also learn
+	where to get the supporting user space utilities raidtools.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_BLK_DEV_DM">
+<refnamediv>
+	<refname>BLK_DEV_DM</refname>
+	<refpurpose>Device mapper support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>MD</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Device-mapper is a low level volume manager.  It works by allowing
+	people to specify mappings for ranges of logical sectors.  Various
+	mapping types are available, in addition people may write their own
+	modules containing custom mappings if they wish.
+	</para>
+
+	<para>
+	Higher level volume managers such as LVM2 use this driver.
+	</para>
+
+	<para>
+	To compile this as a module, choose M here: the module will be
+	called dm-mod.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_IEEE1394">
+<refnamediv>
+	<refname>IEEE1394</refname>
+	<refpurpose>IEEE 1394 (FireWire) support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PCI || BROKEN</literal></para>
+	<para role="select">Selects <literal>NET</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	IEEE 1394 describes a high performance serial bus, which is also
+	known as FireWire(tm) or i.Link(tm) and is used for connecting all
+	sorts of devices (most notably digital video cameras) to your
+	computer.
+	</para>
+
+	<para>
+	If you have FireWire hardware and want to use it, say Y here.  This
+	is the core support only, you will also need to select a driver for
+	your IEEE 1394 adapter.
+	</para>
+
+	<para>
+	To compile this driver as a module, say M here: the
+	module will be called ieee1394.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_I2O">
+<refnamediv>
+	<refname>I2O</refname>
+	<refpurpose>I2O support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PCI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The Intelligent Input/Output (I2O) architecture allows hardware
+	drivers to be split into two parts: an operating system specific
+	module called the OSM and an hardware specific module called the
+	HDM. The OSM can talk to a whole range of HDM's, and ideally the
+	HDM's are not OS dependent. This allows for the same HDM driver to
+	be used under different operating systems if the relevant OSM is in
+	place. In order for this to work, you need to have an I2O interface
+	adapter card in your computer. This card contains a special I/O
+	processor (IOP), thus allowing high speeds since the CPU does not
+	have to deal with I/O.
+	</para>
+
+	<para>
+	If you say Y here, you will get a choice of interface adapter
+	drivers and OSM's with the following questions.
+	</para>
+
+	<para>
+	To compile this support as a module, choose M here: the
+	modules will be called i2o_core.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NETDEVICES">
+<refnamediv>
+	<refname>NETDEVICES</refname>
+	<refpurpose>Network device support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="default">Default Value <literal>y if NET and UML</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	You can say N here if you don't intend to connect your Linux box to
+	any other computer at all.
+	</para>
+
+	<para>
+	You'll have to say Y if your computer contains a network card that
+	you want to use under Linux. If you are going to run SLIP or PPP over
+	telephone line or null modem cable you need say Y here. Connecting
+	two machines with parallel ports using PLIP needs this, as well as
+	AX.25/KISS for sending Internet traffic over amateur radio links.
+	</para>
+
+	<para>
+	See also "The Linux Network Administrator's Guide" by Olaf Kirch and
+	Terry Dawson. Available at http://www.tldp.org/guides.html.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NET_ETHERNET">
+<refnamediv>
+	<refname>NET_ETHERNET</refname>
+	<refpurpose>Ethernet (10 or 100Mbit)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and !UML</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Ethernet (also called IEEE 802.3 or ISO 8802-2) is the most common
+	type of Local Area Network (LAN) in universities and companies.
+	</para>
+
+	<para>
+	Common varieties of Ethernet are: 10BASE-2 or Thinnet (10 Mbps over
+	coaxial cable, linking computers in a chain), 10BASE-T or twisted
+	pair (10 Mbps over twisted pair cable, linking computers to central
+	hubs), 10BASE-F (10 Mbps over optical fiber links, using hubs),
+	100BASE-TX (100 Mbps over two twisted pair cables, using hubs),
+	100BASE-T4 (100 Mbps over 4 standard voice-grade twisted pair
+	cables, using hubs), 100BASE-FX (100 Mbps over optical fiber links)
+	[the 100BASE varieties are also known as Fast Ethernet], and Gigabit
+	Ethernet (1 Gbps over optical fiber or short copper links).
+	</para>
+
+	<para>
+	If your Linux machine will be connected to an Ethernet and you have
+	an Ethernet network interface card (NIC) installed in your computer,
+	say Y here and read the Ethernet-HOWTO, available from
+	http://www.tldp.org/docs.html#howto. You will then also have
+	to say Y to the driver for your particular NIC.
+	</para>
+
+	<para>
+	Note that the answer to this question won't directly affect the
+	kernel: saying N will just cause the configurator to skip all
+	the questions about Ethernet network cards. If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SMCTR">
+<refnamediv>
+	<refname>SMCTR</refname>
+	<refpurpose>SMC ISA/MCA adapter support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and NETDEVICES and !UML and TR and (ISA || MCA_LEGACY) and (BROKEN || !64BIT)</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is support for the ISA and MCA SMC Token Ring cards,
+	specifically SMC TokenCard Elite (8115T) and SMC TokenCard Elite/A
+	(8115T/A) adapters.
+	</para>
+
+	<para>
+	If you have such an adapter and would like to use it, say Y or M and
+	read the Token-Ring mini-HOWTO, available from
+	http://www.tldp.org/docs.html#howto and the file
+	file:Documentation/networking/smctr.txt.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the module will be
+	called smctr.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NET_RADIO">
+<refnamediv>
+	<refname>NET_RADIO</refname>
+	<refpurpose>Wireless LAN drivers (non-hamradio) &amp; Wireless Extensions</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and NETDEVICES</literal></para>
+	<para role="select">Selects <literal>WIRELESS_EXT</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Support for wireless LANs and everything having to do with radio,
+	but not with amateur radio or FM broadcasting.
+	</para>
+
+	<para>
+	Saying Y here also enables the Wireless Extensions (creates
+	/proc/net/wireless and enables iwconfig access). The Wireless
+	Extension is a generic API allowing a driver to expose to the user
+	space configuration and statistics specific to common Wireless LANs.
+	The beauty of it is that a single set of tool can support all the
+	variations of Wireless LANs, regardless of their type (as long as
+	the driver supports Wireless Extension). Another advantage is that
+	these parameters may be changed on the fly without restarting the
+	driver (or Linux). If you wish to use Wireless Extensions with
+	wireless PCMCIA (PC-) cards, you need to say Y here; you can fetch
+	the tools from
+	http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_NET_WIRELESS">
+<refnamediv>
+	<refname>NET_WIRELESS</refname>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y if NET and NETDEVICES and NET_RADIO and (ISA || PCI || PPC_PMAC || PCMCIA)</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PPP">
+<refnamediv>
+	<refname>PPP</refname>
+	<refpurpose>PPP (point-to-point protocol) support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	PPP (Point to Point Protocol) is a newer and better SLIP.  It serves
+	the same purpose: sending Internet traffic over telephone (and other
+	serial) lines.  Ask your access provider if they support it, because
+	otherwise you can't use it; most Internet access providers these
+	days support PPP rather than SLIP.
+	</para>
+
+	<para>
+	To use PPP, you need an additional program called pppd as described
+	in the PPP-HOWTO, available at
+	http://www.tldp.org/docs.html#howto.  Make sure that you have
+	the version of pppd recommended in file:Documentation/Changes.
+	The PPP option enlarges your kernel by about 16 KB.
+	</para>
+
+	<para>
+	There are actually two versions of PPP: the traditional PPP for
+	asynchronous lines, such as regular analog phone lines, and
+	synchronous PPP which can be used over digital ISDN lines for
+	example.  If you want to use PPP over phone lines or other
+	asynchronous serial lines, you need to say Y (or M) here and also to
+	the next option, "PPP support for async serial ports".  For PPP over
+	synchronous lines, you should say Y (or M) here and to "Support
+	synchronous PPP", below.
+	</para>
+
+	<para>
+	If you said Y to "Version information on all symbols" above, then
+	you cannot compile the PPP driver into the kernel; you can then only
+	compile it as a module. To compile this driver as a module, choose M
+	here and read file:Documentation/networking/net-modules.txt.
+	The module will be called ppp_generic.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PPPOE">
+<refnamediv>
+	<refname>PPPOE</refname>
+	<refpurpose>PPP over Ethernet (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and EXPERIMENTAL and PPP</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Support for PPP over Ethernet.
+	</para>
+
+	<para>
+	This driver requires the latest version of pppd from the CVS
+	repository at cvs.samba.org.  Alternatively, see the 
+	RoaringPenguin package (http://www.roaringpenguin.com/pppoe)
+	which contains instruction on how to use this driver (under 
+	the heading "Kernel mode PPPoE").
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_ISDN">
+<refnamediv>
+	<refname>ISDN</refname>
+	<refpurpose>ISDN support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	ISDN ("Integrated Services Digital Networks", called RNIS in France)
+	is a special type of fully digital telephone service; it's mostly
+	used to connect to your Internet service provider (with SLIP or
+	PPP).  The main advantage is that the speed is higher than ordinary
+	modem/telephone connections, and that you can have voice
+	conversations while downloading stuff.  It only works if your
+	computer is equipped with an ISDN card and both you and your service
+	provider purchased an ISDN line from the phone company.  For
+	details, read http://www.alumni.caltech.edu/~dank/isdn/ on the WWW.
+	</para>
+
+	<para>
+	Select this option if you want your kernel to support ISDN.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PHONE">
+<refnamediv>
+	<refname>PHONE</refname>
+	<refpurpose>Linux telephony support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you have a telephony card, which for example allows
+	you to use a regular phone for voice-over-IP applications.
+	</para>
+
+	<para>
+	Note: this has nothing to do with modems.  You do not need to say Y
+	here in order to be able to use a modem under Linux.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called phonedev.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_INPUT">
+<refnamediv>
+	<refname>INPUT</refname>
+	<refpurpose>Generic input layer (needed for keyboard, mouse, ...)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you have any input device (mouse, keyboard, tablet,
+	joystick, steering wheel ...) connected to your system and want
+	it to be available to applications. This includes standard PS/2
+	keyboard and mouse.
+	</para>
+
+	<para>
+	Say N here if you have a headless (no monitor, no keyboard) system.
+	</para>
+
+	<para>
+	More information is available: file:Documentation/input/input.txt
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called input.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_VT">
+<refnamediv>
+	<refname>VT</refname>
+	<refpurpose>Virtual terminal</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
+	<para role="select">Selects <literal>INPUT</literal></para>
+	<para role="default">Default Value <literal>y if !VIOCONS</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you say Y here, you will get support for terminal devices with
+	display and keyboard devices. These are called "virtual" because you
+	can run several virtual terminals (also called virtual consoles) on
+	one physical terminal. This is rather useful, for example one
+	virtual terminal can collect system messages and warnings, another
+	one can be used for a text-mode user session, and a third could run
+	an X session, all in parallel. Switching between virtual terminals
+	is done with certain key combinations, usually Alt-function key.
+	</para>
+
+	<para>
+	The setterm command ("man setterm") can be used to change the
+	properties (such as colors or beeping) of a virtual terminal. The
+	man page console_codes(4) ("man console_codes") contains the special
+	character sequences that can be used to change those properties
+	directly. The fonts used on virtual terminals can be changed with
+	the setfont ("man setfont") command and the key bindings are defined
+	with the loadkeys ("man loadkeys") command.
+	</para>
+
+	<para>
+	You need at least one virtual terminal device in order to make use
+	of your keyboard and monitor. Therefore, only people configuring an
+	embedded system would want to say N here in order to save some
+	memory; the only way to log into such a system is then via a serial
+	or network connection.
+	</para>
+
+	<para>
+	If unsure, say Y, or else you won't be able to do much with your new
+	shiny Linux system :-)
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_VT_CONSOLE">
+<refnamediv>
+	<refname>VT_CONSOLE</refname>
+	<refpurpose>Support for console on virtual terminal</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>VT and EMBEDDED</literal></para>
+	<para role="default">Default Value <literal>y if VT</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The system console is the device which receives all kernel messages
+	and warnings and which allows logins in single user mode. If you
+	answer Y here, a virtual terminal (the device used to interact with
+	a physical terminal) can be used as system console. This is the most
+	common mode of operations, so you should say Y here unless you want
+	the kernel messages be output only to a serial port (in which case
+	you should say Y to "Console on serial port", below).
+	</para>
+
+	<para>
+	If you do say Y here, by default the currently visible virtual
+	terminal (/dev/tty0) will be used as system console. You can change
+	that with a kernel command line option such as "console=tty3" which
+	would use the third virtual terminal as system console. (Try "man
+	bootparam" or see the documentation of your boot loader (lilo or
+	loadlin) about how to pass options to the kernel at boot time.)
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HW_CONSOLE">
+<refnamediv>
+	<refname>HW_CONSOLE</refname>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y if VT and !S390 and !UML</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SERIAL_8250">
+<refnamediv>
+	<refname>SERIAL_8250</refname>
+	<refpurpose>8250/16550 and compatible serial support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>BROKEN || !SPARC</literal></para>
+	<para role="select">Selects <literal>SERIAL_CORE</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This selects whether you want to include the driver for the standard
+	serial ports.  The standard answer is Y.  People who might say N
+	here are those that are setting up dedicated Ethernet WWW/FTP
+	servers, or users that have one of the various bus mice instead of a
+	serial mouse and don't intend to use their machine's standard serial
+	port for anything.  (Note that the Cyclades and Stallion multi
+	serial port drivers do not need this driver built in for them to
+	work.)
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called 8250.
+	[WARNING: Do not compile this driver as a module if you are using
+	non-standard serial ports, since the configuration information will
+	be lost when the driver is unloaded.  This limitation may be lifted
+	in the future.]
+	</para>
+
+	<para>
+	BTW1: If you have a mouseman serial mouse which is not recognized by
+	the X window system, try running gpm first.
+	</para>
+
+	<para>
+	BTW2: If you intend to use a software modem (also called Winmodem)
+	under Linux, forget it.  These modems are crippled and require
+	proprietary drivers which are only available under Windows.
+	</para>
+
+	<para>
+	Most people will say Y or M here, so that they can use serial mice,
+	modems and similar devices connecting to the standard serial ports.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SERIAL_CORE">
+<refnamediv>
+	<refname>SERIAL_CORE</refname>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_AGP">
+<refnamediv>
+	<refname>AGP</refname>
+	<refpurpose>/dev/agpgart (AGP Support)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>(ALPHA || IA64 || PPC || X86) and !GART_IOMMU</literal></para>
+	<para role="default">Default Value <literal>y if (ALPHA || IA64 || PPC || X86) and GART_IOMMU</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	AGP (Accelerated Graphics Port) is a bus system mainly used to
+	connect graphics cards to the rest of the system.
+	</para>
+
+	<para>
+	If you have an AGP system and you say Y here, it will be possible to
+	use the AGP features of your 3D rendering video card. This code acts
+	as a sort of "AGP driver" for the motherboard's chipset.
+	</para>
+
+	<para>
+	If you need more texture memory than you can get with the AGP GART
+	(theoretically up to 256 MB, but in practice usually 64 or 128 MB
+	due to kernel allocation issues), you could use PCI accesses
+	and have up to a couple gigs of texture space.
+	</para>
+
+	<para>
+	Note that this is the only means to have X/GLX use
+	write-combining with MTRR support on the AGP bus. Without it, OpenGL
+	direct rendering will be a lot slower but still faster than PIO.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called agpgart.
+	</para>
+
+	<para>
+	You should say Y here if you want to use GLX or DRI.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_DRM">
+<refnamediv>
+	<refname>DRM</refname>
+	<refpurpose>Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>(AGP || AGP=n) and PCI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Kernel-level support for the Direct Rendering Infrastructure (DRI)
+	introduced in XFree86 4.0. If you say Y here, you need to select
+	the module that's right for your graphics card from the list below.
+	These modules provide support for synchronization, security, and
+	DMA transfers. Please see http://dri.sourceforge.net/ for more
+	details.  You should also select and configure AGP
+	(/dev/agpgart) support.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_I2C">
+<refnamediv>
+	<refname>I2C</refname>
+	<refpurpose>I2C support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	I2C (pronounce: I-square-C) is a slow serial bus protocol used in
+	many micro controller applications and developed by Philips.  SMBus,
+	or System Management Bus is a subset of the I2C protocol.  More
+	information is contained in the directory file:Documentation/i2c/,
+	especially in the file called "summary" there.
+	</para>
+
+	<para>
+	Both I2C and SMBus are supported here. You will need this for
+	hardware sensors support, and also for Video For Linux support.
+	</para>
+
+	<para>
+	If you want I2C support, you should say Y here and also to the
+	specific driver for your bus adapter(s) below.
+	</para>
+
+	<para>
+	This I2C support can also be built as a module.  If so, the module
+	will be called i2c-core.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SPI">
+<refnamediv>
+	<refname>SPI</refname>
+	<refpurpose>SPI support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The "Serial Peripheral Interface" is a low level synchronous
+	protocol.  Chips that support SPI can have data transfer rates
+	up to several tens of Mbit/sec.  Chips are addressed with a
+	controller and a chipselect.  Most SPI slaves don't support
+	dynamic device discovery; some are even write-only or read-only.
+	</para>
+
+	<para>
+	SPI is widely used by microcontollers to talk with sensors,
+	eeprom and flash memory, codecs and various other controller
+	chips, analog to digital (and d-to-a) converters, and more.
+	MMC and SD cards can be accessed using SPI protocol; and for
+	DataFlash cards used in MMC sockets, SPI must always be used.
+	</para>
+
+	<para>
+	SPI is one of a family of similar protocols using a four wire
+	interface (select, clock, data in, data out) including Microwire
+	(half duplex), SSP, SSI, and PSP.  This driver framework should
+	work with most such devices and controllers.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_HWMON">
+<refnamediv>
+	<refname>HWMON</refname>
+	<refpurpose>Hardware Monitoring support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Hardware monitoring devices let you monitor the hardware health
+	of a system. Most modern motherboards include such a device. It
+	can include temperature sensors, voltage sensors, fan speed
+	sensors and various additional features such as the ability to
+	control the speed of the fans.  If you want this support you
+	should say Y here and also to the specific driver(s) for your
+	sensors chip(s) below.
+	</para>
+
+	<para>
+	This support can also be built as a module.  If so, the module
+	will be called hwmon.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_VIDEO_DEV">
+<refnamediv>
+	<refname>VIDEO_DEV</refname>
+	<refpurpose>Video For Linux</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Support for audio/video capture and overlay devices and FM radio
+	cards. The exact capabilities of each device vary.
+	</para>
+
+	<para>
+	This kernel includes support for the new Video for Linux Two API,
+	(V4L2) as well as the original system. Drivers and applications
+	need to be rewritten to use V4L2, but drivers for popular cards
+	and applications for most video capture functions already exist.
+	</para>
+
+	<para>
+	Additional info and docs are available on the web at
+	http://linuxtv.org
+	</para>
+
+	<para>
+	Documentation for V4L2 is also available on the web at
+	http://bytesex.org/v4l/.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called videodev.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_VIDEO_V4L2">
+<refnamediv>
+	<refname>VIDEO_V4L2</refname>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_DVB">
+<refnamediv>
+	<refname>DVB</refname>
+	<refpurpose>DVB For Linux</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and INET</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Support Digital Video Broadcasting hardware.  Enable this if you
+	own a DVB adapter and want to use it or if you compile Linux for
+	a digital SetTopBox.
+	</para>
+
+	<para>
+	API specs and user tools are available from http://www.linuxtv.org/.
+	</para>
+
+	<para>
+	Please report problems regarding this driver to the LinuxDVB
+	mailing list.
+	</para>
+
+	<para>
+	If unsure say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_FB">
+<refnamediv>
+	<refname>FB</refname>
+	<refpurpose>Support for frame buffer devices</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The frame buffer device provides an abstraction for the graphics
+	hardware. It represents the frame buffer of some video hardware and
+	allows application software to access the graphics hardware through
+	a well-defined interface, so the software doesn't need to know
+	anything about the low-level (hardware register) stuff.
+	</para>
+
+	<para>
+	Frame buffer devices work identically across the different
+	architectures supported by Linux and make the implementation of
+	application programs easier and more portable; at this point, an X
+	server exists which uses the frame buffer device exclusively.
+	On several non-X86 architectures, the frame buffer device is the
+	only way to use the graphics hardware.
+	</para>
+
+	<para>
+	The device is accessed through special device nodes, usually located
+	in the /dev directory, i.e. /dev/fb*.
+	</para>
+
+	<para>
+	You need an utility program called fbset to make full use of frame
+	buffer devices. Please read file:Documentation/fb/framebuffer.txt
+	and the Framebuffer-HOWTO at
+	http://www.tahallah.demon.co.uk/programming/prog.html for more
+	information.
+	</para>
+
+	<para>
+	Say Y here and to the driver for your graphics board below if you
+	are compiling a kernel for a non-x86 architecture.
+	</para>
+
+	<para>
+	If you are compiling for the x86 architecture, you can say Y if you
+	want to play with it, but it is not essential. Please note that
+	running graphical applications that directly touch the hardware
+	(e.g. an accelerated X server) and that are not frame buffer
+	device-aware may cause unexpected results. If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_VGA_CONSOLE">
+<refnamediv>
+	<refname>VGA_CONSOLE</refname>
+	<refpurpose>VGA text console</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>VT and !ARCH_ACORN and !ARCH_EBSA110 and !4xx and !8xx and !SPARC and !M68K and !PARISC and !FRV and !ARCH_VERSATILE and (EMBEDDED || !X86)</literal></para>
+	<para role="default">Default Value <literal>y if VT and !ARCH_ACORN and !ARCH_EBSA110 and !4xx and !8xx and !SPARC and !M68K and !PARISC and !FRV and !ARCH_VERSATILE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Saying Y here will allow you to use Linux in text mode through a
+	display that complies with the generic VGA standard. Virtually
+	everyone wants that.
+	</para>
+
+	<para>
+	The program SVGATextMode can be used to utilize SVGA video cards to
+	their full potential in text mode. Download it from
+	ftp://ibiblio.org/pub/Linux/utils/console/.
+	</para>
+
+	<para>
+	Say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_LOGO">
+<refnamediv>
+	<refname>LOGO</refname>
+	<refpurpose>Bootup logo</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>FB || SGI_NEWPORT_CONSOLE</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Enable and select frame buffer bootup logos.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SOUND">
+<refnamediv>
+	<refname>SOUND</refname>
+	<refpurpose>Sound card support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you have a sound card in your computer, i.e. if it can say more
+	than an occasional beep, say Y.  Be sure to have all the information
+	about your sound card and its configuration down (I/O port,
+	interrupt and DMA channel), because you will be asked for it.
+	</para>
+
+	<para>
+	You want to read the Sound-HOWTO, available from
+	http://www.tldp.org/docs.html#howto. General information about
+	the modular sound system is contained in the files
+	file:Documentation/sound/oss/Introduction.  The file
+	file:Documentation/sound/oss/README.OSS contains some slightly
+	outdated but still useful information as well.  Newer sound
+	driver documentation is found in file:Documentation/sound/alsa/*.
+	</para>
+
+	<para>
+	If you have a PnP sound card and you want to configure it at boot
+	time using the ISA PnP tools (read
+	http://www.roestock.demon.co.uk/isapnptools/), then you need to
+	compile the sound card support as a module and load that module
+	after the PnP configuration is finished.  To do this, choose M here
+	and read file:Documentation/sound/oss/README.modules; the module
+	will be called soundcore.
+	</para>
+
+	<para>
+	I'm told that even without a sound card, you can make your computer
+	say more than an occasional beep, by programming the PC speaker.
+	Kernel patches and supporting utilities to do that are in the pcsp
+	package, available at ftp://ftp.infradead.org/pub/pcsp/.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SND">
+<refnamediv>
+	<refname>SND</refname>
+	<refpurpose>Advanced Linux Sound Architecture</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!M68K and SOUND</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say 'Y' or 'M' to enable ALSA (Advanced Linux Sound Architecture),
+	the new base sound system.
+	</para>
+
+	<para>
+	For more information, see http://www.alsa-project.org/
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SND_USB_AUDIO">
+<refnamediv>
+	<refname>SND_USB_AUDIO</refname>
+	<refpurpose>USB Audio/MIDI driver</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!M68K and SOUND!=n and SND and USB</literal></para>
+	<para role="select">Selects <literal>SND_HWDEP</literal></para>
+	<para role="select">Selects <literal>SND_RAWMIDI</literal></para>
+	<para role="select">Selects <literal>SND_PCM</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here to include support for USB audio and USB MIDI
+	devices.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the module
+	will be called snd-usb-audio.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_USB">
+<refnamediv>
+	<refname>USB</refname>
+	<refpurpose>Support for Host-side USB</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>USB_ARCH_HAS_HCD</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Universal Serial Bus (USB) is a specification for a serial bus
+	subsystem which offers higher speeds and more features than the
+	traditional PC serial port.  The bus supplies power to peripherals
+	and allows for hot swapping.  Up to 127 USB peripherals can be
+	connected to a single USB host in a tree structure.
+	</para>
+
+	<para>
+	The USB host is the root of the tree, the peripherals are the
+	leaves and the inner nodes are special USB devices called hubs.
+	Most PCs now have USB host ports, used to connect peripherals
+	such as scanners, keyboards, mice, modems, cameras, disks,
+	flash memory, network links, and printers to the PC.
+	</para>
+
+	<para>
+	Say Y here if your computer has a host-side USB port and you want
+	to use USB devices.  You then need to say Y to at least one of the
+	Host Controller Driver (HCD) options below.  Choose a USB 1.1
+	controller, such as "UHCI HCD support" or "OHCI HCD support",
+	and "EHCI HCD (USB 2.0) support" except for older systems that
+	do not have USB 2.0 support.  It doesn't normally hurt to select
+	them all if you are not certain.
+	</para>
+
+	<para>
+	If your system has a device-side USB port, used in the peripheral
+	side of the USB protocol, see the "USB Gadget" framework instead.
+	</para>
+
+	<para>
+	After choosing your HCD, then select drivers for the USB peripherals
+	you'll be using.  You may want to check out the information provided
+	in file:Documentation/usb/ and especially the links given in
+	file:Documentation/usb/usb-help.txt.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called usbcore.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_USB_EHCI_HCD">
+<refnamediv>
+	<refname>USB_EHCI_HCD</refname>
+	<refpurpose>EHCI HCD (USB 2.0) support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>USB and USB_ARCH_HAS_EHCI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
+	"high speed" (480 Mbit/sec, 60 Mbyte/sec) host controller hardware.
+	If your USB host controller supports USB 2.0, you will likely want to
+	configure this Host Controller Driver.  At the time of this writing, 
+	the primary implementation of EHCI is a chip from NEC, widely available
+	in add-on PCI cards, but implementations are in the works from other 
+	vendors including Intel and Philips.  Motherboard support is appearing.
+	</para>
+
+	<para>
+	EHCI controllers are packaged with "companion" host controllers (OHCI
+	or UHCI) to handle USB 1.1 devices connected to root hub ports.  Ports
+	will connect to EHCI if the device is high speed, otherwise they
+	connect to a companion controller.  If you configure EHCI, you should
+	probably configure the OHCI (for NEC and some other vendors) USB Host
+	Controller Driver or UHCI (for Via motherboards) Host Controller
+	Driver too.
+	</para>
+
+	<para>
+	You may want to read file:Documentation/usb/ehci.txt.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called ehci-hcd.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_USB_OHCI_HCD">
+<refnamediv>
+	<refname>USB_OHCI_HCD</refname>
+	<refpurpose>OHCI HCD support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>USB and USB_ARCH_HAS_OHCI</literal></para>
+	<para role="select">Selects <literal>ISP1301_OMAP</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The Open Host Controller Interface (OHCI) is a standard for accessing
+	USB 1.1 host controller hardware.  It does more in hardware than Intel's
+	UHCI specification.  If your USB host controller follows the OHCI spec,
+	say Y.  On most non-x86 systems, and on x86 hardware that's not using a
+	USB controller from Intel or VIA, this is appropriate.  If your host
+	controller doesn't use PCI, this is probably appropriate.  For a PCI
+	based system where you're not sure, the "lspci -v" entry will list the
+	right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called ohci-hcd.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_USB_UHCI_HCD">
+<refnamediv>
+	<refname>USB_UHCI_HCD</refname>
+	<refpurpose>UHCI HCD (most Intel and VIA) support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>USB and PCI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The Universal Host Controller Interface is a standard by Intel for
+	accessing the USB hardware in the PC (which is also called the USB
+	host controller). If your USB host controller conforms to this
+	standard, you may want to say Y, but see below. All recent boards
+	with Intel PCI chipsets (like intel 430TX, 440FX, 440LX, 440BX,
+	i810, i820) conform to this standard. Also all VIA PCI chipsets
+	(like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
+	133). If unsure, say Y.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called uhci-hcd.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_USB_STORAGE">
+<refnamediv>
+	<refname>USB_STORAGE</refname>
+	<refpurpose>USB Mass Storage support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>USB</literal></para>
+	<para role="select">Selects <literal>SCSI</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you want to connect USB mass storage devices to your
+	computer's USB port. This is the driver you need for USB
+	floppy drives, USB hard disks, USB tape drives, USB CD-ROMs,
+	USB flash devices, and memory sticks, along with
+	similar devices. This driver may also be used for some cameras
+	and card readers.
+	</para>
+
+	<para>
+	This option 'selects' (turns on, enables) 'SCSI', but you
+	probably also need 'SCSI device support: SCSI disk support'
+	(BLK_DEV_SD) for most USB storage devices.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called usb-storage.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_USB_SERIAL">
+<refnamediv>
+	<refname>USB_SERIAL</refname>
+	<refpurpose>USB Serial Converter support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>USB</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you have a USB device that provides normal serial
+	ports, or acts like a serial device, and you want to connect it to
+	your USB bus.
+	</para>
+
+	<para>
+	Please read file:Documentation/usb/usb-serial.txt for more
+	information on the specifics of the different devices that are
+	supported, and on how to use them.
+	</para>
+
+	<para>
+	To compile this driver as a module, choose M here: the
+	module will be called usbserial.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_USB_GADGET">
+<refnamediv>
+	<refname>USB_GADGET</refname>
+	<refpurpose>Support for USB Gadgets</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	USB is a master/slave protocol, organized with one master
+	host (such as a PC) controlling up to 127 peripheral devices.
+	The USB hardware is asymmetric, which makes it easier to set up:
+	you can't connect a "to-the-host" connector to a peripheral.
+	</para>
+
+	<para>
+	Linux can run in the host, or in the peripheral.  In both cases
+	you need a low level bus controller driver, and some software
+	talking to it.  Peripheral controllers are often discrete silicon,
+	or are integrated with the CPU in a microcontroller.  The more
+	familiar host side controllers have names like like "EHCI", "OHCI",
+	or "UHCI", and are usually integrated into southbridges on PC
+	motherboards.
+	</para>
+
+	<para>
+	Enable this configuration option if you want to run Linux inside
+	a USB peripheral device.  Configure one hardware driver for your
+	peripheral/device side bus controller, and a "gadget driver" for
+	your peripheral protocol.  (If you use modular gadget drivers,
+	you may configure more than one.)
+	</para>
+
+	<para>
+	If in doubt, say "N" and don't enable these drivers; most people
+	don't have this kind of hardware (except maybe inside Linux PDAs).
+	</para>
+
+	<para>
+	For more information, see http://www.linux-usb.org/gadget and
+	the kernel DocBook documentation for this API.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_MMC">
+<refnamediv>
+	<refname>MMC</refname>
+	<refpurpose>MMC support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	MMC is the "multi-media card" bus protocol.
+	</para>
+
+	<para>
+	If you want MMC support, you should say Y here and also
+	to the specific driver for your MMC interface.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_INFINIBAND">
+<refnamediv>
+	<refname>INFINIBAND</refname>
+	<refpurpose>InfiniBand support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>PCI || BROKEN</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Core support for InfiniBand (IB).  Make sure to also select
+	any protocols you wish to use as well as drivers for your
+	InfiniBand hardware.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_EDAC">
+<refnamediv>
+	<refname>EDAC</refname>
+	<refpurpose>EDAC core system error reporting (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>X86 and EXPERIMENTAL</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	EDAC is designed to report errors in the core system.
+	These are low-level errors that are reported in the CPU or
+	supporting chipset: memory errors, cache errors, PCI errors,
+	thermal throttling, etc..  If unsure, select 'Y'.
+	</para>
+
+	<para>
+	If this code is reporting problems on your system, please
+	see the EDAC project web pages for more information at:
+	</para>
+
+	<para>
+	http://bluesmoke.sourceforge.net/
+	</para>
+
+	<para>
+	and:
+	</para>
+
+	<para>
+	http://buttersideup.com/edacwiki
+	</para>
+
+	<para>
+	There is also a mailing list for the EDAC project, which can
+	be found via the sourceforge page.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_EXT2_FS">
+<refnamediv>
+	<refname>EXT2_FS</refname>
+	<refpurpose>Second extended fs support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Ext2 is a standard Linux file system for hard disks.
+	</para>
+
+	<para>
+	To compile this file system support as a module, choose M here: the
+	module will be called ext2.  Be aware however that the file system
+	of your root partition (the one containing the directory /) cannot
+	be compiled as a module, and so this could be dangerous.
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_EXT3_FS">
+<refnamediv>
+	<refname>EXT3_FS</refname>
+	<refpurpose>Ext3 journalling file system support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="select">Selects <literal>JBD</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is the journaling version of the Second extended file system
+	(often called ext3), the de facto standard Linux file system
+	(method to organize files on a storage device) for hard disks.
+	</para>
+
+	<para>
+	The journaling code included in this driver means you do not have
+	to run e2fsck (file system checker) on your file systems after a
+	crash.  The journal keeps track of any changes that were being made
+	at the time the system crashed, and can ensure that your file system
+	is consistent without the need for a lengthy check.
+	</para>
+
+	<para>
+	Other than adding the journal to the file system, the on-disk format
+	of ext3 is identical to ext2.  It is possible to freely switch
+	between using the ext3 driver and the ext2 driver, as long as the
+	file system has been cleanly unmounted, or e2fsck is run on the file
+	system.
+	</para>
+
+	<para>
+	To add a journal on an existing ext2 file system or change the
+	behavior of ext3 file systems, you can use the tune2fs utility ("man
+	tune2fs").  To modify attributes of files and directories on ext3
+	file systems, use chattr ("man chattr").  You need to be using
+	e2fsprogs version 1.20 or later in order to create ext3 journals
+	(available at http://sourceforge.net/projects/e2fsprogs/).
+	</para>
+
+	<para>
+	To compile this file system support as a module, choose M here: the
+	module will be called ext3.  Be aware however that the file system
+	of your root partition (the one containing the directory /) cannot
+	be compiled as a module, and so this may be dangerous.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_REISERFS_FS">
+<refnamediv>
+	<refname>REISERFS_FS</refname>
+	<refpurpose>Reiserfs support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Stores not just filenames but the files themselves in a balanced
+	tree.  Uses journaling.
+	</para>
+
+	<para>
+	Balanced trees are more efficient than traditional file system
+	architectural foundations.
+	</para>
+
+	<para>
+	In general, ReiserFS is as fast as ext2, but is very efficient with
+	large directories and small files.  Additional patches are needed
+	for NFS and quotas, please see http://www.namesys.com/ for links.
+	</para>
+
+	<para>
+	It is more easily extended to have features currently found in
+	database and keyword search systems than block allocation based file
+	systems are.  The next version will be so extended, and will support
+	plugins consistent with our motto ``It takes more than a license to
+	make source code open.''
+	</para>
+
+	<para>
+	Read http://www.namesys.com/ to learn more about reiserfs.
+	</para>
+
+	<para>
+	Sponsored by Threshold Networks, Emusic.com, and Bigstorage.com.
+	</para>
+
+	<para>
+	If you like it, you can pay us to add new features to it that you
+	need, buy a support contract, or pay us to port it to another OS.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_JFS_FS">
+<refnamediv>
+	<refname>JFS_FS</refname>
+	<refpurpose>JFS filesystem support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="select">Selects <literal>NLS</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is a port of IBM's Journaled Filesystem .  More information is
+	available in the file file:Documentation/filesystems/jfs.txt.
+	</para>
+
+	<para>
+	If you do not intend to use the JFS filesystem, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_XFS_FS">
+<refnamediv>
+	<refname>XFS_FS</refname>
+	<refpurpose>XFS filesystem support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="select">Selects <literal>EXPORTFS</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	XFS is a high performance journaling filesystem which originated
+	on the SGI IRIX platform.  It is completely multi-threaded, can
+	support large files and large filesystems, extended attributes,
+	variable block sizes, is extent based, and makes extensive use of
+	Btrees (directories, extents, free space) to aid both performance
+	and scalability.
+	</para>
+
+	<para>
+	Refer to the documentation at http://oss.sgi.com/projects/xfs/
+	for complete details.  This implementation is on-disk compatible
+	with the IRIX version of XFS.
+	</para>
+
+	<para>
+	To compile this file system support as a module, choose M here: the
+	module will be called xfs.  Be aware, however, that if the file
+	system of your root partition is compiled as a module, you'll need
+	to use an initial ramdisk (initrd) to boot.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_OCFS2_FS">
+<refnamediv>
+	<refname>OCFS2_FS</refname>
+	<refpurpose>OCFS2 file system support (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and EXPERIMENTAL</literal></para>
+	<para role="select">Selects <literal>CONFIGFS_FS</literal></para>
+	<para role="select">Selects <literal>JBD</literal></para>
+	<para role="select">Selects <literal>CRC32</literal></para>
+	<para role="select">Selects <literal>INET</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	OCFS2 is a general purpose extent based shared disk cluster file
+	system with many similarities to ext3. It supports 64 bit inode
+	numbers, and has automatically extending metadata groups which may
+	also make it attractive for non-clustered use.
+	</para>
+
+	<para>
+	You'll want to install the ocfs2-tools package in order to at least
+	get "mount.ocfs2".
+	</para>
+
+	<para>
+	Project web page:    http://oss.oracle.com/projects/ocfs2
+	Tools web page:      http://oss.oracle.com/projects/ocfs2-tools
+	OCFS2 mailing lists: http://oss.oracle.com/projects/ocfs2/mailman/
+	</para>
+
+	<para>
+	Note: Features which OCFS2 does not support yet:
+	        - extended attributes
+	        - shared writeable mmap
+	        - loopback is supported, but data written will not
+	          be cluster coherent.
+	        - quotas
+	        - cluster aware flock
+	        - Directory change notification (F_NOTIFY)
+	        - Distributed Caching (F_SETLEASE/F_GETLEASE/break_lease)
+	        - POSIX ACLs
+	        - readpages / writepages (not user visible)
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_INOTIFY">
+<refnamediv>
+	<refname>INOTIFY</refname>
+	<refpurpose>Inotify file change notification support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="default">Default Value <literal>y</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here to enable inotify support and the associated system
+	calls.  Inotify is a file change notification system and a
+	replacement for dnotify.  Inotify fixes numerous shortcomings in
+	dnotify and introduces several new features.  It allows monitoring
+	of both files and directories via a single open fd.  Other features
+	include multiple file events, one-shot support, and unmount
+	notification.
+	</para>
+
+	<para>
+	For more information, see Documentation/filesystems/inotify.txt
+	</para>
+
+	<para>
+	If unsure, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_QUOTA">
+<refnamediv>
+	<refname>QUOTA</refname>
+	<refpurpose>Quota support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you say Y here, you will be able to set per user limits for disk
+	usage (also called disk quotas). Currently, it works for the
+	ext2, ext3, and reiserfs file system. ext3 also supports journalled
+	quotas for which you don't need to run quotacheck(8) after an unclean
+	shutdown.
+	For further details, read the Quota mini-HOWTO, available from
+	http://www.tldp.org/docs.html#howto, or the documentation provided
+	with the quota tools. Probably the quota support is only useful for
+	multi user systems. If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_AUTOFS_FS">
+<refnamediv>
+	<refname>AUTOFS_FS</refname>
+	<refpurpose>Kernel automounter support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	The automounter is a tool to automatically mount remote file systems
+	on demand. This implementation is partially kernel-based to reduce
+	overhead in the already-mounted case; this is unlike the BSD
+	automounter (amd), which is a pure user space daemon.
+	</para>
+
+	<para>
+	To use the automounter you need the user-space tools from the autofs
+	package; you can find the location in file:Documentation/Changes.
+	You also want to answer Y to "NFS file system support", below.
+	</para>
+
+	<para>
+	If you want to use the newer version of the automounter with more
+	features, say N here and say Y to "Kernel automounter v4 support",
+	below.
+	</para>
+
+	<para>
+	To compile this support as a module, choose M here: the module will be
+	called autofs.
+	</para>
+
+	<para>
+	If you are not a part of a fairly large, distributed network, you
+	probably do not need an automounter, and can say N here.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_FUSE_FS">
+<refnamediv>
+	<refname>FUSE_FS</refname>
+	<refpurpose>Filesystem in Userspace support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	With FUSE it is possible to implement a fully functional filesystem
+	in a userspace program.
+	</para>
+
+	<para>
+	There's also companion library: libfuse.  This library along with
+	utilities is available from the FUSE homepage:
+	http://fuse.sourceforge.net/
+	</para>
+
+	<para>
+	See file:Documentation/filesystems/fuse.txt for more information.
+	See file:Documentation/Changes for needed library/utility version.
+	</para>
+
+	<para>
+	If you want to develop a userspace FS, or if you want to use
+	a filesystem based on FUSE, answer Y or M.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SMB_FS">
+<refnamediv>
+	<refname>SMB_FS</refname>
+	<refpurpose>SMB file system support (to mount Windows shares etc.)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and INET</literal></para>
+	<para role="select">Selects <literal>NLS</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	SMB (Server Message Block) is the protocol Windows for Workgroups
+	(WfW), Windows 95/98, Windows NT and OS/2 Lan Manager use to share
+	files and printers over local networks.  Saying Y here allows you to
+	mount their file systems (often called "shares" in this context) and
+	access them just like any other Unix directory.  Currently, this
+	works only if the Windows machines use TCP/IP as the underlying
+	transport protocol, and not NetBEUI.  For details, read
+	file:Documentation/filesystems/smbfs.txt and the SMB-HOWTO,
+	available from http://www.tldp.org/docs.html#howto.
+	</para>
+
+	<para>
+	Note: if you just want your box to act as an SMB *server* and make
+	files and printing services available to Windows clients (which need
+	to have a TCP/IP stack), you don't need to say Y here; you can use
+	the program SAMBA (available from ftp://ftp.samba.org/pub/samba/)
+	for that.
+	</para>
+
+	<para>
+	General information about how to connect Linux, Windows machines and
+	Macs is on the WWW at http://www.eats.com/linux_mac_win.html.
+	</para>
+
+	<para>
+	To compile the SMB support as a module, choose M here: the module will
+	be called smbfs.  Most people say N, however.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CIFS">
+<refnamediv>
+	<refname>CIFS</refname>
+	<refpurpose>CIFS support (advanced network filesystem for Samba, Window and other CIFS compliant servers)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>NET and INET</literal></para>
+	<para role="select">Selects <literal>NLS</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This is the client VFS module for the Common Internet File System
+	(CIFS) protocol which is the successor to the Server Message Block 
+	(SMB) protocol, the native file sharing mechanism for most early
+	PC operating systems.  The CIFS protocol is fully supported by 
+	file servers such as Windows 2000 (including Windows 2003, NT 4  
+	and Windows XP) as well by Samba (which provides excellent CIFS
+	server support for Linux and many other operating systems). Limited
+	support for Windows ME and similar servers is provided as well. 
+	You must use the smbfs client filesystem to access older SMB servers
+	such as OS/2 and DOS.
+	</para>
+
+	<para>
+	The intent of the cifs module is to provide an advanced
+	network file system client for mounting to CIFS compliant servers, 
+	including support for dfs (hierarchical name space), secure per-user
+	session establishment, safe distributed caching (oplock), optional
+	packet signing, Unicode and other internationalization improvements, 
+	and optional Winbind (nsswitch) integration. You do not need to enable
+	cifs if running only a (Samba) server. It is possible to enable both
+	smbfs and cifs (e.g. if you are using CIFS for accessing Windows 2003
+	and Samba 3 servers, and smbfs for accessing old servers). If you need 
+	to mount to Samba or Windows from this machine, say Y.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PROFILING">
+<refnamediv>
+	<refname>PROFILING</refname>
+	<refpurpose>Profiling support (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here to enable the extended profiling support mechanisms used
+	by profilers such as OProfile.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_OPROFILE">
+<refnamediv>
+	<refname>OPROFILE</refname>
+	<refpurpose>OProfile system profiling (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EXPERIMENTAL and PROFILING</literal></para>
+	<para role="type">Type <literal>tristate</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	OProfile is a profiling system capable of profiling the
+	whole system, include the kernel, kernel modules, libraries,
+	and applications.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_KPROBES">
+<refnamediv>
+	<refname>KPROBES</refname>
+	<refpurpose>Kprobes (EXPERIMENTAL)</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>EXPERIMENTAL and MODULES</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Kprobes allows you to trap at almost any kernel address and
+	execute a callback function.  register_kprobe() establishes
+	a probepoint and specifies the callback.  Kprobes is useful
+	for kernel debugging, non-intrusive instrumentation and testing.
+	If in doubt, say "N".
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_PRINTK_TIME">
+<refnamediv>
+	<refname>PRINTK_TIME</refname>
+	<refpurpose>Show timing information on printks</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Selecting this option causes timing information to be
+	included in printk output.  This allows you to measure
+	the interval between kernel operations, including bootup
+	operations.  This is useful for identifying long delays
+	in kernel startup.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_MAGIC_SYSRQ">
+<refnamediv>
+	<refname>MAGIC_SYSRQ</refname>
+	<refpurpose>Magic SysRq key</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>!UML</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	If you say Y here, you will have some control over the system even
+	if the system crashes for example during kernel debugging (e.g., you
+	will be able to flush the buffer cache to disk, reboot the system
+	immediately or dump some status information). This is accomplished
+	by pressing various keys while holding SysRq (Alt+PrintScreen). It
+	also works on a serial console (on PC hardware at least), if you
+	send a BREAK and then within 5 seconds a command keypress. The
+	keys are documented in file:Documentation/sysrq.txt. Don't say Y
+	unless you really know what this hack does.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_DEBUG_KERNEL">
+<refnamediv>
+	<refname>DEBUG_KERNEL</refname>
+	<refpurpose>Kernel debugging</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	Say Y here if you are developing drivers or trying to debug and
+	identify kernel problems.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_DEBUG_FS">
+<refnamediv>
+	<refname>DEBUG_FS</refname>
+	<refpurpose>Debug Filesystem</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SYSFS</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	debugfs is a virtual file system that kernel developers use to put
+	debugging files into.  Enable this option to be able to read and
+	write to these files.
+	</para>
+
+	<para>
+	If unsure, say N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SECURITY">
+<refnamediv>
+	<refname>SECURITY</refname>
+	<refpurpose>Enable different security models</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SYSFS</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This allows you to choose different security modules to be
+	configured into your kernel.
+	</para>
+
+	<para>
+	If this option is not selected, the default Linux security
+	model will be used.
+	</para>
+
+	<para>
+	If you are unsure how to answer this question, answer N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_SECURITY_SELINUX">
+<refnamediv>
+	<refname>SECURITY_SELINUX</refname>
+	<refpurpose>NSA SELinux Support</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="depends">Depends on <literal>SECURITY_NETWORK and AUDIT and NET and INET</literal></para>
+	<para role="default">Default Value <literal>n if SECURITY_NETWORK and AUDIT and NET and INET</literal></para>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This selects NSA Security-Enhanced Linux (SELinux).
+	You will also need a policy configuration and a labeled filesystem.
+	You can obtain the policy compiler (checkpolicy), the utility for
+	labeling filesystems (setfiles), and an example policy configuration
+	from http://www.nsa.gov/selinux/.
+	If you are unsure how to answer this question, answer N.
+	</para>
+
+</refsect1>
+</refentry>
+
+<refentry id="CONFIG_CRYPTO">
+<refnamediv>
+	<refname>CRYPTO</refname>
+	<refpurpose>Cryptographic API</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+	<para role="type">Type <literal>boolean</literal></para>
+</refsynopsisdiv>
+<refsect1>
+	<title>Description</title>
+	<para>
+	This option provides the core Cryptographic API.
+	</para>
+
+</refsect1>
+</refentry>
+
+#
+# using defaults found in .config
+#
