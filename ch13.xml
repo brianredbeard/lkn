@@ -145,27 +145,6 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_KALLSYMS">
-<refnamediv>
-	<refname>KALLSYMS</refname>
-	<refpurpose>Load all symbols for debugging/kksymoops</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Say Y here to let the kernel print out symbolic crash information and
-	symbolic stack backtraces. This increases the size of the kernel
-	somewhat, as all symbols have to be loaded into the kernel image.
-	</para>
-
-</refsect1>
-</refentry>
-
 <refentry id="CONFIG_MODULES">
 <refnamediv>
 	<refname>MODULES</refname>
@@ -894,10 +873,12 @@ Kernel configuration option reference
 	<para>
 	Power Management is most important for battery powered laptop
 	computers; if you have a laptop, check out the Linux Laptop home
-	page on the WWW at http://www.linux-on-laptops.com/ or
-	Tuxmobil - Linux on Mobile Computers at http://www.tuxmobil.org/
+	page on the WWW at
+	<systemitem class="url">http://www.linux-on-laptops.com/</systemitem> or
+	Tuxmobil - Linux on Mobile Computers at
+	<systemitem class="url">http://www.tuxmobil.org/</systemitem>
 	and the Battery Powered Linux mini-HOWTO, available from
-	http://www.tldp.org/docs.html#howto.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -987,110 +968,20 @@ Kernel configuration option reference
 	The ACPI SourceForge project contains the latest source code, 
 	documentation, tools, mailing list subscription, and other 
 	information.  This project is available at:
-	http://sourceforge.net/projects/acpi
+	<systemitem class="url">http://sourceforge.net/projects/acpi</systemitem>
 	</para>
 
 	<para>
 	Linux support for ACPI is based on Intel Corporation's ACPI
 	Component Architecture (ACPI CA).  For more information see:
-	http://developer.intel.com/technology/iapc/acpi
+	<systemitem class="url">http://developer.intel.com/technology/iapc/acpi</systemitem>
 	</para>
 
 	<para>
 	ACPI is an open industry specification co-developed by Compaq, 
 	Intel, Microsoft, Phoenix, and Toshiba.  The specification is 
 	available at:
-	http://www.acpi.info
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_APM">
-<refnamediv>
-	<refname>APM</refname>
-	<refpurpose>APM (Advanced Power Management) BIOS support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and PM</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	APM is a BIOS specification for saving power using several different
-	techniques. This is mostly useful for battery powered laptops with
-	APM compliant BIOSes. If you say Y here, the system time will be
-	reset after a RESUME operation, the /proc/apm device will provide
-	battery status information, and user-space programs will receive
-	notification of APM "events" (e.g. battery status change).
-	</para>
-
-	<para>
-	If you select "Y" here, you can disable actual use of the APM
-	BIOS by passing the "apm=off" option to the kernel at boot time.
-	</para>
-
-	<para>
-	Note that the APM support is almost completely disabled for
-	machines with more than one CPU.
-	</para>
-
-	<para>
-	In order to use APM, you will need supporting software. For location
-	and more information, read
-	<filename>Documentation/pm.txt</filename> and the
-	Battery Powered Linux mini-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
-	</para>
-
-	<para>
-	This driver does not spin down disk drives (see the hdparm(8)
-	manpage ("man 8 hdparm") for that), and it doesn't turn off
-	VESA-compliant "green" monitors.
-	</para>
-
-	<para>
-	This driver does not support the TI 4000M TravelMate and the ACER
-	486/DX4/75 because they don't have compliant BIOSes. Many "green"
-	desktop machines also don't have compliant BIOSes, and this driver
-	may cause those machines to panic during the boot phase.
-	</para>
-
-	<para>
-	Generally, if you don't have a battery in your machine, there isn't
-	much point in using this driver and you should say N. If you get
-	random kernel OOPSes or reboots that don't seem to be related to
-	anything, try disabling/enabling this option (or disabling/enabling
-	APM in your BIOS).
-	</para>
-
-	<para>
-	Some other things you should try when experiencing seemingly random,
-	"weird" problems:
-	</para>
-
-	<para>
-	1) make sure that you have enough swap space and that it is
-	enabled.
-	2) pass the "no-hlt" option to the kernel
-	3) switch on floating point emulation in the kernel and pass
-	the "no387" option to the kernel
-	4) pass the "floppy=nodma" option to the kernel
-	5) pass the "mem=4M" option to the kernel (thereby disabling
-	all but the first 4 MB of RAM)
-	6) make sure that the CPU is not over clocked.
-	7) read the sig11 FAQ at http://www.bitwizard.nl/sig11/
-	8) disable the cache from your BIOS settings
-	9) install a fan for the video card or exchange video RAM
-	10) install a better fan for the CPU
-	11) exchange RAM chips
-	12) exchange the motherboard.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called apm.
+	<systemitem class="url">http://www.acpi.info</systemitem>
 	</para>
 
 </refsect1>
@@ -1235,7 +1126,7 @@ Kernel configuration option reference
 	Enable this cpufreq governor when you either want to set the
 	CPU frequency manually or when an userspace program shall
 	be able to set the CPU dynamically, like on LART 
-	http://www.lartmaker.nl/.
+	<systemitem class="url">http://www.lartmaker.nl/</systemitem>.
 	</para>
 
 	<para>
@@ -1340,7 +1231,7 @@ Kernel configuration option reference
 
 	<para>
 	The PCI-HOWTO, available from
-	http://www.tldp.org/docs.html#howto, contains valuable
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, contains valuable
 	information about which PCI hardware does work under Linux and which
 	doesn't.
 	</para>
@@ -1525,7 +1416,7 @@ Kernel configuration option reference
 	<para>
 	For a general introduction to Linux networking, it is highly
 	recommended to read the NET-HOWTO, available from
-	http://www.tldp.org/docs.html#howto.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 </refsect1>
@@ -1588,7 +1479,7 @@ Kernel configuration option reference
 	<para>
 	For an excellent introduction to Linux networking, please read the
 	Linux Networking HOWTO, available from
-	http://www.tldp.org/docs.html#howto.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -1790,7 +1681,7 @@ Kernel configuration option reference
 	To administer these schedulers, you'll need the user-level utilities
 	from the package iproute2+tc at ftp://ftp.tux.org/pub/net/ip-routing/.
 	That package also contains some documentation; for more, check out
-	http://linux-net.osdl.org/index.php/Iproute2.
+	<systemitem class="url">http://linux-net.osdl.org/index.php/Iproute2</systemitem>.
 	</para>
 
 	<para>
@@ -1798,7 +1689,7 @@ Kernel configuration option reference
 	Differentiated Services (diffserv) and Resource Reservation Protocol
 	(RSVP) on your Linux router if you also say Y to the corresponding
 	classifiers below.  Documentation and software is at
-	http://diffserv.sourceforge.net/.
+	<systemitem class="url">http://diffserv.sourceforge.net/</systemitem>.
 	</para>
 
 	<para>
@@ -1844,7 +1735,7 @@ Kernel configuration option reference
 	<para>
 	If you want to exchange bits of data (vCal, vCard) with a PDA, you
 	will need to install some OBEX application, such as OpenObex :
-	http://sourceforge.net/projects/openobex/
+	<systemitem class="url">http://sourceforge.net/projects/openobex/</systemitem>
 	</para>
 
 	<para>
@@ -1972,7 +1863,7 @@ Kernel configuration option reference
 	It was designed as a replacement for cables and other short-range
 	technologies like IrDA.  Bluetooth operates in personal area range
 	that typically extends up to 10 meters.  More information about
-	Bluetooth can be found at http://www.bluetooth.com/.
+	Bluetooth can be found at <systemitem class="url">http://www.bluetooth.com/</systemitem>.
 	</para>
 
 	<para>
@@ -1996,7 +1887,7 @@ Kernel configuration option reference
 	To use Linux Bluetooth subsystem, you will need several user-space
 	utilities like hciconfig and hcid.  These utilities and updates to
 	Bluetooth kernel modules are provided in the BlueZ packages.
-	For more information, see http://www.bluez.org/.
+	For more information, see <systemitem class="url">http://www.bluez.org/</systemitem>.
 	</para>
 
 </refsect1>
@@ -2016,51 +1907,6 @@ Kernel configuration option reference
 	<para>
 	This option enables the hardware independent IEEE 802.11
 	networking stack.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_STANDALONE">
-<refnamediv>
-	<refname>STANDALONE</refname>
-	<refpurpose>Select only drivers that don't need compile-time external firmware</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Select this option if you don't have magic firmware for drivers that
-	need it.
-	</para>
-
-	<para>
-	If unsure, say Y.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_PREVENT_FIRMWARE_BUILD">
-<refnamediv>
-	<refname>PREVENT_FIRMWARE_BUILD</refname>
-	<refpurpose>Prevent firmware from being built</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Say yes to avoid building firmware. Firmware is usually shipped
-	with the driver, and only when updating the firmware a rebuild
-	should be made.
-	If unsure say Y here.
 	</para>
 
 </refsect1>
@@ -2111,8 +1957,7 @@ Kernel configuration option reference
 
 	<para>
 	For extensive information about drivers for many devices attaching
-	to the parallel port see http://www.torque.net/linux-pp.html on
-	the WWW.
+	to the parallel port see <systemitem class="url">http://www.torque.net/linux-pp.html</systemitem>.
 	</para>
 
 	<para>
@@ -2123,36 +1968,6 @@ Kernel configuration option reference
 	If you have more than one parallel port and want to specify which
 	port and IRQ to be used by this driver at module load time, take a
 	look at <filename>Documentation/parport.txt</filename>.
-	</para>
-
-	<para>
-	If unsure, say Y.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_PARPORT_PC">
-<refnamediv>
-	<refname>PARPORT_PC</refname>
-	<refpurpose>PC-style hardware</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PARPORT and (!SPARC64 || PCI) and !SPARC32 and !M32R and !FRV</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	You should say Y here if you have a PC-style parallel port. All
-	IBM PC compatible computers and some Alphas have PC-style
-	parallel ports.  PA-RISC owners should only say Y here if they
-	have a SuperIO parallel port.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called parport_pc.
 	</para>
 
 	<para>
@@ -2252,72 +2067,6 @@ Kernel configuration option reference
 	Note: ACPI is expected to supersede PNPBIOS some day, currently it
 	co-exists nicely.  If you have a non-ISA system that supports ACPI,
 	you probably don't need PNPBIOS support.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_PNPBIOS_PROC_FS">
-<refnamediv>
-	<refname>PNPBIOS_PROC_FS</refname>
-	<refpurpose>Plug and Play BIOS /proc interface</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PNPBIOS and PROC_FS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	If you say Y here and to "/proc file system support", you will be
-	able to directly access the PNPBIOS.  This includes resource
-	allocation, ESCD, and other PNPBIOS services.  Using this
-	interface is potentially dangerous because the PNPBIOS driver will
-	not be notified of any resource changes made by writing directly.
-	Also some buggy systems will fault when accessing certain features
-	in the PNPBIOS /proc interface (e.g. "boot" configs).
-	</para>
-
-	<para>
-	See the latest pcmcia-cs (stand-alone package) for a nice set of
-	PNPBIOS /proc interface tools (lspnp and setpnp).
-	</para>
-
-	<para>
-	Unless you are debugging or have other specific reasons, it is
-	recommended that you say N here.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_PNPACPI">
-<refnamediv>
-	<refname>PNPACPI</refname>
-	<refpurpose>Plug and Play ACPI support (EXPERIMENTAL)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PNP and ACPI and EXPERIMENTAL</literal></para>
-	<para role="default">Default Value <literal>y if PNP and ACPI and EXPERIMENTAL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Linux uses the PNPACPI to autodetect built-in
-	mainboard resources (e.g. parallel port resources).
-	</para>
-
-	<para>
-	Some features (e.g. real hotplug) are not currently
-	implemented.
-	</para>
-
-	<para>
-	If you would like the kernel to detect and allocate resources to
-	your mainboard devices (on some systems they are disabled by the
-	BIOS) say Y here.  Also the PNPACPI can help prevent resource
-	conflicts between mainboard devices and other bus devices.
 	</para>
 
 </refsect1>
@@ -2448,78 +2197,6 @@ Kernel configuration option reference
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_BLK_DEV_IDE_SATA">
-<refnamediv>
-	<refname>BLK_DEV_IDE_SATA</refname>
-	<refpurpose>Support for SATA (deprecated; conflicts with libata SATA driver)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
-	<para role="default">Default Value <literal>n if IDE and BLK_DEV_IDE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	There are two drivers for Serial ATA controllers.
-	</para>
-
-	<para>
-	The main driver, "libata", exists inside the SCSI subsystem
-	and supports most modern SATA controllers.
-	</para>
-
-	<para>
-	The IDE driver (which you are currently configuring) supports
-	a few first-generation SATA controllers.
-	</para>
-
-	<para>
-	In order to eliminate conflicts between the two subsystems,
-	this config option enables the IDE driver's SATA support.
-	Normally this is disabled, as it is preferred that libata
-	supports SATA controllers, and this (IDE) driver supports
-	PATA controllers.
-	</para>
-
-	<para>
-	If unsure, say N.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_BLK_DEV_HD_IDE">
-<refnamediv>
-	<refname>BLK_DEV_HD_IDE</refname>
-	<refpurpose>Use old disk-only driver on primary interface</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and (X86 || SH_MPC1211)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	There are two drivers for MFM/RLL/IDE disks.  Most people use just
-	the new enhanced driver by itself.  This option however installs the
-	old hard disk driver to control the primary IDE/disk interface in
-	the system, leaving the new enhanced IDE driver to take care of only
-	the 2nd/3rd/4th IDE interfaces.  Doing this will prevent you from
-	having an IDE/ATAPI CD-ROM or tape drive connected to the primary
-	IDE interface.  Choosing this option may be useful for older systems
-	which have MFM/RLL/ESDI controller+drives at the primary port
-	address (0x1f0), along with IDE drives at the secondary/3rd/4th port
-	addresses.
-	</para>
-
-	<para>
-	Normally, just say N here; you will then use the new driver for all
-	4 interfaces.
-	</para>
-
-</refsect1>
-</refentry>
 
 <refentry id="CONFIG_BLK_DEV_IDEDISK">
 <refnamediv>
@@ -2548,52 +2225,6 @@ Kernel configuration option reference
 
 	<para>
 	If unsure, say Y.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_IDEDISK_MULTI_MODE">
-<refnamediv>
-	<refname>IDEDISK_MULTI_MODE</refname>
-	<refpurpose>Use multi-mode by default</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	If you get this error, try to say Y here:
-	</para>
-
-	<para>
-	hda: set_multmode: status=0x51 { DriveReady SeekComplete Error }
-	hda: set_multmode: error=0x04 { DriveStatusError }
-	</para>
-
-	<para>
-	If in doubt, say N.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_BLK_DEV_IDECS">
-<refnamediv>
-	<refname>BLK_DEV_IDECS</refname>
-	<refpurpose>PCMCIA IDE support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and PCMCIA</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Support for Compact Flash cards, outboard IDE disks, tape drives,
-	and CD-ROM drives connected through a PCMCIA card.
 	</para>
 
 </refsect1>
@@ -2629,54 +2260,12 @@ Kernel configuration option reference
 	<para>
 	Note that older versions of LILO (LInux LOader) cannot properly deal
 	with IDE/ATAPI CD-ROMs, so install LILO 16 or higher, available from
-	http://lilo.go.dyndns.org/.
+	<systemitem class="url">http://lilo.go.dyndns.org/</systemitem>.
 	</para>
 
 	<para>
 	To compile this driver as a module, choose M here: the
 	module will be called ide-cd.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_BLK_DEV_IDETAPE">
-<refnamediv>
-	<refname>BLK_DEV_IDETAPE</refname>
-	<refpurpose>Include IDE/ATAPI TAPE support (EXPERIMENTAL)</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and EXPERIMENTAL</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	If you have an IDE tape drive using the ATAPI protocol, say Y.
-	ATAPI is a newer protocol used by IDE tape and CD-ROM drives,
-	similar to the SCSI protocol.  If you have an SCSI tape drive
-	however, you can say N here.
-	</para>
-
-	<para>
-	You should also say Y if you have an OnStream DI-30 tape drive; this
-	will not work with the SCSI protocol, until there is support for the
-	SC-30 and SC-50 versions.
-	</para>
-
-	<para>
-	If you say Y here, the tape drive will be identified at boot time
-	along with other IDE devices, as "hdb" or "hdc", or something
-	similar, and will be mapped to a character device such as "ht0"
-	(check the boot messages with dmesg).  Be sure to consult the
-	<filename>drivers/ide/ide-tape.c</filename> and
-	<filename>Documentation/ide.txt</filename> files
-	for usage information.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ide-tape.
 	</para>
 
 </refsect1>
@@ -2703,7 +2292,7 @@ Kernel configuration option reference
 	The LS-120 and the IDE/ATAPI Iomega ZIP drive are also supported by
 	this driver. For information about jumper settings and the question
 	of when a ZIP drive uses a partition table, see
-	http://www.win.tue.nl/~aeb/linux/zip/zip-1.html.
+	<systemitem class="url">http://www.win.tue.nl/~aeb/linux/zip/zip-1.html</systemitem>.
 	(ATAPI PD-CD/CDR drives are not supported by this driver; support
 	for PD-CD/CDR drives is available if you answer Y to
 	"SCSI emulation support", below).
@@ -2718,75 +2307,6 @@ Kernel configuration option reference
 	<para>
 	To compile this driver as a module, choose M here: the
 	module will be called ide-floppy.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_BLK_DEV_IDESCSI">
-<refnamediv>
-	<refname>BLK_DEV_IDESCSI</refname>
-	<refpurpose>SCSI emulation support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE and SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	WARNING: ide-scsi is no longer needed for cd writing applications!
-	The 2.6 kernel supports direct writing to ide-cd, which eliminates
-	the need for ide-scsi + the entire scsi stack just for writing a
-	cd. The new method is more efficient in every way.
-	</para>
-
-	<para>
-	This will provide SCSI host adapter emulation for IDE ATAPI devices,
-	and will allow you to use a SCSI device driver instead of a native
-	ATAPI driver.
-	</para>
-
-	<para>
-	This is useful if you have an ATAPI device for which no native
-	driver has been written (for example, an ATAPI PD-CD drive);
-	you can then use this emulation together with an appropriate SCSI
-	device driver. In order to do this, say Y here and to "SCSI support"
-	and "SCSI generic support", below. You must then provide the kernel
-	command line "hdx=ide-scsi" (try "man bootparam" or see the
-	documentation of your boot loader (lilo or loadlin) about how to
-	pass options to the kernel at boot time) for devices if you want the
-	native EIDE sub-drivers to skip over the native support, so that
-	this SCSI emulation can be used instead.
-	</para>
-
-	<para>
-	Note that this option does NOT allow you to attach SCSI devices to a
-	box that doesn't have a SCSI host adapter installed.
-	</para>
-
-	<para>
-	If both this SCSI emulation and native ATAPI support are compiled
-	into the kernel, the native support will be used.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_IDE_GENERIC">
-<refnamediv>
-	<refname>IDE_GENERIC</refname>
-	<refpurpose>generic/default IDE chipset support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
-	<para role="default">Default Value <literal>y if IDE and BLK_DEV_IDE</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -2847,7 +2367,7 @@ Kernel configuration option reference
 	USB storage or the SCSI or parallel port version of
 	the IOMEGA ZIP drive, say Y and read the SCSI-HOWTO,
 	the Disk-HOWTO and the Multi-Disk-HOWTO, available from
-	http://www.tldp.org/docs.html#howto. This is NOT for SCSI
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. This is NOT for SCSI
 	CD-ROMs.
 	</para>
 
@@ -2914,10 +2434,10 @@ Kernel configuration option reference
 	tape drives (ADR-x0) that supports the standard SCSI-2 commands for
 	tapes (QIC-157) and can be driven by the standard driver st.
 	For more information, you may have a look at the SCSI-HOWTO
-	http://www.tldp.org/docs.html#howto  and
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>  and
 	<filename>Documentation/scsi/osst.txt</filename> in the kernel source.
 	More info on the OnStream driver may be found on
-	http://linux1.onstream.nl/test/
+	<systemitem class="url">http://linux1.onstream.nl/test/</systemitem>
 	Please also have a look at the standard st docu, as most of it
 	applies to osst as well.
 	</para>
@@ -2944,7 +2464,7 @@ Kernel configuration option reference
 	<para>
 	If you want to use a SCSI or FireWire CD-ROM under Linux,
 	say Y and read the SCSI-HOWTO and the CDROM-HOWTO at
-	http://www.tldp.org/docs.html#howto. Also make sure to say
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. Also make sure to say
 	Y or M to "ISO 9660 CD-ROM file system support" later.
 	</para>
 
@@ -3123,7 +2643,7 @@ Kernel configuration option reference
 	<para>
 	More information about Software RAID on Linux is contained in the
 	Software RAID mini-HOWTO, available from
-	http://www.tldp.org/docs.html#howto. There you will also learn
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. There you will also learn
 	where to get the supporting user space utilities raidtools.
 	</para>
 
@@ -3269,7 +2789,7 @@ Kernel configuration option reference
 
 	<para>
 	See also "The Linux Network Administrator's Guide" by Olaf Kirch and
-	Terry Dawson. Available at http://www.tldp.org/guides.html.
+	Terry Dawson. Available at <systemitem class="url">http://www.tldp.org/guides.html</systemitem>.
 	</para>
 
 	<para>
@@ -3311,7 +2831,7 @@ Kernel configuration option reference
 	If your Linux machine will be connected to an Ethernet and you have
 	an Ethernet network interface card (NIC) installed in your computer,
 	say Y here and read the Ethernet-HOWTO, available from
-	http://www.tldp.org/docs.html#howto. You will then also have
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. You will then also have
 	to say Y to the driver for your particular NIC.
 	</para>
 
@@ -3344,7 +2864,7 @@ Kernel configuration option reference
 	<para>
 	If you have such an adapter and would like to use it, say Y or M and
 	read the Token-Ring mini-HOWTO, available from
-	http://www.tldp.org/docs.html#howto and the file
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem> and the file
 	<filename>Documentation/networking/smctr.txt</filename>.
 	</para>
 
@@ -3385,7 +2905,7 @@ Kernel configuration option reference
 	driver (or Linux). If you wish to use Wireless Extensions with
 	wireless PCMCIA (PC-) cards, you need to say Y here; you can fetch
 	the tools from
-	http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html.
+	<systemitem class="url">http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html</systemitem>.
 	</para>
 
 </refsect1>
@@ -3426,7 +2946,7 @@ Kernel configuration option reference
 	<para>
 	To use PPP, you need an additional program called pppd as described
 	in the PPP-HOWTO, available at
-	http://www.tldp.org/docs.html#howto.  Make sure that you have
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.  Make sure that you have
 	the version of pppd recommended in <filename>Documentation/Changes</filename>.
 	The PPP option enlarges your kernel by about 16 KB.
 	</para>
@@ -3471,7 +2991,7 @@ Kernel configuration option reference
 	<para>
 	This driver requires the latest version of pppd from the CVS
 	repository at cvs.samba.org.  Alternatively, see the 
-	RoaringPenguin package (http://www.roaringpenguin.com/pppoe)
+	RoaringPenguin package <systemitem class="url">http://www.roaringpenguin.com/pppoe</systemitem>
 	which contains instruction on how to use this driver (under 
 	the heading "Kernel mode PPPoE").
 	</para>
@@ -3499,7 +3019,7 @@ Kernel configuration option reference
 	conversations while downloading stuff.  It only works if your
 	computer is equipped with an ISDN card and both you and your service
 	provider purchased an ISDN line from the phone company.  For
-	details, read http://www.alumni.caltech.edu/~dank/isdn/ on the WWW.
+	details, read <systemitem class="url">http://www.alumni.caltech.edu/~dank/isdn/</systemitem>.
 	</para>
 
 	<para>
@@ -3808,7 +3328,7 @@ Kernel configuration option reference
 	introduced in XFree86 4.0. If you say Y here, you need to select
 	the module that's right for your graphics card from the list below.
 	These modules provide support for synchronization, security, and
-	DMA transfers. Please see http://dri.sourceforge.net/ for more
+	DMA transfers. Please see <systemitem class="url">http://dri.sourceforge.net/</systemitem> for more
 	details.  You should also select and configure AGP
 	(/dev/agpgart) support.
 	</para>
@@ -3941,12 +3461,12 @@ Kernel configuration option reference
 
 	<para>
 	Additional info and docs are available on the web at
-	http://linuxtv.org
+	<systemitem class="url">http://linuxtv.org</systemitem>
 	</para>
 
 	<para>
 	Documentation for V4L2 is also available on the web at
-	http://bytesex.org/v4l/.
+	<systemitem class="url">http://bytesex.org/v4l/</systemitem>.
 	</para>
 
 	<para>
@@ -3988,7 +3508,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	API specs and user tools are available from http://www.linuxtv.org/.
+	API specs and user tools are available from <systemitem class="url">http://www.linuxtv.org/</systemitem>.
 	</para>
 
 	<para>
@@ -4039,7 +3559,7 @@ Kernel configuration option reference
 	You need an utility program called fbset to make full use of frame
 	buffer devices. Please read <filename>Documentation/fb/framebuffer.txt</filename>
 	and the Framebuffer-HOWTO at
-	http://www.tahallah.demon.co.uk/programming/prog.html for more
+	<systemitem class="url">http://www.tahallah.demon.co.uk/programming/prog.html</systemitem> for more
 	information.
 	</para>
 
@@ -4127,7 +3647,7 @@ Kernel configuration option reference
 
 	<para>
 	You want to read the Sound-HOWTO, available from
-	http://www.tldp.org/docs.html#howto. General information about
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. General information about
 	the modular sound system is contained in the files
 	<filename>Documentation/sound/oss/Introduction</filename>.  The file
 	<filename>Documentation/sound/oss/README.OSS</filename> contains some slightly
@@ -4138,7 +3658,7 @@ Kernel configuration option reference
 	<para>
 	If you have a PnP sound card and you want to configure it at boot
 	time using the ISA PnP tools (read
-	http://www.roestock.demon.co.uk/isapnptools/), then you need to
+	<systemitem class="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>), then you need to
 	compile the sound card support as a module and load that module
 	after the PnP configuration is finished.  To do this, choose M here
 	and read <filename>Documentation/sound/oss/README.modules</filename>; the module
@@ -4172,7 +3692,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For more information, see http://www.alsa-project.org/
+	For more information, see <systemitem class="url">http://www.alsa-project.org/</systemitem>
 	</para>
 
 </refsect1>
@@ -4473,7 +3993,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	For more information, see http://www.linux-usb.org/gadget and
+	For more information, see <systemitem class="url">http://www.linux-usb.org/gadget</systemitem> and
 	the kernel DocBook documentation for this API.
 	</para>
 
@@ -4546,7 +4066,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	http://bluesmoke.sourceforge.net/
+	<systemitem class="url">http://bluesmoke.sourceforge.net/</systemitem>
 	</para>
 
 	<para>
@@ -4554,7 +4074,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	http://buttersideup.com/edacwiki
+	<systemitem class="url">http://buttersideup.com/edacwiki</systemitem>
 	</para>
 
 	<para>
@@ -4632,7 +4152,7 @@ Kernel configuration option reference
 	tune2fs").  To modify attributes of files and directories on ext3
 	file systems, use chattr ("man chattr").  You need to be using
 	e2fsprogs version 1.20 or later in order to create ext3 journals
-	(available at http://sourceforge.net/projects/e2fsprogs/).
+	(available at <systemitem class="url">http://sourceforge.net/projects/e2fsprogs/</systemitem>).
 	</para>
 
 	<para>
@@ -4668,7 +4188,7 @@ Kernel configuration option reference
 	<para>
 	In general, ReiserFS is as fast as ext2, but is very efficient with
 	large directories and small files.  Additional patches are needed
-	for NFS and quotas, please see http://www.namesys.com/ for links.
+	for NFS and quotas, please see <systemitem class="url">http://www.namesys.com/ </systemitem>for links.
 	</para>
 
 	<para>
@@ -4680,7 +4200,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Read http://www.namesys.com/ to learn more about reiserfs.
+	Read <systemitem class="url">http://www.namesys.com/</systemitem>to learn more about reiserfs.
 	</para>
 
 	<para>
@@ -4739,7 +4259,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Refer to the documentation at http://oss.sgi.com/projects/xfs/
+	Refer to the documentation at <systemitem class="url">http://oss.sgi.com/projects/xfs/</systemitem>
 	for complete details.  This implementation is on-disk compatible
 	with the IRIX version of XFS.
 	</para>
@@ -4782,9 +4302,9 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Project web page:    http://oss.oracle.com/projects/ocfs2
-	Tools web page:      http://oss.oracle.com/projects/ocfs2-tools
-	OCFS2 mailing lists: http://oss.oracle.com/projects/ocfs2/mailman/
+	Project web page:    <systemitem class="url">http://oss.oracle.com/projects/ocfs2</systemitem>
+	Tools web page:      <systemitem class="url">http://oss.oracle.com/projects/ocfs2-tools</systemitem>
+	OCFS2 mailing lists: <systemitem class="url">http://oss.oracle.com/projects/ocfs2/mailman/</systemitem>
 	</para>
 
 	<para>
@@ -4853,7 +4373,7 @@ Kernel configuration option reference
 	quotas for which you don't need to run quotacheck(8) after an unclean
 	shutdown.
 	For further details, read the Quota mini-HOWTO, available from
-	http://www.tldp.org/docs.html#howto, or the documentation provided
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, or the documentation provided
 	with the quota tools. Probably the quota support is only useful for
 	multi user systems. If unsure, say N.
 	</para>
@@ -4921,7 +4441,7 @@ Kernel configuration option reference
 	<para>
 	There's also companion library: libfuse.  This library along with
 	utilities is available from the FUSE homepage:
-	http://fuse.sourceforge.net/
+	<systemitem class="url">http://fuse.sourceforge.net/</systemitem>
 	</para>
 
 	<para>
@@ -4972,7 +4492,7 @@ Kernel configuration option reference
 
 	<para>
 	General information about how to connect Linux, Windows machines and
-	Macs is on the WWW at http://www.eats.com/linux_mac_win.html.
+	Macs is at <systemitem class="url">http://www.eats.com/linux_mac_win.html</systemitem>.
 	</para>
 
 	<para>
@@ -5223,7 +4743,7 @@ Kernel configuration option reference
 	You will also need a policy configuration and a labeled filesystem.
 	You can obtain the policy compiler (checkpolicy), the utility for
 	labeling filesystems (setfiles), and an example policy configuration
-	from http://www.nsa.gov/selinux/.
+	from <systemitem class="url">http://www.nsa.gov/selinux/</systemitem>.
 	If you are unsure how to answer this question, answer N.
 	</para>
 
