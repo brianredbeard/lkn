@@ -337,7 +337,7 @@
 +	}
 +	fprintf(out, "</literal></para>\n");
 +
-+	fprintf(out, "\t<para role=\"module\">Module Name <filename>FIXME</filename></para>\n");
++//	fprintf(out, "\t<para role=\"module\">Module Name <filename>FIXME</filename></para>\n");
 +	fprintf(out, "</refsynopsisdiv>\n");
 +
 +
