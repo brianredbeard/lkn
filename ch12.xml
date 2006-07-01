@@ -6,24 +6,60 @@ Kernel build command line reference
 
 <simplesect>
 
+<para>
+As discussed in Chapter 5, the kernel is built by using the
+<literal>make</literal> program and passing it a target specifying what you
+want to build.  That chapter went over the basic options needed to know to
+build the kernel properly, but the kernel build system has a wide range of
+other options availble.  This chapter details these options, and what they
+can be used for.
+</para>
+
+<para>
+All of these options are passed to the <literal>make</literal> program on
+the command line, and a number of them can be grouped together if desired.
+They are broken down into the different type of options.
+</para>
+
+</simplesect>
+
+<sect1>
+<title>Cleaning options</title>
+
+<para>
 <screen>
-Cleaning targets:
   clean		  - remove most generated files but keep the config
   mrproper	  - remove all generated files + config + various backup files
+  distclean	  - everything mrproper does + editor backup and patch leftover files.
+</screen>
 
-Configuration targets:
+</para>
+</sect1>
+
+<sect1>
+<title>Configuring options</title>
+<para>
+<screen>
   config	  - Update current config utilising a line-oriented program
   menuconfig	  - Update current config utilising a menu based program
   xconfig	  - Update current config utilising a QT based front-end
   gconfig	  - Update current config utilising a GTK based front-end
   oldconfig	  - Update current config utilising a provided .config as base
+  silentoldconfig - Like oldconfig, but nothing is printed to the screen,
+  		    except where a question needs to be answered.
   randconfig	  - New config with random answer to all options
   defconfig	  - New config with default answer to all options
   allmodconfig	  - New config selecting modules when possible
   allyesconfig	  - New config where all options are accepted with yes
   allnoconfig	  - New config where all options are answered with no
+</screen>
+</para>
+</sect1>
 
-Other generic targets:
+<sect1>
+<title>Build options</title>
+<para>
+<screen>
   all		  - Build all targets marked with [*]
 * vmlinux	  - Build the bare kernel
 * modules	  - Build all modules
@@ -34,14 +70,40 @@ Other generic targets:
   rpm		  - Build a kernel as an RPM package
   tags/TAGS	  - Generate tags file for editors
   cscope	  - Generate cscope index
+
+  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build
+  make O=dir [targets] Locate all output files in "dir", including .config
+  make C=1   [targets] Check all c source with $CHECK (sparse)
+  make C=2   [targets] Force check of all c source with $CHECK (sparse)
+
+</screen>
+</para>
+</sect1>
+
+<sect1>
+<title>Informational options</title>
+<para>
+<screen>
   kernelrelease	  - Output the release version string
   kernelversion	  - Output the version stored in Makefile
+</screen>
+</para>
+</sect1>
 
-Static analysers
+<sect1>
+<title>Analyser options</title>
+<para>
+<screen>
   checkstack      - Generate a list of stack hogs
   namespacecheck  - Name space analysis on compiled kernel
+</screen>
+</para>
+</sect1>
 
-Kernel packaging:
+<sect1>
+<title>Packaging options</title>
+<para>
+<screen>
   rpm-pkg         - Build the kernel as an RPM package
   binrpm-pkg      - Build an rpm package containing the compiled kernel
                     and modules
@@ -49,13 +111,31 @@ Kernel packaging:
   tar-pkg         - Build the kernel as an uncompressed tarball
   targz-pkg       - Build the kernel as a gzip compressed tarball
   tarbz2-pkg      - Build the kernel as a bzip2 compressed tarball
+</screen>
+</para>
+</sect1>
 
-Documentation targets:
-  Linux kernel internal documentation in different formats:
-  xmldocs (XML DocBook), psdocs (Postscript), pdfdocs (PDF)
-  htmldocs (HTML), mandocs (man pages, use installmandocs to install)
+<sect1>
+<title>Documentation options</title>
+<para>
+These options build the internal kernel documentation in a variety of
+different formats:
+<screen>
+  xmldocs (XML DocBook)
+  psdocs (Postscript)
+  pdfdocs (PDF)
+  htmldocs (HTML)
+  mandocs (man pages, use installmandocs to install)
+</screen>
+</para>
+</sect1>
 
-Architecture specific targets (i386):
+<sect1>
+<title>Architecture specific options</title>
+<para>
+Each kernel architecture has a set of specific options unique to it.  The
+32bit Intel architecture has these options availble:
+<screen>
 * bzImage	- Compressed kernel image (arch/i386/boot/bzImage)
   install	- Install kernel using
 		   (your) ~/bin/installkernel or
@@ -64,16 +144,10 @@ Architecture specific targets (i386):
   bzdisk       - Create a boot floppy in /dev/fd0
   fdimage      - Create a boot floppy image
   isoimage     - Create a boot CD-ROM image
-
-  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build
-  make O=dir [targets] Locate all output files in "dir", including .config
-  make C=1   [targets] Check all c source with $CHECK (sparse)
-  make C=2   [targets] Force check of all c source with $CHECK (sparse)
-
-Execute "make" or "make all" to build all targets marked with [*] 
-For further info see the ./README file
 </screen>
-</simplesect>
+</para>
+</sect1>
+
 </chapter>
 
 <!-- vim: set ai tw=72 : -->
