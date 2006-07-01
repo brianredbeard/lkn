@@ -8,37 +8,36 @@ Kernel build command line reference
 
 <screen>
 Cleaning targets:
-  clean           - remove most generated files but keep the config
-  mrproper        - remove all generated files + config + various backup files
+  clean		  - remove most generated files but keep the config
+  mrproper	  - remove all generated files + config + various backup files
 
 Configuration targets:
-  config          - Update current config utilising a line-oriented program
-  menuconfig      - Update current config utilising a menu based program
-  xconfig         - Update current config utilising a QT based front-end
-  gconfig         - Update current config utilising a GTK based front-end
-  oldconfig       - Update current config utilising a provided .config as base
-  randconfig      - New config with random answer to all options
-  defconfig       - New config with default answer to all options
-  allmodconfig    - New config selecting modules when possible
-  allyesconfig    - New config where all options are accepted with yes
-  allnoconfig     - New minimal config
+  config	  - Update current config utilising a line-oriented program
+  menuconfig	  - Update current config utilising a menu based program
+  xconfig	  - Update current config utilising a QT based front-end
+  gconfig	  - Update current config utilising a GTK based front-end
+  oldconfig	  - Update current config utilising a provided .config as base
+  randconfig	  - New config with random answer to all options
+  defconfig	  - New config with default answer to all options
+  allmodconfig	  - New config selecting modules when possible
+  allyesconfig	  - New config where all options are accepted with yes
+  allnoconfig	  - New config where all options are answered with no
 
 Other generic targets:
-  all             - Build all targets marked with [*]
-* vmlinux         - Build the bare kernel
-* modules         - Build all modules
-  modules_install - Install all modules
+  all		  - Build all targets marked with [*]
+* vmlinux	  - Build the bare kernel
+* modules	  - Build all modules
+  modules_install - Install all modules to INSTALL_MOD_PATH (default: /)
   dir/            - Build all files in dir and below
   dir/file.[ois]  - Build specified target only
   dir/file.ko     - Build module including final link
-  rpm             - Build a kernel as an RPM package
-  tags/TAGS       - Generate tags file for editors
-  cscope          - Generate cscope index
-  kernelrelease   - Output the release version string
+  rpm		  - Build a kernel as an RPM package
+  tags/TAGS	  - Generate tags file for editors
+  cscope	  - Generate cscope index
+  kernelrelease	  - Output the release version string
+  kernelversion	  - Output the version stored in Makefile
 
 Static analysers
-  buildcheck      - List dangling references to vmlinux discarded sections
-                    and init sections from non-init sections
   checkstack      - Generate a list of stack hogs
   namespacecheck  - Name space analysis on compiled kernel
 
@@ -57,22 +56,22 @@ Documentation targets:
   htmldocs (HTML), mandocs (man pages, use installmandocs to install)
 
 Architecture specific targets (i386):
-* bzImage       - Compressed kernel image (arch/i386/boot/bzImage)
-  install       - Install kernel using
-                   (your) ~/bin/installkernel or
-                   (distribution) /sbin/installkernel or
-                   install to $(INSTALL_PATH) and run lilo
+* bzImage	- Compressed kernel image (arch/i386/boot/bzImage)
+  install	- Install kernel using
+		   (your) ~/bin/installkernel or
+		   (distribution) /sbin/installkernel or
+		   install to $(INSTALL_PATH) and run lilo
   bzdisk       - Create a boot floppy in /dev/fd0
   fdimage      - Create a boot floppy image
+  isoimage     - Create a boot CD-ROM image
 
   make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build
   make O=dir [targets] Locate all output files in "dir", including .config
   make C=1   [targets] Check all c source with $CHECK (sparse)
   make C=2   [targets] Force check of all c source with $CHECK (sparse)
 
-Execute "make" or "make all" to build all targets marked with [*]
+Execute "make" or "make all" to build all targets marked with [*] 
 For further info see the ./README file
-
 </screen>
 </simplesect>
 </chapter>
