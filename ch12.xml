@@ -35,13 +35,11 @@ sections.
 <title>Cleaning options</title>
 
 <para>
-
 These options simply remove files from previous builds. Their use is
 highly recommended to make sure you don't contaminate new builds with
 files left over that may have been built with different options. They
 differ in how much they remove; sometimes you want to keep around
 files you've changed.
-
 </para>
 
 <table id="lkn-ch12-table-cleaning">
@@ -56,15 +54,18 @@ files you've changed.
     <tbody>
       <row>
 	<entry><para><literal>clean</literal></para></entry>
-	<entry><para>Remove most generated files but keep configuration.</para></entry>
+	<entry><para>Remove most of the generated files by the kernel build
+	system, but keep the kernel configuration.</para></entry>
       </row>
       <row>
 	<entry><para><literal>mrproper</literal></para></entry>
-	<entry><para>Remove all generated files + configuration + various backup files.</para></entry>
+	<entry><para>Remove all of the generated files by the kernel build
+	system including the configuration and some
+	various backup files.</para></entry>
       </row>
       <row>
 	<entry><para><literal>distclean</literal></para></entry>
-	<entry><para>Everything <literal>mrproper</literal> does +
+	<entry><para>Everything <literal>mrproper</literal> does and removes some
 	editor backup and patch leftover files.</para></entry>
       </row>
     </tbody>
@@ -74,22 +75,81 @@ files you've changed.
 
 <sect1>
 <title>Configuring options</title>
+
 <para>
-<screen>
-  config	  - Update current config utilising a line-oriented program
-  menuconfig	  - Update current config utilising a menu based program
-  xconfig	  - Update current config utilising a QT based front-end
-  gconfig	  - Update current config utilising a GTK based front-end
-  oldconfig	  - Update current config utilising a provided .config as base
-  silentoldconfig - Like oldconfig, but nothing is printed to the screen,
-  		    except where a question needs to be answered.
-  randconfig	  - New config with random answer to all options
-  defconfig	  - New config with default answer to all options
-  allmodconfig	  - New config selecting modules when possible
-  allyesconfig	  - New config where all options are accepted with yes
-  allnoconfig	  - New config where all options are answered with no
-</screen>
+These options allow the kernel to be configured in a wide range of different ways.
 </para>
+
+<table id="lkn-ch12-table-configuring">
+  <title> Configuring options</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>config</literal></para></entry>
+	<entry><para>Update the current kernel configuration by using a
+	line-oriented program.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>menuconfig</literal></para></entry>
+	<entry><para>Update the current kernel configuration by using a text
+	based menu program.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>xconfig</literal></para></entry>
+	<entry><para>Update the current kernel configuration by using a QT
+	based graphical program.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>gconfig</literal></para></entry>
+	<entry><para>Update the current kernel configuration by using a GTK
+	based graphical program.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>oldconfig</literal></para></entry>
+	<entry><para>Update the current kernel configuration by using the
+	current .config file and prompting for any new options that have been
+	added to the kernel.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>silentoldconfig</literal></para></entry>
+	<entry><para>Just like <literal>oldconfig</literal>, but nothing is
+	printed to the screen, except when a question needs to be
+	answered.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>randconfig</literal></para></entry>
+	<entry><para>Generates a new kernel configuration with random answers
+	to all of the different options.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>defconfig</literal></para></entry>
+	<entry><para>Generates a new kernel configuration with the default
+	answer being used for all of the different options.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>allmodconfig</literal></para></entry>
+	<entry><para>Generates a new kernel configuration with all modules are
+	enabled whenever possible.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>allyesconfig</literal></para></entry>
+	<entry><para>Generates a new kernel configuration with all options are
+	answered with <literal>yes</literal>.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>allnoconfig</literal></para></entry>
+	<entry><para>Generates a new kernel configuration with all options are
+	answered with <literal>no</literal>.</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
 </sect1>
 
 <sect1>
@@ -119,70 +179,229 @@ files you've changed.
 <sect1>
 <title>Informational options</title>
 <para>
-<screen>
-  kernelrelease	  - Output the release version string
-  kernelversion	  - Output the version stored in Makefile
-</screen>
+These options print out the kernel version based on a number of different
+options to the screen.  They are commonly used by scripts to determine the
+version of the kernel being built.
 </para>
+
+<table id="lkn-ch12-table-informational">
+  <title>Informational options</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>kernelrelease</literal></para></entry>
+	<entry><para>The current kernel version, as determined by the build
+	system, will be printed.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>kernelversion</literal></para></entry>
+	<entry><para>The current kernel version, as told by the main Makefile
+	will be printed.  This differs from the
+	<literal>kernelrelease</literal> option in that any additional version
+	information based on configuration options or localversion files will
+	not be used.</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
 </sect1>
 
 <sect1>
 <title>Analyser options</title>
 <para>
-<screen>
-  checkstack      - Generate a list of stack hogs
-  namespacecheck  - Name space analysis on compiled kernel
-</screen>
+These options are good for trying to find problem code in the kernel.  The
+stack space list is good to run when creating new code to determine that your
+changes are not taking up too much kernel stack space.  The
+<literal>namespacecheck</literal> option is good to use to determine if your
+changes should really be adding symbols to the kernel's global namespace or
+not.
 </para>
+
+<table id="lkn-ch12-table-analyser">
+  <title>Informational options</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>checkstack</literal></para></entry>
+	<entry><para>A list of the functions that use the most of the kernel stack space will be generated.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>namespacecheck</literal></para></entry>
+	<entry><para>A large list of all of the kernel symbols, and their namespace will be generated.
+	</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
 </sect1>
 
 <sect1>
 <title>Packaging options</title>
 <para>
-<screen>
-  rpm-pkg         - Build the kernel as an RPM package
-  binrpm-pkg      - Build an rpm package containing the compiled kernel
-                    and modules
-  deb-pkg         - Build the kernel as an deb package
-  tar-pkg         - Build the kernel as an uncompressed tarball
-  targz-pkg       - Build the kernel as a gzip compressed tarball
-  tarbz2-pkg      - Build the kernel as a bzip2 compressed tarball
-</screen>
+These options package up a built kernel into a stand-alone package that can be
+installed to a wide range of different machines.
 </para>
+
+<table id="lkn-ch12-table-packaging">
+  <title>Packaging options</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>rpm-pkg</literal></para></entry>
+	<entry><para>Build a source RPM package containing the kernel.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>binrpm-pkg</literal></para></entry>
+	<entry><para>Build a RPM package that contains a compiled kernel and modules.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>deb-pkg</literal></para></entry>
+	<entry><para>Build a Debian package that contains the compiled kernel and modules.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>tar-pkg</literal></para></entry>
+	<entry><para>Build a tarball that contains the compiled kernel and modules.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>targz-pkg</literal></para></entry>
+	<entry><para>Build a gzip compressed tarball that contains the compiled kernel and modules.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>tarbz2-pkg</literal></para></entry>
+	<entry><para>Build a bzip2 compressed tarball that contains the compiled kernel and modules.
+	</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
 </sect1>
 
 <sect1>
 <title>Documentation options</title>
 <para>
 These options build the internal kernel documentation in a variety of
-different formats:
-<screen>
-  xmldocs (XML DocBook)
-  psdocs (Postscript)
-  pdfdocs (PDF)
-  htmldocs (HTML)
-  mandocs (man pages, use installmandocs to install)
-</screen>
+different formats.
 </para>
+
+<table id="lkn-ch12-table-documentation">
+  <title>Informational options</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>xmldocs</literal></para></entry>
+	<entry><para>The kernel documentation will be build as XML DocBook files.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>psdocs</literal></para></entry>
+	<entry><para>The kernel documentation will be build as Postscript files.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>pdfdocs</literal></para></entry>
+	<entry><para>The kernel documentation will be build as PDF files.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>htmldocs</literal></para></entry>
+	<entry><para>The kernel documentation will be build as HTML files.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>mandocs</literal></para></entry>
+	<entry><para>The kernel documentation will be build as a set of man pages.  They can then be installed with the <literal>installmandocs</literal> option.
+	</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
 </sect1>
 
 <sect1>
 <title>Architecture specific options</title>
 <para>
 Each kernel architecture has a set of specific options unique to it.  The
-32bit Intel architecture has these options availble:
-<screen>
-* bzImage	- Compressed kernel image (arch/i386/boot/bzImage)
-  install	- Install kernel using
-		   (your) ~/bin/installkernel or
-		   (distribution) /sbin/installkernel or
-		   install to $(INSTALL_PATH) and run lilo
+32bit Intel architecture has these options available.
+</para>
   bzdisk       - Create a boot floppy in /dev/fd0
   fdimage      - Create a boot floppy image
   isoimage     - Create a boot CD-ROM image
-</screen>
-</para>
+
+<table id="lkn-ch12-table-arch">
+  <title>Architecture specific options</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>bzImage</literal></para></entry>
+	<entry><para>A compressed kernel image will be created and placed in
+	the <filename>arch/i386/boot/bzImage</filename> file. This is the
+	default target for the i386 kernel build.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>install</literal></para></entry>
+	<entry><para>This installs the kernel image using the distribution
+	specific <filename>/sbin/installkernel</filename> program.  Note that
+	this does not install the kernel modules, that must be done with the
+	<literal>modules_install</literal> option.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>bzdisk</literal></para></entry>
+	<entry><para>This will create a boot floppy and write it out to the <literal>/dev/fd0</literal> device.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>fdimage</literal></para></entry>
+	<entry><para>This will create a boot floppy image and place it in the 
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal></literal></para></entry>
+	<entry><para>
+	</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
 </sect1>
+
 
 </chapter>
 
