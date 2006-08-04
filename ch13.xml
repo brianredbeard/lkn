@@ -1862,7 +1862,7 @@ developers and released under the GPL.
 	allows to exchange data over IrDA with really simple devices (watch,
 	beacon) without the overhead of the IrDA protocol (no handshaking, no
 	management frames, simple fixed header).  Ultra is available as a
-	special socket : socket(AF_IRDA, SOCK_DGRAM, 1);
+	special socket: <literal>socket(AF_IRDA, SOCK_DGRAM, 1);</literal>
 	</para>
 
 </refsect1>
@@ -2056,11 +2056,6 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Some features (e.g. event notification, docking station information,
-	ISAPNP services) are not currently implemented.
-	</para>
-
-	<para>
 	If you would like the kernel to detect and allocate resources to
 	your mainboard devices (on some systems they are disabled by the
 	BIOS) say yes here.  Also the PNPBIOS can help prevent resource
@@ -2172,12 +2167,13 @@ developers and released under the GPL.
 	<para>
 	To fine-tune ATA/IDE drive/interface parameters for improved
 	performance, look for the hdparm package at
-	ftp://ibiblio.org/pub/Linux/system/hardware/.
+	<systemitem class="url">ftp://ibiblio.org/pub/Linux/system/hardware/</systemitem>.
 	</para>
 
 	<para>
 	Do not compile this driver as a module if your root file system (the
-	one containing the directory /) is located on an IDE device.
+	one containing the directory <filename>/</filename>) is located on an
+	IDE device.
 	</para>
 
 	<para>
@@ -2212,7 +2208,8 @@ developers and released under the GPL.
 
 	<para>
 	Do not compile this driver as a module if your root file system
-	(the one containing the directory /) is located on the IDE disk.
+	(the one containing the directory <filename>/</filename>) is
+	located on the IDE disk.
 	</para>
 
 </refsect1>
@@ -2319,7 +2316,8 @@ developers and released under the GPL.
 
 	<para>
 	Do not compile this as a module if your root file system (the one
-	containing the directory /) is located on a SCSI device.
+	containing the directory <filename>/</filename>) is located on a
+	SCSI device.
 	</para>
 
 </refsect1>
@@ -2341,15 +2339,15 @@ developers and released under the GPL.
 	USB storage or the SCSI or parallel port version of
 	the IOMEGA ZIP drive, say yes and read the SCSI-HOWTO,
 	the Disk-HOWTO and the Multi-Disk-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. This is NOT for SCSI
-	CD-ROMs.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	This is NOT for SCSI CD-ROMs.
 	</para>
 
 	<para>
 	Do not compile this driver as a module if your root file system
-	(the one containing the directory /) is located on a SCSI disk.
-	In this case, do not compile the driver for your SCSI host adapter
-	as a module either.
+	(the one containing the directory <filename>/</filename>) is
+	located on a SCSI disk.  In this case, do not compile the driver
+	for your SCSI host adapter as a module either.
 	</para>
 
 </refsect1>
@@ -2481,9 +2479,11 @@ developers and released under the GPL.
 	This is a driver for SCSI media changers.  Most common devices are
 	tape libraries and MOD/CDROM jukeboxes.  *Real* jukeboxes, you
 	don't need this for those tiny 6-slot cdrom changers.  Media
-	changers are listed as "Type: Medium Changer" in /proc/scsi/scsi.
+	changers are listed as "Type: Medium Changer" in
+	<filename>/proc/scsi/scsi</filename>.
 	If you have such hardware and want to use it with linux, say yes
-	here.  Check <filename>Documentation/scsi-changer.txt</filename> for details.
+	here.  Check <filename>Documentation/scsi-changer.txt</filename>
+	for details.
 	</para>
 
 </refsect1>
@@ -2575,8 +2575,9 @@ developers and released under the GPL.
 	<para>
 	More information about Software RAID on Linux is contained in the
 	Software RAID mini-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. There you will also learn
-	where to get the supporting user space utilities raidtools.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	There you will also learn where to get the supporting user space
+	utilities raidtools.
 	</para>
 
 </refsect1>
@@ -2627,9 +2628,9 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you have FireWire hardware and want to use it, say yes here.  This
-	is the core support only, you will also need to select a driver for
-	your IEEE 1394 adapter.
+	If you have FireWire hardware and want to use it, say yes here.
+	This is the core support only, you will also need to select a
+	driver for your IEEE 1394 adapter.
 	</para>
 
 </refsect1>
@@ -2661,7 +2662,7 @@ developers and released under the GPL.
 
 	<para>
 	If you say yes here, you will get a choice of interface adapter
-	drivers and OSM's with the following questions.
+	drivers and OSM's that must be enabled.
 	</para>
 
 </refsect1>
@@ -2694,7 +2695,8 @@ developers and released under the GPL.
 
 	<para>
 	See also "The Linux Network Administrator's Guide" by Olaf Kirch and
-	Terry Dawson. Available at <systemitem class="url">http://www.tldp.org/guides.html</systemitem>.
+	Terry Dawson. Available at
+	<systemitem class="url">http://www.tldp.org/guides.html</systemitem>.
 	</para>
 
 </refsect1>
@@ -2746,26 +2748,6 @@ developers and released under the GPL.
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_SMCTR">
-<refnamediv>
-	<refname>SMCTR</refname>
-	<refpurpose>SMC ISA/MCA adapter support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and NETDEVICES and !UML and TR and (ISA || MCA_LEGACY) and (BROKEN || !64BIT)</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	This is support for the ISA and MCA SMC Token Ring cards,
-	specifically SMC TokenCard Elite (8115T) and SMC TokenCard Elite/A
-	(8115T/A) adapters.
-	</para>
-
-</refsect1>
-</refentry>
-
 <refentry id="CONFIG_NET_RADIO">
 <refnamediv>
 	<refname>NET_RADIO</refname>
@@ -2801,19 +2783,6 @@ developers and released under the GPL.
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_NET_WIRELESS">
-<refnamediv>
-	<refname>NET_WIRELESS</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if NET and NETDEVICES and NET_RADIO and (ISA || PCI || PPC_PMAC || PCMCIA)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
 <refentry id="CONFIG_PPP">
 <refnamediv>
 	<refname>PPP</refname>
@@ -2836,9 +2805,10 @@ developers and released under the GPL.
 	<para>
 	To use PPP, you need an additional program called pppd as described
 	in the PPP-HOWTO, available at
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.  Make sure that you have
-	the version of pppd recommended in <filename>Documentation/Changes</filename>.
-	The PPP option enlarges your kernel by about 16 KB.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	Make sure that you have the version of pppd recommended in
+	<filename>Documentation/Changes</filename>.  The PPP option
+	enlarges your kernel by about 16 KB.
 	</para>
 
 	<para>
@@ -2872,10 +2842,11 @@ developers and released under the GPL.
 
 	<para>
 	This driver requires the latest version of pppd from the CVS
-	repository at cvs.samba.org.  Alternatively, see the 
-	RoaringPenguin package <systemitem class="url">http://www.roaringpenguin.com/pppoe</systemitem>
-	which contains instruction on how to use this driver (under 
-	the heading "Kernel mode PPPoE").
+	repository at cvs.samba.org.  Alternatively, see the
+	RoaringPenguin package
+	<systemitem class="url">http://www.roaringpenguin.com/pppoe</systemitem>
+	which contains instruction on how to use this driver (under the
+	heading "Kernel mode PPPoE").
 	</para>
 
 </refsect1>
@@ -2901,7 +2872,8 @@ developers and released under the GPL.
 	conversations while downloading stuff.  It only works if your
 	computer is equipped with an ISDN card and both you and your service
 	provider purchased an ISDN line from the phone company.  For
-	details, read <systemitem class="url">http://www.alumni.caltech.edu/~dank/isdn/</systemitem>.
+	details, read
+	<systemitem class="url">http://www.alumni.caltech.edu/~dank/isdn/</systemitem>.
 	</para>
 
 	<para>
@@ -2958,7 +2930,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	More information is available: <filename>Documentation/input/input.txt</filename>
+	More information is available in the file
+	<filename>Documentation/input/input.txt</filename>.
 	</para>
 
 </refsect1>
@@ -2989,13 +2962,15 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	The setterm command ("man setterm") can be used to change the
-	properties (such as colors or beeping) of a virtual terminal. The
-	man page console_codes(4) ("man console_codes") contains the special
-	character sequences that can be used to change those properties
-	directly. The fonts used on virtual terminals can be changed with
-	the setfont ("man setfont") command and the key bindings are defined
-	with the loadkeys ("man loadkeys") command.
+	The setterm command (<userinput>man setterm</userinput>) can be
+	used to change the properties (such as colors or beeping) of a
+	virtual terminal. The man page console_codes(4) (<userinput>man
+	console_codes</userinput>) contains the special character sequences
+	that can be used to change those properties directly. The fonts
+	used on virtual terminals can be changed with the setfont
+	(<userinput>man setfont</userinput>) command and the key bindings
+	are defined with the loadkeys (<userinput>man loadkeys</userinput>)
+	command.
 	</para>
 
 	<para>
@@ -3007,8 +2982,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If unsure, say yes, or else you won't be able to do much with your new
-	shiny Linux system :-)
+	If unsure, say yes, or else you won't be able to do much with your
+	Linux system.
 	</para>
 
 </refsect1>
@@ -3039,11 +3014,12 @@ developers and released under the GPL.
 
 	<para>
 	If you do say yes here, by default the currently visible virtual
-	terminal (/dev/tty0) will be used as system console. You can change
-	that with a kernel command line option such as "console=tty3" which
-	would use the third virtual terminal as system console. (Try "man
-	bootparam" or see the documentation of your boot loader (lilo or
-	loadlin) about how to pass options to the kernel at boot time.)
+	terminal (<filename>/dev/tty0</filename>) will be used as system console. You can change
+	that with a kernel command line option such as
+	<literal>console=tty3</literal> which would use the third virtual
+	terminal as system console. (Try <userinput>man
+	bootparam</userinput> or see the documentation of your boot loader
+	about how to pass options to the kernel at boot time.)
 	</para>
 
 </refsect1>
@@ -3090,17 +3066,6 @@ developers and released under the GPL.
 	non-standard serial ports, since the configuration information will
 	be lost when the driver is unloaded.  This limitation may be lifted
 	in the future.
-	</para>
-
-	<para>
-	BTW1: If you have a mouseman serial mouse which is not recognized by
-	the X window system, try running gpm first.
-	</para>
-
-	<para>
-	BTW2: If you intend to use a software modem (also called Winmodem)
-	under Linux, forget it.  These modems are crippled and require
-	proprietary drivers which are only available under Windows.
 	</para>
 
 	<para>
@@ -3182,9 +3147,10 @@ developers and released under the GPL.
 	introduced in XFree86 4.0. If you say yes here, you need to select
 	the module that's right for your graphics card from the list.
 	These modules provide support for synchronization, security, and
-	DMA transfers. Please see <systemitem class="url">http://dri.sourceforge.net/</systemitem> for more
-	details.  You should also select and configure AGP
-	(/dev/agpgart) support.
+	DMA transfers. Please see
+	<systemitem class="url">http://dri.sourceforge.net/</systemitem>
+	for more details.  You should also select and configure AGP
+	(<filename>/dev/agpgart</filename>) support.
 	</para>
 
 </refsect1>
@@ -3204,8 +3170,9 @@ developers and released under the GPL.
 	I2C (pronounce: I-square-C) is a slow serial bus protocol used in
 	many micro controller applications and developed by Philips.  SMBus,
 	or System Management Bus is a subset of the I2C protocol.  More
-	information is contained in the directory <filename>Documentation/i2c/</filename>,
-	especially in the file called "summary" there.
+	information is contained in the directory
+	<filename>Documentation/i2c/</filename>,
+	especially in the file called <filename>summary</filename> there.
 	</para>
 
 	<para>
@@ -3316,19 +3283,6 @@ developers and released under the GPL.
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_VIDEO_V4L2">
-<refnamediv>
-	<refname>VIDEO_V4L2</refname>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
 <refentry id="CONFIG_DVB">
 <refnamediv>
 	<refname>DVB</refname>
@@ -3347,12 +3301,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	API specs and user tools are available from <systemitem class="url">http://www.linuxtv.org/</systemitem>.
-	</para>
-
-	<para>
-	Please report problems regarding this driver to the LinuxDVB
-	mailing list.
+	API specs and user tools are available from
+	<systemitem class="url">http://www.linuxtv.org/</systemitem>.
 	</para>
 
 </refsect1>
@@ -3383,11 +3333,6 @@ developers and released under the GPL.
 	server exists which uses the frame buffer device exclusively.
 	On several non-X86 architectures, the frame buffer device is the
 	only way to use the graphics hardware.
-	</para>
-
-	<para>
-	The device is accessed through special device nodes, usually located
-	in the /dev directory, i.e. /dev/fb*.
 	</para>
 
 	<para>
@@ -3435,7 +3380,7 @@ developers and released under the GPL.
 	<para>
 	The program SVGATextMode can be used to utilize SVGA video cards to
 	their full potential in text mode. Download it from
-	ftp://ibiblio.org/pub/Linux/utils/console/.
+	<systemitem class="url">ftp://ibiblio.org/pub/Linux/utils/console/</systemitem>.
 	</para>
 
 </refsect1>
@@ -3453,7 +3398,10 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Enable and select frame buffer bootup logos.
+	This option enables the pretty penguin logo at boot time.  It will
+	show up on the frame buffer while the kernel is booting.  The
+	number of penguins shows the number of processors that the kernel
+	has found.
 	</para>
 
 </refsect1>
@@ -3500,7 +3448,8 @@ developers and released under the GPL.
 	I'm told that even without a sound card, you can make your computer
 	say more than an occasional beep, by programming the PC speaker.
 	Kernel patches and supporting utilities to do that are in the pcsp
-	package, available at ftp://ftp.infradead.org/pub/pcsp/.
+	package, available at
+	<systemitem class="url">ftp://ftp.infradead.org/pub/pcsp/</systemitem>.
 	</para>
 
 </refsect1>
@@ -3582,15 +3531,17 @@ developers and released under the GPL.
 	Say yes here if your computer has a host-side USB port and you want
 	to use USB devices.  You then need to say yes to at least one of the
 	Host Controller Driver (HCD) options below.  Choose a USB 1.1
-	controller, such as "UHCI HCD support" or "OHCI HCD support",
-	and "EHCI HCD (USB 2.0) support" except for older systems that
-	do not have USB 2.0 support.  It doesn't normally hurt to select
-	them all if you are not certain.
+	controller, such as <literal>UHCI HCD support</literal> or
+	<literal>OHCI HCD support</literal>, and
+	<literal>EHCI HCD (USB 2.0) support</literal> except for older
+	systems that do not have USB 2.0 support.  It does not hurt to
+	select them all if you are not certain.
 	</para>
 
 	<para>
 	If your system has a device-side USB port, used in the peripheral
-	side of the USB protocol, see the "USB Gadget" framework instead.
+	side of the USB protocol, see the <literal>USB Gadget</literal>
+	option instead.
 	</para>
 
 	<para>
@@ -3615,27 +3566,30 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
-	"high speed" (480 Mbit/sec, 60 Mbyte/sec) host controller hardware.
-	If your USB host controller supports USB 2.0, you will likely want to
-	configure this Host Controller Driver.  At the time of this writing, 
-	the primary implementation of EHCI is a chip from NEC, widely available
-	in add-on PCI cards, but implementations are in the works from other 
-	vendors including Intel and Philips.  Motherboard support is appearing.
+	The Enhanced Host Controller Interface (EHCI) is standard for USB
+	2.0 "high speed" (480 Mbit/sec, 60 Mbyte/sec) host controller
+	hardware.  If your USB host controller supports USB 2.0, you will
+	likely want to configure this Host Controller Driver.  At the time
+	of this writing, the primary implementation of EHCI is a chip from
+	NEC, widely available in add-on PCI cards, but implementations are
+	in the works from other vendors including Intel and Philips.
+	Motherboard support is appearing.
 	</para>
 
 	<para>
-	EHCI controllers are packaged with "companion" host controllers (OHCI
-	or UHCI) to handle USB 1.1 devices connected to root hub ports.  Ports
-	will connect to EHCI if the device is high speed, otherwise they
-	connect to a companion controller.  If you configure EHCI, you should
-	probably configure the OHCI (for NEC and some other vendors) USB Host
-	Controller Driver or UHCI (for Via motherboards) Host Controller
-	Driver too.
+	EHCI controllers are packaged with "companion" host controllers
+	(OHCI or UHCI) to handle USB 1.1 devices connected to root hub
+	ports.  Ports will connect to EHCI if the device is high speed,
+	otherwise they connect to a companion controller.  If you configure
+	EHCI, you should probably configure the OHCI (for NEC and some
+	other vendors) USB Host Controller Driver or UHCI (for Via
+	motherboards) Host Controller Driver too.
 	</para>
 
 	<para>
-	You may want to read <filename>Documentation/usb/ehci.txt</filename>.
+	You may want to read
+	<filename>Documentation/usb/ehci.txt</filename> for more
+	information on this driver.
 	</para>
 
 </refsect1>
@@ -3654,14 +3608,16 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	The Open Host Controller Interface (OHCI) is a standard for accessing
-	USB 1.1 host controller hardware.  It does more in hardware than Intel's
-	UHCI specification.  If your USB host controller follows the OHCI spec,
-	say yes.  On most non-x86 systems, and on x86 hardware that's not using a
-	USB controller from Intel or VIA, this is appropriate.  If your host
-	controller doesn't use PCI, this is probably appropriate.  For a PCI
-	based system where you're not sure, the "lspci -v" entry will list the
-	right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
+	The Open Host Controller Interface (OHCI) is a standard for
+	accessing USB 1.1 host controller hardware.  It does more in
+	hardware than Intel's UHCI specification.  If your USB host
+	controller follows the OHCI spec, say yes.  On most non-x86
+	systems, and on x86 hardware that's not using a USB controller from
+	Intel or VIA, this is appropriate.  If your host controller doesn't
+	use PCI, this is probably appropriate.  For a PCI based system
+	where you're not sure, the <userinput>lspci -v</userinput> entry
+	will list the right <literal>prog-if</literal> for your USB
+	controller(s):  EHCI, OHCI, or UHCI.
 	</para>
 
 </refsect1>
@@ -3713,9 +3669,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	This option 'selects' (turns on, enables) 'SCSI', but you
-	probably also need 'SCSI device support: SCSI disk support'
-	(BLK_DEV_SD) for most USB storage devices.
+	This option 'selects' (turns on, enables) the
+	<literal>SCSI</literal> option, but you probably also need
+	<literal>SCSI device support: SCSI disk support</literal> for most
+	USB storage devices to work properly.
 	</para>
 
 </refsect1>
@@ -3739,9 +3696,9 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Please read <filename>Documentation/usb/usb-serial.txt</filename> for more
-	information on the specifics of the different devices that are
-	supported, and on how to use them.
+	Please read <filename>Documentation/usb/usb-serial.txt</filename>
+	for more information on the specifics of the different devices that
+	are supported, and on how to use them.
 	</para>
 
 </refsect1>
@@ -3758,28 +3715,28 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	USB is a master/slave protocol, organized with one master
-	host (such as a PC) controlling up to 127 peripheral devices.
-	The USB hardware is asymmetric, which makes it easier to set up:
-	you can't connect a "to-the-host" connector to a peripheral.
+	USB is a master/slave protocol, organized with one master host
+	(such as a PC) controlling up to 127 peripheral devices.  The USB
+	hardware is asymmetric, which makes it easier to set up: you can't
+	connect a "to-the-host" connector to a peripheral.
 	</para>
 
 	<para>
-	Linux can run in the host, or in the peripheral.  In both cases
-	you need a low level bus controller driver, and some software
-	talking to it.  Peripheral controllers are often discrete silicon,
-	or are integrated with the CPU in a microcontroller.  The more
-	familiar host side controllers have names like like "EHCI", "OHCI",
-	or "UHCI", and are usually integrated into southbridges on PC
+	Linux can run in the host, or in the peripheral.  In both cases you
+	need a low level bus controller driver, and some software talking
+	to it.  Peripheral controllers are often discrete silicon, or are
+	integrated with the CPU in a microcontroller.  The more familiar
+	host side controllers have names like like "EHCI", "OHCI", or
+	"UHCI", and are usually integrated into southbridges on PC
 	motherboards.
 	</para>
 
 	<para>
-	Enable this configuration option if you want to run Linux inside
-	a USB peripheral device.  Configure one hardware driver for your
+	Enable this configuration option if you want to run Linux inside a
+	USB peripheral device.  Configure one hardware driver for your
 	peripheral/device side bus controller, and a "gadget driver" for
-	your peripheral protocol.  (If you use modular gadget drivers,
-	you may configure more than one.)
+	your peripheral protocol.  (If you use modular gadget drivers, you
+	may configure more than one.)
 	</para>
 
 	<para>
@@ -3788,8 +3745,9 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	For more information, see <systemitem class="url">http://www.linux-usb.org/gadget</systemitem> and
-	the kernel DocBook documentation for this API.
+	For more information, see
+	<systemitem class="url">http://www.linux-usb.org/gadget</systemitem>
+	and the kernel DocBook documentation for this API.
 	</para>
 
 </refsect1>
@@ -3858,23 +3816,9 @@ developers and released under the GPL.
 	<para>
 	If this code is reporting problems on your system, please
 	see the EDAC project web pages for more information at:
-	</para>
-
-	<para>
 	<systemitem class="url">http://bluesmoke.sourceforge.net/</systemitem>
-	</para>
-
-	<para>
 	and:
-	</para>
-
-	<para>
 	<systemitem class="url">http://buttersideup.com/edacwiki</systemitem>
-	</para>
-
-	<para>
-	There is also a mailing list for the EDAC project, which can
-	be found via the sourceforge page.
 	</para>
 
 </refsect1>
@@ -3896,9 +3840,9 @@ developers and released under the GPL.
 
 	<para>
 	Be aware however that the file system of your root partition (the
-	one containing the directory /) cannot be compiled as a module
-	without using a special boot process, so building it as a module
-	could be dangerous.
+	one containing the directory <filename>/</filename>) cannot be
+	compiled as a module without using a special boot process, so
+	building it as a module could be dangerous.
 	</para>
 
 </refsect1>
@@ -3939,18 +3883,20 @@ developers and released under the GPL.
 
 	<para>
 	To add a journal on an existing ext2 file system or change the
-	behavior of ext3 file systems, you can use the tune2fs utility ("man
-	tune2fs").  To modify attributes of files and directories on ext3
-	file systems, use chattr ("man chattr").  You need to be using
-	e2fsprogs version 1.20 or later in order to create ext3 journals
-	(available at <systemitem class="url">http://sourceforge.net/projects/e2fsprogs/</systemitem>).
+	behavior of ext3 file systems, you can use the tune2fs utility
+	(<userinput>man	tune2fs</userinput>).  To modify attributes of
+	files and directories on ext3 file systems, use chattr
+	(<userinput>man	chattr</userinput>).  You need to be using
+	<literal>e2fsprogs</literal> version 1.20 or later in order to
+	create ext3 journals (available at
+	<systemitem class="url">http://sourceforge.net/projects/e2fsprogs/</systemitem>).
 	</para>
 
 	<para>
 	Be aware however that the file system of your root partition (the
-	one containing the directory /) cannot be compiled as a module
-	without using a special boot process, so building it as a module
-	could be dangerous.
+	one containing the directory <filename>/</filename>) cannot be
+	compiled as a module without using a special boot process, so
+	building it as a module could be dangerous.
 	</para>
 
 </refsect1>
@@ -3976,6 +3922,13 @@ developers and released under the GPL.
 	<para>
 	In general, ReiserFS is as fast as ext2, but is more efficient with
 	large directories and small files.
+	</para>
+
+	<para>
+	Be aware however that the file system of your root partition (the
+	one containing the directory <filename>/</filename>) cannot be
+	compiled as a module without using a special boot process, so
+	building it as a module could be dangerous.
 	</para>
 
 </refsect1>
@@ -4028,9 +3981,9 @@ developers and released under the GPL.
 
 	<para>
 	Be aware however that the file system of your root partition (the
-	one containing the directory /) cannot be compiled as a module
-	without using a special boot process, so building it as a module
-	could be dangerous.
+	one containing the directory <filename>/</filename>) cannot be
+	compiled as a module without using a special boot process, so
+	building it as a module could be dangerous.
 	</para>
 
 </refsect1>
@@ -4060,27 +4013,13 @@ developers and released under the GPL.
 
 	<para>
 	You'll want to install the ocfs2-tools package in order to at least
-	get "mount.ocfs2".
+	get the <filename>mount.ocfs2</filename> program.
 	</para>
 
 	<para>
 	Project web page:    <systemitem class="url">http://oss.oracle.com/projects/ocfs2</systemitem>
 	Tools web page:      <systemitem class="url">http://oss.oracle.com/projects/ocfs2-tools</systemitem>
 	OCFS2 mailing lists: <systemitem class="url">http://oss.oracle.com/projects/ocfs2/mailman/</systemitem>
-	</para>
-
-	<para>
-	Note: Features which OCFS2 does not support yet:
-	        - extended attributes
-	        - shared writeable mmap
-	        - loopback is supported, but data written will not
-	          be cluster coherent.
-	        - quotas
-	        - cluster aware flock
-	        - Directory change notification (F_NOTIFY)
-	        - Distributed Caching (F_SETLEASE/F_GETLEASE/break_lease)
-	        - POSIX ACLs
-	        - readpages / writepages (not user visible)
 	</para>
 
 </refsect1>
@@ -4132,9 +4071,9 @@ developers and released under the GPL.
 	quotas for which you don't need to run quotacheck(8) after an unclean
 	shutdown.
 	For further details, read the Quota mini-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, or the documentation provided
-	with the quota tools. Probably the quota support is only useful for
-	multi user systems.
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>,
+	or the documentation provided with the quota tools. Probably the
+	quota support is only useful for multi user systems.
 	</para>
 
 </refsect1>
@@ -4158,10 +4097,11 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To use the automounter you need the user-space tools from the autofs
-	package; you can find the location in <filename>Documentation/Changes</filename>.
-	You also want to answer yes to the <literal>NFS file system
-	support</literal> option.
+	To use the automounter you need the user-space tools from the
+	autofs package; you can find the location in
+	<filename>Documentation/Changes</filename>.  You also want to
+	answer yes to the <literal>NFS file system support</literal>
+	option.
 	</para>
 
 	<para>
@@ -4205,8 +4145,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you want to develop a userspace FS, or if you want to use
-	a filesystem based on FUSE, answer yes here.
+	If you want to develop a userspace FS, or if you want to use a
+	filesystem based on FUSE, answer yes here.
 	</para>
 
 </refsect1>
@@ -4227,27 +4167,29 @@ developers and released under the GPL.
 	<para>
 	SMB (Server Message Block) is the protocol Windows for Workgroups
 	(WfW), Windows 95/98, Windows NT and OS/2 Lan Manager use to share
-	files and printers over local networks.  Saying yes here allows you to
-	mount their file systems (often called "shares" in this context) and
-	access them just like any other Unix directory.  Currently, this
-	works only if the Windows machines use TCP/IP as the underlying
-	transport protocol, and not NetBEUI.  For details, read
-	<filename>Documentation/filesystems/smbfs.txt</filename> and the SMB-HOWTO,
-	available from
+	files and printers over local networks.  Saying yes here allows you
+	to mount their file systems (often called "shares" in this context)
+	and access them just like any other Unix directory.  Currently,
+	this works only if the Windows machines use TCP/IP as the
+	underlying transport protocol, and not NetBEUI.  For details, read
+	<filename>Documentation/filesystems/smbfs.txt</filename> and the
+	SMB-HOWTO, available from
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
 	Note: if you just want your box to act as an SMB *server* and make
-	files and printing services available to Windows clients (which need
-	to have a TCP/IP stack), you don't need to say yes here; you can use
-	the program SAMBA (available from ftp://ftp.samba.org/pub/samba/)
+	files and printing services available to Windows clients (which
+	need to have a TCP/IP stack), you don't need to say yes here; you
+	can use the program SAMBA (available from
+	<systemitem class="url">ftp://ftp.samba.org/pub/samba/</systemitem>)
 	for that.
 	</para>
 
 	<para>
-	General information about how to connect Linux, Windows machines and
-	Macs is at <systemitem class="url">http://www.eats.com/linux_mac_win.html</systemitem>.
+	General information about how to connect Linux, Windows machines
+	and Macs is at
+	<systemitem class="url">http://www.eats.com/linux_mac_win.html</systemitem>.
 	</para>
 
 </refsect1>
@@ -4267,28 +4209,29 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	This is the client VFS module for the Common Internet File System
-	(CIFS) protocol which is the successor to the Server Message Block 
-	(SMB) protocol, the native file sharing mechanism for most early
-	PC operating systems.  The CIFS protocol is fully supported by 
-	file servers such as Windows 2000 (including Windows 2003, NT 4  
-	and Windows XP) as well by Samba (which provides excellent CIFS
-	server support for Linux and many other operating systems). Limited
-	support for Windows ME and similar servers is provided as well. 
-	You must use the smbfs client filesystem to access older SMB servers
-	such as OS/2 and DOS.
+	(CIFS) protocol which is the successor to the Server Message Block
+	(SMB) protocol, the native file sharing mechanism for most early PC
+	operating systems.  The CIFS protocol is fully supported by file
+	servers such as Windows 2000 (including Windows 2003, NT 4  and
+	Windows XP) as well by Samba (which provides excellent CIFS server
+	support for Linux and many other operating systems). Limited
+	support for Windows ME and similar servers is provided as well.
+	You must use the smbfs client filesystem to access older SMB
+	servers such as OS/2 and DOS.
 	</para>
 
 	<para>
-	The intent of the cifs module is to provide an advanced
-	network file system client for mounting to CIFS compliant servers, 
-	including support for dfs (hierarchical name space), secure per-user
-	session establishment, safe distributed caching (oplock), optional
-	packet signing, Unicode and other internationalization improvements, 
-	and optional Winbind (nsswitch) integration. You do not need to enable
-	cifs if running only a (Samba) server. It is possible to enable both
-	smbfs and cifs (e.g. if you are using CIFS for accessing Windows 2003
-	and Samba 3 servers, and smbfs for accessing old servers). If you need 
-	to mount to Samba or Windows from this machine, say yes.
+	The intent of the cifs module is to provide an advanced network
+	file system client for mounting to CIFS compliant servers,
+	including support for dfs (hierarchical name space), secure
+	per-user session establishment, safe distributed caching (oplock),
+	optional packet signing, Unicode and other internationalization
+	improvements, and optional Winbind (nsswitch) integration. You do
+	not need to enable cifs if running only a (Samba) server. It is
+	possible to enable both smbfs and cifs (e.g. if you are using CIFS
+	for accessing Windows 2003 and Samba 3 servers, and smbfs for
+	accessing old servers). If you need to mount to Samba or Windows
+	from this machine, say yes.
 	</para>
 
 </refsect1>
@@ -4306,8 +4249,8 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say yes here to enable the extended profiling support mechanisms used
-	by profilers such as OProfile.
+	Say yes here to enable the extended profiling support mechanisms
+	used by profilers such as OProfile.
 	</para>
 
 </refsect1>
@@ -4325,9 +4268,9 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	OProfile is a profiling system capable of profiling the
-	whole system, include the kernel, kernel modules, libraries,
-	and applications.
+	OProfile is a profiling system capable of profiling the whole
+	system, include the kernel, kernel modules, libraries, and
+	applications.
 	</para>
 
 </refsect1>
@@ -4345,10 +4288,10 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Kprobes allows you to trap at almost any kernel address and
-	execute a callback function.  register_kprobe() establishes
-	a probepoint and specifies the callback.  Kprobes is useful
-	for kernel debugging, non-intrusive instrumentation and testing.
+	Kprobes allows you to trap at almost any kernel address and execute
+	a callback function.  register_kprobe() establishes a probepoint
+	and specifies the callback.  Kprobes is useful for kernel
+	debugging, non-intrusive instrumentation and testing.
 	</para>
 
 </refsect1>
@@ -4365,11 +4308,10 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Selecting this option causes timing information to be
-	included in printk output.  This allows you to measure
-	the interval between kernel operations, including bootup
-	operations.  This is useful for identifying long delays
-	in kernel startup.
+	Selecting this option causes timing information to be included in
+	printk output.  This allows you to measure the interval between
+	kernel operations, including bootup operations.  This is useful for
+	identifying long delays in kernel startup.
 	</para>
 
 </refsect1>
@@ -4387,14 +4329,14 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say yes here, you will have some control over the system even
-	if the system crashes for example during kernel debugging (e.g., you
-	will be able to flush the buffer cache to disk, reboot the system
-	immediately or dump some status information). This is accomplished
-	by pressing various keys while holding SysRq (Alt+PrintScreen). It
-	also works on a serial console (on PC hardware at least), if you
-	send a BREAK and then within 5 seconds a command keypress. The
-	keys are documented in
+	If you say yes here, you will have some control over the system
+	even if the system crashes for example during kernel debugging
+	(e.g., you will be able to flush the buffer cache to disk, reboot
+	the system immediately or dump some status information). This is
+	accomplished by pressing various keys while holding SysRq
+	(Alt+PrintScreen). It also works on a serial console (on PC
+	hardware at least), if you send a BREAK and then within 5 seconds a
+	command keypress. The keys are documented in
 	<filename>Documentation/sysrq.txt</filename>. Don't say yes unless
 	you really know what this hack does.
 	</para>
