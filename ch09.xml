@@ -216,6 +216,7 @@ important is that the command shows some an IDE Controller (the first
 
   AO: Is plural "controllers" accurate here?
 
+  gkh: yes, that's fine.
 -->
 device in the previous example.)  If you find only SATA controllers, please
 see <xref linkend="lkn_sata" />.
@@ -369,7 +370,6 @@ Once that is enabled, the SATA or SCSI CD-ROM drive will work properly.
 
 </sect3>
 </sect2>
-
 </sect1>
 
 <sect1>
@@ -732,6 +732,8 @@ tune for your processor.
   sounds like if you don't enable it, you could waste half or more of
   your computer. Is that worth saying?
 
+  gkh: yes, is a section down below.
+
 -->
 </para>
 
@@ -758,6 +760,10 @@ on the system.
   this book might have a following among people using other chips,
   maybe you should say something about what PC-compatible means. Does
   it assume Intel/AMD?
+
+  gkh:  Yes it does, but all of these processors are compatible with the
+  Intel/AMD ones.  I don't think it's necessary to go into the different
+  types of processors here, do you?
 
 -->
 
@@ -829,7 +835,8 @@ range of machines you wish the kernel to run on.
 If the machine you are using for Linux contains more than one CPU, or a
 Hyperthreaded or Dual Core CPU, you should select the multiprocessor
 option for the Linux kernel in order to take advantage of the additional
-processors.
+processors.  If you do not select this option, you will be wasting the other
+processors by not using them at all.
 </para>
 
 <para>
@@ -1535,7 +1542,7 @@ Device Drivers
 
 
 <sect2 id="samba">
-<title>Samba</title>
+<title>Filesharing with Windows</title>
 <!--
 
   AO: Is this section really about Samba? It's not about the Samba
@@ -1546,6 +1553,8 @@ Device Drivers
   system can access files on a Windows domain. (I've done that.) I
   might be wrong, but I'd title the section "File-sharing with Windows
   domains".
+
+  gkh: ok, title changed.
 
 -->
 
@@ -1562,6 +1571,10 @@ Windows machine.
 
   AO: CIFS is an evolution of SMB; I think that should be briefly
   stated somehow.
+
+  gkh:  Why?  does that really need to be known?  There's a long history
+  behind CIFS that I probably do not want to get into trying to describe
+  accurately :)
 
 -->
 Two different filesystems that allow a Linux machine to connect
