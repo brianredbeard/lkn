@@ -14,13 +14,14 @@
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch09.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch10.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch11.xml"/>
-</book>
-<!--
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch12.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch13.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="appa.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="appb.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="appc.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="appd.xml"/>
+</book>
+<!--
 <bookinfo>
 <edition>First</edition>
 <isbn>X-XXXXX-XXX-X</isbn>
