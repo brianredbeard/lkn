@@ -20,9 +20,6 @@ developers and released under the GPL.
 	<refname>EXPERIMENTAL</refname>
 	<refpurpose>Prompt for development and/or incomplete code/drivers</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -69,9 +66,6 @@ developers and released under the GPL.
 	<refname>LOCALVERSION</refname>
 	<refpurpose>Local version - append to kernel release</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>string</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -90,10 +84,6 @@ developers and released under the GPL.
 	<refname>AUDIT</refname>
 	<refpurpose>Auditing support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -110,9 +100,6 @@ developers and released under the GPL.
 	<refname>IKCONFIG</refname>
 	<refpurpose>Kernel .config support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -135,9 +122,6 @@ developers and released under the GPL.
 	<refname>EMBEDDED</refname>
 	<refpurpose>Configure standard kernel features (for small systems)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -156,9 +140,6 @@ developers and released under the GPL.
 	<refname>MODULES</refname>
 	<refpurpose>Enable loadable module support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -191,10 +172,6 @@ developers and released under the GPL.
 <refnamediv>
 	<refname>IOSCHED_NOOP</refname>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -213,10 +190,6 @@ developers and released under the GPL.
 	<refname>IOSCHED_AS</refname>
 	<refpurpose>Anticipatory I/O scheduler</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -234,10 +207,6 @@ developers and released under the GPL.
 	<refname>IOSCHED_DEADLINE</refname>
 	<refpurpose>Deadline I/O scheduler</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -256,10 +225,6 @@ developers and released under the GPL.
 	<refname>IOSCHED_CFQ</refname>
 	<refpurpose>CFQ I/O scheduler</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -276,9 +241,6 @@ developers and released under the GPL.
 	<refname>SMP</refname>
 	<refpurpose>Symmetric multi-processing support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -319,10 +281,6 @@ developers and released under the GPL.
 	<refname>M386</refname>
 	<refpurpose>386</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -541,10 +499,6 @@ developers and released under the GPL.
 	<refname>X86_GENERIC</refname>
 	<refpurpose>Generic x86 support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_ELAN</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -567,13 +521,6 @@ developers and released under the GPL.
 	<refname>NR_CPUS</refname>
 	<refpurpose>Maximum number of CPUs (2-255)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SMP</literal></para>
-	<para role="range">Range <literal>[2 255]</literal></para>
-	<para role="default">Default Value <literal>32 if SMP and (X86_NUMAQ || X86_SUMMIT || X86_BIGSMP || X86_ES7000)</literal></para>
-	<para role="default">Default Value <literal>8 if SMP</literal></para>
-	<para role="type">Type <literal>integer</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -595,11 +542,6 @@ developers and released under the GPL.
 	<refname>SCHED_SMT</refname>
 	<refpurpose>SMT (Hyperthreading) scheduler support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SMP</literal></para>
-	<para role="default">Default Value <literal>off if SMP</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -616,10 +558,6 @@ developers and released under the GPL.
 	<refname>PREEMPT_NONE</refname>
 	<refpurpose>No Forced Preemption (Server)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -644,10 +582,6 @@ developers and released under the GPL.
 	<refname>PREEMPT_VOLUNTARY</refname>
 	<refpurpose>Voluntary Kernel Preemption (Desktop)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -678,10 +612,6 @@ developers and released under the GPL.
 	<refname>PREEMPT</refname>
 	<refpurpose>Preemptible Kernel (Low-Latency Desktop)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -710,11 +640,6 @@ developers and released under the GPL.
 	<refname>PREEMPT_BKL</refname>
 	<refpurpose>Preempt The Big Kernel Lock</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SMP || PREEMPT</literal></para>
-	<para role="default">Default Value <literal>y if SMP || PREEMPT</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -734,10 +659,6 @@ developers and released under the GPL.
 	<refname>NOHIGHMEM</refname>
 	<refpurpose>off</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -794,10 +715,6 @@ developers and released under the GPL.
 	<refname>HIGHMEM4G</refname>
 	<refpurpose>4GB</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and !X86_NUMAQ</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -813,10 +730,6 @@ developers and released under the GPL.
 	<refname>HIGHMEM64G</refname>
 	<refpurpose>64GB</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and X86_CMPXCHG64</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -832,10 +745,6 @@ developers and released under the GPL.
 	<refname>FLATMEM_MANUAL</refname>
 	<refpurpose>Flat Memory</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and (!ARCH_DISCONTIGMEM_ENABLE and !ARCH_SPARSEMEM_ENABLE || ARCH_FLATMEM_ENABLE)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -868,10 +777,6 @@ developers and released under the GPL.
 	<refname>DISCONTIGMEM_MANUAL</refname>
 	<refpurpose>Discontiguous Memory</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and ARCH_DISCONTIGMEM_ENABLE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -900,10 +805,6 @@ developers and released under the GPL.
 	<refname>SPARSEMEM_MANUAL</refname>
 	<refpurpose>Sparse Memory</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis><literal> and ARCH_SPARSEMEM_ENABLE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -931,11 +832,6 @@ developers and released under the GPL.
 	<refname>SECCOMP</refname>
 	<refpurpose>Enable seccomp to safely compute untrusted bytecode</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PROC_FS</literal></para>
-	<para role="default">Default Value <literal>y if PROC_FS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -962,10 +858,6 @@ developers and released under the GPL.
 	<refname>KEXEC</refname>
 	<refpurpose>kexec system call (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -995,10 +887,6 @@ developers and released under the GPL.
 	<refname>HOTPLUG_CPU</refname>
 	<refpurpose>Support for hot-pluggable CPUs (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SMP and HOTPLUG and EXPERIMENTAL and !X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1015,10 +903,6 @@ developers and released under the GPL.
 	<refname>PM</refname>
 	<refpurpose>Power Management support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and !IA64_HP_SIM</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1054,10 +938,6 @@ developers and released under the GPL.
 	<refname>SOFTWARE_SUSPEND</refname>
 	<refpurpose>Software Suspend</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and (PM and SWAP and X86 and (!SMP || SUSPEND_SMP) || (FRV || PPC32) and !SMP)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1095,13 +975,6 @@ developers and released under the GPL.
 	<refname>ACPI</refname>
 	<refpurpose>ACPI Support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal></para>
-	<para role="select">Selects <literal>PM</literal></para>
-	<para role="select">Selects <literal>PCI</literal></para>
-	<para role="default">Default Value <literal>y if !X86_VOYAGER and !X86_VISWS and !IA64_HP_SIM and (IA64 || X86)</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1147,10 +1020,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ</refname>
 	<refpurpose>CPU Frequency scaling</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1178,11 +1047,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ_DEFAULT_GOV_PERFORMANCE</refname>
 	<refpurpose>performance</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="select">Selects <literal>CPU_FREQ_GOV_PERFORMANCE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1199,11 +1063,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ_DEFAULT_GOV_USERSPACE</refname>
 	<refpurpose>userspace</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <emphasis>choice</emphasis></para>
-	<para role="select">Selects <literal>CPU_FREQ_GOV_USERSPACE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1221,10 +1080,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ_GOV_PERFORMANCE</refname>
 	<refpurpose>'performance' governor</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1240,10 +1095,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ_GOV_POWERSAVE</refname>
 	<refpurpose>'powersave' governor</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1259,10 +1110,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ_GOV_USERSPACE</refname>
 	<refpurpose>'userspace' governor for userspace frequency scaling</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1285,10 +1132,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ_GOV_ONDEMAND</refname>
 	<refpurpose>'ondemand' cpufreq policy governor</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1311,10 +1154,6 @@ developers and released under the GPL.
 	<refname>CPU_FREQ_GOV_CONSERVATIVE</refname>
 	<refpurpose>'conservative' cpufreq governor</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and CPU_FREQ</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1346,11 +1185,6 @@ developers and released under the GPL.
 	<refname>PCI</refname>
 	<refpurpose>PCI support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS</literal></para>
-	<para role="default">Default Value <literal>y if !X86_VOYAGER and X86_VISWS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1367,10 +1201,6 @@ developers and released under the GPL.
 	<refname>PCCARD</refname>
 	<refpurpose>PCCard (PCMCIA/CardBus) support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="select">Selects <literal>HOTPLUG</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1389,12 +1219,6 @@ developers and released under the GPL.
 	<refname>PCMCIA</refname>
 	<refpurpose>16-bit PCMCIA support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCCARD</literal></para>
-	<para role="select">Selects <literal>CRC32</literal></para>
-	<para role="default">Default Value <literal>y if PCCARD</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1418,11 +1242,6 @@ developers and released under the GPL.
 	<refname>CARDBUS</refname>
 	<refpurpose>32-bit CardBus support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCCARD and PCI</literal></para>
-	<para role="default">Default Value <literal>y if PCCARD and PCI</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1445,11 +1264,6 @@ developers and released under the GPL.
 	<refname>HOTPLUG_PCI</refname>
 	<refpurpose>Support for PCI Hotplug (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCI and EXPERIMENTAL</literal></para>
-	<para role="select">Selects <literal>HOTPLUG</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1466,9 +1280,6 @@ developers and released under the GPL.
 	<refname>NET</refname>
 	<refpurpose>Networking support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1500,10 +1311,6 @@ developers and released under the GPL.
 	<refname>UNIX</refname>
 	<refpurpose>Unix domain sockets</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1523,10 +1330,6 @@ developers and released under the GPL.
 	<refname>INET</refname>
 	<refpurpose>TCP/IP networking</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1552,10 +1355,6 @@ developers and released under the GPL.
 	<refname>IP_ADVANCED_ROUTER</refname>
 	<refpurpose>IP: advanced router</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and INET</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1611,10 +1410,6 @@ developers and released under the GPL.
 	<refname>NETFILTER</refname>
 	<refpurpose>Network packet filtering (replaces ipchains)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1692,10 +1487,6 @@ developers and released under the GPL.
 	<refname>NET_SCHED</refname>
 	<refpurpose>QoS and/or fair queueing</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1741,11 +1532,6 @@ developers and released under the GPL.
 	<refname>IRDA</refname>
 	<refpurpose>IrDA (infrared) subsystem support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="select">Selects <literal>CRC_CCITT</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1777,10 +1563,6 @@ developers and released under the GPL.
 	<refname>IRLAN</refname>
 	<refpurpose>IrLAN protocol</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1803,10 +1585,6 @@ developers and released under the GPL.
 	<refname>IRNET</refname>
 	<refpurpose>IrNET protocol</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and IRDA and PPP</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1829,10 +1607,6 @@ developers and released under the GPL.
 	<refname>IRCOMM</refname>
 	<refpurpose>IrCOMM protocol</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1851,10 +1625,6 @@ developers and released under the GPL.
 	<refname>IRDA_ULTRA</refname>
 	<refpurpose>Ultra (connectionless) protocol</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and IRDA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1873,10 +1643,6 @@ developers and released under the GPL.
 	<refname>BT</refname>
 	<refpurpose>Bluetooth subsystem support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1916,10 +1682,6 @@ developers and released under the GPL.
 	<refname>IEEE80211</refname>
 	<refpurpose>Generic IEEE 802.11 Networking Stack</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1935,9 +1697,6 @@ developers and released under the GPL.
 	<refname>MTD</refname>
 	<refpurpose>Memory Technology Device (MTD) support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1958,9 +1717,6 @@ developers and released under the GPL.
 	<refname>PARPORT</refname>
 	<refpurpose>Parallel port support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -1994,10 +1750,6 @@ developers and released under the GPL.
 	<refname>PNP</refname>
 	<refpurpose>Plug and Play support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>ISA || ACPI</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2023,10 +1775,6 @@ developers and released under the GPL.
 	<refname>ISAPNP</refname>
 	<refpurpose>ISA Plug and Play support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PNP and ISA</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2042,11 +1790,6 @@ developers and released under the GPL.
 	<refname>PNPBIOS</refname>
 	<refpurpose>Plug and Play BIOS support (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PNP and ISA and X86 and EXPERIMENTAL</literal></para>
-	<para role="default">Default Value <literal>n if PNP and ISA and X86 and EXPERIMENTAL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2076,9 +1819,6 @@ developers and released under the GPL.
 	<refname>IDE</refname>
 	<refpurpose>ATA/ATAPI/MFM/RLL support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2141,10 +1881,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_IDE</refname>
 	<refpurpose>Enhanced IDE/MFM/RLL disk/cdrom/tape/floppy support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2193,10 +1929,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_IDEDISK</refname>
 	<refpurpose>Include IDE/ATA-2 DISK support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2220,10 +1952,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_IDECD</refname>
 	<refpurpose>Include IDE/ATAPI CDROM support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2257,10 +1985,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_IDEFLOPPY</refname>
 	<refpurpose>Include IDE/ATAPI FLOPPY support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>IDE and BLK_DEV_IDE</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2294,9 +2018,6 @@ developers and released under the GPL.
 	<refname>SCSI</refname>
 	<refpurpose>SCSI device support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2328,10 +2049,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_SD</refname>
 	<refpurpose>SCSI disk support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2358,10 +2075,6 @@ developers and released under the GPL.
 	<refname>CHR_DEV_ST</refname>
 	<refpurpose>SCSI tape support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2380,10 +2093,6 @@ developers and released under the GPL.
 	<refname>CHR_DEV_OSST</refname>
 	<refpurpose>SCSI OnStream SC-x0 tape support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2411,10 +2120,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_SR</refname>
 	<refpurpose>SCSI CDROM support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2433,10 +2138,6 @@ developers and released under the GPL.
 	<refname>CHR_DEV_SG</refname>
 	<refpurpose>SCSI generic support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2469,10 +2170,6 @@ developers and released under the GPL.
 	<refname>CHR_DEV_SCH</refname>
 	<refpurpose>SCSI media changer support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2494,10 +2191,6 @@ developers and released under the GPL.
 	<refname>SCSI_MULTI_LUN</refname>
 	<refpurpose>Probe all LUNs on each SCSI device</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2518,10 +2211,6 @@ developers and released under the GPL.
 	<refname>SCSI_SATA</refname>
 	<refpurpose>Serial ATA (SATA) support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2537,9 +2226,6 @@ developers and released under the GPL.
 	<refname>MD</refname>
 	<refpurpose>Multiple devices driver support (RAID and LVM)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2555,10 +2241,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_MD</refname>
 	<refpurpose>RAID support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>MD</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2588,10 +2270,6 @@ developers and released under the GPL.
 	<refname>BLK_DEV_DM</refname>
 	<refpurpose>Device mapper support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>MD</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2613,11 +2291,6 @@ developers and released under the GPL.
 	<refname>IEEE1394</refname>
 	<refpurpose>IEEE 1394 (FireWire) support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCI || BROKEN</literal></para>
-	<para role="select">Selects <literal>NET</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2641,10 +2314,6 @@ developers and released under the GPL.
 	<refname>I2O</refname>
 	<refpurpose>I2O support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2673,11 +2342,6 @@ developers and released under the GPL.
 	<refname>NETDEVICES</refname>
 	<refpurpose>Network device support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="default">Default Value <literal>y if NET and UML</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2707,10 +2371,6 @@ developers and released under the GPL.
 	<refname>NET_ETHERNET</refname>
 	<refpurpose>Ethernet (10 or 100Mbit)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and !UML</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2753,11 +2413,6 @@ developers and released under the GPL.
 	<refname>NET_RADIO</refname>
 	<refpurpose>Wireless LAN drivers (non-hamradio) &amp; Wireless Extensions</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and NETDEVICES</literal></para>
-	<para role="select">Selects <literal>WIRELESS_EXT</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2788,10 +2443,6 @@ developers and released under the GPL.
 	<refname>PPP</refname>
 	<refpurpose>PPP (point-to-point protocol) support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2830,10 +2481,6 @@ developers and released under the GPL.
 	<refname>PPPOE</refname>
 	<refpurpose>PPP over Ethernet (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and EXPERIMENTAL and PPP</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2857,10 +2504,6 @@ developers and released under the GPL.
 	<refname>ISDN</refname>
 	<refpurpose>ISDN support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2888,9 +2531,6 @@ developers and released under the GPL.
 	<refname>PHONE</refname>
 	<refpurpose>Linux telephony support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2911,11 +2551,6 @@ developers and released under the GPL.
 	<refname>INPUT</refname>
 	<refpurpose>Generic input layer (needed for keyboard, mouse, ...)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2942,12 +2577,6 @@ developers and released under the GPL.
 	<refname>VT</refname>
 	<refpurpose>Virtual terminal</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EMBEDDED</literal></para>
-	<para role="select">Selects <literal>INPUT</literal></para>
-	<para role="default">Default Value <literal>y if !VIOCONS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -2994,11 +2623,6 @@ developers and released under the GPL.
 	<refname>VT_CONSOLE</refname>
 	<refpurpose>Support for console on virtual terminal</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>VT and EMBEDDED</literal></para>
-	<para role="default">Default Value <literal>y if VT</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3029,10 +2653,6 @@ developers and released under the GPL.
 <refnamediv>
 	<refname>HW_CONSOLE</refname>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y if VT and !S390 and !UML</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 </refsect1>
@@ -3043,11 +2663,6 @@ developers and released under the GPL.
 	<refname>SERIAL_8250</refname>
 	<refpurpose>8250/16550 and compatible serial support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>BROKEN || !SPARC</literal></para>
-	<para role="select">Selects <literal>SERIAL_CORE</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3080,9 +2695,6 @@ developers and released under the GPL.
 <refnamediv>
 	<refname>SERIAL_CORE</refname>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 </refsect1>
@@ -3093,11 +2705,6 @@ developers and released under the GPL.
 	<refname>AGP</refname>
 	<refpurpose>/dev/agpgart (AGP Support)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>(ALPHA || IA64 || PPC || X86) and !GART_IOMMU</literal></para>
-	<para role="default">Default Value <literal>y if (ALPHA || IA64 || PPC || X86) and GART_IOMMU</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3136,10 +2743,6 @@ developers and released under the GPL.
 	<refname>DRM</refname>
 	<refpurpose>Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>(AGP || AGP=n) and PCI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3161,9 +2764,6 @@ developers and released under the GPL.
 	<refname>I2C</refname>
 	<refpurpose>I2C support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3193,9 +2793,6 @@ developers and released under the GPL.
 	<refname>SPI</refname>
 	<refpurpose>SPI support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3229,10 +2826,6 @@ developers and released under the GPL.
 	<refname>HWMON</refname>
 	<refpurpose>Hardware Monitoring support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3253,9 +2846,6 @@ developers and released under the GPL.
 	<refname>VIDEO_DEV</refname>
 	<refpurpose>Video For Linux</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3288,10 +2878,6 @@ developers and released under the GPL.
 	<refname>DVB</refname>
 	<refpurpose>DVB For Linux</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and INET</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3313,9 +2899,6 @@ developers and released under the GPL.
 	<refname>FB</refname>
 	<refpurpose>Support for frame buffer devices</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3364,11 +2947,6 @@ developers and released under the GPL.
 	<refname>VGA_CONSOLE</refname>
 	<refpurpose>VGA text console</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>VT and !ARCH_ACORN and !ARCH_EBSA110 and !4xx and !8xx and !SPARC and !M68K and !PARISC and !FRV and !ARCH_VERSATILE and (EMBEDDED || !X86)</literal></para>
-	<para role="default">Default Value <literal>y if VT and !ARCH_ACORN and !ARCH_EBSA110 and !4xx and !8xx and !SPARC and !M68K and !PARISC and !FRV and !ARCH_VERSATILE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3391,10 +2969,6 @@ developers and released under the GPL.
 	<refname>LOGO</refname>
 	<refpurpose>Bootup logo</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>FB || SGI_NEWPORT_CONSOLE</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3412,9 +2986,6 @@ developers and released under the GPL.
 	<refname>SOUND</refname>
 	<refpurpose>Sound card support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3460,10 +3031,6 @@ developers and released under the GPL.
 	<refname>SND</refname>
 	<refpurpose>Advanced Linux Sound Architecture</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!M68K and SOUND</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3483,13 +3050,6 @@ developers and released under the GPL.
 	<refname>SND_USB_AUDIO</refname>
 	<refpurpose>USB Audio/MIDI driver</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!M68K and SOUND!=n and SND and USB</literal></para>
-	<para role="select">Selects <literal>SND_HWDEP</literal></para>
-	<para role="select">Selects <literal>SND_RAWMIDI</literal></para>
-	<para role="select">Selects <literal>SND_PCM</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3505,10 +3065,6 @@ developers and released under the GPL.
 	<refname>USB</refname>
 	<refpurpose>Support for Host-side USB</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB_ARCH_HAS_HCD</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3559,10 +3115,6 @@ developers and released under the GPL.
 	<refname>USB_EHCI_HCD</refname>
 	<refpurpose>EHCI HCD (USB 2.0) support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB and USB_ARCH_HAS_EHCI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3600,11 +3152,6 @@ developers and released under the GPL.
 	<refname>USB_OHCI_HCD</refname>
 	<refpurpose>OHCI HCD support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB and USB_ARCH_HAS_OHCI</literal></para>
-	<para role="select">Selects <literal>ISP1301_OMAP</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3628,10 +3175,6 @@ developers and released under the GPL.
 	<refname>USB_UHCI_HCD</refname>
 	<refpurpose>UHCI HCD (most Intel and VIA) support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB and PCI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3652,11 +3195,6 @@ developers and released under the GPL.
 	<refname>USB_STORAGE</refname>
 	<refpurpose>USB Mass Storage support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB</literal></para>
-	<para role="select">Selects <literal>SCSI</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3683,10 +3221,6 @@ developers and released under the GPL.
 	<refname>USB_SERIAL</refname>
 	<refpurpose>USB Serial Converter support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>USB</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3709,9 +3243,6 @@ developers and released under the GPL.
 	<refname>USB_GADGET</refname>
 	<refpurpose>Support for USB Gadgets</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3758,9 +3289,6 @@ developers and released under the GPL.
 	<refname>MMC</refname>
 	<refpurpose>MMC support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3780,10 +3308,6 @@ developers and released under the GPL.
 	<refname>INFINIBAND</refname>
 	<refpurpose>InfiniBand support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>PCI || BROKEN</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3800,10 +3324,6 @@ developers and released under the GPL.
 	<refname>EDAC</refname>
 	<refpurpose>EDAC core system error reporting (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>X86 and EXPERIMENTAL</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3829,9 +3349,6 @@ developers and released under the GPL.
 	<refname>EXT2_FS</refname>
 	<refpurpose>Second extended fs support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3853,10 +3370,6 @@ developers and released under the GPL.
 	<refname>EXT3_FS</refname>
 	<refpurpose>Ext3 journalling file system support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="select">Selects <literal>JBD</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3907,9 +3420,6 @@ developers and released under the GPL.
 	<refname>REISERFS_FS</refname>
 	<refpurpose>Reiserfs support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3939,10 +3449,6 @@ developers and released under the GPL.
 	<refname>JFS_FS</refname>
 	<refpurpose>JFS filesystem support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="select">Selects <literal>NLS</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3958,10 +3464,6 @@ developers and released under the GPL.
 	<refname>XFS_FS</refname>
 	<refpurpose>XFS filesystem support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="select">Selects <literal>EXPORTFS</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -3994,14 +3496,6 @@ developers and released under the GPL.
 	<refname>OCFS2_FS</refname>
 	<refpurpose>OCFS2 file system support (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and EXPERIMENTAL</literal></para>
-	<para role="select">Selects <literal>CONFIGFS_FS</literal></para>
-	<para role="select">Selects <literal>JBD</literal></para>
-	<para role="select">Selects <literal>CRC32</literal></para>
-	<para role="select">Selects <literal>INET</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4030,10 +3524,6 @@ developers and released under the GPL.
 	<refname>INOTIFY</refname>
 	<refpurpose>Inotify file change notification support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="default">Default Value <literal>y</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4059,9 +3549,6 @@ developers and released under the GPL.
 	<refname>QUOTA</refname>
 	<refpurpose>Quota support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4084,9 +3571,6 @@ developers and released under the GPL.
 	<refname>AUTOFS_FS</refname>
 	<refpurpose>Kernel automounter support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4123,9 +3607,6 @@ developers and released under the GPL.
 	<refname>FUSE_FS</refname>
 	<refpurpose>Filesystem in Userspace support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4157,11 +3638,6 @@ developers and released under the GPL.
 	<refname>SMB_FS</refname>
 	<refpurpose>SMB file system support (to mount Windows shares etc.)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and INET</literal></para>
-	<para role="select">Selects <literal>NLS</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4200,11 +3676,6 @@ developers and released under the GPL.
 	<refname>CIFS</refname>
 	<refpurpose>CIFS support (advanced network filesystem for Samba, Window and other CIFS compliant servers)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>NET and INET</literal></para>
-	<para role="select">Selects <literal>NLS</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4242,10 +3713,6 @@ developers and released under the GPL.
 	<refname>PROFILING</refname>
 	<refpurpose>Profiling support (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EXPERIMENTAL</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4261,10 +3728,6 @@ developers and released under the GPL.
 	<refname>OPROFILE</refname>
 	<refpurpose>OProfile system profiling (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EXPERIMENTAL and PROFILING</literal></para>
-	<para role="type">Type <literal>tristate</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4281,10 +3744,6 @@ developers and released under the GPL.
 	<refname>KPROBES</refname>
 	<refpurpose>Kprobes (EXPERIMENTAL)</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>EXPERIMENTAL and MODULES</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4302,9 +3761,6 @@ developers and released under the GPL.
 	<refname>PRINTK_TIME</refname>
 	<refpurpose>Show timing information on printks</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4322,10 +3778,6 @@ developers and released under the GPL.
 	<refname>MAGIC_SYSRQ</refname>
 	<refpurpose>Magic SysRq key</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!UML</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4349,9 +3801,6 @@ developers and released under the GPL.
 	<refname>DEBUG_KERNEL</refname>
 	<refpurpose>Kernel debugging</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4367,10 +3816,6 @@ developers and released under the GPL.
 	<refname>DEBUG_FS</refname>
 	<refpurpose>Debug Filesystem</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SYSFS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4387,10 +3832,6 @@ developers and released under the GPL.
 	<refname>SECURITY</refname>
 	<refpurpose>Enable different security models</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SYSFS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
@@ -4411,11 +3852,6 @@ developers and released under the GPL.
 	<refname>SECURITY_SELINUX</refname>
 	<refpurpose>NSA SELinux Support</refpurpose>
 </refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>SECURITY_NETWORK and AUDIT and NET and INET</literal></para>
-	<para role="default">Default Value <literal>n if SECURITY_NETWORK and AUDIT and NET and INET</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
 <refsect1>
 	<title>Description</title>
 	<para>
