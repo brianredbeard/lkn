@@ -6,18 +6,22 @@ Upgrading a kernel
 
 <sect1>
 <title>retrieving the patch</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>applying the patch</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>updating the configuration</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>building the updated kernel</title>
+<para></para>
 </sect1>
 
 </chapter>

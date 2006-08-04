@@ -6,10 +6,12 @@ Configuring a kernel
 
 <sect1>
 <title>customizing it for the hardware on your machine</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>building modules</title>
+<para></para>
 </sect1>
 
 <sect1>
@@ -17,26 +19,32 @@ Configuring a kernel
 
 <sect2>
 <title>USB</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>power management</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>ACPI</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>filesystems</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>firewire</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>other common things that users need.</title>
+<para></para>
 </sect2>
 
 </sect1>

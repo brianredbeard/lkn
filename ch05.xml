@@ -6,22 +6,27 @@ Building a kernel
 
 <sect1>
 <title>use the the default configuration options</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>basic options to make (full coverage will be in later chapter).</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>building a kernel with the source in one place, and the output in another.</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>building only a portion of the kernel tree</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>building a kernel for a different architecture</title>
+<para></para>
 </sect1>
 
 </chapter>

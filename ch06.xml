@@ -7,14 +7,17 @@ Installing a kernel and booting with it
 
 <sect1>
 <title>grub</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>lilo</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>other boot loaders</title>
+<para></para>
 </sect1>
 
 </chapter>

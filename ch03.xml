@@ -1,5 +1,4 @@
 <chapter id="LKN-chapter-requirements">
-
 <title>
 Requirements for building a kernel
 </title>
@@ -38,14 +37,17 @@ o  udev                   071                     # udevinfo -V
 
 <sect2>
 <title>Compiler</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>Make</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>binutils</title>
+<para></para>
 </sect2>
 
 </sect1>
@@ -55,10 +57,12 @@ o  udev                   071                     # udevinfo -V
 
 <sect2>
 <title>util-linux</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>module-init-tools</title>
+<para></para>
 </sect2>
 
 <sect2>
@@ -66,22 +70,27 @@ o  udev                   071                     # udevinfo -V
 
 <sect3>
 <title>ext2/ext3</title>
+<para></para>
 </sect3>
 
 <sect3>
 <title>jfs</title>
+<para></para>
 </sect3>
 
 <sect3>
 <title>reiserfs</title>
+<para></para>
 </sect3>
 
 <sect3>
 <title>xfs</title>
+<para></para>
 </sect3>
 
 <sect3>
 <title>quotas</title>
+<para></para>
 </sect3>
 
 </sect2>
