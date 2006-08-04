@@ -171,6 +171,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_IOSCHED_NOOP">
 <refnamediv>
 	<refname>IOSCHED_NOOP</refname>
+	<refpurpose>No-OP I/O scheduler</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -2649,15 +2650,6 @@ developers and released under the GPL.
 </refsect1>
 </refentry>
 
-<refentry id="CONFIG_HW_CONSOLE">
-<refnamediv>
-	<refname>HW_CONSOLE</refname>
-</refnamediv>
-<refsect1>
-	<title>Description</title>
-</refsect1>
-</refentry>
-
 <refentry id="CONFIG_SERIAL_8250">
 <refnamediv>
 	<refname>SERIAL_8250</refname>
@@ -2688,15 +2680,6 @@ developers and released under the GPL.
 	modems and similar devices connecting to the standard serial ports.
 	</para>
 
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_SERIAL_CORE">
-<refnamediv>
-	<refname>SERIAL_CORE</refname>
-</refnamediv>
-<refsect1>
-	<title>Description</title>
 </refsect1>
 </refentry>
 
