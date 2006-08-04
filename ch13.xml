@@ -6,8 +6,14 @@
 Kernel configuration option reference
 </title>
 
+<footnote>
+<para>
+The majority of this chapter is based on the in-kernel documentation for the
+different kernel configuration options, which were written by the kernel
+developers and released under the GPL.
+</para>
+</footnote>
 
-<!-- automatic generated stuff below for all USB options as a test... -->
 
 <refentry id="CONFIG_EXPERIMENTAL">
 <refnamediv>
@@ -49,9 +55,9 @@ Kernel configuration option reference
 	<para>
 	Unless you intend to help test and develop a feature or driver that
 	falls into this category, or you have a situation that requires
-	using these features, you should probably say N here, which will
+	using these features, you should probably say no here, which will
 	cause the configurator to present you with fewer choices. If
-	you say Y here, you will be offered the choice of using features or
+	you say yes here, you will be offered the choice of using features or
 	drivers that are currently considered to be in the alpha-test phase.
 	</para>
 
@@ -69,12 +75,11 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Append an extra string to the end of your kernel version.
-	This will show up when you type uname, for example.
-	The string you set here will be appended after the contents of
-	any files with a filename matching localversion* in your
-	object and source tree, in that order.  Your total string can
-	be a maximum of 64 characters.
+	This allows you to append an extra string to the end of your kernel
+	version.  This will show up when you type uname, for example.  The
+	string you set here will be appended after the contents of any files
+	with a filename matching localversion* in your object and source tree,
+	in that order.  The string can be a maximum of 64 characters.
 	</para>
 
 </refsect1>
@@ -94,8 +99,7 @@ Kernel configuration option reference
 	<para>
 	Enable auditing infrastructure that can be used with another
 	kernel subsystem, such as SELinux (which requires this for
-	logging of avc messages output).  Does not do system-call
-	auditing without CONFIG_AUDITSYSCALL.
+	logging of avc messages output).
 	</para>
 
 </refsect1>
@@ -116,10 +120,11 @@ Kernel configuration option reference
 	contents to be saved in the kernel. It provides documentation
 	of which kernel options are used in a running kernel or in an
 	on-disk kernel.  This information can be extracted from the kernel
-	image file with the script scripts/extract-ikconfig and used as
-	input to rebuild the current kernel or to build another kernel.
-	It can also be extracted from a running kernel by reading
-	/proc/config.gz if enabled (below).
+	image file with the script
+	<filename>scripts/extract-ikconfig</filename> and used as input to
+	rebuild the current kernel or to build another kernel.  It can also be
+	extracted from a running kernel by reading the file
+	<filename>/proc/config.gz</filename>.
 	</para>
 
 </refsect1>
@@ -137,9 +142,10 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	This option allows certain base kernel options and settings
-	to be disabled or tweaked. This is for specialized
-	environments which can tolerate a "non-standard" kernel.
-	Only use this if you really know what you are doing.
+	to be disabled or tweaked. This is for specialized environments which
+	can tolerate a "non-standard" kernel.  Only use this if you really know
+	what you are doing, as it is very easy to change the options to create
+	a kernel that will not even boot properly.
 	</para>
 
 </refsect1>
@@ -159,23 +165,23 @@ Kernel configuration option reference
 	Kernel modules are small pieces of compiled code which can
 	be inserted in the running kernel, rather than being
 	permanently built into the kernel.  You use the "modprobe"
-	tool to add (and sometimes remove) them.  If you say Y here,
+	tool to add (and sometimes remove) them.  If you say yes here,
 	many parts of the kernel can be built as modules (by
-	answering M instead of Y where indicated): this is most
-	useful for infrequently used options which are not required
-	for booting.  For more information, see the man pages for
-	modprobe, lsmod, modinfo, insmod and rmmod.
+	answering <literal>M</literal> instead of <literal>Y</literal> where
+	indicated): this is most useful for infrequently used options which are
+	not required for booting.  For more information, see the man pages for
+	<literal>modprobe</literal>, 
+	<literal>lsmod</literal>,
+	<literal>modinfo</literal>,
+	<literal>insmod</literal>, and
+	<literal>rmmod</literal>.
 	</para>
 
 	<para>
-	If you say Y here, you will need to run "make
-	modules_install" to put the modules under /lib/modules/
-	where modprobe can find them (you may need to be root to do
-	this).
-	</para>
-
-	<para>
-	If unsure, say Y.
+	If you say yes here, you will need to run
+	<literal>make modules_install</literal> to put the modules under
+	<filename>/lib/modules/</filename> where the module tools can find
+	them.
 	</para>
 
 </refsect1>
@@ -277,29 +283,23 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	This enables support for systems with more than one CPU. If you have
-	a system with only one CPU, like most personal computers, say N. If
-	you have a system with more than one CPU, say Y.
+	a system with only one CPU, like most personal computers, say no. If
+	you have a system with more than one CPU, say yes.
 	</para>
 
 	<para>
-	If you say N here, the kernel will run on single and multiprocessor
+	If you say no here, the kernel will run on single and multiprocessor
 	machines, but will use only one CPU of a multiprocessor machine. If
-	you say Y here, the kernel will run on many, but not all,
+	you say yes here, the kernel will run on many, but not all,
 	singleprocessor machines. On a singleprocessor machine, the kernel
-	will run faster if you say N here.
+	will run faster if you say no here.
 	</para>
 
 	<para>
-	Note that if you say Y here and choose architecture "586" or
+	Note that if you say yes here and choose architecture "586" or
 	"Pentium" under "Processor family", the kernel will not work on 486
 	architectures. Similarly, multiprocessor kernels for the "PPro"
 	architecture may not work on all Pentium based boards.
-	</para>
-
-	<para>
-	People using multiprocessor machines who say Y here should also say
-	Y to "Enhanced Real Time Clock Support", below. The "Advanced Power
-	Management" code will be disabled if you say Y here.
 	</para>
 
 	<para>
@@ -309,10 +309,6 @@ Kernel configuration option reference
 	<filename>Documentation/nmi_watchdog.txt</filename> and the
 	<filename>SMP-HOWTO</filename> available at
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
-	</para>
-
-	<para>
-	If you don't know what to do here, say N.
 	</para>
 
 </refsect1>
@@ -333,7 +329,7 @@ Kernel configuration option reference
 	This is the processor type of your CPU. This information is used for
 	optimizing purposes. In order to compile a kernel that can run on
 	all x86 CPU types (albeit not optimally fast), you can specify
-	"386" here.
+	<literal>386</literal> here.
 	</para>
 
 	<para>
@@ -344,34 +340,197 @@ Kernel configuration option reference
 
 	<para>
 	Here are the settings recommended for greatest speed:
-	- "386" for the AMD/Cyrix/Intel 386DX/DXL/SL/SLC/SX, Cyrix/TI
-	486DLC/DLC2, UMC 486SX-S and NexGen Nx586.  Only "386" kernels
-	will run on a 386 class machine.
-	- "486" for the AMD/Cyrix/IBM/Intel 486DX/DX2/DX4 or
-	SL/SLC/SLC2/SLC3/SX/SX2 and UMC U5D or U5S.
-	- "586" for generic Pentium CPUs lacking the TSC
+	<variablelist>
+
+	<varlistentry>
+	<term><literal>386</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a AMD/Cyrix/Intel 386DX/DXL/SL/SLC/SX, Cyrix/TI 486DLC/DLC2, UMC
+	486SX-S and NexGen Nx586 procesor.  Only <literal>386</literal> kernels will run
+	on a 386 class machine.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>486</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a AMD/Cyrix/IBM/Intel 486DX/DX2/DX4 or SL/SLC/SLC2/SLC3/SX/SX2
+	and UMC U5D or U5S processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>586</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a generic Pentium processor lacking the TSC
 	(time stamp counter) register.
-	- "Pentium-Classic" for the Intel Pentium.
-	- "Pentium-MMX" for the Intel Pentium MMX.
-	- "Pentium-Pro" for the Intel Pentium Pro.
-	- "Pentium-II" for the Intel Pentium II or pre-Coppermine Celeron.
-	- "Pentium-III" for the Intel Pentium III or Coppermine Celeron.
-	- "Pentium-4" for the Intel Pentium 4 or P4-based Celeron.
-	- "K6" for the AMD K6, K6-II and K6-III (aka K6-3D).
-	- "Athlon" for the AMD K7 family (Athlon/Duron/Thunderbird).
-	- "Crusoe" for the Transmeta Crusoe series.
-	- "Efficeon" for the Transmeta Efficeon series.
-	- "Winchip-C6" for original IDT Winchip.
-	- "Winchip-2" for IDT Winchip 2.
-	- "Winchip-2A" for IDT Winchips with 3dNow! capabilities.
-	- "GeodeGX1" for Geode GX1 (Cyrix MediaGX).
-	- "Geode GX/LX" For AMD Geode GX and LX processors.
-	- "CyrixIII/VIA C3" for VIA Cyrix III or VIA C3.
-	- "VIA C3-2 for VIA C3-2 "Nehemiah" (model 9 and above).
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Pentium-Classic</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an Intel Pentium processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Pentium-MMX</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an Intel Pentium MMX processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Pentium-Pro</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an Intel Pentium Pro processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Pentium-II</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an Intel Pentium II or pre-Coppermine Celeron processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Pentium-III</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an the Intel Pentium III or Coppermine Celeron processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Pentium-4</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an Intel Pentium 4 or P4-based Celeron processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>K6</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an AMD K6, K6-II or K6-III (aka K6-3D) processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Athlon</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a AMD K7 family (Athlon/Duron/Thunderbird) processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Crusoe</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a Transmeta Crusoe series processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Efficeon</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a Transmeta Efficeon series processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Winchip-C6</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an original IDT Winchip processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Winchip-2</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an IDT Winchip 2 processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Winchip-2</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an IDT Winchip processor with 3dNow! capabilities.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>GeodeGX1</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a Geode GX1 (Cyrix MediaGX) procssor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>Geode GX/LX</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have an AMD Geode GX or LX processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>CyrixIII/VIA C3</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a VIA Cyrix III or VIA C3 processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><literal>VIA C3-2</literal></term>
+	<listitem>
+	<para>
+	Choose this if you have a VIA C3-2 "Nehemiah" (model 9 and above) processor.
+	</para>
+	</listitem>
+	</varlistentry>
+
+	</variablelist>
 	</para>
 
 	<para>
-	If you don't know what to do, choose "386".
+	If you don't know what to do, choose <literal>386</literal>.
 	</para>
 
 </refsect1>
@@ -424,7 +583,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	This is purely to save memory - each supported CPU adds
+	This option is purely to save memory - each supported CPU adds
 	approximately eight kilobytes to the kernel image.
 	</para>
 
@@ -447,7 +606,7 @@ Kernel configuration option reference
 	SMT scheduler support improves the CPU scheduler's decision making
 	when dealing with Intel Pentium 4 chips with HyperThreading at a
 	cost of slightly increased overhead in some places. If unsure say
-	N here.
+	no here.
 	</para>
 
 </refsect1>
@@ -565,8 +724,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Say Y here if you are building a kernel for a desktop system.
-	Say N if you are unsure.
+	Say yes here if you are building a kernel for a desktop system.
 	</para>
 
 </refsect1>
@@ -594,38 +752,39 @@ Kernel configuration option reference
 
 	<para>
 	If you are compiling a kernel which will never run on a machine with
-	more than 1 Gigabyte total physical RAM, answer "off" here (default
-	choice and suitable for most users). This will result in a "3GB/1GB"
-	split: 3GB are mapped so that each process sees a 3GB virtual memory
-	space and the remaining part of the 4GB virtual memory space is used
-	by the kernel to permanently map as much physical memory as
-	possible.
+	more than 1 Gigabyte total physical RAM, answer <literal>off</literal>
+	here (default choice and suitable for most users). This will result in
+	a <literal>3GB/1GB</literal> split: 3GB are mapped so that each process
+	sees a 3GB virtual memory space and the remaining part of the 4GB
+	virtual memory space is used by the kernel to permanently map as much
+	physical memory as possible.
 	</para>
 
 	<para>
 	If the machine has between 1 and 4 Gigabytes physical RAM, then
-	answer "4GB" here.
+	answer <literal>4GB</literal> here.
 	</para>
 
 	<para>
-	If more than 4 Gigabytes is used then answer "64GB" here. This
-	selection turns Intel PAE (Physical Address Extension) mode on.
-	PAE implements 3-level paging on IA32 processors. PAE is fully
+	If more than 4 Gigabytes is used then answer <literal>64GB</literal>
+	here. This selection turns Intel PAE (Physical Address Extension) mode
+	on.  PAE implements 3-level paging on IA32 processors. PAE is fully
 	supported by Linux, PAE mode is implemented on all recent Intel
-	processors (Pentium Pro and better). NOTE: If you say "64GB" here,
-	then the kernel will not boot on CPUs that don't support PAE!
+	processors (Pentium Pro and better).  Note: If you say
+	<literal>64GB</literal> here, then the kernel will not boot on CPUs
+	that don't support PAE!
 	</para>
 
 	<para>
 	The actual amount of total physical memory will either be
 	auto detected or can be forced by using a kernel command line option
-	such as "mem=256M". (Try "man bootparam" or see the documentation of
-	your boot loader (lilo or loadlin) about how to pass options to the
-	kernel at boot time.)
+	such as <literal>mem=256M</literal>. (Try <literal>man
+	bootparam</literal> or see the documentation of your boot loader about
+	how to pass options to the kernel at boot time.)
 	</para>
 
 	<para>
-	If unsure, say "off".
+	If unsure, say <literal>off</literal>.
 	</para>
 
 </refsect1>
@@ -683,22 +842,23 @@ Kernel configuration option reference
 	<para>
 	This option allows you to change some of the ways that
 	Linux manages its memory internally.  Most users will
-	only have one option here: FLATMEM.  This is normal
+	only have one option here: <literal>FLATMEM</literal>.  This is normal
 	and a correct option.
 	</para>
 
 	<para>
 	Some users of more advanced features like NUMA and
 	memory hotplug may have different options here.
-	DISCONTIGMEM is an more mature, better tested system,
-	but is incompatible with memory hotplug and may suffer
-	decreased performance over SPARSEMEM.  If unsure between
-	"Sparse Memory" and "Discontiguous Memory", choose
-	"Discontiguous Memory".
+	<literal>DISCONTIGMEM</literal> is an more mature, better tested
+	system, but is incompatible with memory hotplug and may suffer
+	decreased performance over <literal>SPARSEMEM</literal>.  If unsure
+	between <literal>Sparse Memory</literal> and <literal>Discontiguous
+	Memory</literal>, choose <literal>Discontiguous Memory</literal>.
 	</para>
 
 	<para>
-	If unsure, choose this option (Flat Memory) over any other.
+	If unsure, choose this option, <literal>Flat Memory</literal> over any
+	other.
 	</para>
 
 </refsect1>
@@ -730,7 +890,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	If unsure, choose "Flat Memory" over this option.
+	If unsure, choose <literal>Flat Memory</literal> over this option.
 	</para>
 
 </refsect1>
@@ -760,8 +920,8 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	If unsure, choose "Discontiguous Memory" or "Flat Memory"
-	over this option.
+	If unsure, choose <literal>Discontiguous Memory</literal> or
+	<literal>Flat Memory</literal> over this option.
 	</para>
 
 </refsect1>
@@ -792,7 +952,7 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	If unsure, say Y. Only embedded should say N here.
+	If unsure, say yes. Only embedded systems should say no here.
 	</para>
 
 </refsect1>
@@ -843,9 +1003,9 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here to experiment with turning CPUs off and on, and to
-	enable suspend on SMP systems. CPUs can be controlled through
-	/sys/devices/system/cpu.
+	Say yes here to experiment with turning CPUs off and on, and to
+	enable suspend on SMP systems. CPUs can be controlled through the
+	<filename>/sys/devices/system/cpu</filename> interface.
 	</para>
 
 </refsect1>
@@ -873,7 +1033,7 @@ Kernel configuration option reference
 	<para>
 	Power Management is most important for battery powered laptop
 	computers; if you have a laptop, check out the Linux Laptop home
-	page on the WWW at
+	page on the internet at
 	<systemitem class="url">http://www.linux-on-laptops.com/</systemitem> or
 	Tuxmobil - Linux on Mobile Computers at
 	<systemitem class="url">http://www.tuxmobil.org/</systemitem>
@@ -882,9 +1042,9 @@ Kernel configuration option reference
 	</para>
 
 	<para>
-	Note that, even if you say N here, Linux on the x86 architecture
-	will issue the hlt instruction if nothing is to be done, thereby
-	sending the processor to sleep and saving power.
+	Note that, even if you say no here, Linux on the x86 architecture
+	will issue the <literal>hlt</literal> instruction if nothing is to be
+	done, thereby sending the processor to sleep and saving power.
 	</para>
 
 </refsect1>
@@ -903,19 +1063,17 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	Enable the possibility of suspending the machine.
-	It doesn't need ACPI or APM.
-	You may suspend your machine by 'swsusp' or 'shutdown -z time' 
-	(patch for sysvinit needed). 
 	</para>
 
 	<para>
-	It creates an image which is saved in your active swap. Upon next
-	boot, pass the 'resume=/dev/swappartition' argument to the kernel to
-	have it detect the saved image, restore memory state from it, and
-	continue to run as before. If you do not want the previous state to
-	be reloaded, then use the 'noresume' kernel argument. However, note
-	that your partitions will be fsck'd and you must re-mkswap your swap
-	partitions. It does not work with swap files.
+	When suspending the machine, an image is saved in your active swap.
+	Upon next boot, pass the <literal>resume=/dev/swappartition</literal>
+	argument to the kernel to have it detect the saved image, restore
+	memory state from it, and continue to run as before. If you do not want
+	the previous state to be reloaded, then use the
+	<literal>noresume</literal> kernel argument. However, note that your
+	partitions will be fsck'd and you must re-mkswap your swap partitions.
+	It does not work with swap files.
 	</para>
 
 	<para>
@@ -948,39 +1106,37 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Advanced Configuration and Power Interface (ACPI) support for 
-	Linux requires an ACPI compliant platform (hardware/firmware),
-	and assumes the presence of OS-directed configuration and power
-	management (OSPM) software.  This option will enlarge your 
-	kernel by about 70K.
+	Advanced Configuration and Power Interface (ACPI) support for Linux
+	requires an ACPI compliant platform (hardware/firmware), and assumes
+	the presence of OS-directed configuration and power management (OSPM)
+	software.  This option will enlarge your kernel by about 70K.
 	</para>
 
 	<para>
-	Linux ACPI provides a robust functional replacement for several 
-	legacy configuration and power management interfaces, including
-	the Plug-and-Play BIOS specification (PnP BIOS), the 
-	MultiProcessor Specification (MPS), and the Advanced Power 
-	Management (APM) specification.  If both ACPI and APM support 
-	are configured, whichever is loaded first shall be used.
+	Linux ACPI provides a robust functional replacement for several legacy
+	configuration and power management interfaces, including the
+	Plug-and-Play BIOS specification (PnP BIOS), the MultiProcessor
+	Specification (MPS), and the Advanced Power Management (APM)
+	specification.  If both ACPI and APM support are configured, whichever
+	is loaded first shall be used.
 	</para>
 
 	<para>
-	The ACPI SourceForge project contains the latest source code, 
-	documentation, tools, mailing list subscription, and other 
-	information.  This project is available at:
+	The ACPI SourceForge project contains the latest source code,
+	documentation, tools, mailing list subscription, and other information.
+	This project is available at:
 	<systemitem class="url">http://sourceforge.net/projects/acpi</systemitem>
 	</para>
 
 	<para>
-	Linux support for ACPI is based on Intel Corporation's ACPI
-	Component Architecture (ACPI CA).  For more information see:
+	Linux support for ACPI is based on Intel Corporation's ACPI Component
+	Architecture (ACPI CA).  For more information see:
 	<systemitem class="url">http://developer.intel.com/technology/iapc/acpi</systemitem>
 	</para>
 
 	<para>
-	ACPI is an open industry specification co-developed by Compaq, 
-	Intel, Microsoft, Phoenix, and Toshiba.  The specification is 
-	available at:
+	ACPI is an open industry specification co-developed by Compaq, Intel,
+	Microsoft, Phoenix, and Toshiba.  The specification is available at:
 	<systemitem class="url">http://www.acpi.info</systemitem>
 	</para>
 
@@ -999,24 +1155,20 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	CPU Frequency scaling allows you to change the clock speed of 
-	CPUs on the fly. This is a nice method to save power, because 
-	the lower the CPU clock speed, the less power the CPU consumes.
+	CPU Frequency scaling allows you to change the clock speed of CPUs on
+	the fly. This is a nice method to save power, because the lower the CPU
+	clock speed, the less power the CPU consumes.
 	</para>
 
 	<para>
-	Note that this driver doesn't automatically change the CPU
-	clock speed, you need to either enable a dynamic cpufreq governor
-	(see below) after boot, or use a userspace tool.
+	Note that this driver doesn't automatically change the CPU clock speed,
+	you need to either enable a dynamic cpufreq governor (see below) after
+	boot, or use a userspace tool.
 	</para>
 
 	<para>
 	For details, take a look at
 	<filename>Documentation/cpu-freq</filename>.
-	</para>
-
-	<para>
-	If in doubt, say N.
 	</para>
 
 </refsect1>
@@ -1035,9 +1187,9 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Use the CPUFreq governor 'performance' as default. This sets
-	the frequency statically to the highest frequency supported by
-	the CPU.
+	Use the CPUFreq governor <literal>performance</literal> as default.
+	This sets the frequency statically to the highest frequency supported
+	by the CPU.
 	</para>
 
 </refsect1>
@@ -1056,10 +1208,10 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Use the CPUFreq governor 'userspace' as default. This allows
-	you to set the CPU frequency manually or when an userspace 
-	program shall be able to set the CPU dynamically without having
-	to enable the userspace governor manually.
+	Use the CPUFreq governor <literal>userspace</literal> as default. This
+	allows you to set the CPU frequency manually or when an userspace
+	program shall be able to set the CPU dynamically without having to
+	enable the userspace governor manually.
 	</para>
 
 </refsect1>
@@ -1081,10 +1233,6 @@ Kernel configuration option reference
 	highest available CPU frequency.
 	</para>
 
-	<para>
-	If in doubt, say Y.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -1100,12 +1248,8 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	This cpufreq governor sets the frequency statically to the
-	lowest available CPU frequency.
-	</para>
-
-	<para>
-	If in doubt, say Y.
+	This cpufreq governor sets the frequency statically to the lowest
+	available CPU frequency.
 	</para>
 
 </refsect1>
@@ -1123,19 +1267,15 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Enable this cpufreq governor when you either want to set the
-	CPU frequency manually or when an userspace program shall
-	be able to set the CPU dynamically, like on LART 
+	Enable this cpufreq governor when you either want to set the CPU
+	frequency manually or when an userspace program shall be able to set
+	the CPU dynamically, like on LART
 	<systemitem class="url">http://www.lartmaker.nl/</systemitem>.
 	</para>
 
 	<para>
 	For details, take a look at
 	<filename>Documentation/cpu-freq/</filename>.
-	</para>
-
-	<para>
-	If in doubt, say Y.
 	</para>
 
 </refsect1>
@@ -1153,20 +1293,15 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	'ondemand' - This driver adds a dynamic cpufreq policy governor.
-	The governor does a periodic polling and 
-	changes frequency based on the CPU utilization.
-	The support for this governor depends on CPU capability to
-	do fast frequency switching (i.e, very low latency frequency
-	transitions). 
+	<literal>ondemand</literal> - This driver adds a dynamic cpufreq policy
+	governor.  The governor does a periodic polling and changes frequency
+	based on the CPU utilization.  The support for this governor depends on
+	CPU capability to do fast frequency switching (i.e, very low latency
+	frequency transitions).
 	</para>
 
 	<para>
-	For details, take a look at linux/Documentation/cpu-freq.
-	</para>
-
-	<para>
-	If in doubt, say N.
+	For details, take a look at <filename>Documentation/cpu-freq</filename>.
 	</para>
 
 </refsect1>
@@ -1184,27 +1319,24 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	'conservative' - this driver is rather similar to the 'ondemand'
-	governor both in its source code and its purpose, the difference is
-	its optimisation for better suitability in a battery powered
-	environment.  The frequency is gracefully increased and decreased
-	rather than jumping to 100% when speed is required.
+	<literal>conservative</literal> - this driver is rather similar to the
+	<literal>ondemand</literal> governor both in its source code and its
+	purpose, the difference is its optimisation for better suitability in a
+	battery powered environment.  The frequency is gracefully increased and
+	decreased rather than jumping to 100% when speed is required.
 	</para>
 
 	<para>
 	If you have a desktop machine then you should really be considering
-	the 'ondemand' governor instead, however if you are using a laptop,
-	PDA or even an AMD64 based computer (due to the unacceptable
-	step-by-step latency issues between the minimum and maximum frequency
-	transitions in the CPU) you will probably want to use this governor.
+	the <literal>ondemand</literal> governor instead, however if you are
+	using a laptop, PDA or even an AMD64 based computer (due to the
+	unacceptable step-by-step latency issues between the minimum and
+	maximum frequency transitions in the CPU) you will probably want to use
+	this governor.
 	</para>
 
 	<para>
-	For details, take a look at linux/Documentation/cpu-freq.
-	</para>
-
-	<para>
-	If in doubt, say N.
+	For details, take a look at <filename>Documentation/cpu-freq</filename>.
 	</para>
 
 </refsect1>
@@ -1223,39 +1355,9 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Find out whether you have a PCI motherboard. PCI is the name of a
-	bus system, i.e. the way the CPU talks to the other stuff inside
-	your box. Other bus systems are ISA, EISA, MicroChannel (MCA) or
-	VESA. If you have PCI, say Y, otherwise N.
-	</para>
-
-	<para>
-	The PCI-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, contains valuable
-	information about which PCI hardware does work under Linux and which
-	doesn't.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry id="CONFIG_ISA">
-<refnamediv>
-	<refname>ISA</refname>
-	<refpurpose>ISA support</refpurpose>
-</refnamediv>
-<refsynopsisdiv>
-	<para role="depends">Depends on <literal>!X86_VOYAGER and !X86_VISWS</literal></para>
-	<para role="type">Type <literal>boolean</literal></para>
-</refsynopsisdiv>
-<refsect1>
-	<title>Description</title>
-	<para>
-	Find out whether you have ISA slots on your motherboard.  ISA is the
-	name of a bus system, i.e. the way the CPU talks to the other stuff
-	inside your box.  Other bus systems are PCI, EISA, MicroChannel
-	(MCA) or VESA.  ISA is an older system, now being displaced by PCI;
-	newer boards don't support it.  If you have ISA, say Y, otherwise N.
+	PCI is a bus system that the processor used to talk to internal devices
+	and add-on cards.  It is extremely common and found in almost all
+	modern computers.
 	</para>
 
 </refsect1>
@@ -1273,16 +1375,11 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want to attach PCMCIA- or PC-cards to your Linux
+	Say yes here if you want to attach PCMCIA- or PC-cards to your Linux
 	computer.  These are credit-card size devices such as network cards,
 	modems or hard drives often used with laptops computers.  There are
-	actually two varieties of these cards: 16 bit PCMCIA and 32 bit
-	CardBus cards.
-	</para>
-
-	<para>
-	To compile this driver as modules, choose M here: the
-	module will be called pcmcia_core.
+	actually two varieties of these cards: 16 bit PCMCIA and 32 bit CardBus
+	cards.
 	</para>
 
 </refsect1>
@@ -1303,24 +1400,15 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	This option enables support for 16-bit PCMCIA cards. Most older
-	PC-cards are such 16-bit PCMCIA cards, so unless you know you're
-	only using 32-bit CardBus cards, say Y or M here.
+	PC-cards are such 16-bit PCMCIA cards, so unless you know you're only
+	using 32-bit CardBus cards, say Y or M here.
 	</para>
 
 	<para>
-	To use 16-bit PCMCIA cards, you will need supporting software in
-	most cases. (see the file
+	To use 16-bit PCMCIA cards, you will need supporting software in most
+	cases. (see the file
 	<filename>Documentation/Changes</filename> for
 	location and details).
-	</para>
-
-	<para>
-	To compile this driver as modules, choose M here: the
-	module will be called pcmcia.
-	</para>
-
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -1339,19 +1427,15 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	CardBus is a bus mastering architecture for PC-cards, which allows
-	for 32 bit PC-cards (the original PCMCIA standard specifies only
-	a 16 bit wide bus). Many newer PC-cards are actually CardBus cards.
+	CardBus is a bus mastering architecture for PC-cards, which allows for
+	32 bit PC-cards (the original PCMCIA standard specifies only a 16 bit
+	wide bus). Many newer PC-cards are actually CardBus cards.
 	</para>
 
 	<para>
-	To use 32 bit PC-cards, you also need a CardBus compatible host
-	bridge. Virtually all modern PCMCIA bridges do this, and most of
-	them are "yenta-compatible", so say Y or M there, too.
-	</para>
-
-	<para>
-	If unsure, say Y.
+	To use 32 bit PC-cards, you also need a CardBus compatible host bridge.
+	Virtually all modern PCMCIA bridges do this, and most of them are
+	"yenta-compatible", so also enable that option.
 	</para>
 
 </refsect1>
@@ -1370,18 +1454,9 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you have a motherboard with a PCI Hotplug controller.
+	Say yes here if you have a motherboard with a PCI Hotplug controller.
 	This allows you to add and remove PCI cards while the machine is
 	powered up and running.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called pci_hotplug.
-	</para>
-
-	<para>
-	When in doubt, say N.
 	</para>
 
 </refsect1>
@@ -1398,18 +1473,17 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Unless you really know what you are doing, you should say Y here.
+	Unless you really know what you are doing, you should say yes here.
 	The reason is that some programs need kernel networking support even
-	when running on a stand-alone machine that isn't connected to any
-	other computer.
+	when running on a stand-alone machine that isn't connected to any other
+	computer.
 	</para>
 
 	<para>
-	If you are upgrading from an older kernel, you
-	should consider updating your networking tools too because changes
-	in the kernel and the tools often go hand in hand. The tools are
-	contained in the package net-tools, the location and version number
-	of which are given in
+	If you are upgrading from an older kernel, you should consider updating
+	your networking tools too because changes in the kernel and the tools
+	often go hand in hand. The tools are contained in the package
+	net-tools, the location and version number of which are given in
 	<filename>Documentation/Changes</filename>.
 	</para>
 
@@ -1434,23 +1508,12 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say Y here, you will include support for Unix domain sockets;
-	sockets are the standard Unix mechanism for establishing and
-	accessing network connections.  Many commonly used programs such as
-	the X Window system and syslog use these sockets even if your
-	machine is not connected to any network.  Unless you are working on
-	an embedded system or something similar, you therefore definitely
-	want to say Y here.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the module will be
-	called unix.  Note that several important services won't work
-	correctly if you say M here and then neglect to load the module.
-	</para>
-
-	<para>
-	Say Y unless you know what you are doing.
+	If you say yes here, you will include support for Unix domain sockets;
+	sockets are the standard Unix mechanism for establishing and accessing
+	network connections.  Many commonly used programs such as the X Window
+	system and syslog use these sockets even if your machine is not
+	connected to any network.  Unless you are working on an embedded system
+	or something similar, you therefore definitely want to say yes here.
 	</para>
 
 </refsect1>
@@ -1469,29 +1532,17 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	These are the protocols used on the Internet and on most local
-	Ethernets. It is highly recommended to say Y here (this will enlarge
+	Ethernets. It is highly recommended to say yes here (this will enlarge
 	your kernel by about 144 KB), since some programs (e.g. the X window
-	system) use TCP/IP even if your machine is not connected to any
-	other computer. You will get the so-called loopback device which
-	allows you to ping yourself (great fun, that!).
+	system) use TCP/IP even if your machine is not connected to any other
+	computer. You will get the so-called loopback device which allows you
+	to ping yourself.
 	</para>
 
 	<para>
 	For an excellent introduction to Linux networking, please read the
 	Linux Networking HOWTO, available from
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
-	</para>
-
-	<para>
-	If you say Y here and also to "<filename>/proc</filename> file system support" and
-	"Sysctl support" below, you can change various aspects of the
-	behavior of the TCP/IP code by writing to the (virtual) files in
-	<filename>/proc/sys/net/ipv4/*</filename>; the options are explained in the file
-	<filename>Documentation/networking/ip-sysctl.txt</filename>.
-	</para>
-
-	<para>
-	Short answer: say Y.
 	</para>
 
 </refsect1>
@@ -1510,30 +1561,28 @@ Kernel configuration option reference
 	<title>Description</title>
 	<para>
 	If you intend to run your Linux box mostly as a router, i.e. as a
-	computer that forwards and redistributes network packets, say Y; you
-	will then be presented with several options that allow more precise
+	computer that forwards and redistributes network packets, say yes here.
+	You will then be presented with several options that allow more precise
 	control about the routing process.
 	</para>
 
 	<para>
-	The answer to this question won't directly affect the kernel:
-	answering N will just cause the configurator to skip all the
-	questions about advanced routing.
+	The answer to this question won't directly affect the kernel: answering
+	no will just cause the configurator to skip all the questions about
+	advanced routing.
 	</para>
 
 	<para>
-	Note that your box can only act as a router if you enable IP
-	forwarding in your kernel; you can do that by saying Y to "/proc
-	file system support" and "Sysctl support" below and executing the
-	line
-	</para>
-
-	<para>
-	echo "1"  /proc/sys/net/ipv4/ip_forward
-	</para>
-
-	<para>
-	at boot time after the /proc file system has been mounted.
+	Note that your box can only act as a router if you enable IP forwarding
+	in your kernel; you can do that by saying yes to
+	<literal>/proc file system support</literal> and 
+	<literal>Sysctl support</literal> below and executing the
+	line:
+	<userinput>
+	echo "1" &gt; /proc/sys/net/ipv4/ip_forward
+	</userinput>
+	at boot time after the <filename>/proc</filename> file system has been
+	mounted.
 	</para>
 
 	<para>
@@ -1546,16 +1595,13 @@ Kernel configuration option reference
 	than packets from that host to you) or if you operate a non-routing
 	host which has several IP addresses on different interfaces. To turn
 	rp_filter off use:
-	</para>
-
-	<para>
-	echo 0  /proc/sys/net/ipv4/conf/device/rp_filter
+	<userinput>
+	echo 0 &gt; /proc/sys/net/ipv4/conf/device/rp_filter
+	</userinput>
 	or
-	echo 0  /proc/sys/net/ipv4/conf/all/rp_filter
-	</para>
-
-	<para>
-	If unsure, say N here.
+	<userinput>
+	echo 0 &gt; /proc/sys/net/ipv4/conf/all/rp_filter
+	</userinput>
 	</para>
 
 </refsect1>
@@ -1590,11 +1636,11 @@ Kernel configuration option reference
 	firewalls often require changes to the programs running on the local
 	clients. Proxy-based firewalls don't need support by the kernel, but
 	they are often combined with a packet filter, which only works if
-	you say Y here.
+	you say yes here.
 	</para>
 
 	<para>
-	You should also say Y here if you intend to use your Linux box as
+	You should also say yes here if you intend to use your Linux box as
 	the gateway to the Internet for a local network of machines without
 	globally valid IP addresses. This is called "masquerading": if one
 	of the computers on your local network wants to send something to
@@ -1628,20 +1674,15 @@ Kernel configuration option reference
 
 	<para>
 	Various modules exist for netfilter which replace the previous
-	masquerading (ipmasqadm), packet filtering (ipchains), transparent
-	proxying, and portforwarding mechanisms. Please see
-	<filename>Documentation/Changes</filename> under "iptables" for the location of
-	these packages.
+	masquerading (<literal>ipmasqadm</literal>), packet filtering
+	(<literal>ipchains</literal>), transparent proxying, and portforwarding
+	mechanisms. Please see <filename>Documentation/Changes</filename> under
+	<literal>iptables</literal> for the location of these packages.
 	</para>
 
 	<para>
-	Make sure to say N to "Fast switching" below if you intend to say Y
-	here, as Fast switching currently bypasses netfilter.
-	</para>
-
-	<para>
-	Chances are that you should say Y here if you compile a kernel which
-	will run as a router and N for regular hosts. If unsure, say N.
+	Chances are that you should say yes here if you compile a kernel which
+	will run as a router and no for regular hosts.
 	</para>
 
 </refsect1>
@@ -1679,7 +1720,8 @@ Kernel configuration option reference
 
 	<para>
 	To administer these schedulers, you'll need the user-level utilities
-	from the package iproute2+tc at ftp://ftp.tux.org/pub/net/ip-routing/.
+	from the package iproute2+tc at
+	<systemitem class="url">ftp://ftp.tux.org/pub/net/ip-routing/</systemitem>.
 	That package also contains some documentation; for more, check out
 	<systemitem class="url">http://linux-net.osdl.org/index.php/Iproute2</systemitem>.
 	</para>
@@ -1690,17 +1732,6 @@ Kernel configuration option reference
 	(RSVP) on your Linux router if you also say Y to the corresponding
 	classifiers below.  Documentation and software is at
 	<systemitem class="url">http://diffserv.sourceforge.net/</systemitem>.
-	</para>
-
-	<para>
-	If you say Y here and to "/proc file system" below, you will be able
-	to read status information about packet schedulers from the file
-	/proc/net/psched.
-	</para>
-
-	<para>
-	The available schedulers are listed in the following questions; you
-	can say Y to as many as you like. If unsure, say N now.
 	</para>
 
 </refsect1>
@@ -1738,11 +1769,6 @@ Kernel configuration option reference
 	<systemitem class="url">http://sourceforge.net/projects/openobex/</systemitem>
 	</para>
 
-	<para>
-	To compile this support as a module, choose M here: the module will
-	be called irda.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -1758,17 +1784,15 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want to build support for the IrLAN protocol.
-	To compile it as a module, choose M here: the module will be called
-	irlan.  IrLAN emulates an Ethernet and makes it possible to put up
-	a wireless LAN using infrared beams.
+	Say yes here if you want to build support for the IrLAN protocol.
+	IrLAN emulates an Ethernet and makes it possible to put up a wireless
+	LAN using infrared beams.
 	</para>
 
 	<para>
-	The IrLAN protocol can be used to talk with infrared access points
-	like the HP NetbeamIR, or the ESI JetEye NET.  You can also connect
-	to another Linux machine running the IrLAN protocol for ad-hoc
-	networking!
+	The IrLAN protocol can be used to talk with infrared access points like
+	the HP NetbeamIR, or the ESI JetEye NET.  You can also connect to
+	another Linux machine running the IrLAN protocol for ad-hoc networking.
 	</para>
 
 </refsect1>
@@ -1786,16 +1810,15 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want to build support for the IrNET protocol.
-	To compile it as a module, choose M here: the module will be
-	called irnet.  IrNET is a PPP driver, so you will also need a
-	working PPP subsystem (driver, daemon and config)...
+	Say yes here if you want to build support for the IrNET protocol.
+	IrNET is a PPP driver, so you will also need a working PPP subsystem
+	(driver, daemon and config).
 	</para>
 
 	<para>
 	IrNET is an alternate way to transfer TCP/IP traffic over IrDA.  It
 	uses synchronous PPP over a set of point to point IrDA sockets.  You
-	can use it between Linux machine or with W2k.
+	can use it between Linux machine or with Windows.
 	</para>
 
 </refsect1>
@@ -1813,13 +1836,11 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want to build support for the IrCOMM protocol.
-	To compile it as modules, choose M here: the modules will be
-	called ircomm and ircomm_tty.
-	IrCOMM implements serial port emulation, and makes it possible to
-	use all existing applications that understands TTY's with an
-	infrared link.  Thus you should be able to use application like PPP,
-	minicom and others.
+	Say yes here if you want to build support for the IrCOMM protocol.
+	IrCOMM implements serial port emulation, and makes it possible to use
+	all existing applications that understands TTY's with an infrared link.
+	Thus you should be able to use application like PPP, minicom and
+	others.
 	</para>
 
 </refsect1>
@@ -1837,11 +1858,11 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here to support the connectionless Ultra IRDA protocol.
-	Ultra allows to exchange data over IrDA with really simple devices
-	(watch, beacon) without the overhead of the IrDA protocol (no handshaking,
-	no management frames, simple fixed header).
-	Ultra is available as a special socket : socket(AF_IRDA, SOCK_DGRAM, 1);
+	Say yes here to support the connectionless Ultra IRDA protocol.  Ultra
+	allows to exchange data over IrDA with really simple devices (watch,
+	beacon) without the overhead of the IrDA protocol (no handshaking, no
+	management frames, simple fixed header).  Ultra is available as a
+	special socket : socket(AF_IRDA, SOCK_DGRAM, 1);
 	</para>
 
 </refsect1>
@@ -1859,11 +1880,12 @@ Kernel configuration option reference
 <refsect1>
 	<title>Description</title>
 	<para>
-	Bluetooth is low-cost, low-power, short-range wireless technology.
-	It was designed as a replacement for cables and other short-range
-	technologies like IrDA.  Bluetooth operates in personal area range
-	that typically extends up to 10 meters.  More information about
-	Bluetooth can be found at <systemitem class="url">http://www.bluetooth.com/</systemitem>.
+	Bluetooth is low-cost, low-power, short-range wireless technology.  It
+	was designed as a replacement for cables and other short-range
+	technologies like IrDA.  Bluetooth operates in personal area range that
+	typically extends up to 10 meters.  More information about Bluetooth
+	can be found at
+	<systemitem class="url">http://www.bluetooth.com/</systemitem>.
 	</para>
 
 	<para>
@@ -1872,22 +1894,18 @@ Kernel configuration option reference
 	   HCI Device drivers (Interface to the hardware)
 	   SCO Module (SCO audio links)
 	   L2CAP Module (Logical Link Control and Adaptation Protocol)
-	   RFCOMM Module (RFCOMM Protocol)  
+	   RFCOMM Module (RFCOMM Protocol)
 	   BNEP Module (Bluetooth Network Encapsulation Protocol)
 	   CMTP Module (CAPI Message Transport Protocol)
 	   HIDP Module (Human Interface Device Protocol)
 	</para>
 
 	<para>
-	Say Y here to compile Bluetooth support into the kernel or say M to
-	compile it as module (bluetooth).
-	</para>
-
-	<para>
 	To use Linux Bluetooth subsystem, you will need several user-space
 	utilities like hciconfig and hcid.  These utilities and updates to
 	Bluetooth kernel modules are provided in the BlueZ packages.
-	For more information, see <systemitem class="url">http://www.bluez.org/</systemitem>.
+	For more information, see
+	<systemitem class="url">http://www.bluez.org/</systemitem>.
 	</para>
 
 </refsect1>
@@ -4749,9 +4767,6 @@ Kernel configuration option reference
 
 </refsect1>
 </refentry>
-
-<!-- end automated stuff -->
-
 
 </chapter>
 <!-- vim: set ai tw=72 : -->
