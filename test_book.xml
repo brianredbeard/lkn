@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "--//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book>
+ <title>Linux Kernel in a Nutshell</title>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch01.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch02.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch03.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch04.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch05.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch06.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch07.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch08.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch09.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch10.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch11.xml"/>
+</book>
+<!--
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch12.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="appa.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="appb.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="appc.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="appd.xml"/>
+<bookinfo>
+<edition>First</edition>
+<isbn>X-XXXXX-XXX-X</isbn>
+<authorgroup>
+<author>
+<firstname>Greg</firstname>
+<surname>Kroah-Hartman</surname>
+</author>
+</authorgroup>
+
+<editor>
+<firstname>????</firstname>
+<surname>??????</surname>
+</editor>
+
+<pagenums>300 pages (est.)</pagenums>
+<pubdate>(TBA)</pubdate>
+
+</bookinfo>
+
+&ch01;
+&ch02;
+&ch03;
+&ch04;
+&ch05;
+&ch06;
+&ch07;
+&ch08;
+&ch09;
+&ch10;
+&ch11;
+&ch12;
+&ch13;
+&appa;
+&appb;
+&appc;
+&appd;
+
+</book>
+-->
