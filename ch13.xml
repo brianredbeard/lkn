@@ -605,8 +605,7 @@ developers and released under the GPL.
 	<para>
 	SMT scheduler support improves the CPU scheduler's decision making
 	when dealing with Intel Pentium 4 chips with HyperThreading at a
-	cost of slightly increased overhead in some places. If unsure say
-	no here.
+	cost of slightly increased overhead in some places.
 	</para>
 
 </refsect1>
@@ -1947,7 +1946,7 @@ developers and released under the GPL.
 	themselves with the kernel and for potential users of MTD devices
 	to enumerate the devices which are present and obtain a handle on
 	them. It will also allow you to select individual drivers for
-	particular hardware and users of MTD devices. If unsure, say N.
+	particular hardware and users of MTD devices.
 	</para>
 
 </refsect1>
@@ -1981,15 +1980,9 @@ developers and released under the GPL.
 	<para>
 	It is possible to share a single parallel port among several devices
 	and it is safe to compile all the corresponding drivers into the
-	kernel. To compile parallel port support as a module, choose M here:
-	the module will be called parport.
-	If you have more than one parallel port and want to specify which
-	port and IRQ to be used by this driver at module load time, take a
-	look at <filename>Documentation/parport.txt</filename>.
-	</para>
-
-	<para>
-	If unsure, say Y.
+	kernel.  If you have more than one parallel port and want to specify
+	which port and IRQ to be used by this driver at module load time, take
+	a look at <filename>Documentation/parport.txt</filename>.
 	</para>
 
 </refsect1>
@@ -2021,10 +2014,6 @@ developers and released under the GPL.
 	using user space utilities such as the isapnptools package.
 	</para>
 
-	<para>
-	If unsure, say Y.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2042,10 +2031,6 @@ developers and released under the GPL.
 	<para>
 	Say Y here if you would like support for ISA Plug and Play devices.
 	Some information is in <filename>Documentation/isapnp.txt</filename>.
-	</para>
-
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -2149,16 +2134,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ide.
-	</para>
-
-	<para>
 	For further information, please read <filename>Documentation/ide.txt</filename>.
-	</para>
-
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -2199,8 +2175,6 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here and read
-	<filename>Documentation/ide.txt</filename>. The module will be called ide-mod.
 	Do not compile this driver as a module if your root file system (the
 	one containing the directory /) is located on an IDE device.
 	</para>
@@ -2235,14 +2209,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ide-disk.
 	Do not compile this driver as a module if your root file system
 	(the one containing the directory /) is located on the IDE disk.
-	</para>
-
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -2281,11 +2249,6 @@ developers and released under the GPL.
 	<systemitem class="url">http://lilo.go.dyndns.org/</systemitem>.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ide-cd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2322,11 +2285,6 @@ developers and released under the GPL.
 	the boot messages with dmesg).
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ide-floppy.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2356,14 +2314,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here and read
-	<filename>Documentation/scsi/scsi.txt</filename>.
-	The module will be called scsi_mod.
-	</para>
-
-	<para>
-	However, do not compile this as a module if your root file system
-	(the one containing the directory /) is located on a SCSI device.
+	Do not compile this as a module if your root file system (the one
+	containing the directory /) is located on a SCSI device.
 	</para>
 
 </refsect1>
@@ -2390,16 +2342,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here and read
-	<filename>Documentation/scsi/scsi.txt</filename>.
-	The module will be called sd_mod.
-	</para>
-
-	<para>
 	Do not compile this driver as a module if your root file system
 	(the one containing the directory /) is located on a SCSI disk.
 	In this case, do not compile the driver for your SCSI host adapter
-	(below) as a module either.
+	as a module either.
 	</para>
 
 </refsect1>
@@ -2422,11 +2368,6 @@ developers and released under the GPL.
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, and
 	<filename>Documentation/scsi/st.txt</filename> in the kernel source.  This is NOT
 	for SCSI CD-ROMs.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here and read
-	<filename>Documentation/scsi/scsi.txt</filename>. The module will be called st.
 	</para>
 
 </refsect1>
@@ -2460,11 +2401,6 @@ developers and released under the GPL.
 	applies to osst as well.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here and read
-	<filename>Documentation/scsi/scsi.txt</filename>. The module will be called osst.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2484,12 +2420,6 @@ developers and released under the GPL.
 	say Y and read the SCSI-HOWTO and the CDROM-HOWTO at
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. Also make sure to say
 	Y or M to "ISO 9660 CD-ROM file system support" later.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here and read
-	<filename>Documentation/scsi/scsi.txt</filename>.
-	The module will be called sr_mod.
 	</para>
 
 </refsect1>
@@ -2528,15 +2458,6 @@ developers and released under the GPL.
 	<filename>Documentation/scsi/scsi-generic.txt</filename> for more information.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here and read
-	<filename>Documentation/scsi/scsi.txt</filename>. The module will be called sg.
-	</para>
-
-	<para>
-	If unsure, say N.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2558,14 +2479,6 @@ developers and released under the GPL.
 	changers are listed as "Type: Medium Changer" in /proc/scsi/scsi.
 	If you have such hardware and want to use it with linux, say Y
 	here.  Check <filename>Documentation/scsi-changer.txt</filename> for details.
-	</para>
-
-	<para>
-	If you want to compile this as a module ( = code which can be
-	inserted in and removed from the running kernel whenever you want),
-	say M here and read <filename>Documentation/modules.txt</filename> and
-	<filename>Documentation/scsi.txt</filename>. The module will be called ch.o.
-	If unsure, say N.
 	</para>
 
 </refsect1>
@@ -2609,10 +2522,6 @@ developers and released under the GPL.
 	<para>
 	This driver family supports Serial ATA host controllers
 	and devices.
-	</para>
-
-	<para>
-	If unsure, say N.
 	</para>
 
 </refsect1>
@@ -2665,10 +2574,6 @@ developers and released under the GPL.
 	where to get the supporting user space utilities raidtools.
 	</para>
 
-	<para>
-	If unsure, say N.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2692,15 +2597,6 @@ developers and released under the GPL.
 
 	<para>
 	Higher level volume managers such as LVM2 use this driver.
-	</para>
-
-	<para>
-	To compile this as a module, choose M here: the module will be
-	called dm-mod.
-	</para>
-
-	<para>
-	If unsure, say N.
 	</para>
 
 </refsect1>
@@ -2729,11 +2625,6 @@ developers and released under the GPL.
 	If you have FireWire hardware and want to use it, say Y here.  This
 	is the core support only, you will also need to select a driver for
 	your IEEE 1394 adapter.
-	</para>
-
-	<para>
-	To compile this driver as a module, say M here: the
-	module will be called ieee1394.
 	</para>
 
 </refsect1>
@@ -2768,15 +2659,6 @@ developers and released under the GPL.
 	drivers and OSM's with the following questions.
 	</para>
 
-	<para>
-	To compile this support as a module, choose M here: the
-	modules will be called i2o_core.
-	</para>
-
-	<para>
-	If unsure, say N.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2808,10 +2690,6 @@ developers and released under the GPL.
 	<para>
 	See also "The Linux Network Administrator's Guide" by Olaf Kirch and
 	Terry Dawson. Available at <systemitem class="url">http://www.tldp.org/guides.html</systemitem>.
-	</para>
-
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -2856,7 +2734,7 @@ developers and released under the GPL.
 	<para>
 	Note that the answer to this question won't directly affect the
 	kernel: saying N will just cause the configurator to skip all
-	the questions about Ethernet network cards. If unsure, say N.
+	the questions about Ethernet network cards.
 	</para>
 
 </refsect1>
@@ -2884,11 +2762,6 @@ developers and released under the GPL.
 	read the Token-Ring mini-HOWTO, available from
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem> and the file
 	<filename>Documentation/networking/smctr.txt</filename>.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the module will be
-	called smctr.
 	</para>
 
 </refsect1>
@@ -2980,14 +2853,6 @@ developers and released under the GPL.
 	synchronous PPP", below.
 	</para>
 
-	<para>
-	If you said Y to "Version information on all symbols" above, then
-	you cannot compile the PPP driver into the kernel; you can then only
-	compile it as a module. To compile this driver as a module, choose M
-	here and read <filename>Documentation/networking/net-modules.txt</filename>.
-	The module will be called ppp_generic.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3067,11 +2932,6 @@ developers and released under the GPL.
 	here in order to be able to use a modem under Linux.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called phonedev.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3100,15 +2960,6 @@ developers and released under the GPL.
 
 	<para>
 	More information is available: <filename>Documentation/input/input.txt</filename>
-	</para>
-
-	<para>
-	If unsure, say Y.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called input.
 	</para>
 
 </refsect1>
@@ -3157,7 +3008,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If unsure, say Y, or else you won't be able to do much with your new
+	If unsure, say yes, or else you won't be able to do much with your new
 	shiny Linux system :-)
 	</para>
 
@@ -3193,10 +3044,6 @@ developers and released under the GPL.
 	would use the third virtual terminal as system console. (Try "man
 	bootparam" or see the documentation of your boot loader (lilo or
 	loadlin) about how to pass options to the kernel at boot time.)
-	</para>
-
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -3239,12 +3086,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called 8250.
-	[WARNING: Do not compile this driver as a module if you are using
+	WARNING: Do not compile this driver as a module if you are using
 	non-standard serial ports, since the configuration information will
 	be lost when the driver is unloaded.  This limitation may be lifted
-	in the future.]
+	in the future.
 	</para>
 
 	<para>
@@ -3315,16 +3160,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called agpgart.
-	</para>
-
-	<para>
 	You should say Y here if you want to use GLX or DRI.
-	</para>
-
-	<para>
-	If unsure, say N.
 	</para>
 
 </refsect1>
@@ -3380,11 +3216,6 @@ developers and released under the GPL.
 	<para>
 	If you want I2C support, you should say Y here and also to the
 	specific driver for your bus adapter(s) below.
-	</para>
-
-	<para>
-	This I2C support can also be built as a module.  If so, the module
-	will be called i2c-core.
 	</para>
 
 </refsect1>
@@ -3447,11 +3278,6 @@ developers and released under the GPL.
 	sensors chip(s) below.
 	</para>
 
-	<para>
-	This support can also be built as a module.  If so, the module
-	will be called hwmon.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3485,11 +3311,6 @@ developers and released under the GPL.
 	<para>
 	Documentation for V4L2 is also available on the web at
 	<systemitem class="url">http://bytesex.org/v4l/</systemitem>.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called videodev.
 	</para>
 
 </refsect1>
@@ -3532,10 +3353,6 @@ developers and released under the GPL.
 	<para>
 	Please report problems regarding this driver to the LinuxDVB
 	mailing list.
-	</para>
-
-	<para>
-	If unsure say N.
 	</para>
 
 </refsect1>
@@ -3591,7 +3408,7 @@ developers and released under the GPL.
 	want to play with it, but it is not essential. Please note that
 	running graphical applications that directly touch the hardware
 	(e.g. an accelerated X server) and that are not frame buffer
-	device-aware may cause unexpected results. If unsure, say N.
+	device-aware may cause unexpected results.
 	</para>
 
 </refsect1>
@@ -3676,11 +3493,11 @@ developers and released under the GPL.
 	<para>
 	If you have a PnP sound card and you want to configure it at boot
 	time using the ISA PnP tools (read
-	<systemitem class="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>), then you need to
-	compile the sound card support as a module and load that module
-	after the PnP configuration is finished.  To do this, choose M here
-	and read <filename>Documentation/sound/oss/README.modules</filename>; the module
-	will be called soundcore.
+	<systemitem class="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>),
+	then you need to compile the sound card support as a module and load
+	that module after the PnP configuration is finished.  To do this
+	properly, read
+	<filename>Documentation/sound/oss/README.modules</filename>
 	</para>
 
 	<para>
@@ -3735,11 +3552,6 @@ developers and released under the GPL.
 	devices.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the module
-	will be called snd-usb-audio.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3792,11 +3604,6 @@ developers and released under the GPL.
 	<filename>Documentation/usb/usb-help.txt</filename>.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usbcore.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3835,11 +3642,6 @@ developers and released under the GPL.
 	You may want to read <filename>Documentation/usb/ehci.txt</filename>.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ehci-hcd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3866,11 +3668,6 @@ developers and released under the GPL.
 	right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called ohci-hcd.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3893,12 +3690,7 @@ developers and released under the GPL.
 	with Intel PCI chipsets (like intel 430TX, 440FX, 440LX, 440BX,
 	i810, i820) conform to this standard. Also all VIA PCI chipsets
 	(like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
-	133). If unsure, say Y.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called uhci-hcd.
+	133).
 	</para>
 
 </refsect1>
@@ -3931,11 +3723,6 @@ developers and released under the GPL.
 	(BLK_DEV_SD) for most USB storage devices.
 	</para>
 
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usb-storage.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -3960,11 +3747,6 @@ developers and released under the GPL.
 	Please read <filename>Documentation/usb/usb-serial.txt</filename> for more
 	information on the specifics of the different devices that are
 	supported, and on how to use them.
-	</para>
-
-	<para>
-	To compile this driver as a module, choose M here: the
-	module will be called usbserial.
 	</para>
 
 </refsect1>
@@ -4075,7 +3857,7 @@ developers and released under the GPL.
 	EDAC is designed to report errors in the core system.
 	These are low-level errors that are reported in the CPU or
 	supporting chipset: memory errors, cache errors, PCI errors,
-	thermal throttling, etc..  If unsure, select 'Y'.
+	thermal throttling, etc..
 	</para>
 
 	<para>
@@ -4122,10 +3904,6 @@ developers and released under the GPL.
 	module will be called ext2.  Be aware however that the file system
 	of your root partition (the one containing the directory /) cannot
 	be compiled as a module, and so this could be dangerous.
-	</para>
-
-	<para>
-	If unsure, say Y.
 	</para>
 
 </refsect1>
@@ -4367,10 +4145,6 @@ developers and released under the GPL.
 	For more information, see Documentation/filesystems/inotify.txt
 	</para>
 
-	<para>
-	If unsure, say Y.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -4393,7 +4167,7 @@ developers and released under the GPL.
 	For further details, read the Quota mini-HOWTO, available from
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, or the documentation provided
 	with the quota tools. Probably the quota support is only useful for
-	multi user systems. If unsure, say N.
+	multi user systems.
 	</para>
 
 </refsect1>
@@ -4429,13 +4203,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this support as a module, choose M here: the module will be
-	called autofs.
-	</para>
-
-	<para>
 	If you are not a part of a fairly large, distributed network, you
-	probably do not need an automounter, and can say N here.
+	probably do not need an automounter, and can say no here.
 	</para>
 
 </refsect1>
@@ -4511,11 +4280,6 @@ developers and released under the GPL.
 	<para>
 	General information about how to connect Linux, Windows machines and
 	Macs is at <systemitem class="url">http://www.eats.com/linux_mac_win.html</systemitem>.
-	</para>
-
-	<para>
-	To compile the SMB support as a module, choose M here: the module will
-	be called smbfs.  Most people say N, however.
 	</para>
 
 </refsect1>
@@ -4596,10 +4360,6 @@ developers and released under the GPL.
 	OProfile is a profiling system capable of profiling the
 	whole system, include the kernel, kernel modules, libraries,
 	and applications.
-	</para>
-
-	<para>
-	If unsure, say N.
 	</para>
 
 </refsect1>
@@ -4709,10 +4469,6 @@ developers and released under the GPL.
 	write to these files.
 	</para>
 
-	<para>
-	If unsure, say N.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -4737,10 +4493,6 @@ developers and released under the GPL.
 	model will be used.
 	</para>
 
-	<para>
-	If you are unsure how to answer this question, answer N.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -4762,7 +4514,6 @@ developers and released under the GPL.
 	You can obtain the policy compiler (checkpolicy), the utility for
 	labeling filesystems (setfiles), and an example policy configuration
 	from <systemitem class="url">http://www.nsa.gov/selinux/</systemitem>.
-	If you are unsure how to answer this question, answer N.
 	</para>
 
 </refsect1>
