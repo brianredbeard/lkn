@@ -1015,6 +1015,7 @@ easier for Linux not to have to worry about handling the bigger areas, so
 it is benificial to tell the kernel how much memory you want it to
 support.  For a more detailed description of this option, please see
 <xref linkend="CONFIG_NOHIGHMEM" />.
+</para>
 
 <para>
 Linux supports three different memory models for 32bit Intel processors,
