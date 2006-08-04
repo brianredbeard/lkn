@@ -210,9 +210,14 @@ $ <userinput>/usr/sbin/lspci | grep IDE</userinput>
 00:1f.1 IDE interface: Intel Corporation 82801EB/ER (ICH5/ICH5R) IDE Controller (rev 02)
 00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that is
 important is that the command shows some an IDE Controller (the first
-device in the above example.)  If you only show a SATA controller, please
+<!--
+
+  AO: Is plural "controllers" accurate here?
+
+-->
+device in the previous example.)  If you find only SATA controllers, please
 see <xref linkend="lkn_sata" />.
 </para>
 
@@ -232,7 +237,7 @@ Device Drivers
 
 In the ATA system, the specific type of IDE controller that you have must
 be enabled in order for it to work properly.  To provide a good backup
-incase you choose the wrong type, select the "generic" IDE controller:
+in case you choose the wrong type, select the "generic" IDE controller:
 <screen>
 Device Drivers
     ATA/ATAPI/MFM/RLL support
@@ -264,7 +269,7 @@ following command:
 $ <userinput>/usr/sbin/lspci | grep SATA</userinput>
 00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that is
 important is that the command shows some SATA devices.
 </para>
 
@@ -303,10 +308,10 @@ Device Drivers
 </screen>
 
 In that section, enable the specific SATA controller type that you have.
-Look at the output of the above mentioned <literal>lspci</literal>
+Look at the output of the previously mentioned <literal>lspci</literal>
 command for a list of the types of SATA controllers that are present on
-your system.  For example, most motherboards from Intel would require the PIIX/ICH
-SATA driver (as the above example showed.)
+your system.  For example, most motherboards from Intel require the PIIX/ICH
+SATA driver (as the previous example showed.)
 <screen>
 Device Drivers
 	SCSI Device Support
@@ -320,38 +325,38 @@ Device Drivers
 </sect2>
 
 <sect2 id="lkn_burn_cdrom">
-<title>Burning a CDROM</title>
+<title>Burning a CD-ROM</title>
 
 <para>
-Burning a CDROM is very simple on Linux.  If your kernel can support
-reading from a CDROM, then it can also support burning from it.  There are
-two different ways to enable CDROM support in Linux:
+Burning a CD-ROM is very simple on Linux.  If your kernel can support
+reading from a CD-ROM, it can also support burning a CD-ROM.  There are
+two different ways to enable CD-ROM support in Linux, one for IDE
+drives and one for SCSI and SATA drives.
 </para>
 
 <sect3>
-<title>IDE CDROM drives</title>
+<title>IDE CD-ROM drives</title>
 
 <para>
-IDE CDROM drives are controlled by the same IDE controller as your main IDE
+IDE CD-ROM drives are controlled by the same IDE controller as your main IDE
 disk drives.  Make sure the IDE controller is properly supported as
 described in <xref linkend="lkn_ide" />.  If that is properly supported,
-then the IDE CDROM drive needs no other kernel configuration in order to
-properly use it.
+the IDE CD-ROM drive can be used without any further kernel configuration.
 </para>
 
 </sect3>
 
 <sect3>
-<title>SCSI / SATA CDROM drives</title>
+<title>SCSI and SATA CD-ROM drives</title>
 
 <para>
-SATA and SCSI cdrom drives are controlled by the same controller as your
+SATA and SCSI CD-ROM drives are controlled by the same controller as your
 main disk drives.  Make sure the SATA or SCSI controller is properly
 supported.  For SATA disks, see <xref linkend="lkn_sata" />.
 </para>
 
 <para>
-To support SATA or SCSI CDROM drives, the SCSI cdrom driver must be
+To support SATA or SCSI CD-ROM drives, the SCSI CD-ROM driver must be
 enabled:
 <screen>
 Device Drivers
@@ -359,7 +364,7 @@ Device Drivers
 		[*] SCSI CDROM support
 </screen>
 
-Once that is enabled, the SATA or SCSI CDROM drive will work properly.
+Once that is enabled, the SATA or SCSI CD-ROM drive will work properly.
 </para>
 
 </sect3>
@@ -370,13 +375,11 @@ Once that is enabled, the SATA or SCSI CDROM drive will work properly.
 <sect1>
 <title>Devices</title>
 
-<simplesect>
 <para>
 Linux supports a vast range of different types of devices (more than any
 other operating system ever has).  This section shows how to enable
 some of the more common types.
 </para>
-</simplesect>
 
 <sect2 id="lkn_usb">
 <title>USB</title>
@@ -389,7 +392,7 @@ drives the USB connection on the machine.
 
 <para>
 To determine if your machine has a USB controller present, and which type
-is is, run the following command:
+it is, run the following command:
 <screen>
 $ <userinput>/usr/sbin/lspci | grep USB</userinput>
 00:1d.0 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #1 (rev 02)
@@ -398,7 +401,7 @@ $ <userinput>/usr/sbin/lspci | grep USB</userinput>
 00:1d.3 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #4 (rev 02)
 00:1d.7 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB2 EHCI Controller (rev 02)
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that is
 important is that the command shows some USB controllers.
 </para>
 
@@ -478,9 +481,9 @@ If you want to insert USB storage devices (USB flash), look now at
 <title>IEEE 1394 (FireWire)</title>
 
 <para>
-IEEE 1394 is commonly known by the name FireWire, under which Apple
-Computer publicized it. It is a
-highspeed bus that connects external devices, much as USB does.
+IEEE 1394 is commonly known by the name FireWire, the name by which Apple
+Computer publicized it. IEEE 1394 is a
+high-speed bus that connects external devices, much as USB does.
 </para>
 
 <para>
@@ -515,7 +518,7 @@ Device Drivers
 		[*] IEEE 1394 (FireWire) support
 </screen>
 
-Enable the specific type of Firewire host controller that you have:
+Enable the specific type of Firewire host controller you have:
 <screen>
 Device Drivers
 	IEEE 1394 (FireWire) support
@@ -526,7 +529,7 @@ Device Drivers
 
 </screen>
 
-And enable the specific type of Firewire devices that you have:
+And enable the specific type of Firewire devices you have:
 <screen>
 Device Drivers
 	IEEE 1394 (FireWire) support
@@ -551,8 +554,8 @@ ExpressCard and laptop docking stations.
 </para>
 
 <para>
-To determine whether your machine has an ExpressCard controller present look
-at the hardware to see if an ExpressCard card can be plugged into it.
+To determine whether your machine has an ExpressCard controller present, look
+at the hardware to see whether an ExpressCard card can be plugged into it.
 </para>
 
 <para>
@@ -580,7 +583,7 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 		[M]   ACPI PCI Hotplug driver
 </screen>
 
-As well as the PCI Express controller:
+as well as the PCI Express controller:
 <screen>
 Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
@@ -606,8 +609,8 @@ recipe in <xref linkend="lkn_pci_hotplug" />).
 </para>
 
 <para>
-To determine whether your machine has a PCMCIA controller present look at
-the hardware to see if a PCMCIA card can be plugged into it.
+To determine whether your machine has a PCMCIA controller present, look at
+the hardware to see whether a PCMCIA card can be plugged into it.
 </para>
 
 <para>
@@ -655,7 +658,7 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 <para>
 ALSA (Advanced Linux Sound Architecture) is the current sound
 system for the Linux kernel.  An earlier sound system (OSS) has
-been depreciated and almost all of the older drivers have been removed
+been depreciated, and almost all of the older drivers have been removed
 from the kernel source tree.
 </para>
 
@@ -668,7 +671,7 @@ $ <userinput>/usr/sbin/lspci | grep -i audio</userinput>
 06:0d.0 Multimedia audio controller: Creative Labs SB Audigy (rev 04)
 </screen>
 Note that your response will probably not match identically; all that's
-important is that the command shows some FireWire controllers.
+important is that the command shows some Audio controllers.
 </para>
 
 <para>
@@ -687,7 +690,7 @@ Device Drivers
 </screen>
 There are a number of different base ALSA options, such as support for
 the older <literal>OSS</literal> sound protocol.  If you have older
-applications, you should enable these options:
+applications, you should enable the related options:
 <screen>
 Device Drivers
     Sound
@@ -717,34 +720,46 @@ Device Drivers
 <sect1>
 <title>CPU</title>
 
-<simplesect>
-
 <para>
-If you wish to have the Linux kernel to run the fastest for your specific
+If you wish to have the Linux kernel run the fastest that it can for your specific
 processor and hardware type, there are a few different options that you can
 set to get the last bit of performance out of the hardware.  This section
-will show some of the different processor specific options that you can
+will show some of the different processor-specific options that you can
 tune for your processor.
-</para>
+<!--
 
-</simplesect>
+  AO: One option, concerning SMP, seems particularly important. It
+  sounds like if you don't enable it, you could waste half or more of
+  your computer. Is that worth saying?
+
+-->
+</para>
 
 <sect2 id="processor">
 <title>Processor Types</title>
 
 <para>
-There are a wide range of specific processor options that are available to
-be changed in the Linux kernel.  The most important one is specifying the
+A wide range of specific processor options are available to
+be changed in the Linux kernel.  The most important one for our
+purpose specifies  the
 exact type of CPU you are using this kernel for.  To determine the type of
 processor you are using, run the following command:
 <screen>
 $ <userinput>cat /proc/cpuinfo  | grep "model name"</userinput>
 model name      : Intel(R) Xeon(TM) CPU 3.20GHz
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that is
 important is that the command shows the model name of the processor present
 on the system.
 </para>
+<!--
+
+  AO: The following paragraph seems to apply to Intel chips. Because
+  this book might have a following among people using other chips,
+  maybe you should say something about what PC-compatible means. Does
+  it assume Intel/AMD?
+
+-->
 
 <para>
 Select the subarchitecture type of the processor:
@@ -761,17 +776,17 @@ Processor type and features
         ( ) Generic architecture (Summit, bigsmp, ES7000, default)
         ( ) Support for Unisys ES7000 IA32 series
 </screen>
-Only if you have a machine of the other types in the above list should you
+Only if your machine is one of the other types in the preceding list should you
 select anything other than the <literal>PC-compatible</literal> option.
-However, if you wish to create a single kernel that will run on all of the above
-types of machines, then select the <literal>Generic architecture</literal>
+However, if you wish to create a single kernel that will run on all of the
+types of machines shown, select the <literal>Generic architecture</literal>
 option.
 </para>
 
 <para>
 Select the processor family type.  The <literal>PC-compatible</literal>
-option needs to be first selected from the above options for this submenu
-to be able to be selected:
+option needs to be selected from the previous options for this submenu
+to be made available to you:
 <screen>
 Processor type and features
     Processor family
@@ -812,7 +827,7 @@ range of machines you wish the kernel to run on.
 
 <para>
 If the machine you are using for Linux contains more than one CPU, or a
-Hyperthreaded or Dual Core CPU, then you should select the multiprocessor
+Hyperthreaded or Dual Core CPU, you should select the multiprocessor
 option for the Linux kernel in order to take advantage of the additional
 processors.
 </para>
@@ -831,16 +846,16 @@ Processor type and features
 <title>Preemption</title>
 
 <para>
-Systems running as a server have very different workload requirements than
+Systems running as a server have very different workload requirements from
 those being used as a desktop for video and audio applicatons.  The kernel
 allows different modes of "preemption" in order to handle these different
 workloads.  Preemption is the ability of the kernel to interrupt itself
 while it is doing something else, in order to work on something with a
-higher priority, like updating a sound or video program.
+higher priority, such as updating a sound or video program.
 </para>
 
 <para>
-To change the different preemption model:
+To change to a different preemption model, use this menu:
 <screen>
 Processor type and features
     Preemption Model
@@ -852,13 +867,14 @@ Processor type and features
 
 <para>
 If you wish to make the kernel even more responsive to higher priority
-tasks than the general preemption option provides, you can also interrupt
+tasks than the general preemption option provides, you can also allow
+interruptions to
 one of the main internal kernel locks:
 <screen>
 Processor type and features
     [*] Preempt The Big Kernel Lock
 </screen>
-This option will only be able to be selected if you have already selected
+This option is able to be selected only if you have already selected
 either the <literal>Preemptable Kernel</literal> or <literal>Symmetric
 multi-processing support</literal> options.
 </para>
@@ -870,7 +886,7 @@ multi-processing support</literal> options.
 <title>Suspend</title>
 
 <para>
-The Linux kernel has the ability to suspend itself to disk allowing you to
+The Linux kernel has the ability to suspend itself to disk, allowing you to
 disconnect the power, and then at a later time, power up and resume exactly
 where the machine was when it was suspended.  This functionality is very
 useful on laptops that run Linux.
@@ -884,24 +900,30 @@ Power management options (ACPI, APM)
 </screen>
 
 The kernel needs to know where to save off the suspended kernel image, and
-then later where to resume it from.  This is usually a kernel swap
+then later where to resume it from.  This location is usually a kernel swap
 partition on the disk.  To specify which partition this should be:
 <screen>
 Power management options (ACPI, APM)
     (/dev/hda3) Default resume partition
 </screen>
-Note: make sure you specify the proper partition to suspend the machine to,
-and do not use a partition that is being used by the system for data.  This
+</para>
+
+<note>
+<para>
+Make sure you specify the proper partition to suspend the machine to,
+and do not use a partition that is being used by the system for data.
+The proper
 partition name can be found by running the following command:
 <screen>
 $ <userinput>/sbin/swapon -s | grep dev | cut -f 1 -d ' '</userinput>
 /dev/hda3
 </screen>
-Use the output of the above command in this kernel configuration option,
-and on the kernel boot line where it specifies the kernel should be resumed
+Use the output of the preceding command in this kernel configuration option,
+and on the kernel boot line where it specifies where the kernel should be resumed
 from.  See <xref linkend="CONFIG_SOFTWARE_SUSPEND" /> for more information
 about how to specify the resume partition and how to suspend the kernel.
 </para>
+</note>
 
 </sect2>
 
@@ -910,9 +932,9 @@ about how to specify the resume partition and how to suspend the kernel.
 <title>CPU Frequency Scaling</title>
 
 <para>
-Most modern processors have the feature to slow down the internal clock of
+Most modern processors can slow down the internal clock of
 processor in order to conserve power and battery life.  Linux supports this
-ability and offers a wide range of different type of power "governors".
+ability and offers a wide range of different type of power "governors."
 Different governors implement different heursitcs in order to determine how
 to speed up and slow down the processor depending on the system load and
 other variables.
@@ -944,9 +966,9 @@ Power management options (ACPI, APM)
           Default CPUFreq governor (performance)
 </screen>
 
-Select the specific processor type the machine has.  For details on how to
+Select the specific processor type on the machine.  For details on how to
 determine the processor type of the machine, see
-<xref linkend="processor" /> for how to do this.
+<xref linkend="processor" />.
 
 <screen>
 Power management options (ACPI, APM)
@@ -974,13 +996,13 @@ Power management options (ACPI, APM)
 <title>Different Memory Models</title>
 
 <para>
-Linux on Intel 32bit hardware has the ability to access up to 64 Gigabytes
+Linux on Intel 32bit hardware can access up to 64 Gigabytes
 of memory, but the address space of the 32bit processor is only 4 Gigabytes
-big.  To work around this limitation, Linux can handle this by mapping the
-additional memory into another area and then switch to it for when other
+big.  To work around this limitation, Linux can map the
+additional memory into another area and then switch to it when other
 tasks need it.  But if your machine has a smaller ammount of memory, it is
-easier for Linux to not have to worry about handling the bigger areas, so
-it is benificial to tell the kernel how much memory you are wanting it to
+easier for Linux not to have to worry about handling the bigger areas, so
+it is benificial to tell the kernel how much memory you want it to
 support.  For a more detailed description of this option, please see
 <xref linkend="CONFIG_NOHIGHMEM" /> and the additional configuration item
 describing sparse memory at <xref linkend="CONFIG_FLATMEM_MANUAL" />.
@@ -991,9 +1013,9 @@ Linux supports three different memory models for 32bit Intel processors,
 depending on the memory available:
 
 <itemizedlist>
-<listitem><para>Under one Gigabyte of physical memory</para></listitem>
-<listitem><para>Between one and four Gigabytes of physical memory.</para></listitem>
-<listitem><para>Greater than four Gigabytes of physical memory.</para></listitem>
+<listitem><para>Under 1 Gigabyte of physical memory</para></listitem>
+<listitem><para>Between 1 and 4 Gigabytes of physical memory.</para></listitem>
+<listitem><para>Greater than 4 Gigabytes of physical memory.</para></listitem>
 </itemizedlist>
 
 To select the ammount of memory:
@@ -1014,11 +1036,11 @@ Processor type and features
 On almost all modern Intel based systems, ACPI is required in order for the
 machine to work properly.  ACPI is a standard that allows the BIOS of the
 computer to work with the operating system in order to access the hardware
-in an indirect manner, hopefully allowing less operating system specfic
-code to be written to handle a wide range of different devices.  It also
-provides a facility for how to help suspend and resume a machine and
-control the speed of the processor and fans, so if you have a laptop, it is
-recommended that you enable this option.  For more details on acpi, refer
+in an indirect manner, in the hope of  handling a wide range of
+devices with relatively little code specific to each operating system.  ACPI also
+provides a facility to help suspend and resume a machine and
+control the speed of the processor and fans. If you have a laptop, it is
+recommended that you enable this option.  For more details on ACPI, refer
 to <xref linkend="CONFIG_ACPI" />.
 </para>
 
@@ -1058,16 +1080,15 @@ Power management options (ACPI, APM)
 <sect1 id="lkn_network">
 <title>Networking</title>
 
-<simplesect>
 <para>
 Networking is required for almost all machines today, and Linux supports
-almost every different networking option availble.  Here we are going to
+almost every networking option availble.  Here we are going to
 show only a few of the wide variety that are present.
 </para>
 
 <para>
 For all networking options, including different drivers, the main network
-config option must be enabled:
+configuration option must be enabled:
 <screen>
 Networking
     [*] Networking support
@@ -1075,8 +1096,8 @@ Networking
 </para>
 
 <para>
-Also the TCP/IP option should be selected so that the machine can talk to
-other machines on the internet:
+The TCP/IP option should also be selected so that the machine can talk to
+other machines on the Internet:
 <screen>
 Networking
     [*] Networking support
@@ -1084,7 +1105,6 @@ Networking
               [*] TCP/IP networking
 </screen>
 </para>
-</simplesect>
 
 <sect2 id="netfilter">
 <title>Netfilter</title>
@@ -1093,9 +1113,9 @@ Networking
 The netfilter portion of the Linux kernel is a framework for filtering and
 manipulating all network packets that pass through the machine.  It is
 commonly used if you wish to enable a firewall on the machine to protect it
-from different systems on the internet, or if you wish to use the machine
+from different systems on the Internet, or if you wish to use the machine
 to act as a proxy for other machines on the network.  For more details on
-what netfilter is good for please see <xref linkend="CONFIG_NETFILTER" />.
+what netfilter is good for, please see <xref linkend="CONFIG_NETFILTER" />.
 </para>
 
 <para>
@@ -1150,17 +1170,17 @@ Networking
 <title>Network Drivers</title>
 
 <para>
-Linux supports a wide array of different types of networking devices.  The
-most common one is a PCI network device, which an ethernet cable is
-connected into.
-To determine if you have a PCI network device on the system, and what type
+Linux supports a wide array of different network devices.  The
+most common one is a PCI network device, which an Ethernet cable can be
+plugged into.
+To determine whether you have a PCI network device on the system, and what type
 it is, run the following command:
 <screen>
 $ <userinput>/usr/sbin/lspci | grep Ethernet</userinput>
 03:0c.0 Ethernet controller: D-Link System Inc RTL8139 Ethernet (rev 10)
 03:0e.0 Ethernet controller: Intel Corporation 82545GM Gigabit Ethernet Controller (rev 04)
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that is
 important is that the command shows some PCI Ethernet devices.
 </para>
 
@@ -1184,7 +1204,7 @@ Device Drivers
 <para>
 Then comes the fun task of finding the specific device drivers for your
 hardware.  The most common place to find Ethernet devices for modern
-hardware, is in the gigabit section of the driver selection:
+hardware is in the gigabit section of the driver selection:
 <screen>
 Device Drivers
     Network device support
@@ -1226,8 +1246,8 @@ Networking
 </para>
 
 <para>
-There are a number of different IrDA protocols that can be selected,
-depending on the type of device you wish to communicate with, and the
+A number of different IrDA protocols can be selected,
+depending on the type of device you wish to communicate with and the
 program used to do the communication:
 <screen>
 Networking
@@ -1241,9 +1261,9 @@ Networking
 </para>
 
 <para>
-There are a wide range of different types of IrDA devices, some are serial,
+There are a wide range of different types of IrDA devices, some serial,
 some PCI, and others based on USB.  To select the specific type of IrDA
-device that you have, choose it under the driver submenu for IrDA:
+device you have, choose it under the driver submenu for IrDA:
 <screen>
 Networking
     [*] Networking support
@@ -1303,9 +1323,9 @@ Networking
 </para>
 
 <para>
-There are relativly few individual Bluetooth devices drivers available, due
-to almost all devices following the Bluetooth specification which details
-how devices should operate.  These drivers must be selected in order for
+There are relativly few individual Bluetooth devices drivers available, because
+almost all of these devices follow the Bluetooth specification detailing
+how devices should operate.  The drivers marked in the following list must be selected in order for
 Bluetooth to work with the device:
 <screen>
 Networking
@@ -1332,23 +1352,23 @@ Networking
 <title>Wireless</title>
 
 <para>
-Wireless networking is very popular with almost all modern laptops having a
-builtin wireless network device.  Linux supports a wide range of wireless
+Wireless networking is very popular, with almost all modern laptops having a
+built-in wireless network device.  Linux supports a wide range of wireless
 drivers, with more being added every week.
-To determine if you have a PCI wireless device on the system, and what type
+To determine whether you have a PCI wireless device on the system, and what type
 it is, run the following command:
 <screen>
 $ <userinput>/usr/sbin/lspci | grep -i wireless</userinput>
 06:05.0 Network controller: Intel Corporation PRO/Wireless 2915ABG MiniPCI Adapter (rev 05)
 </screen>
-Note that your response will probably not match identically, all that is
+Note that your response will probably not match identically; all that is
 important is that the command shows some PCI Wireless devices.
 </para>
 
 <para>
 To enable wireless support in Linux, the IEEE 802.11 network configuration
 option must be enabled (802.11 is the number of the wireless specification
-that all devices follow.)
+that all these devices follow.)
 <screen>
 Networking
     [*] Networking support
@@ -1381,7 +1401,7 @@ Device Drivers
             [*] Wireless LAN drivers (non-hamradio) &amp; Wireless Extensions
             [*]   Wireless Extension API over RtNetlink
 </screen>
-There is a wide range of different PCI drivers in this section, select the
+There is a wide range of different PCI drivers in this section. Select the
 proper one depending on the device you have.
 </para>
 
@@ -1402,7 +1422,6 @@ Device Drivers
 <sect1>
 <title>Filesystems</title>
 
-<simplesect>
 <para>
 Linux supports a wide range of traditional file system types and a number
 of different types of filesystems (volume managers, clustered filesystems,
@@ -1422,7 +1441,6 @@ File Systems
 This section will show a few of the non-traditional file system types that
 Linux supports, and how to enable them.
 </para>
-</simplesect>
 
 <sect2 id="raid">
 <title>RAID</title>
@@ -1449,8 +1467,8 @@ Device Drivers
 </para>
 
 <para>
-There are many different types of RAID configurations.  At least one of
-them needs to be selected in order for RAID to work properly:
+There are many different types of RAID configurations.  At least one 
+needs to be selected in order for RAID to work properly:
 <screen>
 Device Drivers
     Multi-device support (RAID and LVM)
@@ -1473,7 +1491,13 @@ Device Drivers
 <para>
 Much like RAID, LVM (Logical Volume Manager) allows the user to combine
 different block devices to look like one logical device.  However it does
-not work on a device level like RAID, but on a block and sector mapping.
+<!--
+
+  AO: I'm not sure changing "on" to "through" is correct below, but it
+  sounds better.
+
+-->
+not work on a device level like RAID, but through a block and sector mapping.
 It allows different portions of different disks to be combined together to
 look like one large block device to the user.  To do this, the kernel uses
 something called Device Mapper (DM).  For more information about the
@@ -1511,19 +1535,37 @@ Device Drivers
 
 
 <sect2 id="samba">
-<title>SAMBA</title>
+<title>Samba</title>
+<!--
+
+  AO: Is this section really about Samba? It's not about the Samba
+  servers. My understanding is that the Samba servers can run on Linux
+  without the SMB or CIFS filesystem, just serving Linux shares to
+  remote systems. And by the same token, a Linux system can support a
+  SMB or CIFS filesystem without running Samba so that the Linux
+  system can access files on a Windows domain. (I've done that.) I
+  might be wrong, but I'd title the section "File-sharing with Windows
+  domains".
+
+-->
 
 <para>
-SAMBA is a program that allows Linux users to access Windows machines
-nativly accross the network, providing a way to share drives and devices in
+Samba is a program that allows Linux users to access Windows machines
+natively accross the network, providing a way to share drives and devices in
 a transparent manner.  It also allows Linux to work as a Windows server,
 allowing Windows clients to connect to it thinking that it is a real
 Windows machine.
 </para>
 
 <para>
-There are two different filesystems that allow a Linux machine to connect
-with a Windows machine, the SMB filesystem and the CIFS filesystem.  For
+<!--
+
+  AO: CIFS is an evolution of SMB; I think that should be briefly
+  stated somehow.
+
+-->
+Two different filesystems that allow a Linux machine to connect
+with a Windows machine: the SMB filesystem and the CIFS filesystem.  For
 the ability to connect to older Windows for Workgroups or Windows 95 or 98
 machines, select the SMB filesystem:
 <screen>
@@ -1535,7 +1577,7 @@ File systems
 
 <para>
 For the ability to connect to newer Windows machines, the CIFS filesystem
-is recommended to be used instead:
+is recommended instead:
 <screen>
 File systems
     Network File Systems
@@ -1557,8 +1599,8 @@ one should be used instead of the other, please see
 
 <para>
 OCFS2 is a cluster filesystem from Oracle that works for large network
-instalations and small local systems at the same time.  It is recommended
-to use this filesystem when using large databases, like Oracle or DB2, as
+instalations and small local systems at the same time.
+This filesystem is recommended when using large databases, such as Oracle or DB2, because
 it can be moved over time to different backing disks across the network
 quite easily as more storage is needed.  For more details about OCFS2,
 please refer to <xref linkend="CONFIG_OCFS2_FS" />.
@@ -1579,14 +1621,13 @@ File Systems
 <sect1>
 <title>Security</title>
 
-<simplesect>
 <para>
-The Linux kernel provides the ability to run with different types of
-security models built into it.  Right now there are only a few different
-models that come with the default kernel source tree, but more are working
-on getting accepted.
+The Linux kernel provides support for different
+security models by providing hooks and letting you build in your
+choice of model.  Right now, only a few different
+models come with the default kernel source tree, but developers of new
+models are working on getting more accepted.
 </para>
-</simplesect>
 
 <sect2 id="capabilities">
 <title>Default Linux Capabilities</title>
@@ -1618,7 +1659,7 @@ option, please see <xref linkend="CONFIG_SECURITY_SELINUX" />.
 
 <para>
 SELinux requires that the networking option be enabled.  See
-<xref linkend="lkn_network" /> for how to enable this.
+<xref linkend="lkn_network" /> to enable this.
 </para>
 
 <para>
@@ -1676,16 +1717,13 @@ Security options
 <sect1>
 <title>Kernel debugging</title>
 
-<simplesect>
 <para>
-There are a wide range of different kernel options that can help in
+A wide range of different kernel options can help in
 debugging what is going on within the kernel.  Following is a list of some
 of the more common one that can be useful for discovering new things
 about how the kernel works, or help find potential problems within the
 current kernel source code.
 </para>
-
-</simplesect>
 
 <sect2 id="debug_printk">
 <title>Kernel log timestamps</title>
@@ -1693,7 +1731,7 @@ current kernel source code.
 <para>
 The kernel outputs a wide range of messages to its log file.  These
 messages can be seen by looking at the system log file (usually located
-in <filename>/var/log/messages</filename>, or can be seen by running the
+in <filename>/var/log/messages</filename>, or by running the
 <command>dmesg</command> command.
 </para>
 
@@ -1736,7 +1774,7 @@ Kernel hacking
 
 <para>
 For a full description of the different actions that can be triggered by
-this option, please see the file,
+this option, please see the file
 <filename>Documentation/sysrq.txt</filename> in the kernel source tree.
 </para>
 </sect2>
@@ -1755,7 +1793,7 @@ Kernel hacking
 </para>
 
 <para>
-After you enable this option and booting the rebuilt kernel, it
+After you enable this option and boot the rebuilt kernel, it
 creates the directory
 <filename>/sys/kernel/debug</filename> as a location for the user to mount
 the <literal>debugfs</literal> filesystem. Do this manually by:
@@ -1774,8 +1812,8 @@ After you mount <literal>debugfs</literal>, a large number of
 different directories and files will turn up in the <literal>/sys/kernel/debug/</literal>
 directory. These are all virtual and dynamically generated by the
 kernel, like the files in <literal>procfs</literal> or
-<literal>sysfs</literal>. These can be used to help debug different kernel
-subsystems, or just looked at to see what is happening to the system as it
+<literal>sysfs</literal>. The files can be used to help debug different kernel
+subsystems, or just perused to see what is happening to the system as it
 runs.
 </para>
 </sect2>
@@ -1789,7 +1827,7 @@ wish to enable if you want to help kernel developers debug different
 problems, or just learn more about how the kernel works by looking at the
 messages that these options print out.  Note that if you enable almost any
 of these options, the kernel will slow down a small ammount, so if you
-notice any decrease in performance, you might wish to disable these
+notice any decrease in performance, you might wish to disable the
 options.
 <screen>
 Kernel hacking
