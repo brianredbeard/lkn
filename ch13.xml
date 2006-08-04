@@ -170,7 +170,7 @@ developers and released under the GPL.
 	answering <literal>M</literal> instead of <literal>Y</literal> where
 	indicated): this is most useful for infrequently used options which are
 	not required for booting.  For more information, see the man pages for
-	<literal>modprobe</literal>, 
+	<literal>modprobe</literal>,
 	<literal>lsmod</literal>,
 	<literal>modinfo</literal>,
 	<literal>insmod</literal>, and
@@ -1025,8 +1025,8 @@ developers and released under the GPL.
 	"Power Management" means that parts of your computer are shut
 	off or put into a power conserving "sleep" mode if they are not
 	being used.  There are two competing standards for doing this: APM
-	and ACPI.  If you want to use either one, say Y here and then also
-	to the requisite support below.
+	and ACPI.  If you want to use either one, say yes here and then also
+	enable one of the different standards.
 	</para>
 
 	<para>
@@ -1400,7 +1400,7 @@ developers and released under the GPL.
 	<para>
 	This option enables support for 16-bit PCMCIA cards. Most older
 	PC-cards are such 16-bit PCMCIA cards, so unless you know you're only
-	using 32-bit CardBus cards, say Y or M here.
+	using 32-bit CardBus cards, say yes here.
 	</para>
 
 	<para>
@@ -1573,9 +1573,9 @@ developers and released under the GPL.
 
 	<para>
 	Note that your box can only act as a router if you enable IP forwarding
-	in your kernel; you can do that by saying yes to
-	<literal>/proc file system support</literal> and 
-	<literal>Sysctl support</literal> below and executing the
+	in your kernel; you can do that by saying yes to the
+	<literal>/proc file system support</literal> and
+	<literal>Sysctl support</literal> options and executing the
 	line:
 	<userinput>
 	echo "1" &gt; /proc/sys/net/ipv4/ip_forward
@@ -1707,14 +1707,14 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you say N here, you will get the standard packet scheduler, which
-	is a FIFO (first come, first served). If you say Y here, you will be
-	able to choose from among several alternative algorithms which can
-	then be attached to different network devices. This is useful for
-	example if some of your network devices are real time devices that
-	need a certain minimum data flow rate, or if you need to limit the
-	maximum data flow rate for traffic which matches specified criteria.
-	This code is considered to be experimental.
+	If you say no here, you will get the standard packet scheduler,
+	which is a FIFO (first come, first served). If you say yes here,
+	you will be able to choose from among several alternative
+	algorithms which can then be attached to different network devices.
+	This is useful for example if some of your network devices are real
+	time devices that need a certain minimum data flow rate, or if you
+	need to limit the maximum data flow rate for traffic which matches
+	specified criteria.  This code is considered to be experimental.
 	</para>
 
 	<para>
@@ -1727,9 +1727,9 @@ developers and released under the GPL.
 
 	<para>
 	This Quality of Service (QoS) support will enable you to use
-	Differentiated Services (diffserv) and Resource Reservation Protocol
-	(RSVP) on your Linux router if you also say Y to the corresponding
-	classifiers below.  Documentation and software is at
+	Differentiated Services (diffserv) and Resource Reservation
+	Protocol (RSVP) on your Linux router if you also say yes to the
+	corresponding classifiers.  Documentation and software is at
 	<systemitem class="url">http://diffserv.sourceforge.net/</systemitem>.
 	</para>
 
@@ -1749,9 +1749,10 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want to build support for the IrDA (TM) protocols.
-	The Infrared Data Associations (tm) specifies standards for wireless
-	infrared communication and is supported by most laptops and PDA's.
+	Say yes here if you want to build support for the IrDA (TM)
+	protocols.  The Infrared Data Associations (tm) specifies standards
+	for wireless infrared communication and is supported by most
+	laptops and PDAs.
 	</para>
 
 	<para>
@@ -1764,7 +1765,7 @@ developers and released under the GPL.
 
 	<para>
 	If you want to exchange bits of data (vCal, vCard) with a PDA, you
-	will need to install some OBEX application, such as OpenObex :
+	will need to install some OBEX application, such as OpenObex:
 	<systemitem class="url">http://sourceforge.net/projects/openobex/</systemitem>
 	</para>
 
@@ -1967,7 +1968,7 @@ developers and released under the GPL.
 	(the connector at the computer with 25 holes), e.g. printer, ZIP
 	drive, PLIP link (Parallel Line Internet Protocol is mainly used to
 	create a mini network by connecting the parallel ports of two local
-	machines) etc., then you need to say Y here; please read
+	machines) etc., then you need to say yes here; please read
 	<filename>Documentation/parport.txt</filename> and
 	<filename>drivers/parport/BUGS-parport</filename>.
 	</para>
@@ -2008,10 +2009,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Say Y here if you would like Linux to configure your Plug and Play
-	devices. You should then also say Y to all of the protocols below.
-	Alternatively, you can say N here and configure your PnP devices
-	using user space utilities such as the isapnptools package.
+	Say yes here if you would like Linux to configure your Plug and
+	Play devices. You should then also say yes to all of the protocols
+	needed.  Alternatively, you can say no here and configure your PnP
+	devices using user space utilities such as the isapnptools package.
 	</para>
 
 </refsect1>
@@ -2029,7 +2030,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you would like support for ISA Plug and Play devices.
+	Say yes here if you would like support for ISA Plug and Play devices.
 	Some information is in <filename>Documentation/isapnp.txt</filename>.
 	</para>
 
@@ -2062,7 +2063,7 @@ developers and released under the GPL.
 	<para>
 	If you would like the kernel to detect and allocate resources to
 	your mainboard devices (on some systems they are disabled by the
-	BIOS) say Y here.  Also the PNPBIOS can help prevent resource
+	BIOS) say yes here.  Also the PNPBIOS can help prevent resource
 	conflicts between mainboard devices and other bus devices.
 	</para>
 
@@ -2086,14 +2087,14 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say Y here, your kernel will be able to manage low cost mass
+	If you say yes here, your kernel will be able to manage low cost mass
 	storage units such as ATA/(E)IDE and ATAPI units. The most common
 	cases are IDE hard drives and ATAPI CD-ROM drives.
 	</para>
 
 	<para>
 	If your system is pure SCSI and doesn't use these interfaces, you
-	can say N here.
+	can say no here.
 	</para>
 
 	<para>
@@ -2152,7 +2153,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say Y here, you will use the full-featured IDE driver to
+	If you say yes here, you will use the full-featured IDE driver to
 	control up to ten ATA/IDE interfaces, each being able to serve a
 	"master" and a "slave" device, for a total of up to twenty ATA/IDE
 	disk/cdrom/tape/floppy drives.
@@ -2180,10 +2181,11 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you have one or more IDE drives, say Y or M here. If your system
-	has no IDE drives, or if memory requirements are really tight, you
-	could say N here, and select the "Old hard disk driver" below
-	instead to save about 13 KB of memory in the kernel.
+	If you have one or more IDE drives, enable this option. If your
+	system has no IDE drives, or if memory requirements are really
+	tight, you could say no here, and select the <literal>Old hard disk
+	driver</literal> option instead to save about 13 KB of memory in
+	the kernel.
 	</para>
 
 </refsect1>
@@ -2204,8 +2206,8 @@ developers and released under the GPL.
 	<para>
 	This will include enhanced support for MFM/RLL/IDE hard disks.  If
 	you have a MFM/RLL/IDE disk, and there is no special reason to use
-	the old hard disk driver instead, say Y.  If you have an SCSI-only
-	system, you can say N here.
+	the old hard disk driver instead, say yes.  If you have an SCSI-only
+	system, you can say no here.
 	</para>
 
 	<para>
@@ -2228,19 +2230,20 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you have a CD-ROM drive using the ATAPI protocol, say Y. ATAPI is
-	a newer protocol used by IDE CD-ROM and TAPE drives, similar to the
-	SCSI protocol. Most new CD-ROM drives use ATAPI, including the
-	NEC-260, Mitsumi FX400, Sony 55E, and just about all non-SCSI
-	double(2X) or better speed drives.
+	If you have a CD-ROM drive using the ATAPI protocol, say yes here.
+	ATAPI is a newer protocol used by IDE CD-ROM and TAPE drives,
+	similar to the SCSI protocol. Most new CD-ROM drives use ATAPI,
+	including the NEC-260, Mitsumi FX400, Sony 55E, and just about all
+	non-SCSI double(2X) or better speed drives.
 	</para>
 
 	<para>
-	If you say Y here, the CD-ROM drive will be identified at boot time
-	along with other IDE devices, as "hdb" or "hdc", or something
-	similar (check the boot messages with dmesg). If this is your only
-	CD-ROM drive, you can say N to all other CD-ROM options, but be sure
-	to say Y or M to "ISO 9660 CD-ROM file system support".
+	If you say yes here, the CD-ROM drive will be identified at boot
+	time along with other IDE devices, as <literal>hdb</literal> or
+	<literal>hdc</literal>, or something similar (check the boot
+	messages with dmesg). If this is your only CD-ROM drive, you can
+	say no to all other CD-ROM options, but be sure to also enable the
+	<literal>ISO 9660 CD-ROM file system support</literal> option.
 	</para>
 
 	<para>
@@ -2265,7 +2268,7 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you have an IDE floppy drive which uses the ATAPI protocol,
-	answer Y.  ATAPI is a newer protocol used by IDE CD-ROM/tape/floppy
+	answer yes.  ATAPI is a newer protocol used by IDE CD-ROM/tape/floppy
 	drives, similar to the SCSI protocol.
 	</para>
 
@@ -2275,14 +2278,15 @@ developers and released under the GPL.
 	of when a ZIP drive uses a partition table, see
 	<systemitem class="url">http://www.win.tue.nl/~aeb/linux/zip/zip-1.html</systemitem>.
 	(ATAPI PD-CD/CDR drives are not supported by this driver; support
-	for PD-CD/CDR drives is available if you answer Y to
-	"SCSI emulation support", below).
+	for PD-CD/CDR drives is available if you answer yes to
+	<literal>SCSI emulation support</literal>).
 	</para>
 
 	<para>
-	If you say Y here, the FLOPPY drive will be identified along with
-	other IDE devices, as "hdb" or "hdc", or something similar (check
-	the boot messages with dmesg).
+	If you say yes here, the FLOPPY drive will be identified along with
+	other IDE devices, as <literal>hdb</literal> or
+	<literal>hdc</literal>, or something similar (check the boot
+	messages with dmesg).
 	</para>
 
 </refsect1>
@@ -2300,14 +2304,14 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or
-	any other SCSI device under Linux, say Y and make sure that you know
+	any other SCSI device under Linux, say yes and make sure that you know
 	the name of your SCSI host adapter (the card inside your computer
 	that "speaks" the SCSI protocol, also called SCSI controller),
 	because you will be asked for it.
 	</para>
 
 	<para>
-	You also need to say Y here if you have a device which speaks
+	You also need to say yes here if you have a device which speaks
 	the SCSI protocol.  Examples of this include the parallel port
 	version of the IOMEGA ZIP drive, USB storage devices, Fibre
 	Channel, FireWire storage and the IDE-SCSI emulation driver.
@@ -2335,7 +2339,7 @@ developers and released under the GPL.
 	<para>
 	If you want to use SCSI hard disks, Fibre Channel disks,
 	USB storage or the SCSI or parallel port version of
-	the IOMEGA ZIP drive, say Y and read the SCSI-HOWTO,
+	the IOMEGA ZIP drive, say yes and read the SCSI-HOWTO,
 	the Disk-HOWTO and the Multi-Disk-HOWTO, available from
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. This is NOT for SCSI
 	CD-ROMs.
@@ -2363,7 +2367,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you want to use a SCSI tape drive under Linux, say Y and read the
+	If you want to use a SCSI tape drive under Linux, say yes and read the
 	SCSI-HOWTO, available from
 	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, and
 	<filename>Documentation/scsi/st.txt</filename> in the kernel source.  This is NOT
@@ -2417,9 +2421,10 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you want to use a SCSI or FireWire CD-ROM under Linux,
-	say Y and read the SCSI-HOWTO and the CDROM-HOWTO at
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. Also make sure to say
-	Y or M to "ISO 9660 CD-ROM file system support" later.
+	say yes and read the SCSI-HOWTO and the CDROM-HOWTO at
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	Also make sure to enable the <literal>ISO 9660 CD-ROM file system
+	support</literal> option.
 	</para>
 
 </refsect1>
@@ -2439,7 +2444,7 @@ developers and released under the GPL.
 	<para>
 	If you want to use SCSI scanners, synthesizers or CD-writers or just
 	about anything having "SCSI" in its name other than hard disks,
-	CD-ROMs or tapes, say Y here. These won't be supported by the kernel
+	CD-ROMs or tapes, say yes here. These won't be supported by the kernel
 	directly, so you need some additional software which knows how to
 	talk to these devices using the SCSI protocol:
 	</para>
@@ -2477,7 +2482,7 @@ developers and released under the GPL.
 	tape libraries and MOD/CDROM jukeboxes.  *Real* jukeboxes, you
 	don't need this for those tiny 6-slot cdrom changers.  Media
 	changers are listed as "Type: Medium Changer" in /proc/scsi/scsi.
-	If you have such hardware and want to use it with linux, say Y
+	If you have such hardware and want to use it with linux, say yes
 	here.  Check <filename>Documentation/scsi-changer.txt</filename> for details.
 	</para>
 
@@ -2498,11 +2503,11 @@ developers and released under the GPL.
 	<para>
 	If you have a SCSI device that supports more than one LUN (Logical
 	Unit Number), e.g. a CD jukebox, and only one LUN is detected, you
-	can say Y here to force the SCSI driver to probe for multiple LUNs.
+	can say yes here to force the SCSI driver to probe for multiple LUNs.
 	A SCSI device with multiple LUNs acts logically like multiple SCSI
 	devices. The vast majority of SCSI devices have only one LUN, and
-	so most people can say N here. The max_luns boot/module parameter 
-	allows to override this setting.
+	so most people can say no here. The <literal>max_luns</literal>
+	boot/module parameter allows to override this setting.
 	</para>
 
 </refsect1>
@@ -2564,7 +2569,7 @@ developers and released under the GPL.
 	disk failures. This is called "Software RAID" since the combining of
 	the partitions is done by the kernel. "Hardware RAID" means that the
 	combining is done by a dedicated controller; if you have such a
-	controller, you do not need to say Y here.
+	controller, you do not need to say yes here.
 	</para>
 
 	<para>
@@ -2622,7 +2627,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you have FireWire hardware and want to use it, say Y here.  This
+	If you have FireWire hardware and want to use it, say yes here.  This
 	is the core support only, you will also need to select a driver for
 	your IEEE 1394 adapter.
 	</para>
@@ -2655,7 +2660,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you say Y here, you will get a choice of interface adapter
+	If you say yes here, you will get a choice of interface adapter
 	drivers and OSM's with the following questions.
 	</para>
 
@@ -2675,14 +2680,14 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	You can say N here if you don't intend to connect your Linux box to
+	You can say no here if you do not intend to connect your Linux box to
 	any other computer at all.
 	</para>
 
 	<para>
-	You'll have to say Y if your computer contains a network card that
+	You'll have to say yes if your computer contains a network card that
 	you want to use under Linux. If you are going to run SLIP or PPP over
-	telephone line or null modem cable you need say Y here. Connecting
+	telephone line or null modem cable you need say yes here. Connecting
 	two machines with parallel ports using PLIP needs this, as well as
 	AX.25/KISS for sending Internet traffic over amateur radio links.
 	</para>
@@ -2726,14 +2731,15 @@ developers and released under the GPL.
 	<para>
 	If your Linux machine will be connected to an Ethernet and you have
 	an Ethernet network interface card (NIC) installed in your computer,
-	say Y here and read the Ethernet-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. You will then also have
-	to say Y to the driver for your particular NIC.
+	say yes here and read the Ethernet-HOWTO, available from
+	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	You will then also have to say yes to the driver for your
+	particular NIC.
 	</para>
 
 	<para>
 	Note that the answer to this question won't directly affect the
-	kernel: saying N will just cause the configurator to skip all
+	kernel: saying no will just cause the configurator to skip all
 	the questions about Ethernet network cards.
 	</para>
 
@@ -2757,13 +2763,6 @@ developers and released under the GPL.
 	(8115T/A) adapters.
 	</para>
 
-	<para>
-	If you have such an adapter and would like to use it, say Y or M and
-	read the Token-Ring mini-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem> and the file
-	<filename>Documentation/networking/smctr.txt</filename>.
-	</para>
-
 </refsect1>
 </refentry>
 
@@ -2785,7 +2784,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Saying Y here also enables the Wireless Extensions (creates
+	Saying yes here also enables the Wireless Extensions (creates
 	/proc/net/wireless and enables iwconfig access). The Wireless
 	Extension is a generic API allowing a driver to expose to the user
 	space configuration and statistics specific to common Wireless LANs.
@@ -2794,7 +2793,7 @@ developers and released under the GPL.
 	the driver supports Wireless Extension). Another advantage is that
 	these parameters may be changed on the fly without restarting the
 	driver (or Linux). If you wish to use Wireless Extensions with
-	wireless PCMCIA (PC-) cards, you need to say Y here; you can fetch
+	wireless PCMCIA (PC-) cards, you need to say yes here; you can fetch
 	the tools from
 	<systemitem class="url">http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html</systemitem>.
 	</para>
@@ -2847,10 +2846,10 @@ developers and released under the GPL.
 	asynchronous lines, such as regular analog phone lines, and
 	synchronous PPP which can be used over digital ISDN lines for
 	example.  If you want to use PPP over phone lines or other
-	asynchronous serial lines, you need to say Y (or M) here and also to
-	the next option, "PPP support for async serial ports".  For PPP over
-	synchronous lines, you should say Y (or M) here and to "Support
-	synchronous PPP", below.
+	asynchronous serial lines, you need to enable the <literal>PPP
+	support for async serial ports</literal> option.  For PPP over
+	synchronous lines, also enable the <literal>Support synchronous
+	PPP</literal> option.
 	</para>
 
 </refsect1>
@@ -2923,13 +2922,13 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you have a telephony card, which for example allows
+	Say yes here if you have a telephony card, which for example allows
 	you to use a regular phone for voice-over-IP applications.
 	</para>
 
 	<para>
-	Note: this has nothing to do with modems.  You do not need to say Y
-	here in order to be able to use a modem under Linux.
+	Note: this has nothing to do with modems.  You do not need to say
+	yes here in order to be able to use a modem under Linux.
 	</para>
 
 </refsect1>
@@ -2948,14 +2947,14 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you have any input device (mouse, keyboard, tablet,
+	Say yes here if you have any input device (mouse, keyboard, tablet,
 	joystick, steering wheel ...) connected to your system and want
 	it to be available to applications. This includes standard PS/2
 	keyboard and mouse.
 	</para>
 
 	<para>
-	Say N here if you have a headless (no monitor, no keyboard) system.
+	Say no here if you have a headless (no monitor, no keyboard) system.
 	</para>
 
 	<para>
@@ -2979,7 +2978,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say Y here, you will get support for terminal devices with
+	If you say yes here, you will get support for terminal devices with
 	display and keyboard devices. These are called "virtual" because you
 	can run several virtual terminals (also called virtual consoles) on
 	one physical terminal. This is rather useful, for example one
@@ -3002,7 +3001,7 @@ developers and released under the GPL.
 	<para>
 	You need at least one virtual terminal device in order to make use
 	of your keyboard and monitor. Therefore, only people configuring an
-	embedded system would want to say N here in order to save some
+	embedded system would want to say no here in order to save some
 	memory; the only way to log into such a system is then via a serial
 	or network connection.
 	</para>
@@ -3030,15 +3029,16 @@ developers and released under the GPL.
 	<para>
 	The system console is the device which receives all kernel messages
 	and warnings and which allows logins in single user mode. If you
-	answer Y here, a virtual terminal (the device used to interact with
+	answer yes here, a virtual terminal (the device used to interact with
 	a physical terminal) can be used as system console. This is the most
-	common mode of operations, so you should say Y here unless you want
+	common mode of operations, so you should say yes here unless you want
 	the kernel messages be output only to a serial port (in which case
-	you should say Y to "Console on serial port", below).
+	you should also enable the <literal>Console on serial
+	port</literal> option).
 	</para>
 
 	<para>
-	If you do say Y here, by default the currently visible virtual
+	If you do say yes here, by default the currently visible virtual
 	terminal (/dev/tty0) will be used as system console. You can change
 	that with a kernel command line option such as "console=tty3" which
 	would use the third virtual terminal as system console. (Try "man
@@ -3076,7 +3076,7 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	This selects whether you want to include the driver for the standard
-	serial ports.  The standard answer is Y.  People who might say N
+	serial ports.  The standard answer is yes.  People who might say no
 	here are those that are setting up dedicated Ethernet WWW/FTP
 	servers, or users that have one of the various bus mice instead of a
 	serial mouse and don't intend to use their machine's standard serial
@@ -3104,7 +3104,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Most people will say Y or M here, so that they can use serial mice,
+	Most people will say yes here, so that they can use serial mice,
 	modems and similar devices connecting to the standard serial ports.
 	</para>
 
@@ -3141,7 +3141,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you have an AGP system and you say Y here, it will be possible to
+	If you have an AGP system and you say yes here, it will be possible to
 	use the AGP features of your 3D rendering video card. This code acts
 	as a sort of "AGP driver" for the motherboard's chipset.
 	</para>
@@ -3160,7 +3160,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	You should say Y here if you want to use GLX or DRI.
+	You should say yes here if you want to use GLX or DRI.
 	</para>
 
 </refsect1>
@@ -3179,8 +3179,8 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	Kernel-level support for the Direct Rendering Infrastructure (DRI)
-	introduced in XFree86 4.0. If you say Y here, you need to select
-	the module that's right for your graphics card from the list below.
+	introduced in XFree86 4.0. If you say yes here, you need to select
+	the module that's right for your graphics card from the list.
 	These modules provide support for synchronization, security, and
 	DMA transfers. Please see <systemitem class="url">http://dri.sourceforge.net/</systemitem> for more
 	details.  You should also select and configure AGP
@@ -3214,8 +3214,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you want I2C support, you should say Y here and also to the
-	specific driver for your bus adapter(s) below.
+	If you want I2C support, you should say yes here and also to the
+	specific driver for your bus adapter(s).
 	</para>
 
 </refsect1>
@@ -3274,8 +3274,8 @@ developers and released under the GPL.
 	can include temperature sensors, voltage sensors, fan speed
 	sensors and various additional features such as the ability to
 	control the speed of the fans.  If you want this support you
-	should say Y here and also to the specific driver(s) for your
-	sensors chip(s) below.
+	should say yes here and also to the specific driver(s) for your
+	sensors chip(s).
 	</para>
 
 </refsect1>
@@ -3399,12 +3399,12 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Say Y here and to the driver for your graphics board below if you
+	Say yes here and to the driver for your graphics board if you
 	are compiling a kernel for a non-x86 architecture.
 	</para>
 
 	<para>
-	If you are compiling for the x86 architecture, you can say Y if you
+	If you are compiling for the x86 architecture, you can say yes if you
 	want to play with it, but it is not essential. Please note that
 	running graphical applications that directly touch the hardware
 	(e.g. an accelerated X server) and that are not frame buffer
@@ -3427,7 +3427,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Saying Y here will allow you to use Linux in text mode through a
+	Saying yes here will allow you to use Linux in text mode through a
 	display that complies with the generic VGA standard. Virtually
 	everyone wants that.
 	</para>
@@ -3436,10 +3436,6 @@ developers and released under the GPL.
 	The program SVGATextMode can be used to utilize SVGA video cards to
 	their full potential in text mode. Download it from
 	ftp://ibiblio.org/pub/Linux/utils/console/.
-	</para>
-
-	<para>
-	Say Y.
 	</para>
 
 </refsect1>
@@ -3475,7 +3471,7 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you have a sound card in your computer, i.e. if it can say more
-	than an occasional beep, say Y.  Be sure to have all the information
+	than an occasional beep, say yes.  Be sure to have all the information
 	about your sound card and its configuration down (I/O port,
 	interrupt and DMA channel), because you will be asked for it.
 	</para>
@@ -3522,8 +3518,8 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say 'Y' or 'M' to enable ALSA (Advanced Linux Sound Architecture),
-	the new base sound system.
+	Say yes to enable ALSA (Advanced Linux Sound Architecture), the
+	standard Linux sound system.
 	</para>
 
 	<para>
@@ -3548,7 +3544,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here to include support for USB audio and USB MIDI
+	Say yes here to include support for USB audio and USB MIDI
 	devices.
 	</para>
 
@@ -3583,8 +3579,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Say Y here if your computer has a host-side USB port and you want
-	to use USB devices.  You then need to say Y to at least one of the
+	Say yes here if your computer has a host-side USB port and you want
+	to use USB devices.  You then need to say yes to at least one of the
 	Host Controller Driver (HCD) options below.  Choose a USB 1.1
 	controller, such as "UHCI HCD support" or "OHCI HCD support",
 	and "EHCI HCD (USB 2.0) support" except for older systems that
@@ -3661,7 +3657,7 @@ developers and released under the GPL.
 	The Open Host Controller Interface (OHCI) is a standard for accessing
 	USB 1.1 host controller hardware.  It does more in hardware than Intel's
 	UHCI specification.  If your USB host controller follows the OHCI spec,
-	say Y.  On most non-x86 systems, and on x86 hardware that's not using a
+	say yes.  On most non-x86 systems, and on x86 hardware that's not using a
 	USB controller from Intel or VIA, this is appropriate.  If your host
 	controller doesn't use PCI, this is probably appropriate.  For a PCI
 	based system where you're not sure, the "lspci -v" entry will list the
@@ -3686,11 +3682,10 @@ developers and released under the GPL.
 	The Universal Host Controller Interface is a standard by Intel for
 	accessing the USB hardware in the PC (which is also called the USB
 	host controller). If your USB host controller conforms to this
-	standard, you may want to say Y, but see below. All recent boards
-	with Intel PCI chipsets (like intel 430TX, 440FX, 440LX, 440BX,
-	i810, i820) conform to this standard. Also all VIA PCI chipsets
-	(like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
-	133).
+	standard, you may want to say yes. All recent boards with Intel PCI
+	chipsets (like intel 430TX, 440FX, 440LX, 440BX, i810, i820)
+	conform to this standard. Also all VIA PCI chipsets (like VIA VP2,
+	VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro 133).
 	</para>
 
 </refsect1>
@@ -3709,7 +3704,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you want to connect USB mass storage devices to your
+	Say yes here if you want to connect USB mass storage devices to your
 	computer's USB port. This is the driver you need for USB
 	floppy drives, USB hard disks, USB tape drives, USB CD-ROMs,
 	USB flash devices, and memory sticks, along with
@@ -3738,7 +3733,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you have a USB device that provides normal serial
+	Say yes here if you have a USB device that provides normal serial
 	ports, or acts like a serial device, and you want to connect it to
 	your USB bus.
 	</para>
@@ -3788,7 +3783,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If in doubt, say "N" and don't enable these drivers; most people
+	If in doubt, say no and don't enable these drivers; most people
 	don't have this kind of hardware (except maybe inside Linux PDAs).
 	</para>
 
@@ -3815,7 +3810,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If you want MMC support, you should say Y here and also
+	If you want MMC support, you should say yes here and also
 	to the specific driver for your MMC interface.
 	</para>
 
@@ -3900,10 +3895,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called ext2.  Be aware however that the file system
-	of your root partition (the one containing the directory /) cannot
-	be compiled as a module, and so this could be dangerous.
+	Be aware however that the file system of your root partition (the
+	one containing the directory /) cannot be compiled as a module
+	without using a special boot process, so building it as a module
+	could be dangerous.
 	</para>
 
 </refsect1>
@@ -3952,10 +3947,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called ext3.  Be aware however that the file system
-	of your root partition (the one containing the directory /) cannot
-	be compiled as a module, and so this may be dangerous.
+	Be aware however that the file system of your root partition (the
+	one containing the directory /) cannot be compiled as a module
+	without using a special boot process, so building it as a module
+	could be dangerous.
 	</para>
 
 </refsect1>
@@ -3972,40 +3967,15 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Stores not just filenames but the files themselves in a balanced
-	tree.  Uses journaling.
+	This is a journaled filesystem that stores not just filenames but
+	the files themselves in a balanced tree.  Balanced trees can be
+	more efficient than traditional file system architectural
+	foundations.
 	</para>
 
 	<para>
-	Balanced trees are more efficient than traditional file system
-	architectural foundations.
-	</para>
-
-	<para>
-	In general, ReiserFS is as fast as ext2, but is very efficient with
-	large directories and small files.  Additional patches are needed
-	for NFS and quotas, please see <systemitem class="url">http://www.namesys.com/ </systemitem>for links.
-	</para>
-
-	<para>
-	It is more easily extended to have features currently found in
-	database and keyword search systems than block allocation based file
-	systems are.  The next version will be so extended, and will support
-	plugins consistent with our motto ``It takes more than a license to
-	make source code open.''
-	</para>
-
-	<para>
-	Read <systemitem class="url">http://www.namesys.com/</systemitem>to learn more about reiserfs.
-	</para>
-
-	<para>
-	Sponsored by Threshold Networks, Emusic.com, and Bigstorage.com.
-	</para>
-
-	<para>
-	If you like it, you can pay us to add new features to it that you
-	need, buy a support contract, or pay us to port it to another OS.
+	In general, ReiserFS is as fast as ext2, but is more efficient with
+	large directories and small files.
 	</para>
 
 </refsect1>
@@ -4025,10 +3995,6 @@ developers and released under the GPL.
 	<para>
 	This is a port of IBM's Journaled Filesystem .  More information is
 	available in the file <filename>Documentation/filesystems/jfs.txt</filename>.
-	</para>
-
-	<para>
-	If you do not intend to use the JFS filesystem, say N.
 	</para>
 
 </refsect1>
@@ -4061,10 +4027,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	To compile this file system support as a module, choose M here: the
-	module will be called xfs.  Be aware, however, that if the file
-	system of your root partition is compiled as a module, you'll need
-	to use an initial ramdisk (initrd) to boot.
+	Be aware however that the file system of your root partition (the
+	one containing the directory /) cannot be compiled as a module
+	without using a special boot process, so building it as a module
+	could be dangerous.
 	</para>
 
 </refsect1>
@@ -4132,7 +4098,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here to enable inotify support and the associated system
+	Say yes here to enable inotify support and the associated system
 	calls.  Inotify is a file change notification system and a
 	replacement for dnotify.  Inotify fixes numerous shortcomings in
 	dnotify and introduces several new features.  It allows monitoring
@@ -4142,7 +4108,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	For more information, see Documentation/filesystems/inotify.txt
+	For more information, see
+	<filename>Documentation/filesystems/inotify.txt</filename>
 	</para>
 
 </refsect1>
@@ -4159,7 +4126,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say Y here, you will be able to set per user limits for disk
+	If you say yes here, you will be able to set per user limits for disk
 	usage (also called disk quotas). Currently, it works for the
 	ext2, ext3, and reiserfs file system. ext3 also supports journalled
 	quotas for which you don't need to run quotacheck(8) after an unclean
@@ -4193,13 +4160,14 @@ developers and released under the GPL.
 	<para>
 	To use the automounter you need the user-space tools from the autofs
 	package; you can find the location in <filename>Documentation/Changes</filename>.
-	You also want to answer Y to "NFS file system support", below.
+	You also want to answer yes to the <literal>NFS file system
+	support</literal> option.
 	</para>
 
 	<para>
 	If you want to use the newer version of the automounter with more
-	features, say N here and say Y to "Kernel automounter v4 support",
-	below.
+	features, say no here and say yes to the <literal>Kernel
+	automounter v4 support</literal> option.
 	</para>
 
 	<para>
@@ -4238,7 +4206,7 @@ developers and released under the GPL.
 
 	<para>
 	If you want to develop a userspace FS, or if you want to use
-	a filesystem based on FUSE, answer Y or M.
+	a filesystem based on FUSE, answer yes here.
 	</para>
 
 </refsect1>
@@ -4259,7 +4227,7 @@ developers and released under the GPL.
 	<para>
 	SMB (Server Message Block) is the protocol Windows for Workgroups
 	(WfW), Windows 95/98, Windows NT and OS/2 Lan Manager use to share
-	files and printers over local networks.  Saying Y here allows you to
+	files and printers over local networks.  Saying yes here allows you to
 	mount their file systems (often called "shares" in this context) and
 	access them just like any other Unix directory.  Currently, this
 	works only if the Windows machines use TCP/IP as the underlying
@@ -4272,7 +4240,7 @@ developers and released under the GPL.
 	<para>
 	Note: if you just want your box to act as an SMB *server* and make
 	files and printing services available to Windows clients (which need
-	to have a TCP/IP stack), you don't need to say Y here; you can use
+	to have a TCP/IP stack), you don't need to say yes here; you can use
 	the program SAMBA (available from ftp://ftp.samba.org/pub/samba/)
 	for that.
 	</para>
@@ -4320,7 +4288,7 @@ developers and released under the GPL.
 	cifs if running only a (Samba) server. It is possible to enable both
 	smbfs and cifs (e.g. if you are using CIFS for accessing Windows 2003
 	and Samba 3 servers, and smbfs for accessing old servers). If you need 
-	to mount to Samba or Windows from this machine, say Y.
+	to mount to Samba or Windows from this machine, say yes.
 	</para>
 
 </refsect1>
@@ -4338,7 +4306,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here to enable the extended profiling support mechanisms used
+	Say yes here to enable the extended profiling support mechanisms used
 	by profilers such as OProfile.
 	</para>
 
@@ -4381,7 +4349,6 @@ developers and released under the GPL.
 	execute a callback function.  register_kprobe() establishes
 	a probepoint and specifies the callback.  Kprobes is useful
 	for kernel debugging, non-intrusive instrumentation and testing.
-	If in doubt, say "N".
 	</para>
 
 </refsect1>
@@ -4420,15 +4387,16 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say Y here, you will have some control over the system even
+	If you say yes here, you will have some control over the system even
 	if the system crashes for example during kernel debugging (e.g., you
 	will be able to flush the buffer cache to disk, reboot the system
 	immediately or dump some status information). This is accomplished
 	by pressing various keys while holding SysRq (Alt+PrintScreen). It
 	also works on a serial console (on PC hardware at least), if you
 	send a BREAK and then within 5 seconds a command keypress. The
-	keys are documented in <filename>Documentation/sysrq.txt</filename>. Don't say Y
-	unless you really know what this hack does.
+	keys are documented in
+	<filename>Documentation/sysrq.txt</filename>. Don't say yes unless
+	you really know what this hack does.
 	</para>
 
 </refsect1>
@@ -4445,7 +4413,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say Y here if you are developing drivers or trying to debug and
+	Say yes here if you are developing drivers or trying to debug and
 	identify kernel problems.
 	</para>
 
