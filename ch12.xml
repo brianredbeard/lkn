@@ -155,25 +155,154 @@ These options allow the kernel to be configured in a wide range of different way
 <sect1>
 <title>Build options</title>
 <para>
-<screen>
-  all		  - Build all targets marked with [*]
-* vmlinux	  - Build the bare kernel
-* modules	  - Build all modules
-  modules_install - Install all modules to INSTALL_MOD_PATH (default: /)
-  dir/            - Build all files in dir and below
-  dir/file.[ois]  - Build specified target only
-  dir/file.ko     - Build module including final link
-  rpm		  - Build a kernel as an RPM package
-  tags/TAGS	  - Generate tags file for editors
-  cscope	  - Generate cscope index
-
-  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build
-  make O=dir [targets] Locate all output files in "dir", including .config
-  make C=1   [targets] Check all c source with $CHECK (sparse)
-  make C=2   [targets] Force check of all c source with $CHECK (sparse)
-
-</screen>
+These options build the kernel itself in a variety of different ways.
 </para>
+
+<table id="lkn-ch12-table-build">
+  <title>Build options</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>all</literal></para></entry>
+	<entry><para>This option builds all of the different targets needed for
+	this kernel to be able to be used.  This includes both the modules and
+	the static portion of the kernel.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>vmlinux</literal></para></entry>
+	<entry><para>This option builds just the static portion of the kernel
+	that does not include any loadable modules.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>modules</literal></para></entry>
+	<entry><para>This option builds all of the loadable kernel modules for
+	this configuration.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>modules_install</literal></para></entry>
+	<entry><para>This option installs all of the modules into the specified
+	location.  If no location is specified with the
+	<literal>INSTALL_MODULE_PATH</literal> environment variable, they are
+	installed in the default root directory of the machine.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>dir/</literal></para></entry>
+	<entry><para>This option builds all of the files in the specified
+	directory and in all subdirectories below it.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>dir/file.[ois]</literal></para></entry>
+	<entry><para>This option will build only the specified file.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>dir/file.ko</literal></para></entry>
+	<entry><para>This option will build all of the needed files and link
+	them together to form the specified module.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>rpm</literal></para></entry>
+	<entry><para>This option builds the kernel and packages it up as a RPM
+	package that can be installed.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>tags</literal></para></entry>
+	<entry><para>This option builds all of the needed tags that most common
+	editors can use while editing the source code.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>TAGS</literal></para></entry>
+	<entry><para>This option builds all of the needed tags that most common
+	editors can use while editing the source code.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>cscope</literal></para></entry>
+	<entry><para>This option builds a cscope image of the source tree for
+	the architecture that is specified fby the configuration file (not all
+	of the kernel source files.)
+	</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+
+<para>
+There are also a number of environment variables that you can pass to the make
+system that will change the way the build happens.  These can be specified for
+almost any different target option.
+</para>
+
+<table id="lkn-ch12-table-environment">
+  <title>Environment variables</title>
+  <tgroup>
+    <thead>
+      <row>
+	<entry><para>Variable</para></entry>
+	<entry><para>Value</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>V</literal></para></entry>
+	<entry><para><literal>0</literal></para></entry>
+	<entry><para>This tells the build system to run in a quiet manner, only
+	showing the file that is currently being built, and not the entire
+	command that is running in order to build that file.  This is the
+	default option for the build system
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>V</literal></para></entry>
+	<entry><para><literal>1</literal></para></entry>
+	<entry><para>This tells the build system to operate in a verbose way,
+	showing the full command that is being used to generate each of the
+	specific files.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>O</literal></para></entry>
+	<entry><para><literal>dir</literal></para></entry>
+	<entry><para>This tells the build system to locate all output files in
+	the <literal>dir</literal> directory, including the kernel
+	configuration files.  This allows the kernel to be built from a
+	read-only filesystem and have the output placed in another location
+	away from the source files.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>C</literal></para></entry>
+	<entry><para><literal>1</literal></para></entry>
+	<entry><para>This checks all c files that are about to be built with
+	the <literal>sparse</literal> tool.  This tool is used to detect common
+	programming errors in the kernel source files at build time.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>C</literal></para></entry>
+	<entry><para><literal>2</literal></para></entry>
+	<entry><para>This forces all c files to be checked with the
+	<literal>sparse</literal> tool, even if they did not need to be build.
+	</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
 </sect1>
 
 <sect1>
@@ -353,10 +482,6 @@ different formats.
 Each kernel architecture has a set of specific options unique to it.  The
 32bit Intel architecture has these options available.
 </para>
-  bzdisk       - Create a boot floppy in /dev/fd0
-  fdimage      - Create a boot floppy image
-  isoimage     - Create a boot CD-ROM image
-
 <table id="lkn-ch12-table-arch">
   <title>Architecture specific options</title>
   <tgroup>
@@ -384,24 +509,30 @@ Each kernel architecture has a set of specific options unique to it.  The
       </row>
       <row>
 	<entry><para><literal>bzdisk</literal></para></entry>
-	<entry><para>This will create a boot floppy and write it out to the <literal>/dev/fd0</literal> device.
+	<entry><para>This will create a boot floppy and write it out to the
+	<literal>/dev/fd0</literal> device.
 	</para></entry>
       </row>
       <row>
 	<entry><para><literal>fdimage</literal></para></entry>
-	<entry><para>This will create a boot floppy image and place it in the 
+	<entry><para>This will create a boot floppy image and place it in the
+	file <filename>arch/i386/boot/fdimage</filename>.  The
+	<literal>mtools</literal> package must be present on your system in
+	order for this to work properly.
 	</para></entry>
       </row>
       <row>
-	<entry><para><literal></literal></para></entry>
-	<entry><para>
+	<entry><para><literal>isoimage</literal></para></entry>
+	<entry><para>This will create a CDROM boot image and place it in the
+	file <filename>arch/i396/boot/image.iso</filename>.  The
+	<literal>syslinux</literal> package must be present on your system in
+	order for this to work properly.
 	</para></entry>
       </row>
     </tbody>
   </tgroup>
 </table>
 </sect1>
-
 
 </chapter>
 
