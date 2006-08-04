@@ -927,8 +927,11 @@ $ <userinput>/sbin/swapon -s | grep dev | cut -f 1 -d ' '</userinput>
 </screen>
 Use the output of the preceding command in this kernel configuration option,
 and on the kernel boot line where it specifies where the kernel should be resumed
-from.  See <xref linkend="CONFIG_SOFTWARE_SUSPEND" /> for more information
-about how to specify the resume partition and how to suspend the kernel.
+from.  After the machine has been suspended, to resume it proper, pass the
+<literal>resume=/dev/swappartition</literal> argument to the kernel command
+line to have it use the proper image.  If you do not want to have the
+suspended image restored, use the <literal>noresume</literal> kernel
+command line argument.
 </para>
 </note>
 
@@ -1011,9 +1014,7 @@ tasks need it.  But if your machine has a smaller ammount of memory, it is
 easier for Linux not to have to worry about handling the bigger areas, so
 it is benificial to tell the kernel how much memory you want it to
 support.  For a more detailed description of this option, please see
-<xref linkend="CONFIG_NOHIGHMEM" /> and the additional configuration item
-describing sparse memory at <xref linkend="CONFIG_FLATMEM_MANUAL" />.
-</para>
+<xref linkend="CONFIG_NOHIGHMEM" />.
 
 <para>
 Linux supports three different memory models for 32bit Intel processors,
@@ -1047,8 +1048,7 @@ in an indirect manner, in the hope of  handling a wide range of
 devices with relatively little code specific to each operating system.  ACPI also
 provides a facility to help suspend and resume a machine and
 control the speed of the processor and fans. If you have a laptop, it is
-recommended that you enable this option.  For more details on ACPI, refer
-to <xref linkend="CONFIG_ACPI" />.
+recommended that you enable this option.
 </para>
 
 <para>
@@ -1238,8 +1238,7 @@ devices.
 IrDA is an infrared protocol used by a number of laptops and PDAs to
 communicate very short distances.  It is prevelant on older hardware, with
 newer hardware using Bluetooth to communicate instead
-<xref linkend="bluetooth" />.  For more details about IrDA, please refer to
-<xref linkend="CONFIG_IRDA" />.
+<xref linkend="bluetooth" />.
 </para>
 
 <para>
@@ -1302,9 +1301,9 @@ Networking
 
 <para>
 Bluetooth is a wireless technology that was created to replace IrDA to talk
-between devices over a very short distance.  For more details about
-Bluetooth, and the different layers that make up the protocol, please see
-<xref linkend="CONFIG_BT" />.
+between devices over a very short distance.  It is a shortrange wireless
+technology that was designed as a replacement for cables.  It operates
+within a 10 meter radius and is commonly used in mobile phones.
 </para>
 
 <para>
@@ -1457,9 +1456,7 @@ RAID offers up the option of combining numerous disks together so that they
 look like one logical disk.  This can help in providing ways of providing
 redundancy, or speed by spreading the data across different disk platters.
 Linux supports both hardware and software RAID.  Hardware raid is handled
-by the disk controller, without any help needed from the kernel.  For more
-information about software RAID in Linux, please see 
-<xref linkend="CONFIG_BLK_DEV_MD" />.
+by the disk controller, without any help needed from the kernel.
 </para>
 
 <para>
@@ -1507,8 +1504,7 @@ different block devices to look like one logical device.  However it does
 not work on a device level like RAID, but through a block and sector mapping.
 It allows different portions of different disks to be combined together to
 look like one large block device to the user.  To do this, the kernel uses
-something called Device Mapper (DM).  For more information about the
-details of Device Mapper, please refer to <xref linkend="CONFIG_BLK_DEV_DM" />.
+something called Device Mapper (DM).
 </para>
 
 <para>
@@ -1615,8 +1611,7 @@ OCFS2 is a cluster filesystem from Oracle that works for large network
 instalations and small local systems at the same time.
 This filesystem is recommended when using large databases, such as Oracle or DB2, because
 it can be moved over time to different backing disks across the network
-quite easily as more storage is needed.  For more details about OCFS2,
-please refer to <xref linkend="CONFIG_OCFS2_FS" />.
+quite easily as more storage is needed.
 </para>
 
 <para>
@@ -1666,8 +1661,7 @@ Security options
 
 <para>
 A very popular security model is called SELinux.  This model is supported
-by a number of different Linux distributions.  For more details about this
-option, please see <xref linkend="CONFIG_SECURITY_SELINUX" />.
+by a number of different Linux distributions.
 </para>
 
 <para>
@@ -1704,8 +1698,8 @@ Security options
 
 <para>
 There are also a number of individual SELinux options that you might wish
-to enable.  Please see the help for the different items for more
-descriptions on what they do in <xref linkend="CONFIG_SECURITY_SELINUX" />.
+to enable.  Please see the help for the individual different items for more
+descriptions on what they do in.
 <screen>
 Security options
     [*] Enable different security models
