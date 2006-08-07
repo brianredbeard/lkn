@@ -44,7 +44,7 @@ files you've changed.
 
 <table id="lkn-ch12-table-cleaning">
   <title>Cleaning options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
@@ -82,7 +82,7 @@ These options allow the kernel to be configured in a wide range of different way
 
 <table id="lkn-ch12-table-configuring">
   <title> Configuring options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
@@ -160,7 +160,7 @@ These options build the kernel itself in a variety of different ways.
 
 <table id="lkn-ch12-table-build">
   <title>Build options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
@@ -249,7 +249,7 @@ almost any different target option.
 
 <table id="lkn-ch12-table-environment">
   <title>Environment variables</title>
-  <tgroup>
+  <tgroup cols="3">
     <thead>
       <row>
 	<entry><para>Variable</para></entry>
@@ -315,7 +315,7 @@ version of the kernel being built.
 
 <table id="lkn-ch12-table-informational">
   <title>Informational options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
@@ -354,7 +354,7 @@ not.
 
 <table id="lkn-ch12-table-analyser">
   <title>Informational options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
@@ -386,7 +386,7 @@ installed to a wide range of different machines.
 
 <table id="lkn-ch12-table-packaging">
   <title>Packaging options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
@@ -438,7 +438,7 @@ different formats.
 
 <table id="lkn-ch12-table-documentation">
   <title>Informational options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
@@ -484,7 +484,7 @@ Each kernel architecture has a set of specific options unique to it.  The
 </para>
 <table id="lkn-ch12-table-arch">
   <title>Architecture specific options</title>
-  <tgroup>
+  <tgroup cols="2">
     <thead>
       <row>
 	<entry><para>Option</para></entry>
