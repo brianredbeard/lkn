@@ -4,11 +4,10 @@ Requirements for building a kernel
 </title>
 
 <simplesect>
+
 <para>
 This chapter will describe all of the different programs that are necessary for you to be able to build a kernel, and boot it, successfully.
 </para>
-</simplesect>
-
 <!--
 
 o  Gnu C                  3.2                     # gcc - -version
@@ -31,6 +30,8 @@ o  oprofile               0.9                     # oprofiled - -version
 o  udev                   071                     # udevinfo -V
 
 -->
+
+</simplesect>
 
 <sect1>
 <title>Tools to build the kernel</title>
