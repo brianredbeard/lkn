@@ -43,6 +43,13 @@ bookhtml:
 	db2h $(BOOK_SRC)
 
 
+# check one file:
+#	xmllint --dtdvalid "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" --noout ch09.xml
+# check whole book:
+#	xmllint --xinclude  --postvalid --noout test_book.xml
+
+
+
 VERSION=$(shell date "+%Y_%m_%d"| awk '{print $$1}')
 
 RELEASE_NAME=$(BOOK_NAME)-$(VERSION)
