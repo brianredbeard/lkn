@@ -6,10 +6,12 @@ Creating useful bugreports
 
 <sect1>
 <title>decoding a oops message</title>
+<para></para>
 </sect1>
 
 <sect1>
 <title>what a kernel developer wants to see in a bug report.</title>
+<para></para>
 </sect1>
 
 <sect1>
@@ -17,10 +19,12 @@ Creating useful bugreports
 
 <sect2>
 <title>email</title>
+<para></para>
 </sect2>
 
 <sect2>
 <title>bugzilla.kernel.org</title>
+<para></para>
 </sect2>
 
 </sect1>
