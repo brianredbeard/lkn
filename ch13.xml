@@ -271,7 +271,7 @@ developers and released under the GPL.
 	<filename>Documentation/i386/IO-APIC.txt</filename>,
 	<filename>Documentation/nmi_watchdog.txt</filename> and the
 	<filename>SMP-HOWTO</filename> available at
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 </refsect1>
@@ -918,11 +918,11 @@ developers and released under the GPL.
 	Power Management is most important for battery powered laptop
 	computers; if you have a laptop, check out the Linux Laptop home
 	page on the internet at
-	<systemitem class="url">http://www.linux-on-laptops.com/</systemitem> or
+	<systemitem role="url">http://www.linux-on-laptops.com/</systemitem> or
 	Tuxmobil - Linux on Mobile Computers at
-	<systemitem class="url">http://www.tuxmobil.org/</systemitem>
+	<systemitem role="url">http://www.tuxmobil.org/</systemitem>
 	and the Battery Powered Linux mini-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -998,19 +998,19 @@ developers and released under the GPL.
 	The ACPI SourceForge project contains the latest source code,
 	documentation, tools, mailing list subscription, and other information.
 	This project is available at:
-	<systemitem class="url">http://sourceforge.net/projects/acpi</systemitem>
+	<systemitem role="url">http://sourceforge.net/projects/acpi</systemitem>
 	</para>
 
 	<para>
 	Linux support for ACPI is based on Intel Corporation's ACPI Component
 	Architecture (ACPI CA).  For more information see:
-	<systemitem class="url">http://developer.intel.com/technology/iapc/acpi</systemitem>
+	<systemitem role="url">http://developer.intel.com/technology/iapc/acpi</systemitem>
 	</para>
 
 	<para>
 	ACPI is an open industry specification co-developed by Compaq, Intel,
 	Microsoft, Phoenix, and Toshiba.  The specification is available at:
-	<systemitem class="url">http://www.acpi.info</systemitem>
+	<systemitem role="url">http://www.acpi.info</systemitem>
 	</para>
 
 </refsect1>
@@ -1117,7 +1117,7 @@ developers and released under the GPL.
 	Enable this cpufreq governor when you either want to set the CPU
 	frequency manually or when an userspace program shall be able to set
 	the CPU dynamically, like on LART
-	<systemitem class="url">http://www.lartmaker.nl/</systemitem>.
+	<systemitem role="url">http://www.lartmaker.nl/</systemitem>.
 	</para>
 
 	<para>
@@ -1301,7 +1301,7 @@ developers and released under the GPL.
 	<para>
 	For a general introduction to Linux networking, it is highly
 	recommended to read the NET-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 </refsect1>
@@ -1345,7 +1345,7 @@ developers and released under the GPL.
 	<para>
 	For an excellent introduction to Linux networking, please read the
 	Linux Networking HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 </refsect1>
@@ -1512,9 +1512,9 @@ developers and released under the GPL.
 	<para>
 	To administer these schedulers, you'll need the user-level utilities
 	from the package iproute2+tc at
-	<systemitem class="url">ftp://ftp.tux.org/pub/net/ip-routing/</systemitem>.
+	<systemitem role="url">ftp://ftp.tux.org/pub/net/ip-routing/</systemitem>.
 	That package also contains some documentation; for more, check out
-	<systemitem class="url">http://linux-net.osdl.org/index.php/Iproute2</systemitem>.
+	<systemitem role="url">http://linux-net.osdl.org/index.php/Iproute2</systemitem>.
 	</para>
 
 	<para>
@@ -1522,7 +1522,7 @@ developers and released under the GPL.
 	Differentiated Services (diffserv) and Resource Reservation
 	Protocol (RSVP) on your Linux router if you also say yes to the
 	corresponding classifiers.  Documentation and software is at
-	<systemitem class="url">http://diffserv.sourceforge.net/</systemitem>.
+	<systemitem role="url">http://diffserv.sourceforge.net/</systemitem>.
 	</para>
 
 </refsect1>
@@ -1547,13 +1547,13 @@ developers and released under the GPL.
 	some user-space utilities like irattach.  For more information, see
 	the file <filename>Documentation/networking/irda.txt</filename>.
 	You also want to read the IR-HOWTO, available at
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
 	If you want to exchange bits of data (vCal, vCard) with a PDA, you
 	will need to install some OBEX application, such as OpenObex:
-	<systemitem class="url">http://sourceforge.net/projects/openobex/</systemitem>
+	<systemitem role="url">http://sourceforge.net/projects/openobex/</systemitem>
 	</para>
 
 </refsect1>
@@ -1652,7 +1652,7 @@ developers and released under the GPL.
 	technologies like IrDA.  Bluetooth operates in personal area range that
 	typically extends up to 10 meters.  More information about Bluetooth
 	can be found at
-	<systemitem class="url">http://www.bluetooth.com/</systemitem>.
+	<systemitem role="url">http://www.bluetooth.com/</systemitem>.
 	</para>
 
 	<para>
@@ -1672,7 +1672,7 @@ developers and released under the GPL.
 	utilities like hciconfig and hcid.  These utilities and updates to
 	Bluetooth kernel modules are provided in the BlueZ packages.
 	For more information, see
-	<systemitem class="url">http://www.bluez.org/</systemitem>.
+	<systemitem role="url">http://www.bluez.org/</systemitem>.
 	</para>
 
 </refsect1>
@@ -1732,7 +1732,7 @@ developers and released under the GPL.
 
 	<para>
 	For extensive information about drivers for many devices attaching
-	to the parallel port see <systemitem class="url">http://www.torque.net/linux-pp.html</systemitem>.
+	to the parallel port see <systemitem role="url">http://www.torque.net/linux-pp.html</systemitem>.
 	</para>
 
 	<para>
@@ -1898,13 +1898,13 @@ developers and released under the GPL.
 	topics, is contained in <filename>Documentation/ide.txt</filename>. For detailed
 	information about hard drives, consult the Disk-HOWTO and the
 	Multi-Disk-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
 	To fine-tune ATA/IDE drive/interface parameters for improved
 	performance, look for the hdparm package at
-	<systemitem class="url">ftp://ibiblio.org/pub/Linux/system/hardware/</systemitem>.
+	<systemitem role="url">ftp://ibiblio.org/pub/Linux/system/hardware/</systemitem>.
 	</para>
 
 	<para>
@@ -1975,7 +1975,7 @@ developers and released under the GPL.
 	<para>
 	Note that older versions of LILO (LInux LOader) cannot properly deal
 	with IDE/ATAPI CD-ROMs, so install LILO 16 or higher, available from
-	<systemitem class="url">http://lilo.go.dyndns.org/</systemitem>.
+	<systemitem role="url">http://lilo.go.dyndns.org/</systemitem>.
 	</para>
 
 </refsect1>
@@ -1998,7 +1998,7 @@ developers and released under the GPL.
 	The LS-120 and the IDE/ATAPI Iomega ZIP drive are also supported by
 	this driver. For information about jumper settings and the question
 	of when a ZIP drive uses a partition table, see
-	<systemitem class="url">http://www.win.tue.nl/~aeb/linux/zip/zip-1.html</systemitem>.
+	<systemitem role="url">http://www.win.tue.nl/~aeb/linux/zip/zip-1.html</systemitem>.
 	(ATAPI PD-CD/CDR drives are not supported by this driver; support
 	for PD-CD/CDR drives is available if you answer yes to
 	<literal>SCSI emulation support</literal>).
@@ -2057,7 +2057,7 @@ developers and released under the GPL.
 	USB storage or the SCSI or parallel port version of
 	the IOMEGA ZIP drive, say yes and read the SCSI-HOWTO,
 	the Disk-HOWTO and the Multi-Disk-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	This is NOT for SCSI CD-ROMs.
 	</para>
 
@@ -2081,7 +2081,7 @@ developers and released under the GPL.
 	<para>
 	If you want to use a SCSI tape drive under Linux, say yes and read the
 	SCSI-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>, and
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>, and
 	<filename>Documentation/scsi/st.txt</filename> in the kernel source.  This is NOT
 	for SCSI CD-ROMs.
 	</para>
@@ -2105,10 +2105,10 @@ developers and released under the GPL.
 	tape drives (ADR-x0) that supports the standard SCSI-2 commands for
 	tapes (QIC-157) and can be driven by the standard driver st.
 	For more information, you may have a look at the SCSI-HOWTO
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>  and
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>  and
 	<filename>Documentation/scsi/osst.txt</filename> in the kernel source.
 	More info on the OnStream driver may be found on
-	<systemitem class="url">http://linux1.onstream.nl/test/</systemitem>
+	<systemitem role="url">http://linux1.onstream.nl/test/</systemitem>
 	Please also have a look at the standard st docu, as most of it
 	applies to osst as well.
 	</para>
@@ -2126,7 +2126,7 @@ developers and released under the GPL.
 	<para>
 	If you want to use a SCSI or FireWire CD-ROM under Linux,
 	say yes and read the SCSI-HOWTO and the CDROM-HOWTO at
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	Also make sure to enable the <literal>ISO 9660 CD-ROM file system
 	support</literal> option.
 	</para>
@@ -2151,13 +2151,13 @@ developers and released under the GPL.
 
 	<para>
 	For scanners, look at SANE
-	<systemitem class="url">http://www.mostang.com/sane/</systemitem>.
+	<systemitem role="url">http://www.mostang.com/sane/</systemitem>.
 	For CD writer software look at Cdrtools
-	<systemitem class="url">http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html</systemitem>
+	<systemitem role="url">http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html</systemitem>
 	and for burning a "disk at once": CDRDAO
-	<systemitem class="url">http://cdrdao.sourceforge.net/</systemitem>.
+	<systemitem role="url">http://cdrdao.sourceforge.net/</systemitem>.
 	Cdparanoia is a high quality digital reader of audio CDs
-	<systemitem class="url">http://www.xiph.org/paranoia/</systemitem>.
+	<systemitem role="url">http://www.xiph.org/paranoia/</systemitem>.
 	For other devices, it's possible that you'll have to write the
 	driver software yourself. Please read the file
 	<filename>Documentation/scsi/scsi-generic.txt</filename> for more information.
@@ -2258,7 +2258,7 @@ developers and released under the GPL.
 	<para>
 	More information about Software RAID on Linux is contained in the
 	Software RAID mini-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	There you will also learn where to get the supporting user space
 	utilities raidtools.
 	</para>
@@ -2361,7 +2361,7 @@ developers and released under the GPL.
 	<para>
 	See also "The Linux Network Administrator's Guide" by Olaf Kirch and
 	Terry Dawson. Available at
-	<systemitem class="url">http://www.tldp.org/guides.html</systemitem>.
+	<systemitem role="url">http://www.tldp.org/guides.html</systemitem>.
 	</para>
 
 </refsect1>
@@ -2395,7 +2395,7 @@ developers and released under the GPL.
 	If your Linux machine will be connected to an Ethernet and you have
 	an Ethernet network interface card (NIC) installed in your computer,
 	say yes here and read the Ethernet-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	You will then also have to say yes to the driver for your
 	particular NIC.
 	</para>
@@ -2433,7 +2433,7 @@ developers and released under the GPL.
 	driver (or Linux). If you wish to use Wireless Extensions with
 	wireless PCMCIA (PC-) cards, you need to say yes here; you can fetch
 	the tools from
-	<systemitem class="url">http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html</systemitem>.
+	<systemitem role="url">http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html</systemitem>.
 	</para>
 
 </refsect1>
@@ -2457,7 +2457,7 @@ developers and released under the GPL.
 	<para>
 	To use PPP, you need an additional program called pppd as described
 	in the PPP-HOWTO, available at
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	Make sure that you have the version of pppd recommended in
 	<filename>Documentation/Changes</filename>.  The PPP option
 	enlarges your kernel by about 16 KB.
@@ -2492,7 +2492,7 @@ developers and released under the GPL.
 	This driver requires the latest version of pppd from the CVS
 	repository at cvs.samba.org.  Alternatively, see the
 	RoaringPenguin package
-	<systemitem class="url">http://www.roaringpenguin.com/pppoe</systemitem>
+	<systemitem role="url">http://www.roaringpenguin.com/pppoe</systemitem>
 	which contains instruction on how to use this driver (under the
 	heading "Kernel mode PPPoE").
 	</para>
@@ -2517,7 +2517,7 @@ developers and released under the GPL.
 	computer is equipped with an ISDN card and both you and your service
 	provider purchased an ISDN line from the phone company.  For
 	details, read
-	<systemitem class="url">http://www.alumni.caltech.edu/~dank/isdn/</systemitem>.
+	<systemitem role="url">http://www.alumni.caltech.edu/~dank/isdn/</systemitem>.
 	</para>
 
 	<para>
@@ -2734,7 +2734,7 @@ developers and released under the GPL.
 	the module that's right for your graphics card from the list.
 	These modules provide support for synchronization, security, and
 	DMA transfers. Please see
-	<systemitem class="url">http://dri.sourceforge.net/</systemitem>
+	<systemitem role="url">http://dri.sourceforge.net/</systemitem>
 	for more details.  You should also select and configure AGP
 	(<filename>/dev/agpgart</filename>) support.
 	</para>
@@ -2845,12 +2845,12 @@ developers and released under the GPL.
 
 	<para>
 	Additional info and docs are available on the web at
-	<systemitem class="url">http://linuxtv.org</systemitem>
+	<systemitem role="url">http://linuxtv.org</systemitem>
 	</para>
 
 	<para>
 	Documentation for V4L2 is also available on the web at
-	<systemitem class="url">http://bytesex.org/v4l/</systemitem>.
+	<systemitem role="url">http://bytesex.org/v4l/</systemitem>.
 	</para>
 
 </refsect1>
@@ -2871,7 +2871,7 @@ developers and released under the GPL.
 
 	<para>
 	API specs and user tools are available from
-	<systemitem class="url">http://www.linuxtv.org/</systemitem>.
+	<systemitem role="url">http://www.linuxtv.org/</systemitem>.
 	</para>
 
 </refsect1>
@@ -2905,7 +2905,7 @@ developers and released under the GPL.
 	You need an utility program called fbset to make full use of frame
 	buffer devices. Please read <filename>Documentation/fb/framebuffer.txt</filename>
 	and the Framebuffer-HOWTO at
-	<systemitem class="url">http://www.tahallah.demon.co.uk/programming/prog.html</systemitem> for more
+	<systemitem role="url">http://www.tahallah.demon.co.uk/programming/prog.html</systemitem> for more
 	information.
 	</para>
 
@@ -2941,7 +2941,7 @@ developers and released under the GPL.
 	<para>
 	The program SVGATextMode can be used to utilize SVGA video cards to
 	their full potential in text mode. Download it from
-	<systemitem class="url">ftp://ibiblio.org/pub/Linux/utils/console/</systemitem>.
+	<systemitem role="url">ftp://ibiblio.org/pub/Linux/utils/console/</systemitem>.
 	</para>
 
 </refsect1>
@@ -2980,7 +2980,7 @@ developers and released under the GPL.
 
 	<para>
 	You want to read the Sound-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>. General information about
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>. General information about
 	the modular sound system is contained in the files
 	<filename>Documentation/sound/oss/Introduction</filename>.  The file
 	<filename>Documentation/sound/oss/README.OSS</filename> contains some slightly
@@ -2991,7 +2991,7 @@ developers and released under the GPL.
 	<para>
 	If you have a PnP sound card and you want to configure it at boot
 	time using the ISA PnP tools (read
-	<systemitem class="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>),
+	<systemitem role="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>),
 	then you need to compile the sound card support as a module and load
 	that module after the PnP configuration is finished.  To do this
 	properly, read
@@ -3003,7 +3003,7 @@ developers and released under the GPL.
 	say more than an occasional beep, by programming the PC speaker.
 	Kernel patches and supporting utilities to do that are in the pcsp
 	package, available at
-	<systemitem class="url">ftp://ftp.infradead.org/pub/pcsp/</systemitem>.
+	<systemitem role="url">ftp://ftp.infradead.org/pub/pcsp/</systemitem>.
 	</para>
 
 </refsect1>
@@ -3022,7 +3022,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	For more information, see <systemitem class="url">http://www.alsa-project.org/</systemitem>
+	For more information, see <systemitem role="url">http://www.alsa-project.org/</systemitem>
 	</para>
 
 </refsect1>
@@ -3260,7 +3260,7 @@ developers and released under the GPL.
 
 	<para>
 	For more information, see
-	<systemitem class="url">http://www.linux-usb.org/gadget</systemitem>
+	<systemitem role="url">http://www.linux-usb.org/gadget</systemitem>
 	and the kernel DocBook documentation for this API.
 	</para>
 
@@ -3319,9 +3319,9 @@ developers and released under the GPL.
 	<para>
 	If this code is reporting problems on your system, please
 	see the EDAC project web pages for more information at:
-	<systemitem class="url">http://bluesmoke.sourceforge.net/</systemitem>
+	<systemitem role="url">http://bluesmoke.sourceforge.net/</systemitem>
 	and:
-	<systemitem class="url">http://buttersideup.com/edacwiki</systemitem>
+	<systemitem role="url">http://buttersideup.com/edacwiki</systemitem>
 	</para>
 
 </refsect1>
@@ -3385,7 +3385,7 @@ developers and released under the GPL.
 	(<userinput>man	chattr</userinput>).  You need to be using
 	<literal>e2fsprogs</literal> version 1.20 or later in order to
 	create ext3 journals (available at
-	<systemitem class="url">http://sourceforge.net/projects/e2fsprogs/</systemitem>).
+	<systemitem role="url">http://sourceforge.net/projects/e2fsprogs/</systemitem>).
 	</para>
 
 	<para>
@@ -3459,7 +3459,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Refer to the documentation at <systemitem class="url">http://oss.sgi.com/projects/xfs/</systemitem>
+	Refer to the documentation at <systemitem role="url">http://oss.sgi.com/projects/xfs/</systemitem>
 	for complete details.  This implementation is on-disk compatible
 	with the IRIX version of XFS.
 	</para>
@@ -3494,9 +3494,9 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Project web page:    <systemitem class="url">http://oss.oracle.com/projects/ocfs2</systemitem>
-	Tools web page:      <systemitem class="url">http://oss.oracle.com/projects/ocfs2-tools</systemitem>
-	OCFS2 mailing lists: <systemitem class="url">http://oss.oracle.com/projects/ocfs2/mailman/</systemitem>
+	Project web page:    <systemitem role="url">http://oss.oracle.com/projects/ocfs2</systemitem>
+	Tools web page:      <systemitem role="url">http://oss.oracle.com/projects/ocfs2-tools</systemitem>
+	OCFS2 mailing lists: <systemitem role="url">http://oss.oracle.com/projects/ocfs2/mailman/</systemitem>
 	</para>
 
 </refsect1>
@@ -3541,7 +3541,7 @@ developers and released under the GPL.
 	quotas for which you don't need to run quotacheck(8) after an unclean
 	shutdown.
 	For further details, read the Quota mini-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>,
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>,
 	or the documentation provided with the quota tools. Probably the
 	quota support is only useful for multi user systems.
 	</para>
@@ -3600,7 +3600,7 @@ developers and released under the GPL.
 	<para>
 	There's also companion library: libfuse.  This library along with
 	utilities is available from the FUSE homepage:
-	<systemitem class="url">http://fuse.sourceforge.net/</systemitem>
+	<systemitem role="url">http://fuse.sourceforge.net/</systemitem>
 	</para>
 
 	<para>
@@ -3633,7 +3633,7 @@ developers and released under the GPL.
 	underlying transport protocol, and not NetBEUI.  For details, read
 	<filename>Documentation/filesystems/smbfs.txt</filename> and the
 	SMB-HOWTO, available from
-	<systemitem class="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
@@ -3641,14 +3641,14 @@ developers and released under the GPL.
 	files and printing services available to Windows clients (which
 	need to have a TCP/IP stack), you don't need to say yes here; you
 	can use the program SAMBA (available from
-	<systemitem class="url">ftp://ftp.samba.org/pub/samba/</systemitem>)
+	<systemitem role="url">ftp://ftp.samba.org/pub/samba/</systemitem>)
 	for that.
 	</para>
 
 	<para>
 	General information about how to connect Linux, Windows machines
 	and Macs is at
-	<systemitem class="url">http://www.eats.com/linux_mac_win.html</systemitem>.
+	<systemitem role="url">http://www.eats.com/linux_mac_win.html</systemitem>.
 	</para>
 
 </refsect1>
@@ -3842,7 +3842,7 @@ developers and released under the GPL.
 	You will also need a policy configuration and a labeled filesystem.
 	You can obtain the policy compiler (checkpolicy), the utility for
 	labeling filesystems (setfiles), and an example policy configuration
-	from <systemitem class="url">http://www.nsa.gov/selinux/</systemitem>.
+	from <systemitem role="url">http://www.nsa.gov/selinux/</systemitem>.
 	</para>
 
 </refsect1>
