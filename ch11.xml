@@ -1,9 +1,7 @@
+<!--<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">-->
 <chapter id="LKN-command-line">
 
-<title>
-Kernel boot command line reference
-</title>
-
+<title>Kernel boot command line reference
 <footnote>
 <para>
 The majority of this chapter is based on the in-kernel documentation for the
@@ -11,8 +9,8 @@ different kernel boot command line reference options, which were written by the
 kernel developers and released under the GPL.
 </para>
 </footnote>
+</title>
 
-<simplesect>
 
 <para>
 The kernel has a wide variety of different command line options that are
@@ -62,21 +60,19 @@ hardware.
 Note that all of these paramaters are case sensitive.
 </para>
 
-</simplesect>
 
-<!--
 <sect1>
 <title>Example options</title>
 
-<nutlist longestterm="unseten">
+<reflist longestterm="unseten">
 
 
-<nutentry>
+<refentry>
 	<term>nousb</term>
-<nutsynopsis>
+<refsynopsis>
 	Disable the USB subsystem
-</nutsynopsis>
-<nutentrybody>
+</refsynopsis>
+<refsect1>
 	<para>
 	requires
 	<literal>USB</literal>
@@ -87,15 +83,15 @@ Note that all of these paramaters are case sensitive.
 	initialized.
 	</para>
 
-</nutentrybody>
-</nutentry>
+</refsect1>
+</refentry>
 
-<nutentry>
+<refentry>
 	<term>mem</term>
-<nutsynopsis>
+<refsynopsis>
 	<literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
-</nutsynopsis>
-<nutentrybody>
+</refsynopsis>
+<refsect1>
 	<para>
 	Force a specified amount of memory to be used by the
 	kernel. <emphasis>nn</emphasis> is measured in units of... [Is
@@ -103,14 +99,13 @@ Note that all of these paramaters are case sensitive.
 	</para>
 
 
-</nutentrybody>
-</nutentry>
+</refsect1>
+</refentry>
 
 
-</nutlist>
+</reflist>
 
 </sect1>
--->
 
 <sect1>
 <title>Options not requiring hardware</title>
@@ -922,29 +917,8 @@ you have present in the system.
 </para>
 
 
-<nutlist>
-
-<nutentry>
-	<term>nousb</term>
-<nutsynopsis>
-	Disable the USB subsystem
-</nutsynopsis>
-<nutentrybody>
-	<para>
-	requires
-	<literal>USB</literal>
-	</para>
-
-	<para>
-	If this command line option is present, the USB subsystem will not be
-	initialized.
-	</para>
-
-</nutentrybody>
-</nutentry>
 
 
-</nutlist>
 
 <screen>
 nousb
@@ -989,6 +963,21 @@ nr_uarts=
 
 
 </screen>
+<refentry>
+  <refnamediv>
+    <refname>nousb</refname>
+    <refpurpose>Disable the USB subsystem</refpurpose>
+  </refnamediv>  
+<refsect1>
+	<title>requires <literal>USB</literal></title>
+
+	<para>
+	If this command line option is present, the USB subsystem will not be
+	initialized.
+	</para>
+
+</refsect1>
+</refentry>
 </sect1>
 
 
@@ -1025,4 +1014,3 @@ clocksource=
 </sect1>
 </chapter>
 <!-- vim: set ai tw=72 : -->
-
