@@ -293,7 +293,9 @@ found at
 <para>
 As of the 2.6.18 kernel release, the oldest version of
 <literal>e2fsprogs</literal> that will work properly with the kernel is the
-1.29 release.
+1.29 release, but it is highly recommended that you use the newest version
+in order to take advantage of newer features in the ext3 and ext4
+filesystems.
 </para>
 
 <para>
@@ -307,22 +309,139 @@ $ <userinput>tune2fs</userinput>
 
 <sect3>
 <title>jfs</title>
-<para></para>
+<para>
+To use the jfs filesystem from IBM, the <literal>jfsutils</literal> pacakge
+must be installed.
+If you wish to download and install the this package yourself, it can be
+found at
+<systemitem role="url">http://jfs.sourceforge.net/</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>jfsutils</literal> that will work properly with the kernel is the
+1.1.3 release.
+</para>
+
+<para>
+To determine what version of <literal>jfsutils</literal> you have
+installed on your system, run the following command:
+<screen>
+$ <userinput>fsck.jfs -V</userinput>
+</screen>
+</para>
 </sect3>
 
 <sect3>
 <title>reiserfs</title>
-<para></para>
+<para>
+To use the reiserfs filesystem, the <literal>reiserfsprogs</literal> package
+must be installed.
+If you wish to download and install the this package yourself, it can be
+found at
+<systemitem role="url">http://www.namesys.com/download.html</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>reiserfsprogs</literal> that will work properly with the kernel is the
+3.6.3 release.
+</para>
+
+<para>
+To determine what version of <literal>reiserfsprogs</literal> you have
+installed on your system, run the following command:
+<screen>
+$ <userinput>reiserfsck -V 2>&amp;1|grep reiserfsprogs</userinput>
+</screen>
+</para>
 </sect3>
 
 <sect3>
 <title>xfs</title>
-<para></para>
+
+<para>
+To use the xfs filesystem from SGI, the <literal>xfsprogs</literal> package
+must be installed.
+If you wish to download and install the this package yourself, it can be
+found at
+<systemitem role="url">http://oss.sgi.com/projects/xfs/</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>xfsprogs</literal> that will work properly with the kernel is the
+2.6.0 release.
+</para>
+
+<para>
+To determine what version of <literal>xfsprogs</literal> you have
+installed on your system, run the following command:
+<screen>
+$ <userinput>xfs_db -V</userinput>
+</screen>
+</para>
 </sect3>
 
 <sect3>
 <title>quotas</title>
-<para></para>
+<para>
+To use the quota functionality of the kernel, you must have the
+<literal>quota-tools</literal> package installed.  This package includes
+programs that let you set quotas on users, provide statistics on the
+ammount of quota being used by different users, and set up warnings when
+people get too close to using up their availble filesystem quota.
+</para>
+
+<para>
+If you wish to download and install the this package yourself, it can be
+found at
+<systemitem role="url">http://sourceforge.net/projects/linuxquota/</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>quota-tools</literal> that will work properly with the kernel is the
+3.09 release.
+</para>
+
+<para>
+To determine what version of <literal>quota-tools</literal> you have
+installed on your system, run the following command:
+<screen>
+$ <userinput>quota -V</userinput>
+</screen>
+</para>
+</sect3>
+
+<sect3>
+<title>NFS</title>
+<para>
+To use the NFS filesystem properly, you must have the
+<literal>nfs-utils</literal> package installed.  This package includes
+programs that let you mount NFS partitions as a client, and run a NFS
+server.
+</para>
+
+<para>
+If you wish to download and install the this package yourself, it can be
+found at
+<systemitem role="url">http://nfs.sf.net/</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>quota-tools</literal> that will work properly with the kernel is the
+1.0.5 release.
+</para>
+
+<para>
+To determine what version of <literal>quota-tools</literal> you have
+installed on your system, run the following command:
+<screen>
+$ <userinput>showmount --version</userinput>
+</screen>
+</para>
 </sect3>
 
 </sect2>
@@ -331,18 +450,135 @@ $ <userinput>tune2fs</userinput>
 <title>Other tools</title>
 
 <para>
+There are a few other important programs that are closely tied to the
+kernel version.  These programs are not usually required in order for the
+kernel to work properly, but they enable access to different types of
+hardware and functions.
+</para>
+
+<sect3>
+<title><literal>udev</literal></title>
+
+<para>
+<literal>udev</literal> is a program that enables Linux to provide a
+persistant device naming system in the <filename>/dev</filename> directory.
+It also provides a dynamic <filename>/dev</filename> much like the older
+(and now removed) <literal>devfs</literal> filesystem used to provide.
+Almost all Linux distributions use <literal>udev</literal> to manage the
+<filename>/dev</filename> directory, so it is required in order to properly
+boot the machine.
+</para>
+
+<para>
+Unfortunatly, <literal>udev</literal> relies on the structure of
+<filename>/sys</filename>, which has been known to change from time to time
+with kernel releases.  Some of these changes in the past have been known to
+break <literal>udev</literal>, so that your machine will not boot properly.
+If you have the latest version of <literal>udev</literal> that the kernel
+recommends installed, and have problems with it working properly, please
+contact the <literal>udev</literal> developers on the mailing list
+available at
+<systemitem role="url">linux-hotplug-devel@lists.sourceforge.net</systemitem>
+</para>
+
+<para>
+It is highly recommended that you use the version of
+<literal>udev</literal> that comes with your Linux distribution, as it is
+tied into the distibution specific boot process very tightly.  But, if you
+wish to upgrade <literal>udev</literal> on your own, it can be found at
+<systemitem role="url">http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>udev</literal> that will work properly with the kernel is the
+081 release.  It is recommended that you use the latest version of udev, as
+it will work better with newer kernels, due to some of the changes involved
+in how udev and the kernel communicate.
+</para>
+
+<para>
+To determine what version of <literal>udev</literal> you have
+installed on your system, run the following command:
 <screen>
-pcmciautils
-pcmcia-cs
-quota-tools
-PPP
-isdn4k-utils
-nfs-utils
-procps
-oprofile
-udev
+$ <userinput>udevinfo -V</userinput>
 </screen>
 </para>
+</sect3>
+
+<sect3>
+<title>Process tools</title>
+
+<para>
+The package <literal>procps</literal> includes the commonly used tools
+<literal>ps</literal> and <literal>top</literal>, as well as many other
+handy tools to manage and monitor processes that are running in the system.
+</para>
+
+<para>
+If you wish to download and install the this package yourself, it can be
+found at
+<systemitem role="url">http://procps.sourceforge.net/</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>procps</literal> that will work properly with the kernel is the
+3.2.0 release.
+</para>
+
+<para>
+To determine what version of <literal>procps</literal> you have
+installed on your system, run the following command:
+<screen>
+$ <userinput>ps --version</userinput>
+</screen>
+</para>
+</sect3>
+
+<sect3>
+<title>PCMCIA tools</title>
+
+<para>
+In order to properly use PCMCIA devices with Linux, a helper userspace
+program must be used to set up the devices.  For older kernel versions,
+this program was called <literal>pcmcia-cs</literal>, but that has been
+replaced with a much simpler system called <literal>pcmciautils</literal>.
+If you wish to use PCMCIA devices, you must have this package installed for
+them to work properly.
+</para>
+
+<para>
+If you wish to download and install the this package yourself, it can be
+found at
+<systemitem role="url">ftp://ftp.kernel.org/pub/linux/utils/kernel/pcmcia/</systemitem>
+</para>
+
+<para>
+As of the 2.6.18 kernel release, the oldest version of
+<literal>pcmciautils</literal> that will work properly with the kernel is the
+004 release.  But the latest version is recommended to be installed in
+order to take advantage of newer features in the PCMCIA subsystem, such as
+automatic driver loading when new devices are found.
+</para>
+
+<para>
+To determine what version of <literal>procps</literal> you have
+installed on your system, run the following command:
+<screen>
+$ <userinput>FIXME!!!</userinput>
+</screen>
+</para>
+</sect3>
+
+<!-- gkh: Include the other tools not mentioned:
+		PPP
+		isdn4k-utils
+		oprofile
+	  ???
+	  Personally, I think we have enough, and have hit the common
+	  things that most people would need to care about.
+-->
 </sect2>
 
 </sect1>
