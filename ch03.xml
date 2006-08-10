@@ -327,6 +327,23 @@ $ <userinput>tune2fs</userinput>
 
 </sect2>
 
+<sect2>
+<title>Other tools</title>
+
+<para>
+<screen>
+pcmciautils
+pcmcia-cs
+quota-tools
+PPP
+isdn4k-utils
+nfs-utils
+procps
+oprofile
+udev
+</screen>
+</para>
+</sect2>
 
 </sect1>
 
