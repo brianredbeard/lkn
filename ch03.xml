@@ -566,7 +566,7 @@ automatic driver loading when new devices are found.
 To determine what version of <literal>procps</literal> you have
 installed on your system, run the following command:
 <screen>
-$ <userinput>FIXME!!!</userinput>
+$ <userinput>pccardctl -V</userinput>
 </screen>
 </para>
 </sect3>
