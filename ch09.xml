@@ -210,7 +210,7 @@ $ <userinput>/usr/sbin/lspci | grep IDE</userinput>
 00:1f.1 IDE interface: Intel Corporation 82801EB/ER (ICH5/ICH5R) IDE Controller (rev 02)
 00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
 </screen>
-Note that your response will probably not match identically; all that is
+Note that your response will probably not be identical; all that is
 important is that the command shows some an IDE Controller (the first
 <!--
 
@@ -225,7 +225,7 @@ see <xref linkend="lkn_sata" />.
 <para>
 Enable PCI support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
     [*] PCI Support
 </screen>
 
@@ -252,9 +252,9 @@ Device Drivers
         [*]     PCI IDE chipset support
 </screen>
 
-This opens up a wide submenu of the different IDE controller types.  Select
-the proper one based on the name of the device you found in the original
-step.
+This opens up a lengthy submenu of the different IDE controller types.
+Select the proper one based on the name of the device you found in the
+original step.
 </para>
 
 </sect2>
@@ -270,7 +270,7 @@ following command:
 $ <userinput>/usr/sbin/lspci | grep SATA</userinput>
 00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
 </screen>
-Note that your response will probably not match identically; all that is
+Note that your response will probably not be identical; all that is
 important is that the command shows some SATA devices.
 </para>
 
@@ -281,7 +281,7 @@ to the block layer, so many different kernel options need to be enabled
 in order for SATA disks to work properly.
 Enable PCI support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 </screen>
 
@@ -331,8 +331,8 @@ Device Drivers
 <para>
 Burning a CD-ROM is very simple on Linux.  If your kernel can support
 reading from a CD-ROM, it can also support burning a CD-ROM.  There are
-two different ways to enable CD-ROM support in Linux, one for IDE
-drives and one for SCSI and SATA drives.
+two ways to enable CD-ROM support in Linux, one for IDE drives and one for
+SCSI and SATA drives.
 </para>
 
 <sect3>
@@ -385,13 +385,13 @@ some of the more common types.
 <title>USB</title>
 
 <para>
-Linux supports lots of different types of USB devices.  To enable USB
+Linux supports many different types of USB devices.  To enable USB
 support, you must first enable support for a USB controller, which
 drives the USB connection on the machine.
 </para>
 
 <para>
-To determine if your machine has a USB controller present, and which type
+To determine if your machine has a USB controller, and which type
 it is, run the following command:
 <screen>
 $ <userinput>/usr/sbin/lspci | grep USB</userinput>
@@ -401,14 +401,14 @@ $ <userinput>/usr/sbin/lspci | grep USB</userinput>
 00:1d.3 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #4 (rev 02)
 00:1d.7 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB2 EHCI Controller (rev 02)
 </screen>
-Note that your response will probably not match identically; all that is
+Note that your response will probably not be identical; all that is
 important is that the command shows some USB controllers.
 </para>
 
 <para>
 Enable PCI support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 </screen>
 
@@ -493,21 +493,21 @@ high-speed bus that connects external devices, much as USB does.
   determine whether something is true. A minor nit.
 
 -->
-To determine whether your machine has a FireWire controller present, and which type
+To determine whether your machine has a FireWire controller, and which type
 is is, run the following command:
 <screen>
 $ <userinput>/usr/sbin/lspci | grep FireWire</userinput>
 06:0c.0 FireWire (IEEE 1394): Texas Instruments TSB43AB22/A IEEE-1394a-2000 Controller (PHY/Link)
 06:0d.2 FireWire (IEEE 1394): Creative Labs SB Audigy FireWire Port (rev 04)
 </screen>
-Note that your response will probably not match identically; all that's
+Note that your response will probably not be identical; all that's
 important is that the command shows some FireWire controllers.
 </para>
 
 <para>
 Enable PCI support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 </screen>
 
@@ -554,19 +554,19 @@ ExpressCard and laptop docking stations.
 </para>
 
 <para>
-To determine whether your machine has an ExpressCard controller present, look
+To determine whether your machine has an ExpressCard controller, look
 at the hardware to see whether an ExpressCard card can be plugged into it.
 </para>
 
 <para>
 Enable PCI support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 </screen>
 Enable PCI Hotplug support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 	PCI Hotplug Support
 		[M] Support for PCI Hotplug (EXPERIMENTAL)
@@ -576,7 +576,7 @@ There is a wide range of different types of PCI Hotplug controllers.
 For most laptops and for ExpressCard support, enable the ACPI
 controller:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 	PCI Hotplug Support
 		[M] Support for PCI Hotplug (EXPERIMENTAL)
@@ -585,7 +585,7 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 
 as well as the PCI Express controller:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 	[*] PCI Express Support
 	[M]   PCI Express Hotplug driver
@@ -609,20 +609,20 @@ recipe in <xref linkend="lkn_pci_hotplug" />).
 </para>
 
 <para>
-To determine whether your machine has a PCMCIA controller present, look at
+To determine whether your machine has a PCMCIA controller, look at
 the hardware to see whether a PCMCIA card can be plugged into it.
 </para>
 
 <para>
 Enable PCI support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	[*] PCI Support
 </screen>
 
 Enable PCCARD support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	PCCARD (PCMCIA/CardBus) support
 		[M] PCCard (PCMCIA/CardBus) support
 </screen>
@@ -630,7 +630,7 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 Enable both PCMCIA and CardBus support to cover the widest range of
 devices:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	PCCARD (PCMCIA/CardBus) support
 		[M] PCCard (PCMCIA/CardBus) support
 		[M]   16-bit PCMCIA support
@@ -640,7 +640,7 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 Enable the card bridge type for your laptop.  The most common one is the
 "yenta-like" controller:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
 	PCCARD (PCMCIA/CardBus) support
 		[M] PCCard (PCMCIA/CardBus) support
 		[M]   CardBus yenta-compatible bridge support
@@ -658,7 +658,7 @@ Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
 <para>
 ALSA (Advanced Linux Sound Architecture) is the current sound
 system for the Linux kernel.  An earlier sound system (OSS) has
-been depreciated, and almost all of the older drivers have been removed
+been deprecated, and almost all of the older drivers have been removed
 from the kernel source tree.
 </para>
 
@@ -670,7 +670,7 @@ $ <userinput>/usr/sbin/lspci | grep -i audio</userinput>
 00:1f.5 Multimedia audio controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) AC'97 Audio Controller (rev 02)
 06:0d.0 Multimedia audio controller: Creative Labs SB Audigy (rev 04)
 </screen>
-Note that your response will probably not match identically; all that's
+Note that your response will probably not be identical; all that's
 important is that the command shows some Audio controllers.
 </para>
 
@@ -721,8 +721,8 @@ Device Drivers
 <title>CPU</title>
 
 <para>
-If you wish to have the Linux kernel run the fastest that it can for your specific
-processor and hardware type, there are a few different options that you can
+If you wish to have the Linux kernel run as fast as possible for your specific
+processor and hardware type, there are a few options that you can
 set to get the last bit of performance out of the hardware.  This section
 will show some of the different processor-specific options that you can
 tune for your processor.
@@ -750,7 +750,7 @@ processor you are using, run the following command:
 $ <userinput>cat /proc/cpuinfo  | grep "model name"</userinput>
 model name      : Intel(R) Xeon(TM) CPU 3.20GHz
 </screen>
-Note that your response will probably not match identically; all that is
+Note that your response will probably not be identical; all that is
 important is that the command shows the model name of the processor present
 on the system.
 </para>
@@ -882,7 +882,7 @@ Processor type and features
     [*] Preempt The Big Kernel Lock
 </screen>
 This option is able to be selected only if you have already selected
-either the <literal>Preemptable Kernel</literal> or <literal>Symmetric
+either the <literal>Preemptible Kernel</literal> or <literal>Symmetric
 multi-processing support</literal> options.
 </para>
 
@@ -906,7 +906,7 @@ Power management options (ACPI, APM)
     [*] Software Suspend
 </screen>
 
-The kernel needs to know where to save off the suspended kernel image, and
+The kernel needs to know where to save the suspended kernel image to, and
 then later where to resume it from.  This location is usually a kernel swap
 partition on the disk.  To specify which partition this should be:
 <screen>
@@ -942,11 +942,11 @@ command line argument.
 <title>CPU Frequency Scaling</title>
 
 <para>
-Most modern processors can slow down the internal clock of
+Most modern processors can slow down the internal clock of the
 processor in order to conserve power and battery life.  Linux supports this
-ability and offers a wide range of different type of power "governors."
-Different governors implement different heursitcs in order to determine how
-to speed up and slow down the processor depending on the system load and
+ability and offers a variety of power "governors."
+Different governors implement different heuristics in order to determine how
+to vary the processor speed depending on the system load and
 other variables.
 </para>
 
@@ -1007,12 +1007,12 @@ Power management options (ACPI, APM)
 
 <para>
 Linux on Intel 32bit hardware can access up to 64 Gigabytes
-of memory, but the address space of the 32bit processor is only 4 Gigabytes
-big.  To work around this limitation, Linux can map the
+of memory, but the address space of the 32bit processor is only 4
+Gigabytes.  To work around this limitation, Linux can map the
 additional memory into another area and then switch to it when other
-tasks need it.  But if your machine has a smaller ammount of memory, it is
+tasks need it.  But if your machine has a smaller amount of memory, it is
 easier for Linux not to have to worry about handling the bigger areas, so
-it is benificial to tell the kernel how much memory you want it to
+it is beneficial to tell the kernel how much memory you want it to
 support.  For a more detailed description of this option, please see
 <xref linkend="CONFIG_NOHIGHMEM" />.
 </para>
@@ -1027,7 +1027,7 @@ depending on the memory available:
 <listitem><para>Greater than 4 Gigabytes of physical memory.</para></listitem>
 </itemizedlist>
 
-To select the ammount of memory:
+To select the amount of memory:
 <screen>
 Processor type and features
     High Memory Support
@@ -1137,6 +1137,7 @@ Networking
 </para>
 
 <para>
+<!-- one reviewer wanted more details here as to why we "recommend" this.  -->
 It is recommended that you enable the netfilter netlink interface and the
 Xtables support when using netlink:
 <screen>
@@ -1151,7 +1152,7 @@ Networking
 </para>
 
 <para>
-The different protocols that you wish to filter should also be enabled:
+The different protocols that you wish to filter should also be selected:
 <screen>
 Networking
     [*] Networking support
@@ -1179,8 +1180,8 @@ Networking
 
 <para>
 Linux supports a wide array of different network devices.  The
-most common one is a PCI network device, which an Ethernet cable can be
-plugged into.
+most common one is a PCI network device, into which an Ethernet cable can be
+plugged.
 To determine whether you have a PCI network device on the system, and what type
 it is, run the following command:
 <screen>
@@ -1188,14 +1189,14 @@ $ <userinput>/usr/sbin/lspci | grep Ethernet</userinput>
 03:0c.0 Ethernet controller: D-Link System Inc RTL8139 Ethernet (rev 10)
 03:0e.0 Ethernet controller: Intel Corporation 82545GM Gigabit Ethernet Controller (rev 04)
 </screen>
-Note that your response will probably not match identically; all that is
+Note that your response will probably not be identical; all that is
 important is that the command shows some PCI Ethernet devices.
 </para>
 
 <para>
 Enable PCI support for the kernel:
 <screen>
-Bus Options (PCI, PCMCIA, EISA, MCA, ISA)
+Bus options (PCI, PCMCIA, EISA, MCA, ISA)
     [*] PCI Support
 </screen>
 </para>
@@ -1224,7 +1225,7 @@ Some older ethernet devices will be found in the 10 and 100 Mbit section:
 Device Drivers
     Network device support
         [*] Network device support
-            Ethernet (10 or 100 Mbit)
+            Ethernet (10 or 100Mbit)
 </screen>
 Look through those sections to find the proper driver for your specific
 devices.
@@ -1237,8 +1238,8 @@ devices.
 
 <para>
 IrDA is an infrared protocol used by a number of laptops and PDAs to
-communicate very short distances.  It is prevelant on older hardware, with
-newer hardware using Bluetooth to communicate instead
+communicate over very short distances.  It is prevalent on older hardware,
+with newer hardware using Bluetooth to communicate instead
 <xref linkend="bluetooth" />.
 </para>
 
@@ -1318,7 +1319,7 @@ Networking
 </para>
 
 <para>
-There is two main protocol selections for Bluetooth.  Both of these should
+There are two main protocol selections for Bluetooth.  Both of these should
 be enabled in order to work with all types of Bluetooth devices:
 <screen>
 Networking
@@ -1368,7 +1369,7 @@ it is, run the following command:
 $ <userinput>/usr/sbin/lspci | grep -i wireless</userinput>
 06:05.0 Network controller: Intel Corporation PRO/Wireless 2915ABG MiniPCI Adapter (rev 05)
 </screen>
-Note that your response will probably not match identically; all that is
+Note that your response will probably not be identical; all that is
 important is that the command shows some PCI Wireless devices.
 </para>
 
@@ -1453,7 +1454,7 @@ Linux supports, and how to enable them.
 <title>RAID</title>
 
 <para>
-RAID offers up the option of combining numerous disks together so that they
+RAID offers the option of combining numerous disks together so that they
 look like one logical disk.  This can help in providing ways of providing
 redundancy, or speed by spreading the data across different disk platters.
 Linux supports both hardware and software RAID.  Hardware raid is handled
@@ -1557,7 +1558,7 @@ Device Drivers
 
 <para>
 Samba is a program that allows Linux users to access Windows machines
-natively accross the network, providing a way to share drives and devices in
+natively across the network, providing a way to share drives and devices in
 a transparent manner.  It also allows Linux to work as a Windows server,
 allowing Windows clients to connect to it thinking that it is a real
 Windows machine.
@@ -1609,7 +1610,7 @@ one should be used instead of the other, please see
 
 <para>
 OCFS2 is a cluster filesystem from Oracle that works for large network
-instalations and small local systems at the same time.
+installations and small local systems at the same time.
 This filesystem is recommended when using large databases, such as Oracle or DB2, because
 it can be moved over time to different backing disks across the network
 quite easily as more storage is needed.
@@ -1633,7 +1634,7 @@ File Systems
 <para>
 The Linux kernel provides support for different
 security models by providing hooks and letting you build in your
-choice of model.  Right now, only a few different
+choice of model.  Right now, only a few
 models come with the default kernel source tree, but developers of new
 models are working on getting more accepted.
 </para>
@@ -1834,7 +1835,7 @@ Here are a range of other good kernel configuration options that you might
 wish to enable if you want to help kernel developers debug different
 problems, or just learn more about how the kernel works by looking at the
 messages that these options print out.  Note that if you enable almost any
-of these options, the kernel will slow down a small ammount, so if you
+of these options, the kernel will slow down a small amount, so if you
 notice any decrease in performance, you might wish to disable the
 options.
 <screen>
