@@ -4,8 +4,6 @@
 
 <title>
 Kernel configuration option reference
-</title>
-
 <footnote>
 <para>
 The majority of this chapter is based on the in-kernel documentation for the
@@ -13,6 +11,7 @@ different kernel configuration options, which were written by the kernel
 developers and released under the GPL.
 </para>
 </footnote>
+</title>
 
 
 <refentry id="CONFIG_EXPERIMENTAL">
