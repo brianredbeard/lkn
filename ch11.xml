@@ -1082,45 +1082,114 @@ pci=option[,option...]
 These options specify different paramaters the SELinux subsystem can use.
 </para>
 
-<screen>
+<refentry>
+  <refnamediv>
+    <refname>checkreqprot</refname>
+    <refpurpose>Set the initial checkreqprot flag value</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>checkreqprot=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Sets the initial checkreqprot flag value.  <emphasis>0</emphasis>
+	means that the check protection will be applied by the kernel and
+	will include any implied execute protection.
+	<emphasis>1</emphasis> means that the check protection is requested
+	by the application.  The default value is set by a kernel
+	configuration option.
+	</para>
+	<para>
+	The value can be changed at runtime via the
+	<filename>/selinux/checkreqprot</filename> file.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>enforcing</refname>
+    <refpurpose>Set the initial enforcing status</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>enforcing=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Sets the initial SELinux enforcing status.  <emphasis>0</emphasis>
+	means that the enforcement will be permissive with only logging
+	issues and no denials.  <emphasis>1</emphasis> means that the
+	enforcement will be fully enabled with denying and logging.  The
+	default value is <emphasis>0</emphasis>.
+	</para>
+	<para>
+	The value can be changed at runtime via the
+	<filename>/selinux/enforce</filename> file.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>selinux</refname>
+    <refpurpose>Enable or disable SELinux at boot time</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>selinux=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This allows SELinux to be enabled or disabled to boot time.
+	<emphasis>0</emphasis> is to disable, and <emphasis>1</emphasis> is
+	to enable it.  The default value is set by a kernel configuration
+	option at boot time.
+	</para>
+	<para>
+	If SELinux is enabled at boot time, the
+	<filename>/selinux/disable</filename> file can be used later to
+	disable prior to the initial policy load.
+	</para>
+</refsect1>
+</refentry>
 
 
-checkreqprot=
-	Set the initial checkreqprot flag value.
-	Format: { "0" | "1" }
-	See security/selinux/Kconfig help text.
-	0 -- check protection applied by kernel (includes any implied execute protection).
-	1 -- check protection requested by application.
-	The default value is set via a kernel config option.
-	Value can be changed at runtime via the <filename>/selinux/checkreqprot</filename> file.
+<refentry>
+  <refnamediv>
+    <refname>selinux_compat_net</refname>
+    <refpurpose>Sets the initial <literal>selinux_compat_net</literal> value</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>selinux_compat_net=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Sets the initial value for the
+	<literal>selinux_compat_net</literal> option.
+	<emphasis>0</emphasis> means to use the new secmark-based packet
+	controls, and <emphasis>1</emphasis> means to use the legacy packet
+	controls.
+	</para>
+	<para>
+	<emphasis>0</emphasis> is the default and preferred value.  This
+	value can be changed at runtime via the
+	<filename>/selinux/compat_net</filename> file.
+	</para>
+</refsect1>
+</refentry>
 
-enforcing=
-	Set the initial enforcing status.
-	Format: {"0" | "1"}
-	See security/selinux/Kconfig help text.
-	0 -- permissive (log only, no denials).
-	1 -- enforcing (deny and log).
-	Default value is 0.
-	Value can be changed at runtime via the <filename>/selinux/enforce</filename> file.
 
-selinux=
-	Disable or enable SELinux at boot time.
-	Format: { "0" | "1" }
-	See security/selinux/Kconfig help text.
-	0 -- disable.
-	1 -- enable.
-	Default value is set via a kernel config option.
-	If enabled at boot time, the <filename>/selinux/disable</filename> file can be used later to disable prior to initial policy load.
-
-selinux_compat_net=
-	Set initial selinux_compat_net flag value.
-	Format: { "0" | "1" }
-	0 -- use new secmark-based packet controls
-	1 -- use legacy packet controls
-	Default value is 0 and is the preferred value.
-	Value can be changed at runtime via the <filename>/selinux/compat_net</filename> file.
-
-</screen>
 </sect1>
 
 <sect1>
