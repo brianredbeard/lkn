@@ -123,24 +123,27 @@ properly.
       <varlistentry>
         <term><literal>tty[n]</literal></term> <!-- <replaceable> around [n] ? -->
         <listitem><para>Use the virtual console device [n].</para></listitem>
-      </varlistentry>  
+      </varlistentry>
       <varlistentry>
         <term><literal>ttyS[n][,options]</literal></term>
         <term><literal>ttyUSB0[,options]</literal></term> <!-- can have two, hooray -->
         <listitem>
-          <para>Use the specified serial port.  The options are of
-		the form "bbbbpnf", where "bbbb" is the baud rate,
-		"p" is parity ("n", "o", or "e"), "n" is number of
-		bits, and "f" is flow control ("r" for RTS or
-		omit it).  Default is "9600n8".</para>
+          <para>
+	  Use the specified serial port.  The options are of the form
+	  "bbbbpnf", where "bbbb" is the baud rate, "p" is parity ("n",
+	  "o", or "e"), "n" is number of bits, and "f" is flow control ("r"
+	  for RTS or omit it).  Default is "9600n8".
+	  </para>
 
-		      <para>See the file
-		<filename>Documentation/serial-console.txt</filename> for more
-		information and the file
-		<filename>Documentation/networking/netconsole.txt</filename> for an
-		alternative if you do not have a serial port.</para>
+	  <para>
+	  See the file
+	  <filename>Documentation/serial-console.txt</filename> for more
+	  information on how to use a serial console.  If you wish to have
+	  access to the kernel console information and do not have a serial
+	  port, see the netconsole command line option.
+	  </para>
         </listitem>
-      </varlistentry>  
+      </varlistentry>
       <varlistentry>
         <term><literal>uart,io,[addr][,options]</literal></term>
         <term><literal>uart,mmio,[addr][,options]</literal></term>
@@ -151,8 +154,68 @@ properly.
 		options are the same as for ttyS, above.</para>
         </listitem>
       </varlistentry>
-    </variablelist>  
-  </refsect1>  
+    </variablelist>
+  </refsect1>
+</refentry>
+
+
+<refentry>
+  <refnamediv>
+    <refname>netconsole</refname>
+    <refpurpose>Output console data across the network.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>netconsole=</literal>[<emphasis>src-port</emphasis>]<literal>@</literal>[<emphasis>src-ip</emphasis>]<literal>/</literal>[<emphasis>dev</emphasis>]<literal>,</literal>[<emphasis>target-port</emphasis>]<literal>@</literal><emphasis>target-ip</emphasis><literal>/</literal>[<emphasis>target-mac-address</emphasis>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option sends kernel console data across the network using UDP
+	packets to another machine.
+	</para>
+	<para>
+	<emphasis>src-port</emphasis> is the source for the UDP packets.
+	The default value is 6665 if this is not specified.
+	</para>
+	<para>
+	<emphasis>src-ip</emphasis> is the source IP of the interface
+	address to use.
+	</para>
+	<para>
+	<emphasis>dev</emphasis>Is the network interface to use.
+	<literal>eth0</literal> would be an example of a network interface
+	name.  The network interface can also run normal network traffic,
+	the netconsole data is not intrusive and should cause no slowdowns
+	of any other network operations.
+	</para>
+	<para>
+	<emphasis>target-port</emphasis> is the port that the logging agent
+	will use.  The default value is 6666 if this is not specified.
+	</para>
+	<para>
+	<emphasis>target-ip</emphasis> is the IP address for the logging
+	agent.
+	</para>
+	<para>
+	<emphasis>target-mac-address</emphasis> is the ethernet MAC address
+	for the logging agent.
+	</para>
+	<para>
+	To listen to this data, the remote machine can use the
+	<literal>syslogd</literal> program, or run the
+	<literal>netcat</literal> program as:
+	<screen>
+	<userinput>netcat -u -l -p &lt;port&gt;</userinput>
+	</screen>
+	</para>
+	<para>
+	For some more background on how to use this option fully, please
+	see the file
+	<filename>Documentation/networking/netconsole.txt</filename>.
+	</para>
+</refsect1>
 </refentry>
 
 <refentry>
@@ -870,7 +933,7 @@ properly.
 	</para>
 </refsect1>
 </refentry>
-<!-- just to validate...
+
 <screen>
 
 migration_cost=
@@ -1055,7 +1118,6 @@ rootfstype=
 	Set root filesystem type
 
 </screen>
--->
 
 <refentry>
   <refnamediv>
