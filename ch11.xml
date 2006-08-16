@@ -62,51 +62,6 @@ Note that all of these paramaters are case sensitive.
 
 
 <sect1>
-<title>Example options</title>
-
-<!--
-<reference>  not sure this is necessary -->
-
-<refentry>
-  <refnamediv>
-    <refname>nousb</refname>
-    <refpurpose>Disable the USB subsystem</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	requires
-	<literal>USB</literal>
-	</para>
-
-	<para>
-	If this command line option is present, the USB subsystem will not be
-	initialized.
-	</para>
-
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>mem</refname>
-    <refpurpose/>  <!-- not provided -->
-  </refnamediv>
-  <refsynopsisdiv>
-    <para><literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]</para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Force a specified amount of memory to be used by the
-	kernel. <emphasis>nn</emphasis> is measured in units of... [Is
-	this one of those k, m, g-modified values?]
-	</para>
-</refsect1>
-</refentry>
-</sect1>
-
-<sect1>
 <title>Options not requiring hardware</title>
 
 <para>
@@ -569,14 +524,50 @@ mem=nn[KMG]
 mem=nopentium
 	Disable usage of 4MB pages for kernel memory.
 
-memmap=exactmap
-	Enable setting of an exact E820 memory map, as specified by the user.
-	Such memmap=exactmap lines can be constructed based on BIOS output or
-	other requirements. See the memmap=nn@ss option description.
+</screen>
 
-memmap=nn[KMG]@ss[KMG]
-	Force usage of a specific region of memory Region of memory to be used,
-	from ss to ss+nn.
+<refentry>
+  <refnamediv>
+    <refname>memmap</refname>
+    <refpurpose>Enable setting of an exact E820 memory map</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>memmap=</literal><emphasis>exactmap</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This lets the user to specify an exact memory map that the kernel
+	should use.  These <emphasis>exactmap</emphasis> lines can be
+	constructed based on BIOS output or other requirements.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>memmap</refname>
+    <refpurpose>Force specific memory to be used</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>memmap=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]<literal>@</literal><emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This forces the kernel to use a specific memory region.
+	<emphasis>nn</emphasis> is the size of the memory location and
+	<emphasis>ss</emphasis>is the start location in memory of the
+	range.
+	</para>
+</refsect1>
+</refentry>
+
+<screen>
 
 migration_cost=
 	debug: override scheduler migration costs
@@ -767,28 +758,65 @@ S
 
 time
 	Show timing data prefixed to each printk message line
-
-vdso=
-	vdso=1: enable VDSO (default)
-	vdso=0: disable VDSO mapping
-
-vga=
-	Select a particular video mode
-	See Documentation/i386/boot.txt and Documentation/svga.txt.
-	Use vga=ask for menu.
-	This is actually a boot loader parameter; the value is passed to the
-	kernel using a special protocol.
-
-vmalloc=nn[KMG]
-	Forces the vmalloc area to have an exact size of [nn]. This can be used
-	to increase the minimum size (128MB on x86). It can also be used to
-	decrease the size and leave more room for directly mapped kernel RAM.
-
-norandmaps
-	on't use address space randomization
-	Equivalent to echo 0 > /proc/sys/kernel/randomize_va_space
-
 </screen>
+
+<refentry>
+  <refnamediv>
+    <refname>vdso</refname>
+    <refpurpose>Enable or disable the VDSO mapping</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>vdso=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This enables or disables the VDSO mapping option.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>vmalloc</refname>
+    <refpurpose>Force the vmalloc area to have a specific size</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>vmalloc=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option forces the vmalloc to have the exact size specified by
+	<emphasis>nn</emphasis>.  This can be used to increase the minimum
+	size of the vmalloc area (which is 128Mb on the x86 processor).  It
+	can also be used to decrease the size and leave more room for
+	directly mapped kernel RAM.  <emphasis>nn</emphasis> specifies the
+	amount of memory and is measured in units of kilo, mega, or
+	gigabytes.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>norandmaps</refname>
+    <refpurpose>Do not use the address space randomization</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	By default the kernel randomizes the address space of all programs
+	when they are started.  This option will disable this feature.  It
+	is also equivalent to writing a <literal>0</literal> to the file
+	<filename>/proc/sys/kernel/randomize_va_space</filename>.
+	</para>
+</refsect1>
+</refentry>
 
 </sect1>
 
@@ -799,101 +827,415 @@ norandmaps
 These options specify different paramaters the ACPI subsystem can use.
 </para>
 
-<screen>
-acpi=
-	Advanced Configuration and Power Interface
-	Format: { force | off | ht | strict | noirq }
-	force -- enable ACPI if default was off
-	off -- disable ACPI if default was on
-	noirq -- do not use ACPI for IRQ routing
-	ht -- run only enough ACPI to enable Hyper Threading
-	strict -- Be less tolerant of platforms that are not strictly ACPI specification compliant.
-	See also Documentation/pm.txt, pci=noacpi
+<refentry>
+  <refnamediv>
+    <refname>acpi</refname>
+    <refpurpose>ACPI subsystem options</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi=</literal>[<replaceable>force</replaceable>|<replaceable>off</replaceable>|<replaceable>noirq</replaceable>|<replaceable>ht</replaceable>|<replaceable>strict</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is the main option for the Advanced Configuration and Power
+	Interface (ACPI).
+	</para>
+	<para>
+	<literal>acpi=force</literal> forces ACPI to be enabled if the
+	kernel configuration option had it disabled.
+	</para>
+	<para>
+	<literal>acpi=off</literal> disables ACPI if the kernel
+	configuration option had it enabled.
+	</para>
+	<para>
+	<literal>acpi=noirq</literal> does not use ACPI for IRQ routing
+	</para>
+	<para>
+	<literal>acpi=ht</literal> only runs enough of the ACPI layer in
+	order to enable HyperThreading on processors that are capable of
+	it.
+	</para>
+	<para>
+	<literal>acpi=strict</literal> makes the ACPI layer be less
+	tolerant of platforms that are not fully compiant with the ACPI
+	specification.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_sleep=
-	Sleep options
-	Format: { s3_bios, s3_mode }
-	See Documentation/power/video.txt
+<refentry>
+  <refnamediv>
+    <refname>acpi_sleep</refname>
+    <refpurpose>ACPI sleep options</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi_sleep=</literal>[<replaceable>s3_bios</replaceable>]<literal>,</literal>[<replaceable>s3_mode</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	During S3 resume (this happens when the machine has been suspended
+	to RAM), hardware needs to be reinitialized properly.  For most
+	devices, this is simple, except for video cards, which are normally
+	initialized by the BIOS.  The kernel does not have enough
+	information to restore the video device, as that information is in
+	the BIOS and not accessable at all.  This option lets the kernel
+	try to use the ACPI subsystem to restore the video card in
+	two different ways.
+	</para>
+	<para>
+	See the file <filename>Documentation/power/video.txt</filename> for
+	more information on this option and how to find the proper value
+	for your type of hardware.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_sci=
-	ACPI System Control Interrupt trigger mode
-	Format: { level | edge | high | low }
+<refentry>
+  <refnamediv>
+    <refname>acpi_sci</refname>
+    <refpurpose>ACPI System Control Interrupt trigger mode</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi_sci=</literal>[<replaceable>level</replaceable>|<replaceable>edge</replaceable>|<replaceable>high</replaceable>|<replaceable>low</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This sets the ACPI System Control Interrupt trigger mode.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_irq_balance
-	ACPI will balance active IRQs
-	default in APIC mode
+<refentry>
+  <refnamediv>
+    <refname>acpi_irq_balance</refname>
+    <refpurpose>Enable ACPI IRQ balance</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	ACPI will balance the active IRQs if this option is present.  This
+	is the default option when operating in APIC mode.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_irq_nobalance
-	ACPI will not move active IRQs (default)
-	default in PIC mode
+<refentry>
+  <refnamediv>
+    <refname>acpi_irq_nobalance</refname>
+    <refpurpose>Disable ACPI IRQ balance</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	ACPI will not move the active IRQs if this option is present.  This
+	is the default option when operating in PIC mode.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_irq_pci=
-	If irq_balance, clear listed IRQs for use by PCI
-	Format: [irq],[irq]...
+<refentry>
+  <refnamediv>
+    <refname>acpi_irq_isa</refname>
+    <refpurpose>Mark the listed IRQs as used by ISA</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi_irq_isa=</literal>[<replaceable>irq</replaceable>]<literal>,</literal>[<replaceable>irq</replaceable>]...
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If the IRQ balance option is enabled, mark the listed IRQs as used
+	by the ISA subsystem.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_irq_isa=
-	If irq_balance, mark listed IRQs used by ISA
-	Format: [irq],[irq]...
+<refentry>
+  <refnamediv>
+    <refname>acpi_irq_pci</refname>
+    <refpurpose>Mark the listed IRQs as used by PCI</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi_irq_pci=</literal>[<replaceable>irq</replaceable>]<literal>,</literal>[<replaceable>irq</replaceable>]...
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If the IRQ balance option is enabled, mark the listed IRQs as used
+	by the PCI subsystem.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_os_name=
-	Tell ACPI BIOS the name of the OS
-	Format: To spoof as Windows 98: ="Microsoft Windows"
+<refentry>
+  <refnamediv>
+    <refname>acpi_os_name</refname>
+    <refpurpose>Fake the operating system name to ACPI</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi_os_name=</literal><emphasis>name</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This tells the ACPI BIOS that the name of the running operating
+	system is <emphasis>name</emphasis>.  This can be useful to spoof
+	the BIOS into thinking that Windows is running instead of Linux,
+	which can help solve some ACPI issues for older BIOSes.  As an
+	example, use the string <literal>Microsoft 2001</literal> to
+	spoof the BIOS into thinking that Windows 2001 is running on the
+	machine.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_osi=
-	empty param disables _OSI
+<refentry>
+  <refnamediv>
+    <refname>acpi_osi</refname>
+    <refpurpose>Disable the _OSI ACPI method</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi_osi=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If <emphasis>nn</emphasis> is not present, ACPI will disable the
+	_OSI method.  If the paramater is present, _OSI will not be
+	disabled.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_serialize
-	force serialization of AML methods
+<refentry>
+  <refnamediv>
+    <refname>acpi_serialize</refname>
+    <refpurpose>Force serialization of AML methods</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If present, this option forces the serialization of ACPI AML
+	methods.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_skip_timer_override
-	Recognize and ignore IRQ0/pin2 Interrupt Override.
-	For broken nForce2 BIOS resulting in XT-PIC timer.
+<refentry>
+  <refnamediv>
+    <refname>acpi_skip_timer_override</refname>
+    <refpurpose>Skip interrupt override issues</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option allows the ACPI layer to recognize and ignore IRQ0/pin2
+	Interrupt Override issues for broken nForce2 BIOSes that result in
+	the XT-PIC timer acting up.
+	</para>
+</refsect1>
+</refentry>
 
-acpi_dbg_layer=
-	Format: [int]
-	Each bit of the [int] indicates an ACPI debug layer,
-	Format: 1: enable, 0: disable.
-	It is useful for boot time debugging. After system has booted up, it can be set via the <filename>/proc/acpi/debug_layer</filename> file.
-
-acpi_fake_ecdt
-	Workaround failure due to BIOS lacking ECDT
-
-acpi_generic_hotkey
-	Allow consolidated generic hotkey driver to override platform specific driver.
-	See also Documentation/acpi-hotkey.txt.
-
-acpi_pm_good
-	Override the pmtimer bug detection: force the kernel
-	to assume that this machine's pmtimer latches its value
-	and always returns good values.
-
-ec_intr=
-	ACPI Embedded Controller interrupt mode
-	Format: [int]
-	0: polling mode
-	non-0: interrupt mode (default)
-
-memmap=nn[KMG]#ss[KMG]
-	Mark specific memory as ACPI data.
-	Region of memory to be used, from ss to ss+nn.
-
-memmap=nn[KMG]$ss[KMG]
-	Mark specific memory as reserved.
-	Region of memory to be used, from ss to ss+nn.
-
-pnpacpi=
-	{ off }
-
-processor.max_cstate=
-	Limit processor to maximum C-state
-	max_cstate=9 overrides any DMI blacklist limit.
-
-processor.nocst
-	Ignore the _CST method to determine C-states,
-	instead using the legacy FADT method
+<refentry>
+  <refnamediv>
+    <refname>acpi_dbg_layer</refname>
+    <refpurpose>ACPI debug layer</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>acpi_dbg_layer=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This allows the ACPI debug layer to be set at boot time.
+	<emphasis>nn</emphasis> is an integer with every bit indicating a
+	different ACPI debug layer.  After the system has booted up, it can
+	be set via the <filename>/proc/acpi/debug_layer</filename> file.
+	</para>
+</refsect1>
+</refentry>
 
 
-</screen>
+<refentry>
+  <refnamediv>
+    <refname>acpi_fake_ecdt</refname>
+    <refpurpose>ECDT workaround</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If present, this allows ACPI to workaround BIOS failures when they
+	lack ECDT.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>acpi_generic_hotkey</refname>
+    <refpurpose>ACPI generic hotkey driver override</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This allows the ACPI consolidated generic hotkey driver to override
+	the platform specific driver if present.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>acpi_pm_good</refname>
+    <refpurpose>Override the pmtimer bug detection</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If used, this forces the kernel to assume that the machine's
+	pmtimer latches its value and always returns good values.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>ec_intr</refname>
+    <refpurpose>ACPI Embedded Controller interrupt mode</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>ec_intr=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies the ACPI embedded controller interrupt mode.
+	If <emphasis>nn</emphasis> is <literal>0</literal>, then polling
+	mode will be used, otherwise interrupt mode will be used.  The
+	interrupt mode is the default mode.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>memmap</refname>
+    <refpurpose>Mark specific memory as ACPI data</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>memmap=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]<literal>#</literal><emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This marks a specific location and range of memory as ACPI data.
+	<emphasis>nn</emphasis> is the size of the memory location and
+	<emphasis>ss</emphasis>is the start location in memory of the
+	range.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>memmap</refname>
+    <refpurpose>Mark specific memory as reserved</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>memmap=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]<literal>$</literal><emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This marks a specific location and range of memory as reserved.
+	<emphasis>nn</emphasis> is the size of the memory location and
+	<emphasis>ss</emphasis>is the start location in memory of the
+	range.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnpacpi</refname>
+    <refpurpose>Turns PnP ACPI off</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnpacpic=off</literal>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If specified, the PnP ACPI functionality will be disabled.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>processor.max_cstate</refname>
+    <refpurpose>Limit the processor to a maximum C-state</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>processor.max_cstate=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option limits the processor to a maximum C-state, no matter
+	what the ACPI tables say it can support.  <emphasis>nn</emphasis>
+	is a valid C-state value.  If this is set to <literal>9</literal>
+	it will override any DMI blacklist limit that might be present for
+	this processor.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>processor.nocst</refname>
+    <refpurpose>Ignore the _CST method for C-states</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If this option is specified, the ACPI core will ignore the _CST
+	method of determining the processor C-states and use the legacy
+	FADT method instead.
+	</para>
+</refsect1>
+</refentry>
+
 </sect1>
 
 <sect1>
