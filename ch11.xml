@@ -1224,37 +1224,157 @@ These options specify different paramaters the Networking subsystem can use.
 These options specify different paramaters the NFS subsystem can use.
 </para>
 
-<screen>
-lockd.nlm_grace_period=P
-	Assign grace period.
-	Format: [integer]
+<refentry>
+  <refnamediv>
+    <refname>lockd.nlm_grace_period</refname>
+    <refpurpose>Assign a grace period to the lock manager</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>lockd.nlm_grace_period=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Sets the NFS lock manager grace period.  <emphasis>nn</emphasis> is
+	in seconds.
+	</para>
+</refsect1>
+</refentry>
 
-lockd.nlm_tcpport=N
-	Assign TCP port.
-	Format: [integer]
+<refentry>
+  <refnamediv>
+    <refname>lockd.nlm_tcpport</refname>
+    <refpurpose>Assign a TCP port to the lock manager</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>lockd.nlm_tcpport=</literal><emphasis>port</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Set the TCP port that the NFS lock manager should use.
+	<emphasis>port</emphasis> must be a valid TCP port value.
+	</para>
+</refsect1>
+</refentry>
 
-lockd.nlm_timeout=T
-	Assign timeout value.
-	Format: [integer]
+<refentry>
+  <refnamediv>
+    <refname>lockd.nlm_timeout</refname>
+    <refpurpose>Assign a new timeout value to the lock manager</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>lockd.nlm_timeout=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Overrides the default time value for the NFS lock manager.
+	<emphasis>nn</emphasis> is in seconds.
+	</para>
+</refsect1>
+</refentry>
 
-lockd.nlm_udpport=M
-	Assign UDP port.
-	Format: [integer]
+<refentry>
+  <refnamediv>
+    <refname>lockd.nlm_udpport</refname>
+    <refpurpose>Assign a UDP port to the lock manager</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>lockd.nlm_udpport=</literal><emphasis>port</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Set the UDP port that the NFS lock manager should use.
+	<emphasis>port</emphasis> must be a valid UDP port value.
+	</para>
+</refsect1>
+</refentry>
 
-nfsaddrs=
-	See Documentation/nfsroot.txt for full details about this option (FIXME!!!)
+<refentry>
+  <refnamediv>
+    <refname>nfsroot</refname>
+    <refpurpose>Specifies the NFS root filesystem</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>nfsroot=</literal>[<emphasis>server-ip</emphasis><literal>:</literal>]<emphasis>root-dir</emphasis>[,<emphasis>nfs-options</emphasis>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option sets the NFS root filesystem for diskless boxes, to
+	enable them to boot properly over NFS.  If this option is not given
+	on the command line, the default will be
+	<literal>/tftpboot/</literal><emphasis>client_ip_address</emphasis>
+	will be used.
+	</para>
+	<para>
+	<emphasis>server-ip</emphasis> specifies the IP address of the NFS
+	server to connect to.
+	</para>
+	<para>
+	<emphasis>root-dir</emphasis> specifies the directory on the NFS
+	server to mount as root.  If there is a <literal>%s</literal> token
+	in this string, it will be replaced with the ASCII representation
+	of the client's IP address.
+	</para>
+	<para>
+	<emphasis>nfs-options</emphasis> are the standard NFS options,
+	separated by commas.
+	</para>
+</refsect1>
+</refentry>
 
-nfsroot=
-	nfs root filesystem for disk-less boxes.
-	See Documentation/nfsroot.txt for full details about this option (FIXME!!!)
+<refentry>
+  <refnamediv>
+    <refname>nfs.callback_tcpport</refname>
+    <refpurpose>Set the NFSv4 TCP port for the callback channel.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>nfs.callback_tcpport=</literal><emphasis>port</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specifies the TCP port that the NFSv4 callback channel should
+	listen on.  <emphasis>port</emphasis> must be a valid TCP port
+	value.
+	</para>
+</refsect1>
+</refentry>
 
-nfs.callback_tcpport=
-	Set the TCP port on which the NFSv4 callback channel should listen.
+<refentry>
+  <refnamediv>
+    <refname>nfs.idmap_cache_timeout</refname>
+    <refpurpose>Set the maximum lifetime for idmapper cache entries</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>nfs.idmap_cache_timeout=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specifies the maximum lifetime for the idmapper cache entries.
+	<emphasis>nn</emphasis> is in seconds.
+	</para>
+</refsect1>
+</refentry>
 
-nfs.idmap_cache_timeout=
-	Set the maximum lifetime for idmapper cache entries.
-
-</screen>
 </sect1>
 
 
