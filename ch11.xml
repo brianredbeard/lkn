@@ -93,7 +93,6 @@ Note that all of these paramaters are case sensitive.
     <refpurpose/>  <!-- not provided -->
   </refnamediv>
   <refsynopsisdiv>
-    <!-- different than above, perhaps a cmdsynopsis, if you wanted to be overly semantic -->
     <para><literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]</para>
   </refsynopsisdiv>
 <refsect1>
@@ -103,13 +102,8 @@ Note that all of these paramaters are case sensitive.
 	kernel. <emphasis>nn</emphasis> is measured in units of... [Is
 	this one of those k, m, g-modified values?]
 	</para>
-
-
 </refsect1>
 </refentry>
-
-
-
 </sect1>
 
 <sect1>
@@ -121,20 +115,45 @@ subsystem or hardware being present in the system in order to work
 properly.
 </para>
 
+<refentry>
+  <refnamediv>
+    <refname>apic</refname>
+    <refpurpose>Change the output verbosity of the APIC subsystem when booting</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para><literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]</para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option changes how verbose the APIC subsystem is when booting
+	the kernel.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>cachesize</refname>
+    <refpurpose>Override the level 2 CPU cache size detection by the kernel.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para><literal>cachesize=</literal><emphasis>nn</emphasis></para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Sometimes CPU hardware bugs make them report the cache size
+	incorrectly. The kernel will attempt to work around and fix known
+	problems with most CPUs, but for some CPUs it is not possible to
+	determine what the correct size should be.  This option provides an
+	override for these situations.
+	<emphasis>nn</emphasis> is measured in units of bytes.
+	</para>
+</refsect1>
+</refentry>
+
 <screen>
-apic=
-	Change the output verbosity whilst booting
-	Format: { quiet (default) | verbose | debug }
-	Change the amount of debugging information output when initialising the APIC and IO-APIC components.
-
-cachesize=
-	Override level 2 CPU cache size detection.
-	Sometimes CPU hardware bugs make them report the cache
-	size incorrectly. The kernel will attempt work arounds
-	to fix known problems, but for some CPUs it is not
-	possible to determine what the correct size should be.
-	This option provides an override for these situations.
-
 console=
 	Output console device and options.
 
@@ -160,60 +179,295 @@ console=
 		UART at the specified I/O port or MMIO address,
 		switching to the matching ttyS device later.  The
 		options are the same as for ttyS, above.
+</screen>
 
-crashkernel=nn[KMG]@ss[KMG]
-	Reserve a chunk of physical memory to
-	hold a kernel to switch to with kexec on panic.
+<refentry>
+  <refnamediv>
+    <refname>crashkernel</refname>
+    <refpurpose>Reserve a portion of physical memory for kexec to use</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para><literal>crashkernel=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]@<emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]</para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	The kexec subsystem likes to have a portion of physical memory to
+	use.  This option reserves that memory from the rest of the kernel
+	and will switch to use it if the kernel panics.
+	<emphasis>nn</emphasis> specifies the amount of memory to reserve
+	and is measured in units of kilo, mega, or
+	gigabytes.
+	<emphasis>ss</emphasis> specifies the location for this memory
+	chunk and is measured in units of kilo, mega, or
+	gigabytes.
+	</para>
+</refsect1>
+</refentry>
 
-debug
-	Enable kernel debugging (events log level).
+<refentry>
+  <refnamediv>
+    <refname>debug</refname>
+    <refpurpose>Enable kernel debugging.</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will enable the kernel log level to default to the
+	debug level, so that all debug messages will be printed to the
+	console at boot time.
+	</para>
+</refsect1>
+</refentry>
 
-dhash_entries=
-	Set number of hash buckets for dentry cache.
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
-earlyprintk=
-	earlyprintk=vga
-	earlyprintk=serial[,ttySn[,baudrate]]
-	Append ",keep" to not disable it when the real console takes over.
-	Only vga or serial at a time, not both.
-	Currently only ttyS0 and ttyS1 are supported.
-	Interaction with the standard serial driver is not very good.
-	The VGA output is eventually overwritten by the real console.
+<refentry>
+  <refnamediv>
+    <refname>dhash_entries</refname>
+    <refpurpose>Set the number of dentry hash buckets.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>dhash_entries=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets you override the default number of hash buckets
+	for the kernel's dentry cache.  Only use this if you know what you
+	are doing.
+	</para>
+</refsect1>
+</refentry>
 
-elevator=
-	Format: {"anticipatory" | "cfq" | "deadline" | "noop"}
-	See Documentation/block/as-iosched.txt and
-	Documentation/block/deadline-iosched.txt for details.
+<refentry>
+  <refnamediv>
+    <refname>earlyprintk</refname>
+    <refpurpose>Show early boot messages
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>earlyprintk=</literal>[<replaceable>vga</replaceable>|<replaceable>serial</replaceable>[,<replaceable>ttyS</replaceable><emphasis>n</emphasis>[,<emphasis>baudrate</emphasis>]]]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option enables the ability to see the kernel log messages that
+	happen before the traditional console is initialized.  It can be
+	very useful for tracking down hardware issues.  Currently only the
+	VGA device or the serial port will work, not both at the same time.
+	Also, only the <literal>ttyS0</literal> or <literal>ttyS1</literal>
+	serial devices will work.  Interaction with the standard serial
+	driver is not very good, and the VGA output will eventually be
+	overwritten by the real console.
+	</para>
+	<para>
+	Append the string <literal>,keep</literal> to not disable the
+	messages when the real kernel console is initializes and takes over
+	the system.
+	</para>
+</refsect1>
+</refentry>
 
-elfcorehdr=
-	Specifies physical address of start of kernel core image elf header.
-	Generally kexec loader will pass this option to capture kernel.
-	See Documentation/kdump/kdump.txt for details.
+<refentry>
+  <refnamediv>
+    <refname>elevator</refname>
+    <refpurpose>Sets the default I/O scheduler elevator
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>elevator=</literal>[<replaceable>anticipatory</replaceable>|<replaceable>cfg</replaceable>|<replaceable>deadline</replaceable>|<replaceable>noop</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This sets the default I/O scheduler to be the one specified.  See
+	<xref linkend="CONFIG_IOSCHED_NOOP" /> for a list of the different
+	I/O schedulers available, and what they do.
+	</para>
+</refsect1>
+</refentry>
 
-hashdist=
-	Large hashes allocated during boot are distributed across NUMA nodes.
-	Defaults on for IA-64, off otherwise.
-	Format: 0 | 1 (for off | on)
+<refentry>
+  <refnamediv>
+    <refname>elfcorehdr
+    </refname>
+    <refpurpose>Specify the start of the kernel core image elf header</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>elfcorhdr=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This will specify the physical address that the kernel core image's
+	elf header is at.  This is used by kexec to find the kernel when
+	booting the secondary kernel image.  <emphasis>nn</emphasis> is a
+	memory location.
+	</para>
+</refsect1>
+</refentry>
 
-highmem=nn
-	Force the highmem zone to have an exact size of nn. This works even on
-	boxes that have no highmem otherwise. This also works to reduce highmem
-	size on bigger boxes.
+<refentry>
+  <refnamediv>
+    <refname>hashdist</refname>
+    <refpurpose>Distribute large hashes across NUMA nodes</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>hashdist=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Large hashs that are allocated during the boot process are by
+	default on the IA-64 platform distributed across the different NUMA
+	nodes.  This option lets the user turn this option on or off.
+	</para>
+</refsect1>
+</refentry>
 
-hugepages=
-	Maximal number of HugeTLB pages.
+<refentry>
+  <refnamediv>
+    <refname>highmem</refname>
+    <refpurpose>Specify the size of the highmem memory zone</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>highmem=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will force the highmem memory zone to have an exact
+	size of <emphasis>nn</emphasis> bytes.  This will work even on
+	boxes that have no highmem zones by default.  It will can also
+	reduce the size of the highmem zone for machines with a lot of
+	memory.
+	</para>
+</refsect1>
+</refentry>
 
-noirqbalance
-	Disable kernel irq balancing
+<refentry>
+  <refnamediv>
+    <refname>hugepages</refname>
+    <refpurpose>Set the number of hugetlb pages</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>hugepages=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Set the maximum number of hugetlb pages to be
+	<emphasis>nn</emphasis>.
+	</para>
+</refsect1>
+</refentry>
 
-ihash_entries=
-	Set number of hash buckets for inode cache.
+<refentry>
+  <refnamediv>
+    <refname>noirqbalance</refname>
+    <refpurpose>Disable kernel irq balancing</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will disable all of the built in kernel irq balancing logic.
+	</para>
+</refsect1>
+</refentry>
 
-init=
-	Format: [full_path]
-	Run specified binary as the init process instead of the default
+<refentry>
+  <refnamediv>
+    <refname>ihash_entries</refname>
+    <refpurpose>Set the number of inode hash buckets.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>ihash_entries=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets you override the default number of hash buckets
+	for the kernel's inode cache.  Only use this if you know what you
+	are doing.
+	</para>
+</refsect1>
+</refentry>
+
+
+<refentry>
+  <refnamediv>
+    <refname>init</refname>
+    <refpurpose>Set the program to run at init time</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>init=</literal><emphasis>filename</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Run the specified binary as the init process instead of the default
 	<filename>/sbin/init</filename> program.
+	</para>
+</refsect1>
+</refentry>
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+<screen>
 initcall_debug
 	Trace initcalls as they are executed.  Useful for working out where the
 	kernel is dying during startup.
@@ -853,22 +1107,90 @@ selinux_compat_net=
 These options specify different paramaters the Networking subsystem can use.
 </para>
 
-<screen>
-netdev=
-	Network devices parameters
-	Format: [irq],[io],[mem_start],[mem_end],[name]
-	Note that mem_start is often overloaded to mean something different and driver-specific.
-	This usage is only documented in each driver source file if at all.
+<refentry>
+  <refnamediv>
+    <refname>netdev</refname>
+    <refpurpose>Set different network device paramaters.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <emphasis><literal>netdev</literal></emphasis><literal>=</literal>[<replaceable>irq</replaceable>],[<replaceable>io</replaceable>],[<replaceable>mem_start</replaceable>],[<replaceable>mem_end</replaceable>],[<replaceable>name</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specify different network device parameters.  Note that each of these
+	paramaters are specific to the different driver used by the network
+	device.  These options might be documented in the different driver
+	source files.
+	</para>
+</refsect1>
+</refentry>
 
-rhash_entries=
-	Set number of hash buckets for route cache
+<refentry>
+  <refnamediv>
+    <refname>rhash_entries</refname>
+    <refpurpose>Set the number of route cache hash buckets.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>dhash_entries=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets you override the default number of hash buckets
+	for the kernel's route cache.  Only use this if you know what you
+	are doing.
+	</para>
+</refsect1>
+</refentry>
 
-shapers=
-	Maximal number of shapers.
+<refentry>
+  <refnamediv>
+    <refname>shapers</refname>
+    <refpurpose>Set the maximum number of network shapers.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>shapers=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets you set the maximum number of network shapers that are
+	possible to be used by the kernel.
+	</para>
+</refsect1>
+</refentry>
 
-thash_entries=
-	Set number of hash buckets for TCP connection
-</screen>
+<refentry>
+  <refnamediv>
+    <refname>thash_entries</refname>
+    <refpurpose>Set the number of TCP connection hash buckets.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>thash_entries=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets you override the default number of hash buckets for
+	the kernel's TCP connection cache.  Only use this if you know what you
+	are doing.
+	</para>
+</refsect1>
+</refentry>
+
 </sect1>
 
 
@@ -921,14 +1243,20 @@ These options specify different paramaters the depending on the hardware
 you have present in the system.
 </para>
 
-
-
-
+<refentry>
+  <refnamediv>
+    <refname>nousb</refname>
+    <refpurpose>Disable the USB subsystem</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If this option is present, the USB subsystem will not be initialized.
+	</para>
+</refsect1>
+</refentry>
 
 <screen>
-nousb
-	Disable the USB subsystem
-
 lp=0
 lp=port[,port...]
 lp=reset
@@ -966,23 +1294,7 @@ parport_init_mode=
 nr_uarts=
 	maximum number of UARTs to be registered.
 
-
 </screen>
-<refentry>
-  <refnamediv>
-    <refname>nousb</refname>
-    <refpurpose>Disable the USB subsystem</refpurpose>
-  </refnamediv>  
-<refsect1>
-	<title>requires <literal>USB</literal></title>
-
-	<para>
-	If this command line option is present, the USB subsystem will not be
-	initialized.
-	</para>
-
-</refsect1>
-</refentry>
 </sect1>
 
 
@@ -994,28 +1306,107 @@ These options specify different paramaters for the timer.
 </para>
 
 
-<screen>
-enable_timer_pin_1
-disable_timer_pin_1
-	Enable/Disable PIN 1 of the APIC timer.  This can be useful to work
-	around chipset bugs (in particular on some ATI chipsets).  The kernel
-	tries to set a reasonable default.
+<refentry>
+  <refnamediv>
+    <refname>enable_timer_pin_1</refname>
+    <refpurpose>Enable pin 1 of the APIC timer</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This enables pin 1 of the APIC timer.  It can be useful to work
+	around chipset bugs (in particular on some ATI chipsets.)  The
+	kernel tries to set a reasonable default but sometimes this option
+	is necessary to override it.
+	</para>
+</refsect1>
+</refentry>
 
-enable_8254_timer
-disable_8254_timer
-	Enable/Disable interrupt 0 timer routing over the 8254 in addition to
-	over the IO-APIC. The kernel tries to set a sensible default.
+<refentry>
+  <refnamediv>
+    <refname>disable_timer_pin_1</refname>
+    <refpurpose>Disable pin 1 of the APIC timer</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This disables pin 1 of the APIC timer.  It can be useful to work
+	around chipset bugs (in particular on some ATI chipsets.)  The
+	kernel tries to set a reasonable default but sometimes this option
+	is necessary to override it.
+	</para>
+</refsect1>
+</refentry>
 
-hpet=
-	option to disable HPET and use PIT.
-	Format: disable
+<refentry>
+  <refnamediv>
+    <refname>enable_8254_timer</refname>
+    <refpurpose>Enables interrupt 0 timer routing over the 8254 chip</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Enable interrupt 0 timer routing over the 8254 chip in addition to
+	over the IO-APIC. The kernel tries to set a reasonable default but
+	sometimes this option is necessary to override it.
+	</para>
+</refsect1>
+</refentry>
 
-clocksource=
-	Override the default clocksource and use the clocksource with the name
-	specified.
+<refentry>
+  <refnamediv>
+    <refname>disable_8254_timer</refname>
+    <refpurpose>Disables interrupt 0 timer routing over the 8254 chip</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Disable interrupt 0 timer routing over the 8254 chip in addition to
+	over the IO-APIC. The kernel tries to set a reasonable default but
+	sometimes this option is necessary to override it.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>hpet</refname>
+    <refpurpose>Disable HPET and use PIT instead</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>hpet=disable</literal>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This disables the HPET timer source tells the kernel to use the PIT
+	timer source instead.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>clocksource</refname>
+    <refpurpose>Set the specific clocksource</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>clocksource=</literal>[<replaceable>hpet</replaceable>|<replaceable>pit</replaceable>|<replaceable>tsc</replaceable>|<replaceable>acpi_pm</replaceable>|<replaceable>cyclone</replaceable>|<replaceable>scx200_hrt</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Override the default kernel clocksource and use the clocksource
+	with the specified name instead.
+	</para>
+</refsect1>
+</refentry>
 
 
-</screen>
 </sect1>
 </chapter>
 <!-- vim: set ai tw=72 : -->
