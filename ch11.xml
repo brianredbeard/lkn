@@ -2,6 +2,7 @@
 <chapter id="LKN-command-line">
 
 <title>Kernel boot command line reference
+<!-- don't put a footnote in a title normally... -->
 <footnote>
 <para>
 The majority of this chapter is based on the in-kernel documentation for the
@@ -108,33 +109,51 @@ properly.
 </refsect1>
 </refentry>
 
-<screen>
-console=
-	Output console device and options.
-
-	tty[n]	Use the virtual console device [n].
-
-	ttyS[n][,options]
-	ttyUSB0[,options]
-		Use the specified serial port.  The options are of
+<refentry>
+  <refnamediv>
+    <refname>console</refname>
+    <refpurpose>Output console device and options.</refpurpose>
+  </refnamediv>  
+  <refsynopsisdiv>
+    <para><literal>console=</literal></para>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>Description</title> <!-- or Options ? -->
+    <variablelist>
+      <varlistentry>
+        <term><literal>tty[n]</literal></term> <!-- <replaceable> around [n] ? -->
+        <listitem><para>Use the virtual console device [n].</para></listitem>
+      </varlistentry>  
+      <varlistentry>
+        <term><literal>ttyS[n][,options]</literal></term>
+        <term><literal>ttyUSB0[,options]</literal></term> <!-- can have two, hooray -->
+        <listitem>
+          <para>Use the specified serial port.  The options are of
 		the form "bbbbpnf", where "bbbb" is the baud rate,
 		"p" is parity ("n", "o", or "e"), "n" is number of
 		bits, and "f" is flow control ("r" for RTS or
-		omit it).  Default is "9600n8".
+		omit it).  Default is "9600n8".</para>
 
-		See the file
+		      <para>See the file
 		<filename>Documentation/serial-console.txt</filename> for more
 		information and the file
 		<filename>Documentation/networking/netconsole.txt</filename> for an
-		alternative if you do not have a serial port.
-
-	uart,io,[addr][,options]
-	uart,mmio,[addr][,options]
-		Start an early, polled-mode console on the 8250/16550
+		alternative if you do not have a serial port.</para>
+        </listitem>
+      </varlistentry>  
+      <varlistentry>
+        <term><literal>uart,io,[addr][,options]</literal></term>
+        <term><literal>uart,mmio,[addr][,options]</literal></term>
+        <listitem>
+          <para>Start an early, polled-mode console on the 8250/16550
 		UART at the specified I/O port or MMIO address,
 		switching to the matching ttyS device later.  The
-		options are the same as for ttyS, above.
-</screen>
+		options are the same as for ttyS, above.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>  
+  </refsect1>  
+</refentry>
 
 <refentry>
   <refnamediv>
@@ -851,7 +870,7 @@ console=
 	</para>
 </refsect1>
 </refentry>
-
+<!-- just to validate...
 <screen>
 
 migration_cost=
@@ -1036,6 +1055,7 @@ rootfstype=
 	Set root filesystem type
 
 </screen>
+-->
 
 <refentry>
   <refnamediv>
