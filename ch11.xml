@@ -406,125 +406,410 @@ console=
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>initcall_debug</refname>
+    <refpurpose>Debug the initcall functions in the kernel</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option causes the kernel to trace all initcalls as they are
+	executed during the boot process.  It is useful for working out
+	where the kernel is dying during startup.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>initrd</refname>
+    <refpurpose>Specify where the initial ramdisk is located</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>initrd=</literal><emphasis>filename</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option specifies where the initial ramdisk for the kernel boot
+	is located.  Please see <xref linkend="LKN-initramfs" /> for more
+	information about kernel ramdisks.
 	</para>
 </refsect1>
 </refentry>
-<screen>
-initcall_debug
-	Trace initcalls as they are executed.  Useful for working out where the
-	kernel is dying during startup.
 
-initrd=
-	Specify the location of the initial ramdisk
+<refentry>
+  <refnamediv>
+    <refname>combined_mode</refname>
+    <refpurpose>Specify IDE driver usage</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>combined_mode=</literal>[<replaceable>combined</replaceable>|<replaceable>ide</replaceable>|<replaceable>libata</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option controls which driver use the IDE ports in combined
+	mode: the legacy IDE driver, libata, or both.  Note that using the
+	ide or libata options may affect your device naming (e.g. by
+	changing hdc to sdb).
+	</para>
+</refsect1>
+</refentry>
 
-combined_mode=
-	control which driver uses IDE ports in combined mode: legacy IDE
-	driver, libata, or both (in the libata case, libata.atapi_enabled=1 may
-	be useful as well).  Note that using the ide or libata options may
-	affect your device naming (e.g. by changing hdc to sdb).
-	Format: combined (default), ide, or libata
+<refentry>
+  <refnamediv>
+    <refname>irqfixup</refname>
+    <refpurpose>Fix IRQ issues</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	When an interrupt is not handled, search all known interrupt
+	handlers for it.  This is Intended to get systems with badly broken
+	firmware running.
+	</para>
+</refsect1>
+</refentry>
 
-irqfixup
-	When an interrupt is not handled search all handlers for it. Intended
-	to get systems with badly broken firmware running.
+<refentry>
+  <refnamediv>
+    <refname>irqpoll</refname>
+    <refpurpose>Fix IRQ issues</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	When an interrupt is not handled search all known interrupt
+	handlers for it and also check all handlers each timer interrupt.
+	This is intended to get systems with badly broken firmware running.
+	</para>
+</refsect1>
+</refentry>
 
-irqpoll
-	When an interrupt is not handled search all handlers for it. Also check
-	all handlers each timer interrupt. Intended to get systems with badly
-	broken firmware running.
-
-isolcpus=
-	Isolate CPUs from the general scheduler.
-	Format: [cpu number],...,[cpu number]
-	This option can be used to specify one or more CPUs to isolate from the
-	general SMP balancing and scheduling algorithms. The only way to move a
+<refentry>
+  <refnamediv>
+    <refname>isolcpus</refname>
+    <refpurpose>Isolate CPUs from the kernel scheduler</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>isolcpus=</literal>[<emphasis>cpu_number</emphasis>]<literal>,</literal>...<literal>,</literal>[<emphasis>cpu_number</emphasis>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is used to remove the specified cpus, as defined by the
+	<emphasis>cpu_number</emphasis> values, from the general kernel
+	SMP balancing and scheduler algroithms.  The only way to move a
 	process onto or off an "isolated" CPU is via the CPU affinity syscalls.
-	[cpu number] begins at 0 and the maximum value is "number of CPUs in
-	system - 1".
-
-	This option is the preferred way to isolate CPUs. The alternative -
-	manually setting the CPU mask of all tasks in the system - can cause
+	<emphasis>cpu_number</emphasis> begins at <literal>0</literal> and
+	the maximum value is "number of CPUs in system - 1".
+	</para>
+	<para>
+	This option is the preferred way to isolate CPUs.  The alternative,
+	manually setting the CPU mask of all tasks in the system, can cause
 	problems and suboptimal load balancer performance.
+	</para>
+</refsect1>
+</refentry>
 
-kstack=N
-	Print N words from the kernel stack in oops dumps.
 
-lapic
-	Enable the local APIC even if BIOS disabled it.
+<refentry>
+  <refnamediv>
+    <refname>kstack</refname>
+    <refpurpose>How many words of the stack to print in kernel oopses</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>kstack=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies how many words from the kernel stack should be
+	printed in the kernel oops dumps.  <emphasis>nn</emphasis> is an
+	integer value.
+	</para>
+</refsect1>
+</refentry>
 
-load_ramdisk=
-	List of ramdisks to load from floppy.
-	See Documentation/ramdisk.txt for more information.
+<refentry>
+  <refnamediv>
+    <refname>lapic</refname>
+    <refpurpose>Enable the local APIC</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will cause the kernel to enable the local APIC even if
+	the BIOS had disabled it.
+	</para>
+</refsect1>
+</refentry>
 
-loglevel=
-	All Kernel Messages with a loglevel smaller than the console loglevel
-	will be printed to the console. It can also be changed with klogd or
-	other programs. The loglevels are defined as follows:
+<refentry>
+  <refnamediv>
+    <refname>load_ramdisk</refname>
+    <refpurpose>Load a kernel ramdisk from a floppy</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>load_ramdisk=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	If <emphasis>nn</emphasis> is set to <literal>1</literal> than a
+	ramdisk will be loaded by the kernel at boot time from the floppy
+	drive.
+	</para>
+</refsect1>
+</refentry>
 
-	0 (KERN_EMERG)		system is unusable
-	1 (KERN_ALERT)		action must be taken immediately
-	2 (KERN_CRIT)		critical conditions
-	3 (KERN_ERR)		error conditions
-	4 (KERN_WARNING)	warning conditions
-	5 (KERN_NOTICE)		normal but significant condition
-	6 (KERN_INFO)		informational
-	7 (KERN_DEBUG)		debug-level messages
+<refentry>
+  <refnamediv>
+    <refname>loglevel</refname>
+    <refpurpose>Set the default console log level</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>loglevel=</literal><emphasis>level</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option specifies the initial console log level.  Any log
+	messages smaller than the default value will be printed to the
+	console and any equal or greater than will not be displayed.
+	</para>
+	<para>
+	The console log level can also be changed by the klogd program, or
+	by writing the specified level to the
+	<filename>/proc/sys/kernel/printk</filename> file.
+	</para>
+	<para>
+	The kernel log levels are defined as:
+	<variablelist>
 
-log_buf_len=n
-	Sets the size of the printk ring buffer, in bytes.
-	Format: { n | nk | nM }
-	n must be a power of two.  The default size is set in the kernel config
-	file.
+	<varlistentry>
+	<term><literal>0 (KERN_EMERG)</literal></term>
+	<listitem>
+	<para>The system is unusable.</para>
+	</listitem>
+	</varlistentry>
 
-lpj=n
-	Sets loops_per_jiffy to given constant, thus avoiding time-consuming
-	boot-time autodetection (up to 250 ms per CPU). 0 enables autodetection
-	(default). To determine the correct value for your kernel, boot with
-	normal autodetection and see what value is printed. Note that on SMP
-	systems the preset will be applied to all CPUs, which is likely to
-	cause problems if your CPUs need significantly divergent settings. An
-	incorrect value will cause delays in the kernel to be wrong, leading to
-	unpredictable I/O errors and other breakage. Although unlikely, in the
-	extreme case this might damage your hardware.
+	<varlistentry>
+	<term><literal>1 (KERN_ALERT)</literal></term>
+	<listitem>
+	<para>This is for actions that must be taken care of immediately.</para>
+	</listitem>
+	</varlistentry>
 
-max_loop=
-	Maximum number of loopback devices that can be mounted
-	Format: [1-256]
+	<varlistentry>
+	<term><literal>2 (KERN_CRIT)</literal></term>
+	<listitem>
+	<para>This is for critical conditions.</para>
+	</listitem>
+	</varlistentry>
 
-maxcpus=
-	Maximum number of processors that an SMP kernel should make use of.
+	<varlistentry>
+	<term><literal>3 (KERN_ERR)</literal></term>
+	<listitem>
+	<para>This is for error conditions that have happend to the system.</para>
+	</listitem>
+	</varlistentry>
 
-max_addr=
-	All physical memory greater than or equal to this physical address is
-	ignored.
+	<varlistentry>
+	<term><literal>4 (KERN_WARNING)</literal></term>
+	<listitem>
+	<para>This is for warning conditions that should be taken care of.</para>
+	</listitem>
+	</varlistentry>
 
-mce
-	Machine Check Exception
+	<varlistentry>
+	<term><literal>5 (KERN_NOTICE)</literal></term>
+	<listitem>
+	<para>This is for normal, but significant conditions that might
+	happen.</para>
+	</listitem>
+	</varlistentry>
 
-mem=nn[KMG]
-	Force usage of a specific amount of memory Amount of memory to be used
-	when the kernel is not able to see the whole system memory or for test.
-	[IA-32] Use together with memmap= to avoid physical address space
-	collisions. Without memmap= PCI devices could be placed at addresses
-	belonging to unused RAM.
+	<varlistentry>
+	<term><literal>6 (KERN_INFO)</literal></term>
+	<listitem>
+	<para>Informational messages are printed here.</para>
+	</listitem>
+	</varlistentry>
 
-mem=nopentium
-	Disable usage of 4MB pages for kernel memory.
+	<varlistentry>
+	<term><literal>7 (KERN_DEBUG)</literal></term>
+	<listitem>
+	<para>This is for kernel debugging messages.</para>
+	</listitem>
+	</varlistentry>
 
-</screen>
+	</variablelist>
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>log_buf_len</refname>
+    <refpurpose>Set the size of the kernel log buffer</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>log_buf_len=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This sets the size of the kernel's internal log buffer.
+	<emphasis>nn</emphasis> is in bytes and must be a power of two.
+	This value can also be changed by a kernel configuration value.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>lpj</refname>
+    <refpurpose>Set the loops per jiffy</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>lpg=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies the loops per jiffy that should be used by the
+	kernel and thus have the kernel avoid the time-consuming boot time
+	autodetection of this value.  If <emphasis>nn</emphasis> is
+	<literal>0</literal> then the value will be autodetected like
+	normal.
+	</para>
+	<para>
+	Note that on SMP systems, this value will be set to all CPUs, which
+	might cause problems if the different CPUs need different settings.
+	An incorrect value will cause delays in the kernel to be wrong
+	which can lead to unpredictable I/O errors and other breakage.
+	Although unlikely, in the extreme case this might damage your
+	hardware.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>max_loop</refname>
+    <refpurpose>Maximum number of loopback devices</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>max_loop=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies the maximum number of loopback filesystem devices
+	that can be mounted at the same time.  <emphasis>nn</emphasis> is a
+	number between 1 and 256.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>max_cpus</refname>
+    <refpurpose>Maximum number of CPUs to use</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>maxcpus=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies the maximum number of processors that a SMP kernel
+	should use even if there are more processors present in the system.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>max_addr</refname>
+    <refpurpose>Ignore memory</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>max_addr=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	All physical memory greater than or equal to the physical address
+	<emphasis>nn</emphasis> is to be ignored by the kernel.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>mem</refname>
+    <refpurpose>Force memory usage</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option forces the specific ammount of memory to be used by the
+	kernel.  When used with the <literal>memmap=</literal> option,
+	physical address space collisions can be avoided.  Without the
+	<literal>memmap=</literal> option, this option could cause PCI
+	devices to be placed at addresses that belong to unused RAM.
+	<emphasis>nn</emphasis> specifies the amount of memory to force and
+	is measured in units of kilo, mega, or gigabytes.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>mem</refname>
+    <refpurpose>Disable the usage of 4Mb pages for kernel memory</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>mem=nopentium</literal>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will disable the use of 4Mb pages for kernel memory.
+	</para>
+</refsect1>
+</refentry>
 
 <refentry>
   <refnamediv>
@@ -750,15 +1035,50 @@ rootflags=
 rootfstype=
 	Set root filesystem type
 
-rw
-	Mount root device read-write on boot
-
-S
-	Run init in single mode
-
-time
-	Show timing data prefixed to each printk message line
 </screen>
+
+<refentry>
+  <refnamediv>
+    <refname>rw</refname>
+    <refpurpose>Mount the root device read-write on boot</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	The default for the kernel is to mount the root device as read only
+	at boot time.  This option changes this to mount the root device as
+	read-write instead.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>S</refname>
+    <refpurpose>Run init in single mode</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	The default for the kernel is to run init in multi-user mode.  This
+	option changes this to have init run in single mode only.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>time</refname>
+    <refpurpose>Show timing data on every kernel log message</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option causes the kernel to prefix every kernel log message
+	with a timestamp.
+	</para>
+</refsect1>
+</refentry>
 
 <refentry>
   <refnamediv>
