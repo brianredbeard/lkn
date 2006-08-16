@@ -64,15 +64,16 @@ Note that all of these paramaters are case sensitive.
 <sect1>
 <title>Example options</title>
 
-<reflist longestterm="unseten">
-
+<!--
+<reference>  not sure this is necessary -->
 
 <refentry>
-	<term>nousb</term>
-<refsynopsis>
-	Disable the USB subsystem
-</refsynopsis>
+  <refnamediv>
+    <refname>nousb</refname>
+    <refpurpose>Disable the USB subsystem</refpurpose> 
+  </refnamediv>
 <refsect1>
+  <title>Description</title>
 	<para>
 	requires
 	<literal>USB</literal>
@@ -87,11 +88,16 @@ Note that all of these paramaters are case sensitive.
 </refentry>
 
 <refentry>
-	<term>mem</term>
-<refsynopsis>
-	<literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
-</refsynopsis>
+  <refnamediv>
+    <refname>mem</refname>
+    <refpurpose/>  <!-- not provided -->
+  </refnamediv>
+  <refsynopsisdiv>
+    <!-- different than above, perhaps a cmdsynopsis, if you wanted to be overly semantic -->
+    <para><literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]</para>
+  </refsynopsisdiv>
 <refsect1>
+  <title>Description</title>
 	<para>
 	Force a specified amount of memory to be used by the
 	kernel. <emphasis>nn</emphasis> is measured in units of... [Is
@@ -103,7 +109,6 @@ Note that all of these paramaters are case sensitive.
 </refentry>
 
 
-</reflist>
 
 </sect1>
 
