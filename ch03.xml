@@ -2,8 +2,6 @@
 
 <title>Requirements for building and using the kernel</title>
 
-<simplesect>
-
 <para>
 This chapter will describe all of the different programs that are necessary
 for you to be able to configure a kernel, build it, and then successfully
@@ -44,8 +42,6 @@ o  oprofile               0.9                     # oprofiled - -version
 o  udev                   081                     # udevinfo -V
 
 -->
-
-</simplesect>
 
 <sect1>
 <title>Tools to build the kernel</title>
@@ -104,10 +100,12 @@ files.  The <literal>binutils</literal> package also contains useful
 utilities that can manipulate object files in all sorts of different ways.
 </para>
 
+<para>
 <literal>binutils</literal> can usually be found in a distribution package
 called (obviously) <literal>binutils</literal>.  If you wish to download
 and install the package yourself, it can be found at
 <systemitem role="url">http://www.gnu.org/software/binutils/</systemitem>
+</para>
 
 <para>
 As of the 2.6.18 kernel release, the oldest version of binutils that will

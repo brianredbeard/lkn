@@ -4,8 +4,6 @@
 Kernel build command line reference
 </title>
 
-<simplesect>
-
 <para>
 As discussed in <xref linkend="LKN-chapter-building" />, the tool that
 ties together kernel builds is the <command>make</command> program, to
@@ -28,8 +26,6 @@ The options are broken down into different types in the following
 sections.
 
 </para>
-
-</simplesect>
 
 <sect1>
 <title>Cleaning options</title>

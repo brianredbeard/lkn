@@ -4,7 +4,6 @@
 Managing changes made to a kernel source tree
 </title>
 
-<simplesect>
 <remark>
 Based on the ideas presented at http://www.linuxjournal.com/article/6183
 </remark>
@@ -89,8 +88,6 @@ sharing patches: the traditional
 <command>quilt</command>, and the source control system developed
 specifically for the Linux kernel. <command>git</command>.
 </para>
-
-</simplesect>
 
 <sect1>
 <title>patch and diff</title>

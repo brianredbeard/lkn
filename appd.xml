@@ -4,7 +4,6 @@
 Helpful Utilities
 </title>
 
-<simplesect>
 <para>
 The act of retrieving, building, updating, and maintaining a Linux
 kernel source tree invoves a lot of different steps, as this book has
@@ -12,8 +11,6 @@ shown.  Developers being naturally lazy creatures, they have created
 some programs to help with the various routiene tasks.  Here we describe
 a few of these useful tools and the basics on how to use them.
 </para>
-</simplesect>
-
 
 <sect1>
 <title>ketchup</title>

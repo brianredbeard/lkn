@@ -98,8 +98,6 @@ Kernel Configuration Recipes
 <sect1>
 <title>Disks</title>
 
-<simplesect>
-
 <!--
 
   AO: We should have a little text between sect1 and sect2, although
@@ -112,8 +110,6 @@ The Linux kernel supports a wide range of different disk types.
 This section shows how to make sure the kernel can
 support a few of the more common types of disk controllers.
 </para>
-
-</simplesect>
 
 <sect2 id="lkn_usb_storage">
 <title>USB storage</title>
