@@ -71,57 +71,27 @@ subsystem or hardware being present in the system in order to work
 properly.
 </para>
 
-<refentry>
-  <refnamediv>
-    <refname>apic</refname>
-    <refpurpose>Change the output verbosity of the APIC subsystem when booting</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para><literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]</para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option changes how verbose the APIC subsystem is when booting
-	the kernel.
-	</para>
-</refsect1>
-</refentry>
+<sect2>
+<title>Console options</title>
 
-<refentry>
-  <refnamediv>
-    <refname>cachesize</refname>
-    <refpurpose>Override the level 2 CPU cache size detection by the kernel.</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para><literal>cachesize=</literal><emphasis>nn</emphasis></para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Sometimes CPU hardware bugs make them report the cache size
-	incorrectly. The kernel will attempt to work around and fix known
-	problems with most CPUs, but for some CPUs it is not possible to
-	determine what the correct size should be.  This option provides an
-	override for these situations.
-	<emphasis>nn</emphasis> is measured in units of bytes.
-	</para>
-</refsect1>
-</refentry>
+<para>
+These options all deal with the kernel log or console which is used for
+displaying kernel debug and error information.
+</para>
 
 <refentry>
   <refnamediv>
     <refname>console</refname>
     <refpurpose>Output console device and options.</refpurpose>
-  </refnamediv>  
+  </refnamediv>
   <refsynopsisdiv>
     <para><literal>console=</literal></para>
   </refsynopsisdiv>
   <refsect1>
-    <title>Description</title> <!-- or Options ? -->
+    <title>Options</title> <!-- Description or Options ?  I like options... -->
     <variablelist>
       <varlistentry>
-        <term><literal>tty[n]</literal></term> <!-- <replaceable> around [n] ? -->
+        <term><literal>tty[n]</literal></term>
         <listitem><para>Use the virtual console device [n].</para></listitem>
       </varlistentry>
       <varlistentry>
@@ -148,10 +118,12 @@ properly.
         <term><literal>uart,io,[addr][,options]</literal></term>
         <term><literal>uart,mmio,[addr][,options]</literal></term>
         <listitem>
-          <para>Start an early, polled-mode console on the 8250/16550
-		UART at the specified I/O port or MMIO address,
-		switching to the matching ttyS device later.  The
-		options are the same as for ttyS, above.</para>
+          <para>
+	  Start an early, polled-mode console on the 8250/16550 UART at the
+	  specified I/O port or MMIO address, switching to the matching
+	  ttyS device later.  The options are the same as for ttyS,
+	  above.
+	  </para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -220,6 +192,65 @@ properly.
 
 <refentry>
   <refnamediv>
+    <refname>debug</refname>
+    <refpurpose>Enable kernel debugging.</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will enable the kernel log level to default to the
+	debug level, so that all debug messages will be printed to the
+	console at boot time.
+	</para>
+</refsect1>
+</refentry>
+
+</sect2>
+
+<para>
+---------------------------------------------
+</para>
+
+<refentry>
+  <refnamediv>
+    <refname>apic</refname>
+    <refpurpose>Change the output verbosity of the APIC subsystem when booting</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para><literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]</para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option changes how verbose the APIC subsystem is when booting
+	the kernel.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>cachesize</refname>
+    <refpurpose>Override the level 2 CPU cache size detection by the kernel.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para><literal>cachesize=</literal><emphasis>nn</emphasis></para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Sometimes CPU hardware bugs make them report the cache size
+	incorrectly. The kernel will attempt to work around and fix known
+	problems with most CPUs, but for some CPUs it is not possible to
+	determine what the correct size should be.  This option provides an
+	override for these situations.
+	<emphasis>nn</emphasis> is measured in units of bytes.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
     <refname>crashkernel</refname>
     <refpurpose>Reserve a portion of physical memory for kexec to use</refpurpose>
   </refnamediv>
@@ -238,40 +269,6 @@ properly.
 	<emphasis>ss</emphasis> specifies the location for this memory
 	chunk and is measured in units of kilo, mega, or
 	gigabytes.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>debug</refname>
-    <refpurpose>Enable kernel debugging.</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option will enable the kernel log level to default to the
-	debug level, so that all debug messages will be printed to the
-	console at boot time.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
 	</para>
 </refsect1>
 </refentry>
@@ -934,30 +931,81 @@ properly.
 </refsect1>
 </refentry>
 
-<screen>
+<refentry>
+  <refnamediv>
+    <refname>migration_cost</refname>
+    <refpurpose>Override the default scheduler migrations costs</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>migration_cost=</literal>[<replaceable>level-1-useconds</replaceable>],[<replaceable>level-2-useconds</replaceable>]...
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is a debugging option that enables the default scheduler
+	migration cost matrix to be overridden.  The numbers specified by
+	<replaceable>level-N-useconds</replaceable> are indexed by
+	the "CPU domain distance" and are in microseconds.
+	</para>
+	<para>
+	An example of this option is
+	<literal>migration_cost=1000,2000,3000</literal> for a SMT NUMA
+	machine will set up an intra-core migration cost of 1 msec, an
+	inter-core migration cost of 2 msecs, and an inter-node migration
+	cost of 3 msecs.
+	</para>
+	<para>
+	WARNING: using the wrong values here can break scheduler
+	performance, so it should only be used for scheduler development
+	purposes, never for production environments.
+	</para>
+</refsect1>
+</refentry>
 
-migration_cost=
-	debug: override scheduler migration costs
-	Format: [level-1-usecs],[level-2-usecs],...
-	This debugging option can be used to override the default scheduler
-	migration cost matrix. The numbers are indexed by 'CPU domain
-	distance'.
-	E.g. migration_cost=1000,2000,3000 on an SMT NUMA box will set up an
-	intra-core migration cost of 1 msec, an inter-core migration cost of 2
-	msecs, and an inter-node migration cost of 3 msecs.
+<refentry>
+  <refnamediv>
+    <refname>migration_debug</refname>
+    <refpurpose>Migration cost auto-detect verbosity</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>migration_debug=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>|<replaceable>2</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This sets the migration cost debug levels.  If <literal>0</literal>
+	is specified, no extra messages will be printed to the kernel log.
+	This is the default value.  <literal>1</literal> will print some
+	information on how the matrix is determined and
+	<literal>2</literal> will be very verbose and only useful if you
+	use a serial console as the amount of information will overflow the
+	kernel log buffer.
+	</para>
+</refsect1>
+</refentry>
 
-	WARNING: using the wrong values here can break scheduler performance,
-	so it's only for scheduler development purposes, not production
-	environments.
-
-migration_debug=
-	migration cost auto-detect verbosity
-	Format=[0|1|2]
-	If a system's migration matrix reported at bootup seems erroneous then
-	this option can be used to increase verbosity of the detection process.
-	We default to 0 (no extra messages), 1 will print some more
-	information, and 2 will be really verbose (probably only useful if you
-	also have a serial console attached to the system).
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 migration_factor=
 	multiply/divide migration costs by a factor
@@ -973,82 +1021,527 @@ migration_factor=
 	so it's only for scheduler development purposes, not production
 	environments.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 nmi_watchdog=
 	Debugging features for SMP kernels
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 no387
 	Tells the kernel to use the 387 maths emulation library even if a 387
 	maths coprocessor is present.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 noapic
 	Tells the kernel to not make use of any IOAPICs that may be present in
 	the system.
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 noexec
 	noexec=on: enable non-executable mappings (default)
 	noexec=off: disable nn-executable mappings
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 nofxsr
 	Disables x86 floating point extended register save and restore. The
 	kernel will only save legacy floating-point registers on task switch.
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 no-hlt
 	Tells the kernel that the hlt instruction doesn't work correctly and
 	not to use it.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 noirqdebug
 	Disables the code which attempts to detect and disable unhandled
 	interrupt sources.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 noisapnp
 	Disables ISA PnP code.
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 noinitrd
 	Tells the kernel not to load any configured initial RAM disk.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 nolapic
 	Do not enable or use the local APIC.
 
-nomce
-	Machine Check Exception
+<refentry>
+  <refnamediv>
+    <refname>mce</refname>
+    <refpurpose>Enable the machine check exception feature</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Some processors have the ability to check for machine errors
+	(usually errors in the hardware).  This option turns this subsystem
+	on, if it has been built into the kernel configuration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>nomce</refname>
+    <refpurpose>Disable the machine check exception feature</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Some processors have the ability to check for machine errors
+	(usually errors in the hardware).  This option turns this subsystem
+	off, if it has been built into the kernel configuration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 noresume
 	Disables resume and restores original swap space.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 nosep
 	Disables x86 SYSENTER/SYSEXIT support.
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 nosmp
 	Tells an SMP kernel to act as a UP kernel.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 notsc
 	Disable Time Stamp Counter
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 panic=
 	Kernel behaviour on panic
 	Format: [timeout]
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 pause_on_oops=
 	Halt all CPUs after the first oops has been printed for the specified
 	number of seconds.  This is to be used if your oopses keep scrolling
 	off the screen.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 pnpbios=
 	{ on | off | curr | res | no-curr | no-res }
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 pnp_reserve_irq=
 	Exclude IRQs for the autoconfiguration
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 pnp_reserve_dma=
 	Exclude DMAs for the autoconfiguration
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 pnp_reserve_io=
 	Exclude I/O ports for the autoconfiguration Ranges are in pairs (I/O
 	port base and size).
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 pnp_reserve_mem=
 	Exclude memory regions for the autoconfiguration.
 	Ranges are in pairs (memory base and size).
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 profile=
 	Enable kernel profiling via /proc/profile
@@ -1056,68 +1549,411 @@ profile=
 	Param: "schedule" - profile schedule points.
 	Param: [number] - step/bucket size as a power of 2 for statistical time based profiling.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 prompt_ramdisk=
 	List of RAM disks to prompt for floppy disk before loading.
 	See Documentation/ramdisk.txt.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 quiet=
 	Disable log messages
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 ramdisk=
 	Sizes of RAM disks in kilobytes [deprecated]
 	See Documentation/ramdisk.txt.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 ramdisk_blocksize=
 	See Documentation/ramdisk.txt.
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 ramdisk_size=
 	Sizes of RAM disks in kilobytes
 	New name for the ramdisk parameter.
 	See Documentation/ramdisk.txt.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 rcu.blimit=
 	Set maximum number of finished RCU callbacks to process in one batch.
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 rcu.qhimark=
 	Set threshold of queued RCU callbacks over which batch limiting is
 	disabled.
 
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
 rcu.qlowmark=
 	Set threshold of queued RCU callbacks below which batch limiting is
 	re-enabled.
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
 
 rcu.rsinterval=
 	Set the number of additional RCU callbacks to queued before forcing
 	reschedule on all cpus.
 
-rdinit=
-	Format: [full_path]
-	Run specified binary instead of /init from the ramdisk,
-	used for early userspace startup. See initrd.
+<refentry>
+  <refnamediv>
+    <refname>rdinit</refname>
+    <refpurpose>Specify the init process is from the ramdisk</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rdinit=</literal><emphasis>full_path_name</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel to run the program specified by
+	<emphasis>full_path_name</emphasis> as the init process.  This file
+	is on the kernel ramdisk instead of on the root filesystem.
+	</para>
+</refsect1>
+</refentry>
 
-reserve=
-	Force the kernel to ignore some iomem area
+<refentry>
+  <refnamediv>
+    <refname>reserve</refname>
+    <refpurpose>Reserve some I/O memory</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>reserve=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This forces the kernel to ignore some of the I/O memory areas.
+	</para>
+</refsect1>
+</refentry>
 
-resume=
-	Specify the partition device for software suspend
+<refentry>
+  <refnamediv>
+    <refname>resume</refname>
+    <refpurpose>Specify the partition device for the suspend image</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>resume=</literal><emphasis>suspend_device</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel which disk device contains the
+	suspended kernel image.  If the data on the image is a valid kernel
+	image created by the software suspend subsystem, it will be loaded
+	into memory and the kernel will run it instead of continuing on
+	with the normal boot process.  <emphasis>suspend_device</emphasis>
+	is the kernel device name, which might be different from what
+	userspace thinks the device name is, so be careful with this.
+	</para>
+</refsect1>
+</refentry>
 
-ro
-	Mount root device read-only on boot
+<refentry>
+  <refnamediv>
+    <refname>ro</refname>
+    <refpurpose>Mount the root device read only on boot</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	The default for the kernel is to mount the root device as read only
+	at boot time.  This option ensures that this is the mode the kernel
+	uses (it overrides the <literal>rw</literal> command option, if it
+	had been specified earlier on the boot command line.)
+	</para>
+</refsect1>
+</refentry>
 
-root=
-	Root filesystem
+<refentry>
+  <refnamediv>
+    <refname>root</refname>
+    <refpurpose>Specify the root filesystem to boot from</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>root=</literal><emphasis>device</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel which disk device the root filesystem
+	image is on.
+	</para>
+	<para>
+	<emphasis>device</emphasis> can be specified in one of the
+	following ways:
+	<variablelist>
+	<varlistentry>
+        <term><emphasis>nnnn</emphasis></term>
+        <listitem><para>A device number in hexadecimal represents the major
+	and minor number of the device in the internal format that the
+	kernel expects.  This method is not recommended to use unless you
+	know exactly what you are doing</para></listitem>
+      	</varlistentry>
+	<varlistentry>
+        <term><literal>/dev/nfs</literal></term>
+        <listitem><para>This means to use the NFS disk specified by the
+	<literal>nfsroot</literal> boot option as the root disk.
+	</para></listitem>
+      	</varlistentry>
+	<varlistentry>
+        <term><literal>/dev/<emphasis>&lt;diskname&gt;</emphasis></literal></term>
+        <listitem><para>This means to use the kernel disk name specified by
+	<emphasis>&lt;diskname&gt;</emphasis> as the root disk.
+	</para></listitem>
+      	</varlistentry>
+	<varlistentry>
+        <term><literal>/dev/<emphasis>&lt;diskname&gt;&lt;decimal&gt;</emphasis></literal></term>
+        <listitem><para>This means to use the kernel disk name specified by
+	<emphasis>&lt;diskname&gt;</emphasis> and the partition specified
+	by <emphasis>&lt;decimal&gt;</emphasis> as the root disk.
+	</para></listitem>
+      	</varlistentry>
+	<varlistentry>
+        <term><literal>/dev/<emphasis>&lt;diskname&gt;</emphasis>p<emphasis>&lt;decimal&gt;</emphasis></literal></term>
+        <listitem><para>This means to use the kernel disk name specified by
+	<emphasis>&lt;diskname&gt;</emphasis> and the partition specified
+	by <emphasis>&lt;decimal&gt;</emphasis> as the root disk.  This is
+	the same as above, but it is needed when the
+	<emphasis>&lt;diskname&gt;</emphasis> ends with a digit.
+	</para></listitem>
+      	</varlistentry>
+	</variablelist>
+	</para>
+</refsect1>
+</refentry>
 
-rootdelay=
-	Delay (in seconds) to pause before attempting to mount the root
-	filesystem
+<refentry>
+  <refnamediv>
+    <refname>rootdelay</refname>
+    <refpurpose>Time to delay before attempting to mount the root filesystem</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rootdelay=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel to wait <emphasis>nn</emphasis>
+	seconds before trying to mount the root filesystem.  This can be
+	useful if the root filesystem is on a USB or Firewire device, as
+	those disk devices take a bit longer to be discovered by the
+	kernel.
+	</para>
+</refsect1>
+</refentry>
 
-rootflags=
-	Set root filesystem mount option string
+<refentry>
+  <refnamediv>
+    <refname>rootflags</refname>
+    <refpurpose>The root filesystem mount options</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rootflags=</literal><emphasis>options</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This sets the mount options that the kernel should use in mounting
+	the root filesystem.  The <emphasis>options</emphasis> value
+	depending on the filesystem type, see the documentation for the
+	individual types for details on what is valid.
+	</para>
+</refsect1>
+</refentry>
 
-rootfstype=
-	Set root filesystem type
-
-</screen>
+<refentry>
+  <refnamediv>
+    <refname>rootfstype</refname>
+    <refpurpose>The root filesystem type</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rootfstype=</literal><emphasis>type</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is the type of filesystem to try to mount the root filesystem
+	as.  <emphasis>type</emphasis> is a string containing the name of
+	the filesystem type.
+	</para>
+</refsect1>
+</refentry>
 
 <refentry>
   <refnamediv>
