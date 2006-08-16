@@ -272,7 +272,7 @@ important is that the command shows some SATA devices.
 
 <para>
 SATA disks use a kernel library called <emphasis>libata</emphasis> that handles most of the
-SATA specific functionality.  That library uses the SCSI layer to talk
+SATA-specific functionality.  That library uses the SCSI layer to talk
 to the block layer, so many different kernel options need to be enabled
 in order for SATA disks to work properly.
 Enable PCI support for the kernel:
