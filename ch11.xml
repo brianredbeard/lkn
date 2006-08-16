@@ -205,6 +205,25 @@ displaying kernel debug and error information.
 </refsect1>
 </refentry>
 
+<refentry>
+  <refnamediv>
+    <refname>quiet</refname>
+    <refpurpose>Disable all log messages</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>quiet=</literal>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option sets the default kernel log level to KERN_ERR (3) which
+	means that the kernel boot process is very quiet.
+	</para>
+</refsect1>
+</refentry>
+
 </sect2>
 
 <para>
@@ -990,262 +1009,194 @@ displaying kernel debug and error information.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>migration_factor</refname>
+    <refpurpose>Multiply or divide the migration costs</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>migration_factor=</literal><emphasis>percent</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	</para>
-</refsect1>
-</refentry>
-
-migration_factor=
-	multiply/divide migration costs by a factor
-	Format=[percent]
-	This debug option can be used to proportionally increase or decrease
+	This allows the default migration costs to be modified by the
+	specified <emphasis>percentage</emphasis>.
+	This is a debugging option that can be used to proportionally increase or decrease
 	the auto-detected migration costs for all entries of the migration
-	matrix.  E.g. migration_factor=150 will increase migration costs by
-	50%. (and thus the scheduler will be less eager migrating cache-hot
-	tasks) migration_factor=80 will decrease migration costs by 20%. (thus
-	the scheduler will be more eager to migrate tasks)
+	matrix.  For example, <literal>migration_factor=150</literal> will
+	increase migration costs by 50% and thus the scheduler will be less
+	eager to migrate cache-hot tasks.
+	<literal>migration_factor=80</literal> will decrease migration
+	costs by 20% thus making the scheduler will be more eager to
+	migrate tasks.
+	</para>
+	<para>
+	WARNING: using the wrong values here can break scheduler
+	performance, so it should only be used for scheduler development
+	purposes, never for production environments.
+	</para>
+</refsect1>
+</refentry>
 
-	WARNING: using the wrong values here can break scheduler performance,
-	so it's only for scheduler development purposes, not production
-	environments.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>nmi_watchdog</refname>
+    <refpurpose>Set the NMI watchdog value</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>nmi_watchdog=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>|<replaceable>2</replaceable>|<replaceable>3</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This is a debugging feature that allows the user to override the
+	default NMI watchdog value. <literal>0</literal> specifies that no
+	NMI watchdog should be used.  <literal>1</literal> specifies that
+	the APIC should be used if present.  <literal>2</literal> specifies
+	that the local APIC should be used if present.
+	<literal>3</literal> means that the NMI watchdog is invalid so do
+	not use it.
 	</para>
 </refsect1>
 </refentry>
 
-nmi_watchdog=
-	Debugging features for SMP kernels
+<refentry>
+  <refnamediv>
+    <refname>no387</refname>
+    <refpurpose>Always use the 387 emulation library</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel to always use the 387 math emulation
+	library even if a 387 math coprocessor is present in the system.
+	</para>
+</refsect1>
+</refentry>
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>noapic</refname>
+    <refpurpose>Do not use any IOAPICs in the system</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This options specifies that the kernel should not use any of the
+	IOAPICs that might be present in the system.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>noexec</refname>
+    <refpurpose>Enable or disable non-executable mappings</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>noexec=</literal>[<replaceable>on</replaceable>(default)|<replaceable>off</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This enables or disables the kernel's ability to map sections of
+	memory as non-executable.
 	</para>
 </refsect1>
 </refentry>
-
-no387
-	Tells the kernel to use the 387 maths emulation library even if a 387
-	maths coprocessor is present.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>nofxsr</refname>
+    <refpurpose>Disable x86 floating point save and restore</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option disables the x86 floating point extended register save
+	and restore. The kernel will only save legacy floating-point
+	registers on task switch.
 	</para>
 </refsect1>
 </refentry>
-
-noapic
-	Tells the kernel to not make use of any IOAPICs that may be present in
-	the system.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>no-hlt</refname>
+    <refpurpose>Do not use the <literal>hlt</literal> instruction</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option tells the kernel that the <literal>hlt</literal>
+	instruction does not work correctly for this processor and that it
+	should not use it.
 	</para>
 </refsect1>
 </refentry>
-
-noexec
-	noexec=on: enable non-executable mappings (default)
-	noexec=off: disable nn-executable mappings
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>noirqdebug</refname>
+    <refpurpose>Disable unhandled interrupt detection</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	The kernel by default attempts to detect and disable unhandled
+	interrupt sources as they can cause problems with the
+	responsiveness of the rest of the kernel if left unchecked.  This
+	option will disable this logic.
 	</para>
 </refsect1>
 </refentry>
-
-nofxsr
-	Disables x86 floating point extended register save and restore. The
-	kernel will only save legacy floating-point registers on task switch.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>noisapnp</refname>
+    <refpurpose>Disable the ISA PnP subsystem</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	Disable the ISA PnP subsystem, if it has been enabled in the kernel
+	configuration.
 	</para>
 </refsect1>
 </refentry>
-
-no-hlt
-	Tells the kernel that the hlt instruction doesn't work correctly and
-	not to use it.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>noinitrd</refname>
+    <refpurpose>Do not use any initrd</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option tells the kernel to not load any initial ram disk, even
+	if it is configured in other options passed to the kernel.
 	</para>
 </refsect1>
 </refentry>
-
-noirqdebug
-	Disables the code which attempts to detect and disable unhandled
-	interrupt sources.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>nolapic</refname>
+    <refpurpose>Do not use the local APIC</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option tells the kernel to not use the local APIC.
 	</para>
 </refsect1>
 </refentry>
-
-noisapnp
-	Disables ISA PnP code.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-noinitrd
-	Tells the kernel not to load any configured initial RAM disk.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-nolapic
-	Do not enable or use the local APIC.
 
 <refentry>
   <refnamediv>
@@ -1279,480 +1230,287 @@ nolapic
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>noresume</refname>
+    <refpurpose>Disable resume</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option disables the resume functionality of the kernel and any
+	swap partitions that were being used to hold system images to be
+	restored to will be reverted back to swap space.
 	</para>
 </refsect1>
 </refentry>
-
-noresume
-	Disables resume and restores original swap space.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>nosep</refname>
+    <refpurpose>Disable x86 SYSENTER/SYSEXIT support</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option disables x86 SYSENTER/SYSEXIT support in the kernel,
+	which can cause some system calls to take longer than if this was
+	enabled.
 	</para>
 </refsect1>
 </refentry>
-
-nosep
-	Disables x86 SYSENTER/SYSEXIT support.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>nosmp</refname>
+    <refpurpose>Run as a single processor machine</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option tells a SMP kernel to act as a single processor kernel,
+	no matter how many processors are present on the system.
 	</para>
 </refsect1>
 </refentry>
-
-nosmp
-	Tells an SMP kernel to act as a UP kernel.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>notsc</refname>
+    <refpurpose>Disable the time stamp counter</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option disables the Time Stamp Counter hardware in the system,
+	if present.
 	</para>
 </refsect1>
 </refentry>
-
-notsc
-	Disable Time Stamp Counter
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>panic</refname>
+    <refpurpose>Timeout until the machine is rebooted on panic</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>panic=</literal><emphasis>nn</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option specifies the ammount of time in seconds that the
+	kernel should wait after a panic happens before it reboots.  If
+	this is set to <literal>0</literal> (the default value) the kernel
+	will not reboot after panicking.
 	</para>
 </refsect1>
 </refentry>
-
-panic=
-	Kernel behaviour on panic
-	Format: [timeout]
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>pause_on_oops</refname>
+    <refpurpose>Delay between kernel oopses</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>pause_on_oops=</literal><emphasis>nn</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option tells the kernel to halt all CPUs after the first oops
+	for <emphasis>nn</emphasis> seconds before continuing on.  This is
+	useful if oopses keep scrolling off of the screen before you can
+	write them down or take a picture of them.
 	</para>
 </refsect1>
 </refentry>
-
-pause_on_oops=
-	Halt all CPUs after the first oops has been printed for the specified
-	number of seconds.  This is to be used if your oopses keep scrolling
-	off the screen.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>pnpbios</refname>
+    <refpurpose>PnP BIOS settings</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>pnpbios=</literal>[<replaceable>on</replaceable>|<replaceable>off</replaceable>|<replaceable>curr</replaceable>|<replaceable>no-curr</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option sets the main PnP BIOS settings.  <literal>on</literal>
+	enables the PnP BIOS subsystem.  <literal>off</literal> disables
+	the PnP BIOS subsystem.  <literal>cur</literal> tells the PnP BIOS
+	subsystem to use the current static settings and
+	<literal>no-curr</literal> tells the subsystem to probe for dynamic
+	settings if possible.
 	</para>
 </refsect1>
 </refentry>
-
-pnpbios=
-	{ on | off | curr | res | no-curr | no-res }
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>pnp_reserve_irq</refname>
+    <refpurpose>PnP BIOS reserved IRQs</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>pnp_reserve_irq=</literal><emphasis>irq1</emphasis>[<literal>,</literal><emphasis>irq2</emphasis>]<literal>,</literal>...
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option is a list of the IRQs that the PnP BIOS subsystem
+	should not use for autoconfiguration.
 	</para>
 </refsect1>
 </refentry>
-
-pnp_reserve_irq=
-	Exclude IRQs for the autoconfiguration
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>pnp_reserve_dma</refname>
+    <refpurpose>PnP BIOS reserved DMAs</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>pnp_reserve_dma=</literal><emphasis>dma1</emphasis>[<literal>,</literal><emphasis>dma2</emphasis>]<literal>,</literal>...
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option is a list of the DMAs that the PnP BIOS subsystem
+	should not use for autoconfiguration.
 	</para>
 </refsect1>
 </refentry>
-
-pnp_reserve_dma=
-	Exclude DMAs for the autoconfiguration
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>pnp_reserve_io</refname>
+    <refpurpose>PnP BIOS reserved I/O ports</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>pnp_reserve_io=</literal><emphasis>io1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>io2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This is a list of the I/O ports and size that the PnP BIOS
+	subsystem should not use for autoconfiguration.
 	</para>
 </refsect1>
 </refentry>
-
-pnp_reserve_io=
-	Exclude I/O ports for the autoconfiguration Ranges are in pairs (I/O
-	port base and size).
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>pnp_reserve_mem</refname>
+    <refpurpose>PnP BIOS reserved memory regions</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>pnp_reserve_mem=</literal><emphasis>mem1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>mem2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This is a list of the memory locations and size that the PnP BIOS
+	subsystem should not use for autoconfiguration.
 	</para>
 </refsect1>
 </refentry>
-
-pnp_reserve_mem=
-	Exclude memory regions for the autoconfiguration.
-	Ranges are in pairs (memory base and size).
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>profile</refname>
+    <refpurpose>Control the kernel profiling</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>profile=</literal>[<replaceable>schedule</replaceable><literal>,</literal>][<emphasis>number</emphasis>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option affects how the kernel profiler is calculated.  If
+	<literal>schedule</literal> is specified the schedule points are
+	affected by the value set in <emphasis>number</emphasis>.  If
+	<literal>schedule</literal> is not specified, then
+	<emphasis>number</emphasis> is the step size as a power of two for
+	the statistical time based profiling of the kernel.
+	</para>
+	<para>
+	The most common use of this option is <literal>profile=2</literal>
 	</para>
 </refsect1>
 </refentry>
-
-profile=
-	Enable kernel profiling via /proc/profile
-	Format: [schedule,][number]
-	Param: "schedule" - profile schedule points.
-	Param: [number] - step/bucket size as a power of 2 for statistical time based profiling.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>prompt_ramdisk</refname>
+    <refpurpose>Prompt for the list of ramdisks</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>prompt_ramdisk=1</literal>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	If this option is present, the kernel will prompt the user for the
+	initial ramdisk before attempting to read it from the floppy drive.
 	</para>
 </refsect1>
 </refentry>
-
-prompt_ramdisk=
-	List of RAM disks to prompt for floppy disk before loading.
-	See Documentation/ramdisk.txt.
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>ramdisk_blocksize</refname>
+    <refpurpose>Blocksize of the ramdisk</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>ramdisk_blocksize=</literal><emphasis>nn</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option tells the ramdisk driver how many bytes to use per
+	block.  If it is not specified the default value is 1024.
 	</para>
 </refsect1>
 </refentry>
-
-quiet=
-	Disable log messages
 
 <refentry>
   <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
+    <refname>ramdisk_size</refname>
+    <refpurpose>Size of the ramdisk</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    <literal>ramdisk_size=</literal><emphasis>nn</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+	This option specifies the size of the initial RAM disk in
+	kilobytes.  If this option is not specified, the default size will
+	be 4096 (4 MB).  This option should be used instead of the older
+	<literal>ramdisk</literal> command line option.
 	</para>
 </refsect1>
 </refentry>
-
-ramdisk=
-	Sizes of RAM disks in kilobytes [deprecated]
-	See Documentation/ramdisk.txt.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-ramdisk_blocksize=
-	See Documentation/ramdisk.txt.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-ramdisk_size=
-	Sizes of RAM disks in kilobytes
-	New name for the ramdisk parameter.
-	See Documentation/ramdisk.txt.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-rcu.blimit=
-	Set maximum number of finished RCU callbacks to process in one batch.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-rcu.qhimark=
-	Set threshold of queued RCU callbacks over which batch limiting is
-	disabled.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-rcu.qlowmark=
-	Set threshold of queued RCU callbacks below which batch limiting is
-	re-enabled.
-
-<refentry>
-  <refnamediv>
-    <refname>
-    </refname>
-    <refpurpose>
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	</para>
-</refsect1>
-</refentry>
-
-rcu.rsinterval=
-	Set the number of additional RCU callbacks to queued before forcing
-	reschedule on all cpus.
 
 <refentry>
   <refnamediv>
@@ -1866,20 +1624,20 @@ rcu.rsinterval=
 	</para></listitem>
       	</varlistentry>
 	<varlistentry>
-        <term><literal>/dev/<emphasis>&lt;diskname&gt;</emphasis></literal></term>
+        <term><literal>/dev/</literal><emphasis>&lt;diskname&gt;</emphasis></term>
         <listitem><para>This means to use the kernel disk name specified by
 	<emphasis>&lt;diskname&gt;</emphasis> as the root disk.
 	</para></listitem>
       	</varlistentry>
 	<varlistentry>
-        <term><literal>/dev/<emphasis>&lt;diskname&gt;&lt;decimal&gt;</emphasis></literal></term>
+        <term><literal>/dev/</literal><emphasis>&lt;diskname&gt;&lt;decimal&gt;</emphasis></term>
         <listitem><para>This means to use the kernel disk name specified by
 	<emphasis>&lt;diskname&gt;</emphasis> and the partition specified
 	by <emphasis>&lt;decimal&gt;</emphasis> as the root disk.
 	</para></listitem>
       	</varlistentry>
 	<varlistentry>
-        <term><literal>/dev/<emphasis>&lt;diskname&gt;</emphasis>p<emphasis>&lt;decimal&gt;</emphasis></literal></term>
+        <term><literal>/dev/</literal><emphasis>&lt;diskname&gt;</emphasis><literal>p</literal><emphasis>&lt;decimal&gt;</emphasis></term>
         <listitem><para>This means to use the kernel disk name specified by
 	<emphasis>&lt;diskname&gt;</emphasis> and the partition specified
 	by <emphasis>&lt;decimal&gt;</emphasis> as the root disk.  This is
@@ -2055,6 +1813,93 @@ rcu.rsinterval=
 	</para>
 </refsect1>
 </refentry>
+
+<sect2>
+<title>RCU options</title>
+
+<para>
+Read Copy Update (RCU) is a portion of the kernel that handles locking for
+a variety of subsystems in a lock-less manner.  There are a number of
+options that can be used to tune RCU in different ways:
+</para>
+
+<refentry>
+  <refnamediv>
+    <refname>rcu.blimit</refname>
+    <refpurpose>RCU batch limit</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rcu.blimit=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option sets the maximum number of finished RCU callbacks to
+	process in one batch.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>rcu.qhimark</refname>
+    <refpurpose>RCU queue high level</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rcu.qhimark=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option sets the threshold of queued RCU callbacks over which
+	batch limiting is disabled.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>rcu.qlowmark</refname>
+    <refpurpose>RCU queue low level</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rcu.qlowmark=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option sets the threshold of queued RCU callbacks below which
+	batch limiting is re-enabled.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>rcu.rsinterval</refname>
+    <refpurpose>RCU callback queue length</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rcu.rsinterval=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option set the number of additional RCU callbacks that should
+	bee queued before forcing a reschedule on all cpus.
+	</para>
+</refsect1>
+</refentry>
+
+</sect2>
 
 </sect1>
 
