@@ -70,7 +70,7 @@ Note that all of these paramaters are case sensitive.
 <refentry>
   <refnamediv>
     <refname>nousb</refname>
-    <refpurpose>Disable the USB subsystem</refpurpose> 
+    <refpurpose>Disable the USB subsystem</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
@@ -907,41 +907,64 @@ kernel directory, <filename>Documentation/scsi/</filename> for details
 on these.
 </para>
 
-<screen>
-max_luns=
-	Maximum number of LUNs to probe.
-	Should be between 1 and 2^32-1.
+<refentry>
+  <refnamediv>
+    <refname>max_luns</refname>
+    <refpurpose>The maximum number of SCSI LUNS to probe</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>max_luns=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specifies the maximum number of SCSI LUNS that the system should
+	probe.  <emphasis>nn</emphasis> is a number between 1 and
+	4294967295.
+	</para>
+</refsect1>
+</refentry>
 
-max_report_luns=
-	Maximum number of LUNs received.
-	Should be between 1 and 16384.
+<refentry>
+  <refnamediv>
+    <refname>max_report_luns</refname>
+    <refpurpose>The maximum number of SCSI LUNS received</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>max_report_luns=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specifies the maximum number of SCSI LUNs that the system can
+	receive.  <emphasis>nn</emphasis> is a number between 1 and 16384.
+	</para>
+</refsect1>
+</refentry>
 
-osst=
-	SCSI Tape Driver
-	Format: [buffer_size],[write_threshold]
-	See also Documentation/scsi/st.txt.
+<refentry>
+  <refnamediv>
+    <refname>scsi_dev_flags</refname>
+    <refpurpose>SCSI black/white list</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>scsi_dev_flags=</literal><emphasis>vendor</emphasis><literal>:</literal><emphasis>model</emphasis><literal>:</literal><emphasis>flags</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets the user add entries to the SCSI black/white list
+	for a specific vendor and model of device.
+	</para>
+</refsect1>
+</refentry>
 
-scsi_debug_*=
-	See drivers/scsi/scsi_debug.c.
-
-scsi_default_dev_flags=
-	SCSI default device flags
-	Format: [integer]
-
-scsi_dev_flags=
-	Black/white list entry for vendor and model
-	Format: [vendor]:[model]:[flags]
-	(flags are integer value)
-
-scsi_logging=
-
-sg_def_reserved_size=
-
-st=
-	SCSI tape parameters (buffers, etc.)
-	See Documentation/scsi/st.txt.
-
-</screen>
 </sect1>
 
 
@@ -1256,45 +1279,114 @@ you have present in the system.
 </refsect1>
 </refentry>
 
-<screen>
-lp=0
-lp=port[,port...]
-lp=reset
-lp=auto
-	Specify parallel ports to use, e.g, lp=none,parport0 (lp0 not
-	configured, lp1 uses first parallel port). 'lp=0' disables the printer
-	driver. 'lp=reset' (which can be specified in addition to the ports)
-	causes attached printers to be reset. Using lp=port1,port2,...
-	specifies the parallel ports to associate lp devices with, starting
-	with lp0. A port specification may be 'none' to skip that lp device, or
-	a parport name such as 'parport0'. Specifying 'lp=auto' instead of a
-	port specification list means that device IDs from each port should be
-	examined, to see if an IEEE 1284-compliant printer is attached; if so,
-	the driver will manage that printer.  See also header of
-	drivers/char/lp.c.
+<refentry>
+  <refnamediv>
+    <refname>lp</refname>
+    <refpurpose>Specify the parallel port to use and the mode of it.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>lp=</literal>[<replaceable>0</replaceable>|<replaceable>port</replaceable>[,<replaceable>port</replaceable>...]|<replaceable>reset</replaceable>|<replaceable>auto</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specify the parallel port to use.  An example of this would be
+	<literal>lp=none,parport0</literal> which would not configure
+	the <literal>lp0</literal> device, and the <literal>lp1</literal>
+	device would use the first parallel port.
+	</para>
+	<para>
+	If using the format, <literal>lp=port1,port2...</literal> the
+	specified parallel ports would be associated with the different
+	devices, starting with <literal>lp0</literal>.
+	</para>
+	<para>
+	<literal>lp=0</literal> disables the printer driver.
+	</para>
+	<para>
+	<literal>lp=reset</literal> causes the attached printers to be
+	reset.  This option can be combined with the port specifications.
+	</para>
+	<para>
+	<literal>lp=auto</literal> instead of a port specification list
+	causes the device ids from each port will be examined by the kernel
+	to determine if a IEEE 1284-compatible printer is attached.  If so,
+	the kernel will manage that printer.
+	</para>
 
-parport=
-	Specify parallel ports. 0 disables.
-	Format: { 0 | auto | 0xBBB[,IRQ[,DMA]] }
-	Use 'auto' to force the driver to use any IRQ/DMA settings detected
-	(the default is to ignore detected IRQ/DMA settings because of possible
-	conflicts). You can specify the base address, IRQ, and DMA settings;
-	IRQ and DMA should be numbers, or 'auto' (for using detected settings
-	on that particular port), or 'nofifo' (to avoid using a FIFO even if it
-	is detected).  Parallel ports are assigned in the order they are
-	specified on the command line, starting with parport0.
+</refsect1>
+</refentry>
 
-parport_init_mode=
-	Configure VIA parallel port to operate in a specific mode. This is
-	necessary on Pegasos computer where firmware has no options for setting
-	up parallel port mode and sets it to spp.  Currently this function
-	knows 686a and 8231 chips.
-	Format: [spp|ps2|epp|ecp|ecpepp]
+<refentry>
+  <refnamediv>
+    <refname>parport</refname>
+    <refpurpose>Specify the parallel port parameters</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>parport=</literal>[<replaceable>0</replaceable>|<replaceable>auto</replaceable>|<replaceable>0x</replaceable><emphasis>BBBB</emphasis>[,<emphasis>IRQ</emphasis>[,<emphasis>DMA</emphasis>]]]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This sets the parallel port driver to use these specific settings
+	instead of any others.  Use <literal>auto</literal> to force the
+	driver to use any IRQ/DMA settings detected (the default is to
+	ignore detected IRQ/DMA settings because of possible conflicts).
+	You can specify the base address, IRQ, and DMA settings;
+	IRQ and DMA should be numbers, or <literal>auto</literal> (for
+	using detected settings on that particular port), or
+	<literal>nofifo</literal> (to avoid using a FIFO even if it is
+	detected).  Parallel ports are assigned in the order they are
+	specified on the command line, starting with
+	<literal>parport0</literal>.
+	</para>
+</refsect1>
+</refentry>
 
-nr_uarts=
-	maximum number of UARTs to be registered.
+<refentry>
+  <refnamediv>
+    <refname>parport_init_mode</refname>
+    <refpurpose>Configure the parallel port initialization mode</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>parport_init_mode=</literal>[<replaceable>spp</replaceable>|<replaceable>ps2</replaceable>|<replaceable>epp</replaceable>|<replaceable>ecp</replaceable>|<replaceable>ecpepp</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specifies the mode that the parallel port should be operated in.
+	This is necessary on the Pegasos computer where the firmware has no
+	options for setting up the parallel port mode.  This function works
+	for parallel port chips of type 686a and 8231.
+	</para>
+</refsect1>
+</refentry>
 
-</screen>
+<refentry>
+  <refnamediv>
+    <refname>nr_uarts</refname>
+    <refpurpose>Maximum number of UARTs to be registered</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>nr_uarts=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Specifies the maximum number of different UARTs that can be
+	registered in the kernel.
+	</para>
+</refsect1>
+</refentry>
+
 </sect1>
 
 
@@ -1405,6 +1497,31 @@ These options specify different paramaters for the timer.
 	</para>
 </refsect1>
 </refentry>
+
+<!--
+
+template for options...
+
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	</para>
+</refsect1>
+</refentry>
+
+-->
 
 
 </sect1>
