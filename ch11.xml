@@ -63,15 +63,6 @@ Note that all of these paramaters are case sensitive.
 
 
 <sect1>
-<title>Options not requiring hardware</title>
-
-<para>
-These options should always be available, and not depend on any specific
-subsystem or hardware being present in the system in order to work
-properly.
-</para>
-
-<sect2>
 <title>Console options</title>
 
 <para>
@@ -129,7 +120,6 @@ displaying kernel debug and error information.
     </variablelist>
   </refsect1>
 </refentry>
-
 
 <refentry>
   <refnamediv>
@@ -224,95 +214,6 @@ displaying kernel debug and error information.
 </refsect1>
 </refentry>
 
-</sect2>
-
-<para>
----------------------------------------------
-</para>
-
-<refentry>
-  <refnamediv>
-    <refname>apic</refname>
-    <refpurpose>Change the output verbosity of the APIC subsystem when booting</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para><literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]</para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option changes how verbose the APIC subsystem is when booting
-	the kernel.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>cachesize</refname>
-    <refpurpose>Override the level 2 CPU cache size detection by the kernel.</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para><literal>cachesize=</literal><emphasis>nn</emphasis></para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Sometimes CPU hardware bugs make them report the cache size
-	incorrectly. The kernel will attempt to work around and fix known
-	problems with most CPUs, but for some CPUs it is not possible to
-	determine what the correct size should be.  This option provides an
-	override for these situations.
-	<emphasis>nn</emphasis> is measured in units of bytes.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>crashkernel</refname>
-    <refpurpose>Reserve a portion of physical memory for kexec to use</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para><literal>crashkernel=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]@<emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]</para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	The kexec subsystem likes to have a portion of physical memory to
-	use.  This option reserves that memory from the rest of the kernel
-	and will switch to use it if the kernel panics.
-	<emphasis>nn</emphasis> specifies the amount of memory to reserve
-	and is measured in units of kilo, mega, or
-	gigabytes.
-	<emphasis>ss</emphasis> specifies the location for this memory
-	chunk and is measured in units of kilo, mega, or
-	gigabytes.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>dhash_entries</refname>
-    <refpurpose>Set the number of dentry hash buckets.
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>dhash_entries=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option lets you override the default number of hash buckets
-	for the kernel's dentry cache.  Only use this if you know what you
-	are doing.
-	</para>
-</refsect1>
-</refentry>
-
 <refentry>
   <refnamediv>
     <refname>earlyprintk</refname>
@@ -340,333 +241,6 @@ displaying kernel debug and error information.
 	Append the string <literal>,keep</literal> to not disable the
 	messages when the real kernel console is initializes and takes over
 	the system.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>elevator</refname>
-    <refpurpose>Sets the default I/O scheduler elevator
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>elevator=</literal>[<replaceable>anticipatory</replaceable>|<replaceable>cfg</replaceable>|<replaceable>deadline</replaceable>|<replaceable>noop</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This sets the default I/O scheduler to be the one specified.  See
-	<xref linkend="CONFIG_IOSCHED_NOOP" /> for a list of the different
-	I/O schedulers available, and what they do.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>elfcorehdr
-    </refname>
-    <refpurpose>Specify the start of the kernel core image elf header</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>elfcorhdr=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This will specify the physical address that the kernel core image's
-	elf header is at.  This is used by kexec to find the kernel when
-	booting the secondary kernel image.  <emphasis>nn</emphasis> is a
-	memory location.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>hashdist</refname>
-    <refpurpose>Distribute large hashes across NUMA nodes</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>hashdist=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Large hashs that are allocated during the boot process are by
-	default on the IA-64 platform distributed across the different NUMA
-	nodes.  This option lets the user turn this option on or off.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>highmem</refname>
-    <refpurpose>Specify the size of the highmem memory zone</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>highmem=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option will force the highmem memory zone to have an exact
-	size of <emphasis>nn</emphasis> bytes.  This will work even on
-	boxes that have no highmem zones by default.  It will can also
-	reduce the size of the highmem zone for machines with a lot of
-	memory.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>hugepages</refname>
-    <refpurpose>Set the number of hugetlb pages</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>hugepages=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Set the maximum number of hugetlb pages to be
-	<emphasis>nn</emphasis>.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>noirqbalance</refname>
-    <refpurpose>Disable kernel irq balancing</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option will disable all of the built in kernel irq balancing logic.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>ihash_entries</refname>
-    <refpurpose>Set the number of inode hash buckets.
-    </refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>ihash_entries=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option lets you override the default number of hash buckets
-	for the kernel's inode cache.  Only use this if you know what you
-	are doing.
-	</para>
-</refsect1>
-</refentry>
-
-
-<refentry>
-  <refnamediv>
-    <refname>init</refname>
-    <refpurpose>Set the program to run at init time</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>init=</literal><emphasis>filename</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Run the specified binary as the init process instead of the default
-	<filename>/sbin/init</filename> program.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>initcall_debug</refname>
-    <refpurpose>Debug the initcall functions in the kernel</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option causes the kernel to trace all initcalls as they are
-	executed during the boot process.  It is useful for working out
-	where the kernel is dying during startup.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>initrd</refname>
-    <refpurpose>Specify where the initial ramdisk is located</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>initrd=</literal><emphasis>filename</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option specifies where the initial ramdisk for the kernel boot
-	is located.  Please see <xref linkend="LKN-initramfs" /> for more
-	information about kernel ramdisks.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>combined_mode</refname>
-    <refpurpose>Specify IDE driver usage</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>combined_mode=</literal>[<replaceable>combined</replaceable>|<replaceable>ide</replaceable>|<replaceable>libata</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option controls which driver use the IDE ports in combined
-	mode: the legacy IDE driver, libata, or both.  Note that using the
-	ide or libata options may affect your device naming (e.g. by
-	changing hdc to sdb).
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>irqfixup</refname>
-    <refpurpose>Fix IRQ issues</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	When an interrupt is not handled, search all known interrupt
-	handlers for it.  This is Intended to get systems with badly broken
-	firmware running.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>irqpoll</refname>
-    <refpurpose>Fix IRQ issues</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	When an interrupt is not handled search all known interrupt
-	handlers for it and also check all handlers each timer interrupt.
-	This is intended to get systems with badly broken firmware running.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>isolcpus</refname>
-    <refpurpose>Isolate CPUs from the kernel scheduler</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>isolcpus=</literal>[<emphasis>cpu_number</emphasis>]<literal>,</literal>...<literal>,</literal>[<emphasis>cpu_number</emphasis>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This is used to remove the specified cpus, as defined by the
-	<emphasis>cpu_number</emphasis> values, from the general kernel
-	SMP balancing and scheduler algroithms.  The only way to move a
-	process onto or off an "isolated" CPU is via the CPU affinity syscalls.
-	<emphasis>cpu_number</emphasis> begins at <literal>0</literal> and
-	the maximum value is "number of CPUs in system - 1".
-	</para>
-	<para>
-	This option is the preferred way to isolate CPUs.  The alternative,
-	manually setting the CPU mask of all tasks in the system, can cause
-	problems and suboptimal load balancer performance.
-	</para>
-</refsect1>
-</refentry>
-
-
-<refentry>
-  <refnamediv>
-    <refname>kstack</refname>
-    <refpurpose>How many words of the stack to print in kernel oopses</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>kstack=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This specifies how many words from the kernel stack should be
-	printed in the kernel oops dumps.  <emphasis>nn</emphasis> is an
-	integer value.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>lapic</refname>
-    <refpurpose>Enable the local APIC</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option will cause the kernel to enable the local APIC even if
-	the BIOS had disabled it.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>load_ramdisk</refname>
-    <refpurpose>Load a kernel ramdisk from a floppy</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>load_ramdisk=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	If <emphasis>nn</emphasis> is set to <literal>1</literal> than a
-	ramdisk will be loaded by the kernel at boot time from the floppy
-	drive.
 	</para>
 </refsect1>
 </refentry>
@@ -781,69 +355,248 @@ displaying kernel debug and error information.
 
 <refentry>
   <refnamediv>
-    <refname>lpj</refname>
-    <refpurpose>Set the loops per jiffy</refpurpose>
+    <refname>initcall_debug</refname>
+    <refpurpose>Debug the initcall functions in the kernel</refpurpose>
   </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>lpg=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies the loops per jiffy that should be used by the
-	kernel and thus have the kernel avoid the time-consuming boot time
-	autodetection of this value.  If <emphasis>nn</emphasis> is
-	<literal>0</literal> then the value will be autodetected like
-	normal.
-	</para>
-	<para>
-	Note that on SMP systems, this value will be set to all CPUs, which
-	might cause problems if the different CPUs need different settings.
-	An incorrect value will cause delays in the kernel to be wrong
-	which can lead to unpredictable I/O errors and other breakage.
-	Although unlikely, in the extreme case this might damage your
-	hardware.
+	This option causes the kernel to trace all initcalls as they are
+	executed during the boot process.  It is useful for working out
+	where the kernel is dying during startup.
 	</para>
 </refsect1>
 </refentry>
 
 <refentry>
   <refnamediv>
-    <refname>max_loop</refname>
-    <refpurpose>Maximum number of loopback devices</refpurpose>
+    <refname>kstack</refname>
+    <refpurpose>How many words of the stack to print in kernel oopses</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>max_loop=</literal><emphasis>nn</emphasis>
+    <literal>kstack=</literal><emphasis>nn</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies the maximum number of loopback filesystem devices
-	that can be mounted at the same time.  <emphasis>nn</emphasis> is a
-	number between 1 and 256.
+	This specifies how many words from the kernel stack should be
+	printed in the kernel oops dumps.  <emphasis>nn</emphasis> is an
+	integer value.
 	</para>
 </refsect1>
 </refentry>
 
 <refentry>
   <refnamediv>
-    <refname>max_cpus</refname>
-    <refpurpose>Maximum number of CPUs to use</refpurpose>
+    <refname>time</refname>
+    <refpurpose>Show timing data on every kernel log message</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option causes the kernel to prefix every kernel log message
+	with a timestamp.
+	</para>
+</refsect1>
+</refentry>
+
+</sect1>
+
+<sect1>
+<title>Interrupt options</title>
+
+<para>
+There are a wide range of different kernel options when it comes to
+finding, routing and handling interrupts.
+</para>
+
+<refentry>
+  <refnamediv>
+    <refname>apic</refname>
+    <refpurpose>Change the output verbosity of the APIC subsystem when booting</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para><literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]</para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option changes how verbose the APIC subsystem is when booting
+	the kernel.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>noapic</refname>
+    <refpurpose>Do not use any IOAPICs in the system</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This options specifies that the kernel should not use any of the
+	IOAPICs that might be present in the system.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>lapic</refname>
+    <refpurpose>Enable the local APIC</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will cause the kernel to enable the local APIC even if
+	the BIOS had disabled it.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>nolapic</refname>
+    <refpurpose>Do not use the local APIC</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel to not use the local APIC.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>noirqbalance</refname>
+    <refpurpose>Disable kernel irq balancing</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option will disable all of the built in kernel irq balancing logic.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>irqfixup</refname>
+    <refpurpose>Fix IRQ issues</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	When an interrupt is not handled, search all known interrupt
+	handlers for it.  This is Intended to get systems with badly broken
+	firmware running.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>irqpoll</refname>
+    <refpurpose>Fix IRQ issues</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	When an interrupt is not handled search all known interrupt
+	handlers for it and also check all handlers each timer interrupt.
+	This is intended to get systems with badly broken firmware running.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>noirqdebug</refname>
+    <refpurpose>Disable unhandled interrupt detection</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	The kernel by default attempts to detect and disable unhandled
+	interrupt sources as they can cause problems with the
+	responsiveness of the rest of the kernel if left unchecked.  This
+	option will disable this logic.
+	</para>
+</refsect1>
+</refentry>
+
+</sect1>
+
+<sect1>
+<title>Memory options</title>
+
+<para>
+Here are the different options that affect how the kernel uses and detects
+the memory in the system.
+</para>
+
+<refentry>
+  <refnamediv>
+    <refname>highmem</refname>
+    <refpurpose>Specify the size of the highmem memory zone</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>maxcpus=</literal><emphasis>nn</emphasis>
+    <literal>highmem=</literal><emphasis>nn</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies the maximum number of processors that a SMP kernel
-	should use even if there are more processors present in the system.
+	This option will force the highmem memory zone to have an exact
+	size of <emphasis>nn</emphasis> bytes.  This will work even on
+	boxes that have no highmem zones by default.  It will can also
+	reduce the size of the highmem zone for machines with a lot of
+	memory.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>hugepages</refname>
+    <refpurpose>Set the number of hugetlb pages</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>hugepages=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Set the maximum number of hugetlb pages to be
+	<emphasis>nn</emphasis>.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>ihash_entries</refname>
+    <refpurpose>Set the number of inode hash buckets.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>ihash_entries=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets you override the default number of hash buckets
+	for the kernel's inode cache.  Only use this if you know what you
+	are doing.
 	</para>
 </refsect1>
 </refentry>
@@ -952,6 +705,396 @@ displaying kernel debug and error information.
 
 <refentry>
   <refnamediv>
+    <refname>noexec</refname>
+    <refpurpose>Enable or disable non-executable mappings</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>noexec=</literal>[<replaceable>on</replaceable>(default)|<replaceable>off</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This enables or disables the kernel's ability to map sections of
+	memory as non-executable.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>reserve</refname>
+    <refpurpose>Reserve some I/O memory</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>reserve=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This forces the kernel to ignore some of the I/O memory areas.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>vmalloc</refname>
+    <refpurpose>Force the vmalloc area to have a specific size</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>vmalloc=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option forces the vmalloc to have the exact size specified by
+	<emphasis>nn</emphasis>.  This can be used to increase the minimum
+	size of the vmalloc area (which is 128Mb on the x86 processor).  It
+	can also be used to decrease the size and leave more room for
+	directly mapped kernel RAM.  <emphasis>nn</emphasis> specifies the
+	amount of memory and is measured in units of kilo, mega, or
+	gigabytes.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>norandmaps</refname>
+    <refpurpose>Do not use the address space randomization</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	By default the kernel randomizes the address space of all programs
+	when they are started.  This option will disable this feature.  It
+	is also equivalent to writing a <literal>0</literal> to the file
+	<filename>/proc/sys/kernel/randomize_va_space</filename>.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>vdso</refname>
+    <refpurpose>Enable or disable the VDSO mapping</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>vdso=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This enables or disables the VDSO mapping option.
+	</para>
+</refsect1>
+</refentry>
+
+</sect1>
+
+<sect1>
+<title>Suspend options</title>
+
+<refentry>
+  <refnamediv>
+    <refname>resume</refname>
+    <refpurpose>Specify the partition device for the suspend image</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>resume=</literal><emphasis>suspend_device</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel which disk device contains the
+	suspended kernel image.  If the data on the image is a valid kernel
+	image created by the software suspend subsystem, it will be loaded
+	into memory and the kernel will run it instead of continuing on
+	with the normal boot process.  <emphasis>suspend_device</emphasis>
+	is the kernel device name, which might be different from what
+	userspace thinks the device name is, so be careful with this.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>noresume</refname>
+    <refpurpose>Disable resume</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option disables the resume functionality of the kernel and any
+	swap partitions that were being used to hold system images to be
+	restored to will be reverted back to swap space.
+	</para>
+</refsect1>
+</refentry>
+
+</sect1>
+
+
+<sect1>
+<title>CPU options</title>
+
+<refentry>
+  <refnamediv>
+    <refname>cachesize</refname>
+    <refpurpose>Override the level 2 CPU cache size detection by the kernel.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para><literal>cachesize=</literal><emphasis>nn</emphasis></para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Sometimes CPU hardware bugs make them report the cache size
+	incorrectly. The kernel will attempt to work around and fix known
+	problems with most CPUs, but for some CPUs it is not possible to
+	determine what the correct size should be.  This option provides an
+	override for these situations.
+	<emphasis>nn</emphasis> is measured in units of bytes.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>lpj</refname>
+    <refpurpose>Set the loops per jiffy</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>lpg=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies the loops per jiffy that should be used by the
+	kernel and thus have the kernel avoid the time-consuming boot time
+	autodetection of this value.  If <emphasis>nn</emphasis> is
+	<literal>0</literal> then the value will be autodetected like
+	normal.
+	</para>
+	<para>
+	Note that on SMP systems, this value will be set to all CPUs, which
+	might cause problems if the different CPUs need different settings.
+	An incorrect value will cause delays in the kernel to be wrong
+	which can lead to unpredictable I/O errors and other breakage.
+	Although unlikely, in the extreme case this might damage your
+	hardware.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>nmi_watchdog</refname>
+    <refpurpose>Set the NMI watchdog value</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>nmi_watchdog=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>|<replaceable>2</replaceable>|<replaceable>3</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is a debugging feature that allows the user to override the
+	default NMI watchdog value. <literal>0</literal> specifies that no
+	NMI watchdog should be used.  <literal>1</literal> specifies that
+	the APIC should be used if present.  <literal>2</literal> specifies
+	that the local APIC should be used if present.
+	<literal>3</literal> means that the NMI watchdog is invalid so do
+	not use it.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>no387</refname>
+    <refpurpose>Always use the 387 emulation library</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel to always use the 387 math emulation
+	library even if a 387 math coprocessor is present in the system.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>nofxsr</refname>
+    <refpurpose>Disable x86 floating point save and restore</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option disables the x86 floating point extended register save
+	and restore. The kernel will only save legacy floating-point
+	registers on task switch.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>no-hlt</refname>
+    <refpurpose>Do not use the <literal>hlt</literal> instruction</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel that the <literal>hlt</literal>
+	instruction does not work correctly for this processor and that it
+	should not use it.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>mce</refname>
+    <refpurpose>Enable the machine check exception feature</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Some processors have the ability to check for machine errors
+	(usually errors in the hardware).  This option turns this subsystem
+	on, if it has been built into the kernel configuration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>nomce</refname>
+    <refpurpose>Disable the machine check exception feature</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Some processors have the ability to check for machine errors
+	(usually errors in the hardware).  This option turns this subsystem
+	off, if it has been built into the kernel configuration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>nosep</refname>
+    <refpurpose>Disable x86 SYSENTER/SYSEXIT support</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option disables x86 SYSENTER/SYSEXIT support in the kernel,
+	which can cause some system calls to take longer than if this was
+	enabled.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>nosmp</refname>
+    <refpurpose>Run as a single processor machine</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells a SMP kernel to act as a single processor kernel,
+	no matter how many processors are present on the system.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>notsc</refname>
+    <refpurpose>Disable the time stamp counter</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option disables the Time Stamp Counter hardware in the system,
+	if present.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>max_cpus</refname>
+    <refpurpose>Maximum number of CPUs to use</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>maxcpus=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies the maximum number of processors that a SMP kernel
+	should use even if there are more processors present in the system.
+	</para>
+</refsect1>
+</refentry>
+
+
+</sect1>
+
+<sect1>
+<title>Scheduler options</title>
+
+<refentry>
+  <refnamediv>
+    <refname>isolcpus</refname>
+    <refpurpose>Isolate CPUs from the kernel scheduler</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>isolcpus=</literal>[<emphasis>cpu_number</emphasis>]<literal>,</literal>...<literal>,</literal>[<emphasis>cpu_number</emphasis>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is used to remove the specified cpus, as defined by the
+	<emphasis>cpu_number</emphasis> values, from the general kernel
+	SMP balancing and scheduler algroithms.  The only way to move a
+	process onto or off an "isolated" CPU is via the CPU affinity syscalls.
+	<emphasis>cpu_number</emphasis> begins at <literal>0</literal> and
+	the maximum value is "number of CPUs in system - 1".
+	</para>
+	<para>
+	This option is the preferred way to isolate CPUs.  The alternative,
+	manually setting the CPU mask of all tasks in the system, can cause
+	problems and suboptimal load balancer performance.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
     <refname>migration_cost</refname>
     <refpurpose>Override the default scheduler migrations costs</refpurpose>
   </refnamediv>
@@ -1039,134 +1182,47 @@ displaying kernel debug and error information.
 </refsect1>
 </refentry>
 
+</sect1>
+
+<sect1>
+<title>Ramdisk options</title>
 
 <refentry>
   <refnamediv>
-    <refname>nmi_watchdog</refname>
-    <refpurpose>Set the NMI watchdog value</refpurpose>
+    <refname>initrd</refname>
+    <refpurpose>Specify where the initial ramdisk is located</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>nmi_watchdog=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>|<replaceable>2</replaceable>|<replaceable>3</replaceable>]
+    <literal>initrd=</literal><emphasis>filename</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This is a debugging feature that allows the user to override the
-	default NMI watchdog value. <literal>0</literal> specifies that no
-	NMI watchdog should be used.  <literal>1</literal> specifies that
-	the APIC should be used if present.  <literal>2</literal> specifies
-	that the local APIC should be used if present.
-	<literal>3</literal> means that the NMI watchdog is invalid so do
-	not use it.
+	This option specifies where the initial ramdisk for the kernel boot
+	is located.  Please see <xref linkend="LKN-initramfs" /> for more
+	information about kernel ramdisks.
 	</para>
 </refsect1>
 </refentry>
 
 <refentry>
   <refnamediv>
-    <refname>no387</refname>
-    <refpurpose>Always use the 387 emulation library</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option tells the kernel to always use the 387 math emulation
-	library even if a 387 math coprocessor is present in the system.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>noapic</refname>
-    <refpurpose>Do not use any IOAPICs in the system</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This options specifies that the kernel should not use any of the
-	IOAPICs that might be present in the system.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>noexec</refname>
-    <refpurpose>Enable or disable non-executable mappings</refpurpose>
+    <refname>load_ramdisk</refname>
+    <refpurpose>Load a kernel ramdisk from a floppy</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>noexec=</literal>[<replaceable>on</replaceable>(default)|<replaceable>off</replaceable>]
+    <literal>load_ramdisk=</literal><emphasis>nn</emphasis>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This enables or disables the kernel's ability to map sections of
-	memory as non-executable.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>nofxsr</refname>
-    <refpurpose>Disable x86 floating point save and restore</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option disables the x86 floating point extended register save
-	and restore. The kernel will only save legacy floating-point
-	registers on task switch.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>no-hlt</refname>
-    <refpurpose>Do not use the <literal>hlt</literal> instruction</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option tells the kernel that the <literal>hlt</literal>
-	instruction does not work correctly for this processor and that it
-	should not use it.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>noirqdebug</refname>
-    <refpurpose>Disable unhandled interrupt detection</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	The kernel by default attempts to detect and disable unhandled
-	interrupt sources as they can cause problems with the
-	responsiveness of the rest of the kernel if left unchecked.  This
-	option will disable this logic.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>noisapnp</refname>
-    <refpurpose>Disable the ISA PnP subsystem</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Disable the ISA PnP subsystem, if it has been enabled in the kernel
-	configuration.
+	If <emphasis>nn</emphasis> is set to <literal>1</literal> than a
+	ramdisk will be loaded by the kernel at boot time from the floppy
+	drive.
 	</para>
 </refsect1>
 </refentry>
@@ -1181,274 +1237,6 @@ displaying kernel debug and error information.
 	<para>
 	This option tells the kernel to not load any initial ram disk, even
 	if it is configured in other options passed to the kernel.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>nolapic</refname>
-    <refpurpose>Do not use the local APIC</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option tells the kernel to not use the local APIC.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>mce</refname>
-    <refpurpose>Enable the machine check exception feature</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Some processors have the ability to check for machine errors
-	(usually errors in the hardware).  This option turns this subsystem
-	on, if it has been built into the kernel configuration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>nomce</refname>
-    <refpurpose>Disable the machine check exception feature</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Some processors have the ability to check for machine errors
-	(usually errors in the hardware).  This option turns this subsystem
-	off, if it has been built into the kernel configuration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>noresume</refname>
-    <refpurpose>Disable resume</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option disables the resume functionality of the kernel and any
-	swap partitions that were being used to hold system images to be
-	restored to will be reverted back to swap space.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>nosep</refname>
-    <refpurpose>Disable x86 SYSENTER/SYSEXIT support</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option disables x86 SYSENTER/SYSEXIT support in the kernel,
-	which can cause some system calls to take longer than if this was
-	enabled.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>nosmp</refname>
-    <refpurpose>Run as a single processor machine</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option tells a SMP kernel to act as a single processor kernel,
-	no matter how many processors are present on the system.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>notsc</refname>
-    <refpurpose>Disable the time stamp counter</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option disables the Time Stamp Counter hardware in the system,
-	if present.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>panic</refname>
-    <refpurpose>Timeout until the machine is rebooted on panic</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>panic=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option specifies the ammount of time in seconds that the
-	kernel should wait after a panic happens before it reboots.  If
-	this is set to <literal>0</literal> (the default value) the kernel
-	will not reboot after panicking.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pause_on_oops</refname>
-    <refpurpose>Delay between kernel oopses</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pause_on_oops=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option tells the kernel to halt all CPUs after the first oops
-	for <emphasis>nn</emphasis> seconds before continuing on.  This is
-	useful if oopses keep scrolling off of the screen before you can
-	write them down or take a picture of them.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnpbios</refname>
-    <refpurpose>PnP BIOS settings</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnpbios=</literal>[<replaceable>on</replaceable>|<replaceable>off</replaceable>|<replaceable>curr</replaceable>|<replaceable>no-curr</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option sets the main PnP BIOS settings.  <literal>on</literal>
-	enables the PnP BIOS subsystem.  <literal>off</literal> disables
-	the PnP BIOS subsystem.  <literal>cur</literal> tells the PnP BIOS
-	subsystem to use the current static settings and
-	<literal>no-curr</literal> tells the subsystem to probe for dynamic
-	settings if possible.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_irq</refname>
-    <refpurpose>PnP BIOS reserved IRQs</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_irq=</literal><emphasis>irq1</emphasis>[<literal>,</literal><emphasis>irq2</emphasis>]<literal>,</literal>...
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option is a list of the IRQs that the PnP BIOS subsystem
-	should not use for autoconfiguration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_dma</refname>
-    <refpurpose>PnP BIOS reserved DMAs</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_dma=</literal><emphasis>dma1</emphasis>[<literal>,</literal><emphasis>dma2</emphasis>]<literal>,</literal>...
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option is a list of the DMAs that the PnP BIOS subsystem
-	should not use for autoconfiguration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_io</refname>
-    <refpurpose>PnP BIOS reserved I/O ports</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_io=</literal><emphasis>io1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>io2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This is a list of the I/O ports and size that the PnP BIOS
-	subsystem should not use for autoconfiguration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_mem</refname>
-    <refpurpose>PnP BIOS reserved memory regions</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_mem=</literal><emphasis>mem1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>mem2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This is a list of the memory locations and size that the PnP BIOS
-	subsystem should not use for autoconfiguration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>profile</refname>
-    <refpurpose>Control the kernel profiling</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>profile=</literal>[<replaceable>schedule</replaceable><literal>,</literal>][<emphasis>number</emphasis>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option affects how the kernel profiler is calculated.  If
-	<literal>schedule</literal> is specified the schedule points are
-	affected by the value set in <emphasis>number</emphasis>.  If
-	<literal>schedule</literal> is not specified, then
-	<emphasis>number</emphasis> is the step size as a power of two for
-	the statistical time based profiling of the kernel.
-	</para>
-	<para>
-	The most common use of this option is <literal>profile=2</literal>
 	</para>
 </refsect1>
 </refentry>
@@ -1512,67 +1300,10 @@ displaying kernel debug and error information.
 </refsect1>
 </refentry>
 
-<refentry>
-  <refnamediv>
-    <refname>rdinit</refname>
-    <refpurpose>Specify the init process is from the ramdisk</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>rdinit=</literal><emphasis>full_path_name</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option tells the kernel to run the program specified by
-	<emphasis>full_path_name</emphasis> as the init process.  This file
-	is on the kernel ramdisk instead of on the root filesystem.
-	</para>
-</refsect1>
-</refentry>
+</sect1>
 
-<refentry>
-  <refnamediv>
-    <refname>reserve</refname>
-    <refpurpose>Reserve some I/O memory</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>reserve=</literal><emphasis>nn</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This forces the kernel to ignore some of the I/O memory areas.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>resume</refname>
-    <refpurpose>Specify the partition device for the suspend image</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>resume=</literal><emphasis>suspend_device</emphasis>
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option tells the kernel which disk device contains the
-	suspended kernel image.  If the data on the image is a valid kernel
-	image created by the software suspend subsystem, it will be loaded
-	into memory and the kernel will run it instead of continuing on
-	with the normal boot process.  <emphasis>suspend_device</emphasis>
-	is the kernel device name, which might be different from what
-	userspace thinks the device name is, so be careful with this.
-	</para>
-</refsect1>
-</refentry>
+<sect1>
+<title>Root disk options</title>
 
 <refentry>
   <refnamediv>
@@ -1728,6 +1459,50 @@ displaying kernel debug and error information.
 </refsect1>
 </refentry>
 
+</sect1>
+
+<sect1>
+<title>Init options</title>
+
+<refentry>
+  <refnamediv>
+    <refname>init</refname>
+    <refpurpose>Set the program to run at init time</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>init=</literal><emphasis>filename</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Run the specified binary as the init process instead of the default
+	<filename>/sbin/init</filename> program.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>rdinit</refname>
+    <refpurpose>Specify the init process is from the ramdisk</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>rdinit=</literal><emphasis>full_path_name</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel to run the program specified by
+	<emphasis>full_path_name</emphasis> as the init process.  This file
+	is on the kernel ramdisk instead of on the root filesystem.
+	</para>
+</refsect1>
+</refentry>
+
 <refentry>
   <refnamediv>
     <refname>S</refname>
@@ -1742,57 +1517,30 @@ displaying kernel debug and error information.
 </refsect1>
 </refentry>
 
-<refentry>
-  <refnamediv>
-    <refname>time</refname>
-    <refpurpose>Show timing data on every kernel log message</refpurpose>
-  </refnamediv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option causes the kernel to prefix every kernel log message
-	with a timestamp.
-	</para>
-</refsect1>
-</refentry>
+</sect1>
+
+<sect1>
+<title>Kexec options</title>
 
 <refentry>
   <refnamediv>
-    <refname>vdso</refname>
-    <refpurpose>Enable or disable the VDSO mapping</refpurpose>
+    <refname>crashkernel</refname>
+    <refpurpose>Reserve a portion of physical memory for kexec to use</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
-    <para>
-    <literal>vdso=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
-    </para>
+    <para><literal>crashkernel=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]@<emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]</para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This enables or disables the VDSO mapping option.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>vmalloc</refname>
-    <refpurpose>Force the vmalloc area to have a specific size</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>vmalloc=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	This option forces the vmalloc to have the exact size specified by
-	<emphasis>nn</emphasis>.  This can be used to increase the minimum
-	size of the vmalloc area (which is 128Mb on the x86 processor).  It
-	can also be used to decrease the size and leave more room for
-	directly mapped kernel RAM.  <emphasis>nn</emphasis> specifies the
-	amount of memory and is measured in units of kilo, mega, or
+	The kexec subsystem likes to have a portion of physical memory to
+	use.  This option reserves that memory from the rest of the kernel
+	and will switch to use it if the kernel panics.
+	<emphasis>nn</emphasis> specifies the amount of memory to reserve
+	and is measured in units of kilo, mega, or
+	gigabytes.
+	<emphasis>ss</emphasis> specifies the location for this memory
+	chunk and is measured in units of kilo, mega, or
 	gigabytes.
 	</para>
 </refsect1>
@@ -1800,21 +1548,29 @@ displaying kernel debug and error information.
 
 <refentry>
   <refnamediv>
-    <refname>norandmaps</refname>
-    <refpurpose>Do not use the address space randomization</refpurpose>
+    <refname>elfcorehdr
+    </refname>
+    <refpurpose>Specify the start of the kernel core image elf header</refpurpose>
   </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>elfcorhdr=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	By default the kernel randomizes the address space of all programs
-	when they are started.  This option will disable this feature.  It
-	is also equivalent to writing a <literal>0</literal> to the file
-	<filename>/proc/sys/kernel/randomize_va_space</filename>.
+	This will specify the physical address that the kernel core image's
+	elf header is at.  This is used by kexec to find the kernel when
+	booting the secondary kernel image.  <emphasis>nn</emphasis> is a
+	memory location.
 	</para>
 </refsect1>
 </refentry>
 
-<sect2>
+</sect1>
+
+<sect1>
 <title>RCU options</title>
 
 <para>
@@ -1898,8 +1654,6 @@ options that can be used to tune RCU in different ways:
 	</para>
 </refsect1>
 </refentry>
-
-</sect2>
 
 </sect1>
 
@@ -2390,6 +2144,105 @@ on these.
 </refsect1>
 </refentry>
 
+<refentry>
+  <refnamediv>
+    <refname>pnpbios</refname>
+    <refpurpose>PnP BIOS settings</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnpbios=</literal>[<replaceable>on</replaceable>|<replaceable>off</replaceable>|<replaceable>curr</replaceable>|<replaceable>no-curr</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option sets the main PnP BIOS settings.  <literal>on</literal>
+	enables the PnP BIOS subsystem.  <literal>off</literal> disables
+	the PnP BIOS subsystem.  <literal>cur</literal> tells the PnP BIOS
+	subsystem to use the current static settings and
+	<literal>no-curr</literal> tells the subsystem to probe for dynamic
+	settings if possible.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_irq</refname>
+    <refpurpose>PnP BIOS reserved IRQs</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_irq=</literal><emphasis>irq1</emphasis>[<literal>,</literal><emphasis>irq2</emphasis>]<literal>,</literal>...
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option is a list of the IRQs that the PnP BIOS subsystem
+	should not use for autoconfiguration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_dma</refname>
+    <refpurpose>PnP BIOS reserved DMAs</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_dma=</literal><emphasis>dma1</emphasis>[<literal>,</literal><emphasis>dma2</emphasis>]<literal>,</literal>...
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option is a list of the DMAs that the PnP BIOS subsystem
+	should not use for autoconfiguration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_io</refname>
+    <refpurpose>PnP BIOS reserved I/O ports</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_io=</literal><emphasis>io1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>io2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is a list of the I/O ports and size that the PnP BIOS
+	subsystem should not use for autoconfiguration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_mem</refname>
+    <refpurpose>PnP BIOS reserved memory regions</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_mem=</literal><emphasis>mem1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>mem2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This is a list of the memory locations and size that the PnP BIOS
+	subsystem should not use for autoconfiguration.
+	</para>
+</refsect1>
+</refentry>
+
 </sect1>
 
 
@@ -2497,6 +2350,27 @@ pci=option[,option...]
 
 
 </screen>
+</sect1>
+
+<sect1>
+<title>PnP BIOS options</title>
+
+<refentry>
+  <refnamediv>
+    <refname>noisapnp</refname>
+    <refpurpose>Disable the ISA PnP subsystem</refpurpose>
+  </refnamediv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Disable the ISA PnP subsystem, if it has been enabled in the kernel
+	configuration.
+	</para>
+</refsect1>
+</refentry>
+
+
+
 </sect1>
 
 
@@ -3112,6 +2986,193 @@ These options specify different paramaters for the timer.
 </refsect1>
 </refentry>
 
+
+</sect1>
+
+<sect1>
+<title>Miscellaneous options</title>
+
+<para>
+These options should always be available, and not depend on any specific
+subsystem or hardware being present in the system in order to work
+properly.
+</para>
+
+
+<refentry>
+  <refnamediv>
+    <refname>dhash_entries</refname>
+    <refpurpose>Set the number of dentry hash buckets.
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>dhash_entries=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option lets you override the default number of hash buckets
+	for the kernel's dentry cache.  Only use this if you know what you
+	are doing.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>elevator</refname>
+    <refpurpose>Sets the default I/O scheduler elevator
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>elevator=</literal>[<replaceable>anticipatory</replaceable>|<replaceable>cfg</replaceable>|<replaceable>deadline</replaceable>|<replaceable>noop</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This sets the default I/O scheduler to be the one specified.  See
+	<xref linkend="CONFIG_IOSCHED_NOOP" /> for a list of the different
+	I/O schedulers available, and what they do.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>hashdist</refname>
+    <refpurpose>Distribute large hashes across NUMA nodes</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>hashdist=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Large hashs that are allocated during the boot process are by
+	default on the IA-64 platform distributed across the different NUMA
+	nodes.  This option lets the user turn this option on or off.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>combined_mode</refname>
+    <refpurpose>Specify IDE driver usage</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>combined_mode=</literal>[<replaceable>combined</replaceable>|<replaceable>ide</replaceable>|<replaceable>libata</replaceable>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option controls which driver use the IDE ports in combined
+	mode: the legacy IDE driver, libata, or both.  Note that using the
+	ide or libata options may affect your device naming (e.g. by
+	changing hdc to sdb).
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>max_loop</refname>
+    <refpurpose>Maximum number of loopback devices</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>max_loop=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This specifies the maximum number of loopback filesystem devices
+	that can be mounted at the same time.  <emphasis>nn</emphasis> is a
+	number between 1 and 256.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>panic</refname>
+    <refpurpose>Timeout until the machine is rebooted on panic</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>panic=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option specifies the ammount of time in seconds that the
+	kernel should wait after a panic happens before it reboots.  If
+	this is set to <literal>0</literal> (the default value) the kernel
+	will not reboot after panicking.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pause_on_oops</refname>
+    <refpurpose>Delay between kernel oopses</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pause_on_oops=</literal><emphasis>nn</emphasis>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option tells the kernel to halt all CPUs after the first oops
+	for <emphasis>nn</emphasis> seconds before continuing on.  This is
+	useful if oopses keep scrolling off of the screen before you can
+	write them down or take a picture of them.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>profile</refname>
+    <refpurpose>Control the kernel profiling</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>profile=</literal>[<replaceable>schedule</replaceable><literal>,</literal>][<emphasis>number</emphasis>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	This option affects how the kernel profiler is calculated.  If
+	<literal>schedule</literal> is specified the schedule points are
+	affected by the value set in <emphasis>number</emphasis>.  If
+	<literal>schedule</literal> is not specified, then
+	<emphasis>number</emphasis> is the step size as a power of two for
+	the statistical time based profiling of the kernel.
+	</para>
+	<para>
+	The most common use of this option is <literal>profile=2</literal>
+	</para>
+</refsect1>
+</refentry>
+
+
+</sect1>
+
 <!--
 
 template for options...
@@ -3137,7 +3198,5 @@ template for options...
 
 -->
 
-
-</sect1>
 </chapter>
 <!-- vim: set ai tw=72 : -->
