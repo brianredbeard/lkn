@@ -26,7 +26,7 @@ past kernel release, before the next release happens.
 
 <para>
 This is all best explained with an example:
-<figure id="kernel.org-screenshot">
+<figure id="kernel_releases-screenshot">
 <title>Kernel development release cycle</title>
 <graphic fileref="images/kernel_releases.png" scalefit="1"/>
 </figure>
@@ -87,7 +87,7 @@ will download the full source tree.  Or you can traverse to the proper
 subdirectory for all of the 2.6 kernel versions,
 <systemitem role="url">http://www.us.kernel.org/pub/linux/kernel/v2.6/</systemitem>: 
 
-<figure id="kernel.org-screenshot">
+<figure id="kernel.org-v2.6-screenshot">
 <title>The 2.6 kernel source directory</title>
 <graphic fileref="images/kernel.org.v2.6.png" scalefit="1"/>
 </figure>
@@ -130,7 +130,7 @@ If you wish to determine the latest kernel version in a simpler manner, use
 the information available at
 <systemitem role="url">http://www.kernel.org/kdist/finger_banner</systemitem>:
 
-<figure id="kernel.org-screenshot">
+<figure id="kernel.org-finger_banner-screenshot">
 <title>Latest kernel version</title>
 <graphic fileref="images/kernel.org_finger_banner.png" scalefit="1"/>
 </figure>
