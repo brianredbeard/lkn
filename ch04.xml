@@ -1,7 +1,7 @@
-<chapter id="LKN-chapter-retreive-source">
+<chapter id="LKN-chapter-retrieve-source">
 
 <title>
-Retreiving the kernel source
+Retrieving the kernel source
 </title>
 
 <sect1>
@@ -17,7 +17,7 @@ a development kernel, while the 2.4.25 release is a stable release.
 
 <para>
 But after the 2.6 development series was created, the kernel developers
-decided to abondon this method, and decided that all of the 2.6 kernel
+decided to abandon this method, and declared that all of the 2.6 kernel
 release would be considered "stable", with the development happening
 between these kernel releases.  Combined with this, a "-stable" kernel
 branch has been created that releases bugfixes and security updates for the
@@ -25,7 +25,7 @@ past kernel release, before the next release happens.
 </para>
 
 <para>
-This is all best explained with a diagram:
+This is all best explained with an example:
 <figure id="kernel.org-screenshot">
 <title>Kernel development release cycle</title>
 <graphic fileref="images/kernel_releases.png" scalefit="1"/>
