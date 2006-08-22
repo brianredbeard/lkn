@@ -103,14 +103,25 @@ both of which should come with your Linux distribution.
 To download the 2.6.17.8 kernel version using wget:
 <screen>
 $ <userinput>wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.17.8.tar.gz</userinput>
+--17:44:55--  http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.17.8.tar.gz
+           => `linux-2.6.17.8.tar.gz'
+Resolving www.kernel.org... 204.152.191.5, 204.152.191.37
+Connecting to www.kernel.org|204.152.191.5|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 51,707,742 (49M) [application/x-gzip]
 
+100%[=============================================>] 51,707,742    35.25K/s    ETA 00:00
+
+18:02:48 (47.12 KB/s) - `linux-2.6.17.8.tar.gz' saved [51707742/51707742]
 </screen>
 
 
 Or to download it using curl:
 <screen>
 $ <userinput>curl http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.17.8.tar.gz -o linux-2.6.17.8.tar.gz</userinput>
-
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 49.3M  100 49.3M    0     0  50298      0  0:17:08  0:17:08 --:--:--  100k
 </screen>
 </para>
 
