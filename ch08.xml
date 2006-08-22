@@ -110,13 +110,13 @@ different from your machine, it is to be expected.
 </para>
 
 <sect3>
-<title>PCI devices</title>
+<title>Need a subsection title here?</title>
 
 <para>
-One of the most common, and important, PCI devices in the system is the
-network device.  It is imperitive that we figure out which driver is
-controlling this device, and enable it in our kernel configuration so that
-networking works properly.
+One of the most common, and important, devices in the system is the network
+device.  It is imperitive that we figure out which driver is controlling
+this device, and enable it in our kernel configuration so that networking
+works properly.
 </para>
 
 <para>
@@ -124,7 +124,7 @@ First, let us work backward from the network connection name to find out
 what PCI device is controlling it.  To do this, look at the different
 network names:
 <screen>
-$ ls <userinput>/sys/class/net/</userinput>
+$ <userinput>ls /sys/class/net/</userinput>
 eth0  eth1  eth2  lo
 </screen>
 The device <literal>lo</literal> is the network loopback device, and is not
@@ -199,7 +199,7 @@ device configuration menus, or you can search the kernel source code
 instead to make sure:
 <screen>
 $ <userinput>cd ~/linux/linux-2.6.17.8</userinput>
-$ <userinput>find  -type f -name Makefile | xargs grep e1000</userinput>
+$ <userinput>find -type f -name Makefile | xargs grep e1000</userinput>
 ./drivers/net/Makefile:obj-$(CONFIG_E1000) += e1000/
 ./drivers/net/e1000/Makefile:obj-$(CONFIG_E1000) += e1000.o
 ./drivers/net/e1000/Makefile:e1000-objs := e1000_main.o e1000_hw.o e1000_ethtool.o e1000_param.o
@@ -255,10 +255,47 @@ Device Drivers
 </sect3>
 
 <sect3>
-<title>USB devices</title>
+<title>Another subsection title?</title>
 
 <para>
+The steps above will work for any type of working device in the kernel.  As
+another example, let us look at a USB to serial converter that is present
+in the system.  It is currently connected to the
+<literal>/dev/ttyUSB0</literal> port, so we need to look in the
+<literal>sysfs</literal> tty section:
+<screen>
+$ <userinput>ls /sys/class/tty/ | grep USB</userinput>
+ttyUSB0
+</screen>
+And we can trace through <literal>sysfs</literal> for this device to find
+the controlling module:
+<screen>
+$ <userinput>basename `readlink /sys/class/tty/ttyUSB0/device/driver/module`</userinput>
+pl2303
+</screen>
+Then search the kernel source tree to find the configuration option that we
+need to enable:
+<screen>
+$ <userinput>cd ~/linux/linux-2.6.17.8</userinput>
+$ <userinput>find -type f -name Makefile | xargs grep pl2303</userinput>
+./drivers/usb/serial/Makefile:obj-$(CONFIG_USB_SERIAL_PL2303) += pl2303.o
+</screen>
+Then use the kernel configuration tool to find the proper option to enable
+in order to set the <literal>CONFIG_USB_SERIAL_PL2303</literal> option:
+<figure id="config_search_pl2303">
+<title>Searching for <literal>USB_SERIAL_PL2303</literal></title>
+<graphic fileref="images/config_search_pl2303.png" scalefit="1"/>
+</figure>
+which results in the following information:
+<figure id="config_search_pl2303_found">
+<title>Result of searching for <literal>USB_SERIAL_PL2303</literal></title>
+<graphic fileref="images/config_search_pl2303_found.png" scalefit="1"/>
+</figure>
+This shows exactly where to find the <literal>USB Prolific 2303 Single Port
+Serial Driver</literal> option that is needed to control this device
+properly.
 </para>
+
 </sect3>
 
 </sect2>
