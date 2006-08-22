@@ -90,11 +90,168 @@ walk though two examples of how to find out what driver is needed to
 control what piece of hardware.
 </para>
 
+<para>
+There are many different locations that are useful for determining what
+devices is bound to what drivers in a running kernel.  The most important
+one is a virtual filesystem called <literal>sysfs</literal>.
+<literal>sysfs</literal> should always be mounted at the
+<filename>/sys</filename> location in your filesystem by the initialization
+scripts of your Linux distribution.  <literal>sysfs</literal> provides a
+glimpse into how the different portions of the kernel are hooked together,
+with many different symlinks pointing all around the filesystem.
+</para>
+
+<para>
+In all of the following examples, real <literal>sysfs</literal> paths and
+hardware types are shown.  Your machine will be different, but the
+locations of where the information will be is in the same place.  Do not be
+alarmed if the different file names in <literal>sysfs</literal> are
+different from your machine, it is to be expected.
+</para>
+
 <sect3>
 <title>PCI devices</title>
 
 <para>
+One of the most common, and important, PCI devices in the system is the
+network device.  It is imperitive that we figure out which driver is
+controlling this device, and enable it in our kernel configuration so that
+networking works properly.
 </para>
+
+<para>
+First, let us work backward from the network connection name to find out
+what PCI device is controlling it.  To do this, look at the different
+network names:
+<screen>
+$ ls <userinput>/sys/class/net/</userinput>
+eth0  eth1  eth2  lo
+</screen>
+The device <literal>lo</literal> is the network loopback device, and is not
+attached to any real network device.  The devices <literal>eth0</literal>,
+<literal>eth1</literal>, and <literal>eth2</literal> are what you should
+pay attention to, as they represent "real" network devices.
+</para>
+
+<para>
+To look further at these network devices, to figure out which one we care
+about, use the <literal>ifconfig</literal> utility:
+<screen>
+$ <userinput>/sbin/ifconfig -a</userinput>
+eth0      Link encap:Ethernet  HWaddr 00:12:3F:65:7D:C2  
+          inet addr:192.168.0.13  Bcast:192.168.0.255  Mask:255.255.255.0
+          UP BROADCAST NOTRAILERS RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:2720792 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1815488 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:100 
+          RX bytes:3103826486 (2960.0 Mb)  TX bytes:371424066 (354.2 Mb)
+          Base address:0xdcc0 Memory:dfee0000-dff00000 
+
+eth1      Link encap:UNSPEC  HWaddr 80-65-00-12-7D-C2-3F-00-00-00-00-00-00-00-00-00  
+          BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+
+eth2      Link encap:UNSPEC  HWaddr 00-02-3C-04-11-09-D2-BA-00-00-00-00-00-00-00-00  
+          BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:60 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:60 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:13409 (13.0 Kb)  TX bytes:13409 (13.0 Kb)
+</screen>
+From this list, the <literal>eth0</literal> device is the network device
+that is active and working, as can be seen by the lines:
+<screen>
+eth0      Link encap:Ethernet  HWaddr 00:12:3F:65:7D:C2  
+          inet addr:192.168.0.13  Bcast:192.168.0.255  Mask:255.255.255.0
+</screen>
+that show this is a ethernet device, with a valid network address assigned
+to it.
+</para>
+
+<para>
+Now that we have determined that we want to make sure the
+<literal>eth0</literal> device will be working in our new kernel, we need
+to find which driver is controlling it.  That is simply a matter of walking
+the different links in the <literal>sysfs</literal> filesystem.  This can
+be done in one line:
+<screen>
+$ <userinput>basename `readlink /sys/class/net/eth0/device/driver/module`</userinput>
+e1000
+</screen>
+This shows that the module named <literal>e1000</literal> is controlling
+the <literal>eth0</literal> network device.
+</para>
+<para>
+Now that we have the module name, we need to find the kernel configuration
+option that controlls it.  You can look through the different network
+device configuration menus, or you can search the kernel source code
+instead to make sure:
+<screen>
+$ <userinput>cd ~/linux/linux-2.6.17.8</userinput>
+$ <userinput>find  -type f -name Makefile | xargs grep e1000</userinput>
+./drivers/net/Makefile:obj-$(CONFIG_E1000) += e1000/
+./drivers/net/e1000/Makefile:obj-$(CONFIG_E1000) += e1000.o
+./drivers/net/e1000/Makefile:e1000-objs := e1000_main.o e1000_hw.o e1000_ethtool.o e1000_param.o
+</screen>
+Note, please replace <literal>e1000</literal> with the name of the module
+that you are looking to find.
+</para>
+
+<para>
+The important thing to be looking for in the output of the above command is
+any line that has the term <literal>CONFIG_</literal> in it.  That is the
+configuration option that the kernel needs to have enabled in order to
+build the module.  In the above example, the option
+<literal>CONFIG_E1000</literal> is the configuration option that we are
+looking for.
+</para>
+
+<para>
+Take the configuration option that we have found, and run the kernel
+menu configuration tool:
+<screen>
+$ <userinput>make menuconfig</userinput>
+</screen>
+Then press the <literal>/</literal> key and type in the configuration
+option, minus the <literal>CONFIG_</literal> portion of the string:
+<figure id="config_search">
+<title>Searching in menuconfig</title>
+<graphic fileref="images/config_search.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+The kernel configuration system will then tell you the exact location where
+to select the option to enable this module:
+<figure id="config_search_found">
+<title>Result of searching in menuconfig</title>
+<graphic fileref="images/config_search_found.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+So, to enable the module <literal>e1000</literal> to be built into the
+kernel the following configuration option must be enabled:
+<screen>
+Device Drivers
+    Network device support
+        [*] Network device support
+            Ethernet (1000 Mbit)
+	    [*] Intel(R) PRO/1000 Gigabit Ethernet support
+</screen>
+</para>
+
 </sect3>
 
 <sect3>
