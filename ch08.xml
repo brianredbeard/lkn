@@ -4,50 +4,139 @@
 Configuring a kernel
 </title>
 
+<para>
+One of the hardest parts of building your own version of the Linux kernel
+is determining exactly which drivers and configuration options are needed
+in order for your machine to work properly.  This chapter will walk you
+through this process of finding the correct drivers.
+</para>
+
 <sect1>
-<title>customizing it for the hardware on your machine</title>
-<para></para>
+<title>Using a distribution kernel</title>
+
+<para>
+One of the easiest ways of determining which modules are necessary, is to
+work off of the kernel configuration that comes with your distribution's
+kernel package.  It is also much easier to determine which drivers are
+needed on a running system, where the proper drivers are already bound to
+the hardware.
+</para>
+
+<para>
+If you do not already have a Linux distribution installed on the machine
+that you are building the kernel for, use a LiveCD version of a
+distribution.  This allows you to boot Linux on the machine and determine
+what kernel configuration options are needed in order to get the hardware
+working properly.
+</para>
+
+<sect2>
+<title>Where is the kernel configuration</title>
+
+<para>
+Almost all distributions provide the kernel configuration files as part of
+the kernel package.  Read the distribution specific documentation for how
+to find these configurations, as it is usually burried somewhere below the
+<filename>/usr/src/linux/</filename> directory tree.
+</para>
+
+<para>
+If the kernel configuration is not easy to find, look in the kernel itself.
+Most distribution kernels are build to include the configuration within the
+<filename>/proc</filename> filesystem.  To determine if this is true for
+your running kernel, do the following:
+<screen>
+$ <userinput>ls /proc/config.gz</userinput>
+/proc/config.gz
+</screen>
+If the <filename>/proc/config.gz</filename> filename is present, copy this
+file to your kernel source directory and uncompress it:
+<screen>
+$ <userinput>cp /proc/config.gz ~/linux/</userinput>
+$ <userinput>cd ~/linux</userinput>
+$ <userinput>gzip -dv config.gz</userinput>
+config.gz:       74.9% -- replaced with config
+</screen>
+Then copy this config file into your kernel directory and use it as the
+basis of the kernel configuration to build the kernel as described in
+chapter <xref linkend="LKN-chapter-building" />.
+</para>
+
+<para>
+Using this configuration file should always generate a working kernel image
+for your machine.  The disadvantage of this kernel image is that you will
+have built almost every kernel module and driver that is present in the
+kernel source tree.  This is almost never needed for a single machine, so
+you can start to turn off different drivers and options that are not
+needed.  It is recommended that you only disable options that you are sure
+you do not need, as there might be parts of the system that rely on
+specific options to be enabled.
+</para>
+
+</sect2>
+
+<sect2>
+<title>Finding what module is needed</title>
+
+<para>
+When using a configuration file that comes from a distribution, it take a
+very long time to build due to all of the different drivers being built.
+You only want to build the drivers for the hardware that you have, which
+will save time on building the kernel, and allows you to build some or all
+of the drivers into the kernel itself, possibly saving a bit of memory, and
+on some architectures, making for a faster running system.  To do this, you
+need to determine which modules are needed to drive your hardware.  We will
+walk though two examples of how to find out what driver is needed to
+control what piece of hardware.
+</para>
+
+<sect3>
+<title>PCI devices</title>
+
+<para>
+</para>
+</sect3>
+
+<sect3>
+<title>USB devices</title>
+
+<para>
+</para>
+</sect3>
+
+</sect2>
 </sect1>
 
 <sect1>
-<title>building modules</title>
-<para></para>
+<title>No help from the distro</title>
+
+<para>
+Sometimes you do not have the option of getting a distribution kernel
+working on a machine in order to determine what kernel module is needed to
+drive the hardware.  Or you have added new hardware to your system, and you
+need to figure out what kernel configuration option needs to be enabled to
+get it to work properly.  This section will help you determine how to find
+that configuration option to get the hardware up and running.
+</para>
+
+<sect2>
+<title>PCI devices</title>
+
+<para>
+</para>
+
+</sect2>
+
+
+<sect2>
+<title>USB devices</title>
+
+<para>
+</para>
+
+</sect2>
 </sect1>
 
-<sect1>
-<title>Common configuration options</title>
-
-<sect2>
-<title>USB</title>
-<para></para>
-</sect2>
-
-<sect2>
-<title>power management</title>
-<para></para>
-</sect2>
-
-<sect2>
-<title>ACPI</title>
-<para></para>
-</sect2>
-
-<sect2>
-<title>filesystems</title>
-<para></para>
-</sect2>
-
-<sect2>
-<title>firewire</title>
-<para></para>
-</sect2>
-
-<sect2>
-<title>other common things that users need.</title>
-<para></para>
-</sect2>
-
-</sect1>
 
 </chapter>
 
