@@ -54,9 +54,13 @@ testchaptercheck:
 VERSION=$(shell date "+%Y_%m_%d"| awk '{print $$1}')
 
 RELEASE_NAME=$(BOOK_NAME)-$(VERSION)
+HTML_NAME=$(BOOK_NAME)-html-$(VERSION)
 FIGURE_NAME=$(BOOK_NAME)-figures-$(VERSION)
 
 FIGURESFILES = $(shell find . \( -not -name '.' \) -print | egrep -v '(BitKeeper|SCCS)' | grep -v "\.tar\.gz" | grep -v "\.dia" | grep figures | sort ) 
+#HTMLFILES = $(shell find . \( -not -name '.' \) -print | egrep -v '(BitKeeper|SCCS|.git)' | grep -v "\.tar\.gz" | grep -v "\.dia" | grep html | sort )
+HTMLFILES = $(shell ls *.html | sort )
+
 distdir := $(RELEASE_NAME)
 srcdir = .
 release: clean
@@ -80,4 +84,18 @@ figure_release: clean
 	@rm -rf $(distdir)
 	@echo "Built $(FIGURE_NAME).tar.gz"
 
-
+html_release:	bookhtml
+	@echo $(HTMLFILES)
+	@-rm -rf $(distdir)
+	@mkdir $(distdir)
+	@-chmod 777 $(distdir)
+	@for file in $(HTMLFILES); do			\
+		if test -d $$file; then			\
+			mkdir $(distdir)/$$file;	\
+		else					\
+			cp -p $$file $(distdir)/$$file;	\
+		fi;					\
+	done
+	@tar -c $(distdir) | gzip -9 > $(HTML_NAME).tar.gz
+	@rm -rf $(distdir)
+	@echo "Built $(HTML_NAME).tar.gz"
