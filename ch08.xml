@@ -36,7 +36,7 @@ working properly.
 <para>
 Almost all distributions provide the kernel configuration files as part of
 the kernel package.  Read the distribution specific documentation for how
-to find these configurations, as it is usually burried somewhere below the
+to find these configurations, as it is usually buried somewhere below the
 <filename>/usr/src/linux/</filename> directory tree.
 </para>
 
@@ -114,7 +114,7 @@ different from your machine, it is to be expected.
 
 <para>
 One of the most common, and important, devices in the system is the network
-device.  It is imperitive that we figure out which driver is controlling
+device.  It is imperative that we figure out which driver is controlling
 this device, and enable it in our kernel configuration so that networking
 works properly.
 </para>
@@ -194,7 +194,7 @@ the <literal>eth0</literal> network device.
 </para>
 <para>
 Now that we have the module name, we need to find the kernel configuration
-option that controlls it.  You can look through the different network
+option that controls it.  You can look through the different network
 device configuration menus, or you can search the kernel source code
 instead to make sure:
 <screen>
@@ -343,9 +343,9 @@ $ <userinput>find -type f -name Makefile | xargs grep MODULE_NAME</userinput>
 
 <listitem>
 <para>
-Search in the kernel configuration system for that config value and go to
-the location in the menu that it specifies to enable that driver to be
-built.
+Search in the kernel configuration system for that configuration value and
+go to the location in the menu that it specifies to enable that driver to
+be built.
 </para>
 </listitem>
 
@@ -580,9 +580,9 @@ The use of the <literal>PCI_VENDOR_ID_REALTEK</literal> value here also
 corrisponds with the code checking to see if the PCI device id matches the
 <literal>PCI_DEVICE_ID_REALTEK_8139</literal> value.  If it does, the
 driver is to print out a message that says:
-<blockquote>
+<quote>
 Use the 8139cp driver for improved performance and stability.
-</blockquote>
+</quote>
 Perhaps we should look at that driver next.  Even if we did not have such a
 visable clue, this driver does not have the vendor and device id pair that
 we are looking for in a <literal>struct pci_device_id</literal> variable,
@@ -686,6 +686,180 @@ built.
 <title>USB devices</title>
 
 <para>
+Finding the specific driver for a USB device is much like finding the
+driver for a PCI device as described in the previous section, with only
+minor differences in finding the bus id values.
+</para>
+
+<para>
+In this example, let us find the driver that is needed for a USB wireless
+device.  As with the PCI device example, the details in this example will
+be different from your situation, but the steps involved should be relevant
+to any type of USB device you wish to find a working driver for.
+</para>
+
+<para>
+As with the PCI device, the bus id must be found for the USB device that we
+wish to find the driver for.  To do this, you can use the
+<literal>lsusb</literal> program that comes in the
+<literal>usbutils</literal> package.
+</para>
+
+<para>
+The <literal>lsusb</literal> program will show all USB devices attached to
+the system.  As we do not know what the specific device we are looking for
+is called, let us look at all devices:
+<screen>
+$ <userinput>/usr/sbin/lsusb</userinput>
+Bus 002 Device 003: ID 045e:0023 Microsoft Corp. Trackball Optical
+Bus 002 Device 001: ID 0000:0000  
+Bus 005 Device 003: ID 0409:0058 NEC Corp. HighSpeed Hub
+Bus 005 Device 001: ID 0000:0000  
+Bus 004 Device 003: ID 157e:300d  
+Bus 004 Device 002: ID 045e:001c Microsoft Corp. 
+Bus 004 Device 001: ID 0000:0000  
+Bus 003 Device 001: ID 0000:0000  
+Bus 001 Device 001: ID 0000:0000  
+</screen>
+The devices with the id of <literal>0000:0000</literal> can be ignored, as
+they are USB host controllers that drive the bus itself.  So, filtering
+them away leaves us with 4 devices:
+<screen>
+$ <userinput>/usr/sbin/lsusb | grep -v 0000:0000</userinput>
+Bus 002 Device 003: ID 045e:0023 Microsoft Corp. Trackball Optical
+Bus 005 Device 003: ID 0409:0058 NEC Corp. HighSpeed Hub
+Bus 004 Device 003: ID 157e:300d  
+Bus 004 Device 002: ID 045e:001c Microsoft Corp.
+</screen>
+As USB devices are easy to remove, unplug the device you are wanting to
+find the driver for and run <literal>lsusb</literal> again:
+<screen>
+$ <userinput>/usr/sbin/lsusb | grep -v 0000:0000</userinput>
+Bus 002 Device 003: ID 045e:0023 Microsoft Corp. Trackball Optical
+Bus 005 Device 003: ID 0409:0058 NEC Corp. HighSpeed Hub
+Bus 004 Device 002: ID 045e:001c Microsoft Corp.
+</screen>
+The third device is now missing, which means the device shown as:
+<screen>
+Bus 004 Device 003: ID 157e:300d  
+</screen>
+Is the device we want to find the driver for.
+</para>
+
+<para>
+If you replace the device and look at the output of
+<literal>lspci</literal> again, the device number will have changed:
+<screen>
+$ <userinput>/usr/sbin/lsusb | grep 157e</userinput>
+Bus 004 Device 004: ID 157e:300d  
+</screen>
+This is because the USB device numbers are not unique and change for every
+time they are plugged in.  What is stable is the vendor and product id,
+which is shown here by <literal>lspci</literal> as the two four digit
+values with the <literal>:</literal> between them.  For this device, the
+vendor id is <literal>157e</literal> and the product id is
+<literal>300d</literal>.  Write these values down as we will use them in
+future steps.
+</para>
+
+<para>
+Like for the PCI device, we will search the kernel source code for the USB
+vendor and product ids in order to find the proper driver to control this
+device.  Unfortunatly, there is no single file that contains all of the USB
+vendor ids, like PCI has.  So a search of the whole tree is necessary:
+<screen>
+$ <userinput>grep -i -R  -l 157e drivers/*</userinput>
+drivers/atm/pca200e.data
+drivers/atm/pca200e_ecd.data
+drivers/atm/sba200e_ecd.data
+drivers/net/wireless/zd1211rw/zd_usb.c
+drivers/scsi/ql1040_fw.h
+drivers/scsi/ql1280_fw.h
+drivers/scsi/qlogicpti_asm.c
+</screen>
+We know this is a USB wireless device, and not an ATM or SCSI device, so we
+can safely ignore the files found in those directories.  That leaves the
+<filename>drivers/net/wireless/zd1211rw/zd_usb.c</filename> filename to
+investigate.
+</para>
+
+<para>
+Looking at the <filename>zd_usb.c</filename> file, the string
+<literal>157e</literal> is used in the following location:
+<programlisting>
+static struct usb_device_id usb_ids[] = {
+        /* ZD1211 */
+        { USB_DEVICE(0x0ace, 0x1211), .driver_info = DEVICE_ZD1211 },
+        { USB_DEVICE(0x07b8, 0x6001), .driver_info = DEVICE_ZD1211 },
+        { USB_DEVICE(0x126f, 0xa006), .driver_info = DEVICE_ZD1211 },
+        { USB_DEVICE(0x6891, 0xa727), .driver_info = DEVICE_ZD1211 },
+        { USB_DEVICE(0x0df6, 0x9071), .driver_info = DEVICE_ZD1211 },
+        { USB_DEVICE(0x157e, 0x300b), .driver_info = DEVICE_ZD1211 },
+        /* ZD1211B */
+        { USB_DEVICE(0x0ace, 0x1215), .driver_info = DEVICE_ZD1211B },
+        { USB_DEVICE(0x157e, 0x300d), .driver_info = DEVICE_ZD1211B },
+        {}
+};
+</programlisting>
+Like PCI drivers, USB drivers tell the kernel what devices they support in
+order for the kernel to bind the driver to the device.  This is done by
+using a <literal>struct usb_device_id</literal> variable, as shown here.
+This is a list of the different vendor and product ids that are supported
+by this driver.  The line:
+<programlisting>
+        { USB_DEVICE(0x157e, 0x300b), .driver_info = DEVICE_ZD1211 },
+</programlisting>
+shows that our vendor and product ids are supported by this driver.
+</para>
+
+<para>
+Now that we have the driver name that is necessary to control this device,
+work backwards through the kernel Makefiles, as described earlier in the
+chapter, to determine how to enable this driver to be built properly.
+</para>
+
+<para>
+In summary, the steps needed in order to find which USB driver
+will control a specific USB device are:
+
+<orderedlist>
+
+<listitem>
+<para>
+Find the USB vendor and product id of device you want to find the driver for using
+<literal>lsusb</literal> by adding and removing the device to see what
+changes in the list.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search the kernel source tree for the vendor and product id of the USB
+device.  Both the vendor and product id should be in a <literal>struct
+usb_device_id</literal> definition.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search the kernel Makefiles for the <literal>CONFIG_</literal> rule that
+builds this driver by using <literal>find</literal> and
+<literal>grep</literal>:
+<screen>
+$ <userinput>find -type f -name Makefile | xargs grep DRIVER_NAME</userinput>
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search in the kernel configuration system for that configuration value and
+go to the location in the menu that it specifies to enable that driver to
+be built.
+</para>
+</listitem>
+
+</orderedlist>
 </para>
 
 </sect2>
