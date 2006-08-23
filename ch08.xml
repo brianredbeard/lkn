@@ -298,6 +298,62 @@ properly.
 
 </sect3>
 
+<sect3>
+<title>summary of steps title?</title>
+
+<para>
+In summary, here are the steps needed to find the driver for a device that
+has a working driver already bound to it:
+<orderedlist>
+
+<listitem>
+<para>
+Find the proper <literal>sysfs</literal> class device that the device is
+bound to.  Network devices are listed in
+<filename>/sys/class/net</filename> and tty devices are listed in
+<filename>/sys/class/tty</filename>.  Other types of devices are listed in
+other directories in <literal>/sys/class</literal> depending on the type of
+device.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Trace through the <literal>sysfs</literal> tree to find the module name
+that controls this device.  It will be found in the
+<filename>/sys/CLASS_NAME/DEVICE_NAME/device/driver/module</filename>, and can be
+displayed using the <literal>readlink</literal> and
+<literal>basename</literal> applications:
+<screen>
+$ <userinput>basename `readlink /sys/class/CLASS_NAME/DEVICE_NAME/device/driver/module`</userinput>
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search the kernel Makefiles for the <literal>CONFIG_</literal> rule that
+builds this module name by using <literal>find</literal> and
+<literal>grep</literal>:
+<screen>
+$ <userinput>find -type f -name Makefile | xargs grep MODULE_NAME</userinput>
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search in the kernel configuration system for that config value and go to
+the location in the menu that it specifies to enable that driver to be
+built.
+</para>
+</listitem>
+
+</orderedlist>
+
+</para>
+
+</sect3>
 </sect2>
 </sect1>
 
@@ -313,10 +369,314 @@ get it to work properly.  This section will help you determine how to find
 that configuration option to get the hardware up and running.
 </para>
 
+<para>
+The easiest way to figure out which driver controls a new device, is to
+build all of the different drivers of that type in the kernel source tree
+as modules, and let the <literal>udev</literal> startup process match up
+the driver to the device properly.  Once this happens, you should be able
+to work backwards using the steps just discussed to determine the proper
+driver needed, and then go back and only enable that driver in the kernel
+configuration.
+</para>
+
+<para>
+But if you do not want to build all drivers, or this does not work for some
+reason, it will require a bit more work in trying to determine the proper
+driver that is needed.  The steps below are complex and require digging in
+the kernel source code at times.  Do not be afraid of this, it will only
+help you understand your hardware and the kernel source better.
+</para>
+
+<para>
+The steps involved in determining the driver to device match differ
+depending on the type of device that you are working with.  We will discuss
+the two most common forms of devices right now, PCI and USB devices.
+</para>
+
 <sect2>
 <title>PCI devices</title>
 
 <para>
+For this example, let us use a PCI network card that is not working with
+the currently running kernel version.  This example will be different from
+your situation, with different PCI device and bus id values, but the steps
+involved should be relevant to any type of PCI device you wish to find a
+working driver for.
+</para>
+
+<para>
+First, let us find the PCI device in the system that is not working.  To
+get a list of all PCI devices , use the <literal>lspci</literal> program.
+But as we only care about the ethernet PCI devices, we will narrow our
+search of the PCI devices down by only searching for anything with the term
+"Ethernet" in it:
+<screen>
+$ <userinput>/usr/sbin/lspci | grep -i ethernet </userinput>
+06:04.0 Ethernet controller: Realtek Semiconductor Co., Ltd.  RTL-8139/8139C/8139C+ (rev 10)
+</screen>
+This is the device we wish to get working.
+<footnote>
+<para>
+Note that you can just try searching through the kernel configuration for a
+device that matches the string described here, a device from Realtek
+Semiconductor with a product name of
+<literal>RTL-8139/8139C/8139C+</literal> but sometimes this does not always
+work.  That is why we are taking the long way around in this chapter.
+</para>
+</footnote>
+</para>
+
+<para>
+The first few bits of the <literal>lspci</literal> output show the PCI bus
+id for this device, <literal>06:04.0</literal>.  That value is what we will
+use in looking through <literal>sysfs</literal> in order to find out more
+information about this device.
+</para>
+
+<para>
+Go into <literal>sysfs</literal> where all of the different PCI devices are
+listed, and look at the names of all of them:
+<screen>
+$ <userinput>cd /sys/bus/pci/devices/</userinput>
+$ <userinput>ls</userinput>
+0000:00:00.0  0000:00:1d.0  0000:00:1e.0  0000:00:1f.3  0000:06:03.3
+0000:00:02.0  0000:00:1d.1  0000:00:1f.0  0000:06:03.0  0000:06:03.4
+0000:00:02.1  0000:00:1d.2  0000:00:1f.1  0000:06:03.1  0000:06:04.0
+0000:00:1b.0  0000:00:1d.7  0000:00:1f.2  0000:06:03.2  0000:06:05.0
+</screen>
+The kernel numbers PCI devices with a leading <literal>0000:</literal> that
+does not show up in the output of the <literal>lspci</literal> program.
+<footnote>
+<para>
+Some 64bit processors will show the leading bus number for PCI devices in
+the output of <literal>lspci</literal>, but for the majority of the common
+Linux machines, it will not show up by default.
+</para>
+</footnote>
+So add the leading <literal>0000:</literal> onto the number that we found
+using <literal>lspci</literal> and go into that directory:
+<screen>
+$ <userinput>cd 0000:06:04.0</userinput>
+</screen>
+In this directory, we want to know the values of the
+<filename>vendor</filename> and <filename>device</filename> filenames:
+<screen>
+$ <userinput>cat vendor</userinput>
+0x10ec
+$ <userinput>cat device</userinput>
+0x8139
+</screen>
+These are the vendor and device ids for this PCI device.  The kernel uses
+these values to match a driver to a device properly.  PCI drivers tell the
+kernel which vendor and device ids that they will support so that the
+kernel knows how to bind the driver to the proper device.  Write them down
+somewhere, as we will refer to them later.
+<footnote>
+<para>
+For fun, run <literal>modprobe</literal> on the value that is in the
+<filename>modalias</filename> file as root:
+<screen>
+$ <userinput>su</userinput>
+Password:
+# <userinput>modprobe `cat modalias`</userinput>
+# <userinput>exit</userinput>
+$
+</screen>
+and see if a module was loaded that will control this device.  The value in
+the <filename>modalias</filename> file is how the userspace tools like
+<literal>udev</literal> and <literal>modprobe</literal> know how to load
+the proper module for the kernel to use for a given device.
+</para>
+</footnote>
+</para>
+
+<para>
+Now that we know the vendor and product id for this PCI device, we need to
+find the proper kernel driver that advertises that it supports this device.
+Go back to the kernel source directory:
+<screen>
+$ <userinput>cd ~/linux/linux-2.6.17.8/</userinput>
+</screen>
+The first location that a large number of PCI ids are located in the kernel
+source tree, is in the <filename>include/linux/pci_ids.h</filename>.
+Search that file for our vendor product number:
+<screen>
+$ <userinput>grep -i 0x10ec include/linux/pci_ids.h</userinput>
+#define PCI_VENDOR_ID_REALTEK           0x10ec
+</screen>
+The defined value here, <literal>PCI_VENDOR_ID_REALTEK</literal> is what
+will probably be used in any kernel driver that puports to support devices
+from this manufacturer.
+</para>
+
+<para>
+To be safe, also look in this file for our device id, as it is sometimes
+described in there too:
+<screen>
+$ <userinput>grep -i 0x8139 include/linux/pci_ids.h</userinput>
+#define PCI_DEVICE_ID_REALTEK_8139      0x8139
+</screen>
+That definition will be useful later.
+</para>
+
+<para>
+So, look for drivers that use this vendor definition in them:
+<screen>
+$ <userinput>grep -Rl PCI_VENDOR_ID_REALTEK *</userinput>
+include/linux/pci_ids.h
+drivers/net/r8169.c
+drivers/net/8139too.c
+drivers/net/8139cp.c
+</screen>
+The first file listed here, <filename>pci_ids.h</filename> does not need to
+be looked at, as that is where we originally found the definition at.  But
+the files, <filename>r8139.c</filename>, <filename>8139too.c</filename>,
+and <filename>8169cp.c</filename> in the <filename>drivers/net/</filename>
+subdirectory should be looked at closer.
+</para>
+
+<para>
+Open one of these files in an editor and search for where the
+<literal>PCI_VENDOR_ID_REALTEK</literal> was found.  In the file
+<filename>drivers/net/r8169.c</filename> it shows up in this section of
+code:
+<programlisting>
+static struct pci_device_id rtl8169_pci_tbl[] = {
+        { PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8169), },
+        { PCI_DEVICE(PCI_VENDOR_ID_REALTEK, 0x8129), },
+        { PCI_DEVICE(PCI_VENDOR_ID_DLINK,   0x4300), },
+        { PCI_DEVICE(0x16ec,                0x0116), },
+        { PCI_VENDOR_ID_LINKSYS,            0x1032, PCI_ANY_ID, 0x0024, },
+        {0,},
+};
+</programlisting>
+All PCI drivers contain a list of the different devices that they support.
+That list is contained in a structure of
+<literal>struct pci_device_id</literal> values, just like this one.  That
+is what we need to look at in order to determine if our device is supported
+by this driver.  The vendor value matches here, but the second value after
+the vendor is the device value.  Our device has the value
+<literal>0x8139</literal>, while this driver supports the device values of
+<literal>0x8169</literal> and <literal>0x8129</literal> for devices with
+the vendor id of <literal>PCI_VENDOR_ID_REALTEK</literal>.  So this driver
+will not support our device.
+</para>
+
+<para>
+Moving on to the next file <filename>drivers/net/8139too.c</filename>, we
+find the use of <literal>PCI_VENDOR_ID_REALTEK</literal> to be found in the
+following bit of code:
+<programlisting>
+if (pdev->vendor == PCI_VENDOR_ID_REALTEK &amp;&amp;
+    pdev->device == PCI_DEVICE_ID_REALTEK_8139 &amp;&amp; pci_rev >= 0x20) {
+	dev_info(&amp;pdev->dev,
+		   "This (id %04x:%04x rev %02x) is an enhanced 8139C+ chip\n",
+		   pdev->vendor, pdev->device, pci_rev);
+	dev_info(&amp;pdev->dev,
+		   "Use the \"8139cp\" driver for improved performance and stability.\n");
+}
+</programlisting>
+The use of the <literal>PCI_VENDOR_ID_REALTEK</literal> value here also
+corrisponds with the code checking to see if the PCI device id matches the
+<literal>PCI_DEVICE_ID_REALTEK_8139</literal> value.  If it does, the
+driver is to print out a message that says:
+<blockquote>
+Use the 8139cp driver for improved performance and stability.
+</blockquote>
+Perhaps we should look at that driver next.  Even if we did not have such a
+visable clue, this driver does not have the vendor and device id pair that
+we are looking for in a <literal>struct pci_device_id</literal> variable,
+so that gives us the clue that it will not support our device.
+</para>
+
+<para>
+Finally, look at the <filename>drivers/net/8139cp.c</filename> file.  It
+uses the <literal>PCI_VENDOR_ID_REALTEK</literal> definition in the
+following code segment:
+<programlisting>
+static struct pci_device_id cp_pci_tbl[] = {
+        { PCI_VENDOR_ID_REALTEK, PCI_DEVICE_ID_REALTEK_8139,
+          PCI_ANY_ID, PCI_ANY_ID, 0, 0, },
+        { PCI_VENDOR_ID_TTTECH, PCI_DEVICE_ID_TTTECH_MC322,
+          PCI_ANY_ID, PCI_ANY_ID, 0, 0, },
+        { },
+};
+MODULE_DEVICE_TABLE(pci, cp_pci_tbl);
+</programlisting>
+Here is a use of both our vendor and device id values, in a <literal>struct
+pci_device_id</literal> variable.  This driver should support our device.
+</para>
+
+<para>
+Now that we have the driver name, we can work backwards as shown in the
+first section in this chapter to find the proper kernel configuration value
+that should be enabled to build this driver.
+</para>
+
+<para>
+In summary, here are the steps needed in order to find which PCI driver
+will control a specific PCI device:
+
+<orderedlist>
+
+<listitem>
+<para>
+Find the PCI bus id of the device you want to find the driver for using
+<literal>lspci</literal>.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Go into the <filename>/sys/bus/pci/devices/0000:BUS_ID/</filename> directory,
+where <literal>BUS_ID</literal> is the PCI bus id found in the previous
+step.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Read the values of the <filename>vendor</filename> and
+<filename>device</filename> files in the PCI device directory.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Move back to the kernel source tree and look in the
+<filename>include/linux/pci_ids.h</filename> for the PCI vendor and device
+ids found in the last step.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search the kernel source tree for usages of those values in drivers.  Both
+the vendor and device id should be in a
+<literal>struct pci_device_id</literal> definition.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search the kernel Makefiles for the <literal>CONFIG_</literal> rule that
+builds this driver by using <literal>find</literal> and
+<literal>grep</literal>:
+<screen>
+$ <userinput>find -type f -name Makefile | xargs grep DRIVER_NAME</userinput>
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+Search in the kernel configuration system for that config value and go to
+the location in the menu that it specifies to enable that driver to be
+built.
+</para>
+</listitem>
+
+</orderedlist>
 </para>
 
 </sect2>
