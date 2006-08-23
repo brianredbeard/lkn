@@ -4,13 +4,9 @@
 Managing changes made to a kernel source tree
 </title>
 
-<remark>
+<!-- 
 Based on the ideas presented at http://www.linuxjournal.com/article/6183
-</remark>
-
-<remark>
-Rough cut-and-paste of original article below.
-</remark>
+-->
 
 <!--
 
@@ -18,96 +14,86 @@ Rough cut-and-paste of original article below.
   do you have the right to reuse the article? Forgive me if you told
   me already.
 
+  gkh: Yes, I have the right to reuse it, I retain the original copyright on
+  any article published by them, after a few months after publication happens.
 -->
 
 <para>
 <emphasis>(The first part of this appendix, concerning
-</emphasis>diff<emphasis> and </emphasis>patch<emphasis>, is based on
-an article originally published in Linux Journal.)</emphasis>
+</emphasis>diff<emphasis> and </emphasis>patch<emphasis>, is based on an
+article originally published in Linux Journal.)</emphasis>
 </para>
 
 <para>
-Linux kernel development differs in many ways from
-traditional software development. Some of the special demands on
-kernel programmers include:
+Linux kernel development differs in many ways from traditional software
+development. Some of the special demands on kernel programmers include:
 </para>
 
 <itemizedlist>
 
-<listitem><para>
+<listitem>
+<para>
 <!--
-
-  AO: I'm not convinced this task is more difficult in the kernel than
-  in any large system developed by multiple staff. Even with good
-  modularization, you need to know what other systems are doing to
-  global data, and keep up with changes to APIs you're using.
-
--->
-Staying aware of changes that are happening to other portions of the
-kernel with which you interact.
-</para></listitem>
-
-<listitem><para>
-<!--
-
   AO: The following is probably worse for the Linux kernel than other
   projects.
 
+  gkh: yes it is...
 -->
-Constantly applying your changes to the moving target of a
-fast-based kernel development release schedule.
-</para></listitem>
+Constantly applying your changes to the moving target of a fast-based
+kernel development release schedule.
+</para>
+</listitem>
 
-<listitem><para>
+<listitem>
+<para>
 <!--
 
   AO: The following seems pretty universal.
 
--->
-Resolving any merge
-conflicts between changes you have made and changes made by other people
-and
-</para></listitem>
+  gkh: no, usually you work in your own area, and no one touches code
+  there.  Merging is very rare in most commercial work because of this.  Or
+  at least that was my experience in all my years doing it...
 
-<listitem><para>
-Exporting your changes in a format that lets others incorporate and
-work with it easily.
-</para></listitem>
+-->
+Resolving any merge conflicts between changes you have made and changes
+made by other people and
+</para>
+</listitem>
+
+<listitem>
+<para>
+Exporting your changes in a format that lets others incorporate and work
+with it easily.
+</para>
+</listitem>
 
 </itemizedlist>
 
 <para>
-For a number of years, I developed and maintained the USB-to-serial-port
-drivers, and then eventually took over maintenance for all of the USB code in
-the kernel. In this article, I explain some of the tools I used in the
-past to do this work and show how some new tools have enhanced my
-ability to keep on top of changes in the kernel and let me do my job
-with less effort. In particularly, we'll cover three systems for
-sharing patches: the traditional
-<command>diff</command>/<command>patch</command> sequence,
-<command>quilt</command>, and the source control system developed
-specifically for the Linux kernel. <command>git</command>.
+This appendix will show how to do kernel development using the simple tools
+of <command>diff</command> and <command>patch</command>.  Then the more
+powerful <command>quilt</command> and <command>git</command> tools will be
+introduced as an easier way to develop kernel changes.
 </para>
 
 <sect1>
 <title>patch and diff</title>
 
 <para>
-One of the most common methods of doing kernel work is to use the <command>patch</command>
-and <command>diff</command> programs.
+One of the most common methods of doing kernel work is to use the
+<command>patch</command> and <command>diff</command> programs.
 <!--
 
   AO: I removed a sentence here that didn't seem necessary given the
   introduction that lays out the appendix.
 
 -->
-One method is to use two different
-directory trees: a "clean" one and a "working" one. The clean tree
-is a released kernel version, while the working one is based on the same
-version but contains your modifications.
-Then you can use <command>patch</command> and <command>diff</command>
-to extract your changes and port them forward 
-to a new kernel release.
+To use these tools, two different directory trees: a "clean" one and a
+"working" one must be used. The clean tree is a released kernel version,
+while the working one is based on the same version but contains your
+modifications.  Then you can use <command>patch</command> and
+<command>diff</command> to extract your changes and port them forward to a
+new kernel release.
 </para>
 
 <!--
@@ -120,67 +106,32 @@ to a new kernel release.
 
 -->
 <para>
-For an example, let's start off with
-a clean 2.4.18 kernel (available at
-<systemitem role="url">http://www.kernel.org/pub/linux/kernel/v2.4/linux-2.4.18.tar.gz</systemitem>) in our working
-directory:
-</para>
-
-<programlisting>
+For an example, create two directories containing the latest kernel version
+as described in Chapter <xref linkend="LKN-chapter-retrieve-source" />:
+<screen>
+$ <userinput>tar -zxf linux-2.6.19.tar.gz</userinput>
+$ <userinput>mv linux-2.6.19 linux-2.6.19-dirty</userinput>
+$ <userinput>tar -zxf linux-2.6.19.tar.gz</userinput>
 $ <userinput>ls</userinput>
-linux-2.4.18.tar.gz
-</programlisting>
-
-<para>
-Uncompress this kernel, which produces a directory named <filename>linux</filename> of
-course code, and then rename the directory to something more
-informative that lets you keep numerous versions around at once:
-</para>
-
-<programlisting>
-$ <userinput>tar -zxf linux-2.4.18.tar.gz</userinput>
-$ <userinput>mv linux linux-2.4.18</userinput>
-$ <userinput>ls</userinput>
-linux-2.4.18  linux-2.4.18.tar.gz
-</programlisting>
-
-<para>
-Now create a duplicate version of this kernel version, and name it
-something else:
-</para>
-
-<programlisting>
-$ <userinput>tar -zxf linux-2.4.18.tar.gz</userinput>
-$ <userinput>mv linux linux-2.4.18-greg</userinput>
-$ <userinput>ls</userinput>
-linux-2.4.18  linux-2.4.18-greg  linux-2.4.18.tar.gz
-</programlisting>
-
-<para>
-Now we can do all of our development in our <filename>-greg</filename> directory and leave
-the clean, original kernel directory alone. After we are finished with
-our work, we need to create a patch to send to other people. The
-Documentation/SubmittingPatches file explains the proper format that
-most kernel developers like for sending and receiving patches. It also
-explains the usage of a <filename>dontdiff</filename> file, which can help with generating
-these patches. The <filename>dontdiff</filename> file can be found at
-<systemitem role="url">http://www.moses.uklinux.net/patches/dontdiff</systemitem> and contains a list of files that
-you do not want to have the diff program pay attention to. These
-typically include backup files from text editors...[Say a little bit here.]
+linux-2.6.19/
+linux-2.6.19-dirty/
+</screen>
 </para>
 
 <para>
-To create a patch, use the following command:
+Now make all of the different changes you wish to do in the
+<filename>-dirty</filename> directory and leave the clean, original kernel
+directory alone.  After finishing making changes, you should create a patch
+to send it to other people:
+<screen>
+$ <userinput>diff -Naur -X linux-2.6.19/Documentation/dontdiff linux-2.6.19/ linux-2.6.19-dirty/ &gt; my_patch</userinput>
+</screen>
 </para>
 
-<programlisting>
-$ diff -Naur -X dontdiff linux-2.4.18 linux-2.4.18-greg/ &gt; my_patch
-</programlisting>
-
 <para>
-This creates a file called <filename>my_patch</filename> that contains the difference between
-your work and a clean 2.4.18 kernel tree. This patch then can be sent to
-other people via e-mail.
+This will create a file called <filename>my_patch</filename> that contains
+the difference between your work and a clean 2.6.19 kernel tree. This patch
+then can be sent to other people via e-mail.
 </para>
 
 </sect1>
@@ -189,10 +140,9 @@ other people via e-mail.
 <title>New Kernel Versions</title>
 
 <para>
-If a new kernel version is released, and you want to port your
-changes to the new version, you need to try to apply your generated
-patch onto a clean kernel version. This can be done in the following
-steps:
+If a new kernel version is released, and you wish to port your changes to
+the new version, you need to try to apply your generated patch onto a clean
+kernel version. This can be done in the following steps:
 </para>
 
 <orderedlist>
@@ -204,50 +154,50 @@ Generate your original patch, as in the previous example.
 
 <listitem>
 <para>
-Using the official patch from <systemitem role="url">kernel.org</systemitem>, move the old kernel version
+Using the official patch from
+<systemitem role="url">kernel.org</systemitem>, move the old kernel version
 forward one release:
 </para>
 
-<programlisting>
-$ <userinput>cd linux-2.4.18</userinput>
-$ <userinput>patch -p1 &lt; ../patch-2.4.19</userinput>
+<screen>
+$ <userinput>cd linux-2.6.19</userinput>
+$ <userinput>patch -p1 &lt; ../patch-2.6.20</userinput>
 $ <userinput>cd ..</userinput>
-$ <userinput>mv linux-2.4.18 linux-2.4.19</userinput>
-</programlisting>
+$ <userinput>mv linux-2.6.19 linux-2.6.20</userinput>
+</screen>
 </listitem>
 
 <listitem>
 <para>
 Move your working directory forward one release by removing your patch,
 then apply the new update:
-</para>
-
-<programlisting>
-$ <userinput>cd linux-2.4.18-greg</userinput>
+<screen>
+$ <userinput>cd linux-2.6.19-dirty</userinput>
 $ <userinput>patch -p1 -R &lt; ../my_patch</userinput>
-$ <userinput>patch -p1 &lt; ../patch-2.4.19</userinput>
+$ <userinput>patch -p1 &lt; ../patch-2.6.20</userinput>
 $ <userinput>cd ..</userinput>
-$ <userinput>mv linux-2.4.18-greg linux-2.4.19-greg</userinput>
-</programlisting>
+$ <userinput>mv linux-2.4.19-dirty linux-2.6.20-dirty</userinput>
+</screen>
+</para>
 </listitem>
 
 <listitem>
 <para>
 Try to apply your patch on top of the new update:
+<screen>
+$ <userinput>cd linux-2.6.20-dirty</userinput>
+$ <userinput>patch -p1 &lt; ../my_patch</userinput>
+</screen>
 </para>
 
-<programlisting>
-$ cd linux-2.4.19-greg
-$ patch -p1 &lt; ../my_patch
-</programlisting>
-
 <para>
-If your patch does not apply cleanly, resolve all of the conflicts that
-are created (the <command>patch</command> command will tell you about these, leaving behind <filename>.rej</filename> and
-<filename>.orig</filename> files for you to compare and fix up manually using your favorite
-editor). This merge process can be the most difficult part if you have
-made changes to portions of the source tree that have been changed by
-other people.
+If your patch does not apply cleanly, resolve all of the conflicts that are
+created (the <command>patch</command> command will tell you about these,
+leaving behind <filename>.rej</filename> and <filename>.orig</filename>
+files for you to compare and fix up manually using your favorite
+editor).  This merge process can be the most difficult part if you have
+made changes to portions of the source tree that have been changed by other
+people.
 </para>
 </listitem>
 
@@ -266,7 +216,229 @@ work.
 
 <sect1>
 <title>Managing your patches with quilt</title>
-<para></para>
+
+<para>
+Kernel development using <command>patch</command> and
+<command>diff</command> generally works quite well. But after a while, most
+people grow tired of it and look for a different way to work that does not
+involve so much tedious patching and merging.  Luckily, a few kernel
+developers came up with a program called <command>quilt</command> that
+handles the process of manipulating a number of patches made against an
+external source tree much easier.
+</para>
+
+<para>
+The idea for <command>quilt</command> came from a set of scripts written by
+Andrew Morton that he used to first maintain the memory management
+subsystem, and then later the entire development kernel tree.  His scripts
+were tied very tightly to his workflow, but the ideas behind them were very
+powerful.  Andreas Gruenbacher took those ideas and created the
+<command>quilt</command> tool.
+</para>
+
+<para>
+The basic idea behind <command>quilt</command> is that you work with a
+pristine source tree, and add a bunch of patches on top of it.  You can
+push and pop different patches off of the source tree, and maintain this
+list of patches in a simple manner.
+</para>
+
+<para>
+To get started, create a kernel source tree like always:
+<screen>
+$ <userinput>tar -zxf linux-2.6.19.tar.gz</userinput>
+$ <userinput>ls</userinput>
+linux-2.6.19/
+</screen>
+And go into that directory:
+<screen>
+$ <userinput>cd linux-2.6.19</userinput>
+</screen>
+To get started, create a directory called <filename>patches</filename> that
+will hold all of our kernel patches:
+<screen>
+$ <userinput>mkdir patches</userinput>
+</screen>
+Then tell <command>quilt</command> to create a new patch called
+<literal>patch1</literal>:
+<screen>
+$ <userinput>quilt new patch1</userinput>
+Patch patches/patch1 is now on top
+</screen>
+<command>quilt</command> needs to be told about all of the different files
+that will be modifed by this new patch.  To do this, use the
+<command>add</command> command:
+<screen>
+$ <userinput>quilt add Makefile</userinput>
+File Makefile added to patch patches/patch1
+</screen>
+Edit the file <filename>Makefile</filename> and modify the
+<literal>EXTRAVERSION</literal> line and save the change.
+After completed, tell <command>quilt</command> to refresh the patch:
+<screen>
+$ <userinput>quilt refresh</userinput>
+Refreshed patch patches/patch1
+</screen>
+If you look at the file <filename>patches/patch1</filename> it will contain
+a patch with the changes that you have just made:
+<screen>
+$ <userinput>cat patches/patch1</userinput>
+Index: linux-2.6.19/Makefile
+===================================================================
+--- linux-2.6.19.orig/Makefile
++++ linux-2.6.19/Makefile
+@@ -1,7 +1,7 @@
+ VERSION = 2
+ PATCHLEVEL = 6
+ SUBLEVEL = 19
+-EXTRAVERSION =
++EXTRAVERSION = -dirty
+ NAME=Crazed Snow-Weasel
+ 
+ # *DOCUMENTATION*
+</screen>
+
+</para>
+
+<para>
+You can continue on, working with this single patch, or create a new one to
+go on top of this patch.  As an example, if three different patches had
+been created, <filename>patch1</filename>, <filename>patch2</filename>, and
+<filename>patch3</filename>, they will be applied one on top of each other.
+</para>
+
+<para>
+To see the list of patches that are currently applied:
+<screen>
+$ <userinput>quilt series -v</userinput>
++ patches/patch1
++ patches/patch2
+= patches/patch3
+</screen>
+This output shows that all three patches are applied, and that the current
+one is <filename>patch3</filename>.
+</para>
+
+<para>
+If a new kernel version is released, and you wish to port your changes to
+the new version, quilt can handle this easily with the following steps:
+</para>
+
+<orderedlist>
+<listitem>
+<para>
+Pop off all of the patches that are currently on the tree:
+<screen>
+$ <userinput>quilt pop -a</userinput>
+Removing patch patches/patch3
+Restoring drivers/usb/Makefile
+
+Removing patch patches/patch2
+Restoring drivers/Makefile
+
+Removing patch patches/patch1
+Restoring Makefile
+
+No patches applied
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+Using the official patch from
+<systemitem role="url">kernel.org</systemitem>, move the old kernel version
+forward one release:
+</para>
+
+<screen>
+$ <userinput>patch -p1 &lt; ../patch-2.6.20</userinput>
+$ <userinput>cd ..</userinput>
+$ <userinput>mv linux-2.6.19 linux-2.6.20</userinput>
+</screen>
+</listitem>
+
+<listitem>
+<para>
+Now have quilt push all of the patches back on top of the new tree:
+<screen>
+$ <userinput>quilt push</userinput>
+Applying patch patches/patch1
+patching file Makefile
+Hunk #1 FAILED at 1.
+1 out of 1 hunk FAILED -- rejects in file Makefile
+Patch patches/patch1 does not apply (enforce with -f)
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+As the first patch doesn't apply cleanly, force the patch to be applied and
+then fix it up:
+<screen>
+$ <userinput>quilt push -f</userinput>
+Applying patch patches/patch1
+patching file Makefile
+Hunk #1 FAILED at 1.
+1 out of 1 hunk FAILED -- saving rejects to file Makefile.rej
+Applied patch patches/patch1 (forced; needs refresh)
+$ <userinput>vim Makefile.rej Makefile</userinput>
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+After the patch is applied by hand, refresh the patch:
+<screen>
+$ <userinput>quilt refresh</userinput>
+Refreshed patch patches/patch1
+</screen>
+</para>
+</listitem>
+
+<listitem>
+<para>
+And continue on pushing the other patches:
+<screen>
+$ <userinput>quilt push</userinput>
+Applying patch patches/patch2
+patching file drivers/Makefile
+
+Now at patch patches/patch2
+$ <userinput>quilt push</userinput>
+Applying patch patches/patch3
+patching file drivers/usb/Makefile
+
+Now at patch patches/patch3
+</screen>
+</para>
+</listitem>
+</orderedlist>
+
+<para>
+<command>quilt</command> also has options that will automatically email out
+all of the patches in the series to a group of people or a mailing list,
+delete specific patches in the middle of the series, go up or down the
+series of patches until a specific patch is found, and many more powerful
+options.
+</para>
+
+<para>
+If you are wanting to do any kind of kernel development,
+<command>quilt</command> is strongly recommended, even for tracking a
+few patches, instead of using the more difficult <command>diff</command>
+and <command>patch</command> method.  It is much simpler and will save you
+much time and effort.
+</para>
+
+<para>
+On a personal note, this author can not recommend this tool enough, as he
+uses it every day to manage hundreds of patches in different development
+trees.  It is also used by numerous Linux distributions to maintain their
+kernel packages, and has an involved and responsive development community.
+</para>
 
 </sect1>
 
@@ -275,12 +447,7 @@ work.
 <sect1>
 <title>Source Code Control with git</title>
 
-
 <para>
-Kernel development using <command>patch</command> and <command>diff</command> generally works
-quite well. But after a while, most people grow tired of it and look for
-a different way to work that does not involve so much tedious patching
-and merging.
 </para>
 
 <!--
