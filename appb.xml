@@ -57,15 +57,6 @@ with it easily.
 
 </itemizedlist>
 
-<para>
-This appendix will show how to do kernel development using the simple tools
-of <command>diff</command> and <command>patch</command>.  Then the more
-powerful <command>quilt</command> and <command>git</command> tools will be
-introduced as an easier way to develop kernel changes.  And finally,
-<command>ketchup</command> is introduced as a way to handle the constant
-downloading and applying of kernel releases.
-</para>
-
 <sect1>
 <title>patch and diff
 <footnote>
@@ -447,201 +438,43 @@ kernel packages, and has an involved and responsive development community.
 </sect1>
 
 
-
 <sect1>
-<title>Source Code Control with git</title>
+<title>git</title>
 
 <para>
+<command>git</command> is a source code control tool that was originally
+written by Linus Torvalds when the Linux kernel was looking for a new
+source code control system.  It is a distributed system, which differs from
+traditional source code control systems like <command>cvs</command> in that
+it is not required to be connected to a server in order to make a commit to
+the repository.
 </para>
 
-<!--
 <para>
-A few years ago I discovered BitKeeper (available at
-http://www.bitmover.com) and have been using it ever since for kernel
-development. It originally enabled me to track easily external changes
-to the kernel tree and allowed me to forward port my kernel changes with
-almost no effort. Now that Linus Torvalds and Marcelo Tosatti are using
-BitKeeper for their kernel development, it also allows me to send
-patches to them easily for inclusion into the main kernel tree.
+It is one of the most powerful, flexible, and fast source code control
+systems currently available, and has an active development team working
+behind it.  The main web page for <command>git</command> can be found at
+<systemitem role="url">http://git.or.cz/</systemitem>.  It is recommended
+that any new user of <command>git</command> go through the published
+tutorials in order to become familiar with how <command>git</command>
+works, and how to use it properly.
 </para>
 
-<p>The use of BitKeeper as a kernel development tool is one that a lot of people find contentious, given
-BitKeeper's licensing strategy. Read over the license and decide for yourself if you should use it. You also
-should go through the tutorial on the BitMover web site to familiarize yourself with the tool and some of the
-different commands.</p>
-<p>To do kernel work with BitKeeper, you can base your kernel off Linus' or Marcelo's kernel tree, or you can
-create your own, with all of the different versions. However, unless you are planning on using BitKeeper to
-send your patches to Linus or Marcelo, I recommend creating your own kernel tree. That way you are not buried
-in the vast number of different changesets that all of the different kernel developers are creating, and you
-can focus on your work.</p>
+<para>
+The Linux kernel is developed using <command>git</command> and the latest
+<command>git</command> kernel tree can be found at
+<systemitem role="url">http://www.kernel.org/git/</systemitem>, along with
+a large list of other kernel developer's <command>git</command> repository.
+</para>
 
-</div>
-<div class="simplesect" lang="en">
-<div class="titlepage">
-<h2 class="title"><a name="N0x850ca10.0x8574268"></a>Two Trees</h2>
-</div>
-<p>Again, with BitKeeper you end up creating two different trees (or repositories as I will now call them) to
-do kernel work: a clean tree and a working tree.</p>
-<p>To create a clean BitKeeper repository, start with a released kernel in your working directory:</p>
-<pre class="programlisting">
-<tt>$ ls              
-linux-2.4.18.tar.gz             
-</tt>
-</pre>
-<p>Uncompress this kernel:</p>
-<pre class="programlisting">
-
-<tt>$ tar -zxf linux-2.4.18.tar.gz
-$ ls
-linux  linux-2.4.18.tar.gz
-</tt>
-</pre>
-Now create a BitKeeper project called linux-2.4: 
-<pre class="programlisting">
-<tt>$ bk setup linux-2.4
-</tt>
-</pre>
-BitKeeper will ask you a few questions and then provide a file to edit where you should describe your
-project. Fill this out with your favorite editor, and save it. <br>
-<br>
-<p>You will now have a directory called linux-2.4, which is where your project will be held. Now import the
-original kernel version into the new repository:</p>
-<pre class="programlisting">
-<tt>$ ls
-linux  linux-2.4  linux-2.4.18.tar.gz
-$ bk import -tplain linux linux-2.4
-</tt>
-</pre>
-
-<p>This will take some time. After BitKeeper is finished importing all of the files, I recommend tagging this
-point with the kernel version number. This will allow you to find the different kernel versions more easily
-in the future:</p>
-<pre class="programlisting">
-<tt>$ cd linux-2.4
-$ bk tag LINUX_2.4.18
-</tt>
-</pre>
-Now make a clone of that repository, which is a clean kernel tree, in a different directory so you can make
-your own changes: 
-<pre class="programlisting">
-<tt>$ bk clone linux-2.4 greg-2.4
-</tt>
-</pre>
-All of our kernel work will be done in the greg-2.4 directory. <br>
-<br>
-<p>You can use the -l option to bk clone. That will use a lot less disk space and go faster by creating hard
-links to the metadata files. If a file is modified, BitKeeper will break the link and create a new one where
-needed. If you end up creating a lot of different repositories on the same disk, you should use this
-option.</p>
-<p>After we are finished with our work, creating changesets by checking in our changes all during the
-development process (see the BitKeeper tutorial for more details of this), we would like to create a patch to
-show our changes. This can be done with a simple command from within the greg-2.4 directory:</p>
-
-<pre class="programlisting">
-<tt>$ bk export -tpatch -rLINUX_2.4.18..+ -h \
-&gt; ../my_patch
-</tt>
-</pre>
-<p>This will create a patch showing all of the changes from the tagged version (LINUX_2.4.18) up to the
-current changeset and save it in the my_patch file. This patch can then be sent to other people through
-e-mail, just like any patch created with diff. You will notice that creating this patch was a much shorter
-process than the previous method of using diff and patch.</p>
-<p><a href="/articles/lj/0101/6183/6183s2.html" target="_top">Submitting Kernel Patches</a></p>
-</div>
-<div class="simplesect" lang="en">
-<div class="titlepage">
-<h2 class="title"><a name="N0x850ca10.0x85745ac"></a>New Kernel Versions</h2>
-</div>
-<p>When a new kernel version is released, you will want to forward port your changes to the new version. This
-is where BitKeeper really shines over the previous patch and diff method.</p>
-
-<p>First, go to the original, clean kernel tree and import the new patch:</p>
-<pre class="programlisting">
-<tt>$ ls
-greg-2.4 linux-2.4 patch-2.4.19
-$ cd linux-2.4
-$ bk import -tpatch -SLINUX_2.4.19 ../patch-2.4.19 .
-</tt>
-</pre>
-<p>If BitKeeper thinks any files that the patch file shows as created and deleted might actually be files
-that were renamed or moved around the tree, it will pop up a GUI tool that you can use to show manually which
-files were renamed, which files simply were deleted and which ones simply were created. Figure 1 shows an
-example of this dialog box.</p>
-<div class="mediaobject"><a href="/articles/lj/0101/6183/6183f1.png"><img src="/articles/lj/0101/6183/6183f1.inline.png"></a>
-<div class="caption">
-<p>Figure 1. BitKeeper Example Dialog Box</p>
-</div>
-</div>
-<br>
-<br>
-<p>Now go back to your working repository and pull the new changes into it:</p>
-
-<pre class="programlisting">
-<tt>$ cd ../greg-2.4
-$ bk pull
-</tt>
-</pre>
-<p>BitKeeper will then merge all of the changes between kernels 2.4.18 and 2.4.19 into your working
-repository. If there are any merge conflicts between any changes you have made and changes that have showed
-up in the new kernel version, it will report this and ask you what you want to do. I suggest using the
-graphical three-way merge tool to help resolve these conflicts. This tool shows the original file with the
-changes that you have made and the changes that the patch (or someone else) has made. It then lets you pick
-which change you want to accept, or you can hand-edit the file, merging both changes together. Figure 2 shows
-an example of a change that I made to a file that conflicts with a change that happened in the main
-kernel.</p>
-<div class="mediaobject"><a href="/articles/lj/0101/6183/6183f2.png"><img src="/articles/lj/0101/6183/6183f2.inline.png"></a>
-<div class="caption">
-<p>Figure 2. A Merge Conflict</p>
-</div>
-</div>
-<br>
-<br>
-<p>After you are finished resolving any conflicts (and wasn't that much easier than manually looking through
-.rej files?), you can continue working in your updated kernel. Again, to export a patch with all of the
-changes you have created, use the following command within the greg-2.4 directory:</p>
-<pre class="programlisting">
-
-<tt>$ bk export -tpatch -rLINUX_2.4.19..+ -h \
-&gt; ../my_patch
-        
-</tt>
-</pre>
-</div>
-<div class="simplesect" lang="en">
-<div class="titlepage">
-<h2 class="title"><a name="N0x850ca10.0x85d2d40"></a>Other Benefits of BitKeeper</h2>
-</div>
-<p>BitKeeper also allows you to see easily all of the changes that have happened to a specific file over
-time. You can see if the file was modified by one of the main kernel patches or by yourself. An example of
-the changes that have happened to the drivers/usb/serial/usbserial.c file over time in my repository can be
-seen in Figure 3. With this tool, you can see what other changes happened at the same time and even what line
-of code was modified in which version.</p>
-<div class="mediaobject"><a href="/articles/lj/0101/6183/6183f3.png"><img src="/articles/lj/0101/6183/6183f3.inline.png"></a>
-<div class="caption">
-<p>Figure 3. BitKeeper Keeping Track of Changes</p>
-
-</div>
-</div>
-<br>
-<br>
-<p>One of the strongest benefits of using BitKeeper for your kernel development is that it is a very powerful
-version control system, and it allows you to work with other developers on the same sections of code at the
-same time. You can allow other people to pull from your working tree, or you can set up a local server to
-store your working tree. See the BitKeeper tutorial and documentation for some good examples of how this can
-be set up and how the development life cycle can be used.</p>
-</div>
-<div class="simplesect" lang="en">
-<div class="titlepage">
-<h2 class="title"><a name="N0x850ca10.0x85d2ef8"></a>Conclusion</h2>
-</div>
-<p>I have shown two different ways of doing Linux kernel development, one with only patch and diff and one
-using BitKeeper. Personally, BitKeeper has enabled me to spend more time actually doing development work and
-less time messing with merges. It has also kept me sane in trying to track the 2.2, 2.4 and 2.5 kernel trees
-for the Linux USB and Linux Hot Plug PCI drivers.</p>
-<p><a href="/articles/lj/0101/6183/6183s3.html" target="_top">Rsources</a></p>
-<div class="mediaobject"><img src="/articles/lj/0101/6183/6183aa.png"></div>
-
--->
+<para>
+It is not necessary to use <command>git</command> in order to do Linux
+kernel development, but it is very handy in helping to track down kernel
+bugs.  If you report a bug to the Linux kernel developers, they might ask
+you to use <command>git bisect</command> in order to find the exact change
+that caused the bug to happen.  If so, follow the directions in the
+<command>git</command> documentation for how to use this.
+</para>
 
 </sect1>
 
