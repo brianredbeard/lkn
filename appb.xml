@@ -1,27 +1,15 @@
 <appendix id="LKN-appendix-making-changes">
 
 <title>
-Managing changes made to a kernel source tree
+Helpful utilities
 </title>
 
-<!-- 
-Based on the ideas presented at http://www.linuxjournal.com/article/6183
--->
-
-<!--
-
-  AO: I think it's fair and proper to add the following. By the way,
-  do you have the right to reuse the article? Forgive me if you told
-  me already.
-
-  gkh: Yes, I have the right to reuse it, I retain the original copyright on
-  any article published by them, after a few months after publication happens.
--->
-
 <para>
-<emphasis>(The first part of this appendix, concerning
-</emphasis>diff<emphasis> and </emphasis>patch<emphasis>, is based on an
-article originally published in Linux Journal.)</emphasis>
+The act of retrieving, building, updating, and maintaining a Linux kernel
+source tree involves a lot of different steps, as this book has shown.
+Developers being naturally lazy creatures, they have created some programs
+to help with the various routine tasks.  Here we describe a few of these
+useful tools and the basics on how to use them.
 </para>
 
 <para>
@@ -73,11 +61,28 @@ with it easily.
 This appendix will show how to do kernel development using the simple tools
 of <command>diff</command> and <command>patch</command>.  Then the more
 powerful <command>quilt</command> and <command>git</command> tools will be
-introduced as an easier way to develop kernel changes.
+introduced as an easier way to develop kernel changes.  And finally,
+<command>ketchup</command> is introduced as a way to handle the constant
+downloading and applying of kernel releases.
 </para>
 
 <sect1>
-<title>patch and diff</title>
+<title>patch and diff
+<footnote>
+<!--
+  AO: I think it's fair and proper to add the following. By the way,
+  do you have the right to reuse the article? Forgive me if you told
+  me already.
+
+  gkh: Yes, I have the right to reuse it, I retain the original copyright on
+  any article published by them, after a few months after publication happens.
+-->
+<para>
+This section is based on an article originally published in Linux Journal.
+<!-- The article can be found at http://www.linuxjournal.com/article/6183 -->
+</para>
+</footnote>
+</title>
 
 <para>
 One of the most common methods of doing kernel work is to use the
@@ -107,7 +112,7 @@ new kernel release.
 -->
 <para>
 For an example, create two directories containing the latest kernel version
-as described in Chapter <xref linkend="LKN-chapter-retrieve-source" />:
+as described in <xref linkend="LKN-chapter-retrieve-source" />:
 <screen>
 $ <userinput>tar -zxf linux-2.6.19.tar.gz</userinput>
 $ <userinput>mv linux-2.6.19 linux-2.6.19-dirty</userinput>
@@ -134,9 +139,7 @@ the difference between your work and a clean 2.6.19 kernel tree. This patch
 then can be sent to other people via e-mail.
 </para>
 
-</sect1>
-
-<sect1>
+<sect2>
 <title>New Kernel Versions</title>
 
 <para>
@@ -212,6 +215,7 @@ useful ways, and they have saved kernel developers many hours of tedious
 work.
 </para>
 
+</sect2>
 </sect1>
 
 <sect1>
@@ -638,6 +642,136 @@ for the Linux USB and Linux Hot Plug PCI drivers.</p>
 <div class="mediaobject"><img src="/articles/lj/0101/6183/6183aa.png"></div>
 
 -->
+
+</sect1>
+
+<sect1>
+<title>ketchup</title>
+
+<para>
+<command>ketchup</command> is a very handy tool that is used to update or
+switch between different versions of the Linux kernel source tree.  It has
+the ability to:
+<itemizedlist>
+<listitem>
+<para>
+Find the latest version of the kernel, download it, and uncompress it.
+</para>
+</listitem>
+<listitem>
+<para>
+Update a currently installed version of the kernel source tree to any other
+version, by patching the tree to the proper version.
+</para>
+</listitem>
+<listitem>
+<para>
+It can handle the different development and stable branches of the kernel
+tree, including the -mm and -stable trees.
+</para>
+</listitem>
+<listitem>
+<para>
+It will download any patches or tarballs needed to do the update, if they
+are not present on the machine already.
+</para>
+</listitem>
+<listitem>
+<para>
+It checks the GPG signatures of the tarball and patches to verify that it
+has downloaded a correct file.
+</para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para>
+<command>ketchup</command> can be found at
+<systemitem role="url">http://www.selenic.com/ketchup/</systemitem>
+and has lots of additional documentation in the wiki at
+<systemitem role="url">http://www.selenic.com/ketchup/wiki/</systemitem>
+.
+</para>
+
+<para>
+Here is a set of steps that show how simple it is to use
+<command>ketchup</command> to download a specific kernel version, and then
+have it switch the directory to another kernel version with only a minimal
+number of commands needed:
+</para>
+
+<para>
+To have <command>ketchup</command> download the 2.6.16.24 version of the
+kernel source tree into a directory do, and rename the directory to be the
+same as the kernel version do:
+<screen>
+$ <userinput>mkdir foo</userinput>
+$ <userinput>cd foo</userinput>
+$ <userinput>ketchup -r 2.6.16.24</userinput>
+None -> 2.6.16.24
+Unpacking linux-2.6.17.tar.bz2
+Applying patch-2.6.17.bz2 -R
+Applying patch-2.6.16.24.bz2
+Current directory renamed to /home/gregkh/linux/linux-2.6.16.24
+</screen>
+</para>
+
+<para>
+Now to upgrade this kernel to contain the latest stable kernel version just
+do:
+<screen>
+$ <userinput>ketchup -r 2.6</userinput>
+2.6.16.24 -> 2.6.17.11
+Applying patch-2.6.16.24.bz2 -R
+Applying patch-2.6.17.bz2
+Downloading patch-2.6.17.11.bz2
+--22:21:14--  http://www.kernel.org/pub/linux/kernel/v2.6/patch-2.6.17.11.bz2
+           => `/home/greg/.ketchup/patch-2.6.17.11.bz2.partial'
+Resolving www.kernel.org... 204.152.191.37, 204.152.191.5
+Connecting to www.kernel.org|204.152.191.37|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 36,809 (36K) [application/x-bzip2]
+
+100%[====================================>] 36,809        93.32K/s
+
+22:21:14 (92.87 KB/s) - `/home/greg/.ketchup/patch-2.6.17.11.bz2.partial' saved [36809/36809]
+
+Downloading patch-2.6.17.11.bz2.sign
+--22:21:14--  http://www.kernel.org/pub/linux/kernel/v2.6/patch-2.6.17.11.bz2.sign
+           => `/home/greg/.ketchup/patch-2.6.17.11.bz2.sign.partial'
+Resolving www.kernel.org... 204.152.191.37, 204.152.191.5
+Connecting to www.kernel.org|204.152.191.37|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 248 [application/pgp-signature]
+
+100%[====================================>] 248           --.--K/s
+
+22:21:14 (21.50 MB/s) - `/home/greg/.ketchup/patch-2.6.17.11.bz2.sign.partial' saved [248/248]
+
+Verifying signature...
+gpg: Signature made Wed Aug 23 15:01:04 2006 PDT using DSA key ID 517D0F0E
+gpg: Good signature from "Linux Kernel Archives Verification Key &gt;ftpadmin@kernel.org&lt;"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C75D C40A 11D7 AF88 9981  ED5B C86B A06A 517D 0F0E
+Applying patch-2.6.17.11.bz2
+Current directory renamed to /home/greg/linux/tmp/x/linux-2.6.17.11
+</screen>
+This shows that <command>ketchup</command> automatically determined that
+the newest stable version was 2.6.17.11, and downloaded the needed patch
+files in order to get to that version.
+</para>
+
+<para>
+It is highly recommended that you use <command>ketchup</command> if you
+want to download any Linux kernel source trees.  It takes all of the work
+in finding where on the server the correct patch file is, and automatically
+will apply the patch in the properly format, after checking that the
+downloaded file is properly signed.  Combine <command>ketchup</command>
+with <command>quilt</command> and you have a very powerful setup that
+contains everything that you need in order to be an effective Linux kernel
+developer.
+</para>
 
 </sect1>
 
