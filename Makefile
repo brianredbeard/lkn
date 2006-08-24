@@ -59,6 +59,7 @@ FIGURE_NAME=$(BOOK_NAME)-figures-$(VERSION)
 
 FIGURESFILES = $(shell find . \( -not -name '.' \) -print | egrep -v '(BitKeeper|SCCS)' | grep -v "\.tar\.gz" | grep -v "\.dia" | grep figures | sort ) 
 #HTMLFILES = $(shell find . \( -not -name '.' \) -print | egrep -v '(BitKeeper|SCCS|.git)' | grep -v "\.tar\.gz" | grep -v "\.dia" | grep html | sort )
+IMAGEFILES = $(shell find -type f -name *png | sort)
 HTMLFILES = $(shell ls *.html | sort )
 
 distdir := $(RELEASE_NAME)
@@ -85,11 +86,11 @@ figure_release: clean
 	@echo "Built $(FIGURE_NAME).tar.gz"
 
 html_release:	bookhtml
-	@echo $(HTMLFILES)
+	@echo $(HTMLFILES) $(IMAGEFILES)
 	@-rm -rf $(distdir)
 	@mkdir $(distdir)
 	@-chmod 777 $(distdir)
-	@for file in $(HTMLFILES); do			\
+	@for file in images $(HTMLFILES) $(IMAGEFILES); do	\
 		if test -d $$file; then			\
 			mkdir $(distdir)/$$file;	\
 		else					\
