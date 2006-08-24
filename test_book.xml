@@ -19,7 +19,6 @@
  <include xmlns="http://www.w3.org/2001/XInclude" href="appa.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="appb.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="appc.xml"/>
- <include xmlns="http://www.w3.org/2001/XInclude" href="appd.xml"/>
 </book>
 <!--
 <bookinfo>
@@ -58,7 +57,6 @@
 &appa;
 &appb;
 &appc;
-&appd;
 
 </book>
 -->

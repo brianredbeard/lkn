@@ -17,7 +17,6 @@
 <!ENTITY appa       SYSTEM "appa.xml">
 <!ENTITY appb       SYSTEM "appb.xml">
 <!ENTITY appc       SYSTEM "appc.xml">
-<!ENTITY appd       SYSTEM "appd.xml">
 <!ENTITY gloss      SYSTEM "glossary.xml">
 ]>
 
@@ -60,7 +59,6 @@
 &appa;
 &appb;
 &appc;
-&appd;
 <!--&gloss;-->
 
 </book>
