@@ -1,12 +1,239 @@
 <chapter id="LKN-chapter-building">
 
 <title>
-Building a kernel
+Configuring and Building
 </title>
 
+<para>
+Now that you have the source for the latest kernel version successfully
+downloaded and installed into a local directory, it is time to build the
+code.  But before the kernel can be built, it needs to be configured with
+the correct options.
+</para>
+
 <sect1>
-<title>use the the default configuration options</title>
-<para></para>
+<title>Creating a configuration</title>
+
+<para>
+The kernel configuration is kept in a file called
+<filename>.config</filename> in the top directory of the kernel source
+tree.  If you have just expanded the kernel source code, there will not be
+a <filename>.config</filename> file present in the directory, so it needs
+to be created.  This file can be created from scratch, created by basing it
+on the "default configuration", taken from a running kernel version, or
+from a distribution kernel release.  We will cover the first to methods
+here, and the last two methods are covered in <xref linkend="LKN-custom" />.
+</para>
+
+<sect2>
+<title>Configure from scratch</title>
+
+<para>
+The most basic method of configuring a kernel is to use the <literal>make
+config</literal> method.:
+<screen>
+$ <userinput>cd linux-2.6.17.10</userinput>
+$ <userinput>make config</userinput>
+ make config
+scripts/kconfig/conf arch/i386/Kconfig
+*
+* Linux Kernel Configuration
+*
+*
+* Code maturity level options
+*
+Prompt for development and/or incomplete code/drivers (EXPERIMENTAL) [Y/n/?] <userinput>Y</userinput>
+*
+* General setup
+*
+Local version - append to kernel release (LOCALVERSION) [] <userinput> </userinput>
+Automatically append version information to the version string (LOCALVERSION_AUTO) [Y/n/?] <userinput>Y</userinput>
+...
+</screen>
+The kernel configuration program will step through every configuration
+option and ask you if you wish to enable this option or not.  Some options
+will have a choice of <literal>[Y/m/n/?]</literal>, and if
+<literal>m</literal> is selected, the option will be built as a kernel
+module, not built directly into the kernel as the <literal>Y</literal>
+selection would do.
+</para>
+
+<para>
+The kernel contains almost two thousand different configuration options, so
+being asked for every individual one will take a very long ammount of time.
+Luckily, there is an easier way to configure a kernel, base the
+configuration on a pre-built configuration.
+</para>
+
+</sect2>
+
+<sect2>
+<title>Default configuration options</title>
+
+<para>
+Every kernel version comes with a "default" kernel configuration.  This
+configuration is loosely based on the defaults that the kernel maintainer
+of that architecture feels are the best options to be used.  In some cases,
+it is merely the configuration that is used by the kernel maintainer
+themself for their personal machines.  This is true for the i386
+architecture, where the default kernel configuration matches closely what
+Linus Torvalds uses for his main development machine.
+</para>
+
+<para>
+To create this default configuration, do the following:
+<screen>
+$ <userinput>cd linux-2.6.17.10</userinput>
+$ <userinput>make defconfig</userinput>
+</screen>
+A huge number of configuration options will scroll quickly by the screen,
+and a <filename>.config</filename> file will be written out and placed in
+the kernel directory.  The kernel is now successfully configured, but it
+should be customised to your machine in order to make sure it will operate
+correctly.
+</para>
+
+</sect2>
+
+</sect1>
+
+<sect1>
+<title>Modifying the configuration</title>
+
+<para>
+Now that we have a basic configuration file created, it should be modified
+to support the hardware you have present in the system.  For details on how
+to find out which configuration options you need to select to achieve this,
+please see <xref linkend="LKN-custom" />.  Here we will show you how to
+select the options you wish to change.
+</para>
+
+<para>
+There are three different interactive kernel configuration tools, a
+terminal based one called <literal>menuconfig</literal>, a GTK+ based
+graphical one called <literal>gconfig</literal>, and a QT based graphical
+one called <literal>xconfig</literal>.
+</para>
+
+<sect2>
+<title><literal>menuconfig</literal></title>
+
+<para>
+The <literal>menuconfig</literal> way of configuring a kernel is a console
+based program that offers up a way to move around the kernel configuration
+using the arrow keys on the keyboard.  To start up this configuration mode,
+do:
+<screen>
+$ <userinput>make menuconfig</userinput>
+</screen>
+And you will be shown a screen much like this one:
+<figure id="menuconfig_1">
+<title>Initial menuconfig screen</title>
+<graphic fileref="images/menuconfig_1.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+The instructions for how to navigate through the program and the
+description of what the different characters mean are shown at the top of
+the screen, with the rest of the screen containing the different kernel
+configuration options.
+</para>
+
+<para>
+The kernel configuration is divided up into sections.  Each section
+contains options that corrispond to a specific topic.  Within those
+sections can be sub-sections for various specialized topics.  As an
+example, all kernel device drivers can be found under the main menu option
+of <literal>Device Drivers</literal>.  To go into that menu, move the arrow
+key down nine times until the line
+<literal>Device Drivers  ---&gt;</literal> is highlighted:
+<figure id="menuconfig_2">
+<title>Device Drivers option selected</title>
+<graphic fileref="images/menuconfig_2.png" scalefit="1"/>
+</figure>
+Then press the <literal>Enter</literal> key and you will move into the
+<literal>Device Drivers</literal> submenu and see it displayed on the
+screen:
+<figure id="menuconfig_3">
+<title>Device Drivers submenu</title>
+<graphic fileref="images/menuconfig_3.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+To see the <literal>Generic Driver Options</literal> submenu, press
+<literal>Enter</literal> again, and you will see the following three
+options:
+<figure id="menuconfig_4">
+<title>Generic Driver Options submenu</title>
+<graphic fileref="images/menuconfig_4.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+The first two options have a <literal>[*]</literal> mark by them.  That
+means that this option is selected (by virtue of the <literal>*</literal>
+being in the middle of the <literal>[ ]</literal> characters), and this
+option is a yes or no option.  The third option has a
+<literal>&lt; &gt;</literal> marking, showing that this option can be
+selected to be either <literal>Y</literal>, <literal>M</literal>, or
+<literal>N</literal> meaning that the option would be built into the
+kernel, or as a module, or not at all respectively.
+</para>
+
+<para>
+If the option is selected with a <literal>Y</literal> then a
+<literal>*</literal> character will be shown.  If it is selected as a
+module with a <literal>M</literal>, it will contain a <literal>M</literal>
+character.  If it is disabled with a <literal>N</literal>, then it will
+show only a blank inbetween the characters.
+</para>
+
+<para>
+So, if we wish to change these three options to select only drivers that
+do not need external firmare at compile time, disable the option to prevent
+firmware from being built, and make the userspace firmware loader be built
+as a module, we would press <literal>Y</literal> for the first option,
+<literal>N</literal> for the second option, and <literal>M</literal> for
+the third, making the screen look like the following:
+<figure id="menuconfig_5">
+<title>Generic Driver Options submenu changed</title>
+<graphic fileref="images/menuconfig_5.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+Now that we are done with our changes, press either the
+<literal>Esc</literal> key or the right arrow followed by the
+<literal>Enter</literal> key to leave this submenu.  All of the different
+kernel options can be explored in this manner.
+</para>
+
+<para>
+When you are finished making all of the changes you wish to make to the
+kernel configuration, exit the program by pressing the
+<literal>Esc</literal> key on the main menu.  You will be shown the
+following screen asking if you wish to save your changed kernel
+configuration:
+<figure id="menuconfig_6">
+<title>Saving kernel options</title>
+<graphic fileref="images/menuconfig_6.png" scalefit="1"/>
+</figure>
+Press <literal>Enter</literal> to save the configuration, or if you wish to
+discard any changes made, press the right arrow to move to the
+<literal>&lt;No&gt;</literal> selection, and then press
+<literal>Enter</literal>.
+</para>
+
+
+<!--
+<literal>&lt;Select&gt;</literal>, <literal>&lt;Exit&gt;</literal>, and
+<literal>&lt;Help&gt;</literal> options.
+-->
+
+</sect2>
+
 </sect1>
 
 <sect1>
