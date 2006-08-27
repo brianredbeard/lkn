@@ -334,9 +334,11 @@ Running <literal>make</literal> will cause the kernel build system to use
 the configuration that you have selected to build a kernel and all modules
 that are needed to support that configuration.
 <footnote>
+<para>
 Older kernel versions prior to the 2.6 release required the additional step
 of <literal>make modules</literal> to build all needed kernel modules.
 That is no longer required.
+</para>
 </footnote>
 While the kernel is building, it will display the individual file names of
 what is currently happening, along with any build warnings or errors.
@@ -364,7 +366,10 @@ do this.
 The kernel build system allows you to do many more things than just build
 the full kernel and modules.  <xref linkend="LKN-build-command-line" />
 gives the full list of options that the kernel build system provides.  In
-this section, we will discuss some of these advanced build options.
+this section, we will discuss some of these advanced build options.  To see
+a full description of how to use other advanced build options, refer to the
+in-kernel documentation on the build system which can be found in the
+<filename>Documentation/kbuild/</filename> directory.
 </para>
 
 <sect2>
@@ -405,18 +410,123 @@ recommended that you pass a number to the <literal>-j</literal> option.
 <title>Build only a portion of the kernel</title>
 
 <para>
+When doing kernel development, sometimes you only wish to build a specific
+subdirectory or a single file within the whole kernel tree.  The kernel
+build system allows you to easily do this.  To only build a specific
+directory, specify it on the build command line.  For example, to only
+build the files in the <filename>drivers/usb/serial</filename> directory,
+do:
+<screen>
+$ <userinput>make drivers/usb/serial</userinput>
+</screen>
+Using this syntax however, will not build the final module images in that
+directory.  To do that, you can use the <literal>M=</literal> option:
+<screen>
+$ <userinput>make M=drivers/usb/serial</userinput>
+</screen>
+which will build all the needed files in that directory and link the final
+module images.
 </para>
+
+<para>
+When using these options, please note that the final kernel image is not
+relinked together, so any changes that were made to the subdirectories will
+not affect the final kernel image, which is probably not what you desire.
+Do a final:
+<screen>
+$ <userinput>make</userinput>
+</screen>
+to have the build system check all changed object files and do the final
+kernel image link properly to resolve this issue.
+</para>
+
+<para>
+To only build a specific file in the kernel tree, just pass it as the
+option to <literal>make</literal>.  For example, if you wish to only build
+the <filename>drivers/usb/serial/visor.ko</filename> kernel module do:
+<screen>
+$ <userinput>make drivers/usb/serial/visor.ko</userinput>
+</screen>
+The build system will build all needed files for the
+<filename>visor.ko</filename> kernel module, and do the final link to
+create the module.
+</para>
+
 </sect2>
 
 <sect2>
 <title>Source in one place, output in another</title>
-<para></para>
+<para>
+Sometimes it is easier to have the source code for the kernel tree in a
+read-only location (like on a cdrom, or in a source code control system),
+and have the output of the kernel build system be placed elsewhere, so that
+you do not disturb the original source tree.  The kernel build system
+handles this easily, by only requiring a single option
+<literal>O=</literal> to tell it where to place the output of the build.
+As an example, if the kernel source was located on a cdrom mounted on
+<filename>/mnt/cdrom/</filename> and you wish to place the built files in
+your local directory, do:
+<screen>
+$ <userinput>cd /mnt/cdrom/linux-2.6.17.11/</userinput>
+$ <userinput>make O=~/linux/linux-2.6.17.11</userinput>
+</screen>
+Then all of the build files will be created in the
+<filename>~/linux/linux-2.6.17.11/</filename> directory.  Please note that
+this <literal>O=</literal> option should also be passed to the
+configuration options of the build so that the configuration is correctly
+placed in the output directory and not in the directory containing the
+source code.
+</para>
+
 </sect2>
 
 <sect2>
 <title>Different architectures</title>
-<para></para>
+
+<para>
+It is very useful to build the kernel in a cross-compile manner to allow a
+more powerful machine to build a kernel for a smaller embedded system, or
+just to provide a method to build the kernel for a different architecture
+to ensure that a change to the source code did not break something
+unexpected.  The kernel build system allows you to specify a different
+architecture from the one that the current system is with the
+<literal>ARCH=</literal> option.  The build system also allows you to
+specify the specific compiler that you wish to build the kernel with by
+using the <literal>CC=</literal> option or a cross-compile toolchain with
+the <literal>CROSS_COMPILE</literal> option.
+</para>
+
+<para>
+For example, to get the default kernel configuration of the x86_64
+architecture, you would do:
+<screen>
+$ <userinput>make ARCH=x86_64 defconfig</userinput>
+</screen>
+To build the whole kernel with an ARM toolchain located in
+<filename>/usr/local/bin/</filename> you would do:
+<screen>
+$ <userinput>make ARCH=arm CROSS_COMPILE=/usr/local/bin/arm-linux-</userinput>
+</screen>
+</para>
+
+<para>
+It is useful even for a non-cross-combiled kernel to change what the build
+system uses for the compiler.  Examples of this is using the
+<literal>distcc</literal> or <literal>ccache</literal> programs, both of
+which help greatly reduce the time it takes to build a kernel.  To use the
+<literal>ccache</literal> program as part of the build system, do:
+<screen>
+$ <userinput>make CC="ccache gcc"</userinput>
+</screen>
+To use both <literal>distcc</literal> and <literal>ccache</literal>
+together do:
+<screen>
+$ <userinput>make CC="ccache distcc"</userinput>
+</screen>
+</para>
+
 </sect2>
+
 
 </sect1>
 
