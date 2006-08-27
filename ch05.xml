@@ -60,7 +60,7 @@ selection would do.
 
 <para>
 The kernel contains almost two thousand different configuration options, so
-being asked for every individual one will take a very long ammount of time.
+being asked for every individual one will take a very long amount of time.
 Luckily, there is an easier way to configure a kernel, base the
 configuration on a pre-built configuration.
 </para>
@@ -75,7 +75,7 @@ Every kernel version comes with a "default" kernel configuration.  This
 configuration is loosely based on the defaults that the kernel maintainer
 of that architecture feels are the best options to be used.  In some cases,
 it is merely the configuration that is used by the kernel maintainer
-themself for their personal machines.  This is true for the i386
+themselves for their personal machines.  This is true for the i386
 architecture, where the default kernel configuration matches closely what
 Linus Torvalds uses for his main development machine.
 </para>
@@ -142,7 +142,7 @@ configuration options.
 
 <para>
 The kernel configuration is divided up into sections.  Each section
-contains options that corrispond to a specific topic.  Within those
+contains options that correspond to a specific topic.  Within those
 sections can be sub-sections for various specialized topics.  As an
 example, all kernel device drivers can be found under the main menu option
 of <literal>Device Drivers</literal>.  To go into that menu, move the arrow
@@ -192,11 +192,12 @@ show only a blank inbetween the characters.
 
 <para>
 So, if we wish to change these three options to select only drivers that
-do not need external firmare at compile time, disable the option to prevent
-firmware from being built, and make the userspace firmware loader be built
-as a module, we would press <literal>Y</literal> for the first option,
-<literal>N</literal> for the second option, and <literal>M</literal> for
-the third, making the screen look like the following:
+do not need external firmware at compile time, disable the option to
+prevent firmware from being built, and make the userspace firmware loader
+be built as a module, we would press <literal>Y</literal> for the first
+option, <literal>N</literal> for the second option, and
+<literal>M</literal> for the third, making the screen look like the
+following:
 <figure id="menuconfig_5">
 <title>Generic Driver Options submenu changed</title>
 <graphic fileref="images/menuconfig_5.png" scalefit="1"/>
@@ -251,7 +252,7 @@ and has a three paned screen looking like this:
 </para>
 
 <para>
-The mouse is how the different submenues are navagated, and the options
+The mouse is how the different submenus are navigated, and the options
 selected.  Use it to select the <literal>Generic Driver Options</literal>
 submenu of the <literal>Device Drivers</literal> menu.  This will change
 the <literal>gconfig</literal> screen to look like:
@@ -510,7 +511,7 @@ $ <userinput>make ARCH=arm CROSS_COMPILE=/usr/local/bin/arm-linux-</userinput>
 </para>
 
 <para>
-It is useful even for a non-cross-combiled kernel to change what the build
+It is useful even for a non-cross-complied kernel to change what the build
 system uses for the compiler.  Examples of this is using the
 <literal>distcc</literal> or <literal>ccache</literal> programs, both of
 which help greatly reduce the time it takes to build a kernel.  To use the
