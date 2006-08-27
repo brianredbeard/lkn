@@ -358,18 +358,66 @@ do this.
 </sect1>
 
 <sect1>
-<title>building a kernel with the source in one place, and the output in another.</title>
-<para></para>
-</sect1>
+<title>Advanced building options</title>
 
-<sect1>
-<title>building only a portion of the kernel tree</title>
-<para></para>
-</sect1>
+<para>
+The kernel build system allows you to do many more things than just build
+the full kernel and modules.  <xref linkend="LKN-build-command-line" />
+gives the full list of options that the kernel build system provides.  In
+this section, we will discuss some of these advanced build options.
+</para>
 
-<sect1>
-<title>building a kernel for a different architecture</title>
+<sect2>
+<title>Build faster on multiprocessor machines</title>
+<para>
+The kernel build system works very well as a task that can be split up into
+little pieces and given to different processors.  By doing this, you can
+use the full power of a multiprocessor machine and speed up the kernel
+build time immensely.
+</para>
+
+<para>
+To build the kernel in a multithreaded way, use the <literal>-j</literal>
+option to the <literal>make</literal> program.  It is best to give a number
+to the <literal>-j</literal> option that corresponds to twice the number of
+processors in the system.  So, for a machine with 2 processors present,
+use:
+<screen>
+$ <userinput>make -j4</userinput>
+</screen>
+and for a machine with four processors, use:
+<screen>
+$ <userinput>make -j8</userinput>
+</screen>
+If you do not pass an option to the <literal>-j</literal> option, the build
+system will create a new thread for every subdirectory in the kernel tree:
+<screen>
+$ <userinput>make -j</userinput>
+</screen>
+which can easily cause your machine to become unresponsive and take a much
+longer time to complete the build.  Because of this, it is always
+recommended that you pass a number to the <literal>-j</literal> option.
+</para>
+</sect2>
+
+
+<sect2>
+<title>Build only a portion of the kernel</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2>
+<title>Source in one place, output in another</title>
 <para></para>
+</sect2>
+
+<sect2>
+<title>Different architectures</title>
+<para></para>
+</sect2>
+
 </sect1>
 
 </chapter>
