@@ -116,7 +116,7 @@ one called <literal>xconfig</literal>.
 </para>
 
 <sect2>
-<title><literal>menuconfig</literal></title>
+<title>Console configuration method</title>
 
 <para>
 The <literal>menuconfig</literal> way of configuring a kernel is a console
@@ -226,19 +226,135 @@ discard any changes made, press the right arrow to move to the
 <literal>Enter</literal>.
 </para>
 
+</sect2>
 
-<!--
-<literal>&lt;Select&gt;</literal>, <literal>&lt;Exit&gt;</literal>, and
-<literal>&lt;Help&gt;</literal> options.
--->
+<sect2>
+<title>Graphical configuration method</title>
+
+<para>
+The <literal>gconfig</literal> and <literal>xconfig</literal> methods of
+configuring a kernel use a graphical program to allow you to modify the
+kernel configuration.  Both of these methods are almost identical, the only
+difference being the different graphical toolkit that the two methods are
+written in.  <literal>gconfig</literal> is written using the GTK+ toolkit
+and has a two paned screen looking like this:
+<figure id="gconfig_1">
+<title><literal>gconfig</literal> default screen</title>
+<graphic fileref="images/gconfig_1.png" scalefit="1"/>
+</figure>
+While the <literal>xconfig</literal> method is written using the QT toolkit
+and has a three paned screen looking like this:
+<figure id="xconfig_1">
+<title><literal>xconfig</literal> default screen</title>
+<graphic fileref="images/xconfig_1.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+The mouse is how the different submenues are navagated, and the options
+selected.  Use it to select the <literal>Generic Driver Options</literal>
+submenu of the <literal>Device Drivers</literal> menu.  This will change
+the <literal>gconfig</literal> screen to look like:
+<figure id="gconfig_2">
+<title><literal>gconfig</literal> Generic Driver Options</title>
+<graphic fileref="images/gconfig_2.png" scalefit="1"/>
+</figure>
+
+And the <literal>xconfig</literal> screen to look like:
+<figure id="xconfig_2">
+<title><literal>xconfg</literal> Generic Driver Options</title>
+<graphic fileref="images/xconfig_2.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+Changing this submenu to disable the second option, and make the third
+option be built as a module causes the different screens to look like:
+<figure id="gconfig_3">
+<title><literal>gconfig</literal> Generic Driver Options changed</title>
+<graphic fileref="images/gconfig_3.png" scalefit="1"/>
+</figure>
+and:
+<figure id="xconfig_3">
+<title><literal>xconfig</literal> Generic Driver Options changed</title>
+<graphic fileref="images/xconfig_3.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+Please note that to enable an option as a module using the
+<literal>gconfig</literal> method, there will be a line though the box,
+instead of it being checked which signifies that the option will be built
+into the kernel.  Using the <literal>xconfig</literal> method, a module
+will be shown with a dot in the box.
+</para>
+
+<para>
+Both of these methods will prompt you to save your changed configuration
+when exiting the program, and they both have options to write that
+configuration out to a different file if you so desire.
+</para>
 
 </sect2>
 
 </sect1>
 
 <sect1>
-<title>basic options to make (full coverage will be in later chapter).</title>
-<para></para>
+<title>Building the kernel</title>
+
+<para>
+Now that you have created a kernel configuration that you wish to use, the
+kernel needs to be built.  This is as simple as entering one command:
+<screen>
+$ <userinput>make</userinput>
+  CHK     include/linux/version.h
+  UPD     include/linux/version.h
+  SYMLINK include/asm -> include/asm-i386
+  SPLIT   include/linux/autoconf.h -> include/config/*
+  CC      arch/i386/kernel/asm-offsets.s
+  GEN     include/asm-i386/asm-offsets.h
+  CC      scripts/mod/empty.o
+  HOSTCC  scripts/mod/mk_elfconfig
+  MKELF   scripts/mod/elfconfig.h
+  HOSTCC  scripts/mod/file2alias.o
+  HOSTCC  scripts/mod/modpost.o
+  HOSTCC  scripts/mod/sumversion.o
+  HOSTLD  scripts/mod/modpost
+  HOSTCC  scripts/kallsyms
+  HOSTCC  scripts/conmakehash
+  HOSTCC  scripts/bin2c
+  CC      init/main.o
+  CHK     include/linux/compile.h
+  UPD     include/linux/compile.h
+  CC      init/version.o
+  CC      init/do_mounts.o
+...
+</screen>
+Running <literal>make</literal> will cause the kernel build system to use
+the configuration that you have selected to build a kernel and all modules
+that are needed to support that configuration.
+<footnote>
+Older kernel versions prior to the 2.6 release required the additional step
+of <literal>make modules</literal> to build all needed kernel modules.
+That is no longer required.
+</footnote>
+While the kernel is building, it will display the individual file names of
+what is currently happening, along with any build warnings or errors.
+</para>
+
+<para>
+If the kernel build finished without any errors, you have successfully
+created a kernel image that needs to be installed properly so that it can
+be used.  See <xref linkend="LKN-installing" /> for how to do this.
+</para>
+
+<para>
+It is very unusual to get any build errors when building a released kernel
+version.  If you do, please report them to the Linux kernel developers so
+it can be fixed.  See <xref linkend="LKN-appendix-bugreports" /> for how to
+do this.
+</para>
+
 </sect1>
 
 <sect1>
