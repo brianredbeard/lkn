@@ -194,7 +194,7 @@ AO: Yes, I think "options" is best. -->
         <listitem>
           <para>
 	  Use the specified serial port. The options are of the form
-	  <replaceable>bbbbpnf</replaceable>, where <replaceable>bbbb</replaceable> is the baud rate, <replaceable><replaceable> is parity (<literal>n</literal>,
+	  <replaceable>bbbbpnf</replaceable>, where <replaceable>bbbb</replaceable> is the baud rate, <replaceable>p</replaceable> is parity (<literal>n</literal>,
 	  <literal>o</literal>, or <literal>e</literal>), <replaceable>n</replaceable> is number of bits, and <replaceable>f</replaceable> is flow control (<literal>r</literal>
 	  for RTS or omitted). Default is <literal>9600n8</literal>.
 	  </para>
@@ -305,8 +305,8 @@ AO: Yes, I think "options" is best. -->
 	</para>
 	</listitem>
 	</varlistentry>
-
-	<variablelist>
+	</variablelist>
+	</para>
 
 	<para>
 	To listen to this data, the remote machine can use the
@@ -379,7 +379,7 @@ AO: Yes, I think "options" is best. -->
   the keep option.
 
 -->
-    <literal>earlyprintk=</literal>[<replaceable>vga</replaceable>|<replaceable>serial</replaceable>][,<literal>ttyS</literal><replaceable>n</replaceable>[,<replaceable>baudrate</replaceable>]][,<literal>keep<literal>]
+    <literal>earlyprintk=</literal>[<replaceable>vga</replaceable>|<replaceable>serial</replaceable>][,<literal>ttyS</literal><replaceable>n</replaceable>[,<replaceable>baudrate</replaceable>]][,<literal>keep</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -480,7 +480,7 @@ AO: Yes, I think "options" is best. -->
 	<varlistentry>
 	<term><literal>5 (KERN_NOTICE)</literal></term>
 	<listitem>
-	<para>Normal, but significant events.
+	<para>Normal, but significant events.</para>
 	</listitem>
 	</varlistentry>
 
@@ -1651,7 +1651,7 @@ that contains the root filesystem.
 	</para></listitem>
       	</varlistentry>
 	<varlistentry>
-        <term><literal>/dev/</literal><replaceable>&lt;diskname&gt;&lt;decimal&ft;</replaceable></term>
+        <term><literal>/dev/</literal><replaceable>&lt;diskname&gt;&lt;decimal&gt;</replaceable></term>
         <listitem><para>Use the kernel disk name specified by
 	<replaceable>&lt;diskname&gt;</replaceable> and the partition specified
 	by <replaceable>&lt;decimal&gt;</replaceable> as the root disk.
@@ -1996,21 +1996,21 @@ and Power Interface (ACPI) subsystem can use.
 	<listitem><para>Force ACPI to be enabled.
 	Can be used to override the kernel configuration option that disabled it.
 	</para>
-	</lististem>
+	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><literal>off</literal></term>
 	<listitem><para>Disable ACPI. Can be used to
 	override the kernel configuration option that enabled it.
 	</para>
-	</lististem>
+	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><literal>noirq</literal></term>
 	<listitem><para>Prevent ACPI from being used
 	for IRQ routing.
 	</para>
-	</lististem>
+	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><literal>ht</literal></term>
@@ -2018,7 +2018,7 @@ and Power Interface (ACPI) subsystem can use.
 	to enable HyperThreading on processors that are capable of
 	it.
 	</para>
-	</lististem>
+	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><literal>strict</literal></term>
@@ -2026,10 +2026,11 @@ and Power Interface (ACPI) subsystem can use.
 	tolerant of platforms that are not fully compliant with the ACPI
 	specification.
 	</para>
-	</lististem>
+	</listitem>
       </varlistentry>
 
-    <variablelist>
+    </variablelist>
+    </para>
 
 </refsect1>
 </refentry>
@@ -2496,113 +2497,6 @@ kernel directory <filename>Documentation/scsi/</filename> for details.
 </refsect1>
 </refentry>
 
-<refentry>
-  <refnamediv>
-    <refname>pnpbios</refname>
-    <refpurpose>PnP BIOS settings.</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnpbios=</literal>[<literal>on</literal>|<literal>off</literal>|<literal>curr</literal>|<literal>no-curr</literal>]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Set the main PnP BIOS settings.  <literal>on</literal>
-	enables the PnP BIOS subsystem.  <literal>off</literal> disables
-	the PnP BIOS subsystem.  <literal>cur</literal> tells the PnP BIOS
-	subsystem to use the current static settings and
-	<literal>no-curr</literal> tells the subsystem to probe for dynamic
-	settings if possible.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_irq</refname>
-    <refpurpose>PnP BIOS reserved IRQs.</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_irq=</literal><replaceable>irq1</replaceable>[<literal>,</literal><replaceable>irq2</replaceable>...]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	List of the IRQs that the PnP BIOS subsystem
-	should not use for autoconfiguration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_dma</refname>
-    <refpurpose>PnP BIOS reserved DMAs.</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_dma=</literal><replaceable>dma1</replaceable>[<literal>,</literal><replaceable>dma2</replaceable>...]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	List of the DMAs that the PnP BIOS subsystem
-	should not use for autoconfiguration.
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_io</refname>
-    <refpurpose>PnP BIOS reserved I/O ports.</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_io=</literal><replaceable>io1</replaceable><literal>,</literal><replaceable>size1</replaceable>[<literal>,</literal><replaceable>io2</replaceable><literal>,</literal><replaceable>size2</replaceable>...]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	I/O ports that the PnP BIOS
-	subsystem should not use for autoconfiguration.
-	Each port is listed by its starting location and size.
-<!--
-
-  AO: I'm not sure this is right because I don't know how a port can
-  have a size.
-
--->
-	</para>
-</refsect1>
-</refentry>
-
-<refentry>
-  <refnamediv>
-    <refname>pnp_reserve_mem</refname>
-    <refpurpose>PnP BIOS reserved memory regions.</refpurpose>
-  </refnamediv>
-  <refsynopsisdiv>
-    <para>
-    <literal>pnp_reserve_mem=</literal><replaceable>mem1</replaceable><literal>,</literal><replaceable>size1</replaceable>[<literal>,</literal><replaceable>mem2</replaceable><literal>,</literal><replaceable>size2</replaceable>...]
-    </para>
-  </refsynopsisdiv>
-<refsect1>
-  <title>Description</title>
-	<para>
-	Memory regions that the PnP BIOS
-	subsystem should not use for autoconfiguration.
-	Each region is listed by its starting location and size.
-	</para>
-</refsect1>
-</refentry>
-
 </sect1>
 
 
@@ -2613,9 +2507,21 @@ kernel directory <filename>Documentation/scsi/</filename> for details.
 These options specify different parameters the PCI subsystem can use.
 </para>
 
-<screen>
-pci=<replaceable>option</replaceable>[,<replaceable>option</replaceable>...]
-</screen>
+<refentry>
+  <refnamediv>
+    <refname>
+    </refname>
+    <refpurpose>
+    </refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pci=<replaceable>option</replaceable>[,<replaceable>option</replaceable>...]</literal>
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
 Each <replaceable>option</replaceable> can be one of the following:
     <variablelist>
       <varlistentry>
@@ -2743,13 +2649,14 @@ Each <replaceable>option</replaceable> can be one of the following:
 		way for adjunct CPUs.
 	</para></listitem>
 	</varlistentry>
-	<varlistentry>
-    <variablelist>
-</screen>
+    </variablelist>
+    </para>
+</refsect1>
+</refentry>
 </sect1>
 
 <sect1>
-<title>PnP BIOS option</title>
+<title>PnP BIOS options</title>
 
 <refentry>
   <refnamediv>
@@ -2761,6 +2668,113 @@ Each <replaceable>option</replaceable> can be one of the following:
 	<para>
 	Disable the ISA PnP subsystem, if it has been enabled in the kernel
 	configuration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnpbios</refname>
+    <refpurpose>PnP BIOS settings.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnpbios=</literal>[<literal>on</literal>|<literal>off</literal>|<literal>curr</literal>|<literal>no-curr</literal>]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Set the main PnP BIOS settings.  <literal>on</literal>
+	enables the PnP BIOS subsystem.  <literal>off</literal> disables
+	the PnP BIOS subsystem.  <literal>cur</literal> tells the PnP BIOS
+	subsystem to use the current static settings and
+	<literal>no-curr</literal> tells the subsystem to probe for dynamic
+	settings if possible.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_irq</refname>
+    <refpurpose>PnP BIOS reserved IRQs.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_irq=</literal><replaceable>irq1</replaceable>[<literal>,</literal><replaceable>irq2</replaceable>...]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	List of the IRQs that the PnP BIOS subsystem
+	should not use for autoconfiguration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_dma</refname>
+    <refpurpose>PnP BIOS reserved DMAs.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_dma=</literal><replaceable>dma1</replaceable>[<literal>,</literal><replaceable>dma2</replaceable>...]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	List of the DMAs that the PnP BIOS subsystem
+	should not use for autoconfiguration.
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_io</refname>
+    <refpurpose>PnP BIOS reserved I/O ports.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_io=</literal><replaceable>io1</replaceable><literal>,</literal><replaceable>size1</replaceable>[<literal>,</literal><replaceable>io2</replaceable><literal>,</literal><replaceable>size2</replaceable>...]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	I/O ports that the PnP BIOS
+	subsystem should not use for autoconfiguration.
+	Each port is listed by its starting location and size.
+<!--
+
+  AO: I'm not sure this is right because I don't know how a port can
+  have a size.
+
+-->
+	</para>
+</refsect1>
+</refentry>
+
+<refentry>
+  <refnamediv>
+    <refname>pnp_reserve_mem</refname>
+    <refpurpose>PnP BIOS reserved memory regions.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <para>
+    <literal>pnp_reserve_mem=</literal><replaceable>mem1</replaceable><literal>,</literal><replaceable>size1</replaceable>[<literal>,</literal><replaceable>mem2</replaceable><literal>,</literal><replaceable>size2</replaceable>...]
+    </para>
+  </refsynopsisdiv>
+<refsect1>
+  <title>Description</title>
+	<para>
+	Memory regions that the PnP BIOS
+	subsystem should not use for autoconfiguration.
+	Each region is listed by its starting location and size.
 	</para>
 </refsect1>
 </refentry>
@@ -3123,6 +3137,7 @@ These options control Network File System startup.
 	separated by commas.</para></listitem>
       </varlistentry>
     </variablelist>
+    </para>
 </refsect1>
 </refentry>
 
@@ -3243,7 +3258,7 @@ present in the system.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>parport=[<replaceable>setting</replaceable>[,<replaceable>setting</replaceable>...]
+    <literal>parport=[<replaceable>setting</replaceable>[,<replaceable>setting</replaceable>...]</literal>
     </para>
   </refsynopsisdiv>
 <refsect1>
