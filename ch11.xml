@@ -30,6 +30,9 @@ kernel developers and released under the GPL.
   AO: I thought the lead-in could be better. I just wrote up the
   following as an experiment.
 
+  gkh: looks good, I made a minor edit about the proc stuff, adding sysfs
+  to it too.
+
 -->
 
 <para>
@@ -55,8 +58,8 @@ configuration file.
 </para></listitem>
 <listitem><para>
 
-At run-time, by writing to files in the <filename>/proc</filename>
-directory.
+At run-time, by writing to files in the <filename>/proc</filename> and
+<filename>/sys</filename> directories.
 
 </para></listitem>
 
@@ -91,6 +94,8 @@ and the individual architecture specific documentation files.
   AO: I assume the following applies to all boot parameters, not just
   module parameters.
 
+  gkh: Yes, you are correct.
+
 -->
 
 <para>
@@ -109,6 +114,9 @@ All of these parameters are case-sensitive.
   AO: I thought the module behavior deserves its own section. I think
   it would go well at the end of the chapter, but maybe it's important
   enough to put up here at the front.
+
+  gkh:  Yes, a different section is fine.  And yes, I think it is important
+  enough to put here.
 
 -->
 
@@ -173,6 +181,8 @@ debugging and error information are displayed.
   sentences? Most seem to be sentences, so I put in the periods. We
   could easily remove them if you prefer.
 
+  gkh: I don't really care either way.  I'll leave your changes in.
+
 -->
     <refpurpose>Output console device and options.</refpurpose>
   </refnamediv>
@@ -214,7 +224,7 @@ AO: Yes, I think "options" is best. -->
         <listitem>
           <para>
 	  Start an early, polled-mode console on the 8250/16550 UART at the
-	  specified I/O port or MMIO address, switching to the matching
+	  specified I/O port or MMIO address, switching to the specified
 	  ttyS device later. The options are the same as for ttyS
 	  shown earlier.
 <!--
@@ -222,6 +232,7 @@ AO: Yes, I think "options" is best. -->
   AO: Do you also have to specify a ttyS option, or does the kernel
   now how to find it automatically?
 
+  gkh: you also have to specify one.  I've edited it to show this.
 -->
 
 	  </para>
@@ -335,9 +346,10 @@ AO: Yes, I think "options" is best. -->
 <!--
 
   AO: Does "match" accurately replace "default to"?
+  gkh: "set to" is a bit better, changed.
 
 -->
-	Cause the kernel log level to match the
+	Cause the kernel log level to be set to the
 	debug level, so that all debug messages will be printed to the
 	console at boot time.
 	</para>
@@ -386,7 +398,8 @@ AO: Yes, I think "options" is best. -->
   <title>Description</title>
 	<para>
 	Show kernel log messages that precede the initialization of
-	the traditional console. This option can be
+	the traditional console.  These messages are typically never seen
+	on the console unless you use this option.  Enabling this can be
 	very useful for tracking down hardware issues. Currently, the
         option can specify either the
 	VGA device or the serial port, but not both at the same time.
@@ -402,10 +415,13 @@ AO: Yes, I think "options" is best. -->
   display the messages that this option displays? Needs a bit of
   explanation.
 
+  gkh: yes, these messages are never seen normally, unless this option is
+  selected.  Changed the text a bit to help show this.
+
 -->
 	Append <literal>,keep</literal> in order not to disable the
-	messages when the real kernel console is initialized and takes over
-	the system.
+	messages shown by this option when the real kernel console is
+	initialized and takes over the system.
 	</para>
 </refsect1>
 </refentry>
@@ -458,6 +474,9 @@ AO: Yes, I think "options" is best. -->
 
   AO: Is critical the same as fatal (this is, the boot is aborted)?
 
+  gkh: No, these are all run-time things.  The machine might still boot fine,
+  but something critical happened that needs to be fixed.
+
 -->
 	<para>Critical conditions.</para>
 	</listitem>
@@ -498,6 +517,8 @@ AO: Yes, I think "options" is best. -->
 
   AO: I tried to put in some explanation, but I might be wrong.
 
+  gkh: looks good to me.
+
 -->
 	<para>Kernel debugging messages, output by the kernel if the
 	developer enabled debugging at compile time.</para>
@@ -524,10 +545,13 @@ AO: Yes, I think "options" is best. -->
 	<para>
 	Set the size of the kernel's internal log buffer.
 	<replaceable>n</replaceable> is specified in bytes and must be a power of 2.
-	This value can also be changed by a kernel configuration value.
+	This value can also be changed by the
+	<literal>CONFIG_LOG_BUF_SHIFT</literal> kernel configuration value.
 <!--
 
   AO: Which configuration value?
+
+  gkh: now specified.
 
 -->
 	</para>
@@ -547,9 +571,12 @@ AO: Yes, I think "options" is best. -->
   AO: Please define initcalls. Are they simply functions in the kernel
   code called during kernel initialization?
 
+  gkh: yes, that is what they are.  changed.
+
 -->
-	Cause the kernel to trace all initcalls as they are
-	executed during the boot process. This option is useful for determining
+	Cause the kernel to trace all functions that are called by the
+	kernel during initialization of the system as the kernel boots.
+	This option is useful for determining
 	where the kernel is dying during startup.
 	</para>
 </refsect1>
@@ -616,6 +643,9 @@ Programmable Interrupt Controller (APIC).
 
   AO: What is the difference between verbose and debug? Does debug
   show more?
+
+  gkh: much more.  stuff that only a developer of the apic code would care
+  about.
 
 -->
 	Control how much information the APIC subsystem generates when
@@ -773,6 +803,8 @@ different purposes. These options allow you to tweak the sizes and settings.
 
   AO: I tried to define hugetlb. I think readers can find out most of
   the other memory values on their own.
+
+  gkh: thanks.
 
 -->
 	The hugetlb feature lets you configure Linux to use 4MB pages,
@@ -934,7 +966,7 @@ different purposes. These options allow you to tweak the sizes and settings.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>reserve=</literal><replaceable>n</replaceable>
+    <literal>reserve=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -943,6 +975,8 @@ different purposes. These options allow you to tweak the sizes and settings.
 <!--
 
   AO: What are the units for n?
+
+  gkh: same as the others, now changed.
 
 -->
 	Force the kernel to ignore some of the I/O memory areas.
@@ -974,6 +1008,8 @@ different purposes. These options allow you to tweak the sizes and settings.
   recently; I'll just put it in at the first instance in each section
   of the chapter.
 
+  gkh: fine with me.
+
 -->
 	</para>
 </refsect1>
@@ -1000,6 +1036,9 @@ different purposes. These options allow you to tweak the sizes and settings.
   are just a few, or if you think a few are particularly important,
   you can leave them in.
 
+  gkh: there are only a very few that have them, so I think they should be
+  left in.
+
 -->
 	</para>
 </refsect1>
@@ -1022,12 +1061,17 @@ different purposes. These options allow you to tweak the sizes and settings.
 
   AO: Could you briefly define VDSO?
 
+  gkh: Ugh, it's a complex thing, that I don't fully understand, and is
+  probably beyond the scope here.  I've spelled it out now, hopefully that
+  will help :)
+
 -->
-	Disable (0) or enable (1) the VDSO mapping option. By default,
-	it is enabled.
+	Disable (0) or enable (1) the VDSO (Virtual Dynamic Shared Object)
+	mapping option.  By default, it is enabled.
 <!--
 
   AO: That's what I assume.
+  gkh: yes.
 
 -->
 
@@ -1165,6 +1209,9 @@ processor use in multi-processor systems, and other processor issues.
 
   AO: 0 and 3 have the same effect and are therefore redundant, but
   what the hell.
+
+  gkh: Not really, they have the same end result, but they do things a bit
+  differently.  And yes, I don't know why it's done this way...
 
 -->
 	This is a debugging feature that allows the user to override the
@@ -1325,6 +1372,7 @@ works in Linux.
 
   AO: An understanding I don't seem to have despite all my reading.
 
+  gkh: Heh, nor do I :)
 -->
 
 </para>
@@ -1339,6 +1387,8 @@ works in Linux.
 <!--
 
   AO: I think this syntax works better, as you use elsewhere.
+
+  gkh:  looks good.
 
 -->
     <literal>isolcpus=</literal><replaceable>cpu_number</replaceable>[<literal>,</literal><replaceable>cpu_number</replaceable>,...]
@@ -1631,6 +1681,8 @@ that contains the root filesystem.
   AO: We could use x's instead of n's to represent hex numbers, but I
   think that's getting into fussy detail.
 
+  gkh: agreed.
+
 -->
         <term><replaceable>nnnn</replaceable></term>
         <listitem><para>A device number in hexadecimal represents the major
@@ -1670,6 +1722,9 @@ that contains the root filesystem.
   confusing because another disk exists that ends in a digit and
   matches the specified disk name. Maybe no confusion would ever
   exist.
+
+  gkh: the odds of that happening are pretty slim, otherwise this would
+  have been changed because of that :)
 
 -->
 	</para></listitem>
@@ -1827,7 +1882,9 @@ control which program is run and how it is run.
 
 <para>
 The kexec subsystem is a specialized rebooting feature that allows a
-fast reboot. These options modify its parameters.
+fast reboot and is usually combined with the kdump facility that enables
+the previous kernel's memory to be dumped to a safe place for analysis at a
+later time. These options modify the kexec subsystem's parameters.
 </para>
 
 <refentry>
@@ -2045,6 +2102,7 @@ and Power Interface (ACPI) subsystem can use.
 <!--
 
   AO: The values are literal, not replaceable, right?
+  gkh: yes, sorry.
 
 -->
     <literal>acpi_sleep=</literal>[<literal>s3_bios</literal>]<literal>,</literal>[<literal>s3_mode</literal>]
@@ -2189,6 +2247,7 @@ and Power Interface (ACPI) subsystem can use.
 
   AO: I put in the brackets because you said the value might be
   absent.
+  gkh: yes, thanks.
 
 -->
     <literal>acpi_osi=</literal>[<replaceable>n</replaceable>]
@@ -2266,6 +2325,8 @@ and Power Interface (ACPI) subsystem can use.
 <!--
 
   AO: I'm guessing here.
+
+  gkh: good guess.
 
 -->
 	If present, this allows ACPI to workaround BIOS failures when it
@@ -2489,6 +2550,8 @@ kernel directory <filename>Documentation/scsi/</filename> for details.
 <!--
 
   AO: Is it worth defining flags, or should the user already know them?
+
+  gkh: they should know them if they are modifing this.
 
 -->
 	This option lets the user add entries to the SCSI black/white list
@@ -2754,6 +2817,7 @@ Each <replaceable>option</replaceable> can be one of the following:
   AO: I'm not sure this is right because I don't know how a port can
   have a size.
 
+  gkh: yes it is, and ports can have a size that says how big it is.
 -->
 	</para>
 </refsect1>
@@ -2862,6 +2926,8 @@ These options change some fundamental aspects of SELinux startup.
 
   AO: I took out "at boot time." The option you're discussing right
   now is the boot-time option.
+
+  gkh: fine.
 
 -->
 	option.
@@ -3042,6 +3108,9 @@ These options control Network File System startup.
 
   AO: Is there a default?
 
+  gkh: Well, 0, but you should probably specify something else for this to
+  work properly, so no, no real default value.
+
 -->
 	</para>
 </refsect1>
@@ -3061,11 +3130,13 @@ These options control Network File System startup.
   <title>Description</title>
 	<para>
 	Override the default time value for the NFS lock manager.
-	<replaceable>n</replaceable> is measured in seconds.
+	<replaceable>n</replaceable> is measured in seconds.  If this
+	option is not specified the default of 10 seconds will be used.
 <!--
 
   AO: Default?
 
+  gkh:  Oops, yes there is, now specified.
 -->
 	</para>
 </refsect1>
@@ -3090,6 +3161,9 @@ These options control Network File System startup.
 
   AO: Default?
 
+  gkh: nope, same as lockd.nlm_tcpport in that 0 will be used, but that
+  will not work.
+
 -->
 	</para>
 </refsect1>
@@ -3109,15 +3183,20 @@ These options control Network File System startup.
   <title>Description</title>
 	<para>
 	Set the NFS root filesystem for diskless boxes, to
-	enable them to boot properly over NFS.  The default value is
+	enable them to boot properly over NFS.  If this parameter is not
+	set, the value
+	<literal>/tftpboot/</literal><replaceable>client_ip_address</replaceable>
+	will be used as the root filesystem with the default NFS options.
 <!--
 
   AO: The following does not correspond to the option. The option
   requires an IP address. Is localhost the default?
 
+  gkh: no, I've rewritten this a bit better to hopefully explain this.  And
+  the machine will have an IP address, that is what it is using to access
+  the NFS host here.
+
 -->
-	<literal>/tftpboot/</literal><replaceable>client_ip_address</replaceable>
-	with default NFS options.
     <variablelist>
       <varlistentry>
         <term><replaceable>server-ip</replaceable></term>
@@ -3160,6 +3239,8 @@ These options control Network File System startup.
 <!--
 
   AO: Default?
+
+  gkh:  Nope, no default value (other than 0 which is invalid.
 
 -->
 	</para>
@@ -3242,7 +3323,7 @@ present in the system.
 	reset.  This option can be combined with the port specifications.
 	</para>
 	<para>
-	<literal>lp=auto</literal> 
+	<literal>lp=auto</literal>
 	causes the kernel to examine the device ID from each port
 	to determine whether a IEEE 1284-compatible printer is attached.  If so,
 	the kernel will manage that printer.
@@ -3282,6 +3363,8 @@ present in the system.
 <!--
 
   AO: What does 0 do?
+
+  gkh:  I'm confused, which 0?  The one in "parport0"?
 
 -->
 	</para>
@@ -3575,6 +3658,8 @@ properly.
 
   AO: Or hang?
 
+  gkh: same thing :)
+
 -->
 	</para>
 </refsect1>
@@ -3617,6 +3702,11 @@ properly.
 <!--
 
   AO: Is it feasible to list values for the schedule parameter?
+
+  gkh: I can't seem to figure them out, so I don't know what they would be.
+       Like I document, just use the "profile=2" option unless you do know
+       what the schedular commands are, then you know what you are doing
+       with them :)
 
 -->
 	This option affects how the kernel profiler is calculated.  If
