@@ -1,7 +1,20 @@
 <!--<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">-->
 <chapter id="LKN-command-line">
 
-<title>Kernel boot command line reference
+<!--
+
+  AO: Some of the options that fix bugs may be obscure. I don't know
+  how common the hardware is that requires these options. I'll trust
+  you; if you think a lot of readers will benefit by having these
+  options, leave them in.
+
+  Production will probably want to alphabetize the options under each
+  sect1, and I think that would be a good idea to make them easier to
+  find, but we can leave it up to production staff.
+
+-->
+
+<title>Kernel boot command-line parameter reference
 <!-- don't put a footnote in a title normally... -->
 <footnote>
 <para>
@@ -12,108 +25,205 @@ kernel developers and released under the GPL.
 </footnote>
 </title>
 
+<!--
+
+  AO: I thought the lead-in could be better. I just wrote up the
+  following as an experiment.
+
+-->
 
 <para>
+
+There are three ways to pass options to the kernel and thus control
+its behavior:
+
+</para>
+
+<orderedlist>
+
+<listitem><para>
+
+When building the kernel. Most of this book discusses these options.
+
+</para></listitem>
+<listitem><para>
+
+When starting the kernel. Usually, parameters are passed to the kernel
+when it is invoked from a boot file such as the GRUB or LILO
+configuration file.
+
+</para></listitem>
+<listitem><para>
+
+At run-time, by writing to files in the <filename>/proc</filename>
+directory.
+
+</para></listitem>
+
+</orderedlist>
+
+<para>
+
+This chapter describes the second method of passing options. The
+chapter breaks the boot-time options into different logical sections.
+A number of architecture-specific and individual driver options are
+not listed here. For a complete list of all known options, please see
+the file <filename>Documentation/kernel-parameters.txt</filename> in
+the kernel source tree and the individual architecture-specific
+documentation files.
+
+</para>
+
+<!--
+<para>
 The kernel has a wide variety of different command line options that are
-able to control lots of different actions.  This chapter documents the
-majority of them, breaking them down into different logical sections.  A
+able to control lots of different actions. This chapter documents the
+majority of them, breaking them down into different logical sections. A
 number of architecture specific and individual driver options are not
-listed here.  For a complete list of all known options, please see the
+listed here. For a complete list of all known options, please see the
 kernel file, <filename>Documentation/kernel-parameters.txt</filename>
 and the individual architecture specific documentation files.
 </para>
+-->
+
+<!--
+
+  AO: I assume the following applies to all boot parameters, not just
+  module parameters.
+
+-->
 
 <para>
-Along with all of the different options show here, all modules
-paramaters are able to be passed on the command line also, if the module
-is built into the kernel image.  For example, the
-<literal>usbcore</literal> module accepts the paramater
-<literal>blinkenlights</literal> as an option to display flashing lights
+Not all of the listed options are always available. Most are
+associated with subsystems, and work only if the kernel is configured
+with those subsystems built in. They also depend on the presence of
+the hardware with which they are associated.
+</para>
+
+<para>
+All of these parameters are case-sensitive.
+</para>
+
+<!--
+
+  AO: I thought the module behavior deserves its own section. I think
+  it would go well at the end of the chapter, but maybe it's important
+  enough to put up here at the front.
+
+-->
+
+<sect1>
+<title>Module-specific options</title>
+
+<para>
+In addition to the options listed in this chapter, parameters for
+modules that are built in to the kernel
+can also be passed on the command line. (Dynamically loaded modules,
+of course, are not in memory when the kernel boots and therefore
+cannot be passed parameters at boot time.)
+The syntax for passing parameters consisting of
+the module name followed by a dot (<literal>.</literal>) and the
+parameter.
+</para>
+
+<para>
+
+For example, the
+<literal>usbcore</literal> module accepts the parameter
+<literal>blinkenlights</literal> to display flashing lights
 on all supported USB 2.0 hubs (don't ever say the kernel developers
-don't have a sense of humor.)  Normally, when loading a module, to set
-this paramater you would do:
+don't have a sense of humor). To set
+this parameter when loading the module dynamically, you would enter:
 <screen>
 $ <userinput>modprobe usbcore blinkenlights=1</userinput>
 </screen>
 But if the <literal>usbcore</literal> module is built into the kernel,
-you need to use the modulename, with a <literal>.</literal> to specify
-the option:
+you achieve the same effect by invoking the kernel with the following
+option:
 <screen>
 usbcore.blinkenlights=1
 </screen>
 </para>
 
 <para>
-Module options for modules that are built into the kernel are also
-allowed to be changed at run time by looking in the
-<filename>/sys/module/</filename> directory for the specified module
+Module options for modules that are built into the kernel can also be
+changed at run time by writing to files in the subdirectory named after the
+module under the <filename>/sys/module/</filename> directory. Thus, the
+<literal>blinkenlights</literal> option is represented by the file
+<filename>/sys/module/usbcore/blinkenlights</filename>.
 desired.
 </para>
 
-<para>
-Note that not all of the listed options are always available, the
-majority of them depend on a kernel configuration option that builds the
-subsystem into the kernel, and also the presence of the specific
-hardware.
-</para>
-
-<para>
-Note that all of these paramaters are case sensitive.
-</para>
-
+</sect1>
 
 <sect1>
 <title>Console options</title>
 
 <para>
-These options all deal with the kernel log or console which is used for
-displaying kernel debug and error information.
+These options deal with the console or kernel log, where kernel
+debugging and error information are displayed.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>console</refname>
+<!--
+
+  AO: Do you like having periods at the end of the refpurpose
+  sentences? Most seem to be sentences, so I put in the periods. We
+  could easily remove them if you prefer.
+
+-->
     <refpurpose>Output console device and options.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para><literal>console=</literal></para>
   </refsynopsisdiv>
   <refsect1>
-    <title>Options</title> <!-- Description or Options ?  I like options... -->
+    <title>Options</title> <!-- Description or Options ?  I like
+    options...
+AO: Yes, I think "options" is best. -->
     <variablelist>
       <varlistentry>
-        <term><literal>tty[n]</literal></term>
-        <listitem><para>Use the virtual console device [n].</para></listitem>
+        <term><literal>tty<replaceable>n</replaceable></literal></term>
+        <listitem><para>Use the virtual console device <replaceable>n</replaceable>.</para></listitem>
       </varlistentry>
       <varlistentry>
-        <term><literal>ttyS[n][,options]</literal></term>
-        <term><literal>ttyUSB0[,options]</literal></term> <!-- can have two, hooray -->
+        <term><literal>ttyS<replaceable>n</replaceable>[,<replaceable>options</replaceable>]</literal></term>
+        <term><literal>ttyUSB0[,<replaceable>options</replaceable>]</literal></term> <!-- can have two, hooray -->
         <listitem>
           <para>
-	  Use the specified serial port.  The options are of the form
-	  "bbbbpnf", where "bbbb" is the baud rate, "p" is parity ("n",
-	  "o", or "e"), "n" is number of bits, and "f" is flow control ("r"
-	  for RTS or omit it).  Default is "9600n8".
+	  Use the specified serial port. The options are of the form
+	  <replaceable>bbbbpnf</replaceable>, where <replaceable>bbbb</replaceable> is the baud rate, <replaceable><replaceable> is parity (<literal>n</literal>,
+	  <literal>o</literal>, or <literal>e</literal>), <replaceable>n</replaceable> is number of bits, and <replaceable>f</replaceable> is flow control (<literal>r</literal>
+	  for RTS or omitted). Default is <literal>9600n8</literal>.
 	  </para>
 
 	  <para>
 	  See the file
 	  <filename>Documentation/serial-console.txt</filename> for more
-	  information on how to use a serial console.  If you wish to have
+	  information on how to use a serial console. If you wish to have
 	  access to the kernel console information and do not have a serial
-	  port, see the netconsole command line option.
+	  port, see the <literal>netconsole</literal> command-line option.
 	  </para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><literal>uart,io,[addr][,options]</literal></term>
-        <term><literal>uart,mmio,[addr][,options]</literal></term>
+        <term><literal>uart,io,<replaceable>addr</replaceable>[,<replaceable>options</replaceable>]</literal></term>
+        <term><literal>uart,mmio,<replaceable>addr</replaceable>[,<replaceable>options</replaceable>]</literal></term>
         <listitem>
           <para>
 	  Start an early, polled-mode console on the 8250/16550 UART at the
 	  specified I/O port or MMIO address, switching to the matching
-	  ttyS device later.  The options are the same as for ttyS,
-	  above.
+	  ttyS device later. The options are the same as for ttyS
+	  shown earlier.
+<!--
+
+  AO: Do you also have to specify a ttyS option, or does the kernel
+  now how to find it automatically?
+
+-->
+
 	  </para>
         </listitem>
       </varlistentry>
@@ -128,52 +238,86 @@ displaying kernel debug and error information.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>netconsole=</literal>[<emphasis>src-port</emphasis>]<literal>@</literal>[<emphasis>src-ip</emphasis>]<literal>/</literal>[<emphasis>dev</emphasis>]<literal>,</literal>[<emphasis>target-port</emphasis>]<literal>@</literal><emphasis>target-ip</emphasis><literal>/</literal>[<emphasis>target-mac-address</emphasis>]
+    <literal>netconsole=</literal>[<replaceable>src-port</replaceable>]<literal>@</literal>[<replaceable>src-ip</replaceable>]<literal>/</literal>[<replaceable>dev</replaceable>]<literal>,</literal>[<replaceable>target-port</replaceable>]<literal>@</literal><replaceable>target-ip</replaceable><literal>/</literal>[<replaceable>target-mac-address</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option sends kernel console data across the network using UDP
-	packets to another machine.
+	Send kernel console data across the network using UDP
+	packets to another machine. Options are:
+
+	<variablelist>
+
+	<varlistentry>
+	<term><replaceable>src-port</replaceable></term>
+	<listitem>
+	<para>Source port for the UDP packets.
+	The default value is 6665.
 	</para>
-	<para>
-	<emphasis>src-port</emphasis> is the source for the UDP packets.
-	The default value is 6665 if this is not specified.
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><replaceable>src-ip</replaceable></term>
+	<listitem>
+	<para>Source IP address of the interface
+	to use.
 	</para>
-	<para>
-	<emphasis>src-ip</emphasis> is the source IP of the interface
-	address to use.
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><replaceable>dev</replaceable></term>
+	<listitem>
+	<para>Network interface to use.
+	<literal>eth0</literal> is an example.
+	The network interface can also run normal network traffic, because
+	the netconsole data is not intrusive and should cause no slowdown
+	in other network operations.
 	</para>
-	<para>
-	<emphasis>dev</emphasis>Is the network interface to use.
-	<literal>eth0</literal> would be an example of a network interface
-	name.  The network interface can also run normal network traffic,
-	the netconsole data is not intrusive and should cause no slowdowns
-	of any other network operations.
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><replaceable>target-port</replaceable></term>
+	<listitem>
+	<para>Port that the logging agent
+	will use. The default value is 6666.
 	</para>
-	<para>
-	<emphasis>target-port</emphasis> is the port that the logging agent
-	will use.  The default value is 6666 if this is not specified.
-	</para>
-	<para>
-	<emphasis>target-ip</emphasis> is the IP address for the logging
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><replaceable>target-ip</replaceable></term>
+	<listitem>
+	<para>IP address for the logging
 	agent.
 	</para>
-	<para>
-	<emphasis>target-mac-address</emphasis> is the ethernet MAC address
+	</listitem>
+	</varlistentry>
+
+	<varlistentry>
+	<term><replaceable>target-mac-address</replaceable></term>
+	<listitem>
+	<para>Ethernet MAC address
 	for the logging agent.
 	</para>
+	</listitem>
+	</varlistentry>
+
+	<variablelist>
+
 	<para>
 	To listen to this data, the remote machine can use the
-	<literal>syslogd</literal> program, or run the
-	<literal>netcat</literal> program as:
+	<command>syslogd</command> program, or run the
+	<command>netcat</command> program as follows:
 	<screen>
-	<userinput>netcat -u -l -p &lt;port&gt;</userinput>
+	<userinput>netcat -u -l -p </userinput><replaceable>port</replaceable>
 	</screen>
 	</para>
 	<para>
-	For some more background on how to use this option fully, please
+	For more background on how to use this option,
 	see the file
 	<filename>Documentation/networking/netconsole.txt</filename>.
 	</para>
@@ -188,7 +332,12 @@ displaying kernel debug and error information.
 <refsect1>
   <title>Description</title>
 	<para>
-	This option will enable the kernel log level to default to the
+<!--
+
+  AO: Does "match" accurately replace "default to"?
+
+-->
+	Cause the kernel log level to match the
 	debug level, so that all debug messages will be printed to the
 	console at boot time.
 	</para>
@@ -198,7 +347,7 @@ displaying kernel debug and error information.
 <refentry>
   <refnamediv>
     <refname>quiet</refname>
-    <refpurpose>Disable all log messages</refpurpose>
+    <refpurpose>Disable all log messages.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
@@ -208,8 +357,10 @@ displaying kernel debug and error information.
 <refsect1>
   <title>Description</title>
 	<para>
-	This option sets the default kernel log level to KERN_ERR (3) which
-	means that the kernel boot process is very quiet.
+	Set the default kernel log level to KERN_ERR (3), which
+	suppresses all messages during boot except extremely serious
+	ones. (Log levels are defined under the
+	<literal>loglevel</literal> parameter.)
 	</para>
 </refsect1>
 </refentry>
@@ -217,29 +368,43 @@ displaying kernel debug and error information.
 <refentry>
   <refnamediv>
     <refname>earlyprintk</refname>
-    <refpurpose>Show early boot messages
+    <refpurpose>Show early boot messages.
     </refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>earlyprintk=</literal>[<replaceable>vga</replaceable>|<replaceable>serial</replaceable>[,<replaceable>ttyS</replaceable><emphasis>n</emphasis>[,<emphasis>baudrate</emphasis>]]]
+<!--
+
+  AO: I thought the brackets weren't placed quite right, and I added
+  the keep option.
+
+-->
+    <literal>earlyprintk=</literal>[<replaceable>vga</replaceable>|<replaceable>serial</replaceable>][,<literal>ttyS</literal><replaceable>n</replaceable>[,<replaceable>baudrate</replaceable>]][,<literal>keep<literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option enables the ability to see the kernel log messages that
-	happen before the traditional console is initialized.  It can be
-	very useful for tracking down hardware issues.  Currently only the
-	VGA device or the serial port will work, not both at the same time.
+	Show kernel log messages that precede the initialization of
+	the traditional console. This option can be
+	very useful for tracking down hardware issues. Currently, the
+        option can specify either the
+	VGA device or the serial port, but not both at the same time.
 	Also, only the <literal>ttyS0</literal> or <literal>ttyS1</literal>
-	serial devices will work.  Interaction with the standard serial
+	serial devices will work. Interaction with the standard serial
 	driver is not very good, and the VGA output will eventually be
 	overwritten by the real console.
 	</para>
 	<para>
-	Append the string <literal>,keep</literal> to not disable the
-	messages when the real kernel console is initializes and takes over
+<!--
+
+  AO: Does the following mean that by default the console doesn't
+  display the messages that this option displays? Needs a bit of
+  explanation.
+
+-->
+	Append <literal>,keep</literal> in order not to disable the
+	messages when the real kernel console is initialized and takes over
 	the system.
 	</para>
 </refsect1>
@@ -248,27 +413,28 @@ displaying kernel debug and error information.
 <refentry>
   <refnamediv>
     <refname>loglevel</refname>
-    <refpurpose>Set the default console log level</refpurpose>
+    <refpurpose>Set the default console log level.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>loglevel=</literal><emphasis>level</emphasis>
+    <literal>loglevel=</literal><replaceable>level</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option specifies the initial console log level.  Any log
-	messages smaller than the default value will be printed to the
-	console and any equal or greater than will not be displayed.
+	Specify the initial console log level. Any log
+	messages with levels less than this (that is, of higher priority) will be printed to the
+	console, whereas any messages with levels equal to or greater than
+    this will not be displayed.
 	</para>
 	<para>
-	The console log level can also be changed by the klogd program, or
+	The console log level can also be changed by the <command>klogd</command> program, or
 	by writing the specified level to the
 	<filename>/proc/sys/kernel/printk</filename> file.
 	</para>
 	<para>
-	The kernel log levels are defined as:
+	The kernel log levels are:
 	<variablelist>
 
 	<varlistentry>
@@ -281,50 +447,60 @@ displaying kernel debug and error information.
 	<varlistentry>
 	<term><literal>1 (KERN_ALERT)</literal></term>
 	<listitem>
-	<para>This is for actions that must be taken care of immediately.</para>
+	<para>Actions that must be taken care of immediately.</para>
 	</listitem>
 	</varlistentry>
 
 	<varlistentry>
 	<term><literal>2 (KERN_CRIT)</literal></term>
 	<listitem>
-	<para>This is for critical conditions.</para>
+<!--
+
+  AO: Is critical the same as fatal (this is, the boot is aborted)?
+
+-->
+	<para>Critical conditions.</para>
 	</listitem>
 	</varlistentry>
 
 	<varlistentry>
 	<term><literal>3 (KERN_ERR)</literal></term>
 	<listitem>
-	<para>This is for error conditions that have happend to the system.</para>
+	<para>Non-critical error conditions.</para>
 	</listitem>
 	</varlistentry>
 
 	<varlistentry>
 	<term><literal>4 (KERN_WARNING)</literal></term>
 	<listitem>
-	<para>This is for warning conditions that should be taken care of.</para>
+	<para>Warning conditions that should be taken care of.</para>
 	</listitem>
 	</varlistentry>
 
 	<varlistentry>
 	<term><literal>5 (KERN_NOTICE)</literal></term>
 	<listitem>
-	<para>This is for normal, but significant conditions that might
-	happen.</para>
+	<para>Normal, but significant events.
 	</listitem>
 	</varlistentry>
 
 	<varlistentry>
 	<term><literal>6 (KERN_INFO)</literal></term>
 	<listitem>
-	<para>Informational messages are printed here.</para>
+	<para>Informational messages that require no action.</para>
 	</listitem>
 	</varlistentry>
 
 	<varlistentry>
 	<term><literal>7 (KERN_DEBUG)</literal></term>
 	<listitem>
-	<para>This is for kernel debugging messages.</para>
+<!--
+
+  AO: I tried to put in some explanation, but I might be wrong.
+
+-->
+	<para>Kernel debugging messages, output by the kernel if the
+	developer enabled debugging at compile time.</para>
 	</listitem>
 	</varlistentry>
 
@@ -336,19 +512,24 @@ displaying kernel debug and error information.
 <refentry>
   <refnamediv>
     <refname>log_buf_len</refname>
-    <refpurpose>Set the size of the kernel log buffer</refpurpose>
+    <refpurpose>Set the size of the kernel log buffer.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>log_buf_len=</literal><emphasis>nn</emphasis>
+    <literal>log_buf_len=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This sets the size of the kernel's internal log buffer.
-	<emphasis>nn</emphasis> is in bytes and must be a power of two.
+	Set the size of the kernel's internal log buffer.
+	<replaceable>n</replaceable> is specified in bytes and must be a power of 2.
 	This value can also be changed by a kernel configuration value.
+<!--
+
+  AO: Which configuration value?
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -356,13 +537,19 @@ displaying kernel debug and error information.
 <refentry>
   <refnamediv>
     <refname>initcall_debug</refname>
-    <refpurpose>Debug the initcall functions in the kernel</refpurpose>
+    <refpurpose>Debug the initcall functions in the kernel.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option causes the kernel to trace all initcalls as they are
-	executed during the boot process.  It is useful for working out
+<!--
+
+  AO: Please define initcalls. Are they simply functions in the kernel
+  code called during kernel initialization?
+
+-->
+	Cause the kernel to trace all initcalls as they are
+	executed during the boot process. This option is useful for determining
 	where the kernel is dying during startup.
 	</para>
 </refsect1>
@@ -371,18 +558,18 @@ displaying kernel debug and error information.
 <refentry>
   <refnamediv>
     <refname>kstack</refname>
-    <refpurpose>How many words of the stack to print in kernel oopses</refpurpose>
+    <refpurpose>How many words of the stack to print in kernel oopses.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>kstack=</literal><emphasis>nn</emphasis>
+    <literal>kstack=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies how many words from the kernel stack should be
-	printed in the kernel oops dumps.  <emphasis>nn</emphasis> is an
+	Specify how many words from the kernel stack should be
+	printed in the kernel oops dumps. <replaceable>n</replaceable> is an
 	integer value.
 	</para>
 </refsect1>
@@ -391,12 +578,12 @@ displaying kernel debug and error information.
 <refentry>
   <refnamediv>
     <refname>time</refname>
-    <refpurpose>Show timing data on every kernel log message</refpurpose>
+    <refpurpose>Show timing data on every kernel log message.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option causes the kernel to prefix every kernel log message
+	Cause the kernel to prefix every kernel log message
 	with a timestamp.
 	</para>
 </refsect1>
@@ -408,14 +595,16 @@ displaying kernel debug and error information.
 <title>Interrupt options</title>
 
 <para>
-There are a wide range of different kernel options when it comes to
-finding, routing and handling interrupts.
+Interrupts are a complex aspect of kernel behavior. The boot-time
+options deal mostly with the interface between the kernel and the
+hardware that handles interrupts, such as the Intel chip's Advanced
+Programmable Interrupt Controller (APIC).
 </para>
 
 <refentry>
   <refnamediv>
     <refname>apic</refname>
-    <refpurpose>Change the output verbosity of the APIC subsystem when booting</refpurpose>
+    <refpurpose>Change the verbosity of the APIC subsystem when booting.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para><literal>apic=</literal>[<replaceable>quiet</replaceable>(default)|<replaceable>verbose</replaceable>|<replaceable>debug</replaceable>]</para>
@@ -423,8 +612,14 @@ finding, routing and handling interrupts.
 <refsect1>
   <title>Description</title>
 	<para>
-	This option changes how verbose the APIC subsystem is when booting
-	the kernel.
+<!--
+
+  AO: What is the difference between verbose and debug? Does debug
+  show more?
+
+-->
+	Control how much information the APIC subsystem generates when
+	booting	the kernel.
 	</para>
 </refsect1>
 </refentry>
@@ -432,12 +627,12 @@ finding, routing and handling interrupts.
 <refentry>
   <refnamediv>
     <refname>noapic</refname>
-    <refpurpose>Do not use any IOAPICs in the system</refpurpose>
+    <refpurpose>Do not use any IOAPICs.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This options specifies that the kernel should not use any of the
+	Prevent the kernel from using any of the
 	IOAPICs that might be present in the system.
 	</para>
 </refsect1>
@@ -446,12 +641,12 @@ finding, routing and handling interrupts.
 <refentry>
   <refnamediv>
     <refname>lapic</refname>
-    <refpurpose>Enable the local APIC</refpurpose>
+    <refpurpose>Enable the local APIC.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option will cause the kernel to enable the local APIC even if
+	Cause the kernel to enable the local APIC even if
 	the BIOS had disabled it.
 	</para>
 </refsect1>
@@ -460,12 +655,12 @@ finding, routing and handling interrupts.
 <refentry>
   <refnamediv>
     <refname>nolapic</refname>
-    <refpurpose>Do not use the local APIC</refpurpose>
+    <refpurpose>Do not use the local APIC.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel to not use the local APIC.
+	Tell the kernel not to use the local APIC.
 	</para>
 </refsect1>
 </refentry>
@@ -473,12 +668,12 @@ finding, routing and handling interrupts.
 <refentry>
   <refnamediv>
     <refname>noirqbalance</refname>
-    <refpurpose>Disable kernel irq balancing</refpurpose>
+    <refpurpose>Disable kernel IRQ balancing.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option will disable all of the built in kernel irq balancing logic.
+	Disable all of the built-in kernel IRQ balancing logic.
 	</para>
 </refsect1>
 </refentry>
@@ -486,13 +681,13 @@ finding, routing and handling interrupts.
 <refentry>
   <refnamediv>
     <refname>irqfixup</refname>
-    <refpurpose>Fix IRQ issues</refpurpose>
+    <refpurpose>Basic fix to interrupt problems.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
 	When an interrupt is not handled, search all known interrupt
-	handlers for it.  This is Intended to get systems with badly broken
+	handlers for it. This is intended to get systems with badly broken
 	firmware running.
 	</para>
 </refsect1>
@@ -501,13 +696,13 @@ finding, routing and handling interrupts.
 <refentry>
   <refnamediv>
     <refname>irqpoll</refname>
-    <refpurpose>Fix IRQ issues</refpurpose>
+    <refpurpose>Extended fix to interrupt problems.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	When an interrupt is not handled search all known interrupt
-	handlers for it and also check all handlers each timer interrupt.
+	When an interrupt is not handled, search all known interrupt
+	handlers for it and also check all handlers on each timer interrupt.
 	This is intended to get systems with badly broken firmware running.
 	</para>
 </refsect1>
@@ -516,14 +711,14 @@ finding, routing and handling interrupts.
 <refentry>
   <refnamediv>
     <refname>noirqdebug</refname>
-    <refpurpose>Disable unhandled interrupt detection</refpurpose>
+    <refpurpose>Disable unhandled interrupt detection.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	The kernel by default attempts to detect and disable unhandled
-	interrupt sources as they can cause problems with the
-	responsiveness of the rest of the kernel if left unchecked.  This
+	By default, the kernel attempts to detect and disable unhandled
+	interrupt sources because they can cause problems with the
+	responsiveness of the rest of the kernel if left unchecked. This
 	option will disable this logic.
 	</para>
 </refsect1>
@@ -535,26 +730,26 @@ finding, routing and handling interrupts.
 <title>Memory options</title>
 
 <para>
-Here are the different options that affect how the kernel uses and detects
-the memory in the system.
+The kernel handles memory in many different chunks and categories for
+different purposes. These options allow you to tweak the sizes and settings.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>highmem</refname>
-    <refpurpose>Specify the size of the highmem memory zone</refpurpose>
+    <refpurpose>Specify the size of the highmem memory zone.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>highmem=</literal><emphasis>nn</emphasis>
+    <literal>highmem=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option will force the highmem memory zone to have an exact
-	size of <emphasis>nn</emphasis> bytes.  This will work even on
-	boxes that have no highmem zones by default.  It will can also
+	Force the highmem memory zone to have an exact
+	size of <replaceable>n</replaceable> bytes. This will work even on
+	boxes that have no highmem zones by default. It can also
 	reduce the size of the highmem zone for machines with a lot of
 	memory.
 	</para>
@@ -564,18 +759,26 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>hugepages</refname>
-    <refpurpose>Set the number of hugetlb pages</refpurpose>
+    <refpurpose>Set the number of hugetlb pages.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>hugepages=</literal><emphasis>nn</emphasis>
+    <literal>hugepages=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Set the maximum number of hugetlb pages to be
-	<emphasis>nn</emphasis>.
+<!--
+
+  AO: I tried to define hugetlb. I think readers can find out most of
+  the other memory values on their own.
+
+-->
+	The hugetlb feature lets you configure Linux to use 4MB pages,
+	one thousand times the default size.
+	If Linux is configured this way, this options sets the maximum
+	number of hugetlb pages to be <replaceable>n</replaceable>.
 	</para>
 </refsect1>
 </refentry>
@@ -588,15 +791,15 @@ the memory in the system.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>ihash_entries=</literal><emphasis>nn</emphasis>
+    <literal>ihash_entries=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option lets you override the default number of hash buckets
-	for the kernel's inode cache.  Only use this if you know what you
-	are doing.
+	Override the default number of hash buckets
+	for the kernel's inode cache. Recommended only for kernel
+	experts.
 	</para>
 </refsect1>
 </refentry>
@@ -604,18 +807,18 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>max_addr</refname>
-    <refpurpose>Ignore memory</refpurpose>
+    <refpurpose>Ignore memory.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>max_addr=</literal><emphasis>nn</emphasis>
+    <literal>max_addr=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	All physical memory greater than or equal to the physical address
-	<emphasis>nn</emphasis> is to be ignored by the kernel.
+	Cause the kernel to ignore all physical memory greater than or equal to the physical address
+	<replaceable>n</replaceable>.
 	</para>
 </refsect1>
 </refentry>
@@ -623,23 +826,23 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>mem</refname>
-    <refpurpose>Force memory usage</refpurpose>
+    <refpurpose>Force memory usage.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>mem=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
+    <literal>mem=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option forces the specific ammount of memory to be used by the
-	kernel.  When used with the <literal>memmap=</literal> option,
-	physical address space collisions can be avoided.  Without the
+	Set the specific ammount of memory used by the
+	kernel. When used with the <literal>memmap=</literal> option,
+	physical address space collisions can be avoided. Without the
 	<literal>memmap=</literal> option, this option could cause PCI
 	devices to be placed at addresses that belong to unused RAM.
-	<emphasis>nn</emphasis> specifies the amount of memory to force and
-	is measured in units of kilo, mega, or gigabytes.
+	<replaceable>n</replaceable> specifies the amount of memory to force and
+	is measured in units of kilobytes (<literal>K</literal>), megabytes (<literal>M</literal>), or gigabytes (<literal>G</literal>).
 	</para>
 </refsect1>
 </refentry>
@@ -647,7 +850,7 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>mem</refname>
-    <refpurpose>Disable the usage of 4Mb pages for kernel memory</refpurpose>
+    <refpurpose>Disable the use of 4MB pages for kernel memory.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
@@ -657,7 +860,7 @@ the memory in the system.
 <refsect1>
   <title>Description</title>
 	<para>
-	This option will disable the use of 4Mb pages for kernel memory.
+	Disable the use of huge (4MB) pages for kernel memory.
 	</para>
 </refsect1>
 </refentry>
@@ -665,18 +868,18 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>memmap</refname>
-    <refpurpose>Enable setting of an exact E820 memory map</refpurpose>
+    <refpurpose>Enable setting of an exact E820 memory map.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>memmap=</literal><emphasis>exactmap</emphasis>
+    <literal>memmap=</literal><replaceable>exactmap</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This lets the user to specify an exact memory map that the kernel
-	should use.  These <emphasis>exactmap</emphasis> lines can be
+	Use a specific memory map. The
+	<replaceable>exactmap</replaceable> lines can be
 	constructed based on BIOS output or other requirements.
 	</para>
 </refsect1>
@@ -685,20 +888,22 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>memmap</refname>
-    <refpurpose>Force specific memory to be used</refpurpose>
+    <refpurpose>Force specific memory to be used.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>memmap=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]<literal>@</literal><emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]
+    <literal>memmap=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]<literal>@</literal><replaceable>start</replaceable>[<replaceable>KMG</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This forces the kernel to use a specific memory region.
-	<emphasis>nn</emphasis> is the size of the memory location and
-	<emphasis>ss</emphasis>is the start location in memory of the
-	range.
+	Force the kernel to use a specific memory region.
+	<replaceable>n</replaceable> is the size of the memory location and
+	<replaceable>start</replaceable>is the start location in memory of the
+	range. Units can be kilobytes (<literal>K</literal>),
+	megabytes (<literal>M</literal>), or gigabytes
+	(<literal>G</literal>).
 	</para>
 </refsect1>
 </refentry>
@@ -706,18 +911,18 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>noexec</refname>
-    <refpurpose>Enable or disable non-executable mappings</refpurpose>
+    <refpurpose>Enable or disable non-executable mappings.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>noexec=</literal>[<replaceable>on</replaceable>(default)|<replaceable>off</replaceable>]
+    <literal>noexec=</literal>[(<literal>on</literal>|(<literal>off</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This enables or disables the kernel's ability to map sections of
-	memory as non-executable.
+	Enable or disable the kernel's ability to map sections of
+	memory as non-executable. By default, the mapping is enabled (<literal>on</literal>).
 	</para>
 </refsect1>
 </refentry>
@@ -725,17 +930,22 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>reserve</refname>
-    <refpurpose>Reserve some I/O memory</refpurpose>
+    <refpurpose>Reserve some I/O memory.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>reserve=</literal><emphasis>nn</emphasis>
+    <literal>reserve=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This forces the kernel to ignore some of the I/O memory areas.
+<!--
+
+  AO: What are the units for n?
+
+-->
+	Force the kernel to ignore some of the I/O memory areas.
 	</para>
 </refsect1>
 </refentry>
@@ -743,23 +953,28 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>vmalloc</refname>
-    <refpurpose>Force the vmalloc area to have a specific size</refpurpose>
+    <refpurpose>Force the vmalloc area to have a specific size.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>vmalloc=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]
+    <literal>vmalloc=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option forces the vmalloc to have the exact size specified by
-	<emphasis>nn</emphasis>.  This can be used to increase the minimum
-	size of the vmalloc area (which is 128Mb on the x86 processor).  It
+	Force vmalloc to have the exact size specified by
+	<replaceable>n</replaceable>. This can be used to increase the minimum
+	size of the vmalloc area (which is 128 MB on the x86 processor). It
 	can also be used to decrease the size and leave more room for
-	directly mapped kernel RAM.  <emphasis>nn</emphasis> specifies the
-	amount of memory and is measured in units of kilo, mega, or
-	gigabytes.
+	directly mapped kernel RAM.
+<!--
+
+  AO: I'm not talking here about the KMG because I know it's been done
+  recently; I'll just put it in at the first instance in each section
+  of the chapter.
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -767,15 +982,25 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>norandmaps</refname>
-    <refpurpose>Do not use the address space randomization</refpurpose>
+    <refpurpose>Do not use address space randomization.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	By default the kernel randomizes the address space of all programs
-	when they are started.  This option will disable this feature.  It
-	is also equivalent to writing a <literal>0</literal> to the file
+	By default, the kernel randomizes the address space of all programs
+	when they are started. This option disables this feature. It
+	is equivalent to writing <literal>0</literal> to the file
 	<filename>/proc/sys/kernel/randomize_va_space</filename>.
+<!--
+
+  AO: There are only about three places where you talk about /proc
+  equivalents to the options here. Are there other options that have
+  /proc equivalents? I'd tend to say that, if there are a lot of such
+  options, we should just remove the references to /proc. But if there
+  are just a few, or if you think a few are particularly important,
+  you can leave them in.
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -783,17 +1008,29 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>vdso</refname>
-    <refpurpose>Enable or disable the VDSO mapping</refpurpose>
+    <refpurpose>Enable or disable the VDSO mapping.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>vdso=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    <literal>vdso=</literal>[<literal>0</literal>|<literal>1</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This enables or disables the VDSO mapping option.
+<!--
+
+  AO: Could you briefly define VDSO?
+
+-->
+	Disable (0) or enable (1) the VDSO mapping option. By default,
+	it is enabled.
+<!--
+
+  AO: That's what I assume.
+
+-->
+
 	</para>
 </refsect1>
 </refentry>
@@ -803,26 +1040,31 @@ the memory in the system.
 <sect1>
 <title>Suspend options</title>
 
+<para>
+These options change the way the kernel handles suspension for
+power-saving purposes.
+</para>
+
 <refentry>
   <refnamediv>
     <refname>resume</refname>
-    <refpurpose>Specify the partition device for the suspend image</refpurpose>
+    <refpurpose>Specify the partition device for the suspend image.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>resume=</literal><emphasis>suspend_device</emphasis>
+    <literal>resume=</literal><replaceable>suspend_device</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel which disk device contains the
-	suspended kernel image.  If the data on the image is a valid kernel
+	Tell the kernel which disk device contains the
+	suspended kernel image. If the data on the image is a valid kernel
 	image created by the software suspend subsystem, it will be loaded
 	into memory and the kernel will run it instead of continuing on
-	with the normal boot process.  <emphasis>suspend_device</emphasis>
+	with the normal boot process. <replaceable>suspend_device</replaceable>
 	is the kernel device name, which might be different from what
-	userspace thinks the device name is, so be careful with this.
+	userspace thinks the device name is, so be careful with this option.
 	</para>
 </refsect1>
 </refentry>
@@ -830,14 +1072,15 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>noresume</refname>
-    <refpurpose>Disable resume</refpurpose>
+    <refpurpose>Disable resume.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option disables the resume functionality of the kernel and any
-	swap partitions that were being used to hold system images to be
-	restored to will be reverted back to swap space.
+	Disable the resume functionality of the kernel. Any
+	swap partitions that were being used to hold system images to
+	which the kernel could be restored will revert back to
+	available swap space.
 	</para>
 </refsect1>
 </refentry>
@@ -848,13 +1091,18 @@ the memory in the system.
 <sect1>
 <title>CPU options</title>
 
+<para>
+These options control a wide range of behavior regarding timing,
+processor use in multi-processor systems, and other processor issues.
+</para>
+
 <refentry>
   <refnamediv>
     <refname>cachesize</refname>
-    <refpurpose>Override the level 2 CPU cache size detection by the kernel.</refpurpose>
+    <refpurpose>Override level 2 CPU cache size detection.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
-    <para><literal>cachesize=</literal><emphasis>nn</emphasis></para>
+    <para><literal>cachesize=</literal><replaceable>n</replaceable></para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
@@ -862,9 +1110,9 @@ the memory in the system.
 	Sometimes CPU hardware bugs make them report the cache size
 	incorrectly. The kernel will attempt to work around and fix known
 	problems with most CPUs, but for some CPUs it is not possible to
-	determine what the correct size should be.  This option provides an
+	determine what the correct size should be. This option provides an
 	override for these situations.
-	<emphasis>nn</emphasis> is measured in units of bytes.
+	<replaceable>n</replaceable> is measured in units of bytes.
 	</para>
 </refsect1>
 </refentry>
@@ -872,52 +1120,59 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>lpj</refname>
-    <refpurpose>Set the loops per jiffy</refpurpose>
+    <refpurpose>Set the loops per jiffy.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>lpg=</literal><emphasis>nn</emphasis>
+    <literal>lpg=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies the loops per jiffy that should be used by the
-	kernel and thus have the kernel avoid the time-consuming boot time
-	autodetection of this value.  If <emphasis>nn</emphasis> is
-	<literal>0</literal> then the value will be autodetected like
-	normal.
+	Specify the loops per jiffy that should be used by the
+	kernel, and thus have the kernel avoid the time-consuming boot-time
+	autodetection of this value. If <replaceable>n</replaceable> is
+	<literal>0</literal>, the value will be autodetected as usual.
 	</para>
+	<warning>
 	<para>
-	Note that on SMP systems, this value will be set to all CPUs, which
+	On SMP systems, this value will be set on all CPUs, which
 	might cause problems if the different CPUs need different settings.
-	An incorrect value will cause delays in the kernel to be wrong
+	An incorrect value will cause incorrect delays in the kernel,
 	which can lead to unpredictable I/O errors and other breakage.
 	Although unlikely, in the extreme case this might damage your
 	hardware.
 	</para>
+	</warning>
 </refsect1>
 </refentry>
 
 <refentry>
   <refnamediv>
     <refname>nmi_watchdog</refname>
-    <refpurpose>Set the NMI watchdog value</refpurpose>
+    <refpurpose>Set the NMI watchdog value.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>nmi_watchdog=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>|<replaceable>2</replaceable>|<replaceable>3</replaceable>]
+    <literal>nmi_watchdog=</literal>[<literal>0</literal>|<literal>1</literal>|<literal>2</literal>|<literal>3</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+<!--
+
+  AO: 0 and 3 have the same effect and are therefore redundant, but
+  what the hell.
+
+-->
 	This is a debugging feature that allows the user to override the
-	default NMI watchdog value. <literal>0</literal> specifies that no
-	NMI watchdog should be used.  <literal>1</literal> specifies that
-	the APIC should be used if present.  <literal>2</literal> specifies
+	default non-maskable interrupt (NMI) watchdog value. <literal>0</literal> specifies that no
+	NMI watchdog should be used. <literal>1</literal> specifies that
+	the APIC should be used if present. <literal>2</literal> specifies
 	that the local APIC should be used if present.
-	<literal>3</literal> means that the NMI watchdog is invalid so do
+	<literal>3</literal> means that the NMI watchdog is invalid, so do
 	not use it.
 	</para>
 </refsect1>
@@ -926,13 +1181,13 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>no387</refname>
-    <refpurpose>Always use the 387 emulation library</refpurpose>
+    <refpurpose>Always use the 387 emulation library.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel to always use the 387 math emulation
-	library even if a 387 math coprocessor is present in the system.
+	Always use the 387 math emulation
+	library, even if a 387 math coprocessor is present in the system.
 	</para>
 </refsect1>
 </refentry>
@@ -940,14 +1195,14 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>nofxsr</refname>
-    <refpurpose>Disable x86 floating point save and restore</refpurpose>
+    <refpurpose>Disable x86 floating-point save and restore.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option disables the x86 floating point extended register save
-	and restore. The kernel will only save legacy floating-point
-	registers on task switch.
+	Disable the x86 floating-point extended register save
+	and restore. The kernel will save only legacy floating-point
+	registers on a task switch.
 	</para>
 </refsect1>
 </refentry>
@@ -955,14 +1210,14 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>no-hlt</refname>
-    <refpurpose>Do not use the <literal>hlt</literal> instruction</refpurpose>
+    <refpurpose>Do not use the <literal>HLT</literal> instruction.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel that the <literal>hlt</literal>
-	instruction does not work correctly for this processor and that it
-	should not use it.
+	This option is available because the <literal>HLT</literal>
+	instruction does not work correctly for some x86
+	processors. This option tells the kernel not to use the instruction.
 	</para>
 </refsect1>
 </refentry>
@@ -970,13 +1225,13 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>mce</refname>
-    <refpurpose>Enable the machine check exception feature</refpurpose>
+    <refpurpose>Enable the machine check exception feature.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Some processors have the ability to check for machine errors
-	(usually errors in the hardware).  This option turns this subsystem
+	Some processors can check for machine errors
+	(usually errors in the hardware). This option turns this subsystem
 	on, if it has been built into the kernel configuration.
 	</para>
 </refsect1>
@@ -985,14 +1240,12 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>nomce</refname>
-    <refpurpose>Disable the machine check exception feature</refpurpose>
+    <refpurpose>Disable the machine check exception feature.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Some processors have the ability to check for machine errors
-	(usually errors in the hardware).  This option turns this subsystem
-	off, if it has been built into the kernel configuration.
+	 This option turns the subsystem off.
 	</para>
 </refsect1>
 </refentry>
@@ -1000,14 +1253,13 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>nosep</refname>
-    <refpurpose>Disable x86 SYSENTER/SYSEXIT support</refpurpose>
+    <refpurpose>Disable x86 SYSENTER/SYSEXIT support.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option disables x86 SYSENTER/SYSEXIT support in the kernel,
-	which can cause some system calls to take longer than if this was
-	enabled.
+	Disable x86 SYSENTER/SYSEXIT support in the kernel.
+	This can cause some system calls to take longer.
 	</para>
 </refsect1>
 </refentry>
@@ -1015,13 +1267,13 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>nosmp</refname>
-    <refpurpose>Run as a single processor machine</refpurpose>
+    <refpurpose>Run as a single processor machine.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells a SMP kernel to act as a single processor kernel,
-	no matter how many processors are present on the system.
+	Tell an SMP kernel to act as a uniprocessor kernel, even on a
+	multiprocessor machine.
 	</para>
 </refsect1>
 </refentry>
@@ -1029,12 +1281,12 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>notsc</refname>
-    <refpurpose>Disable the time stamp counter</refpurpose>
+    <refpurpose>Disable the time stamp counter.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option disables the Time Stamp Counter hardware in the system,
+	Disable the time stamp counter hardware in the system,
 	if present.
 	</para>
 </refsect1>
@@ -1043,18 +1295,18 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>max_cpus</refname>
-    <refpurpose>Maximum number of CPUs to use</refpurpose>
+    <refpurpose>Maximum number of CPUs to use.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>maxcpus=</literal><emphasis>nn</emphasis>
+    <literal>maxcpus=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies the maximum number of processors that a SMP kernel
-	should use even if there are more processors present in the system.
+	Specify the maximum number of processors that a SMP kernel
+	should use, even if there are more processors present in the system.
 	</para>
 </refsect1>
 </refentry>
@@ -1065,28 +1317,46 @@ the memory in the system.
 <sect1>
 <title>Scheduler options</title>
 
+<para>
+These options tweak the parameters used to make scheduling
+decisions. Most depend on an intimate understanding of how scheduling
+works in Linux.
+<!--
+
+  AO: An understanding I don't seem to have despite all my reading.
+
+-->
+
+</para>
+
 <refentry>
   <refnamediv>
     <refname>isolcpus</refname>
-    <refpurpose>Isolate CPUs from the kernel scheduler</refpurpose>
+    <refpurpose>Isolate CPUs from the kernel scheduler.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>isolcpus=</literal>[<emphasis>cpu_number</emphasis>]<literal>,</literal>...<literal>,</literal>[<emphasis>cpu_number</emphasis>]
+<!--
+
+  AO: I think this syntax works better, as you use elsewhere.
+
+-->
+    <literal>isolcpus=</literal><replaceable>cpu_number</replaceable>[<literal>,</literal><replaceable>cpu_number</replaceable>,...]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This is used to remove the specified cpus, as defined by the
-	<emphasis>cpu_number</emphasis> values, from the general kernel
-	SMP balancing and scheduler algroithms.  The only way to move a
+	Remove the specified CPUs, as defined by the
+	<replaceable>cpu_number</replaceable> values, from the general kernel
+	SMP balancing and scheduler algroithms. The only way to move a
 	process onto or off an "isolated" CPU is via the CPU affinity syscalls.
-	<emphasis>cpu_number</emphasis> begins at <literal>0</literal> and
-	the maximum value is "number of CPUs in system - 1".
+	<replaceable>cpu_number</replaceable> begins at
+	<literal>0</literal>, so
+	the maximum value is 1 less than the number of CPUs on the system.
 	</para>
 	<para>
-	This option is the preferred way to isolate CPUs.  The alternative,
+	This option is the preferred way to isolate CPUs. The alternative,
 	manually setting the CPU mask of all tasks in the system, can cause
 	problems and suboptimal load balancer performance.
 	</para>
@@ -1096,55 +1366,57 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>migration_cost</refname>
-    <refpurpose>Override the default scheduler migrations costs</refpurpose>
+    <refpurpose>Override the default scheduler migrations costs.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>migration_cost=</literal>[<replaceable>level-1-useconds</replaceable>],[<replaceable>level-2-useconds</replaceable>]...
+    <literal>migration_cost=</literal><replaceable>level-1-useconds</replaceable>[<replaceable>level-2-useconds</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This is a debugging option that enables the default scheduler
-	migration cost matrix to be overridden.  The numbers specified by
+	This is a debugging option that overrides the default scheduler
+	migration cost matrix. The numbers specified by
 	<replaceable>level-N-useconds</replaceable> are indexed by
-	the "CPU domain distance" and are in microseconds.
+	the "CPU domain distance" and are measured in microseconds.
 	</para>
 	<para>
 	An example of this option is
 	<literal>migration_cost=1000,2000,3000</literal> for a SMT NUMA
-	machine will set up an intra-core migration cost of 1 msec, an
-	inter-core migration cost of 2 msecs, and an inter-node migration
-	cost of 3 msecs.
+	machine. It sets up an intra-core migration cost of 1 ms, another
+	inter-core migration cost of 2 ms, and another internode migration
+	cost of 3 ms.
 	</para>
+	<warning>
 	<para>
-	WARNING: using the wrong values here can break scheduler
-	performance, so it should only be used for scheduler development
-	purposes, never for production environments.
+	Incorrect values can severely degrade scheduler
+	performance, so this option should be used only for scheduler
+	development, never for production environments.
 	</para>
+	</warning>
 </refsect1>
 </refentry>
 
 <refentry>
   <refnamediv>
     <refname>migration_debug</refname>
-    <refpurpose>Migration cost auto-detect verbosity</refpurpose>
+    <refpurpose>Verbosity of migration cost auto-detection.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>migration_debug=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>|<replaceable>2</replaceable>]
+    <literal>migration_debug=</literal>[<literal>0</literal>|<literal>1</literal>|<literal>2</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This sets the migration cost debug levels.  If <literal>0</literal>
+	Set the migration cost debug level. If <literal>0</literal>
 	is specified, no extra messages will be printed to the kernel log.
-	This is the default value.  <literal>1</literal> will print some
-	information on how the matrix is determined and
-	<literal>2</literal> will be very verbose and only useful if you
-	use a serial console as the amount of information will overflow the
+	This is the default value. <literal>1</literal> prints some
+	information on how the matrix is determined.
+	<literal>2</literal> is very verbose and is useful only if you
+	use a serial console, as the amount of information will overflow the
 	kernel log buffer.
 	</para>
 </refsect1>
@@ -1153,32 +1425,34 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>migration_factor</refname>
-    <refpurpose>Multiply or divide the migration costs</refpurpose>
+    <refpurpose>Multiply or divide the migration costs.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>migration_factor=</literal><emphasis>percent</emphasis>
+    <literal>migration_factor=</literal><replaceable>percent</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This allows the default migration costs to be modified by the
-	specified <emphasis>percentage</emphasis>.
+	Modify the default migration costs by the
+	specified <replaceable>percentage</replaceable>.
 	This is a debugging option that can be used to proportionally increase or decrease
 	the auto-detected migration costs for all entries of the migration
-	matrix.  For example, <literal>migration_factor=150</literal> will
-	increase migration costs by 50% and thus the scheduler will be less
+	matrix. For example, <literal>migration_factor=150</literal>
+	increases migration costs by 50%, so the scheduler will be less
 	eager to migrate cache-hot tasks.
-	<literal>migration_factor=80</literal> will decrease migration
-	costs by 20% thus making the scheduler will be more eager to
+	<literal>migration_factor=80</literal> decreases migration
+	costs by 20%, thus making the scheduler will be more eager to
 	migrate tasks.
 	</para>
+	<warning>
 	<para>
-	WARNING: using the wrong values here can break scheduler
-	performance, so it should only be used for scheduler development
-	purposes, never for production environments.
+	Incorrect values can severely degrade scheduler
+	performance, so this option should be used only for scheduler
+	development, never for production environments.
 	</para>
+	</warning>
 </refsect1>
 </refentry>
 
@@ -1187,21 +1461,27 @@ the memory in the system.
 <sect1>
 <title>Ramdisk options</title>
 
+<para>
+These options control how the storage of information in memory to
+imitate disks (Ramdisks) is done, including init ramdisks that hold
+information necessary at some stages of booting.
+</para>
+
 <refentry>
   <refnamediv>
     <refname>initrd</refname>
-    <refpurpose>Specify where the initial ramdisk is located</refpurpose>
+    <refpurpose>Location of initial ramdisk.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>initrd=</literal><emphasis>filename</emphasis>
+    <literal>initrd=</literal><replaceable>filename</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option specifies where the initial ramdisk for the kernel boot
-	is located.  Please see <xref linkend="LKN-initramfs" /> for more
+	Specify where the initial ramdisk for the kernel boot
+	is located. Please see <xref linkend="LKN-initramfs" /> for more
 	information about kernel ramdisks.
 	</para>
 </refsect1>
@@ -1210,18 +1490,19 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>load_ramdisk</refname>
-    <refpurpose>Load a kernel ramdisk from a floppy</refpurpose>
+    <refpurpose>Load a kernel ramdisk from a floppy.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>load_ramdisk=</literal><emphasis>nn</emphasis>
+    <literal>load_ramdisk=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	If <emphasis>nn</emphasis> is set to <literal>1</literal> than a
-	ramdisk will be loaded by the kernel at boot time from the floppy
+	If <replaceable>n</replaceable> is set to
+	<literal>1</literal>, a
+	ramdisk is loaded by the kernel at boot time from the floppy
 	drive.
 	</para>
 </refsect1>
@@ -1230,12 +1511,12 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>noinitrd</refname>
-    <refpurpose>Do not use any initrd</refpurpose>
+    <refpurpose>Do not use any initrd.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel to not load any initial ram disk, even
+	Do not load any initial ramdisk, even
 	if it is configured in other options passed to the kernel.
 	</para>
 </refsect1>
@@ -1244,7 +1525,7 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>prompt_ramdisk</refname>
-    <refpurpose>Prompt for the list of ramdisks</refpurpose>
+    <refpurpose>Prompt for the list of ramdisks.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
@@ -1254,7 +1535,7 @@ the memory in the system.
 <refsect1>
   <title>Description</title>
 	<para>
-	If this option is present, the kernel will prompt the user for the
+	Prompt the user for the
 	initial ramdisk before attempting to read it from the floppy drive.
 	</para>
 </refsect1>
@@ -1263,18 +1544,18 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>ramdisk_blocksize</refname>
-    <refpurpose>Blocksize of the ramdisk</refpurpose>
+    <refpurpose>Blocksize of the ramdisk.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>ramdisk_blocksize=</literal><emphasis>nn</emphasis>
+    <literal>ramdisk_blocksize=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the ramdisk driver how many bytes to use per
-	block.  If it is not specified the default value is 1024.
+	Tell the ramdisk driver how many bytes to use per
+	block. The default size is 1024.
 	</para>
 </refsect1>
 </refentry>
@@ -1282,20 +1563,20 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>ramdisk_size</refname>
-    <refpurpose>Size of the ramdisk</refpurpose>
+    <refpurpose>Size of the ramdisk.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>ramdisk_size=</literal><emphasis>nn</emphasis>
+    <literal>ramdisk_size=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option specifies the size of the initial RAM disk in
-	kilobytes.  If this option is not specified, the default size will
-	be 4096 (4 MB).  This option should be used instead of the older
-	<literal>ramdisk</literal> command line option.
+	Specify the size of the initial RAM disk in
+	kilobytes. The default size is 4096 (4 MB). This option
+	should be used instead of the older
+	<literal>ramdisk</literal> command-line option.
 	</para>
 </refsect1>
 </refentry>
@@ -1305,18 +1586,23 @@ the memory in the system.
 <sect1>
 <title>Root disk options</title>
 
+<para>
+These options control how the kernel finds and handles the filesystem
+that contains the root filesystem.
+</para>
+
 <refentry>
   <refnamediv>
     <refname>ro</refname>
-    <refpurpose>Mount the root device read only on boot</refpurpose>
+    <refpurpose>Mount the root device read-only on boot.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	The default for the kernel is to mount the root device as read only
-	at boot time.  This option ensures that this is the mode the kernel
-	uses (it overrides the <literal>rw</literal> command option, if it
-	had been specified earlier on the boot command line.)
+	The default for the kernel is to mount the root device as read-only
+	at boot time. This option ensures that this is the mode the kernel
+	uses. It overrides the <literal>rw</literal> command-line option, if it
+	had been specified earlier on the boot command line.
 	</para>
 </refsect1>
 </refentry>
@@ -1324,56 +1610,68 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>root</refname>
-    <refpurpose>Specify the root filesystem to boot from</refpurpose>
+    <refpurpose>Specify the root filesystem to boot from.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>root=</literal><emphasis>device</emphasis>
+    <literal>root=</literal><replaceable>device</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel which disk device the root filesystem
+	Tell the kernel which disk device the root filesystem
 	image is on.
-	</para>
-	<para>
-	<emphasis>device</emphasis> can be specified in one of the
+	<replaceable>device</replaceable> can be specified in one of the
 	following ways:
 	<variablelist>
 	<varlistentry>
-        <term><emphasis>nnnn</emphasis></term>
+<!--
+
+  AO: We could use x's instead of n's to represent hex numbers, but I
+  think that's getting into fussy detail.
+
+-->
+        <term><replaceable>nnnn</replaceable></term>
         <listitem><para>A device number in hexadecimal represents the major
 	and minor number of the device in the internal format that the
-	kernel expects.  This method is not recommended to use unless you
-	know exactly what you are doing</para></listitem>
+	kernel expects. This method is not recommended unless you
+	have access to kernel internals.</para></listitem>
       	</varlistentry>
 	<varlistentry>
         <term><literal>/dev/nfs</literal></term>
-        <listitem><para>This means to use the NFS disk specified by the
+        <listitem><para>Use the NFS disk specified by the
 	<literal>nfsroot</literal> boot option as the root disk.
 	</para></listitem>
       	</varlistentry>
 	<varlistentry>
-        <term><literal>/dev/</literal><emphasis>&lt;diskname&gt;</emphasis></term>
-        <listitem><para>This means to use the kernel disk name specified by
-	<emphasis>&lt;diskname&gt;</emphasis> as the root disk.
+        <term><literal>/dev/</literal><replaceable>&lt;diskname&gt;</replaceable></term>
+        <listitem><para>Use the kernel disk name specified by
+	<replaceable>&lt;diskname&gt;</replaceable> as the root disk.
 	</para></listitem>
       	</varlistentry>
 	<varlistentry>
-        <term><literal>/dev/</literal><emphasis>&lt;diskname&gt;&lt;decimal&gt;</emphasis></term>
-        <listitem><para>This means to use the kernel disk name specified by
-	<emphasis>&lt;diskname&gt;</emphasis> and the partition specified
-	by <emphasis>&lt;decimal&gt;</emphasis> as the root disk.
+        <term><literal>/dev/</literal><replaceable>&lt;diskname&gt;&lt;decimal&ft;</replaceable></term>
+        <listitem><para>Use the kernel disk name specified by
+	<replaceable>&lt;diskname&gt;</replaceable> and the partition specified
+	by <replaceable>&lt;decimal&gt;</replaceable> as the root disk.
 	</para></listitem>
       	</varlistentry>
 	<varlistentry>
-        <term><literal>/dev/</literal><emphasis>&lt;diskname&gt;</emphasis><literal>p</literal><emphasis>&lt;decimal&gt;</emphasis></term>
-        <listitem><para>This means to use the kernel disk name specified by
-	<emphasis>&lt;diskname&gt;</emphasis> and the partition specified
-	by <emphasis>&lt;decimal&gt;</emphasis> as the root disk.  This is
-	the same as above, but it is needed when the
-	<emphasis>&lt;diskname&gt;</emphasis> ends with a digit.
+        <term><literal>/dev/</literal><replaceable>&lt;diskname&gt;</replaceable><literal>p</literal><replaceable>&lt;decimal&gt;</replaceable></term>
+        <listitem><para>Use the kernel disk name specified by
+	<replaceable>&lt;diskname&gt;</replaceable> and the partition specified
+	by <replaceable>&lt;decimal&gt;</replaceable> as the root disk.  This is
+	the same as above, but is needed when
+	<replaceable>&lt;diskname&gt;</replaceable> ends with a digit.
+<!--
+
+  AO: It seems to me that it is needed if the first version could be
+  confusing because another disk exists that ends in a digit and
+  matches the specified disk name. Maybe no confusion would ever
+  exist.
+
+-->
 	</para></listitem>
       	</varlistentry>
 	</variablelist>
@@ -1384,17 +1682,17 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>rootdelay</refname>
-    <refpurpose>Time to delay before attempting to mount the root filesystem</refpurpose>
+    <refpurpose>Time to delay before attempting to mount the root filesystem.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rootdelay=</literal><emphasis>nn</emphasis>
+    <literal>rootdelay=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel to wait <emphasis>nn</emphasis>
+	Wait <replaceable>n</replaceable>
 	seconds before trying to mount the root filesystem.  This can be
 	useful if the root filesystem is on a USB or Firewire device, as
 	those disk devices take a bit longer to be discovered by the
@@ -1406,19 +1704,19 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>rootflags</refname>
-    <refpurpose>The root filesystem mount options</refpurpose>
+    <refpurpose>The root filesystem mount options.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rootflags=</literal><emphasis>options</emphasis>
+    <literal>rootflags=</literal><replaceable>options</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This sets the mount options that the kernel should use in mounting
-	the root filesystem.  The <emphasis>options</emphasis> value
-	depending on the filesystem type, see the documentation for the
+	Mount options that the kernel should use in mounting
+	the root filesystem.  The <replaceable>options</replaceable> value
+	depend on the filesystem type; see the documentation for the
 	individual types for details on what is valid.
 	</para>
 </refsect1>
@@ -1427,19 +1725,18 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>rootfstype</refname>
-    <refpurpose>The root filesystem type</refpurpose>
+    <refpurpose>The root filesystem type.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rootfstype=</literal><emphasis>type</emphasis>
+    <literal>rootfstype=</literal><replaceable>type</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This is the type of filesystem to try to mount the root filesystem
-	as.  <emphasis>type</emphasis> is a string containing the name of
-	the filesystem type.
+	Try to mount the root filesystem
+	as this type of filesystem. For instance, <literal>rootfstype=ext3</literal>.
 	</para>
 </refsect1>
 </refentry>
@@ -1447,13 +1744,13 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>rw</refname>
-    <refpurpose>Mount the root device read-write on boot</refpurpose>
+    <refpurpose>Mount the root device read-write on boot.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	The default for the kernel is to mount the root device as read only
-	at boot time.  This option changes this to mount the root device as
+	The default for the kernel is to mount the root device as read-only
+	at boot time.  This option mounts the root device as
 	read-write instead.
 	</para>
 </refsect1>
@@ -1464,20 +1761,26 @@ the memory in the system.
 <sect1>
 <title>Init options</title>
 
+<para>
+The <command>init</command> process is the first to be started by the
+kernel and is the ancestor of all other processes. These options
+control which program is run and how it is run.
+</para>
+
 <refentry>
   <refnamediv>
     <refname>init</refname>
-    <refpurpose>Set the program to run at init time</refpurpose>
+    <refpurpose>Program to run at init time.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>init=</literal><emphasis>filename</emphasis>
+    <literal>init=</literal><replaceable>filename</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Run the specified binary as the init process instead of the default
+	Run the specified binary as the <command>init</command> process instead of the default
 	<filename>/sbin/init</filename> program.
 	</para>
 </refsect1>
@@ -1486,19 +1789,19 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>rdinit</refname>
-    <refpurpose>Specify the init process is from the ramdisk</refpurpose>
+    <refpurpose>Run the <command>init</command> process from the ramdisk.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rdinit=</literal><emphasis>full_path_name</emphasis>
+    <literal>rdinit=</literal><replaceable>full_path_name</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel to run the program specified by
-	<emphasis>full_path_name</emphasis> as the init process.  This file
-	is on the kernel ramdisk instead of on the root filesystem.
+	Run the program specified by
+	<replaceable>full_path_name</replaceable> as the <command>init</command> process.  This file
+	must be on the kernel ramdisk instead of on the root filesystem.
 	</para>
 </refsect1>
 </refentry>
@@ -1506,13 +1809,13 @@ the memory in the system.
 <refentry>
   <refnamediv>
     <refname>S</refname>
-    <refpurpose>Run init in single mode</refpurpose>
+    <refpurpose>Run <command>init</command> in single-user mode.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	The default for the kernel is to run init in multi-user mode.  This
-	option changes this to have init run in single mode only.
+	The default for the kernel is to run <command>init</command> in multi-user mode.  This
+	option runs <command>init</command> in single-user mode instead.
 	</para>
 </refsect1>
 </refentry>
@@ -1520,28 +1823,33 @@ the memory in the system.
 </sect1>
 
 <sect1>
-<title>Kexec options</title>
+<title>kexec options</title>
+
+<para>
+The kexec subsystem is a specialized rebooting feature that allows a
+fast reboot. These options modify its parameters.
+</para>
 
 <refentry>
   <refnamediv>
     <refname>crashkernel</refname>
-    <refpurpose>Reserve a portion of physical memory for kexec to use</refpurpose>
+    <refpurpose>Reserve a portion of physical memory for kexec to use.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
-    <para><literal>crashkernel=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]@<emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]</para>
+    <para><literal>crashkernel=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]@<replaceable>start</replaceable>[<replaceable>KMG</replaceable>]</para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	The kexec subsystem likes to have a portion of physical memory to
-	use.  This option reserves that memory from the rest of the kernel
-	and will switch to use it if the kernel panics.
-	<emphasis>nn</emphasis> specifies the amount of memory to reserve
-	and is measured in units of kilo, mega, or
-	gigabytes.
-	<emphasis>ss</emphasis> specifies the location for this memory
-	chunk and is measured in units of kilo, mega, or
-	gigabytes.
+	The kexec subsystem likes to have a portion of physical memory
+	reserved for it.  This option reserves that memory from the
+	rest of the kernel and will switch to use it if the kernel panics.
+	<replaceable>n</replaceable> specifies the amount of memory to
+	reserve, and
+	<replaceable>start</replaceable> specifies the location for this memory
+	chunk. Both are measured in units of kilobytes (<literal>K</literal>),
+	megabytes (<literal>M</literal>), or gigabytes
+	(<literal>G</literal>).
 	</para>
 </refsect1>
 </refentry>
@@ -1550,20 +1858,20 @@ the memory in the system.
   <refnamediv>
     <refname>elfcorehdr
     </refname>
-    <refpurpose>Specify the start of the kernel core image elf header</refpurpose>
+    <refpurpose>Start of the kernel core image ELF header.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>elfcorhdr=</literal><emphasis>nn</emphasis>
+    <literal>elfcorhdr=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This will specify the physical address that the kernel core image's
-	elf header is at.  This is used by kexec to find the kernel when
-	booting the secondary kernel image.  <emphasis>nn</emphasis> is a
-	memory location.
+	The kernel, like every Linux executable, is stored in ELF format.
+	This option specifies the physical address where the kernel core image's
+	ELF header starts.  This is used by kexec to find the kernel when
+	booting the secondary kernel image.
 	</para>
 </refsect1>
 </refentry>
@@ -1574,7 +1882,7 @@ the memory in the system.
 <title>RCU options</title>
 
 <para>
-Read Copy Update (RCU) is a portion of the kernel that handles locking for
+Read Copy Update (RCU) is a portion of the kernel that handles mutual exclusion for
 a variety of subsystems in a lock-less manner.  There are a number of
 options that can be used to tune RCU in different ways:
 </para>
@@ -1582,17 +1890,17 @@ options that can be used to tune RCU in different ways:
 <refentry>
   <refnamediv>
     <refname>rcu.blimit</refname>
-    <refpurpose>RCU batch limit</refpurpose>
+    <refpurpose>RCU batch limit.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rcu.blimit=</literal><emphasis>nn</emphasis>
+    <literal>rcu.blimit=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option sets the maximum number of finished RCU callbacks to
+	Set the maximum number of finished RCU callbacks to
 	process in one batch.
 	</para>
 </refsect1>
@@ -1601,18 +1909,18 @@ options that can be used to tune RCU in different ways:
 <refentry>
   <refnamediv>
     <refname>rcu.qhimark</refname>
-    <refpurpose>RCU queue high level</refpurpose>
+    <refpurpose>RCU queue high level.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rcu.qhimark=</literal><emphasis>nn</emphasis>
+    <literal>rcu.qhimark=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option sets the threshold of queued RCU callbacks over which
-	batch limiting is disabled.
+	Batch limiting is disabled when the number of queued RCU callbacks
+	rises above <replaceable>n</replaceable>.
 	</para>
 </refsect1>
 </refentry>
@@ -1620,18 +1928,18 @@ options that can be used to tune RCU in different ways:
 <refentry>
   <refnamediv>
     <refname>rcu.qlowmark</refname>
-    <refpurpose>RCU queue low level</refpurpose>
+    <refpurpose>RCU queue low level.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rcu.qlowmark=</literal><emphasis>nn</emphasis>
+    <literal>rcu.qlowmark=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option sets the threshold of queued RCU callbacks below which
-	batch limiting is re-enabled.
+	Batch limiting is re-enabled when the number of queued RCU callbacks
+	falls below <replaceable>n</replaceable>.
 	</para>
 </refsect1>
 </refentry>
@@ -1639,18 +1947,18 @@ options that can be used to tune RCU in different ways:
 <refentry>
   <refnamediv>
     <refname>rcu.rsinterval</refname>
-    <refpurpose>RCU callback queue length</refpurpose>
+    <refpurpose>RCU callback queue length.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>rcu.rsinterval=</literal><emphasis>nn</emphasis>
+    <literal>rcu.rsinterval=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option set the number of additional RCU callbacks that should
-	bee queued before forcing a reschedule on all cpus.
+	Set the number of additional RCU callbacks that should
+	bee queued before forcing a reschedule on all CPUs.
 	</para>
 </refsect1>
 </refentry>
@@ -1661,67 +1969,94 @@ options that can be used to tune RCU in different ways:
 <title>ACPI options</title>
 
 <para>
-These options specify different paramaters the ACPI subsystem can use.
+These options control parameters that the Advanced Configuration
+and Power Interface (ACPI) subsystem can use.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>acpi</refname>
-    <refpurpose>ACPI subsystem options</refpurpose>
+    <refpurpose>ACPI subsystem options.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi=</literal>[<replaceable>force</replaceable>|<replaceable>off</replaceable>|<replaceable>noirq</replaceable>|<replaceable>ht</replaceable>|<replaceable>strict</replaceable>]
+    <literal>acpi=</literal>[<literal>force</literal>|<literal>off</literal>|<literal>noirq</literal>|<literal>ht</literal>|<literal>strict</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	This is the main option for the Advanced Configuration and Power
-	Interface (ACPI).
+	Interface (ACPI). Values are:
+
+    <variablelist>
+
+      <varlistentry>
+	<term><literal>force</literal></term>
+	<listitem><para>Force ACPI to be enabled.
+	Can be used to override the kernel configuration option that disabled it.
 	</para>
-	<para>
-	<literal>acpi=force</literal> forces ACPI to be enabled if the
-	kernel configuration option had it disabled.
+	</lististem>
+      </varlistentry>
+      <varlistentry>
+	<term><literal>off</literal></term>
+	<listitem><para>Disable ACPI. Can be used to
+	override the kernel configuration option that enabled it.
 	</para>
-	<para>
-	<literal>acpi=off</literal> disables ACPI if the kernel
-	configuration option had it enabled.
+	</lististem>
+      </varlistentry>
+      <varlistentry>
+	<term><literal>noirq</literal></term>
+	<listitem><para>Prevent ACPI from being used
+	for IRQ routing.
 	</para>
-	<para>
-	<literal>acpi=noirq</literal> does not use ACPI for IRQ routing
-	</para>
-	<para>
-	<literal>acpi=ht</literal> only runs enough of the ACPI layer in
-	order to enable HyperThreading on processors that are capable of
+	</lististem>
+      </varlistentry>
+      <varlistentry>
+	<term><literal>ht</literal></term>
+	<listitem><para>run only enough of the ACPI layer
+	to enable HyperThreading on processors that are capable of
 	it.
 	</para>
-	<para>
-	<literal>acpi=strict</literal> makes the ACPI layer be less
-	tolerant of platforms that are not fully compiant with the ACPI
+	</lististem>
+      </varlistentry>
+      <varlistentry>
+	<term><literal>strict</literal></term>
+	<listitem><para>Make the ACPI layer be less
+	tolerant of platforms that are not fully compliant with the ACPI
 	specification.
 	</para>
+	</lististem>
+      </varlistentry>
+
+    <variablelist>
+
 </refsect1>
 </refentry>
 
 <refentry>
   <refnamediv>
     <refname>acpi_sleep</refname>
-    <refpurpose>ACPI sleep options</refpurpose>
+    <refpurpose>ACPI sleep options.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi_sleep=</literal>[<replaceable>s3_bios</replaceable>]<literal>,</literal>[<replaceable>s3_mode</replaceable>]
+<!--
+
+  AO: The values are literal, not replaceable, right?
+
+-->
+    <literal>acpi_sleep=</literal>[<literal>s3_bios</literal>]<literal>,</literal>[<literal>s3_mode</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	During S3 resume (this happens when the machine has been suspended
+	During S3 resume (which happens after the machine has been suspended
 	to RAM), hardware needs to be reinitialized properly.  For most
-	devices, this is simple, except for video cards, which are normally
+	devices this is simple, except for video cards, which are normally
 	initialized by the BIOS.  The kernel does not have enough
-	information to restore the video device, as that information is in
+	information to restore the video device, because that information is in
 	the BIOS and not accessable at all.  This option lets the kernel
 	try to use the ACPI subsystem to restore the video card in
 	two different ways.
@@ -1737,17 +2072,17 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_sci</refname>
-    <refpurpose>ACPI System Control Interrupt trigger mode</refpurpose>
+    <refpurpose>ACPI System Control Interrupt trigger mode.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi_sci=</literal>[<replaceable>level</replaceable>|<replaceable>edge</replaceable>|<replaceable>high</replaceable>|<replaceable>low</replaceable>]
+    <literal>acpi_sci=</literal>[<literal>level</literal>|<literal>edge</literal>|<literal>high</literal>|<literal>low</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This sets the ACPI System Control Interrupt trigger mode.
+	Set the ACPI System Control Interrupt trigger mode.
 	</para>
 </refsect1>
 </refentry>
@@ -1755,12 +2090,12 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_irq_balance</refname>
-    <refpurpose>Enable ACPI IRQ balance</refpurpose>
+    <refpurpose>Enable ACPI IRQ balance.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	ACPI will balance the active IRQs if this option is present.  This
+	Cause ACPI to balance the active IRQs.  This
 	is the default option when operating in APIC mode.
 	</para>
 </refsect1>
@@ -1769,12 +2104,12 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_irq_nobalance</refname>
-    <refpurpose>Disable ACPI IRQ balance</refpurpose>
+    <refpurpose>Disable ACPI IRQ balance.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	ACPI will not move the active IRQs if this option is present.  This
+	Cause ACPI not to move the active IRQs.  This
 	is the default option when operating in PIC mode.
 	</para>
 </refsect1>
@@ -1783,11 +2118,11 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_irq_isa</refname>
-    <refpurpose>Mark the listed IRQs as used by ISA</refpurpose>
+    <refpurpose>Mark the listed IRQs as used by ISA.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi_irq_isa=</literal>[<replaceable>irq</replaceable>]<literal>,</literal>[<replaceable>irq</replaceable>]...
+    <literal>acpi_irq_isa=</literal><replaceable>irq</replaceable>[<literal>,</literal><replaceable>irq</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -1802,11 +2137,11 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_irq_pci</refname>
-    <refpurpose>Mark the listed IRQs as used by PCI</refpurpose>
+    <refpurpose>Mark the listed IRQs as used by PCI.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi_irq_pci=</literal>[<replaceable>irq</replaceable>]<literal>,</literal>[<replaceable>irq</replaceable>]...
+    <literal>acpi_irq_pci=</literal><replaceable>irq</replaceable>[<literal>,</literal>[<replaceable>irq</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -1821,18 +2156,18 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_os_name</refname>
-    <refpurpose>Fake the operating system name to ACPI</refpurpose>
+    <refpurpose>Fake the operating system name to ACPI.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi_os_name=</literal><emphasis>name</emphasis>
+    <literal>acpi_os_name=</literal><replaceable>name</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This tells the ACPI BIOS that the name of the running operating
-	system is <emphasis>name</emphasis>.  This can be useful to spoof
+	Tell the ACPI BIOS that the name of the running operating
+	system is <replaceable>name</replaceable>.  This can be useful to spoof
 	the BIOS into thinking that Windows is running instead of Linux,
 	which can help solve some ACPI issues for older BIOSes.  As an
 	example, use the string <literal>Microsoft 2001</literal> to
@@ -1845,18 +2180,25 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_osi</refname>
-    <refpurpose>Disable the _OSI ACPI method</refpurpose>
+    <refpurpose>Disable the _OSI ACPI method.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi_osi=</literal><emphasis>nn</emphasis>
+<!--
+
+  AO: I put in the brackets because you said the value might be
+  absent.
+
+-->
+    <literal>acpi_osi=</literal>[<replaceable>n</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	If <emphasis>nn</emphasis> is not present, ACPI will disable the
-	_OSI method.  If the paramater is present, _OSI will not be
+	This is actually a binary option despite the integer value.
+	If <replaceable>n</replaceable> is absent, ACPI will disable the
+	_OSI method.  If <replaceable>n</replaceable> is present, _OSI will not be
 	disabled.
 	</para>
 </refsect1>
@@ -1865,13 +2207,12 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_serialize</refname>
-    <refpurpose>Force serialization of AML methods</refpurpose>
+    <refpurpose>Force serialization of AML methods.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	If present, this option forces the serialization of ACPI AML
-	methods.
+	Force the serialization of ACPI Machine Language methods.
 	</para>
 </refsect1>
 </refentry>
@@ -1879,12 +2220,12 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_skip_timer_override</refname>
-    <refpurpose>Skip interrupt override issues</refpurpose>
+    <refpurpose>Skip interrupt override issues.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option allows the ACPI layer to recognize and ignore IRQ0/pin2
+	Allow the ACPI layer to recognize and ignore IRQ0/pin2
 	Interrupt Override issues for broken nForce2 BIOSes that result in
 	the XT-PIC timer acting up.
 	</para>
@@ -1894,19 +2235,19 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_dbg_layer</refname>
-    <refpurpose>ACPI debug layer</refpurpose>
+    <refpurpose>ACPI debug layer.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>acpi_dbg_layer=</literal><emphasis>nn</emphasis>
+    <literal>acpi_dbg_layer=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This allows the ACPI debug layer to be set at boot time.
-	<emphasis>nn</emphasis> is an integer with every bit indicating a
-	different ACPI debug layer.  After the system has booted up, it can
+	Set the ACPI debug layers.
+	<replaceable>n</replaceable> is an integer in which each bit indicates a
+	different ACPI debug layer.  After the system has booted, the debug layers can
 	be set via the <filename>/proc/acpi/debug_layer</filename> file.
 	</para>
 </refsect1>
@@ -1916,13 +2257,18 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_fake_ecdt</refname>
-    <refpurpose>ECDT workaround</refpurpose>
+    <refpurpose>ECDT workaround.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	If present, this allows ACPI to workaround BIOS failures when they
-	lack ECDT.
+<!--
+
+  AO: I'm guessing here.
+
+-->
+	If present, this allows ACPI to workaround BIOS failures when it
+	lacks an Embedded Controller Description Table.
 	</para>
 </refsect1>
 </refentry>
@@ -1930,13 +2276,13 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_generic_hotkey</refname>
-    <refpurpose>ACPI generic hotkey driver override</refpurpose>
+    <refpurpose>Use generic ACPI hotkey driver.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
 	This allows the ACPI consolidated generic hotkey driver to override
-	the platform specific driver if present.
+	the platform-specific driver if one is present.
 	</para>
 </refsect1>
 </refentry>
@@ -1944,12 +2290,12 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>acpi_pm_good</refname>
-    <refpurpose>Override the pmtimer bug detection</refpurpose>
+    <refpurpose>Override pmtimer bug detection.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	If used, this forces the kernel to assume that the machine's
+	Force the kernel to assume that the machine's
 	pmtimer latches its value and always returns good values.
 	</para>
 </refsect1>
@@ -1958,20 +2304,20 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>ec_intr</refname>
-    <refpurpose>ACPI Embedded Controller interrupt mode</refpurpose>
+    <refpurpose>ACPI Embedded Controller interrupt mode.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>ec_intr=</literal><emphasis>nn</emphasis>
+    <literal>ec_intr=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies the ACPI embedded controller interrupt mode.
-	If <emphasis>nn</emphasis> is <literal>0</literal>, then polling
-	mode will be used, otherwise interrupt mode will be used.  The
-	interrupt mode is the default mode.
+	Specify the ACPI embedded controller interrupt mode.
+	If <replaceable>n</replaceable> is <literal>0</literal>, polling
+	mode will be used, otherwise interrupt mode will be used.
+	Interrupt mode is the default.
 	</para>
 </refsect1>
 </refentry>
@@ -1979,20 +2325,22 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>memmap</refname>
-    <refpurpose>Mark specific memory as ACPI data</refpurpose>
+    <refpurpose>Mark specific memory as ACPI data.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>memmap=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]<literal>#</literal><emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]
+    <literal>memmap=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]<literal>#</literal><replaceable>start</replaceable>[<replaceable>KMG</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This marks a specific location and range of memory as ACPI data.
-	<emphasis>nn</emphasis> is the size of the memory location and
-	<emphasis>ss</emphasis>is the start location in memory of the
-	range.
+	Marks a specific location and range of memory as ACPI data.
+	<replaceable>n</replaceable> is the size of the memory location and
+	<replaceable>start</replaceable>is the start location in memory of the
+	range. Both are measured in units of kilobytes (<literal>K</literal>),
+	megabytes (<literal>M</literal>), or gigabytes
+	(<literal>G</literal>).
 	</para>
 </refsect1>
 </refentry>
@@ -2000,19 +2348,19 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>memmap</refname>
-    <refpurpose>Mark specific memory as reserved</refpurpose>
+    <refpurpose>Mark specific memory as reserved.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>memmap=</literal><emphasis>nn</emphasis>[<replaceable>KMG</replaceable>]<literal>$</literal><emphasis>ss</emphasis>[<replaceable>KMG</replaceable>]
+    <literal>memmap=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]<literal>$</literal><replaceable>start</replaceable>[<replaceable>KMG</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	This marks a specific location and range of memory as reserved.
-	<emphasis>nn</emphasis> is the size of the memory location and
-	<emphasis>ss</emphasis>is the start location in memory of the
+	<replaceable>n</replaceable> is the size of the memory location and
+	<replaceable>start</replaceable> is the start location in memory of the
 	range.
 	</para>
 </refsect1>
@@ -2021,7 +2369,7 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>pnpacpi</refname>
-    <refpurpose>Turns PnP ACPI off</refpurpose>
+    <refpurpose>Turn PnP ACPI off.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
@@ -2031,7 +2379,7 @@ These options specify different paramaters the ACPI subsystem can use.
 <refsect1>
   <title>Description</title>
 	<para>
-	If specified, the PnP ACPI functionality will be disabled.
+	Disable the PnP ACPI functionality.
 	</para>
 </refsect1>
 </refentry>
@@ -2039,20 +2387,20 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>processor.max_cstate</refname>
-    <refpurpose>Limit the processor to a maximum C-state</refpurpose>
+    <refpurpose>Limit the processor to a maximum C-state.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>processor.max_cstate=</literal><emphasis>nn</emphasis>
+    <literal>processor.max_cstate=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option limits the processor to a maximum C-state, no matter
-	what the ACPI tables say it can support.  <emphasis>nn</emphasis>
-	is a valid C-state value.  If this is set to <literal>9</literal>
-	it will override any DMI blacklist limit that might be present for
+	Limit the processor to a maximum C-state, no matter
+	what the ACPI tables say it can support.  <replaceable>n</replaceable>
+	is a valid C-state value.  A value of <literal>9</literal>
+	overrides any DMI blacklist limit that might be present for
 	this processor.
 	</para>
 </refsect1>
@@ -2061,12 +2409,12 @@ These options specify different paramaters the ACPI subsystem can use.
 <refentry>
   <refnamediv>
     <refname>processor.nocst</refname>
-    <refpurpose>Ignore the _CST method for C-states</refpurpose>
+    <refpurpose>Ignore the _CST method for C-states.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	If this option is specified, the ACPI core will ignore the _CST
+	Causes the ACPI core to ignore the _CST
 	method of determining the processor C-states and use the legacy
 	FADT method instead.
 	</para>
@@ -2079,28 +2427,27 @@ These options specify different paramaters the ACPI subsystem can use.
 <title>SCSI options</title>
 
 <para>
-These options specify different paramaters the SCSI subsystem can use.
-There are a number of SCSI driver specific options that are also
-availble, please see the different driver documentation files in the
-kernel directory, <filename>Documentation/scsi/</filename> for details
-on these.
+These options specify different parameters the SCSI subsystem can use.
+A number of SCSI driver-specific options are also
+available; please see the different driver documentation files in the
+kernel directory <filename>Documentation/scsi/</filename> for details.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>max_luns</refname>
-    <refpurpose>The maximum number of SCSI LUNS to probe</refpurpose>
+    <refpurpose>Maximum number of SCSI LUNS to probe.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>max_luns=</literal><emphasis>nn</emphasis>
+    <literal>max_luns=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Specifies the maximum number of SCSI LUNS that the system should
-	probe.  <emphasis>nn</emphasis> is a number between 1 and
+	Specify the maximum number of SCSI LUNS that the system should
+	probe. <replaceable>n</replaceable> is an integer from 1 to
 	4294967295.
 	</para>
 </refsect1>
@@ -2109,18 +2456,18 @@ on these.
 <refentry>
   <refnamediv>
     <refname>max_report_luns</refname>
-    <refpurpose>The maximum number of SCSI LUNS received</refpurpose>
+    <refpurpose>Maximum number of SCSI LUNS received.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>max_report_luns=</literal><emphasis>nn</emphasis>
+    <literal>max_report_luns=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Specifies the maximum number of SCSI LUNs that the system can
-	receive.  <emphasis>nn</emphasis> is a number between 1 and 16384.
+	Specifu the maximum number of SCSI LUNs that the system can
+	receive. <replaceable>n</replaceable> is an integer from 1 to 16384.
 	</para>
 </refsect1>
 </refentry>
@@ -2128,16 +2475,21 @@ on these.
 <refentry>
   <refnamediv>
     <refname>scsi_dev_flags</refname>
-    <refpurpose>SCSI black/white list</refpurpose>
+    <refpurpose>SCSI black/white list.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>scsi_dev_flags=</literal><emphasis>vendor</emphasis><literal>:</literal><emphasis>model</emphasis><literal>:</literal><emphasis>flags</emphasis>
+    <literal>scsi_dev_flags=</literal><replaceable>vendor</replaceable><literal>:</literal><replaceable>model</replaceable><literal>:</literal><replaceable>flags</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+<!--
+
+  AO: Is it worth defining flags, or should the user already know them?
+
+-->
 	This option lets the user add entries to the SCSI black/white list
 	for a specific vendor and model of device.
 	</para>
@@ -2147,17 +2499,17 @@ on these.
 <refentry>
   <refnamediv>
     <refname>pnpbios</refname>
-    <refpurpose>PnP BIOS settings</refpurpose>
+    <refpurpose>PnP BIOS settings.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>pnpbios=</literal>[<replaceable>on</replaceable>|<replaceable>off</replaceable>|<replaceable>curr</replaceable>|<replaceable>no-curr</replaceable>]
+    <literal>pnpbios=</literal>[<literal>on</literal>|<literal>off</literal>|<literal>curr</literal>|<literal>no-curr</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option sets the main PnP BIOS settings.  <literal>on</literal>
+	Set the main PnP BIOS settings.  <literal>on</literal>
 	enables the PnP BIOS subsystem.  <literal>off</literal> disables
 	the PnP BIOS subsystem.  <literal>cur</literal> tells the PnP BIOS
 	subsystem to use the current static settings and
@@ -2170,17 +2522,17 @@ on these.
 <refentry>
   <refnamediv>
     <refname>pnp_reserve_irq</refname>
-    <refpurpose>PnP BIOS reserved IRQs</refpurpose>
+    <refpurpose>PnP BIOS reserved IRQs.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>pnp_reserve_irq=</literal><emphasis>irq1</emphasis>[<literal>,</literal><emphasis>irq2</emphasis>]<literal>,</literal>...
+    <literal>pnp_reserve_irq=</literal><replaceable>irq1</replaceable>[<literal>,</literal><replaceable>irq2</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option is a list of the IRQs that the PnP BIOS subsystem
+	List of the IRQs that the PnP BIOS subsystem
 	should not use for autoconfiguration.
 	</para>
 </refsect1>
@@ -2189,17 +2541,17 @@ on these.
 <refentry>
   <refnamediv>
     <refname>pnp_reserve_dma</refname>
-    <refpurpose>PnP BIOS reserved DMAs</refpurpose>
+    <refpurpose>PnP BIOS reserved DMAs.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>pnp_reserve_dma=</literal><emphasis>dma1</emphasis>[<literal>,</literal><emphasis>dma2</emphasis>]<literal>,</literal>...
+    <literal>pnp_reserve_dma=</literal><replaceable>dma1</replaceable>[<literal>,</literal><replaceable>dma2</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option is a list of the DMAs that the PnP BIOS subsystem
+	List of the DMAs that the PnP BIOS subsystem
 	should not use for autoconfiguration.
 	</para>
 </refsect1>
@@ -2208,18 +2560,25 @@ on these.
 <refentry>
   <refnamediv>
     <refname>pnp_reserve_io</refname>
-    <refpurpose>PnP BIOS reserved I/O ports</refpurpose>
+    <refpurpose>PnP BIOS reserved I/O ports.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>pnp_reserve_io=</literal><emphasis>io1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>io2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
+    <literal>pnp_reserve_io=</literal><replaceable>io1</replaceable><literal>,</literal><replaceable>size1</replaceable>[<literal>,</literal><replaceable>io2</replaceable><literal>,</literal><replaceable>size2</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This is a list of the I/O ports and size that the PnP BIOS
+	I/O ports that the PnP BIOS
 	subsystem should not use for autoconfiguration.
+	Each port is listed by its starting location and size.
+<!--
+
+  AO: I'm not sure this is right because I don't know how a port can
+  have a size.
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -2227,18 +2586,19 @@ on these.
 <refentry>
   <refnamediv>
     <refname>pnp_reserve_mem</refname>
-    <refpurpose>PnP BIOS reserved memory regions</refpurpose>
+    <refpurpose>PnP BIOS reserved memory regions.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>pnp_reserve_mem=</literal><emphasis>mem1</emphasis><literal>,</literal><emphasis>size1</emphasis>[<literal>,</literal><emphasis>mem2</emphasis><literal>,</literal><emphasis>size2</emphasis>]<literal>,</literal>...
+    <literal>pnp_reserve_mem=</literal><replaceable>mem1</replaceable><literal>,</literal><replaceable>size1</replaceable>[<literal>,</literal><replaceable>mem2</replaceable><literal>,</literal><replaceable>size2</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This is a list of the memory locations and size that the PnP BIOS
+	Memory regions that the PnP BIOS
 	subsystem should not use for autoconfiguration.
+	Each region is listed by its starting location and size.
 	</para>
 </refsect1>
 </refentry>
@@ -2250,115 +2610,151 @@ on these.
 <title>PCI options</title>
 
 <para>
-These options specify different paramaters the PCI subsystem can use.
+These options specify different parameters the PCI subsystem can use.
 </para>
 
-
 <screen>
-
-pci=option[,option...]
-	These are all various PCI subsystem options:
-
-	off
-		Do not probe for the PCI bus.
-
-	bios
-		Force the use of the PCI BIOS by not accessing the hardware
+pci=<replaceable>option</replaceable>[,<replaceable>option</replaceable>...]
+</screen>
+Each <replaceable>option</replaceable> can be one of the following:
+    <variablelist>
+      <varlistentry>
+	<term><literal>off</literal></term>
+	<listitem><para>Do not probe for the PCI bus.
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>bios</literal></term>
+	<listitem><para>Force the use of the PCI BIOS by not accessing the hardware
 		directly.  This means that the kernel should trust the BIOS,
 		which is not the standard thing to do (as BIOSes are known to
 		lie more than they are known to be valid.)  Use this only if
 		your machine has a non-standard PCI host bridge and the normal
 		boot method is not working properly.
-
-	nobios
-		Do not use the PCI BIOS but rather access the hardware directly
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>nobios</literal></term>
+	<listitem><para>Do not use the PCI BIOS, but access the hardware directly
 		instead.  This is the default method of probing for PCI devices
 		in all kernels after 2.6.13.
-
-	conf1
-		Force use of PCI Configuration Mechanism 1 (a way to access PCI
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>conf1</literal></term>
+	<listitem><para>Force use of PCI Configuration Mechanism 1 (a way to access PCI
 		memory on i386 machines.)
-
-	conf2
-		Force use of PCI Configuration Mechanism 2 (a way to access PCI
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>conf2</literal></term>
+	<listitem><para>Force use of PCI Configuration Mechanism 2 (a way to access PCI
 		memory on i386 machines.)
-
-	nommconf
-		Disable use of the ACPI MMCONFIG table for PCI configuration.
-
-	nomsi
-		If the PCI_MSI kernel config parameter is enabled, this kernel
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>nommconf</literal></term>
+	<listitem><para>Disable use of the ACPI MMCONFIG table for PCI configuration.
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>nomsi</literal></term>
+	<listitem><para>If the PCI_MSI kernel config parameter is enabled, this kernel
 		boot option can be used to disable the use of MSI interrupts
 		system-wide.
-
-	nosort
-		Do not sort PCI devices according to order given by the PCI
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>nosort</literal></term>
+	<listitem><para>Do not sort PCI devices according to order given by the PCI
 		BIOS. This sorting is done to get a device order compatible
 		with much older kernel versions.
-
-	biosirq
-		Use PCI BIOS calls to get the interrupt routing table. These
-		calls are known to be buggy on several machines and they hang
-		the machine when used, but on other computers it's the only way
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>biosirq</literal></term>
+	<listitem><para>Use PCI BIOS calls to get the interrupt routing table. These
+		calls are known to be buggy on several machines and hang
+		these machine when used, but on other machines they are the only way
 		to get the interrupt routing table. Try this option if the
 		kernel is unable to allocate IRQs or discover secondary PCI
 		buses on your motherboard.
-
-	rom
-		Assign address space to expansion ROMs.  Use this with caution
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>rom</literal></term>
+	<listitem><para>Assign address space to expansion ROMs.  Use this with caution
 		as certain devices share address decoders between ROMs and
 		other resources.
-
-	irqmask=0xMMMM
-		Set a bit mask of IRQs allowed to be assigned automatically to
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>irqmask=0x</literal><replaceable>nnnn</replaceable></term>
+	<listitem><para>Set a bit mask of IRQs allowed to be assigned automatically to
 		PCI devices. You can make the kernel exclude IRQs of your ISA
 		cards this way.
-
-	pirqaddr=0xAAAAA
-		Specify the physical address of the PIRQ table (normally
-		generated by the BIOS) if it is outside the F0000h-100000h
-		range.
-
-	lastbus=N
-		Scan all buses thru bus #N. Can be useful if the kernel is
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>pirqaddr=0x</literal><replaceable>n</replaceable></term>
+	<listitem><para>Specify the physical address of the PIRQ table (normally
+		generated by the BIOS) if it is outside the
+	F0000-100000 (hexadecimal) range.
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>lastbus=<replaceable>n</replaceable></literal></term>
+	<listitem><para>Scan all buses through bus <replaceable>n</replaceable>. Can be useful if the kernel is
 		unable to find your secondary buses and you want to tell it
 		explicitly which ones they are.
-
-	assign-busses
-		Always assign all PCI bus numbers ourselves, overriding
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>assign-busses</literal></term>
+	<listitem><para>Always use your own PCI bus numbers, overriding
 		whatever the firmware may have done.
-
-	usepirqmask
-		Honor the possible IRQ mask stored in the BIOS $PIR table. This
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>usepirqmask</literal></term>
+	<listitem><para>Honor the possible IRQ mask stored in the BIOS $PIR table. This
 		is needed on some systems with broken BIOSes, notably some HP
 		Pavilion N5400 and Omnibook XE3 notebooks. This will have no
 		effect if ACPI IRQ routing is enabled.
-
-	noacpi
-		Do not use ACPI for IRQ routing or for PCI scanning.
-
-	routeirq
-		Do IRQ routing for all PCI devices.  This is normally done in
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>noacpi</literal></term>
+	<listitem><para>Do not use ACPI for IRQ routing or for PCI scanning.
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>routeirq</literal></term>
+	<listitem><para>Do IRQ routing for all PCI devices.  This is normally done in
 		<literal>pci_enable_device()</literal>, so this option is a
 		temporary workaround for broken drivers that don't call it.
-
-	firmware
-		Do not re-enumerate the bus but instead just use the
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	<term><literal>firmware</literal></term>
+	<listitem><para>Do not re-enumerate the bus, but instead just use the
 		configuration from the bootloader. This is currently used on
 		IXP2000 systems where the bus has to be configured a certain
 		way for adjunct CPUs.
-
-
+	</para></listitem>
+	</varlistentry>
+	<varlistentry>
+    <variablelist>
 </screen>
 </sect1>
 
 <sect1>
-<title>PnP BIOS options</title>
+<title>PnP BIOS option</title>
 
 <refentry>
   <refnamediv>
     <refname>noisapnp</refname>
-    <refpurpose>Disable the ISA PnP subsystem</refpurpose>
+    <refpurpose>Disable the ISA PnP subsystem.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
@@ -2369,8 +2765,6 @@ pci=option[,option...]
 </refsect1>
 </refentry>
 
-
-
 </sect1>
 
 
@@ -2378,26 +2772,26 @@ pci=option[,option...]
 <title>SELinux options</title>
 
 <para>
-These options specify different paramaters the SELinux subsystem can use.
+These options change some fundamental aspects of SELinux startup.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>checkreqprot</refname>
-    <refpurpose>Set the initial checkreqprot flag value</refpurpose>
+    <refpurpose>Set the initial checkreqprot flag value.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>checkreqprot=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    <literal>checkreqprot=</literal>[<literal>0</literal>|<literal>1</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Sets the initial checkreqprot flag value.  <emphasis>0</emphasis>
+	Set the initial checkreqprot flag value.  <literal>0</literal>
 	means that the check protection will be applied by the kernel and
 	will include any implied execute protection.
-	<emphasis>1</emphasis> means that the check protection is requested
+	<literal>1</literal> means that the check protection is requested
 	by the application.  The default value is set by a kernel
 	configuration option.
 	</para>
@@ -2411,21 +2805,21 @@ These options specify different paramaters the SELinux subsystem can use.
 <refentry>
   <refnamediv>
     <refname>enforcing</refname>
-    <refpurpose>Set the initial enforcing status</refpurpose>
+    <refpurpose>Set the initial enforcing status.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>enforcing=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    <literal>enforcing=</literal>[<literal>0</literal>|<literal>1</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Sets the initial SELinux enforcing status.  <emphasis>0</emphasis>
-	means that the enforcement will be permissive with only logging
-	issues and no denials.  <emphasis>1</emphasis> means that the
-	enforcement will be fully enabled with denying and logging.  The
-	default value is <emphasis>0</emphasis>.
+	Specify whether SELinux enforces its rules upon boot.  <literal>0</literal>
+	means that SELinux will just log policy violations but wil not
+	deny access to anything.  <literal>1</literal> means that the
+	enforcement will be fully enabled with denials as well as logging.  The
+	default value is <literal>0</literal>.
 	</para>
 	<para>
 	The value can be changed at runtime via the
@@ -2437,25 +2831,31 @@ These options specify different paramaters the SELinux subsystem can use.
 <refentry>
   <refnamediv>
     <refname>selinux</refname>
-    <refpurpose>Enable or disable SELinux at boot time</refpurpose>
+    <refpurpose>Enable or disable SELinux at boot time.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>selinux=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    <literal>selinux=</literal>[<literal>0</literal>|<literal>1</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This allows SELinux to be enabled or disabled to boot time.
-	<emphasis>0</emphasis> is to disable, and <emphasis>1</emphasis> is
-	to enable it.  The default value is set by a kernel configuration
-	option at boot time.
+	This option allows SELinux to be enabled
+	(<literal>1</literal>) or disabled (<literal>0</literal>) to
+	boot time.  The default value is set by a kernel configuration
+<!--
+
+  AO: I took out "at boot time." The option you're discussing right
+  now is the boot-time option.
+
+-->
+	option.
 	</para>
 	<para>
 	If SELinux is enabled at boot time, the
 	<filename>/selinux/disable</filename> file can be used later to
-	disable prior to the initial policy load.
+	disable it prior to the initial policy load.
 	</para>
 </refsect1>
 </refentry>
@@ -2464,25 +2864,23 @@ These options specify different paramaters the SELinux subsystem can use.
 <refentry>
   <refnamediv>
     <refname>selinux_compat_net</refname>
-    <refpurpose>Sets the initial <literal>selinux_compat_net</literal> value</refpurpose>
+    <refpurpose>Set the network control model.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>selinux_compat_net=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    <literal>selinux_compat_net=</literal>[<literal>0</literal>|<literal>1</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Sets the initial value for the
-	<literal>selinux_compat_net</literal> option.
-	<emphasis>0</emphasis> means to use the new secmark-based packet
-	controls, and <emphasis>1</emphasis> means to use the legacy packet
-	controls.
+	Set the initial value for the SELinux network control model.
+	<literal>0</literal> uses the new secmark-based packet
+	controls, and <literal>1</literal> uses the legacy packet
+	controls.	<replaceable>0</replaceable> is the default and preferred value.
 	</para>
 	<para>
-	<emphasis>0</emphasis> is the default and preferred value.  This
-	value can be changed at runtime via the
+	This value can be changed at runtime via the
 	<filename>/selinux/compat_net</filename> file.
 	</para>
 </refsect1>
@@ -2495,27 +2893,26 @@ These options specify different paramaters the SELinux subsystem can use.
 <title>Network options</title>
 
 <para>
-These options specify different paramaters the Networking subsystem can use.
+These options control low-level aspects of the networking subsystem.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>netdev</refname>
-    <refpurpose>Set different network device paramaters.
+    <refpurpose>Set various network device parameters.
     </refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <emphasis><literal>netdev</literal></emphasis><literal>=</literal>[<replaceable>irq</replaceable>],[<replaceable>io</replaceable>],[<replaceable>mem_start</replaceable>],[<replaceable>mem_end</replaceable>],[<replaceable>name</replaceable>]
+    <literal>netdev=</literal>[<replaceable>irq</replaceable>],[<replaceable>io</replaceable>],[<replaceable>mem_start</replaceable>],[<replaceable>mem_end</replaceable>],[<replaceable>name</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Specify different network device parameters.  Note that each of these
-	paramaters are specific to the different driver used by the network
-	device.  These options might be documented in the different driver
-	source files.
+	Specify network device parameters, which are
+	specific to the driver used by the network
+	device. Some drivers' source files document the applicable options.
 	</para>
 </refsect1>
 </refentry>
@@ -2528,14 +2925,15 @@ These options specify different paramaters the Networking subsystem can use.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>dhash_entries=</literal><emphasis>nn</emphasis>
+    <literal>dhash_entries=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	This option lets you override the default number of hash buckets
-	for the kernel's route cache.  Only use this if you know what you
+	for the kernel's route cache. Recommended only for kernel network
+	experts.
 	are doing.
 	</para>
 </refsect1>
@@ -2549,14 +2947,14 @@ These options specify different paramaters the Networking subsystem can use.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>shapers=</literal><emphasis>nn</emphasis>
+    <literal>shapers=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option lets you set the maximum number of network shapers that are
-	possible to be used by the kernel.
+	This option lets you set the maximum number of network shapers
+	that the kernel can use.
 	</para>
 </refsect1>
 </refentry>
@@ -2569,15 +2967,14 @@ These options specify different paramaters the Networking subsystem can use.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>thash_entries=</literal><emphasis>nn</emphasis>
+    <literal>thash_entries=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	This option lets you override the default number of hash buckets for
-	the kernel's TCP connection cache.  Only use this if you know what you
-	are doing.
+	the kernel's TCP connection cache.
 	</para>
 </refsect1>
 </refentry>
@@ -2589,23 +2986,24 @@ These options specify different paramaters the Networking subsystem can use.
 <title>NFS options</title>
 
 <para>
-These options specify different paramaters the NFS subsystem can use.
+These options control Network File System startup.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>lockd.nlm_grace_period</refname>
-    <refpurpose>Assign a grace period to the lock manager</refpurpose>
+    <refpurpose>Assign a grace period to the lock manager.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>lockd.nlm_grace_period=</literal><emphasis>nn</emphasis>
+    <literal>lockd.nlm_grace_period=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Sets the NFS lock manager grace period.  <emphasis>nn</emphasis> is
+	Set the NFS lock manager grace period.
+	<replaceable>n</replaceable> is measured
 	in seconds.
 	</para>
 </refsect1>
@@ -2614,18 +3012,23 @@ These options specify different paramaters the NFS subsystem can use.
 <refentry>
   <refnamediv>
     <refname>lockd.nlm_tcpport</refname>
-    <refpurpose>Assign a TCP port to the lock manager</refpurpose>
+    <refpurpose>Assign a TCP port to the lock manager.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>lockd.nlm_tcpport=</literal><emphasis>port</emphasis>
+    <literal>lockd.nlm_tcpport=</literal><replaceable>port</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	Set the TCP port that the NFS lock manager should use.
-	<emphasis>port</emphasis> must be a valid TCP port value.
+	<replaceable>port</replaceable> must be a valid TCP port value.
+<!--
+
+  AO: Is there a default?
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -2633,18 +3036,23 @@ These options specify different paramaters the NFS subsystem can use.
 <refentry>
   <refnamediv>
     <refname>lockd.nlm_timeout</refname>
-    <refpurpose>Assign a new timeout value to the lock manager</refpurpose>
+    <refpurpose>Assign a new timeout value to the lock manager.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>lockd.nlm_timeout=</literal><emphasis>nn</emphasis>
+    <literal>lockd.nlm_timeout=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Overrides the default time value for the NFS lock manager.
-	<emphasis>nn</emphasis> is in seconds.
+	Override the default time value for the NFS lock manager.
+	<replaceable>n</replaceable> is measured in seconds.
+<!--
+
+  AO: Default?
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -2652,18 +3060,23 @@ These options specify different paramaters the NFS subsystem can use.
 <refentry>
   <refnamediv>
     <refname>lockd.nlm_udpport</refname>
-    <refpurpose>Assign a UDP port to the lock manager</refpurpose>
+    <refpurpose>Assign a UDP port to the lock manager.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>lockd.nlm_udpport=</literal><emphasis>port</emphasis>
+    <literal>lockd.nlm_udpport=</literal><replaceable>port</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	Set the UDP port that the NFS lock manager should use.
-	<emphasis>port</emphasis> must be a valid UDP port value.
+	<replaceable>port</replaceable> must be a valid UDP port value.
+<!--
+
+  AO: Default?
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -2671,36 +3084,45 @@ These options specify different paramaters the NFS subsystem can use.
 <refentry>
   <refnamediv>
     <refname>nfsroot</refname>
-    <refpurpose>Specifies the NFS root filesystem</refpurpose>
+    <refpurpose>Specifies the NFS root filesystem.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>nfsroot=</literal>[<emphasis>server-ip</emphasis><literal>:</literal>]<emphasis>root-dir</emphasis>[,<emphasis>nfs-options</emphasis>]
+    <literal>nfsroot=</literal>[<replaceable>server-ip</replaceable><literal>:</literal>]<replaceable>root-dir</replaceable>[,<replaceable>nfs-options</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option sets the NFS root filesystem for diskless boxes, to
-	enable them to boot properly over NFS.  If this option is not given
-	on the command line, the default will be
-	<literal>/tftpboot/</literal><emphasis>client_ip_address</emphasis>
-	will be used.
-	</para>
-	<para>
-	<emphasis>server-ip</emphasis> specifies the IP address of the NFS
-	server to connect to.
-	</para>
-	<para>
-	<emphasis>root-dir</emphasis> specifies the directory on the NFS
+	Set the NFS root filesystem for diskless boxes, to
+	enable them to boot properly over NFS.  The default value is
+<!--
+
+  AO: The following does not correspond to the option. The option
+  requires an IP address. Is localhost the default?
+
+-->
+	<literal>/tftpboot/</literal><replaceable>client_ip_address</replaceable>
+	with default NFS options.
+    <variablelist>
+      <varlistentry>
+        <term><replaceable>server-ip</replaceable></term>
+        <listitem><para>IP address of the NFS
+	server to connect to.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><replaceable>root-dir</replaceable></term>
+        <listitem><para>Directory on the NFS
 	server to mount as root.  If there is a <literal>%s</literal> token
 	in this string, it will be replaced with the ASCII representation
-	of the client's IP address.
-	</para>
-	<para>
-	<emphasis>nfs-options</emphasis> are the standard NFS options,
-	separated by commas.
-	</para>
+	of the client's IP address.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><replaceable>nfs-options</replaceable></term>
+        <listitem><para>The standard NFS options, such as <literal>ro</literal>,
+	separated by commas.</para></listitem>
+      </varlistentry>
+    </variablelist>
 </refsect1>
 </refentry>
 
@@ -2711,15 +3133,20 @@ These options specify different paramaters the NFS subsystem can use.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>nfs.callback_tcpport=</literal><emphasis>port</emphasis>
+    <literal>nfs.callback_tcpport=</literal><replaceable>port</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Specifies the TCP port that the NFSv4 callback channel should
-	listen on.  <emphasis>port</emphasis> must be a valid TCP port
+	Specify the TCP port that the NFSv4 callback channel should
+	listen on.  <replaceable>port</replaceable> must be a valid TCP port
 	value.
+<!--
+
+  AO: Default?
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -2727,37 +3154,36 @@ These options specify different paramaters the NFS subsystem can use.
 <refentry>
   <refnamediv>
     <refname>nfs.idmap_cache_timeout</refname>
-    <refpurpose>Set the maximum lifetime for idmapper cache entries</refpurpose>
+    <refpurpose>Set the maximum lifetime for idmapper cache entries.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>nfs.idmap_cache_timeout=</literal><emphasis>nn</emphasis>
+    <literal>nfs.idmap_cache_timeout=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Specifies the maximum lifetime for the idmapper cache entries.
-	<emphasis>nn</emphasis> is in seconds.
+	Specify the maximum lifetime for idmapper cache entries.
+	<replaceable>n</replaceable> is measured in seconds.
 	</para>
 </refsect1>
 </refentry>
 
 </sect1>
 
-
 <sect1>
 <title>Hardware specific options</title>
 
 <para>
-These options specify different paramaters the depending on the hardware
-you have present in the system.
+These options specify different parameters, depending on the hardware
+present in the system.
 </para>
 
 <refentry>
   <refnamediv>
     <refname>nousb</refname>
-    <refpurpose>Disable the USB subsystem</refpurpose>
+    <refpurpose>Disable the USB subsystem.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
@@ -2770,25 +3196,28 @@ you have present in the system.
 <refentry>
   <refnamediv>
     <refname>lp</refname>
-    <refpurpose>Specify the parallel port to use and the mode of it.</refpurpose>
+    <refpurpose>Parallel port and its mode.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>lp=</literal>[<replaceable>0</replaceable>|<replaceable>port</replaceable>[,<replaceable>port</replaceable>...]|<replaceable>reset</replaceable>|<replaceable>auto</replaceable>]
+    <literal>lp=</literal>[<replaceable>0</replaceable>|<replaceable>port</replaceable>[,<replaceable>port</replaceable>...]|<literal>reset</literal>|<literal>auto</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Specify the parallel port to use.  An example of this would be
-	<literal>lp=none,parport0</literal> which would not configure
-	the <literal>lp0</literal> device, and the <literal>lp1</literal>
-	device would use the first parallel port.
+	Specify the parallel port to use. The
+	<literal>lp=port1,port2...</literal> format associates a
+	sequence of parallel ports to
+	devices, starting with <literal>lp0</literal>.
+	An example is
+	<literal>lp=none,parport0</literal>, which would suppress
+	configuration of
+	the <literal>lp0</literal> device and cause the <literal>lp1</literal>
+	device to use the first parallel port.
 	</para>
 	<para>
-	If using the format, <literal>lp=port1,port2...</literal> the
-	specified parallel ports would be associated with the different
-	devices, starting with <literal>lp0</literal>.
+
 	</para>
 	<para>
 	<literal>lp=0</literal> disables the printer driver.
@@ -2798,9 +3227,9 @@ you have present in the system.
 	reset.  This option can be combined with the port specifications.
 	</para>
 	<para>
-	<literal>lp=auto</literal> instead of a port specification list
-	causes the device ids from each port will be examined by the kernel
-	to determine if a IEEE 1284-compatible printer is attached.  If so,
+	<literal>lp=auto</literal> 
+	causes the kernel to examine the device ID from each port
+	to determine whether a IEEE 1284-compatible printer is attached.  If so,
 	the kernel will manage that printer.
 	</para>
 
@@ -2810,27 +3239,36 @@ you have present in the system.
 <refentry>
   <refnamediv>
     <refname>parport</refname>
-    <refpurpose>Specify the parallel port parameters</refpurpose>
+    <refpurpose>Specify the parallel port parameters.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>parport=</literal>[<replaceable>0</replaceable>|<replaceable>auto</replaceable>|<replaceable>0x</replaceable><emphasis>BBBB</emphasis>[,<emphasis>IRQ</emphasis>[,<emphasis>DMA</emphasis>]]]
+    <literal>parport=[<replaceable>setting</replaceable>[,<replaceable>setting</replaceable>...]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This sets the parallel port driver to use these specific settings
-	instead of any others.  Use <literal>auto</literal> to force the
-	driver to use any IRQ/DMA settings detected (the default is to
-	ignore detected IRQ/DMA settings because of possible conflicts).
-	You can specify the base address, IRQ, and DMA settings;
-	IRQ and DMA should be numbers, or <literal>auto</literal> (for
-	using detected settings on that particular port), or
-	<literal>nofifo</literal> (to avoid using a FIFO even if it is
-	detected).  Parallel ports are assigned in the order they are
+	Specify specific settings for parallel port drivers. Parallel ports are assigned in the order they are
 	specified on the command line, starting with
 	<literal>parport0</literal>.
+	</para>
+	<para>
+	<literal>auto</literal> forces the
+	driver to use any IRQ/DMA settings detected (the default is to
+	ignore detected IRQ/DMA settings because of possible conflicts).
+	You can also specify the base address, IRQ, and DMA settings
+	in the format <literal>0x</literal><replaceable>nnnn</replaceable>[,<replaceable>irq</replaceable>[,<replaceable>dma</replaceable>]].
+	<replaceable>irq</replaceable> and
+	<replaceable>DMA</replaceable> can be numbers,
+	<literal>auto</literal> to use detected settings on that particular port, or
+	<literal>nofifo</literal> to avoid using a FIFO even if it is
+	detected.
+<!--
+
+  AO: What does 0 do?
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -2838,11 +3276,11 @@ you have present in the system.
 <refentry>
   <refnamediv>
     <refname>parport_init_mode</refname>
-    <refpurpose>Configure the parallel port initialization mode</refpurpose>
+    <refpurpose>Parallel port initialization mode.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>parport_init_mode=</literal>[<replaceable>spp</replaceable>|<replaceable>ps2</replaceable>|<replaceable>epp</replaceable>|<replaceable>ecp</replaceable>|<replaceable>ecpepp</replaceable>]
+    <literal>parport_init_mode=</literal>[<literal>spp</literal>|<literal>ps2</literal>|<literal>epp</literal>|<literal>ecp</literal>|<literal>ecpepp</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -2850,7 +3288,7 @@ you have present in the system.
 	<para>
 	Specifies the mode that the parallel port should be operated in.
 	This is necessary on the Pegasos computer where the firmware has no
-	options for setting up the parallel port mode.  This function works
+	options for setting up the parallel port mode.  This option works
 	for parallel port chips of type 686a and 8231.
 	</para>
 </refsect1>
@@ -2859,11 +3297,11 @@ you have present in the system.
 <refentry>
   <refnamediv>
     <refname>nr_uarts</refname>
-    <refpurpose>Maximum number of UARTs to be registered</refpurpose>
+    <refpurpose>Maximum number of UARTs to be registered.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>nr_uarts=</literal><emphasis>nn</emphasis>
+    <literal>nr_uarts=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -2877,26 +3315,25 @@ you have present in the system.
 
 </sect1>
 
-
 <sect1>
 <title>Timer specific options</title>
 
 <para>
-These options specify different paramaters for the timer.
+These options override default kernel behavior to fix problems with
+certain chips.
 </para>
-
 
 <refentry>
   <refnamediv>
     <refname>enable_timer_pin_1</refname>
-    <refpurpose>Enable pin 1 of the APIC timer</refpurpose>
+    <refpurpose>Enable pin 1 of the APIC timer.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This enables pin 1 of the APIC timer.  It can be useful to work
-	around chipset bugs (in particular on some ATI chipsets.)  The
-	kernel tries to set a reasonable default but sometimes this option
+	Enable pin 1 of the APIC timer. This option can be useful to work
+	around chipset bugs (on some ATI chipsets in particular.)  The
+	kernel tries to set a reasonable default, but sometimes this option
 	is necessary to override it.
 	</para>
 </refsect1>
@@ -2905,15 +3342,13 @@ These options specify different paramaters for the timer.
 <refentry>
   <refnamediv>
     <refname>disable_timer_pin_1</refname>
-    <refpurpose>Disable pin 1 of the APIC timer</refpurpose>
+    <refpurpose>Disable pin 1 of the APIC timer.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This disables pin 1 of the APIC timer.  It can be useful to work
-	around chipset bugs (in particular on some ATI chipsets.)  The
-	kernel tries to set a reasonable default but sometimes this option
-	is necessary to override it.
+	Disable pin 1 of the APIC timer.  Useful for the same reasons
+	as <literal>enable_timer_pin_1</literal>.
 	</para>
 </refsect1>
 </refentry>
@@ -2921,13 +3356,13 @@ These options specify different paramaters for the timer.
 <refentry>
   <refnamediv>
     <refname>enable_8254_timer</refname>
-    <refpurpose>Enables interrupt 0 timer routing over the 8254 chip</refpurpose>
+    <refpurpose>Enable interrupt 0 timer routing over the 8254 chip.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
 	Enable interrupt 0 timer routing over the 8254 chip in addition to
-	over the IO-APIC. The kernel tries to set a reasonable default but
+	routing over the IO-APIC. The kernel tries to set a reasonable default but
 	sometimes this option is necessary to override it.
 	</para>
 </refsect1>
@@ -2936,12 +3371,13 @@ These options specify different paramaters for the timer.
 <refentry>
   <refnamediv>
     <refname>disable_8254_timer</refname>
-    <refpurpose>Disables interrupt 0 timer routing over the 8254 chip</refpurpose>
+    <refpurpose>Disable interrupt 0 timer routing over the 8254 chip.</refpurpose>
   </refnamediv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Disable interrupt 0 timer routing over the 8254 chip in addition to
+	Disable interrupt 0 timer routing over the 8254 chip in
+	addition to routing
 	over the IO-APIC. The kernel tries to set a reasonable default but
 	sometimes this option is necessary to override it.
 	</para>
@@ -2951,7 +3387,7 @@ These options specify different paramaters for the timer.
 <refentry>
   <refnamediv>
     <refname>hpet</refname>
-    <refpurpose>Disable HPET and use PIT instead</refpurpose>
+    <refpurpose>Disable HPET and use PIT instead.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
@@ -2961,7 +3397,7 @@ These options specify different paramaters for the timer.
 <refsect1>
   <title>Description</title>
 	<para>
-	This disables the HPET timer source tells the kernel to use the PIT
+	Disable the HPET timer source and tell the kernel to use the PIT
 	timer source instead.
 	</para>
 </refsect1>
@@ -2970,11 +3406,11 @@ These options specify different paramaters for the timer.
 <refentry>
   <refnamediv>
     <refname>clocksource</refname>
-    <refpurpose>Set the specific clocksource</refpurpose>
+    <refpurpose>Set the specific clocksource.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>clocksource=</literal>[<replaceable>hpet</replaceable>|<replaceable>pit</replaceable>|<replaceable>tsc</replaceable>|<replaceable>acpi_pm</replaceable>|<replaceable>cyclone</replaceable>|<replaceable>scx200_hrt</replaceable>]
+    <literal>clocksource=</literal>[<literal>hpet</literal>|<literal>pit</literal>|<literal>tsc</literal>|<literal>acpi_pm</literal>|<literal>cyclone</literal>|<literal>scx200_hrt</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -2993,7 +3429,7 @@ These options specify different paramaters for the timer.
 <title>Miscellaneous options</title>
 
 <para>
-These options should always be available, and not depend on any specific
+These options should always be available, and don't depend on any specific
 subsystem or hardware being present in the system in order to work
 properly.
 </para>
@@ -3007,15 +3443,15 @@ properly.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>dhash_entries=</literal><emphasis>nn</emphasis>
+    <literal>dhash_entries=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	This option lets you override the default number of hash buckets
-	for the kernel's dentry cache.  Only use this if you know what you
-	are doing.
+	for the kernel's dentry cache. Recommended only for kernel
+	experts.
 	</para>
 </refsect1>
 </refentry>
@@ -3023,18 +3459,18 @@ properly.
 <refentry>
   <refnamediv>
     <refname>elevator</refname>
-    <refpurpose>Sets the default I/O scheduler elevator
+    <refpurpose>Set the default I/O scheduler elevator.
     </refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>elevator=</literal>[<replaceable>anticipatory</replaceable>|<replaceable>cfg</replaceable>|<replaceable>deadline</replaceable>|<replaceable>noop</replaceable>]
+    <literal>elevator=</literal>[<literal>anticipatory</literal>|<literal>cfg</literal>|<literal>deadline</literal>|<literal>noop</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This sets the default I/O scheduler to be the one specified.  See
+	Specify the I/O scheduler.  See
 	<xref linkend="CONFIG_IOSCHED_NOOP" /> for a list of the different
 	I/O schedulers available, and what they do.
 	</para>
@@ -3044,19 +3480,20 @@ properly.
 <refentry>
   <refnamediv>
     <refname>hashdist</refname>
-    <refpurpose>Distribute large hashes across NUMA nodes</refpurpose>
+    <refpurpose>Distribute large hashes across NUMA nodes.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>hashdist=</literal>[<replaceable>0</replaceable>|<replaceable>1</replaceable>]
+    <literal>hashdist=</literal>[<literal>0</literal>|<literal>1</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Large hashs that are allocated during the boot process are by
-	default on the IA-64 platform distributed across the different NUMA
-	nodes.  This option lets the user turn this option on or off.
+	Large hashes that are allocated during the boot process on the
+	IA-64 platform are, by default, distributed across the
+	different NUMA nodes.  This option lets the user turn this
+	option on or off.
 	</para>
 </refsect1>
 </refentry>
@@ -3064,20 +3501,20 @@ properly.
 <refentry>
   <refnamediv>
     <refname>combined_mode</refname>
-    <refpurpose>Specify IDE driver usage</refpurpose>
+    <refpurpose>Specify IDE driver usage.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>combined_mode=</literal>[<replaceable>combined</replaceable>|<replaceable>ide</replaceable>|<replaceable>libata</replaceable>]
+    <literal>combined_mode=</literal>[<literal>combined</literal>|<literal>ide</literal>|<literal>libata</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option controls which driver use the IDE ports in combined
-	mode: the legacy IDE driver, libata, or both.  Note that using the
-	ide or libata options may affect your device naming (e.g. by
-	changing hdc to sdb).
+	Control which driver uses the IDE ports in combined
+	mode: the legacy IDE driver, <emphasis>libata</emphasis>, or both.  Note that using the
+	ide or libata options may affect your device naming (e.g., by
+	changing <literal>hdc</literal> to <literal>sdb</literal>).
 	</para>
 </refsect1>
 </refentry>
@@ -3085,19 +3522,19 @@ properly.
 <refentry>
   <refnamediv>
     <refname>max_loop</refname>
-    <refpurpose>Maximum number of loopback devices</refpurpose>
+    <refpurpose>Maximum number of loopback devices.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>max_loop=</literal><emphasis>nn</emphasis>
+    <literal>max_loop=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This specifies the maximum number of loopback filesystem devices
-	that can be mounted at the same time.  <emphasis>nn</emphasis> is a
-	number between 1 and 256.
+	Specify the maximum number of loopback filesystem devices
+	that can be mounted at the same time.  <replaceable>n</replaceable> is an
+	integer from 1 to 256.
 	</para>
 </refsect1>
 </refentry>
@@ -3105,20 +3542,25 @@ properly.
 <refentry>
   <refnamediv>
     <refname>panic</refname>
-    <refpurpose>Timeout until the machine is rebooted on panic</refpurpose>
+    <refpurpose>Time to wait after panic before rebooting.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>panic=</literal><emphasis>nn</emphasis>
+    <literal>panic=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option specifies the ammount of time in seconds that the
+	Specify the ammount of time in seconds that the
 	kernel should wait after a panic happens before it reboots.  If
 	this is set to <literal>0</literal> (the default value) the kernel
-	will not reboot after panicking.
+	will not reboot after panicking; it will simply halt.
+<!--
+
+  AO: Or hang?
+
+-->
 	</para>
 </refsect1>
 </refentry>
@@ -3126,18 +3568,18 @@ properly.
 <refentry>
   <refnamediv>
     <refname>pause_on_oops</refname>
-    <refpurpose>Delay between kernel oopses</refpurpose>
+    <refpurpose>Delay between kernel oopses.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>pause_on_oops=</literal><emphasis>nn</emphasis>
+    <literal>pause_on_oops=</literal><replaceable>n</replaceable>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	This option tells the kernel to halt all CPUs after the first oops
-	for <emphasis>nn</emphasis> seconds before continuing on.  This is
+	Tell the kernel to halt all CPUs after the first oops
+	for <replaceable>n</replaceable> seconds before continuing.  This is
 	useful if oopses keep scrolling off of the screen before you can
 	write them down or take a picture of them.
 	</para>
@@ -3147,22 +3589,27 @@ properly.
 <refentry>
   <refnamediv>
     <refname>profile</refname>
-    <refpurpose>Control the kernel profiling</refpurpose>
+    <refpurpose>Control the kernel profiling.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>profile=</literal>[<replaceable>schedule</replaceable><literal>,</literal>][<emphasis>number</emphasis>]
+    <literal>profile=</literal>[<replaceable>schedule</replaceable><literal>,</literal>][<replaceable>number</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
+<!--
+
+  AO: Is it feasible to list values for the schedule parameter?
+
+-->
 	This option affects how the kernel profiler is calculated.  If
-	<literal>schedule</literal> is specified the schedule points are
-	affected by the value set in <emphasis>number</emphasis>.  If
-	<literal>schedule</literal> is not specified, then
-	<emphasis>number</emphasis> is the step size as a power of two for
-	the statistical time based profiling of the kernel.
+	<literal>schedule</literal> is specified, the schedule points are
+	affected by the value set in <replaceable>number</replaceable>.  If
+	<literal>schedule</literal> is not specified,
+	<replaceable>number</replaceable> is the step size as a power of two for
+	statistical time-based profiling in the kernel.
 	</para>
 	<para>
 	The most common use of this option is <literal>profile=2</literal>
