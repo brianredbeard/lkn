@@ -154,7 +154,7 @@ usbcore.blinkenlights=1
 </para>
 
 <para>
-Module options for modules that are built into the kernel can also be
+Most module options for modules that are built into the kernel can also be
 changed at run time by writing to files in the subdirectory named after the
 module under the <filename>/sys/module/</filename> directory. Thus, the
 <literal>blinkenlights</literal> option is represented by the file
@@ -363,13 +363,13 @@ AO: Yes, I think "options" is best. -->
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>quiet=</literal>
+    <literal>quiet</literal>
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
-	Set the default kernel log level to KERN_ERR (3), which
+	Set the default kernel log level to KERN_WARNING (4), which
 	suppresses all messages during boot except extremely serious
 	ones. (Log levels are defined under the
 	<literal>loglevel</literal> parameter.)
@@ -2435,7 +2435,7 @@ and Power Interface (ACPI) subsystem can use.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>pnpacpic=off</literal>
+    <literal>pnpacpi=off</literal>
     </para>
   </refsynopsisdiv>
 <refsect1>
@@ -2750,7 +2750,7 @@ Each <replaceable>option</replaceable> can be one of the following:
 	<para>
 	Set the main PnP BIOS settings.  <literal>on</literal>
 	enables the PnP BIOS subsystem.  <literal>off</literal> disables
-	the PnP BIOS subsystem.  <literal>cur</literal> tells the PnP BIOS
+	the PnP BIOS subsystem.  <literal>curr</literal> tells the PnP BIOS
 	subsystem to use the current static settings and
 	<literal>no-curr</literal> tells the subsystem to probe for dynamic
 	settings if possible.
@@ -2993,6 +2993,9 @@ These options control low-level aspects of the networking subsystem.
 	Specify network device parameters, which are
 	specific to the driver used by the network
 	device. Some drivers' source files document the applicable options.
+	This option does not usually apply to PCI, USB, or other
+	plug-and-play network devices.  It is intented for use only on
+	devices that can not discover their own resource assignments.
 	</para>
 </refsect1>
 </refentry>
@@ -3562,7 +3565,7 @@ properly.
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>elevator=</literal>[<literal>anticipatory</literal>|<literal>cfg</literal>|<literal>deadline</literal>|<literal>noop</literal>]
+    <literal>elevator=</literal>[<literal>anticipatory</literal>|<literal>cfq</literal>|<literal>deadline</literal>|<literal>noop</literal>]
     </para>
   </refsynopsisdiv>
 <refsect1>
