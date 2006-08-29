@@ -537,14 +537,15 @@ AO: Yes, I think "options" is best. -->
   </refnamediv>
   <refsynopsisdiv>
     <para>
-    <literal>log_buf_len=</literal><replaceable>n</replaceable>
+    <literal>log_buf_len=</literal><replaceable>n</replaceable>[<replaceable>KMG</replaceable>]
     </para>
   </refsynopsisdiv>
 <refsect1>
   <title>Description</title>
 	<para>
 	Set the size of the kernel's internal log buffer.
-	<replaceable>n</replaceable> is specified in bytes and must be a power of 2.
+	<replaceable>n</replaceable> must be a power of 2, if not, it will be
+	rounded up to be a power of two.
 	This value can also be changed by the
 	<literal>CONFIG_LOG_BUF_SHIFT</literal> kernel configuration value.
 <!--
