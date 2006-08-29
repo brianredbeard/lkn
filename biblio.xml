@@ -1,212 +1,268 @@
-<appendix number="2" id="XML-APP-B">
-<title>Resources</title>
+<chapter id="biblio">
 
+<title>Bibliography</title>
 <para>
-There were many valuable sources of information that assisted in the creation
-of this book. The following sections list additional resources to help
-you learn even more &xml;.
+Most of the information in this book has been extracted from the kernel
+documentation and source code.  This is the best place for information on
+how to build and install the kernel, and is usually kept up to date when
+things in the build procedure change.
 </para>
 
-<sect1 number="2.1">
-<title>Online</title>
+
+<sect1>
+
+<title>Books</title>
+
+<para>
+There are a number of very good Linux kernel programming books availble,
+but only a few that deal with building and installing the kernel.  Here is
+a list of books that the author has found useful when dealing with the
+Linux kernel.
+</para>
+
+<sect2>
+<title>General Linux Books</title>
+
+<variablelist>
+<varlistentry>
+<term>
+Ellen Siever, Aaron Weber, Stephen Figgins, Robert Love, Arnold Robbins.
+<emphasis>Linux in a Nutshell, Fifth Edition</emphasis>.
+O'Reilly &amp; Associates, 2005
+</term>
+<listitem>
+<para>
+This book can be has the most complete and authoritative command reference
+for Linux.  It covers almost every different command that you will ever
+need to use.
+</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para> ldd3 stuff below FIXME!!!
+</para>
+
+</sect2>
+
+
+
+<sect2>
+<title>Linux Kernel Books</title>
+
+<variablelist>
+<varlistentry>
+<term>Love, Robert.  <emphasis>Linux Kernel Development</emphasis>.  Sam's
+Publishing, 2004.</term>
+<listitem><para>
+Robert Love's book covers Linux kernel programming with a broad scope.  It
+is a reference which should be on every Linux hacker's bookshelf.
+</para>
+</listitem></varlistentry>
+
+
+<varlistentry>
+<term>Bovet, Daniel P. and Cesate, Marco.  <emphasis>Understanding the
+Linux Kernel, Second Edition</emphasis>.  O'Reilly &amp; Associates,
+2003.</term>
+<listitem>
+<para>
+This book covers the design and implementation of the Linux kernel in
+great detail. It is more oriented toward providing an understanding
+of the algorithms used than documenting the kernel API.  This book covers
+the 2.4 kernel, but still contains a great deal of useful information.
+</para></listitem></varlistentry>
+
+
+<varlistentry>
+<term>Yaghmour, Karim.  <emphasis>Building Embedded Systems</emphasis>.
+O'Reilly &amp; Associates,  2003.</term>
+<listitem>
+<para>
+This book will be useful for people writing Linux code for embedded
+systems.  
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Gorman, Mel.  <emphasis>Understanding the Linux Virtual Memory
+Manager</emphasis>.  Prentice Hall PTR, 2004.</term>
+<listitem>
+<para>
+Developers wanting to know more about the Linux virtual memory subsystem
+may wish to have a look at this book.  It is centered around the 2.4
+kernel, but contains 2.6 information is well.  
+</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title>Unix Design and Internals</title>
 
 <variablelist>
 
-<varlistentry><term>XML.com</term>
-<listitem><para>The website <systemitem
-role="url">http://www.xml.com/</systemitem> is one of the most
-complete and timely sources of &xml; information and news
-around. It should be on your weekly reading list if you have any
-interest in learning or using &xml;.</para></listitem></varlistentry>
-
-<varlistentry><term>The &xml; Cover Pages</term>
+<varlistentry>
+<term>Bach, Maurice.  <emphasis>The Design of the Unix Operating
+System</emphasis>. Prentice Hall. 1987.</term>
 <listitem>
-<para>Edited by Robin Cover, this is one of the largest and most up-to-date lists of &xml; 
-resources. It can be found at <systemitem role="url">http://www.oasis-open.org/cover/</systemitem>.</para>
+<para>
+This book, though quite old, covers all the issues related to Unix
+implementations. It was the main source of inspiration for Linus in the
+first Linux versions.
+</para>
+</listitem></varlistentry>
+
+<varlistentry>
+<term>Stevens, Richard.  <emphasis>Advanced Programming in the UNIX
+Environment</emphasis>.  Addison-Wesley, 1992.</term>
+<listitem>
+<para>
+Every detail of Unix system calls is described herein, which is a good
+companion when implementing advanced features in the device methods.
+</para>
 </listitem>
 </varlistentry>
 
-<varlistentry><term>DocBook web page</term>
-<listitem><para><acronym>OASIS</acronym>, the maintainers of DocBook,
-have a web page devoted to the &xml; application at <systemitem
-role="url">http://www.oasis-open.org/docbook/</systemitem>. There, you
-will find the latest version and plenty of
-documentation.</para></listitem></varlistentry>
-
-<varlistentry><term><citetitle>A Tutorial on Character Code Issues</citetitle>, by Jukka Korpela</term>
-<listitem><para><systemitem role="url">http://www.hut.fi/~jkorpela/chars.html</systemitem></para></listitem></varlistentry>
-
-<varlistentry><term>&xsl; mailing list</term>
-<listitem><para>Signing up with the &xsl; mailing list is a great way
-to be informed of the latest developments in &xsl; and &xslt; tools
-and techniques. It's also a forum for asking questions and getting
-advice. The traffic is fairly high, so you should balance your needs
-with the high volume of messages that will be passing through your
-mailbox. To sign up, go to the web page <systemitem
-role="url">http://www.mulberrytech.com/xsl/</systemitem> and follow
-the instructions there for getting on the list.</para></listitem></varlistentry>
-
-<varlistentry><term>Apache &xml; Project</term>
-<listitem><para>This project is a part of the Apache project that
-focuses on XML technologies. It develops tools and technologies for
-using &xml; with Apache and provides feedback to standards organizations
-about &xml; implementations. Visit them at: 
-<systemitem role="url">http://xml.apache.org/</systemitem></para></listitem></varlistentry>
-
-<varlistentry><term>&xml; Developers Guide</term>
-<listitem><para>The Microsoft Developers Network's online workshop
-for &xml; and information about using &xml; with Microsoft applications.
-Visit them at: <systemitem role="url">http://msdn.microsoft.com/xml/XMLGuide/</systemitem></para></listitem></varlistentry>
-
-<varlistentry><term>Dr. Dobb's Journal</term>
-<listitem><para>Articles, resources, opinions, news, and reviews
-covering all aspects of programming. Go to: 
-<systemitem role="url">http://www.ddj.com/</systemitem> for online content, and
-subscribe to the magazine while you're there.</para></listitem></varlistentry>
+<varlistentry>
+<term>Stevens, Richard.  <emphasis>Unix Network Programming</emphasis>.
+Prentice Hall PTR, 1990.</term>
+<listitem>
+<para>
+Perhaps the definitive book on the Unix network programming API.
+</para>
+</listitem>
+</varlistentry>
 
 </variablelist>
 
+</sect2>
 </sect1>
-<sect1 number="2.2">
-<title>Books</title>
+
+<sect1>
+<title>Web sites</title>
+
+<para>
+In the fast-moving world of Linux kernel development, the most current
+information is often found online.  The following is our selection of the
+best web sites as of this writing.  
+</para>
 
 <variablelist>
-
-<varlistentry><term><citetitle>DocBook, the Definitive Guide</citetitle>, Norman Walsh and
-Leonard Muellner, O'Reilly &amp; Associates.</term>
-<listitem><para>DocBook is a popular and flexible markup language for
-technical documentation, with versions for &sgml; and &xml;. This book
-has an exhaustive, glossary-style format describing every element in
-detail. It also has lots of practical information for getting started
-using &xml; and stylesheets.</para></listitem></varlistentry>
-
-<varlistentry><term><citetitle>The &xml; Bible</citetitle>, Elliotte Rusty Harold,
-IDG Books Worldwide.</term>
-<listitem><para>A solid introduction to &xml; and a comprehensive overview
-of the &xml; landscape.</para></listitem></varlistentry>
-
-<varlistentry><term><citetitle>&xml; in a Nutshell</citetitle>, Elliotte Rusty Harold and
-W. Scott Means, O'Reilly &amp; Associates.</term>
-<listitem><para>A comprehensive desktop reference for all things &xml;.</para></listitem></varlistentry>
-
-<varlistentry><term>&html; and XHTML, the Definitive Guide, Chuck Musciano and
-Bill Kennedy, O'Reilly &amp; Associates.</term>
-<listitem><para>Updated with frequent new editions, this book is a
-very timely and comprehensive resource for learning about
-&html;.</para></listitem></varlistentry>
-
-<varlistentry><term><citetitle>Developing SGML DTDs: from Text to Model to Markup</citetitle>,
-by Eve Maler and Jeanne El Andaloussi, Prentice-Hall.</term>
-<listitem><para>A step-by-step tutorial for designing and implementing DTDs.</para></listitem></varlistentry>
+<varlistentry>
+<term><systemitem role="url">http://www.kernel.org</systemitem></term><term><systemitem role="url">ftp://ftp.kernel.org</systemitem></term>
+<listitem>
+<para>
+This site is the home of Linux kernel development. You'll find the
+latest kernel release and related information. Note that the FTP site
+is mirrored throughout the world, so you'll most likely find a mirror
+near you.
+</para>
+</listitem>
+</varlistentry>
 
 
-<varlistentry><term>The &sgml; Handbook, Charles F. Goldfarb, Oxford
-Press, 1995.</term>
-<listitem><para>A very complete reference for &sgml;, including an
-annotated specification. Like its
-subject, the book is complex and hefty, so beginners may not
-find it to be a good introduction.</para></listitem></varlistentry>
+<varlistentry>
+<term><systemitem role="url">http://www.bkbits.net</systemitem></term>
+<listitem>
+<para>
+This site hosts the source repositories used by a number of prominent
+kernel developers.  The project called ``linus'', in particular, contains
+the mainline kernel as maintained by Linus Torvalds.  If you are curious
+about the very latest patches which have been applied to the kernel, this
+is the place to look.
+</para>
+</listitem></varlistentry>
 
-<varlistentry><term><citetitle>Java and &xml;</citetitle>, Brett McLaughlin,
-O'Reilly &amp; Associates.</term>
-<listitem><para>Shows how to put together &xml; and the Java programming
-language to build real-world applications.</para></listitem></varlistentry>
 
-<varlistentry><term><citetitle>Building Oracle &xml; Applications</citetitle>, 
-Steve Muench, O'Reilly &amp; Associates.</term>
-<listitem><para>A detailed look at the tools that Oracle provides for &xml;
-development and how to combine the power of XML and XSLT 
-with the functionality of the Oracle database.</para></listitem></varlistentry>
+<varlistentry>
+<term><systemitem role="url">http://www.tldp.org</systemitem></term>
+<listitem>
+<para>
+<indexterm><primary>Linux Documentation Project web site</primary></indexterm>
+The Linux Documentation Project carries a lot of interesting documents
+called "HOWTOs"; some of them are pretty technical and cover
+kernel-related topics.
+</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term><systemitem role="url">http://www.linux.it/kerneldocs</systemitem></term>
+<listitem>
+<para>
+This page contains many kernel-oriented magazine articles written by
+Alessandro. Some of them date back a few years but they usually still apply;
+some of them are in Italian, but usually an English translation
+is available as well.
+<!-- not yet, but I'm investing some time or bucks to do that for
+the whole series of new articles -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><systemitem role="url">http://lwn.net</systemitem></term>
+<listitem>
+<para>
+At the risk of seeming self-serving, we'll point out this news site
+(edited by one of your authors) which, among other things, offers
+regular kernel development coverage and API change information.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><systemitem role="url">http://www.kerneltraffic.org</systemitem></term>
+<listitem>
+<para>
+Kernel Traffic is a popular site that provides weekly summaries of
+discussions on the Linux kernel development mailing list.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><systemitem role="url">http://www.kerneltrap.org/</systemitem></term>
+<listitem>
+<para>
+This site picks up occasional interesting developments in the Linux and BSD
+kernel communities.
+</para>
+</listitem></varlistentry>
+
+
+<varlistentry>
+<term><systemitem role="url">http://www.kernelnewbies.org</systemitem></term>
+<listitem>
+<para>
+This site is oriented toward new kernel developers. There is beginning
+information, an FAQ, and an associated IRC channel for those looking
+for immediate assistance.
+</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term><systemitem role="url">http://janitor.kernelnewbies.org/</systemitem></term>
+<listitem>
+<para>
+The Kernel Janitors project is the place where new kernel programmers can
+learn how to join into the development effort.  A wide range of small,
+generally simple tasks that need to be done all over the kernel are
+described here.  There is a mailing list that helps new developers get
+these changes into the main kernel tree.  This is a great place for anyone
+wanting to start doing Linux kernel development, but not knowing where to
+begin.
+</para>
+</listitem>
+</varlistentry>
 
 </variablelist>
 
 
 </sect1>
-<sect1 number="2.3">
-<title>Standards Organizations</title>
-
-<variablelist>
-<varlistentry><term>&iso;, the International Organization for Standardization</term>
-<listitem><para>A worldwide federation of national standards organizations.
-Visit them at <systemitem role="url">http://www.iso.ch/</systemitem>.</para></listitem></varlistentry>
-
-<varlistentry><term>&w3c;</term>
-<listitem><para>The World Wide Web Consortium at <systemitem role="url">http://w3c.org/</systemitem>
-oversees the specifications and guidelines for the technology of the
-World Wide Web.</para></listitem></varlistentry>
-
-<varlistentry><term>Unicode Consortium</term>
-<listitem><para>The organization responsible for defining the Unicode
-character set. Visit them at: <systemitem role="url">http://www.unicode.org/</systemitem>.</para></listitem></varlistentry>
-
-<varlistentry><term>OASIS</term>
-<listitem><para>OASIS, the Organization for the Advancement of Structured Information Standards, 
-is an international consortium that creates interoperable 
-industry specifications based on public standards such as 
-XML and SGML. Visit them at: <systemitem role="url">http://www.oasis-open.org/</systemitem>.</para></listitem></varlistentry>
-
-</variablelist>
-</sect1>
-
-
-<sect1 number="2.4">
-<title>Tools</title>
-
-<variablelist>
-
-<varlistentry><term>GNU Emacs</term>
-<listitem><para>The extraordinarily powerful text editor, and so much more.
-Learn all about it at: <systemitem role="url">http://www.gnu.org/software/emacs/emacs.html</systemitem>.</para></listitem></varlistentry>
-
-<varlistentry><term>Xalan</term>
-<listitem><para>A high-performance XSLT stylesheet processor. Fully implements
-XSLT and XLinks. Find out more about it at the Apache XML Project, 
-<systemitem role="url">http://xml.apache.org/</systemitem>.</para></listitem></varlistentry>
-
-<varlistentry><term>Xerces</term>
-<listitem><para>A fully validating parser that implements XML, DOM levels 1 and 2, and
-SAX2. Find out more about it at the Apache XML Project, 
-<systemitem role="url">http://xml.apache.org/</systemitem>.</para></listitem></varlistentry>
-
-<varlistentry><term>XT</term>
-<listitem><para>A Java implementation of XSLT. Get it at:
-<systemitem role="url">http://www.jclark.com/xml/xt.html</systemitem>.</para></listitem></varlistentry>
-
-
-</variablelist>
-
-
-</sect1>
-
-
-
-<sect1 number="2.5">
-<title>Miscellaneous</title>
-
-<variablelist>
-
-<varlistentry><term><citetitle>User Friendly</citetitle> by Illiad</term>
-<listitem><para>Starring the formidably-cute <quote>dust
-puppy</quote> and a gaggle of computer industry drones, this comic strip
-will inject much-needed jocularity into your bloodstream after a long day
-of hacking &xml;. The whole archive is available online at <systemitem
-role="url">http://www.userfriendly.org/</systemitem>, and in two books
-by O'Reilly, <citetitle>User Friendly, the Comic Strip</citetitle> and
-<citetitle>Evil Geniuses in a Nutshell</citetitle>.</para></listitem></varlistentry>
-
-<varlistentry><term><citetitle>The Cathedral and the
-Bazaar</citetitle>, Eric S. Raymond, O'Reilly &amp; Associates</term>
-<listitem><para>In this philosophical analysis and evangelical sermon
-about the grassroots computer programming movement called <quote>Open
-Source</quote>, Raymond extols the virtues of community, sharing, and
-that good feeling you get when you're working for the common
-good.</para></listitem></varlistentry>
-
-</variablelist>
-
-
-
-
-
-</sect1>
-</appendix>
+</chapter>

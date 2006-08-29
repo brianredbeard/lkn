@@ -1532,8 +1532,11 @@ information necessary at some stages of booting.
   <title>Description</title>
 	<para>
 	Specify where the initial ramdisk for the kernel boot
-	is located. Please see <xref linkend="LKN-initramfs" /> for more
+	is located.
+	<!-- FIXME if this chapter gets added back
+	Please see <xref linkend="LKN-initramfs" /> for more
 	information about kernel ramdisks.
+	-->
 	</para>
 </refsect1>
 </refentry>
