@@ -331,7 +331,98 @@ boot the new kernel image.
 
 <sect2>
 <title><command>lilo</command></title>
-<para></para>
+
+<para>
+To let <command>lilo</command> know that a new kernel is present, the
+<filename>/etc/lilo.conf</filename> file must be modified, and the
+<command>lilo</command> program must be run to apply the changes made to
+the configuration file.  For full details on the structure of the
+<command>lilo</command> configuration file, please see the
+<command>lilo</command> man page:
+<screen>
+$ <userinput>man lilo</userinput>
+</screen>
+</para>
+
+<para>
+The easiest way to add a new kernel entry to the
+<filename>/etc/lilo.conf</filename> file, is to copy an existing
+entry.  For example, consider the following <command>lilo</command>
+configuration file from a Gentoo system:
+<programlisting>
+boot=/dev/hda
+prompt
+timeout=50
+default=2.6.12
+
+image=/boot/bzImage-2.6.15
+	label=2.6.15
+	read-only
+	root=/dev/hda2
+
+image=/boot/bzImage-2.6.12
+	label=2.6.12
+	read-only
+	root=/dev/hda2
+</programlisting>
+The line starting with the word <literal>image=</literal> defines a new
+kernel entry.  Simply copy the lines from one instance of the
+<literal>image=</literal> word to the next one:
+<programlisting>
+image=/boot/bzImage-2.6.15
+	label=2.6.15
+	read-only
+	root=/dev/hda2
+</programlisting>
+to the end of the file, and edit the version number to contain the version
+number of the new kernel you just installed.  In our example, we installed
+the <literal>2.6.17.11</literal> kernel, so the final copy of the file
+would look like:
+<programlisting>
+boot=/dev/hda
+prompt
+timeout=50
+default=2.6.12
+
+image=/boot/bzImage-2.6.15
+	label=2.6.15
+	read-only
+	root=/dev/hda2
+
+image=/boot/bzImage-2.6.12
+	label=2.6.12
+	read-only
+	root=/dev/hda2
+
+image=/boot/bzImage-2.6.17
+	label=2.6.17
+	read-only
+	root=/dev/hda2
+</programlisting>
+</para>
+
+<para>
+When finished editing the file, the <filename>/sbin/lilo</filename> program
+must be run to write the configuration changes out to the boot section of
+the disk:
+<screen>
+# /sbin/lilo
+</screen>
+Now the system can be safely rebooted.  The new kernel choice can be seen
+in the list of kernels that are available at boot time.  Use the down arrow
+to highlight the new kernel version, and press <literal>Enter</literal> to
+boot the new kernel image.
+</para>
+
+<!--
+	Should I show anything else for lilo?  Almost no one uses it
+	anymore, and I don't think I would be able to find a SuSE or RedHat
+	lilo configuration file anymore.
+
+	I feel this is a bit short, but I can't think of anything else that
+	is needed.  It is sufficient?
+-->
+
 
 </sect2>
 </sect1>
