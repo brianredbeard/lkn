@@ -423,9 +423,12 @@ boot the new kernel image.
 	is needed.  It is sufficient?
 -->
 
-
 </sect2>
 </sect1>
+
+<!-- Do we need a "what to do when it goes wrong" section here?  Or are we
+out of space? -->
+
 
 
 </chapter>
