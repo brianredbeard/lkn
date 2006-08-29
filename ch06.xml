@@ -251,9 +251,83 @@ are using.
 
 <sect2>
 <title><command>grub</command></title>
+
 <para>
+To let <command>grub</command> know that a new kernel is present, all that
+is needed is to modify the <filename>/boot/grub/menu.lst</filename> file.
+For full details on the structure of this file, and all of the different
+options available, please see the <command>grub</command> info pages:
+<screen>
+$ <userinput>info grub</userinput>
+</screen>
 </para>
+
+<para>
+The easiest way to add a new kernel entry to the
+<filename>/boot/grub/menu.lst</filename> file, is to copy an existing
+entry.  For example, consider the following <filename>menu.lst</filename>
+file from a Gentoo system:
+<programlisting>
+timeout 300
+default 0
+
+splashimage=(hd0,0)/grub/splash.xpm.gz
+
+title 2.6.16.11
+	root (hd0,0)
+	kernel /bzImage-2.6.16.11 root=/dev/sda2 vga=0x0305
+
+title 2.6.16
+	root (hd0,0)
+	kernel /bzImage-2.6.16 root=/dev/sda2 vga=0x0305
+</programlisting>
+The line starting with the word <literal>title</literal> defines a new
+kernel entry.  Simply copy the lines from one instance of the
+<literal>title</literal> word to the next one:
+<programlisting>
+title 2.6.16.11
+	root (hd0,0)
+	kernel /bzImage-2.6.16.11 root=/dev/sda2 vga=0x0305
+</programlisting>
+to the end of the file, and edit the version number to contain the version
+number of the new kernel you just installed.  In our example, we installed
+the <literal>2.6.17.11</literal> kernel, so the final copy of the file
+would look like:
+<programlisting>
+timeout 300
+default 0
+
+splashimage=(hd0,0)/grub/splash.xpm.gz
+
+title 2.6.16.11
+	root (hd0,0)
+	kernel /bzImage-2.6.16.11 root=/dev/sda2 vga=0x0305
+
+title 2.6.16
+	root (hd0,0)
+	kernel /bzImage-2.6.16 root=/dev/sda2 vga=0x0305
+
+title 2.6.17.11
+	root (hd0,0)
+	kernel /bzImage-2.6.17.11 root=/dev/sda2 vga=0x0305
+</programlisting>
+</para>
+
+<para>
+When finished editing the file, reboot the system and see that the new
+kernel image name comes up in the boot menu.  Use the down arrow to
+highlight the new kernel version, and press <literal>Enter</literal> to
+boot the new kernel image.
+</para>
+
+<!--   
+	Should I show an example of a SuSE and Fedora grub file here?  They
+	are more complex.  If so, can someone send me a Fedora grub file, I
+	don't have any around...
+-->
+
 </sect2>
+
 
 <sect2>
 <title><command>lilo</command></title>
