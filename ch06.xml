@@ -4,6 +4,126 @@
 Installing a kernel and booting with it
 </title>
 
+<para>
+Now that you have a kernel successfully built, it is time to install it and
+attempt to boot your new kernel.  Note, for this chapter, all of the
+commands need to be run as the root user, which is different from the other
+chapters.  This can either be done by using the <command>sudo</command>
+program, or the <command>su</command> command.
+</para>
+
+<para>
+To see if you have <command>sudo</command> installed and the proper access
+set up, do the following:
+<screen>
+$ <userinput>sudo ls ~/linux/linux-2.6.17.11/Makefile</userinput>
+Password:
+Makefile
+</screen>
+Enter either your own password at the password prompt, or the password of
+the system administrator (root).  It depends on how the
+<command>sudo</command> command is set up as to which is necessary.  If
+this is successful, and you see the line containing:
+<screen>
+Makefile
+</screen>
+then you can skip to the next section.
+</para>
+
+<para>
+If <command>sudo</command> is not installed or giving you the proper
+rights, then try using the <command>su</command> command:
+<screen>
+$ <userinput>su</userinput>
+Password:
+# <userinput>exit</userinput>
+exit
+$
+</screen>
+At the password prompt, enter in the password of the system administrator
+(root).  When the <command>su</command> program successfully accepts the
+password, you are transfered to running everything with full root
+privileges.  Be very careful while as root, and only do the minimum needed
+and then exit the program to continue back as your normal user account.
+</para>
+
+<sect1>
+<title>Using the distro install scripts</title>
+<para>
+Almost all distributions come with a script called
+<command>installkernel</command> that can be used by the kernel build
+system to automatically install a built kernel into the proper location and
+modify the bootloader so that nothing extra needs to be done by the
+developer.
+<footnote>
+<para>
+Notable ones to this exception are Gentoo and other "from scratch" type
+distributions, which expect the user to know how to install their kernel on
+their own.  These types of distributions always include documentation on
+how to install a new kernel, so it should be consulted for the exact method
+required.
+</para>
+</footnote>
+To use this method of installing a kernel, first do:
+<screen>
+# <userinput>make modules_install</userinput>
+</screen>
+This will install all of the modules that you have built and place them in
+the proper location in the filesystem for the new kernel to properly find.
+Modules are placed in the <filename>/lib/modules/KERNEL_VERSION/</filename>
+directory, where <literal>KERNEL_VERSION</literal> is the kernel version of
+the new kernel you have just built.
+</para>
+
+<para>
+After the modules have been successfully installed, the main kernel image
+must be installed:
+<screen>
+# <userinput>make install</userinput>
+</screen>
+This will cause the following steps to happen:
+<itemizedlist>
+<listitem>
+<para>
+The kernel build system will verify that the kernel has been successfully
+built properly.
+</para>
+</listitem>
+<listitem>
+<para>
+The build system will install the static kernel portion into /boot
+directory and name it based on the kernel version of the built kernel.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Any needed initial ram disk images will be automatically created, using the
+modules that have just been installed during the
+<literal>modules_install</literal> phase.
+</para>
+</listitem>
+
+<listitem>
+<para>
+The bootloader program will be properly notified that a new kernel is
+present and it will be added to the approiate menu to be selected from the
+next the machine is booted.
+</para>
+</listitem>
+
+</itemizedlist>
+</para>
+
+<para>
+After this is finished, the kernel is successfully installed, and you can
+safely reboot and try out your new kernel image.  Note that this
+installation does not overwrite any older kernel images so if there is a
+problem with your new kernel image, the old kernel can be selected at boot
+time.
+</para>
+
+</sect1>
 
 <sect1>
 <title>grub</title>
