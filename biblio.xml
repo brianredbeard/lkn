@@ -38,231 +38,328 @@ need to use.
 </para>
 </listitem>
 </varlistentry>
+
+<varlistentry>
+<term>
+Yaghmour, Karim.
+<emphasis>Building Embedded Systems</emphasis>.
+O'Reilly &amp; Associates, 2003.
+</term>
+<listitem>
+<para>
+This book, although mainly oriented toward the embedded Linux developer,
+has a great section on how to build up a cross-compiler toolchain and
+kernel.  It is highly recommended for that, as well as other portions of
+this book that are very relevant for people wishing to learn more about
+how to customise a Linux kernel and the rest of the system.
+</para>
+</listitem>
+</varlistentry>
+
 </variablelist>
 
-<para> ldd3 stuff below FIXME!!!
-</para>
-
 </sect2>
-
-
 
 <sect2>
 <title>Linux Kernel Books</title>
 
-<variablelist>
-<varlistentry>
-<term>Love, Robert.  <emphasis>Linux Kernel Development</emphasis>.  Sam's
-Publishing, 2004.</term>
-<listitem><para>
-Robert Love's book covers Linux kernel programming with a broad scope.  It
-is a reference which should be on every Linux hacker's bookshelf.
+<para>
+Most of these books are oriented toward the programmer who is interested
+in learning how to program within the kernel.  They are much more
+technically oriented than this book, but are a great place to start if
+you wish to learn more about the code that controls the kernel.
 </para>
-</listitem></varlistentry>
-
-
-<varlistentry>
-<term>Bovet, Daniel P. and Cesate, Marco.  <emphasis>Understanding the
-Linux Kernel, Second Edition</emphasis>.  O'Reilly &amp; Associates,
-2003.</term>
-<listitem>
-<para>
-This book covers the design and implementation of the Linux kernel in
-great detail. It is more oriented toward providing an understanding
-of the algorithms used than documenting the kernel API.  This book covers
-the 2.4 kernel, but still contains a great deal of useful information.
-</para></listitem></varlistentry>
-
-
-<varlistentry>
-<term>Yaghmour, Karim.  <emphasis>Building Embedded Systems</emphasis>.
-O'Reilly &amp; Associates,  2003.</term>
-<listitem>
-<para>
-This book will be useful for people writing Linux code for embedded
-systems.  
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term>Gorman, Mel.  <emphasis>Understanding the Linux Virtual Memory
-Manager</emphasis>.  Prentice Hall PTR, 2004.</term>
-<listitem>
-<para>
-Developers wanting to know more about the Linux virtual memory subsystem
-may wish to have a look at this book.  It is centered around the 2.4
-kernel, but contains 2.6 information is well.  
-</para></listitem>
-</varlistentry>
-</variablelist>
-
-</sect2>
-
-<sect2>
-<title>Unix Design and Internals</title>
 
 <variablelist>
 
 <varlistentry>
-<term>Bach, Maurice.  <emphasis>The Design of the Unix Operating
-System</emphasis>. Prentice Hall. 1987.</term>
+<term>
+Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman.
+<emphasis>Linux Device Drivers, Third Edition</emphasis>.
+O'Reilly &amp; Associates, 2005.
+</term>
 <listitem>
 <para>
-This book, though quite old, covers all the issues related to Unix
-implementations. It was the main source of inspiration for Linus in the
-first Linux versions.
-</para>
-</listitem></varlistentry>
-
-<varlistentry>
-<term>Stevens, Richard.  <emphasis>Advanced Programming in the UNIX
-Environment</emphasis>.  Addison-Wesley, 1992.</term>
-<listitem>
-<para>
-Every detail of Unix system calls is described herein, which is a good
-companion when implementing advanced features in the device methods.
+This book covers thow the different kernel device driver subsystems
+work, and provides lots of examples of working drivers.  It is
+recommended for anyone wanting to work with Linux kernel drivers.  It is
+also available online for free at
+<systemitem role="url">http://lwn.net/Kernel/LDD3/</systemitem>.
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Stevens, Richard.  <emphasis>Unix Network Programming</emphasis>.
-Prentice Hall PTR, 1990.</term>
+<term>
+Love, Robert.<emphasis>Linux Kernel Development, Second Edition</emphasis>.
+Novell Press Publishing, 2005.
+</term>
 <listitem>
 <para>
-Perhaps the definitive book on the Unix network programming API.
+Robert Love's book covers almost all areas of the Linux kernel, showing
+how everything works together.  It is a great place to start learning
+about the different portions of the kernel internals.
+</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>
+Bovet, Daniel P. and Cesate, Marco.
+<emphasis>Understanding the Linux Kernel, Third Edition</emphasis>.
+O'Reilly &amp; Associates, 2005.</term>
+<listitem>
+<para>
+This book goes into the design and implementation of the core Linux
+kernel.  It is a great reference for understanding the algorithms used
+within the different portions of the kernel.  It is highly recommended
+for anyone wanting to understand the details of how the kernel works.
 </para>
 </listitem>
 </varlistentry>
 
 </variablelist>
-
 </sect2>
 </sect1>
 
 <sect1>
-<title>Web sites</title>
+<title>Tool locations</title>
 
 <para>
-In the fast-moving world of Linux kernel development, the most current
-information is often found online.  The following is our selection of the
-best web sites as of this writing.  
+A lot of different tools were mentioned in this book.  Here are links to
+where the source code for these tools can be found on the internet.
 </para>
 
 <variablelist>
-<varlistentry>
-<term><systemitem role="url">http://www.kernel.org</systemitem></term><term><systemitem role="url">ftp://ftp.kernel.org</systemitem></term>
-<listitem>
-<para>
-This site is the home of Linux kernel development. You'll find the
-latest kernel release and related information. Note that the FTP site
-is mirrored throughout the world, so you'll most likely find a mirror
-near you.
-</para>
-</listitem>
-</varlistentry>
-
 
 <varlistentry>
-<term><systemitem role="url">http://www.bkbits.net</systemitem></term>
+<term>
+Linux kernel
+</term>
+<term>
+</term>
 <listitem>
 <para>
-This site hosts the source repositories used by a number of prominent
-kernel developers.  The project called ``linus'', in particular, contains
-the mainline kernel as maintained by Linus Torvalds.  If you are curious
-about the very latest patches which have been applied to the kernel, this
-is the place to look.
-</para>
-</listitem></varlistentry>
-
-
-<varlistentry>
-<term><systemitem role="url">http://www.tldp.org</systemitem></term>
-<listitem>
-<para>
-<indexterm><primary>Linux Documentation Project web site</primary></indexterm>
-The Linux Documentation Project carries a lot of interesting documents
-called "HOWTOs"; some of them are pretty technical and cover
-kernel-related topics.
-</para>
-</listitem>
-</varlistentry>
-
-
-<varlistentry>
-<term><systemitem role="url">http://www.linux.it/kerneldocs</systemitem></term>
-<listitem>
-<para>
-This page contains many kernel-oriented magazine articles written by
-Alessandro. Some of them date back a few years but they usually still apply;
-some of them are in Italian, but usually an English translation
-is available as well.
-<!-- not yet, but I'm investing some time or bucks to do that for
-the whole series of new articles -->
+<systemitem role="url">http://www.kernel.org</systemitem> and
+<systemitem role="url">ftp://ftp.kernel.org</systemitem> contain all of
+the different versions of the Linux kernel source code.
+<systemitem role="url">http://www.kernel.org/git/</systemitem> contains
+a listing of all <command>git</command> trees in use by the different
+kernel developers.
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><systemitem role="url">http://lwn.net</systemitem></term>
+<term>
+gcc
+</term>
 <listitem>
 <para>
-At the risk of seeming self-serving, we'll point out this news site
-(edited by one of your authors) which, among other things, offers
-regular kernel development coverage and API change information.
+<systemitem role="url">http://gcc.gnu.org/</systemitem> is the main site
+for everything related to the Gnu C Compiler.
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><systemitem role="url">http://www.kerneltraffic.org</systemitem></term>
+<term>
+binutils
+</term>
 <listitem>
 <para>
-Kernel Traffic is a popular site that provides weekly summaries of
-discussions on the Linux kernel development mailing list.
+<systemitem role="url">http://www.gnu.org/software/binutils/</systemitem>
+is the main site for all information about <command>binutils</command>.
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><systemitem role="url">http://www.kerneltrap.org/</systemitem></term>
+<term>
+make
+</term>
 <listitem>
 <para>
-This site picks up occasional interesting developments in the Linux and BSD
-kernel communities.
-</para>
-</listitem></varlistentry>
-
-
-<varlistentry>
-<term><systemitem role="url">http://www.kernelnewbies.org</systemitem></term>
-<listitem>
-<para>
-This site is oriented toward new kernel developers. There is beginning
-information, an FAQ, and an associated IRC channel for those looking
-for immediate assistance.
+<systemitem role="url">http://www.gnu.org/software/make/</systemitem>
+is the main site for all information about <command>make</command>.
 </para>
 </listitem>
 </varlistentry>
 
-
 <varlistentry>
-<term><systemitem role="url">http://janitor.kernelnewbies.org/</systemitem></term>
+<term>
+util-linux
+</term>
 <listitem>
 <para>
-The Kernel Janitors project is the place where new kernel programmers can
-learn how to join into the development effort.  A wide range of small,
-generally simple tasks that need to be done all over the kernel are
-described here.  There is a mailing list that helps new developers get
-these changes into the main kernel tree.  This is a great place for anyone
-wanting to start doing Linux kernel development, but not knowing where to
-begin.
+<systemitem role="url">http://www.kernel.org/pub/linux/utils/util-linux/</systemitem>
+is the directory for where all versions of <command>util-linux</command>
+can be downloaded.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+module-init-tools
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://www.kernel.org/pub/linux/utils/kernel/module-init-tools/</systemitem>
+is the directory for where all versions of
+<command>module-init-tools</command> can be downloaded.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+e2fsprogs
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://e2fsprogs.sourceforge.net/</systemitem> is
+the main project page for the <command>e2fsprogs</command> package.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+jfsutils
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://jfs.sourceforge.net/</systemitem> is the
+main project page for the <command>jfsutils</command> package.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+reiserfsprogs
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://www.namesys.com/download.html</systemitem>
+is the main project page for the <command>reiserfsprogs</command>
+package.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+xfsprogs
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://oss.sgi.com/projects/xfs/</systemitem> is
+the main project page for the <command>xfsprogs</command> package.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+quota-tools
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://sourceforge.net/projects/linuxquota/</systemitem>
+is the main project page for the <command>quota-tools</command> package.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+nfs-utils
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://nfs.sf.net/</systemitem> is the main
+project page for the <command>nfs-utils</command> package.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+udev
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html</systemitem>
+is the directory for where all versions of <command>udev</command> can
+be downloaded.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+procfs
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://procps.sourceforge.net/</systemitem> is
+the main project page for the <command>procfs</command> package.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+patchutils
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://cyberelk.net/tim/patchutils</systemitem>
+is the location for all of the <command>patchutils</command> releases.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+git
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://git.or.cz/</systemitem> is the main site
+for the <command>git</command> project.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ketchup
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://www.selenic.com/ketchup/</systemitem> is
+the main project page for the <command>ketchup</command> program.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+quilt
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://savannah.nongnu.org/projects/quilt</systemitem> is
+the main project page for the <command>quilt</command> program.
 </para>
 </listitem>
 </varlistentry>
 
 </variablelist>
-
-
 </sect1>
+
 </chapter>
