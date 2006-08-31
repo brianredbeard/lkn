@@ -60,6 +60,9 @@ Install the new kernel.
 </para>
 </listitem>
 </orderedlist>
+
+The last two steps work the same as described before, so we will only
+discus the first three steps in this chapter.
 </para>
 
 <para>
@@ -93,7 +96,7 @@ that can upgrade an older kernel release, to a newer one.
 On the main <literal>kernel.org</literal> website, you will remember that
 it contained a list of the current kernel versions that are available for
 download:
-<figure id="kernel.org-screenshot">
+<figure id="kernel.org-screenshot-take2">
 <title>The main kernel.org web site</title>
 <graphic fileref="images/kernel.org.png" scalefit="1"/>
 </figure>
@@ -177,7 +180,16 @@ one level lower, in the <filename>incr</filename> subdirectory.  So, to
 find the patch that goes from 2.6.17.9 to 2.6.17.10, we look in the
 <filename>/pub/linux/kernel/v2.6/incr</filename> directory to find the
 files we need:
+<footnote>
+<para>
+In this example, we use the very good <command>lftp</command> FTP program
+to download the patch files.  Any ftp program or a web browser can be used
+to download the same files.  The important thing here is to show where the
+files are located.
+</para>
+</footnote>
 <screen>
+$ <userinput>cd ~/linux</userinput>
 $ <userinput>lftp ftp.kernel.org/pub/linux/kernel/v2.6/incr</userinput>
 cd ok, cwd=/pub/linux/kernel/v2.6/incr
 lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>ls *2.6.17.9*.bz2</userinput>
@@ -187,26 +199,129 @@ lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>get patch-2.6.17.9-1
 lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>get patch-2.6.17.10-11.bz2</userinput>
 7901 bytes transferred
 lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>exit</userinput>
-$ <userinput>ls</userinput>
-patch-2.6.17.10-11.bz2  patch-2.6.17.9-10.bz2
+$ <userinput>ls -F</userinput>
+good_config linux-2.6.17.9/ patch-2.6.17.10-11.bz2  patch-2.6.17.9-10.bz2
 </screen>
 </para>
 </sect2>
 </sect1>
 
 <sect1>
-<title>applying the patch</title>
-<para></para>
+<title>Applying the patch</title>
+
+<para>
+As the patches we have downloaded are compressed, the first thing to do is
+uncompress them with the <command>bzip2</command> command:
+<screen>
+$ <userinput>bzip2 -dv patch-2.6.17.9-10.bz2</userinput>
+  patch-2.6.17.9-10.bz2: done
+$ <userinput>bzip2 -dv patch-2.6.17.10-11.bz2</userinput>
+  patch-2.6.17.10-11.bz2: done
+$ <userinput>ls -F</userinput>
+good_config linux-2.6.17.9/  patch-2.6.17.10-11  patch-2.6.17.9-10
+</screen>
+</para>
+
+<para>
+Now we need to apply the patch files to the kernel directory.  Go into the
+directory:
+<screen>
+$ <userinput>cd linux-2.6.17.9</userinput>
+</screen>
+and run the <command>patch</command> program to apply the first patch
+moving the source tree from the 2.6.17.9 to the 2.6.17.10 release:
+<screen>
+$ <userinput>patch -p1 &lt; ../patch-2.6.17.9-10</userinput>
+patching file Makefile
+patching file block/elevator.c
+patching file fs/udf/super.c
+patching file fs/udf/truncate.c
+patching file include/net/sctp/sctp.h
+patching file include/net/sctp/sm.h
+patching file net/sctp/sm_make_chunk.c
+patching file net/sctp/sm_statefuns.c
+patching file net/sctp/socket.c
+</screen>
+Verify that the patch really did work properly and that there are no errors
+in the output of the patch program.  It is also a good idea to look at the
+<filename>Makefile</filename> of the kernel to see the kernel version:
+<screen>
+$ <userinput>$ head -n 5 Makefile</userinput>
+VERSION = 2
+PATCHLEVEL = 6
+SUBLEVEL = 17
+EXTRAVERSION = .10
+NAME=Crazed Snow-Weasel
+</screen>
+</para>
+
+<para>
+Now that the kernel is at the 2.6.17.10 release level, do the same thing as
+before and apply the patch to bring it up to the 2.6.17.11 level:
+<screen>
+$ <userinput>patch -p1 &lt; ../patch-2.6.17.10-11</userinput>
+patching file Makefile
+patching file arch/ia64/kernel/sys_ia64.c
+patching file arch/sparc/kernel/sys_sparc.c
+patching file arch/sparc64/kernel/sys_sparc.c
+patching file drivers/char/tpm/tpm_tis.c
+patching file drivers/ieee1394/ohci1394.c
+patching file drivers/md/dm-mpath.c
+patching file drivers/md/raid1.c
+patching file drivers/net/sky2.c
+patching file drivers/pci/quirks.c
+patching file drivers/serial/Kconfig
+patching file fs/befs/linuxvfs.c
+patching file fs/ext3/super.c
+patching file include/asm-generic/mman.h
+patching file include/asm-ia64/mman.h
+patching file include/asm-sparc/mman.h
+patching file include/asm-sparc64/mman.h
+patching file kernel/timer.c
+patching file lib/spinlock_debug.c
+patching file mm/mmap.c
+patching file mm/swapfile.c
+patching file net/bridge/netfilter/ebt_ulog.c
+patching file net/core/dst.c
+patching file net/core/rtnetlink.c
+patching file net/ipv4/fib_semantics.c
+patching file net/ipv4/netfilter/arp_tables.c
+patching file net/ipv4/netfilter/ip_tables.c
+patching file net/ipv4/netfilter/ipt_ULOG.c
+patching file net/ipv4/route.c
+patching file net/ipx/af_ipx.c
+patching file net/netfilter/nfnetlink_log.c
+</screen>
+Again verify that the output of the patch program did not show any errors
+and look at the <filename>Makefile</filename>:
+<screen>
+$ <userinput>head -n 5 Makefile</userinput>
+VERSION = 2
+PATCHLEVEL = 6
+SUBLEVEL = 17
+EXTRAVERSION = .11
+NAME=Crazed Snow-Weasel
+</screen>
+</para>
+
+<para>
+Now that the source code is successfully updated to the version you wish to
+use, it is a good idea to go back and change the directory name to refer to
+the kernel version number so that confusion does not occur at a later time:
+<screen>
+$ <userinput>cd ..</userinput>
+$ <userinput>mv linux-2.6.17.9 linux-2.6.17.11</userinput>
+$ <userinput>ls -F</userinput>
+good_config linux-2.6.17.11/  patch-2.6.17.10-11  patch-2.6.17.9-10
+</screen>
+</para>
+
 </sect1>
 
 <sect1>
-<title>updating the configuration</title>
-<para></para>
-</sect1>
-
-<sect1>
-<title>building the updated kernel</title>
-<para></para>
+<title>Reconfigure the kernel</title>
+<para>
+</para>
 </sect1>
 
 </chapter>
