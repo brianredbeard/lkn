@@ -10,7 +10,7 @@ wonderfully except for one little thing that you know is fixed in the
 latest release from the kernel developers.  Or a security problem is found,
 and a new stable kernel release is made public.  Either way, you are faced
 with the issue of upgrading the kernel and you do not want to loose all the
-time and effort that went into making that perfict kernel configuration.
+time and effort that went into making that perfect kernel configuration.
 </para>
 
 <para>
@@ -22,7 +22,7 @@ the previous one.
 <para>
 First off, please back up the <filename>.config</filename> file in the
 kernel source directory.  You have spent some time and effort into
-creating it, and it should be saved off incase something goes wrong when
+creating it, and it should be saved off in case something goes wrong when
 trying to upgrade.
 <screen>
 $ <userinput>cd ~/linux/linux-2.6.17.11</userinput>
@@ -320,9 +320,127 @@ good_config linux-2.6.17.11/  patch-2.6.17.10-11  patch-2.6.17.9-10
 
 <sect1>
 <title>Reconfigure the kernel</title>
+
 <para>
+Previously, we use the <literal>make menuconfig</literal> or
+<literal>gconfig</literal> or <literal>xconfig</literal> method to change
+different configuration options.  But once you have a working
+configuration, the only thing that is necessary is to update it with any
+new options that have been added to the kernel since the last release.  To
+do this, the <literal>make oldconfig</literal> and
+<literal>make silentoldconfig</literal> options should be used.
+</para>
+
+<para>
+<literal>make oldconfig</literal> takes the current kernel configuration in
+the <filename>.config</filename> file, and updates it based on the new
+kernel release.  To do this, it prints out all configuration questions, and
+provides an answer for them if the option is already handled in the
+configuration file.  If there is a new option, the program stops and asks
+the user what the new configuration value should be set to.  After
+answering it, the program continues on until the whole kernel configuration
+is finished.
+</para>
+
+<para>
+<literal>make silentoldconfig</literal> works exactly the same way as
+<literal>oldconfig</literal> does, but it does not print out anything to
+the screen, unless it needs to ask a question about a new configuration
+option.
+</para>
+
+<para>
+Usually, when upgrading between different versions of the stable releases,
+no new configuration options are added, as this is supposed to be a
+<literal>stable</literal> kernel series.  If this happens, there are no new
+questions that need to be answered for the kernel configuration, so the
+program continues successfully without any need for user intervention.  An
+example of this is moving from the 2.6.17.9 to 2.6.17.11 release:
+<screen>
+$ <userinput>cd linux-2.6.17.11</userinput>
+$ <userinput>make silentoldconfig</userinput>
+scripts/kconfig/conf -s arch/i386/Kconfig
+#
+# using defaults found in .config
+#
+</screen>
+</para>
+
+<para>
+An example for where a new kernel option shows up in a new release is the
+following.  The kernel option to enable <literal>Mutex debugging</literal>
+is a new one when switching between certian kernel releases.  Here is the
+output when this happened:
+<screen>
+$ make silentoldconfig
+scripts/kconfig/conf -s arch/i386/Kconfig
+#
+# using defaults found in .config
+#
+*
+* Restart config...
+*
+*
+* Kernel hacking
+*
+Show timing information on printks (PRINTK_TIME) [Y/n/?] y
+Magic SysRq key (MAGIC_SYSRQ) [Y/n/?] y
+Kernel debugging (DEBUG_KERNEL) [Y/n/?] y
+  Kernel log buffer size (16 => 64KB, 17 => 128KB) (LOG_BUF_SHIFT) [16] 16
+  Detect Soft Lockups (DETECT_SOFTLOCKUP) [Y/n/?] y
+  Collect scheduler statistics (SCHEDSTATS) [N/y/?] n
+  Debug slab memory allocations (DEBUG_SLAB) [Y/n/?] y
+    Memory leak debugging (DEBUG_SLAB_LEAK) [Y/n] y
+  Mutex debugging, deadlock detection (DEBUG_MUTEXES) [N/y/?] (NEW) <userinput>y</userinput>
+</screen>
+The configuration program stopped at this option and asked for the user to
+choose an option.  They pressed <literal>y</literal> and the program
+continued on:
+<screen>
+  Spinlock debugging (DEBUG_SPINLOCK) [Y/n/?] y
+  Sleep-inside-spinlock checking (DEBUG_SPINLOCK_SLEEP) [Y/n/?] y
+  kobject debugging (DEBUG_KOBJECT) [N/y/?] n
+  Highmem debugging (DEBUG_HIGHMEM) [N/y/?] n
+  Compile the kernel with debug info (DEBUG_INFO) [N/y/?] n
+Debug Filesystem (DEBUG_FS) [Y/?] y
+Debug VM (DEBUG_VM) [N/y/?] n
+Compile the kernel with frame pointers (FRAME_POINTER) [N/y/?] n
+Compile the kernel with frame unwind information (UNWIND_INFO) [N/y/?] n
+Force gcc to inline functions marked 'inline' (FORCED_INLINING) [N/y/?] n
+torture tests for RCU (RCU_TORTURE_TEST) [N/m/y/?] n
+Check for stack overflows (DEBUG_STACKOVERFLOW) [N/y/?] n
+Stack utilization instrumentation (DEBUG_STACK_USAGE) [N/y/?] n
+Stack backtraces per line (STACK_BACKTRACE_COLS) [2] 2
+*
+* Page alloc debug is incompatible with Software Suspend on i386
+*
+Write protect kernel read-only data structures (DEBUG_RODATA) [N/y/?] n
+Use 4Kb for kernel stacks instead of 8Kb (4KSTACKS) [N/y/?] n
+</screen>
+</para>
+
+<para>
+So upgrading the kernel configuration for a new release is a simple as
+using a different configuration option to <command>make</command>.  With
+this method, it is no longer needed to use the graphical or text oriented
+configuration programs for any new kernel update.
+</para>
+
+</sect1>
+
+<sect1>
+<title>Can't this be automated?</title>
+
+<para>
+The whole process of downloading the proper patch file, uncompressing it,
+and then applying it seems to be ripe for automating.  Kernel developers
+being the type that likes to automate repetitive tasks, the program
+<command>ketchup</command> has been created to handle all of this
+automatically.  See <xref linkend="lkn_ketchup" /> for more details on how
+this program works and how to use it.
 </para>
 </sect1>
+
 
 </chapter>
 
