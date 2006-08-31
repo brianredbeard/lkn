@@ -4,9 +4,194 @@
 Upgrading a kernel
 </title>
 
+<para>
+Inevitably it happens, you have a custom build kernel, working just
+wonderfully except for one little thing that you know is fixed in the
+latest release from the kernel developers.  Or a security problem is found,
+and a new stable kernel release is made public.  Either way, you are faced
+with the issue of upgrading the kernel and you do not want to loose all the
+time and effort that went into making that perfict kernel configuration.
+</para>
+
+<para>
+This chapter is going to show how easy it is to update a kernel from an
+older versions, while still retaining all of the configuration options from
+the previous one.
+</para>
+
+<para>
+First off, please back up the <filename>.config</filename> file in the
+kernel source directory.  You have spent some time and effort into
+creating it, and it should be saved off incase something goes wrong when
+trying to upgrade.
+<screen>
+$ <userinput>cd ~/linux/linux-2.6.17.11</userinput>
+$ <userinput>cp .config ../good_config</userinput>
+</screen>
+</para>
+
+<para>
+There are only five simple steps that is needed to upgrade a kernel from a
+previously built one:
+<orderedlist>
+<listitem>
+<para>
+Get the new source code.
+</para>
+</listitem>
+<listitem>
+<para>
+Apply the changes to the old source tree to bring it up to the newer level.
+</para>
+</listitem>
+<listitem>
+<para>
+Reconfigure the kernel based on the previous kernel configuration.
+</para>
+</listitem>
+<listitem>
+<para>
+Build the new kernel.
+</para>
+</listitem>
+<listitem>
+<para>
+Install the new kernel.
+</para>
+</listitem>
+</orderedlist>
+</para>
+
+<para>
+In this chapter, we are going to assume that you have built a successful
+2.6.17.9 kernel release, and want to upgrade to the 2.6.17.11 release.
+</para>
+
 <sect1>
-<title>retrieving the patch</title>
-<para></para>
+<title>Download the new source</title>
+
+<para>
+The Linux kernel developers realize that all users do not wish to download
+the entire source code to the kernel for every update.  That would be a
+waste of bandwidth and time.  Because of this, they offer a
+<literal>patch</literal>
+<footnote>
+<para>
+It is called <literal>patch</literal> because the program
+<command>patch</command> takes the file and applies it to the original
+tree, creating the new tree.  The patch file contains a representation of
+the changes that are necessary to reconstruct the new files, based on the
+old ones.  Patch files are readable, and contain a list of the lines that
+are to be removed and the lines that are to be added, with some context
+within the file showing where the change should be made.
+</para>
+</footnote>
+that can upgrade an older kernel release, to a newer one.
+</para>
+
+<para>
+On the main <literal>kernel.org</literal> website, you will remember that
+it contained a list of the current kernel versions that are available for
+download:
+<figure id="kernel.org-screenshot">
+<title>The main kernel.org web site</title>
+<graphic fileref="images/kernel.org.png" scalefit="1"/>
+</figure>
+</para>
+
+<para>
+Previously, you used the link pointed to you by the <literal>F</literal> to
+download the entire source code for the kernel.  However, if you click on
+the name of the kernel release, it will download a patch file instead:
+<figure id="kernel.org_patch-screenshot">
+<title>Downloading a patch from kernel.org</title>
+<graphic fileref="images/kernel.org_patch.png" scalefit="1"/>
+</figure>
+This is what we want to do when upgrading.  But we need to figure out what
+patch to download.
+</para>
+
+<sect2>
+<title>Which patch applies to which release?</title>
+
+<para>
+A kernel patch file will only upgrade the source code from one specific
+release to another specific release.  Here is how the different patch files
+can be applied:
+<itemizedlist>
+<listitem>
+<para>
+Stable kernel patches apply to the base kernel version.  This means that
+the 2.6.17.10 patch will only apply to the 2.6.17 kernel release.  The
+2.6.17.10 kernel patch will not apply to the 2.6.17.9 kernel or any other
+release.
+</para>
+</listitem>
+<listitem>
+<para>
+Base kernel release patches only apply to the previous base kernel version.
+This means that the 2.6.18 patch will only apply to the 2.6.17 kernel
+release.  It will not apply to the last 2.6.17.y kernel release, or any
+other release.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Incremental patches upgrade from a specific release to the next release.
+This allows developers to not have to downgrade their kernel and then
+upgrade it, just to switch from the latest stable release to the next
+stable release (remember that the stable release patches are only against
+the base kernel, not the previous stable release.)  Whenever possible, it
+is recommended that you use the incremental patches to make your life
+easier.
+</para>
+</listitem>
+</itemizedlist>
+</para>
+
+
+</sect2>
+
+<sect2>
+<title>Finding the patch</title>
+
+<para>
+As we want to go from the 2.6.17.9 kernel release, to the 2.6.17.11
+release, we will need to download two different patches.  We will need a
+patch from the 2.6.17.9 release to the 2.6.17.10 release, and then from the
+2.6.17.10 release to the 2.6.17.11 release.
+<footnote>
+<para>
+If you need to upgrade more than two versions, it is recommended to go
+backwards, and then upgrade forward.  In this case, we could go backward
+from 2.6.17.9 to 2.6.17 and then forward from 2.6.17 to 2.6.17.11.
+</para>
+</footnote>
+</para>
+
+<para>
+The stable and base kernel patches are located in the same directory
+structure as the main source trees.  All incremental patches can be found
+one level lower, in the <filename>incr</filename> subdirectory.  So, to
+find the patch that goes from 2.6.17.9 to 2.6.17.10, we look in the
+<filename>/pub/linux/kernel/v2.6/incr</filename> directory to find the
+files we need:
+<screen>
+$ <userinput>lftp ftp.kernel.org/pub/linux/kernel/v2.6/incr</userinput>
+cd ok, cwd=/pub/linux/kernel/v2.6/incr
+lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>ls *2.6.17.9*.bz2</userinput>
+-rw-rw-r--    1 536      536          2872 Aug 22 19:23 patch-2.6.17.9-10.bz2
+lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>get patch-2.6.17.9-10.bz2</userinput>
+2872 bytes transferred
+lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>get patch-2.6.17.10-11.bz2</userinput>
+7901 bytes transferred
+lftp ftp.kernel.org:/pub/linux/kernel/v2.6/incr> <userinput>exit</userinput>
+$ <userinput>ls</userinput>
+patch-2.6.17.10-11.bz2  patch-2.6.17.9-10.bz2
+</screen>
+</para>
+</sect2>
 </sect1>
 
 <sect1>
