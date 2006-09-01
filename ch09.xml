@@ -107,8 +107,8 @@ Kernel Configuration Recipes
 -->
 <para>
 The Linux kernel supports a wide range of different disk types.
-This section shows how to make sure the kernel can
-support a few of the more common types of disk controllers.
+This section shows how to configure the kernel so that it supports most of
+the more common types of disk controllers.
 </para>
 
 <sect2 id="lkn_usb_storage">
@@ -116,14 +116,14 @@ support a few of the more common types of disk controllers.
 
 <para>
 To use a USB storage device (commonly referred to as USB "flash"
-devices) USB support must be first working properly.  Refer to the recipe
+device) USB support must be first working properly.  Refer to the recipe
 in <xref linkend="lkn_usb" /> for how to do this.
 </para>
 
 <para>
 A USB storage device can be identified by using the
 <literal>lsusb</literal> program.  If the following command sequence
-produces the expected result, a USB storage device is present on the
+produces the same result as shown, a USB storage device is present on the
 system:
 </para>
 
@@ -198,15 +198,15 @@ devices, please enable support for them.
 <title>IDE Disks</title>
 
 <para>
-IDE disks are the most common type of PC disk controllers.
-To determine if you have a IDE disk controller on the system, run the
-following command:
+IDE disks are the most common type of PC disks.  The device that enables
+them to work properly is an IDE disk controller.  To determine if you have
+a IDE disk controller on the system, run the following command:
 <screen>
 $ <userinput>/usr/sbin/lspci | grep IDE</userinput>
 00:1f.1 IDE interface: Intel Corporation 82801EB/ER (ICH5/ICH5R) IDE Controller (rev 02)
 00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
 </screen>
-Note that your response will probably not be identical; all that is
+Note that your response will probably not be identical; what is
 important is that the command shows some an IDE Controller (the first
 <!--
 
@@ -259,14 +259,15 @@ original step.
 <title>Serial ATA (SATA)</title>
 
 <para>
-SATA is a type of disk controller that is the successor to the IDE bus.
+SATA is a type of disk controller that is the successor to the IDE disk
+controller.
 To determine if you have a SATA disk controller on the system, run the
 following command:
 <screen>
 $ <userinput>/usr/sbin/lspci | grep SATA</userinput>
 00:1f.2 IDE interface: Intel Corporation 82801EB (ICH5) SATA Controller (rev 02)
 </screen>
-Note that your response will probably not be identical; all that is
+Note that your response will probably not be identical; what is
 important is that the command shows some SATA devices.
 </para>
 
@@ -337,7 +338,7 @@ SCSI and SATA drives.
 <para>
 IDE CD-ROM drives are controlled by the same IDE controller as your main IDE
 disk drives.  Make sure the IDE controller is properly supported as
-described in <xref linkend="lkn_ide" />.  If that is properly supported,
+described in <xref linkend="lkn_ide" />.  If it is properly supported,
 the IDE CD-ROM drive can be used without any further kernel configuration.
 </para>
 
@@ -361,7 +362,7 @@ Device Drivers
 		[*] SCSI CDROM support
 </screen>
 
-Once that is enabled, the SATA or SCSI CD-ROM drive will work properly.
+Once that is enabled, the SATA or SCSI CD-ROM drive should work properly.
 </para>
 
 </sect3>
@@ -397,7 +398,7 @@ $ <userinput>/usr/sbin/lspci | grep USB</userinput>
 00:1d.3 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #4 (rev 02)
 00:1d.7 USB Controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) USB2 EHCI Controller (rev 02)
 </screen>
-Note that your response will probably not be identical; all that is
+Note that your response will probably not be identical; what is
 important is that the command shows some USB controllers.
 </para>
 
@@ -496,7 +497,7 @@ $ <userinput>/usr/sbin/lspci | grep FireWire</userinput>
 06:0c.0 FireWire (IEEE 1394): Texas Instruments TSB43AB22/A IEEE-1394a-2000 Controller (PHY/Link)
 06:0d.2 FireWire (IEEE 1394): Creative Labs SB Audigy FireWire Port (rev 04)
 </screen>
-Note that your response will probably not be identical; all that's
+Note that your response will probably not be identical; what is
 important is that the command shows some FireWire controllers.
 </para>
 
@@ -525,7 +526,7 @@ Device Drivers
 
 </screen>
 
-And enable the specific type of Firewire devices you have:
+Finally, enable the specific type of Firewire devices you have:
 <screen>
 Device Drivers
 	IEEE 1394 (FireWire) support
@@ -666,7 +667,7 @@ $ <userinput>/usr/sbin/lspci | grep -i audio</userinput>
 00:1f.5 Multimedia audio controller: Intel Corporation 82801EB/ER (ICH5/ICH5R) AC'97 Audio Controller (rev 02)
 06:0d.0 Multimedia audio controller: Creative Labs SB Audigy (rev 04)
 </screen>
-Note that your response will probably not be identical; all that's
+Note that your response will probably not be identical; what is
 important is that the command shows some Audio controllers.
 </para>
 
@@ -746,7 +747,7 @@ processor you are using, run the following command:
 $ <userinput>cat /proc/cpuinfo  | grep "model name"</userinput>
 model name      : Intel(R) Xeon(TM) CPU 3.20GHz
 </screen>
-Note that your response will probably not be identical; all that is
+Note that your response will probably not be identical; what is
 important is that the command shows the model name of the processor present
 on the system.
 </para>
@@ -788,7 +789,7 @@ option.
 <para>
 Select the processor family type.  The <literal>PC-compatible</literal>
 option needs to be selected from the previous options for this submenu
-to be made available to you:
+to be displayed:
 <screen>
 Processor type and features
     Processor family
@@ -828,10 +829,10 @@ range of machines you wish the kernel to run on.
 <title>SMP</title>
 
 <para>
-If the machine you are using for Linux contains more than one CPU, or a
+If your system contains more than one CPU, or a
 Hyperthreaded or Dual Core CPU, you should select the multiprocessor
 option for the Linux kernel in order to take advantage of the additional
-processors.  If you do not select this option, you will be wasting the other
+processors.  Unless you do, you will be wasting the other
 processors by not using them at all.
 </para>
 
@@ -849,8 +850,8 @@ Processor type and features
 <title>Preemption</title>
 
 <para>
-Systems running as a server have very different workload requirements from
-those being used as a desktop for video and audio applicatons.  The kernel
+Systems running as servers have very different workload requirements from
+those being used as a desktop for video and audio applications.  The kernel
 allows different modes of "preemption" in order to handle these different
 workloads.  Preemption is the ability of the kernel to interrupt itself
 while it is doing something else, in order to work on something with a
@@ -923,7 +924,8 @@ $ <userinput>/sbin/swapon -s | grep dev | cut -f 1 -d ' '</userinput>
 </screen>
 Use the output of the preceding command in this kernel configuration option,
 and on the kernel boot line where it specifies where the kernel should be resumed
-from.  After the machine has been suspended, to resume it proper, pass the
+from.  After the machine has been suspended, to have it resume properly,
+pass the
 <literal>resume=/dev/swappartition</literal> argument to the kernel command
 line to have it use the proper image.  If you do not want to have the
 suspended image restored, use the <literal>noresume</literal> kernel
@@ -939,7 +941,7 @@ command line argument.
 
 <para>
 Most modern processors can slow down the internal clock of the
-processor in order to conserve power and battery life.  Linux supports this
+processor to conserve power and battery life.  Linux supports this
 ability and offers a variety of power "governors."
 Different governors implement different heuristics in order to determine how
 to vary the processor speed depending on the system load and
@@ -1038,7 +1040,7 @@ Processor type and features
 <sect2 id="acpi">
 <title>ACPI</title>
 <para>
-On almost all modern Intel based systems, ACPI is required in order for the
+On almost all modern Intel-based systems, ACPI is required in order for the
 machine to work properly.  ACPI is a standard that allows the BIOS of the
 computer to work with the operating system in order to access the hardware
 in an indirect manner, in the hope of  handling a wide range of
@@ -1086,7 +1088,7 @@ Power management options (ACPI, APM)
 
 <para>
 Networking is required for almost all machines today, and Linux supports
-almost every networking option availble.  Here we are going to
+almost every networking option available.  Here we are going to
 show only a few of the wide variety that are present.
 </para>
 
@@ -1117,8 +1119,8 @@ Networking
 The netfilter portion of the Linux kernel is a framework for filtering and
 manipulating all network packets that pass through the machine.  It is
 commonly used if you wish to enable a firewall on the machine to protect it
-from different systems on the Internet, or if you wish to use the machine
-to act as a proxy for other machines on the network.  For more details on
+from different systems on the Internet, or to use the machine
+as a proxy for other machines on the network.  For more details on
 what netfilter is good for, please see <xref linkend="CONFIG_NETFILTER" />.
 </para>
 
@@ -1185,7 +1187,7 @@ $ <userinput>/usr/sbin/lspci | grep Ethernet</userinput>
 03:0c.0 Ethernet controller: D-Link System Inc RTL8139 Ethernet (rev 10)
 03:0e.0 Ethernet controller: Intel Corporation 82545GM Gigabit Ethernet Controller (rev 04)
 </screen>
-Note that your response will probably not be identical; all that is
+Note that your response will probably not be identical; what is
 important is that the command shows some PCI Ethernet devices.
 </para>
 
@@ -1327,7 +1329,7 @@ Networking
 </para>
 
 <para>
-There are relativly few individual Bluetooth devices drivers available, because
+There are relatively few individual Bluetooth devices drivers available, because
 almost all of these devices follow the Bluetooth specification detailing
 how devices should operate.  The drivers marked in the following list must be selected in order for
 Bluetooth to work with the device:
@@ -1365,7 +1367,7 @@ it is, run the following command:
 $ <userinput>/usr/sbin/lspci | grep -i wireless</userinput>
 06:05.0 Network controller: Intel Corporation PRO/Wireless 2915ABG MiniPCI Adapter (rev 05)
 </screen>
-Note that your response will probably not be identical; all that is
+Note that your response will probably not be identical; what is
 important is that the command shows some PCI Wireless devices.
 </para>
 
@@ -1396,7 +1398,7 @@ Networking
 </para>
 
 <para>
-Support for the different PCI types of wireless network devices are found
+Support for the different PCI types of wireless network devices is found
 under the Network driver section of the configuration:
 <screen>
 Device Drivers
@@ -1429,10 +1431,10 @@ Device Drivers
 <para>
 Linux supports a wide range of traditional file system types and a number
 of different types of filesystems (volume managers, clustered filesystems,
-etc.)  The traditional file system types (normal or journaled) can be
+etc.).  The traditional file system types (normal or journaled) can be
 selected from the main File System configuration menu:
 <screen>
-File Systems
+File systems
     [*] Second extended fs support
     [*] Ext3 journalling file system support
     [ ] Reiserfs support
@@ -1499,7 +1501,8 @@ different block devices to look like one logical device.  However it does
   sounds better.
 
 -->
-not work on a device level like RAID, but through a block and sector mapping.
+not work on a device level like RAID, but through a block and sector
+mapping mechanism.
 It allows different portions of different disks to be combined together to
 look like one large block device to the user.  To do this, the kernel uses
 something called Device Mapper (DM).
@@ -1615,7 +1618,7 @@ quite easily as more storage is needed.
 <para>
 To enable the filesystem:
 <screen>
-File Systems
+File systems
     [*] OCFS2 file system support
 </screen>
 </para>
@@ -1628,9 +1631,9 @@ File Systems
 <title>Security</title>
 
 <para>
-The Linux kernel provides support for different
+The Linux kernel supports different
 security models by providing hooks and letting you build in your
-choice of model.  Right now, only a few
+choice of model.  At the moment, only a few
 models come with the default kernel source tree, but developers of new
 models are working on getting more accepted.
 </para>
@@ -1725,7 +1728,7 @@ Security options
 <para>
 A wide range of different kernel options can help in
 debugging what is going on within the kernel.  Following is a list of some
-of the more common one that can be useful for discovering new things
+of the more common ones that can be useful for discovering new things
 about how the kernel works, or help find potential problems within the
 current kernel source code.
 </para>
@@ -1736,7 +1739,7 @@ current kernel source code.
 <para>
 The kernel outputs a wide range of messages to its log file.  These
 messages can be seen by looking at the system log file (usually located
-in <filename>/var/log/messages</filename>, or by running the
+in <filename>/var/log/messages</filename>), or by running the
 <command>dmesg</command> command.
 </para>
 
@@ -1765,8 +1768,8 @@ Kernel hacking
 
 <para>
 The <literal>SysRq</literal> key on the keyboard can be used to control
-the kernel in a wide range of different ways while the kernel is
-running, or if it has crashed.
+the kernel in a number of different ways while the kernel is
+running, or after it has crashed.
 </para>
 
 <para>
