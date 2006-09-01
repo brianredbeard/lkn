@@ -9,7 +9,7 @@ boot it.
 </para>
 
 <para>
-First off, the file, <filename>Documenation/Changes</filename> should be
+First off, the file, <filename>Documentation/Changes</filename> should be
 consulted to verify the specific version number of all of the different
 tools described in this chapter.  All version numbers described below were
 taken from the 2.6.18 kernel release, so they should be valid for that
@@ -64,17 +64,17 @@ are the ones that the kernel requires.
 <title>Compiler</title>
 
 <para>
-The Linux kernel is written in the C programming language with a very
-little assembly in some places.  To build this, the GCC C compiler must be
+The Linux kernel is written in the C programming language with a small
+amount of assembly language in some places.  To build the kernel, the GCC C compiler must be
 used.  Most Linux distributions have a package entitiled
 <literal>gcc</literal> that should be installed.  If you wish to download
-the compiler and build it yourself, it is availble at
+the compiler and build it yourself, it is available at
 <systemitem role="url">http://gcc.gnu.org/</systemitem>
 </para>
 
 <para>
 As of the 2.6.18 kernel release, the oldest version of GCC that can
-successfully build the kernel is the 3.2 version.  Some of the newest GCC
+properly build a working kernel is the 3.2 version.  Some of the newest GCC
 releases will also not properly build the kernel, so unless you wish to
 help debug compiler bugs, it is not recommended that you try them out.
 </para>
@@ -102,7 +102,7 @@ utilities that can manipulate object files in all sorts of different ways.
 
 <para>
 <literal>binutils</literal> can usually be found in a distribution package
-called (obviously) <literal>binutils</literal>.  If you wish to download
+called (not surprisingly) <literal>binutils</literal>.  If you wish to download
 and install the package yourself, it can be found at
 <systemitem role="url">http://www.gnu.org/software/binutils/</systemitem>
 </para>
@@ -162,13 +162,9 @@ $ <userinput>make --version</userinput>
 <title>Tools to use the kernel</title>
 
 <para>
-There are a wide range of tools that are used on a Linux machine that are
-indirectly tied to the version of the kernel that is running on it.  For
-the most part, the kernel version does not affect any user program that is
-being used, but for a small group of programs, this is not the case.
-</para>
-
-<para>
+While the version of the running kernel typically does not affect any user
+application, there are a smal number of program for which the kernel
+version is important.
 This section will describe a number of different tools that are probably
 already installed on your Linux system.  However if you upgrade your kernel
 to a newer version than what originally came with your distribution, some
@@ -234,7 +230,7 @@ The kernel module loading process underwent a radical change for the 2.6
 kernel releases from the older kernel release.  The linker for the module
 (the code that resolves all symbols and figures out how to put the pieces
 together in memory) is now built into the kernel, which makes the userspace
-tools quite small.  Older distribuitions will have a packge called
+tools quite small.  Older distributions will have a package called
 <literal>modutils</literal> which will not work properly with the 2.6
 kernel.  The <literal>module-init-tools</literal> package is what you want
 to use in order for the 2.6 kernel to work properly with modules.
@@ -274,7 +270,7 @@ There are a wide range of filesystem specific tools that are necessary to
 create, format, configure, and fix disk partitions.  The different
 filesystem types all have different utilities to do these tasks.  The
 <literal>util-linux</literal> package has a few of these utilities, but
-some more populare filesystems have separate packages that contain the
+some more popular filesystems have separate packages that contain the
 programs needed.
 </para>
 
@@ -283,7 +279,7 @@ programs needed.
 <para>
 To work with ext2, ext3, or ext4 filesystems, the
 <literal>e2fsprogs</literal> package must be installed.
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">http://e2fsprogs.sourceforge.net/</systemitem>
 </para>
@@ -310,7 +306,7 @@ $ <userinput>tune2fs</userinput>
 <para>
 To use the jfs filesystem from IBM, the <literal>jfsutils</literal> pacakge
 must be installed.
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">http://jfs.sourceforge.net/</systemitem>
 </para>
@@ -335,7 +331,7 @@ $ <userinput>fsck.jfs -V</userinput>
 <para>
 To use the reiserfs filesystem, the <literal>reiserfsprogs</literal> package
 must be installed.
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">http://www.namesys.com/download.html</systemitem>
 </para>
@@ -361,7 +357,7 @@ $ <userinput>reiserfsck -V 2>&amp;1|grep reiserfsprogs</userinput>
 <para>
 To use the xfs filesystem from SGI, the <literal>xfsprogs</literal> package
 must be installed.
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">http://oss.sgi.com/projects/xfs/</systemitem>
 </para>
@@ -387,12 +383,12 @@ $ <userinput>xfs_db -V</userinput>
 To use the quota functionality of the kernel, you must have the
 <literal>quota-tools</literal> package installed.  This package includes
 programs that let you set quotas on users, provide statistics on the
-ammount of quota being used by different users, and set up warnings when
-people get too close to using up their availble filesystem quota.
+amount of quota being used by different users, and set up warnings when
+people get too close to using up their available filesystem quota.
 </para>
 
 <para>
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">http://sourceforge.net/projects/linuxquota/</systemitem>
 </para>
@@ -422,7 +418,7 @@ server.
 </para>
 
 <para>
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">http://nfs.sf.net/</systemitem>
 </para>
@@ -459,7 +455,7 @@ hardware and functions.
 
 <para>
 <literal>udev</literal> is a program that enables Linux to provide a
-persistant device naming system in the <filename>/dev</filename> directory.
+persistent device naming system in the <filename>/dev</filename> directory.
 It also provides a dynamic <filename>/dev</filename> much like the older
 (and now removed) <literal>devfs</literal> filesystem used to provide.
 Almost all Linux distributions use <literal>udev</literal> to manage the
@@ -468,7 +464,7 @@ boot the machine.
 </para>
 
 <para>
-Unfortunatly, <literal>udev</literal> relies on the structure of
+Unfortunately, <literal>udev</literal> relies on the structure of
 <filename>/sys</filename>, which has been known to change from time to time
 with kernel releases.  Some of these changes in the past have been known to
 break <literal>udev</literal>, so that your machine will not boot properly.
@@ -490,9 +486,10 @@ wish to upgrade <literal>udev</literal> on your own, it can be found at
 <para>
 As of the 2.6.18 kernel release, the oldest version of
 <literal>udev</literal> that will work properly with the kernel is the
-081 release.  It is recommended that you use the latest version of udev, as
+081 release.  It is recommended that you use the latest version of
+<literal>udev</literal>, as
 it will work better with newer kernels, due to some of the changes involved
-in how udev and the kernel communicate.
+in how <literal>udev</literal> and the kernel communicate.
 </para>
 
 <para>
@@ -514,7 +511,7 @@ handy tools to manage and monitor processes that are running in the system.
 </para>
 
 <para>
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">http://procps.sourceforge.net/</systemitem>
 </para>
@@ -547,7 +544,7 @@ them to work properly.
 </para>
 
 <para>
-If you wish to download and install the this package yourself, it can be
+If you wish to download and install this package yourself, it can be
 found at
 <systemitem role="url">ftp://ftp.kernel.org/pub/linux/utils/kernel/pcmcia/</systemitem>
 </para>
