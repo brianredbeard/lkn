@@ -4,6 +4,17 @@
 Creating useful bugreports
 </title>
 
+<para>
+So, your kernel just crashed and you want to help the kernel developers out
+and send them a bug report so that the problem will have a chance to get
+fixed (if you don't let them know, odds are it will never get fixed.)  But
+how do you do this?  What kind of information do they need to help fix the
+problem?  This appendix will go over the basics of how to create a useful
+bug report, and how to send it to the proper group of people.
+</para>
+
+
+
 <sect1>
 <title>decoding a oops message</title>
 <para></para>
