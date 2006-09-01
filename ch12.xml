@@ -377,8 +377,21 @@ almost any different target option.
 	<entry><para><literal>C</literal></para></entry>
 	<entry><para><literal>1</literal></para></entry>
 	<entry><para>This checks all c files that are about to be built with
-	the <literal>sparse</literal> tool.  This tool is used to detect common
-	programming errors in the kernel source files at build time.
+	the <literal>sparse</literal> tool.
+	<footnote>
+	<para>
+	<command>sparse</command> can be downloaded using
+	<command>git</command> from
+	<systemitem role="url">git://git.kernel.org/pub/scm/devel/sparse/sparse.git</systemitem>
+	or nightly snapshots can be found at
+	<systemitem role="url">http://www.codemonkey.org.uk/projects/git-snapshots/sparse/</systemitem>.
+	More information on how to use <command>sparse</command> can be
+	found in the <filename>Documentation/sparse.txt</filename> file in
+	the kernel source tree.
+	</para>
+	</footnote>
+	This tool is used to detect common programming errors in the kernel
+	source files at build time.
 	</para></entry>
       </row>
       <row>
