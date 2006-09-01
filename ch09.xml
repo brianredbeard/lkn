@@ -116,8 +116,9 @@ the more common types of disk controllers.
 
 <para>
 To use a USB storage device (commonly referred to as USB "flash"
-device) USB support must be first working properly.  Refer to the recipe
-in <xref linkend="lkn_usb" /> for how to do this.
+device, or an external USB disk drive) USB support must be first working
+properly.  Refer to the recipe in <xref linkend="lkn_usb" /> for how to do
+this.
 </para>
 
 <para>
@@ -250,7 +251,7 @@ Device Drivers
 
 This opens up a lengthy submenu of the different IDE controller types.
 Select the proper one based on the name of the device you found in the
-original step.
+lspci step.
 </para>
 
 </sect2>
@@ -339,7 +340,13 @@ SCSI and SATA drives.
 IDE CD-ROM drives are controlled by the same IDE controller as your main IDE
 disk drives.  Make sure the IDE controller is properly supported as
 described in <xref linkend="lkn_ide" />.  If it is properly supported,
-the IDE CD-ROM drive can be used without any further kernel configuration.
+then only one other configuration item need to be selected:
+<screen>
+Device Drivers
+    [*] ATA/ATAPI/MFM/RLL support
+    [*]   Enhanced IDE/MFM/RLL disk/cdrom/tape/floppy support
+    [M]     Include IDE/ATAPI CDROM support
+</screen>
 </para>
 
 </sect3>

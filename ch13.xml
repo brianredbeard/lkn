@@ -57,6 +57,11 @@ developers and released under the GPL.
 	drivers that are currently considered to be in the alpha-test phase.
 	</para>
 
+	<para>
+	On it's own, this option does not do anything except allow you to
+	chance to select other options.
+	</para>
+
 </refsect1>
 </refentry>
 
@@ -129,6 +134,11 @@ developers and released under the GPL.
 	can tolerate a "non-standard" kernel.  Only use this if you really know
 	what you are doing, as it is very easy to change the options to create
 	a kernel that will not even boot properly.
+	</para>
+
+	<para>
+	On it's own, this option does not do anything except allow you to
+	chance to select other options.
 	</para>
 
 </refsect1>
@@ -1191,6 +1201,10 @@ developers and released under the GPL.
 	PCI is a bus system that the processor used to talk to internal devices
 	and add-on cards.  It is extremely common and found in almost all
 	modern computers.
+	</para>
+
+	<para>
+	Say yes to this option unless you know what you are doing.
 	</para>
 
 </refsect1>
@@ -3788,6 +3802,11 @@ developers and released under the GPL.
 	<para>
 	Say yes here if you are developing drivers or trying to debug and
 	identify kernel problems.
+	</para>
+
+	<para>
+	On it's own, this option does not do anything except allow you to
+	chance to select other options.
 	</para>
 
 </refsect1>
