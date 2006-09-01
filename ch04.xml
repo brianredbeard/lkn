@@ -16,12 +16,15 @@ a development kernel, while the 2.4.25 release is a stable release.
 </para>
 
 <para>
-But after the 2.6 development series was created, the kernel developers
-decided to abandon this method, and declared that all of the 2.6 kernel
-release would be considered "stable", with the development happening
-between these kernel releases.  Combined with this, a "-stable" kernel
-branch has been created that releases bugfixes and security updates for the
-past kernel release, before the next release happens.
+But after the 2.6 series was created, the kernel developers decided to
+abandon this method of having two separate trees, and declared that all of
+the 2.6 kernel release would be considered "stable", no matter how quickly
+it seemed development was happening.  The few months between the major 2.6
+releases would allow kernel developers the time to add new features and
+then stabilize them in time for the next release.  Combined with this, a
+"-stable" kernel branch has been created that releases bugfixes and
+security updates for the past kernel release, before the next major 2.6
+release happens.
 </para>
 
 <para>
@@ -66,7 +69,7 @@ site.  kernel.org is a worldwide network of servers that mirror the Linux
 source code all around the world, enabling everyone to find a local server
 that is close to them.  This allows the main kernel servers to be
 responsive to the mirror sites, and lets users be able to download the
-needed files with the fastest speed possible.
+needed files as quickly as possible.
 </para>
 
 <para>
