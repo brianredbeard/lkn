@@ -57,8 +57,9 @@ $ <userinput>cd ~/linux</userinput>
 $ <userinput>gzip -dv config.gz</userinput>
 config.gz:       74.9% -- replaced with config
 </screen>
-Then copy this config file into your kernel directory and use it as the
-basis of the kernel configuration to build the kernel as described in
+Then copy this config file into your kernel directory and rename it to
+<filename>.config</filename>.  Then use it as the basis of the kernel
+configuration to build the kernel as described in
 chapter <xref linkend="LKN-chapter-building" />.
 </para>
 
