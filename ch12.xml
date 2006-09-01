@@ -19,13 +19,57 @@ All of these options are passed to the <literal>make</literal> program on
 the command line, and a number of them can be grouped together if
 desired. For example:
 <screen>
-make mrproper xconfig
+$ <userinput>make mrproper xconfig</userinput>
 </screen>
 
 The options are broken down into different types in the following
 sections.
-
 </para>
+
+<para>
+Most of these options can be reported by the kernel itself by runing
+<screen>
+$ <userinput>make help</userinput>
+</screen>
+This option will print out a lot of the common <command>make</command>
+targets that are described in the rest of this chapter.
+</para>
+
+<sect1>
+<title>Informational options</title>
+<para>
+These options print out the kernel version based on a number of different
+options to the screen.  They are commonly used by scripts to determine the
+version of the kernel being built.
+</para>
+
+<table id="lkn-ch12-table-informational">
+  <title>Informational options</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>kernelrelease</literal></para></entry>
+	<entry><para>The current kernel version, as determined by the build
+	system, will be printed.</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>kernelversion</literal></para></entry>
+	<entry><para>The current kernel version, as told by the main Makefile
+	will be printed.  This differs from the
+	<literal>kernelrelease</literal> option in that any additional version
+	information based on configuration options or localversion files will
+	not be used.</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+</sect1>
 
 <sect1>
 <title>Cleaning options</title>
@@ -126,26 +170,80 @@ These options allow the kernel to be configured in a wide range of different way
       <row>
 	<entry><para><literal>defconfig</literal></para></entry>
 	<entry><para>Generates a new kernel configuration with the default
-	answer being used for all of the different options.</para></entry>
+	answer being used for all of the different options.  The default
+	values are taken from a file located in the
+	<filename>arch/$ARCH/defconfig</filename> file, where
+	<literal>$ARCH</literal> refers to the specific architecture that
+	the kernel is being built for.</para></entry>
       </row>
       <row>
 	<entry><para><literal>allmodconfig</literal></para></entry>
-	<entry><para>Generates a new kernel configuration with all modules are
-	enabled whenever possible.</para></entry>
+	<entry><para>Generates a new kernel configuration in which modules
+	are enabled whenever possible.</para></entry>
       </row>
       <row>
 	<entry><para><literal>allyesconfig</literal></para></entry>
-	<entry><para>Generates a new kernel configuration with all options are
-	answered with <literal>yes</literal>.</para></entry>
+	<entry><para>Generates a new kernel configuration with all options
+	set to <literal>yes</literal>.</para></entry>
       </row>
       <row>
 	<entry><para><literal>allnoconfig</literal></para></entry>
-	<entry><para>Generates a new kernel configuration with all options are
-	answered with <literal>no</literal>.</para></entry>
+	<entry><para>Generates a new kernel configuration with all options
+	set to <literal>no</literal>.</para></entry>
       </row>
     </tbody>
   </tgroup>
 </table>
+
+<para>
+Note that the <literal>allyesconfig</literal>,
+<literal>allmodconfig</literal>,
+<literal>allnoconfig</literal>, and
+<literal>randconfig</literal> targets also take advantage of the
+environment variable <literal>KCONFIG_ALLCONFIG</literal>.  If that
+variable is set to point to a file, that file will be used as a list of
+configuration values that you require to be set to a specific value.
+</para>
+
+<para>
+For example, if the file <filename>~/linux/must_be_set</filename> contains
+the following variables:
+<screen>
+$ <userinput>cat ~/linux/must_be_set</userinput>
+CONFIG_SWAP=y
+CONFIG_DEBUG_FS=y
+</screen>
+And you tell make to <literal>allnoconfig</literal> and set this
+environment variable:
+<screen>
+$ <userinput>KCONFIG_ALLCONFIG=../must_be_set make allnoconfig</userinput>
+$ <userinput>grep CONFIG_SWAP .config</userinput>
+CONFIG_SWAP=y
+$ <userinput>grep CONFIG_DEBUG_FS .config</userinput>
+CONFIG_DEBUG_FS=y
+</screen>
+Those variables would not have normally been set to <literal>y</literal>
+otherwise.
+</para>
+
+<para>
+If the <literal>KCONFIG_ALLCONFIG</literal> variable is not set, the build
+system checks for a file named
+<literal>all</literal>[<replaceable>yes</replaceable>|<replaceable>mod</replaceable>|<replaceable>no</replaceable>|<replaceable>random</replaceable>]<literal>.config</literal>.
+If that file is present, it uses it as a list of config values that must be
+forced to the specified values.  If that file is not found, the build
+system then looks for a file called <literal>all.config</literal> for a
+list of forced configuration values.
+</para>
+
+<para>
+By using these different files, it is easier to set up a known good base
+configuration, that will always work.  Then the other configuration options
+can be used to generate different testing configurations for the needed
+situation.
+</para>
+
+
 </sect1>
 
 <sect1>
@@ -198,7 +296,7 @@ These options build the kernel itself in a variety of different ways.
 	</para></entry>
       </row>
       <row>
-	<entry><para><literal>dir/file.[ois]</literal></para></entry>
+	<entry><para><literal>dir/file.</literal>[<replaceable>o</replaceable>|<replaceable>i</replaceable>|<replaceable>s</replaceable>]</para></entry>
 	<entry><para>This option will build only the specified file.
 	</para></entry>
       </row>
@@ -206,12 +304,6 @@ These options build the kernel itself in a variety of different ways.
 	<entry><para><literal>dir/file.ko</literal></para></entry>
 	<entry><para>This option will build all of the needed files and link
 	them together to form the specified module.
-	</para></entry>
-      </row>
-      <row>
-	<entry><para><literal>rpm</literal></para></entry>
-	<entry><para>This option builds the kernel and packages it up as a RPM
-	package that can be installed.
 	</para></entry>
       </row>
       <row>
@@ -302,78 +394,6 @@ almost any different target option.
 </sect1>
 
 <sect1>
-<title>Informational options</title>
-<para>
-These options print out the kernel version based on a number of different
-options to the screen.  They are commonly used by scripts to determine the
-version of the kernel being built.
-</para>
-
-<table id="lkn-ch12-table-informational">
-  <title>Informational options</title>
-  <tgroup cols="2">
-    <thead>
-      <row>
-	<entry><para>Option</para></entry>
-	<entry><para>Description</para></entry>
-      </row>
-    </thead>
-    <tbody>
-      <row>
-	<entry><para><literal>kernelrelease</literal></para></entry>
-	<entry><para>The current kernel version, as determined by the build
-	system, will be printed.</para></entry>
-      </row>
-      <row>
-	<entry><para><literal>kernelversion</literal></para></entry>
-	<entry><para>The current kernel version, as told by the main Makefile
-	will be printed.  This differs from the
-	<literal>kernelrelease</literal> option in that any additional version
-	information based on configuration options or localversion files will
-	not be used.</para></entry>
-      </row>
-    </tbody>
-  </tgroup>
-</table>
-</sect1>
-
-<sect1>
-<title>Analyser options</title>
-<para>
-These options are good for trying to find problem code in the kernel.  The
-stack space list is good to run when creating new code to determine that your
-changes are not taking up too much kernel stack space.  The
-<literal>namespacecheck</literal> option is good to use to determine if your
-changes should really be adding symbols to the kernel's global namespace or
-not.
-</para>
-
-<table id="lkn-ch12-table-analyser">
-  <title>Informational options</title>
-  <tgroup cols="2">
-    <thead>
-      <row>
-	<entry><para>Option</para></entry>
-	<entry><para>Description</para></entry>
-      </row>
-    </thead>
-    <tbody>
-      <row>
-	<entry><para><literal>checkstack</literal></para></entry>
-	<entry><para>A list of the functions that use the most of the kernel stack space will be generated.
-	</para></entry>
-      </row>
-      <row>
-	<entry><para><literal>namespacecheck</literal></para></entry>
-	<entry><para>A large list of all of the kernel symbols, and their namespace will be generated.
-	</para></entry>
-      </row>
-    </tbody>
-  </tgroup>
-</table>
-</sect1>
-
-<sect1>
 <title>Packaging options</title>
 <para>
 These options package up a built kernel into a stand-alone package that can be
@@ -390,6 +410,12 @@ installed to a wide range of different machines.
       </row>
     </thead>
     <tbody>
+      <row>
+	<entry><para><literal>rpm</literal></para></entry>
+	<entry><para>This option builds the kernel first and then packages
+	it up as a RPM package that can be installed.
+	</para></entry>
+      </row>
       <row>
 	<entry><para><literal>rpm-pkg</literal></para></entry>
 	<entry><para>Build a source RPM package containing the kernel.
@@ -523,6 +549,42 @@ Each kernel architecture has a set of specific options unique to it.  The
 	file <filename>arch/i396/boot/image.iso</filename>.  The
 	<literal>syslinux</literal> package must be present on your system in
 	order for this to work properly.
+	</para></entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+</sect1>
+
+<sect1>
+<title>Analyser options</title>
+<para>
+These options are good for trying to find problem code in the kernel.  The
+stack space list is good to run when creating new code to determine that your
+changes are not taking up too much kernel stack space.  The
+<literal>namespacecheck</literal> option is good to use to determine if your
+changes should really be adding symbols to the kernel's global namespace or
+not.
+</para>
+
+<table id="lkn-ch12-table-analyser">
+  <title>Informational options</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry><para>Option</para></entry>
+	<entry><para>Description</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry><para><literal>checkstack</literal></para></entry>
+	<entry><para>A list of the functions that use the most of the kernel stack space will be generated.
+	</para></entry>
+      </row>
+      <row>
+	<entry><para><literal>namespacecheck</literal></para></entry>
+	<entry><para>A large list of all of the kernel symbols, and their namespace will be generated.
 	</para></entry>
       </row>
     </tbody>
