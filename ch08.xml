@@ -35,9 +35,9 @@ working properly.
 
 <para>
 Almost all distributions provide the kernel configuration files as part of
-the kernel package.  Read the distribution specific documentation for how
-to find these configurations, as it is usually buried somewhere below the
-<filename>/usr/src/linux/</filename> directory tree.
+the distribution kernel package.  Read the distribution specific
+documentation for how to find these configurations, as it is usually buried
+somewhere below the <filename>/usr/src/linux/</filename> directory tree.
 </para>
 
 <para>
