@@ -193,6 +193,19 @@ e1000
 This shows that the module named <literal>e1000</literal> is controlling
 the <literal>eth0</literal> network device.
 </para>
+
+<para>
+That <command>basename...</command> above compresses the following steps
+into a single command line:
+
+<orderedlist>
+<listitem>
+<para>
+</para>
+</listitem>
+</orderedlist>
+</para>
+
 <para>
 Now that we have the module name, we need to find the kernel configuration
 option that controls it.  You can look through the different network
@@ -391,7 +404,8 @@ help you understand your hardware and the kernel source better.
 <para>
 The steps involved in determining the driver to device match differ
 depending on the type of device that you are working with.  We will discuss
-the two most common forms of devices right now, PCI and USB devices.
+the two most common forms of devices right now, PCI and USB devices.  The
+methods described here will also work with other types of devices.
 </para>
 
 <sect2>
