@@ -195,15 +195,55 @@ the <literal>eth0</literal> network device.
 </para>
 
 <para>
-That <command>basename...</command> above compresses the following steps
-into a single command line:
+That <command>basename...</command> command above compresses the following
+steps into a single command line:
 
 <orderedlist>
 <listitem>
 <para>
+Follow the <filename>/sys/class/net/eth0/device</filename> symlink into the
+directory within the <filename>/sys/device/</filename> tree that contains
+the information for the device that controls <literal>eth0</literal>.
+Note that the <filename>/sys/class/net/eth0</filename> directory might also
+be a symlink on the newer versions of the kernel.
+</para>
+</listitem>
+<listitem>
+<para>
+Within the directory that describes the device in <literal>sysfs</literal>,
+there is a symlink to the driver that is bound to this device.  That
+symlink is called <filename>driver</filename>, so we follow that link.
+</para>
+</listitem>
+<listitem>
+<para>
+Within the directory that describes the driver in <literal>sysfs</literal>,
+there is a symlink to the module that this driver is contained within.
+That symlink is called <filename>module</filename>.  We want the target of
+that symlink, and to get the target, we use the <command>readlink</command>
+command:
+<screen>
+$ <userinput>readlink /sys/class/net/eth0/device/driver/module</userinput>
+../../../../module/e1000
+</screen>
+</para>
+</listitem>
+<listitem>
+<para>
+As we only care about the name of the module, we want to strip the rest of
+the path off the output of the <command>readlink</command> command, and
+only save the rightmost portion.  That is what the
+<command>basename</command> command does:
+<screen>
+$ <userinput>basename ../../../../module/e1000</userinput>
+e1000
+</screen>
 </para>
 </listitem>
 </orderedlist>
+So we put the output of the long symlink traversal to the
+<command>readlink</command> location into the <command>basename</command>
+program, enabling the whole process to be done in one line.
 </para>
 
 <para>
@@ -368,6 +408,86 @@ be built.
 </para>
 
 </sect3>
+
+<sect3>
+<title>Let the kernel tell us what we need</title>
+
+<para>
+Now that we have gone through all of the steps poking around in
+<literal>sysfs</literal>, following symlinks to module names, here is a
+very simple script that will do all of that work, in a different way:
+<screen>
+#!/bin/bash
+#
+# find_all_modules.sh
+#
+for i in `find /sys/ -name modalias -exec cat {} \;`; do
+    /sbin/modprobe --config /dev/null --show-depends $i ;
+done | rev | cut -f 1 -d '/' | rev | sort -u
+</screen>
+This script goes through <literal>sysfs</literal> and finds all files
+called <filename>modalias</filename>.  That file contains the module alias
+that describes to the <command>modprobe</command> command, what module
+should be loaded to control this device.  The module alias is made up of a
+combination of device manufacturer, id, class type, and other unique
+identifiers for that specific type of device.  All kernel driver modules
+have an internal list of devices that it supports that is generated
+automatically by the list of devices the driver tells the kernel it
+supports.  The <command>modprobe</command> looks through this list of
+devices by all drivers and tries to match it up with the alias it has.  If
+it finds a match, it will then load the module (this procedure is how the
+automatic driver loading functionalty in Linux works.)
+</para>
+
+<para>
+The script has the <command>modprobe</command> program stop before actually
+loading the module, and just print out what actions it would take.  This
+gives us a list of all of the modules that are needed to control all
+devices in the system.  A little cleaning up of the list by sorting it and
+finding the proper field to display, results in this output:
+<screen>
+$ <userinput>find_all_modules.sh</userinput>
+8139cp.ko
+8139too.ko
+ehci-hcd.ko
+firmware_class.ko
+i2c-i801.ko
+ieee80211.ko
+ieee80211_crypt.ko
+ipw2200.ko
+mii.ko
+mmc_core.ko
+pcmcia_core.ko
+rsrc_nonstatic.ko
+sdhci.ko
+snd-hda-codec.ko
+snd-hda-intel.ko
+snd-page-alloc.ko
+snd-pcm.ko
+snd-timer.ko
+snd.ko
+soundcore.ko
+uhci-hcd.ko
+usbcore.ko
+yenta_socket.ko
+</screen>
+This is a list of all of the modules that are needed to control the
+hardware in the machine.
+</para>
+
+<para>
+The script will also probably print out some error messages that look like:
+<screen>
+FATAL: Module pci:v00008086d00002592sv000010CFsd000012E2bc03sc00i00 not found.
+FATAL: Module serio:ty01pr00id00ex00 not found.
+</screen>
+Which means that it could not find a module that will control that device.
+Do not be concerned about this, as some devices do not have kernel drivers
+that will work for them.
+</para>
+
+</sect3>
+
 </sect2>
 </sect1>
 
