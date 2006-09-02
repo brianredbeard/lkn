@@ -1,4 +1,19 @@
 #!/bin/sh
+#
+# Find all modules and drivers for a given class device.
+#
+
+if [ $# != "1" ] ; then
+	echo
+	echo "Script to display the drivers and modules for a specified sysfs class device"
+	echo "usage: $0 <CLASS_NAME>"
+	echo
+	echo "example usage:"
+	echo "      $0 sda"
+	echo "Will show all drivers and modules for the sda block device."
+	echo
+	exit 1
+fi
 
 DEV=$1
 

@@ -1046,6 +1046,98 @@ that this filesystem type is enabled as described in
 <sect3>
 <title>Disk controller</title>
 
+<para>
+In the output of the <command>mount</command> command above, the first
+portion of the line shows which block device the root filesystem is mounted
+on.  In this example that would be <literal>/dev/sda2</literal>.  Now that
+the filesystem is configured properly in your kernel, you must also make
+sure that this block device will also work correctly.  To find out which
+drivers are needed for this, we need to look at <literal>sysfs</literal>
+again.
+</para>
+
+<para>
+All block devices show up in <literal>sysfs</literal> in either
+<filename>/sys/block/</filename> or in
+<filename>/sys/class/block/</filename>, depending on the version of the
+kernel you are using.  In either location, the block devices are a tree,
+the main block device with the different partitions children of the main
+device:
+<screen>
+$ <userinput>tree -d /sys/block/ | egrep "hd|sd"</userinput>
+|-- hdc
+|-- hdd
+`-- sda
+    |-- sda1
+    |-- sda2
+    |-- sda3
+</screen>
+</para>
+
+<para>
+From the information in the <command>mount</command> command, we need to
+ensure that the <literal>sda3</literal> device is configured properly.  As
+this is a partition (disk partitions are numbered, while main block devices
+are not), the whole <literal>sda</literal> device must be configured
+(without the main block device, there is no way to access the individual
+partitions on that device.)
+</para>
+
+<para>
+The <literal>sda</literal> block device is represented just like the
+network device we looked at earlier in this chapter.  There is a symlink in
+the device's directory called <filename>device</filename> that points to
+the logical device that controls this block device:
+<screen>
+$ <userinput>ls -l /sys/block/sda</userinput>
+  ...
+device -> ../../devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/0:0:0:0
+  ...
+</screen>
+Now we need to start walking up the chain of devices in sysfs to find out
+what driver is controlling this device:
+<screen>
+$ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/0:0:0:0</userinput>
+  ...
+driver -> ../../../../../../bus/scsi/drivers/sd
+  ...
+</screen>
+Here we see that the SCSI disk controller driver is responsible for making
+this device work.  So we know we need to configure SCSI disk support into
+our kernel configuration now.
+</para>
+
+<para>
+Continuing up the directory chain in <literal>sysfs</literal> we try to
+find where the driver is that controls the hardware:
+<screen>
+$ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0</userinput>
+  ...
+</screen>
+There is no link called <filename>driver</filename> in this directory, so
+go back up one more level:
+<screen>
+$ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2/host0</userinput>
+  ...
+</screen>
+Again, no driver here.  Continuing on up one more level:
+<screen>
+$ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2</userinput>
+  ...
+driver -> ../../../bus/pci/drivers/ata_piix
+  ...
+</screen>
+There, this is the disk controller that we need to ensure is in our kernel
+configuration.
+</para>
+
+<para>
+So, for this root filesystem, we need to configure in the
+<literal>ext3</literal>, <literal>sd</literal>, and
+<literal>ata_piix</literal> kernel drivers so that we will be able to
+successfully boot our kernel on this hardware.
+</para>
+
 </sect3>
 </sect2>
 
@@ -1069,6 +1161,92 @@ developed with the kernel developers responsible for
 <literal>sysfs</literal> and should successfully work on all future
 versions of the 2.6 kernel.
 </para>
+
+<para>
+It also makes short work of the previous example trying to get all of the
+proper drivers for the <literal>sda</literal> block device:
+<screen>
+$ <userinput>get-driver.sh sda</userinput>
+looking at sysfs device: /sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/0:0:0:0
+found driver: sd
+found driver: ata_piix
+</screen>
+As well as finding all of the proper drivers needed for complex things like
+USB to serial devices:
+<screen>
+$ <userinput>get-driver.sh ttyUSB0</userinput>
+looking at sysfs device: /sys/devices/pci0000:00/0000:00:1d.3/usb4/4-2/4-2.3/4-2.3:1.0/ttyUSB0
+found driver: pl2303 from module: pl2303
+found driver: pl2303 from module: pl2303
+found driver: usb from module: usbcore
+found driver: usb from module: usbcore
+found driver: usb from module: usbcore
+found driver: uhci_hcd from module: uhci_hcd
+</screen>
+
+</para>
+
+<para>
+<programlisting>
+#!/bin/sh
+#
+# Find all modules and drivers for a given class device.
+#
+
+if [ $# != "1" ] ; then
+	echo
+	echo "Script to display the drivers and modules for a specified sysfs class device"
+	echo "usage: $0 &lt;CLASS_NAME&gt;"
+	echo
+	echo "example usage:"
+	echo "      $0 sda"
+	echo "Will show all drivers and modules for the sda block device."
+	echo
+	exit 1
+fi
+
+DEV=$1
+
+if test -e "$1"; then
+	DEVPATH=$1
+else
+	# find sysfs device directory for device
+	DEVPATH=$(find /sys/class/ -name "$1" | head -1)
+	test -z "$DEVPATH" &amp;&amp; DEVPATH=$(find /sys/block/ -name "$1")
+	test -e "$DEVPATH" || exit 1
+fi
+
+# resolve old-style "device" link as the parent device
+if test -d "$DEVPATH" -a -L $DEVPATH/device ; then
+	if test -e "$DEVPATH/device"; then
+		DEVPATH=$(readlink -f $DEVPATH/device)
+	fi
+fi
+
+echo "looking at sysfs device: $DEVPATH"
+
+while test "$DEVPATH" != "/"; do
+	DRIVERPATH=
+	DRIVER=
+	MODULEPATH=
+	MODULE=
+	if test -e $DEVPATH/driver; then
+		DRIVERPATH=$(readlink -f $DEVPATH/driver)
+		DRIVER=$(basename $DRIVERPATH)
+		echo -n "found driver: $DRIVER"
+		if test -e $DRIVERPATH/module; then
+			MODULEPATH=$(readlink -f $DRIVERPATH/module)
+			MODULE=$(basename $MODULEPATH)
+			echo -n " from module: $MODULE"
+		fi
+		echo
+	fi
+
+	DEVPATH=$(dirname $DEVPATH)
+done
+</programlisting>
+</para>
+
 </sect2>
 
 </sect1>
