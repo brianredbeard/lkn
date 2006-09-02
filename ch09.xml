@@ -201,7 +201,18 @@ devices, please enable support for them.
 <para>
 IDE disks are the most common type of PC disks.  The device that enables
 them to work properly is an IDE disk controller.  To determine if you have
-a IDE disk controller on the system, run the following command:
+a IDE disk controller on the system, use the <command>lspci</command>
+command in the following manner:
+<footnote>
+<para>
+On some machines, the <command>lspci</command> program will be found in the
+<filename>/sbin/</filename> directory, not the
+<filename>/usr/sbin</filename> directory as shown in all of the examples in
+this chapter.  If you are using such a distro, type
+<filename>/sbin/lspci</filename> instead of
+<filename>/usr/sbin/lspci</filename>.
+</para>
+</footnote>
 <screen>
 $ <userinput>/usr/sbin/lspci | grep IDE</userinput>
 00:1f.1 IDE interface: Intel Corporation 82801EB/ER (ICH5/ICH5R) IDE Controller (rev 02)

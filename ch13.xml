@@ -1520,7 +1520,7 @@ developers and released under the GPL.
 	This is useful for example if some of your network devices are real
 	time devices that need a certain minimum data flow rate, or if you
 	need to limit the maximum data flow rate for traffic which matches
-	specified criteria.  This code is considered to be experimental.
+	specified criteria.
 	</para>
 
 	<para>
@@ -1793,6 +1793,13 @@ developers and released under the GPL.
 	<para>
 	Say yes here if you would like support for ISA Plug and Play devices.
 	Some information is in <filename>Documentation/isapnp.txt</filename>.
+	</para>
+
+	<para>
+	If you use have ISA Plug and Play devices, please use the ISA PnP
+	tools that are found at
+	<systemitem role="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>
+	to configure them properly.
 	</para>
 
 </refsect1>
@@ -3694,6 +3701,13 @@ developers and released under the GPL.
 	OProfile is a profiling system capable of profiling the whole
 	system, include the kernel, kernel modules, libraries, and
 	applications.
+	</para>
+
+	<para>
+	For more information, and links to the userspace tools needed to
+	use OProfile properly, see the main project page at
+	<systemitem
+	role="url">http://oprofile.sourceforge.net/news/</systemitem>.
 	</para>
 
 </refsect1>
