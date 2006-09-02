@@ -528,6 +528,12 @@ the two most common forms of devices right now, PCI and USB devices.  The
 methods described here will also work with other types of devices.
 </para>
 
+<para>
+Also, it is very important to have the kernel be able to find all of the
+filesystems in the system, the most important one being the root
+filesystem.  We will go into how to do this in the last section.
+</para>
+
 <sect2>
 <title>PCI devices</title>
 
@@ -606,23 +612,6 @@ these values to match a driver to a device properly.  PCI drivers tell the
 kernel which vendor and device ids that they will support so that the
 kernel knows how to bind the driver to the proper device.  Write them down
 somewhere, as we will refer to them later.
-<footnote>
-<para>
-For fun, run <literal>modprobe</literal> on the value that is in the
-<filename>modalias</filename> file as root:
-<screen>
-$ <userinput>su</userinput>
-Password:
-# <userinput>modprobe `cat modalias`</userinput>
-# <userinput>exit</userinput>
-$
-</screen>
-and see if a module was loaded that will control this device.  The value in
-the <filename>modalias</filename> file is how the userspace tools like
-<literal>udev</literal> and <literal>modprobe</literal> know how to load
-the proper module for the kernel to use for a given device.
-</para>
-</footnote>
 </para>
 
 <para>
@@ -998,6 +987,90 @@ be built.
 </para>
 
 </sect2>
+
+<sect2>
+<title>Root filesystem</title>
+
+<para>
+The root filesystem is the filesystem that the kernel boots from.  It
+contains all of the initial programs that start up the distro and it also
+usually contains all of the system configuration for the machine.  In
+short, it is a very important thing, and must be able to be found by the
+kernel at boot time in order for things to work properly.
+</para>
+
+<para>
+If your newly configured kernel dies at boot time with the following error:
+<screen>
+VFS: Cannot open root device hda2 (03:02)
+Please append a correct "root=" boot option
+Kernal panic: VFS: Unable to mount root fs on 03:02
+</screen>
+then the root disk is unable to be found.  If you are not using a ramdisk
+image at boot time, it is usually recommended that you build both the
+filesystem that you use for your root partition, and the disk controller
+for that disk into the kernel, instead of having it as a module.  If you
+use a ramdisk at boot time, then you should be safe building these portions
+as modules.
+<footnote>
+<para>
+How to determine if you are using a ramdisk at boot time?  In
+<xref linkend="LKN-installing" /> we discuss using the distribution install
+script to install the kernel, or doing it on your own.  If you are using
+the distribuition install script, you are probably using a ramdisk.  If you
+are installing it on your own, then you are probably not.
+</para>
+</footnote>
+</para>
+
+<sect3>
+<title>Filesystem type</title>
+
+<para>
+First, the type of filesystem that the root partition is using needs to be
+determined.  To do that, look in the output of the <command>mount</command>
+command:
+<screen>
+$ <userinput>mount | grep " / "</userinput>
+/dev/sda2 on / type ext3 (rw,noatime)
+</screen>
+We are interested in the type of the filesystem, which is shown after the
+word <literal>type</literal>.  In this example it is
+<literal>ext3</literal>.  This is the type of filesystem that the root
+partition is using.  Go into the kernel configuration system and make sure
+that this filesystem type is enabled as described in
+<xref linkend="filesystems" />.
+</para>
+</sect3>
+
+<sect3>
+<title>Disk controller</title>
+
+</sect3>
+</sect2>
+
+<sect2>
+<title>Helper script</title>
+
+<para>
+The internal structure of the <literal>sysfs</literal> filesystem
+constantly changes around, due to the organization of devices and
+refinements over time from the kernel developers in showing how the
+different internal kernel structures should be displayed to userspace in
+the best manner.  Because of this, over time, some of the symlinks
+previously mentioned in this chapter might not be present.  However the
+information is all still there, just moved around a little bit.
+</para>
+
+<para>
+Here is a script that is handy in determing the needed kernel driver and
+module module name for any device node in the system.  It has been
+developed with the kernel developers responsible for
+<literal>sysfs</literal> and should successfully work on all future
+versions of the 2.6 kernel.
+</para>
+</sect2>
+
 </sect1>
 
 

@@ -1,4 +1,4 @@
-<chapter id="LKN-recipie">
+<chapter id="LKN-recipe">
 
 
 <!--
@@ -1432,7 +1432,7 @@ Device Drivers
 
 </sect1>
 
-<sect1>
+<sect1 id="filesystems">
 <title>Filesystems</title>
 
 <para>
