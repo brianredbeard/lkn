@@ -3,13 +3,16 @@
 <title>Kernel History and Background</title>
 
 <para>
-Despite it's large code base (over 7 million lines of code), the Linux kernel
-is very flexible, and can be tuned for a wide range of different systems.  By
-customizing the kernel for your specific environment, it is possible to create
-something that is both smaller and faster than the kernel provided by most
-Linux distributions.  This book will go into how to build and install a custom
-kernel, and provide some hints on how to enable specific options that you will
-probably wish to use for different situations.
+Despite it's large code base (over 7 million lines of code), the Linux
+kernel is the most flexible operating system that has ever been created.
+It can be tuned for a wide range of different systems, running on
+everything from a radio-controlled model helicoptor, to a cellphone, to the
+majority of the largest supercomputers in the world.  By customizing the
+kernel for your specific environment, it is possible to create something
+that is both smaller and faster than the kernel provided by most Linux
+distributions.  This book will go into how to build and install a custom
+kernel, and provide some hints on how to enable specific options that you
+will probably wish to use for different situations.
 </para>
 
 <!--
@@ -17,47 +20,39 @@ probably wish to use for different situations.
   AO: I decided that paragraph made a good start, and I added the
   following.
 
+  gkh: looks good, I've edited it a bit.
+
 -->
 
 <para>
-
-No Linux distribution provides the exact kernel most of its users
-want. Modern distributions have gotten very accommodating, compiling
-in support for many devices, for sound, and even for power
-conservation. But you will likely have a need that's different from
-the majority of users (and every distribution has to try to meet the
-needs of the majority). You may just have different hardware. And when
-a new kernel comes out, you may want to start using it without waiting
-for a distribution to be built around it.
-
+No Linux distribution provides the exact kernel most of its users want.
+Modern distributions have gotten very accommodating, compiling in support
+for every known device, for sound, and even for power conservation.  But
+you will likely have a need that's different from the majority of users
+(and every distribution has to try to meet the needs of the majority). You
+may just have different hardware. And when a new kernel comes out, you may
+want to start using it without waiting for a distribution to be built
+around it.
 </para>
 
 <para>
-
-For a host of reason, you will want during your Linux career to
-sometimes build a kernel, or to tweak the parameters of one you are
-running. This book gives you the information you need to understand
-the kernel from a user's point of view, and to make the most common
-changes.
-
+For a host of reasons, you will want during your Linux career to sometimes
+build a kernel, or to tweak the parameters of one you are running. This
+book gives you the information you need to understand the kernel from a
+user's point of view, and to make the most common changes.
 </para>
 
 <para>
-
 There are also good reasons to take features out of the kernel,
 particularly if you are running it on an embedded system or one with a
 small form factor.
-
 </para>
 
 <para>
-
-When tweaking, it's helpful to understand the internals of kernel
-behavior. These are beyond the scope of this book, except for brief
-summaries that appear with certain options. The bibliography includes
-references to other books and material that can give you more
-background.
-
+When tweaking, it's helpful to understand the internals of kernel behavior.
+These are beyond the scope of this book, except for brief summaries that
+appear with certain options. The bibliography includes references to other
+books and material that can give you more background.
 </para>
 
 <sect1>
@@ -95,7 +90,8 @@ run bash/gcc/gnu-make/gnu-sed/compress etc under it.
   paragraph.
 
 -->
-
+...
+<!--
 Sources for this pet project of mine can be found at nic.funet.fi
 (128.214.6.100) in the directory /pub/OS/Linux.  The directory also
 contains some README-file and a couple of binaries to work under linux
@@ -117,6 +113,7 @@ hackers interested in operating systems and 386's with access to minix.
 The system needs an AT-compatible harddisk (IDE is fine) and EGA/VGA. If
 you are still interested, please ftp the README/RELNOTES, and/or mail me
 for additional info.
+-->
 
 I can (well, almost) hear you asking yourselves "why?".  Hurd will be
 out in a year (or two, or next month, who knows), and I've already got
