@@ -2,11 +2,69 @@
 
 <title>Kernel History and Background</title>
 
+<para>
+Despite it's large code base (over 7 million lines of code), the Linux kernel
+is very flexible, and can be tuned for a wide range of different systems.  By
+customizing the kernel for your specific environment, it is possible to create
+something that is both smaller and faster than the kernel provided by most
+Linux distributions.  This book will go into how to build and install a custom
+kernel, and provide some hints on how to enable specific options that you will
+probably wish to use for different situations.
+</para>
+
+<!--
+
+  AO: I decided that paragraph made a good start, and I added the
+  following.
+
+-->
+
+<para>
+
+No Linux distribution provides the exact kernel most of its users
+want. Modern distributions have gotten very accommodating, compiling
+in support for many devices, for sound, and even for power
+conservation. But you will likely have a need that's different from
+the majority of users (and every distribution has to try to meet the
+needs of the majority). You may just have different hardware. And when
+a new kernel comes out, you may want to start using it without waiting
+for a distribution to be built around it.
+
+</para>
+
+<para>
+
+For a host of reason, you will want during your Linux career to
+sometimes build a kernel, or to tweak the parameters of one you are
+running. This book gives you the information you need to understand
+the kernel from a user's point of view, and to make the most common
+changes.
+
+</para>
+
+<para>
+
+There are also good reasons to take features out of the kernel,
+particularly if you are running it on an embedded system or one with a
+small form factor.
+
+</para>
+
+<para>
+
+When tweaking, it's helpful to understand the internals of kernel
+behavior. These are beyond the scope of this book, except for brief
+summaries that appear with certain options. The bibliography includes
+references to other books and material that can give you more
+background.
+
+</para>
+
 <sect1>
 <title>Beginning</title>
 
 <para>
-The Linux kernel started its development cycle way back in September of
+The Linux kernel started its development cycle in September
 1991 with this post from Linus Torvalds in the Usenet newsgroup
 <literal>comp.os.minix</literal>:
 </para>
@@ -30,6 +88,13 @@ where it's even usable (though may not be depending on what you want),
 and I am willing to put out the sources for wider distribution.  It is
 just version 0.02 (+1 (very small) patch already), but I've successfully
 run bash/gcc/gnu-make/gnu-sed/compress etc under it.
+<!--
+
+  AO: I would end the quotation here. The rest is uninteresting
+  short-term detail, in my opinion. Perhaps leave in the "Why"
+  paragraph.
+
+-->
 
 Sources for this pet project of mine can be found at nic.funet.fi
 (128.214.6.100) in the directory /pub/OS/Linux.  The directory also
@@ -73,7 +138,7 @@ a line if you are willing to let me use your code.
 
 <para>
 With that auspicious beginning, the Linux kernel was born, and in 15 years,
-has grown into somwthing that supports more different processors and more
+has grown into something that supports more different processors and more
 different devices than any other operating system ever has.
 </para>
 
@@ -82,17 +147,11 @@ different devices than any other operating system ever has.
   	everyone know it by now?
 	And do I need to describe the different development trees of the past,
 	as that is no longer an issue now?
--->
 
-<para>
-Despite it's large code base (over 7 million lines of code), the Linux kernel
-is very flexible, and can be tuned for a wide range of different systems.  By
-customizing the kernel for your specific environment, it is possible to create
-something that is both smaller and faster than the kernel provided by most
-Linux distributions.  This book will go into how to build and install a custom
-kernel, and provide some hints on how to enable specific options that you will
-probably wish to use for different situations.
-</para>
+  ao: I don't know of any historical issues that affect current
+  users. Gee, maybe this whole section is redundant.
+
+-->
 
 </sect1>
 
