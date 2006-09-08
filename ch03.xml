@@ -15,7 +15,8 @@ tools described in this chapter.  All version numbers described below were
 taken from the 2.6.18 kernel release, so they should be valid for that
 kernel.  However, if you are using a newer kernel, please verify that you
 have the required versions as specified in this file, otherwise things
-might not work properly, and can be very hard to determine what went wrong.
+might not work properly, and it can be very hard to determine what went
+wrong.
 </para>
 
 <!--
@@ -49,7 +50,7 @@ o  udev                   081                     # udevinfo -V
 <para>
 For most Linux distributions, there is an installation option to install a
 range of <literal>Kernel Hacking</literal> packages.  If your distribution
-offers this option, it is the easiest to merely install this instead of
+offers this option, it is easiest to install this instead of
 trying to track down all of the individual programs that are needed for
 this task.
 </para>
@@ -163,11 +164,11 @@ $ <userinput>make --version</userinput>
 
 <para>
 While the version of the running kernel typically does not affect any user
-application, there are a smal number of program for which the kernel
+application, there are a small number of program for which the kernel
 version is important.
 This section will describe a number of different tools that are probably
-already installed on your Linux system.  However if you upgrade your kernel
-to a newer version than what originally came with your distribution, some
+already installed on your Linux system.  However, if you upgrade your
+kernel to a version newer than one that came with your distribution, some
 of these packages may also need to be upgraded in order for the system to
 work together properly.
 </para>
@@ -193,7 +194,7 @@ package yourself, it can be found at
 As of the 2.6.18 kernel release, the oldest version of the
 <literal>util-linux</literal> package that will work properly is the 2.10o
 release.  It is recommended that the latest version of this package be
-installed, as new features that are added to the kernel are able to be used
+installed, as new features added to the kernel can be used
 by newer versions of this package.  Bind mounts are one such example of an
 option that newer kernels can provide, and a newer version of
 <literal>util-linux</literal> is needed in order to have them work
@@ -221,8 +222,8 @@ ones when the hardware is present in the system.  All Linux distributions
 use modules in order to only load the needed drivers and options for the
 system based on the hardware present, instead of being forced to build all
 possible drivers and options in the the kernel in one large chunk.  By
-using modules, memory is saved by only having the code that is needed to
-control the machine properly be used up.
+using modules, memory is saved by only loading the code that is needed to
+control the machine properly.
 </para>
 
 <para>
@@ -246,7 +247,7 @@ package yourself, it can be found at
 As of the 2.6.18 kernel release, the oldest version of the
 <literal>module-init-tools</literal> package that will work properly is the 0.9.10
 release.  It is recommended that the latest version of this package be
-installed, as new features that are added to the kernel are able to be used
+installed, as new features added to the kernel can be used
 by newer versions of this package.  Blacklisting of modules to prevent them
 from being automatically loaded by the <literal>udev</literal> package is
 one such option that the newer version of
@@ -491,7 +492,7 @@ available at
 <para>
 It is highly recommended that you use the version of
 <literal>udev</literal> that comes with your Linux distribution, as it is
-tied into the distibution specific boot process very tightly.  But, if you
+tied into the distribution specific boot process very tightly.  But, if you
 wish to upgrade <literal>udev</literal> on your own, it can be found at
 <systemitem role="url">http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html</systemitem>
 </para>

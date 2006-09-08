@@ -19,7 +19,7 @@ a development kernel, while the 2.4.25 release is a stable release.
 But after the 2.6 series was created, the kernel developers decided to
 abandon this method of having two separate trees, and declared that all of
 the 2.6 kernel release would be considered "stable", no matter how quickly
-it seemed development was happening.  The few months between the major 2.6
+development was happening.  The few months between the major 2.6
 releases would allow kernel developers the time to add new features and
 then stabilize them in time for the next release.  Combined with this, a
 "-stable" kernel branch has been created that releases bugfixes and
@@ -53,10 +53,9 @@ contained bug fixes and security updates.
 <para>
 If you wish to just use the latest kernel release, it is recommended that
 you use the stable kernel releases.  If you wish to help the kernel
-developers out in testing out the new features of the next kernel release
-and giving them feedback, use the development kernel release.  For the
-purpose of this chapter, we will assume that you are using a stable kernel
-release.
+developers test the features of the next kernel release and give them
+feedback, use the development kernel release.  For the purpose of this
+chapter, we will assume that you are using a stable kernel release.
 </para>
 </sect1>
 
@@ -68,8 +67,8 @@ All of the source code for the Linux kernel can be found on the kernel.org
 site.  kernel.org is a worldwide network of servers that mirror the Linux
 source code all around the world, enabling everyone to find a local server
 that is close to them.  This allows the main kernel servers to be
-responsive to the mirror sites, and lets users be able to download the
-needed files as quickly as possible.
+responsive to the mirror sites, and lets users download the needed files as
+quickly as possible.
 </para>
 
 <para>
@@ -164,7 +163,7 @@ linux-2.6.17.8.tar.gz
 Now that the source code is in the proper directory, we need to uncompress
 the tree:
 <screen>
-$ <userinput>tar -xcvf linux-2.6.17.8.tar.gz</userinput>
+$ <userinput>tar -xzvf linux-2.6.17.8.tar.gz</userinput>
 </screen>
 The screen will be filled with files that are uncompressed, and then you
 will be left with the following in the <filename>linux/</filename>
