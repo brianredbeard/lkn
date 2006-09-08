@@ -548,6 +548,19 @@ working driver for.
 <para>
 First, let us find the PCI device in the system that is not working.  To
 get a list of all PCI devices , use the <literal>lspci</literal> program.
+<footnote>
+<para>
+Almost all distributions place the <literal>lspci</literal> program in the
+<filename>/usr/sbin/</filename> directory, but some place it in other
+locations.  To find out where it is located, do:
+<screen>
+$ <userinput>which lspci</userinput>
+/usr/sbin/lspci
+</screen>
+If you are using a distribution that puts it somewhere else,
+please use that path for whenever we discuss using <literal>lspci</literal>
+</para>
+</footnote>
 But as we only care about the ethernet PCI devices, we will narrow our
 search of the PCI devices down by only searching for anything with the term
 "Ethernet" in it:

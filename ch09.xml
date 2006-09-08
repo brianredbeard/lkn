@@ -205,12 +205,15 @@ a IDE disk controller on the system, use the <command>lspci</command>
 command in the following manner:
 <footnote>
 <para>
-On some machines, the <command>lspci</command> program will be found in the
-<filename>/sbin/</filename> directory, not the
-<filename>/usr/sbin</filename> directory as shown in all of the examples in
-this chapter.  If you are using such a distro, type
-<filename>/sbin/lspci</filename> instead of
-<filename>/usr/sbin/lspci</filename>.
+Almost all distributions place the <literal>lspci</literal> program in the
+<filename>/usr/sbin/</filename> directory, but some place it in other
+locations.  To find out where it is located, do:
+<screen>
+$ <userinput>which lspci</userinput>
+/usr/sbin/lspci
+</screen>
+If you are using a distribution that puts it somewhere else,
+please use that path for whenever we discuss using <literal>lspci</literal>
 </para>
 </footnote>
 <screen>
@@ -801,6 +804,8 @@ Only if your machine is one of the other types in the preceding list should you
 select anything other than the <literal>PC-compatible</literal> option.
 However, if you wish to create a single kernel that will run on all of the
 types of machines shown, select the <literal>Generic architecture</literal>
+option.  Some of the above options might not be present if you have not
+also selected the <literal>Symmetric multi-processing support</literal>
 option.
 </para>
 
@@ -983,7 +988,11 @@ Power management options (ACPI, APM)
     [*]   'ondemand' cpufreq policy governor
     [*]   'conservative' cpufreq governor
 </screen>
+For more information on what the different governors do, see
+<xref linkend="CONFIG_CPU_FREQ" />.
+</para>
 
+<para>
 Select the default governor you wish to have running when the maching
 boots:
 <screen>

@@ -381,10 +381,17 @@ $ <userinput>xfs_db -V</userinput>
 <title>quotas</title>
 <para>
 To use the quota functionality of the kernel, you must have the
-<literal>quota-tools</literal> package installed.  This package includes
-programs that let you set quotas on users, provide statistics on the
-amount of quota being used by different users, and set up warnings when
-people get too close to using up their available filesystem quota.
+<literal>quota-tools</literal> package installed.
+<footnote>
+<para>
+Some distributions, like Debian, call this package <literal>quota</literal>
+instead of <literal>quota-tools</literal>.
+</para>
+</footnote>
+This package includes programs that let you set quotas on users, provide
+statistics on the amount of quota being used by different users, and set up
+warnings when people get too close to using up their available filesystem
+quota.
 </para>
 
 <para>
@@ -412,9 +419,15 @@ $ <userinput>quota -V</userinput>
 <title>NFS</title>
 <para>
 To use the NFS filesystem properly, you must have the
-<literal>nfs-utils</literal> package installed.  This package includes
-programs that let you mount NFS partitions as a client, and run a NFS
-server.
+<literal>nfs-utils</literal> package installed.
+<footnote>
+<para>
+Some distributions, like Debian, call this package
+<literal>nfs-common</literal> instead of <literal>nfs-utils</literal>.
+</para>
+</footnote>
+This package includes programs that let you mount NFS partitions as a
+client, and run a NFS server.
 </para>
 
 <para>
