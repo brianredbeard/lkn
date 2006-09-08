@@ -465,7 +465,7 @@ Device Drivers
 
 -->
 
-But some, such as USB video and DVB and sound devices are listed in the
+But some devices, such as USB video and DVB and sound, are listed in the
 section controlling all of these types of devices.  For example, the USB
 sound driver can be found under the <literal>Sound</literal> menu:
 <screen>
@@ -1264,8 +1264,8 @@ devices.
 <para>
 IrDA is an infrared protocol used by a number of laptops and PDAs to
 communicate over very short distances.  It is prevalent on older hardware,
-with newer hardware using Bluetooth to communicate instead
-<xref linkend="bluetooth" />.
+with newer hardware using Bluetooth to communicate instead.  See
+<xref linkend="bluetooth" /> for configuring Bluetooth.
 </para>
 
 <para>
@@ -1329,7 +1329,7 @@ Networking
 <para>
 Bluetooth is a wireless technology that was created to replace IrDA to talk
 between devices over a very short distance.  It is a shortrange wireless
-technology that was designed as a replacement for cables.  It operates
+technology that was designed as a replacement for cables and operates
 within a 10 meter radius and is commonly used in mobile phones.
 </para>
 
@@ -1482,7 +1482,7 @@ Linux supports, and how to enable them.
 RAID offers the option of combining numerous disks together so that they
 look like one logical disk.  This can help in providing ways of providing
 redundancy, or speed by spreading the data across different disk platters.
-Linux supports both hardware and software RAID.  Hardware raid is handled
+Linux supports both hardware and software RAID.  Hardware RAID is handled
 by the disk controller, without any help needed from the kernel.
 </para>
 
@@ -1636,8 +1636,8 @@ one should be used instead of the other, please see
 
 <para>
 OCFS2 is a cluster filesystem from Oracle that works for large network
-installations and small local systems at the same time.
-This filesystem is recommended when using large databases, such as Oracle or DB2, because
+installations and small local systems at the same time.  This filesystem is
+recommended when using large databases, such as Oracle or DB2, because
 it can be moved over time to different backing disks across the network
 quite easily as more storage is needed.
 </para>
