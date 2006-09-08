@@ -60,8 +60,6 @@ capitalized letter will be selected as it was the default option.
 </para>
 
 <para>
-
-<para>
 The kernel contains almost two thousand different configuration options, so
 being asked for every individual one will take a very long time.
 Luckily, there is an easier way to configure a kernel, base the
