@@ -190,7 +190,7 @@ If the option is selected with a <literal>Y</literal> then a
 <literal>*</literal> character will be shown.  If it is selected as a
 module with a <literal>M</literal>, it will contain a <literal>M</literal>
 character.  If it is disabled with a <literal>N</literal>, then it will
-show only a blank inbetween the characters.
+show only a blank in between the characters.
 </para>
 
 <para>
@@ -241,13 +241,13 @@ configuring a kernel use a graphical program to allow you to modify the
 kernel configuration.  Both of these methods are almost identical, the only
 difference being the different graphical toolkit that the two methods are
 written in.  <literal>gconfig</literal> is written using the GTK+ toolkit
-and has a two paned screen looking like this:
+and has a two-pane screen looking like this:
 <figure id="gconfig_1">
 <title><literal>gconfig</literal> default screen</title>
 <graphic fileref="images/gconfig_1.png" scalefit="1"/>
 </figure>
 While the <literal>xconfig</literal> method is written using the QT toolkit
-and has a three paned screen looking like this:
+and has a three-pane screen looking like this:
 <figure id="xconfig_1">
 <title><literal>xconfig</literal> default screen</title>
 <graphic fileref="images/xconfig_1.png" scalefit="1"/>
@@ -266,7 +266,7 @@ the <literal>gconfig</literal> screen to look like:
 
 And the <literal>xconfig</literal> screen to look like:
 <figure id="xconfig_2">
-<title><literal>xconfg</literal> Generic Driver Options</title>
+<title><literal>xconfig</literal> Generic Driver Options</title>
 <graphic fileref="images/xconfig_2.png" scalefit="1"/>
 </figure>
 </para>
@@ -381,8 +381,8 @@ in-kernel documentation on the build system which can be found in the
 <para>
 The kernel build system works very well as a task that can be split up into
 little pieces and given to different processors.  By doing this, you can
-use the full power of a multiprocessor machine and speed up the kernel
-build time immensely.
+use the full power of a multiprocessor machine and reduce the kernel build
+time considerably.
 </para>
 
 <para>
