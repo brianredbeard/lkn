@@ -144,7 +144,7 @@ the information available at
 <title>What to do with it</title>
 <para>
 Now that you have downloaded the proper kernel source, where is it supposed
-to go?  I suggest creating a local directory in your home directory called
+to go?  We suggest creating a local directory in your home directory called
 <filename>linux/</filename> to hold all of the different kernel source
 files:
 <screen>
