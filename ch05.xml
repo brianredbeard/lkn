@@ -21,7 +21,7 @@ tree.  If you have just expanded the kernel source code, there will not be
 a <filename>.config</filename> file present in the directory, so it needs
 to be created.  This file can be created from scratch, created by basing it
 on the "default configuration", taken from a running kernel version, or
-from a distribution kernel release.  We will cover the first to methods
+from a distribution kernel release.  We will cover the first two methods
 here, and the last two methods are covered in <xref linkend="LKN-custom" />.
 </para>
 

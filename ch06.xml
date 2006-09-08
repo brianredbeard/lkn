@@ -157,7 +157,7 @@ Note that the kernel version will probably be different for your kernel.
 Use this value in place of the text <literal>KERNEL_VERSION</literal> in
 all of the following steps:
 <screen>
-# <userinput>cp arch/i386/boot/bzImage # /boot/bzImage-KERNEL_VERSION</userinput>
+# <userinput>cp arch/i386/boot/bzImage /boot/bzImage-KERNEL_VERSION</userinput>
 # <userinput>cp System.map /boot/System.map-KERNEL_VERSION</userinput>
 </screen>
 </para>

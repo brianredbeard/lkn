@@ -347,7 +347,7 @@ As of the 2.6.18 kernel release, the oldest version of
 To determine what version of <literal>reiserfsprogs</literal> you have
 installed on your system, run the following command:
 <screen>
-$ <userinput>reiserfsck -V 2>&amp;1|grep reiserfsprogs</userinput>
+$ <userinput>reiserfsck -V</userinput>
 </screen>
 </para>
 </sect3>

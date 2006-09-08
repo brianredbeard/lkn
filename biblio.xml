@@ -359,6 +359,30 @@ the main project page for the <command>quilt</command> program.
 </listitem>
 </varlistentry>
 
+<varlistentry>
+<term>
+distcc
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://distcc.samba.org/</systemitem> is
+the main project page for the <command>distcc</command> program.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ccache
+</term>
+<listitem>
+<para>
+<systemitem role="url">http://ccache.samba.org/</systemitem> is
+the main project page for the <command>ccache</command> program.
+</para>
+</listitem>
+</varlistentry>
+
 </variablelist>
 </sect1>
 
