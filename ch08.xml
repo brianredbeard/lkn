@@ -1225,19 +1225,35 @@ if test -e "$1"; then
 	DEVPATH=$1
 else
 	# find sysfs device directory for device
-	DEVPATH=$(find /sys/class/ -name "$1" | head -1)
-	test -z "$DEVPATH" &amp;&amp; DEVPATH=$(find /sys/block/ -name "$1")
-	test -e "$DEVPATH" || exit 1
-fi
-
-# resolve old-style "device" link as the parent device
-if test -d "$DEVPATH" -a -L $DEVPATH/device ; then
-	if test -e "$DEVPATH/device"; then
-		DEVPATH=$(readlink -f $DEVPATH/device)
+	DEVPATH=$(find /sys/class -name "$1" | head -1)
+	test -z "$DEVPATH" &amp;&amp; DEVPATH=$(find /sys/block -name "$1" | head -1)
+	test -z "$DEVPATH" &amp;&amp; DEVPATH=$(find /sys/bus -name "$1" | head -1)
+	if ! test -e "$DEVPATH"; then
+		echo "no device found"
+		exit 1
 	fi
 fi
 
 echo "looking at sysfs device: $DEVPATH"
+
+if test -L "$DEVPATH"; then
+	# resolve class device link to device directory
+	DEVPATH=$(readlink -f $DEVPATH)
+	echo "resolve link to: $DEVPATH"
+fi
+
+if test -d "$DEVPATH"; then
+	# resolve old-style "device" link to the parent device
+	PARENT="$DEVPATH";
+	while test "$PARENT" != "/"; do
+		if test -L "$PARENT/device"; then
+			DEVPATH=$(readlink -f $PARENT/device)
+			echo "follow 'device' link to parent: $DEVPATH"
+			break
+		fi
+		PARENT=$(dirname $PARENT)
+	done
+fi
 
 while test "$DEVPATH" != "/"; do
 	DRIVERPATH=
