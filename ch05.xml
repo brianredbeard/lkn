@@ -5,10 +5,10 @@ Configuring and Building
 </title>
 
 <para>
-Now that you have the source for the latest kernel version successfully
+Now that you have the source for your selected kernel version successfully
 downloaded and installed into a local directory, it is time to build the
 code.  But before the kernel can be built, it needs to be configured with
-the correct options.
+the appropriate options.
 </para>
 
 <sect1>
@@ -55,12 +55,15 @@ option and ask you if you wish to enable this option or not.  Some options
 will have a choice of <literal>[Y/m/n/?]</literal>, and if
 <literal>m</literal> is selected, the option will be built as a kernel
 module, not built directly into the kernel as the <literal>Y</literal>
-selection would do.
+selection would do.  If you just hit the <literal>Enter</literal> key, the
+capitalized letter will be selected as it was the default option.
 </para>
 
 <para>
+
+<para>
 The kernel contains almost two thousand different configuration options, so
-being asked for every individual one will take a very long amount of time.
+being asked for every individual one will take a very long time.
 Luckily, there is an easier way to configure a kernel, base the
 configuration on a pre-built configuration.
 </para>
@@ -75,7 +78,7 @@ Every kernel version comes with a "default" kernel configuration.  This
 configuration is loosely based on the defaults that the kernel maintainer
 of that architecture feels are the best options to be used.  In some cases,
 it is merely the configuration that is used by the kernel maintainer
-themselves for their personal machines.  This is true for the i386
+themself for their personal machines.  This is true for the i386
 architecture, where the default kernel configuration matches closely what
 Linus Torvalds uses for his main development machine.
 </para>
@@ -120,7 +123,7 @@ one called <literal>xconfig</literal>.
 
 <para>
 The <literal>menuconfig</literal> way of configuring a kernel is a console
-based program that offers up a way to move around the kernel configuration
+based program that offers a way to move around the kernel configuration
 using the arrow keys on the keyboard.  To start up this configuration mode,
 do:
 <screen>
@@ -354,7 +357,7 @@ be used.  See <xref linkend="LKN-installing" /> for how to do this.
 <para>
 It is very unusual to get any build errors when building a released kernel
 version.  If you do, please report them to the Linux kernel developers so
-it can be fixed.  See <xref linkend="LKN-appendix-bugreports" /> for how to
+they can be fixed.  See <xref linkend="LKN-appendix-bugreports" /> for how to
 do this.
 </para>
 
@@ -511,7 +514,7 @@ $ <userinput>make ARCH=arm CROSS_COMPILE=/usr/local/bin/arm-linux-</userinput>
 </para>
 
 <para>
-It is useful even for a non-cross-complied kernel to change what the build
+It is useful even for a non-cross-compiled kernel to change what the build
 system uses for the compiler.  Examples of this is using the
 <literal>distcc</literal> or <literal>ccache</literal> programs, both of
 which help greatly reduce the time it takes to build a kernel.  To use the
