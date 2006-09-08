@@ -216,8 +216,9 @@ $ <userinput>fdformat --version</userinput>
 <para>
 The <literal>module-init-tools</literal> package is needed if you wish to
 use Linux kernel modules.  A kernel module is a loadable chunk of code that
-can be added to or removed from the kernel while it is running.  It is
-useful to compile device drivers as modules and then only load the needed
+can be added to or removed from the kernel while the kernel is running.  It
+is useful to compile device drivers as modules and then only load the
+needed
 ones when the hardware is present in the system.  All Linux distributions
 use modules in order to only load the needed drivers and options for the
 system based on the hardware present, instead of being forced to build all
@@ -439,12 +440,12 @@ found at
 
 <para>
 As of the 2.6.18 kernel release, the oldest version of
-<literal>quota-tools</literal> that will work properly with the kernel is the
+<literal>nfs-utils</literal> that will work properly with the kernel is the
 1.0.5 release.
 </para>
 
 <para>
-To determine what version of <literal>quota-tools</literal> you have
+To determine what version of <literal>nfs-utils</literal> you have
 installed on your system, run the following command:
 <screen>
 $ <userinput>showmount --version</userinput>
@@ -572,7 +573,7 @@ automatic driver loading when new devices are found.
 </para>
 
 <para>
-To determine what version of <literal>procps</literal> you have
+To determine what version of <literal>pcmciautils</literal> you have
 installed on your system, run the following command:
 <screen>
 $ <userinput>pccardctl -V</userinput>
