@@ -42,7 +42,7 @@ $
 </screen>
 At the password prompt, enter in the password of the system administrator
 (root).  When the <command>su</command> program successfully accepts the
-password, you are transfered to running everything with full root
+password, you are transferred to running everything with full root
 privileges.  Be very careful while as root, and only do the minimum needed
 and then exit the program to continue back as your normal user account.
 </para>
@@ -62,6 +62,11 @@ distributions, which expect the user to know how to install their kernel on
 their own.  These types of distributions always include documentation on
 how to install a new kernel, so it should be consulted for the exact method
 required.
+</para>
+<para>
+For distributions that do have this script, it is usually contained in a
+package called <literal>mkinitrd</literal>, so try to install that if you
+can not find the script on your machine.
 </para>
 </footnote>
 To use this method of installing a kernel, first do:
@@ -131,7 +136,7 @@ time.
 <para>
 If your distro does not have a <command>installkernel</command> command, or
 you wish to just do it all by hand to understand the steps involved, here
-are the steps involved in installing a kernel by hand.
+are the steps involved to do this.
 </para>
 
 <orderedlist>
@@ -244,8 +249,8 @@ to boot with.
 </para>
 
 <para>
-The steps involved to add a new kernel to each of these programs are
-different, so only follow the section that corrisponds to the program you
+The steps involved in adding a new kernel to each of these programs are
+different, so follow only the section that corrisponds to the program you
 are using.
 </para>
 
@@ -314,13 +319,13 @@ title 2.6.17.11
 </para>
 
 <para>
-When finished editing the file, reboot the system and see that the new
+When finished editing the file, reboot the system and ensure that the new
 kernel image name comes up in the boot menu.  Use the down arrow to
 highlight the new kernel version, and press <literal>Enter</literal> to
 boot the new kernel image.
 </para>
 
-<!--   
+<!--
 	Should I show an example of a SuSE and Fedora grub file here?  They
 	are more complex.  If so, can someone send me a Fedora grub file, I
 	don't have any around...
