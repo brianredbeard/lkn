@@ -8,7 +8,7 @@ Customizing a kernel
 One of the hardest parts of building your own version of the Linux kernel
 is determining exactly which drivers and configuration options are needed
 in order for your machine to work properly.  This chapter will walk you
-through this process of finding the correct drivers.
+through this process of finding and selecting the correct drivers.
 </para>
 
 <sect1>
@@ -35,14 +35,14 @@ working properly.
 
 <para>
 Almost all distributions provide the kernel configuration files as part of
-the distribution kernel package.  Read the distribution specific
+the distribution kernel package.  Read the distribution-specific
 documentation for how to find these configurations, as it is usually buried
 somewhere below the <filename>/usr/src/linux/</filename> directory tree.
 </para>
 
 <para>
 If the kernel configuration is not easy to find, look in the kernel itself.
-Most distribution kernels are build to include the configuration within the
+Most distribution kernels are built to include the configuration within the
 <filename>/proc</filename> filesystem.  To determine if this is true for
 your running kernel, do the following:
 <screen>
@@ -93,7 +93,7 @@ control what piece of hardware.
 
 <para>
 There are many different locations that are useful for determining what
-devices is bound to what drivers in a running kernel.  The most important
+devices are bound to what drivers in a running kernel.  The most important
 one is a virtual filesystem called <literal>sysfs</literal>.
 <literal>sysfs</literal> should always be mounted at the
 <filename>/sys</filename> location in your filesystem by the initialization
@@ -176,7 +176,7 @@ that is active and working, as can be seen by the lines:
 eth0      Link encap:Ethernet  HWaddr 00:12:3F:65:7D:C2  
           inet addr:192.168.0.13  Bcast:192.168.0.255  Mask:255.255.255.0
 </screen>
-that show this is a ethernet device, with a valid network address assigned
+that show this is an ethernet device, with a valid network address assigned
 to it.
 </para>
 
@@ -313,7 +313,7 @@ Device Drivers
 
 <para>
 The steps above will work for any type of working device in the kernel.  As
-another example, let us look at a USB to serial converter that is present
+another example, let us look at a USB-to-serial converter that is present
 in the system.  It is currently connected to the
 <literal>/dev/ttyUSB0</literal> port, so we need to look in the
 <literal>sysfs</literal> tty section:
@@ -426,17 +426,18 @@ for i in `find /sys/ -name modalias -exec cat {} \;`; do
 done | rev | cut -f 1 -d '/' | rev | sort -u
 </screen>
 This script goes through <literal>sysfs</literal> and finds all files
-called <filename>modalias</filename>.  That file contains the module alias
-that describes to the <command>modprobe</command> command, what module
-should be loaded to control this device.  The module alias is made up of a
-combination of device manufacturer, id, class type, and other unique
-identifiers for that specific type of device.  All kernel driver modules
-have an internal list of devices that it supports that is generated
-automatically by the list of devices the driver tells the kernel it
-supports.  The <command>modprobe</command> looks through this list of
-devices by all drivers and tries to match it up with the alias it has.  If
-it finds a match, it will then load the module (this procedure is how the
-automatic driver loading functionalty in Linux works.)
+called <filename>modalias</filename>.  The <filename>modalias</filename>
+file contains the module alias that describes to the
+<command>modprobe</command> command, what module should be loaded to
+control this device.  The module alias is made up of a combination of
+device manufacturer, id, class type, and other unique identifiers for that
+specific type of device.  All kernel driver modules have an internal list
+of devices that they support that is generated automatically by the list of
+devices the driver tells the kernel it supports.  The
+<command>modprobe</command> looks through this list of devices by all
+drivers and tries to match it up with the alias it has.  If it finds a
+match, it will then load the module (this procedure is how the automatic
+driver loading functionalty in Linux works.)
 </para>
 
 <para>
@@ -496,7 +497,7 @@ that will work for them.
 
 <para>
 Sometimes you do not have the option of getting a distribution kernel
-working on a machine in order to determine what kernel module is needed to
+working on a machine in order to determine what kernel modules are needed to
 drive the hardware.  Or you have added new hardware to your system, and you
 need to figure out what kernel configuration option needs to be enabled to
 get it to work properly.  This section will help you determine how to find
@@ -635,7 +636,7 @@ Go back to the kernel source directory:
 $ <userinput>cd ~/linux/linux-2.6.17.8/</userinput>
 </screen>
 The first location that a large number of PCI ids are located in the kernel
-source tree, is in the <filename>include/linux/pci_ids.h</filename>.
+source tree, is in the <filename>include/linux/pci_ids.h</filename> file.
 Search that file for our vendor product number:
 <screen>
 $ <userinput>grep -i 0x10ec include/linux/pci_ids.h</userinput>
@@ -666,10 +667,11 @@ drivers/net/8139too.c
 drivers/net/8139cp.c
 </screen>
 The first file listed here, <filename>pci_ids.h</filename> does not need to
-be looked at, as that is where we originally found the definition at.  But
-the files, <filename>r8139.c</filename>, <filename>8139too.c</filename>,
-and <filename>8169cp.c</filename> in the <filename>drivers/net/</filename>
-subdirectory should be looked at closer.
+be looked at, as that is where we originally found the original definition.
+But the files, <filename>r8139.c</filename>,
+<filename>8139too.c</filename>, and <filename>8169cp.c</filename> in the
+<filename>drivers/net/</filename> subdirectory should be examined more
+closely.
 </para>
 
 <para>
@@ -714,14 +716,14 @@ if (pdev->vendor == PCI_VENDOR_ID_REALTEK &amp;&amp;
 }
 </programlisting>
 The use of the <literal>PCI_VENDOR_ID_REALTEK</literal> value here also
-corrisponds with the code checking to see if the PCI device id matches the
+corresponds with the code checking to see if the PCI device id matches the
 <literal>PCI_DEVICE_ID_REALTEK_8139</literal> value.  If it does, the
 driver is to print out a message that says:
 <quote>
 Use the 8139cp driver for improved performance and stability.
 </quote>
 Perhaps we should look at that driver next.  Even if we did not have such a
-visable clue, this driver does not have the vendor and device id pair that
+visible clue, this driver does not have the vendor and device id pair that
 we are looking for in a <literal>struct pci_device_id</literal> variable,
 so that gives us the clue that it will not support our device.
 </para>
@@ -868,8 +870,8 @@ Bus 005 Device 003: ID 0409:0058 NEC Corp. HighSpeed Hub
 Bus 004 Device 003: ID 157e:300d  
 Bus 004 Device 002: ID 045e:001c Microsoft Corp.
 </screen>
-As USB devices are easy to remove, unplug the device you are wanting to
-find the driver for and run <literal>lsusb</literal> again:
+As USB devices are easy to remove, unplug the device you want to find the
+driver for and run <literal>lsusb</literal> again:
 <screen>
 $ <userinput>/usr/sbin/lsusb | grep -v 0000:0000</userinput>
 Bus 002 Device 003: ID 045e:0023 Microsoft Corp. Trackball Optical
@@ -878,21 +880,21 @@ Bus 004 Device 002: ID 045e:001c Microsoft Corp.
 </screen>
 The third device is now missing, which means the device shown as:
 <screen>
-Bus 004 Device 003: ID 157e:300d  
+Bus 004 Device 003: ID 157e:300d
 </screen>
 Is the device we want to find the driver for.
 </para>
 
 <para>
 If you replace the device and look at the output of
-<literal>lspci</literal> again, the device number will have changed:
+<literal>lsusb</literal> again, the device number will have changed:
 <screen>
 $ <userinput>/usr/sbin/lsusb | grep 157e</userinput>
 Bus 004 Device 004: ID 157e:300d
 </screen>
 This is because the USB device numbers are not unique and change for every
 time they are plugged in.  What is stable is the vendor and product id,
-which is shown here by <literal>lspci</literal> as the two four digit
+which is shown here by <literal>lsusb</literal> as the two four digit
 values with the <literal>:</literal> between them.  For this device, the
 vendor id is <literal>157e</literal> and the product id is
 <literal>300d</literal>.  Write these values down as we will use them in
@@ -1006,11 +1008,12 @@ be built.
 <title>Root filesystem</title>
 
 <para>
-The root filesystem is the filesystem that the kernel boots from.  It
-contains all of the initial programs that start up the distro and it also
-usually contains all of the system configuration for the machine.  In
-short, it is a very important thing, and must be able to be found by the
-kernel at boot time in order for things to work properly.
+The root filesystem is the filesystem that the kernel boots the main
+portion of the running system from.  It contains all of the initial
+programs that start up the distro and it also usually contains all of the
+system configuration for the machine.  In short, it is a very important
+thing, and must be able to be found by the kernel at boot time in order for
+things to work properly.
 </para>
 
 <para>
@@ -1020,18 +1023,18 @@ VFS: Cannot open root device hda2 (03:02)
 Please append a correct "root=" boot option
 Kernal panic: VFS: Unable to mount root fs on 03:02
 </screen>
-then the root disk is unable to be found.  If you are not using a ramdisk
-image at boot time, it is usually recommended that you build both the
-filesystem that you use for your root partition, and the disk controller
-for that disk into the kernel, instead of having it as a module.  If you
-use a ramdisk at boot time, then you should be safe building these portions
-as modules.
+then the root filesystem is unable to be found.  If you are not using a
+ramdisk image at boot time, it is usually recommended that you build both
+the filesystem that you use for your root partition, and the disk
+controller for that disk into the kernel, instead of having it as a module.
+If you use a ramdisk at boot time, then you should be safe building these
+portions as modules.
 <footnote>
 <para>
 How to determine if you are using a ramdisk at boot time?  In
 <xref linkend="LKN-installing" /> we discuss using the distribution install
 script to install the kernel, or doing it on your own.  If you are using
-the distribuition install script, you are probably using a ramdisk.  If you
+the distribution install script, you are probably using a ramdisk.  If you
 are installing it on your own, then you are probably not.
 </para>
 </footnote>
@@ -1169,7 +1172,7 @@ information is all still there, just moved around a little bit.
 </para>
 
 <para>
-Here is a script that is handy in determing the needed kernel driver and
+Here is a script that is handy in determining the needed kernel driver and
 module module name for any device node in the system.  It has been
 developed with the kernel developers responsible for
 <literal>sysfs</literal> and should successfully work on all future
