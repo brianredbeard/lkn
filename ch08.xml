@@ -80,7 +80,7 @@ specific options to be enabled.
 <title>Finding what module is needed</title>
 
 <para>
-When using a configuration file that comes from a distribution, it take a
+When using a configuration file that comes from a distribution, it takes a
 very long time to build due to all of the different drivers being built.
 You only want to build the drivers for the hardware that you have, which
 will save time on building the kernel, and allows you to build some or all
@@ -888,7 +888,7 @@ If you replace the device and look at the output of
 <literal>lspci</literal> again, the device number will have changed:
 <screen>
 $ <userinput>/usr/sbin/lsusb | grep 157e</userinput>
-Bus 004 Device 004: ID 157e:300d  
+Bus 004 Device 004: ID 157e:300d
 </screen>
 This is because the USB device numbers are not unique and change for every
 time they are plugged in.  What is stable is the vendor and product id,
@@ -900,10 +900,11 @@ future steps.
 </para>
 
 <para>
-Like for the PCI device, we will search the kernel source code for the USB
+As with the PCI device, we will search the kernel source code for the USB
 vendor and product ids in order to find the proper driver to control this
-device.  Unfortunatly, there is no single file that contains all of the USB
-vendor ids, like PCI has.  So a search of the whole tree is necessary:
+device.  Unfortunately, there is no single file that contains all of the USB
+vendor ids, like PCI has.  So a search of the whole kernel source tree is
+necessary:
 <screen>
 $ <userinput>grep -i -R  -l 157e drivers/*</userinput>
 drivers/atm/pca200e.data
