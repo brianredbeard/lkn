@@ -5,11 +5,11 @@ Upgrading a kernel
 </title>
 
 <para>
-Inevitably it happens, you have a custom build kernel, working just
+Inevitably it happens, you have a custom built kernel, working just
 wonderfully except for one little thing that you know is fixed in the
 latest release from the kernel developers.  Or a security problem is found,
 and a new stable kernel release is made public.  Either way, you are faced
-with the issue of upgrading the kernel and you do not want to loose all the
+with the issue of upgrading the kernel and you do not want to lose all the
 time and effort that went into making that perfect kernel configuration.
 </para>
 
@@ -22,7 +22,7 @@ the previous one.
 <para>
 First off, please back up the <filename>.config</filename> file in the
 kernel source directory.  You have spent some time and effort into
-creating it, and it should be saved off in case something goes wrong when
+creating it, and it should be saved in case something goes wrong when
 trying to upgrade.
 <screen>
 $ <userinput>cd ~/linux/linux-2.6.17.11</userinput>
@@ -31,7 +31,7 @@ $ <userinput>cp .config ../good_config</userinput>
 </para>
 
 <para>
-There are only five simple steps that is needed to upgrade a kernel from a
+There are only five simple steps that are needed to upgrade a kernel from a
 previously built one:
 <orderedlist>
 <listitem>
@@ -62,7 +62,7 @@ Install the new kernel.
 </orderedlist>
 
 The last two steps work the same as described before, so we will only
-discus the first three steps in this chapter.
+discuss the first three steps in this chapter.
 </para>
 
 <para>
@@ -76,8 +76,7 @@ In this chapter, we are going to assume that you have built a successful
 <para>
 The Linux kernel developers realize that all users do not wish to download
 the entire source code to the kernel for every update.  That would be a
-waste of bandwidth and time.  Because of this, they offer a
-<literal>patch</literal>
+waste of bandwidth and time.  Because of this, they offer a patch
 <footnote>
 <para>
 It is called <literal>patch</literal> because the program
@@ -86,7 +85,7 @@ tree, creating the new tree.  The patch file contains a representation of
 the changes that are necessary to reconstruct the new files, based on the
 old ones.  Patch files are readable, and contain a list of the lines that
 are to be removed and the lines that are to be added, with some context
-within the file showing where the change should be made.
+within the file showing where the changes should be made.
 </para>
 </footnote>
 that can upgrade an older kernel release, to a newer one.
@@ -118,7 +117,7 @@ patch to download.
 <title>Which patch applies to which release?</title>
 
 <para>
-A kernel patch file will only upgrade the source code from one specific
+A kernel patch file only will upgrade the source code from one specific
 release to another specific release.  Here is how the different patch files
 can be applied:
 <itemizedlist>
@@ -166,9 +165,10 @@ patch from the 2.6.17.9 release to the 2.6.17.10 release, and then from the
 2.6.17.10 release to the 2.6.17.11 release.
 <footnote>
 <para>
-If you need to upgrade more than two versions, it is recommended to go
-backwards, and then upgrade forward.  In this case, we could go backward
-from 2.6.17.9 to 2.6.17 and then forward from 2.6.17 to 2.6.17.11.
+If you need to upgrade more than two versions, it is recommended as a way
+to save steps, to go backwards, and then upgrade forward.  In this case, we
+could go backward from 2.6.17.9 to 2.6.17 and then forward from 2.6.17 to
+2.6.17.11.
 </para>
 </footnote>
 </para>
@@ -243,8 +243,9 @@ patching file net/sctp/sm_statefuns.c
 patching file net/sctp/socket.c
 </screen>
 Verify that the patch really did work properly and that there are no errors
-in the output of the patch program.  It is also a good idea to look at the
-<filename>Makefile</filename> of the kernel to see the kernel version:
+or warnings in the output of the patch program.  It is also a good idea to
+look at the <filename>Makefile</filename> of the kernel to see the kernel
+version:
 <screen>
 $ <userinput>$ head -n 5 Makefile</userinput>
 VERSION = 2
@@ -322,7 +323,7 @@ good_config linux-2.6.17.11/  patch-2.6.17.10-11  patch-2.6.17.9-10
 <title>Reconfigure the kernel</title>
 
 <para>
-Previously, we use the <literal>make menuconfig</literal> or
+Previously, we used the <literal>make menuconfig</literal> or
 <literal>gconfig</literal> or <literal>xconfig</literal> method to change
 different configuration options.  But once you have a working
 configuration, the only thing that is necessary is to update it with any
@@ -338,15 +339,14 @@ kernel release.  To do this, it prints out all configuration questions, and
 provides an answer for them if the option is already handled in the
 configuration file.  If there is a new option, the program stops and asks
 the user what the new configuration value should be set to.  After
-answering it, the program continues on until the whole kernel configuration
-is finished.
+answering the prompt, the program continues on until the whole kernel
+configuration is finished.
 </para>
 
 <para>
 <literal>make silentoldconfig</literal> works exactly the same way as
-<literal>oldconfig</literal> does, but it does not print out anything to
-the screen, unless it needs to ask a question about a new configuration
-option.
+<literal>oldconfig</literal> does, but it does not print anything to the
+screen, unless it needs to ask a question about a new configuration option.
 </para>
 
 <para>
@@ -369,7 +369,7 @@ scripts/kconfig/conf -s arch/i386/Kconfig
 <para>
 An example for where a new kernel option shows up in a new release is the
 following.  The kernel option to enable <literal>Mutex debugging</literal>
-is a new one when switching between certian kernel releases.  Here is the
+is a new one when switching between certain kernel releases.  Here is the
 output when this happened:
 <screen>
 $ make silentoldconfig
@@ -394,8 +394,8 @@ Kernel debugging (DEBUG_KERNEL) [Y/n/?] y
   Mutex debugging, deadlock detection (DEBUG_MUTEXES) [N/y/?] (NEW) <userinput>y</userinput>
 </screen>
 The configuration program stopped at this option and asked for the user to
-choose an option.  They pressed <literal>y</literal> and the program
-continued on:
+choose an option.  Then press <literal>y</literal> and the program
+continues on:
 <screen>
   Spinlock debugging (DEBUG_SPINLOCK) [Y/n/?] y
   Sleep-inside-spinlock checking (DEBUG_SPINLOCK_SLEEP) [Y/n/?] y
@@ -420,9 +420,9 @@ Use 4Kb for kernel stacks instead of 8Kb (4KSTACKS) [N/y/?] n
 </para>
 
 <para>
-So upgrading the kernel configuration for a new release is a simple as
+So upgrading the kernel configuration for a new release is as simple as
 using a different configuration option to <command>make</command>.  With
-this method, it is no longer needed to use the graphical or text oriented
+this method, you do not need to use the graphical or text oriented
 configuration programs for any new kernel update.
 </para>
 
@@ -434,7 +434,7 @@ configuration programs for any new kernel update.
 <para>
 The whole process of downloading the proper patch file, uncompressing it,
 and then applying it seems to be ripe for automating.  Kernel developers
-being the type that likes to automate repetitive tasks, the program
+being the type that like to automate repetitive tasks, the program
 <command>ketchup</command> has been created to handle all of this
 automatically.  See <xref linkend="lkn_ketchup" /> for more details on how
 this program works and how to use it.
