@@ -3,6 +3,7 @@
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <book>
  <title>Linux Kernel in a Nutshell</title>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="ch00.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch01.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch02.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch03.xml"/>
@@ -19,6 +20,7 @@
  <include xmlns="http://www.w3.org/2001/XInclude" href="appb.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="appc.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="biblio.xml"/>
+ <include xmlns="http://www.w3.org/2001/XInclude" href="license.xml"/>
 </book>
 <!--
 <bookinfo>

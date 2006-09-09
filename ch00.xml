@@ -1,0 +1,140 @@
+<chapter id="LKN-chapter-preface">
+
+<title>Preface</title>
+
+<para>
+Intro stuff about the history of this here...
+
+</para>
+
+<sect1>
+<title>Audience for the book</title>
+
+<para>
+</para>
+
+</sect1>
+
+<sect1>
+<title>Organization of the material</title>
+
+<para>
+</para>
+
+</sect1>
+
+<sect1>
+<title>Background Information</title>
+
+<para>
+
+</para>
+
+</sect1>
+<sect1>
+<title>Online Version and License</title>
+
+<para>
+This book is freely available under the Creative Commons
+"Attribution-ShareAlike" license, Version 2.5.  This license can be seen in
+its entirety in <xref linkend="license" />.  The full book is also availble
+online and can be found <systemitem role="url">http://www.kroah.com/lkn</systemitem>.
+</para>
+</sect1>
+
+<sect1>
+<title>Conventions Used in This Book</title>
+
+<para>
+This book uses the following typographical conventions:
+
+<variablelist>
+<varlistentry>
+<term><firstterm>Italic</firstterm></term>
+<listitem>
+<para>
+Indicates nomenclature that we've not previously used.  Also used to
+emphasise some points.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><literal>Constant Width</literal></term>
+<listitem>
+<para>
+Indicates commands and command options, files, directories, usernames, and
+hostnames.  Also used to show the command output, and the contents of text
+and program files.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><userinput>Constant Width Bold</userinput></term>
+<listitem>
+<para>
+Used in examples to indicate commands or other text that should be typed
+literally by the user.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><replaceable>Constant Width Italic</replaceable></term>
+<listitem>
+<para>
+Indicates text that you should replace with your own values;  for example,
+your own name or password.  When this appears as part of text that you
+should type in, it is shown as
+<userinput><replaceable>Constant Width Italic Bold</replaceable></userinput>.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><prompt>#</prompt>, <prompt>$</prompt></term>
+<listitem>
+<para>
+Used in some examples as the root shell prompt
+(<literal>#</literal>) and as the user prompt
+(<literal>$</literal>) under the Bourne or
+<literal>bash</literal> shell.
+</para>
+</listitem>
+</varlistentry>
+
+<!--
+<note role="ora">
+<para>Signifies a tip, suggestion, or general note.</para>
+</note>
+-->
+<!--
+<warning role="ora">
+<para>Indicates a warning or caution.</para>
+</warning>
+-->
+
+</variablelist>
+</para>
+</sect1>
+
+<sect1>
+<title>Contact Information</title>
+
+<para>
+Standard O'Reilly contact information goes here...
+</para>
+
+</sect1>
+
+
+<sect1>
+<title>Acknowledgments</title>
+
+<para>
+</para>
+
+</sect1>
+</chapter>
+

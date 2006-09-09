@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE book SYSTEM "/usr/local/prod/sgml/dblite/dblite.dtd"
 [
+<!ENTITY ch00       SYSTEM "ch00.xml">
 <!ENTITY ch01       SYSTEM "ch01.xml">
 <!ENTITY ch02       SYSTEM "ch02.xml">
 <!ENTITY ch03       SYSTEM "ch03.xml">
@@ -17,7 +18,7 @@
 <!ENTITY appb       SYSTEM "appb.xml">
 <!ENTITY appc       SYSTEM "appc.xml">
 <!ENTITY biblio     SYSTEM "biblio.xml">
-<!ENTITY gloss      SYSTEM "glossary.xml">
+<!ENTITY license    SYSTEM "license.xml">
 ]>
 
 <book id="lkn">
@@ -43,6 +44,7 @@
 
 </bookinfo>
 
+&ch00;
 &ch01;
 &ch02;
 &ch03;
@@ -59,7 +61,7 @@
 &appb;
 &appc;
 &biblio;
-<!--&gloss;-->
+&license;
 
 </book>
 
