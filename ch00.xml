@@ -187,15 +187,21 @@ Used in some examples as the root shell prompt
 </listitem>
 </varlistentry>
 
+<varlistentry>
+<term></term>
+<listitem>
+<para>
+<warning role="ora">
+<para>Indicates a warning or caution.</para>
+</warning>
+</para>
+</listitem>
+</varlistentry>
+
 <!--
 <note role="ora">
 <para>Signifies a tip, suggestion, or general note.</para>
 </note>
--->
-<!--
-<warning role="ora">
-<para>Indicates a warning or caution.</para>
-</warning>
 -->
 
 </variablelist>
