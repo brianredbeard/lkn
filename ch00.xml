@@ -216,7 +216,58 @@ Standard O'Reilly contact information goes here...
 <title>Acknowledgments</title>
 
 <para>
+Thanks first go to my wonderful wife Shannon and my beautiful children
+Madeline and Griffin for their understanding and patience while I took the
+time to work on this book.  Without their support and prodding, this book
+would have never been completed.  Special thanks to Shannon for getting me
+into Linux kernel development in the first place.  Without her effort, I
+would be still doing some odd embedded programming job, and would have
+never discovered this wonderful community in which to work in.
 </para>
+
+<para>
+My editor, Andy Oram, is the driving force behing this book, shaping it
+into something that is both readable and informative.  His editing skills
+and patience as deadlines flew by were instrumental in the creation and
+completion of this book.
+</para>
+
+<para>
+Also a big thanks go to the original editor of this book, David Brickner,
+for giving me the chance to work on this project and believing that I could
+complete it, despite the first version weighing in at over 1000 pages.
+</para>
+
+<para>
+The technical reviewers for this book were amazing, catching all of the
+numerous mistakes and pointing out ommisions that needed to be filled.  The
+reviewers were (in alphabetic order by first name),
+Christian Benvenuti,
+Christian Morgner,
+Golden G. Richard III,
+Jerry Cooperstein,
+Michael Boerner, and
+Robert Day.
+<!-- did I forget anyone?  -->
+Any remaining problems are due to me, and not their excellent skills.
+</para>
+
+<para>
+A special thanks to Randy Dunlap for going over the kernel boot parameters
+with a fine tooth comb and pointing out issues in that chapter.  Also to
+Kay Sievers, who helped immensely with all of the chapter on customizing
+the kernel, and who provided the script at the end of that same chapter.
+Without his <literal>sysfs</literal> help and knowledge, that chapter would
+not have been possible.
+</para>
+
+<para>
+And a final special thanks to my 6th grade English teacher, Ms. Gruber, for
+teaching me that writing was something that was possible to do, and showing
+me the enjoyment in doing it.  Without that start, none of this would have
+been possible.
+</para>
+
 
 </sect1>
 </chapter>
