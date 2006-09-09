@@ -4,7 +4,6 @@
 <book>
  <title>Linux Kernel in a Nutshell</title>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch00.xml"/>
- <include xmlns="http://www.w3.org/2001/XInclude" href="ch01.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch02.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch03.xml"/>
  <include xmlns="http://www.w3.org/2001/XInclude" href="ch04.xml"/>
