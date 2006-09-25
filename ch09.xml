@@ -1,4 +1,8 @@
 <chapter id="LKN-recipe">
+<title>
+Kernel Configuration Recipes
+</title>
+
 
 
 <!--
@@ -89,10 +93,14 @@ is formally incorrect and could confuse the reader.
 
 -->
 
+<para>
 
-<title>
-Kernel Configuration Recipes
-</title>
+Previous chapters taught the mechanics of reconfiguring the kernel;
+the payoff comes in this chapter where you can find all the most
+common kinds of changes people need to make to their kernels, with
+specific instructions on how to do so.
+
+</para>
 
 
 <sect1>
@@ -123,8 +131,8 @@ this.
 
 <para>
 A USB storage device can be identified by using the
-<literal>lsusb</literal> program.  If the following command sequence
-produces the same result as shown, a USB storage device is present on the
+<command>lsusb</command> program.  If the following command sequence
+produces the results shown, a USB storage device is present on the
 system:
 </para>
 
@@ -205,7 +213,7 @@ a IDE disk controller on the system, use the <command>lspci</command>
 command in the following manner:
 <footnote>
 <para>
-Almost all distributions place the <literal>lspci</literal> program in the
+Almost all distributions place the <command>lspci</command> program in the
 <filename>/usr/sbin/</filename> directory, but some place it in other
 locations.  To find out where it is located, do:
 <screen>
@@ -213,7 +221,7 @@ $ <userinput>which lspci</userinput>
 /usr/sbin/lspci
 </screen>
 If you are using a distribution that puts it somewhere else,
-please use that path for whenever we discuss using <literal>lspci</literal>
+please use that path for whenever we discuss using <command>lspci</command>
 </para>
 </footnote>
 <screen>
@@ -321,7 +329,7 @@ Device Drivers
 </screen>
 
 In that section, enable the specific SATA controller type that you have.
-Look at the output of the previously mentioned <literal>lspci</literal>
+Look at the output of the previously mentioned <command>lspci</command>
 command for a list of the types of SATA controllers that are present on
 your system.  For example, most motherboards from Intel require the PIIX/ICH
 SATA driver (as the previous example showed.)
@@ -1031,8 +1039,8 @@ Power management options (ACPI, APM)
 <title>Different Memory Models</title>
 
 <para>
-Linux on Intel 32bit hardware can access up to 64 Gigabytes
-of memory, but the address space of the 32bit processor is only 4
+Linux on 32-bit Intel hardware can access up to 64 Gigabytes
+of memory, but the address space of the 32-bit processor is only 4
 Gigabytes.  To work around this limitation, Linux can map the
 additional memory into another area and then switch to it when other
 tasks need it.  But if your machine has a smaller amount of memory, it is
@@ -1043,7 +1051,7 @@ support.  For a more detailed description of this option, please see
 </para>
 
 <para>
-Linux supports three different memory models for 32bit Intel processors,
+Linux supports three different memory models for 32-bit Intel processors,
 depending on the memory available:
 
 <itemizedlist>
@@ -1143,16 +1151,16 @@ Networking
 <title>Netfilter</title>
 
 <para>
-The netfilter portion of the Linux kernel is a framework for filtering and
+The Netfilter portion of the Linux kernel is a framework for filtering and
 manipulating all network packets that pass through the machine.  It is
 commonly used if you wish to enable a firewall on the machine to protect it
 from different systems on the Internet, or to use the machine
 as a proxy for other machines on the network.  For more details on
-what netfilter is good for, please see <xref linkend="CONFIG_NETFILTER" />.
+what Netfilter is good for, please see <xref linkend="CONFIG_NETFILTER" />.
 </para>
 
 <para>
-To enable the main netfilter option:
+To enable the main Netfilter option:
 <screen>
 Networking
     [*] Networking support
@@ -1162,8 +1170,13 @@ Networking
 </para>
 
 <para>
-<!-- one reviewer wanted more details here as to why we "recommend" this.  -->
-It is recommended that you enable the netfilter netlink interface and the
+<!-- one reviewer wanted more details here as to why we "recommend"
+  this.
+  AO: I suppose it's worth adding. I know that netlink is a relatively
+  new communication channel from one kernel subsystem to another; I
+  suppose it makes things more efficient. I know nothing about Xtables.
+  -->
+It is recommended that you enable the Netfilter netlink interface and
 Xtables support when using netlink:
 <screen>
 Networking
@@ -1245,7 +1258,7 @@ Device Drivers
         [*] Network device support
             Ethernet (1000 Mbit)
 </screen>
-Some older ethernet devices will be found in the 10 and 100 Mbit section:
+Some older ethernet devices will be found in the 10- and 100-Mbit section:
 <screen>
 Device Drivers
     Network device support
@@ -1328,7 +1341,7 @@ Networking
 
 <para>
 Bluetooth is a wireless technology that was created to replace IrDA to talk
-between devices over a very short distance.  It is a shortrange wireless
+between devices over a very short distance.  It is a short-range wireless
 technology that was designed as a replacement for cables and operates
 within a 10 meter radius and is commonly used in mobile phones.
 </para>
@@ -1583,6 +1596,13 @@ Device Drivers
 -->
 
 <para>
+<!--
+
+  AO: When I suggested changing the name of the section, I assumed
+  it's because cifs/smb filesystem support was independent from
+  Samba. Does Samba have to be mentioned?
+
+-->
 Samba is a program that allows Linux users to access Windows machines
 natively across the network, providing a way to share drives and devices in
 a transparent manner.  It also allows Linux to work as a Windows server,
@@ -1599,6 +1619,8 @@ Windows machine.
   gkh:  Why?  does that really need to be known?  There's a long history
   behind CIFS that I probably do not want to get into trying to describe
   accurately :)
+
+  AO: OK, no need to talk about history.
 
 -->
 Two different filesystems that allow a Linux machine to connect
