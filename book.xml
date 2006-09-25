@@ -13,7 +13,7 @@
 <!ENTITY ch11       SYSTEM "ch11.xml">
 <!ENTITY ch12       SYSTEM "ch12.xml">
 <!ENTITY ch13       SYSTEM "ch13.xml">
-<!ENTITY appb       SYSTEM "appb.xml">
+<!ENTITY appa       SYSTEM "appa.xml">
 <!ENTITY biblio     SYSTEM "biblio.xml">
 <!ENTITY license    SYSTEM "license.xml">
 ]>
@@ -53,7 +53,7 @@
 &ch11;
 &ch12;
 &ch13;
-&appb;
+&appa;
 &biblio;
 &license;
 
