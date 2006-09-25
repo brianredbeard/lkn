@@ -6,8 +6,8 @@ Installing and Booting From a Kernel
 
 <para>
 Previous chapters showed you how to download and build your
-kernel. Now that you have an executable file&mdash;along with any
-modules you built&mdash;it is time to install the kernel and
+kernel. Now that you have an executable file -- along with any
+modules you built -- it is time to install the kernel and
 attempt to boot it.  In this chapter, unlike earlier ones, all of the
 commands need to be run as the root user.  This can be done by
 prefixing each command with <command>sudo</command>, by using the
