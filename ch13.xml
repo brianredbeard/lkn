@@ -86,6 +86,9 @@ the kernel developers and released under the GPL.
   AO: Why is order important? I thought you said "any files," the
   order doesn't seem relevant.
 
+  gkh: object directory is used first, followed by the source directory.
+  Remember, they can be different directories now in the 2.6 build
+  system :)
 -->
 	in that order.  The string can be a maximum of 64 characters.
 	</para>
@@ -169,6 +172,7 @@ the kernel developers and released under the GPL.
   AO: Because the material here is basic and is repeated elsewhere, I
   took out a sentence.
 
+  gkh: that's fine.
 -->
 	permanently built into the kernel.    If you select this option,
 	many parts of the kernel can be built as modules (by
@@ -176,6 +180,12 @@ the kernel developers and released under the GPL.
 <!--
 
   AO: It's most useful for drivers!
+
+  gkh: not really only for drivers.  I tend to build in the drivers for
+  my systems into the kernel, and only use modules for other things
+  (networking odd options for one), and use a module for stuff I am
+  currently developing.  So most users will just use them for things
+  they use infrequently.
 
 -->
 	indicated): this is most useful for infrequently used options that are
@@ -732,16 +742,18 @@ If you say
 	<para>
 	The actual amount of total physical memory will either be
 	autodetected or can be forced by using a kernel command line option
-	such as <literal>mem=256M</literal>. (See the
+	such as <literal>mem=256M</literal>. (See <xref
+	linkend="LKN-command-line" /> for details about how to pass
+	options to the kernel at boot time, and what options available.)
 <!--
 
   AO: Actually, I think the parenthesized phrase should be replaced
   with a reference to a section in this book. Don't you have something
   on this subject?
 
+  gkh: I have a whole chapter, cross reference is now added.
+
 -->
-	<command>bootparam</command> manpage or see the documentation for your boot loader about
-	how to pass options to the kernel at boot time.)
 	</para>
 
 	<para>
@@ -989,6 +1001,8 @@ If you say
   there is just a rather mysterious procedure that must be executed at
   reboot. But why reboot?
 
+  gkh: that is when resume happens (resume is the hard part, suspending
+  is easy...)
 -->
 
 	<para>
@@ -1376,8 +1390,12 @@ If you say
   AO: Unix domain sockets are not inet sockets, so being connected to
   another machine isn't even related to using Unix domain sockets.
 
+  gkh: ah, true.  But for some reason, people disable this option
+  without really realizing that it is needed (udev for one uses it.)
+  Added udev reference.
+
 -->
-	System and syslog use these sockets even if your machine is not
+	System, syslog, and udev use these sockets even if your machine is not
 	connected to any network.  Unless you are working on an embedded system
 	or something similar, you therefore definitely want to say yes here.
 	</para>
@@ -1499,6 +1517,8 @@ If you say
   AO: The following explanation is probably well known and
   unnecessary, but I'll leave it up to you to decide whether to cut it
   down.
+
+  gkh: I say leave it for now.
 
 -->
 	You should also say yes here if you intend to use your Linux box as
@@ -2534,6 +2554,8 @@ If you say
 
   AO: I hope the added word below is correct.
 
+  gkh: yes it is.
+
 -->
 	packet radio,
 	but not with amateur radio or FM broadcasting.
@@ -2725,16 +2747,9 @@ If you say
   AO: I actually think the following paragraph is outside the scope of
   the book.
 
+  gkh: good point, now deleted.
+
 -->
-	<para>
-	The <command>setterm</command> command can be
-	used to change the properties (such as colors or beeping) of a
-	virtual terminal. The <emphasis>console_codes</emphasis>(4)
-	manpage lists the special character sequences
-	that can be used to change those properties directly. The fonts
-	used on virtual terminals can be changed with the
-	<command>setfont</command> command and the key bindings can be defined with <command>loadkeys</command>.
-	</para>
 
 	<para>
 	If you are unsure, say yes, or else you won't be able to do much with your
@@ -2767,14 +2782,16 @@ If you say
 	terminal (<filename>/dev/tty0</filename>) will be used as system console. You can change
 	that with a kernel command line option such as
 	<literal>console=tty3</literal>, which specified the third virtual
-	terminal as the system console. (Read the 
+	terminal as the system console. (See <xref
+	linkend="LKN-command-line" /> for details about how to pass
+	options to the kernel at boot time, and what options available.)
 <!--
 
   AO: See what I said earlier about bootparam.
 
+  gkh: same cross reference added here
+
 -->
-	<emphasis>bootparam</emphasis> manpage or see the documentation of your boot loader
-	for information on how to pass options to the kernel at boot time.
 	</para>
 
 </refsect1>
@@ -3048,8 +3065,10 @@ If you say
 
   AO: What does it mean to play with something?
 
+  gkh:  heh, ok, now changed :)
+
 -->
-	want to play with the frame buffer, but it is not essential.
+	want to use the frame buffer, but it is not essential.
 	</para>
 
 	<para>
@@ -3484,6 +3503,10 @@ If you say
   AO: One instance of this is enough, particularly if we call it out
   as a note.
 
+  gkh: are you sure?  It's an important thing that if you are just
+  flipping through and are only looking for one filesystem reference.  I
+  vote to leave it.
+
 -->
 	<note>
 	<para>
@@ -3524,6 +3547,8 @@ If you say
 <!--
 
   AO: Or after the switch?
+
+  gkh: no, I think "before" is correct.
 
 -->
 	system before the switch.
@@ -3694,6 +3719,9 @@ If you say
 
   AO: Also local file systems, such as CDs, right?
 
+  gkh: not anymore, HAL handles this from userspace without using autofs
+  anymore.
+
 -->
 	The automounter is a tool that automatically mounts remote file systems
 	on demand. This implementation is partially kernel-based to reduce
@@ -3818,6 +3846,9 @@ If you say
   AO: I don't understand this paragraph because the phrase "mount to"
   is ambiguous. Clients mount directories from servers. Servers export
   directories to clients.
+
+  gkh: cifs is used to mount to servers running either Samba or windows.
+  So its use here is correct.
 
 -->
 	not need to enable <literal>cifs</literal> if you are running only a server (Samba). It is
