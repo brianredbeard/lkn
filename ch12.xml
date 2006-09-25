@@ -342,6 +342,8 @@ These targets build the kernel itself in a variety of ways.
   AO: Are the two following targets identical, or are they used for
   different text editors?
 
+  gkh: I don't really know.
+
 -->
 	<entry><para><literal>tags</literal></para></entry>
 	<entry><para>Builds all of the needed tags that most common
@@ -607,6 +609,8 @@ These targets are good for trying to find problem code in the kernel.
 <!--
 
   AO: I edited the paragraph heavily and may have put in something wrong.
+
+  gkh: looks good.
 
 -->
 It's a good idea to create a
