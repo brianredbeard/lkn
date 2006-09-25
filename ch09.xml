@@ -1602,6 +1602,7 @@ Device Drivers
   it's because cifs/smb filesystem support was independent from
   Samba. Does Samba have to be mentioned?
 
+  gkh: I think it should be left as is now.
 -->
 Samba is a program that allows Linux users to access Windows machines
 natively across the network, providing a way to share drives and devices in
