@@ -3,12 +3,15 @@
 <chapter id="LKN-config">
 
 <title>
-Kernel configuration option reference
+Kernel Configuration Option Reference
 <footnote>
 <para>
-The majority of this chapter is based on the in-kernel documentation for the
-different kernel configuration options, which were written by the kernel
-developers and released under the GPL.
+This chapter lists the most important configuration options offered
+when you run <command>make config</command> or one of its graphical
+interfaces.
+The majority of the chapter is based on the in-kernel documentation
+for the different kernel configuration options, which were written by
+the kernel developers and released under the GPL.
 </para>
 </footnote>
 </title>
@@ -22,19 +25,19 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Some of the various things that Linux supports (such as network
+	Some of the many things that Linux supports (such as network
 	drivers, file systems, network protocols, etc.) can be in a state
 	of development where the functionality, stability, or the level of
 	testing is not yet high enough for general use. This is usually
 	known as the "alpha-test" phase among developers. If a feature is
-	currently in alpha-test, then the developers usually discourage
+	currently in alpha-test, the developers usually discourage
 	uninformed widespread use of this feature by the general public to
-	avoid "Why doesn't this work?" type mail messages. However, active
+	avoid "Why doesn't this work?" mail messages. However, active
 	testing and use of these systems is welcomed. Just be aware that it
-	may not meet the normal level of reliability or it may fail to work
-	in some special cases. Detailed bug reports from people familiar
-	with the kernel internals are usually welcomed by the developers
-	(before submitting bug reports, please read the documents
+	may not meet the normal level of reliability or may fail to work
+	in some special cases. Detailed bug reports from people familiar.
+	with the kernel internals are usually welcomed by the developers.
+	(But before submitting bug reports, please read the documents
 	<filename>README</filename>,
 	<filename>MAINTAINERS</filename>,
 	<filename>REPORTING-BUGS</filename>,
@@ -43,7 +46,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	This option will also make obsoleted drivers available. These are
+	This option also makes obsoleted drivers available. These are
 	drivers that have been replaced by something else, and/or are
 	scheduled to be removed in a future kernel release.
 	</para>
@@ -58,8 +61,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	On it's own, this option does not do anything except allow you to
-	chance to select other options.
+	On it's own, this option does not do anything except allow you
+	to select other options.
 	</para>
 
 </refsect1>
@@ -68,15 +71,22 @@ developers and released under the GPL.
 <refentry id="CONFIG_LOCALVERSION">
 <refnamediv>
 	<refname>LOCALVERSION</refname>
-	<refpurpose>Local version - append to kernel release</refpurpose>
+	<refpurpose>Local version&mdash;append to kernel release</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This allows you to append an extra string to the end of your kernel
-	version.  This will show up when you type uname, for example.  The
+	version.  This will show up when you enter a
+	<command>uname</command> command, for example.  The
 	string you set here will be appended after the contents of any files
-	with a filename matching localversion* in your object and source tree,
+	with a filename beginning with <filename>localversion</filename> in your object and source tree,
+<!--
+
+  AO: Why is order important? I thought you said "any files," the
+  order doesn't seem relevant.
+
+-->
 	in that order.  The string can be a maximum of 64 characters.
 	</para>
 
@@ -91,7 +101,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Enable auditing infrastructure that can be used with another
+	Enable an auditing infrastructure that can be used with another
 	kernel subsystem, such as SELinux (which requires this for
 	logging of avc messages output).
 	</para>
@@ -102,14 +112,14 @@ developers and released under the GPL.
 <refentry id="CONFIG_IKCONFIG">
 <refnamediv>
 	<refname>IKCONFIG</refname>
-	<refpurpose>Kernel .config support</refpurpose>
+	<refpurpose>Kernel <filename>.config</filename> support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This option enables the complete Linux kernel ".config" file
-	contents to be saved in the kernel. It provides documentation
-	of which kernel options are used in a running kernel or in an
+	This option enables the complete Linux kernel <filename>.config</filename> file
+	contents to be saved in the kernel. It documents
+	which kernel options are used in a running kernel or an
 	on-disk kernel.  This information can be extracted from the kernel
 	image file with the script
 	<filename>scripts/extract-ikconfig</filename> and used as input to
@@ -130,15 +140,15 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	This option allows certain base kernel options and settings
-	to be disabled or tweaked. This is for specialized environments which
-	can tolerate a "non-standard" kernel.  Only use this if you really know
-	what you are doing, as it is very easy to change the options to create
+	to be disabled or tweaked. This is for specialized environments that
+	can tolerate a "non-standard" kernel. This is recommend only
+	for experts, as it is very easy to change the options to create
 	a kernel that will not even boot properly.
 	</para>
 
 	<para>
-	On it's own, this option does not do anything except allow you to
-	chance to select other options.
+	On it's own, this option does not do anything except allow you
+	to select other options.
 	</para>
 
 </refsect1>
@@ -152,14 +162,25 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Kernel modules are small pieces of compiled code which can
+	Kernel modules are small pieces of compiled code that can
 	be inserted in the running kernel, rather than being
-	permanently built into the kernel.  You use the "modprobe"
-	tool to add (and sometimes remove) them.  If you say yes here,
+<!--
+
+  AO: Because the material here is basic and is repeated elsewhere, I
+  took out a sentence.
+
+-->
+	permanently built into the kernel.    If you select this option,
 	many parts of the kernel can be built as modules (by
 	answering <literal>M</literal> instead of <literal>Y</literal> where
-	indicated): this is most useful for infrequently used options which are
-	not required for booting.  For more information, see the man pages for
+<!--
+
+  AO: It's most useful for drivers!
+
+-->
+	indicated): this is most useful for infrequently used options that are
+	not required for booting.  For more information, see <xref
+	linkend="LKN-chapter-building" /> and the manpages for
 	<literal>modprobe</literal>,
 	<literal>lsmod</literal>,
 	<literal>modinfo</literal>,
@@ -170,7 +191,7 @@ developers and released under the GPL.
 	<para>
 	If you say yes here, you will need to run
 	<literal>make modules_install</literal> to put the modules under
-	<filename>/lib/modules/</filename> where the module tools can find
+	<filename>/lib/modules</filename> where the module tools can find
 	them.
 	</para>
 
@@ -180,14 +201,14 @@ developers and released under the GPL.
 <refentry id="CONFIG_IOSCHED_NOOP">
 <refnamediv>
 	<refname>IOSCHED_NOOP</refname>
-	<refpurpose>No-OP I/O scheduler</refpurpose>
+	<refpurpose>No-op I/O scheduler</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	The no-op I/O scheduler is a minimal scheduler that does basic merging
-	and sorting. Its main uses include non-disk based block devices like
-	memory devices, and specialised software or hardware environments
+	and sorting. Its main uses include non-disk based block devices such as
+	memory devices and specialised software or hardware environments
 	that do their own scheduling and require only minimal assistance from
 	the kernel.
 	</para>
@@ -205,8 +226,8 @@ developers and released under the GPL.
 	<para>
 	The anticipatory I/O scheduler is the default disk scheduler. It is
 	generally a good choice for most environments, but is quite large and
-	complex when compared to the deadline I/O scheduler, it can also be
-	slower in some cases especially some database loads.
+	complex compared to the deadline I/O scheduler. It can also be
+	slower in some cases, especially under some database loads.
 	</para>
 
 </refsect1>
@@ -220,9 +241,9 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	The deadline I/O scheduler is simple and compact, and is often as
-	good as the anticipatory I/O scheduler, and in some database
-	workloads, better. In the case of a single process performing I/O to
+	The deadline I/O scheduler is simple and compact. It is often as
+	good as the anticipatory I/O scheduler, and under some database
+	workloads even better. In the case of a single process performing I/O to
 	a disk at any one time, its behaviour is almost identical to the
 	anticipatory I/O scheduler and so is a good choice.
 	</para>
@@ -268,17 +289,17 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Note that if you say yes here and choose architecture "586" or
-	"Pentium" under "Processor family", the kernel will not work on 486
-	architectures. Similarly, multiprocessor kernels for the "PPro"
+	Note that if you say yes here and choose architecture <literal>586</literal> or
+	<literal>Pentium</literal> under <literal>Processor family</literal>, the kernel will not work on 486
+	architectures. Similarly, multiprocessor kernels for the <literal>PPro</literal>
 	architecture may not work on all Pentium based boards.
 	</para>
 
 	<para>
-	See also the
+	See also
 	<filename>Documentation/smp.txt</filename>,
 	<filename>Documentation/i386/IO-APIC.txt</filename>,
-	<filename>Documentation/nmi_watchdog.txt</filename> and the
+	<filename>Documentation/nmi_watchdog.txt</filename>, and the
 	<filename>SMP-HOWTO</filename> available at
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
@@ -295,14 +316,14 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	This is the processor type of your CPU. This information is used for
-	optimizing purposes. In order to compile a kernel that can run on
+	optimization. In order to compile a kernel that can run on
 	all x86 CPU types (albeit not optimally fast), you can specify
 	<literal>386</literal> here.
 	</para>
 
 	<para>
 	The kernel will not necessarily run on earlier architectures than
-	the one you have chosen, e.g. a Pentium optimized kernel will run on
+	the one you have chosen; e.g., a Pentium optimized kernel will run on
 	a PPro, but not necessarily on a i486.
 	</para>
 
@@ -515,7 +536,7 @@ developers and released under the GPL.
 	Instead of just including optimizations for the selected
 	x86 variant (e.g. PII, Crusoe or Athlon), include some more
 	generic optimizations as well. This will make the kernel
-	perform better on x86 CPUs other than that selected.
+	perform better on x86 CPUs other than the one selected.
 	</para>
 
 	<para>
@@ -534,13 +555,13 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	This allows you to specify the maximum number of CPUs which this
+	This allows you to specify the maximum number of CPUs that this
 	kernel will support.  The maximum supported value is 255 and the
-	minimum value which makes sense is 2.
+	minimum value that makes sense is 2.
 	</para>
 
 	<para>
-	This option is purely to save memory - each supported CPU adds
+	This option is purely to save memory; each supported CPU adds
 	approximately eight kilobytes to the kernel image.
 	</para>
 
@@ -550,13 +571,13 @@ developers and released under the GPL.
 <refentry id="CONFIG_SCHED_SMT">
 <refnamediv>
 	<refname>SCHED_SMT</refname>
-	<refpurpose>SMT (Hyperthreading) scheduler support</refpurpose>
+	<refpurpose>SMT (Hyper-Threading) scheduler support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	SMT scheduler support improves the CPU scheduler's decision making
-	when dealing with Intel Pentium 4 chips with HyperThreading at a
+	SMT scheduler support improves the CPU scheduler's decision-making
+	on Intel Pentium 4 chips with Hyper-Threading, at a
 	cost of slightly increased overhead in some places.
 	</para>
 
@@ -566,15 +587,14 @@ developers and released under the GPL.
 <refentry id="CONFIG_PREEMPT_NONE">
 <refnamediv>
 	<refname>PREEMPT_NONE</refname>
-	<refpurpose>No Forced Preemption (Server)</refpurpose>
+	<refpurpose>No forced preemption (server)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This is the traditional Linux preemption model, geared towards
-	throughput. It will still provide good latencies most of the
-	time, but there are no guarantees and occasional longer delays
-	are possible.
+	This is the traditional Linux preemption model, geared toward
+	maximizing throughput. It still provides good latency most of the
+	time, occasional longer delays are possible.
 	</para>
 
 	<para>
@@ -590,7 +610,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_PREEMPT_VOLUNTARY">
 <refnamediv>
 	<refname>PREEMPT_VOLUNTARY</refname>
-	<refpurpose>Voluntary Kernel Preemption (Desktop)</refpurpose>
+	<refpurpose>Voluntary kernel preemption (desktop)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -598,15 +618,15 @@ developers and released under the GPL.
 	This option reduces the latency of the kernel by adding more
 	"explicit preemption points" to the kernel code. These new
 	preemption points have been selected to reduce the maximum
-	latency of rescheduling, providing faster application reactions,
+	latency of rescheduling, which provides faster response to applications
 	at the cost of slighly lower throughput.
 	</para>
 
 	<para>
-	This allows reaction to interactive events by allowing a
-	low priority process to voluntarily preempt itself even if it
+	This option speeds up reaction to interactive events by allowing a
+	low-priority process to voluntarily preempt itself even if it
 	is in kernel mode executing a system call. This allows
-	applications to run more 'smoothly' even when the system is
+	applications to appear to run more smoothly even when the system is
 	under load.
 	</para>
 
@@ -620,18 +640,18 @@ developers and released under the GPL.
 <refentry id="CONFIG_PREEMPT">
 <refnamediv>
 	<refname>PREEMPT</refname>
-	<refpurpose>Preemptible Kernel (Low-Latency Desktop)</refpurpose>
+	<refpurpose>Preemptible kernel (low-latency desktop)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This option reduces the latency of the kernel by making
-	all kernel code (that is not executing in a critical section)
+	all kernel code (except code executing in a critical section)
 	preemptible.  This allows reaction to interactive events by
 	permitting a low priority process to be preempted involuntarily
 	even if it is in kernel mode executing a system call and would
 	otherwise not be about to reach a natural preemption point.
-	This allows applications to run more 'smoothly' even when the
+	This allows applications to appear to run more smoothly even when the
 	system is under load, at the cost of slighly lower throughput
 	and a slight runtime overhead to kernel code.
 	</para>
@@ -648,13 +668,13 @@ developers and released under the GPL.
 <refentry id="CONFIG_PREEMPT_BKL">
 <refnamediv>
 	<refname>PREEMPT_BKL</refname>
-	<refpurpose>Preempt The Big Kernel Lock</refpurpose>
+	<refpurpose>Preempt the Big Kernel Lock</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This option reduces the latency of the kernel by making the
-	big kernel lock preemptible.
+	Big Kernel Lock preemptible.
 	</para>
 
 	<para>
@@ -674,16 +694,16 @@ developers and released under the GPL.
 	<para>
 	Linux can use up to 64 Gigabytes of physical memory on x86 systems.
 	However, the address space of 32-bit x86 processors is only 4
-	Gigabytes large. That means that, if you have a large amount of
-	physical memory, not all of it can be "permanently mapped" by the
+	Gigabytes in size. That means that, if you have a large amount of
+	physical memory, not all of it can be permanently mapped by the
 	kernel. The physical memory that's not permanently mapped is called
-	"high memory".
+	<firstterm>high memory</firstterm>.
 	</para>
 
 	<para>
-	If you are compiling a kernel which will never run on a machine with
+	If you are compiling a kernel that will never run on a machine with
 	more than 1 Gigabyte total physical RAM, answer <literal>off</literal>
-	here (default choice and suitable for most users). This will result in
+	here (the default choice, and suitable for most users). This will result in
 	a <literal>3GB/1GB</literal> split: 3GB are mapped so that each process
 	sees a 3GB virtual memory space and the remaining part of the 4GB
 	virtual memory space is used by the kernel to permanently map as much
@@ -696,20 +716,31 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If more than 4 Gigabytes is used then answer <literal>64GB</literal>
+	If more than 4 Gigabytes is used, answer <literal>64GB</literal>
 	here. This selection turns Intel PAE (Physical Address Extension) mode
 	on.  PAE implements 3-level paging on IA32 processors. PAE is fully
-	supported by Linux, PAE mode is implemented on all recent Intel
-	processors (Pentium Pro and better).  Note: If you say
+	supported by Linux, and PAE mode is implemented on all recent Intel
+	processors (Pentium Pro and better).
+	</para>
+	<note>
+	<para>
+If you say
 	<literal>64GB</literal> here, then the kernel will not boot on CPUs
 	that don't support PAE!
 	</para>
-
+	</note>
 	<para>
 	The actual amount of total physical memory will either be
-	auto detected or can be forced by using a kernel command line option
-	such as <literal>mem=256M</literal>. (Try <literal>man
-	bootparam</literal> or see the documentation of your boot loader about
+	autodetected or can be forced by using a kernel command line option
+	such as <literal>mem=256M</literal>. (See the
+<!--
+
+  AO: Actually, I think the parenthesized phrase should be replaced
+  with a reference to a section in this book. Don't you have something
+  on this subject?
+
+-->
+	<command>bootparam</command> manpage or see the documentation for your boot loader about
 	how to pass options to the kernel at boot time.)
 	</para>
 
@@ -753,21 +784,21 @@ developers and released under the GPL.
 <refentry id="CONFIG_FLATMEM_MANUAL">
 <refnamediv>
 	<refname>FLATMEM_MANUAL</refname>
-	<refpurpose>Flat Memory</refpurpose>
+	<refpurpose>Flat memory</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This option allows you to change some of the ways that
-	Linux manages its memory internally.  Most users will
+	Linux manages its memory internally.  Most users will see
 	only have one option here: <literal>FLATMEM</literal>.  This is normal
 	and a correct option.
 	</para>
 
 	<para>
-	Some users of more advanced features like NUMA and
-	memory hotplug may have different options here.
-	<literal>DISCONTIGMEM</literal> is an more mature, better tested
+	Some users of more advanced features, such as NUMA and
+	memory hotplug, may have different options here.
+	<literal>DISCONTIGMEM</literal> is a more mature, better tested
 	system, but is incompatible with memory hotplug and may suffer
 	decreased performance over <literal>SPARSEMEM</literal>.  If unsure
 	between <literal>Sparse Memory</literal> and <literal>Discontiguous
@@ -775,8 +806,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If unsure, choose this option, <literal>Flat Memory</literal> over any
-	other.
+	If unsure, choose this option, <literal>Flat Memory</literal>.
 	</para>
 
 </refsect1>
@@ -785,17 +815,17 @@ developers and released under the GPL.
 <refentry id="CONFIG_DISCONTIGMEM_MANUAL">
 <refnamediv>
 	<refname>DISCONTIGMEM_MANUAL</refname>
-	<refpurpose>Discontiguous Memory</refpurpose>
+	<refpurpose>Discontiguous memory</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This option provides enhanced support for discontiguous
-	memory systems, over FLATMEM.  These systems have holes
-	in their physical address spaces, and this option provides
-	more efficient handling of these holes.  However, the vast
+	This option provides better support than flat memory for discontiguous
+	memory systems.  These systems have holes
+	in their physical address spaces, and this option handles the holes
+	more efficiently.  However, the vast
 	majority of hardware has quite flat address spaces, and
-	can have degraded performance from extra overhead that
+	can experience degraded performance from the extra overhead
 	this option imposes.
 	</para>
 
@@ -813,25 +843,25 @@ developers and released under the GPL.
 <refentry id="CONFIG_SPARSEMEM_MANUAL">
 <refnamediv>
 	<refname>SPARSEMEM_MANUAL</refname>
-	<refpurpose>Sparse Memory</refpurpose>
+	<refpurpose>Sparse memory</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	This will be the only option for some systems, including
-	memory hotplug systems.  This is normal.
+	memory hotplug systems.
 	</para>
 
 	<para>
 	For many other systems, this will be an alternative to
-	"Discontiguous Memory".  This option provides some potential
+	<literal>Discontiguous Memory</literal>.  This option provides some potential
 	performance benefits, along with decreased code complexity,
-	but it is newer, and more experimental.
+	but it is newer and more experimental.
 	</para>
 
 	<para>
-	If unsure, choose <literal>Discontiguous Memory</literal> or
-	<literal>Flat Memory</literal> over this option.
+	If you are unsure, choose <literal>Discontiguous Memory</literal> or
+	<literal>Flat Memory</literal>.
 	</para>
 
 </refsect1>
@@ -845,19 +875,20 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	This kernel feature is useful for number crunching applications
+	This kernel feature is useful for number-crunching applications
 	that may need to compute untrusted bytecode during their
 	execution. By using pipes or other transports made available to
 	the process as file descriptors supporting the read/write
 	syscalls, it's possible to isolate those applications in
 	their own address space using seccomp. Once seccomp is
-	enabled via /proc/pid/seccomp, it cannot be disabled
-	and the task is only allowed to execute a few safe syscalls
+	enabled via <filename>/proc/pid/seccomp</filename>, it cannot be disabled
+	and the task is allowed to execute only a few safe syscalls
 	defined by each seccomp mode.
 	</para>
 
 	<para>
-	If unsure, say yes. Only embedded systems should say no here.
+	If you are unsure, say yes. Only embedded systems should be
+	built by answering no.
 	</para>
 
 </refsect1>
@@ -866,14 +897,14 @@ developers and released under the GPL.
 <refentry id="CONFIG_KEXEC">
 <refnamediv>
 	<refname>KEXEC</refname>
-	<refpurpose>kexec system call (EXPERIMENTAL)</refpurpose>
+	<refpurpose>kexec system call (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	kexec is a system call that implements the ability to shutdown your
-	current kernel, and to start another kernel.  It is like a reboot
-	but it is indepedent of the system firmware.   And like a reboot
+	kexec is a system call that implements the ability to shut down your
+	current kernel and start up another.  It is like a reboot,
+	but is indepedent of the system firmware.   And like a reboot,
 	you can start any kernel with it, not just Linux.
 	</para>
 
@@ -882,10 +913,9 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	It is an ongoing process to be certain the hardware in a machine
-	is properly shutdown, so do not be surprised if this code does not
+	Do not be surprised if this code does not
 	initially work for you.  It may help to enable device hotplugging
-	support.  As of this writing the exact hardware interface is
+	support.  As of this writing, the exact hardware interface is
 	strongly in flux, so no good recommendation can be made.
 	</para>
 
@@ -895,7 +925,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_HOTPLUG_CPU">
 <refnamediv>
 	<refname>HOTPLUG_CPU</refname>
-	<refpurpose>Support for hot-pluggable CPUs (EXPERIMENTAL)</refpurpose>
+	<refpurpose>Support for hot-pluggable CPUs (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -916,27 +946,27 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	"Power Management" means that parts of your computer are shut
-	off or put into a power conserving "sleep" mode if they are not
+	Power Management allows parts of your computer to shut
+	off or be put into a power-conserving sleep mode if they are not
 	being used.  There are two competing standards for doing this: APM
 	and ACPI.  If you want to use either one, say yes here and then also
-	enable one of the different standards.
+	enable one of those two standards.
 	</para>
 
 	<para>
-	Power Management is most important for battery powered laptop
+	Power Management is most important for battery-powered laptop
 	computers; if you have a laptop, check out the Linux Laptop home
-	page on the internet at
-	<systemitem role="url">http://www.linux-on-laptops.com/</systemitem> or
-	Tuxmobil - Linux on Mobile Computers at
-	<systemitem role="url">http://www.tuxmobil.org/</systemitem>
+	page at
+	<systemitem role="url">http://www.linux-on-laptops.com</systemitem> or
+	Tuxmobil-Linux on Mobile Computers at
+	<systemitem role="url">http://www.tuxmobil.org</systemitem>,
 	and the Battery Powered Linux mini-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
 	Note that, even if you say no here, Linux on the x86 architecture
-	will issue the <literal>hlt</literal> instruction if nothing is to be
+	will issue the <literal>hlt</literal> instruction if nothing is being
 	done, thereby sending the processor to sleep and saving power.
 	</para>
 
@@ -946,29 +976,37 @@ developers and released under the GPL.
 <refentry id="CONFIG_SOFTWARE_SUSPEND">
 <refnamediv>
 	<refname>SOFTWARE_SUSPEND</refname>
-	<refpurpose>Software Suspend</refpurpose>
+	<refpurpose>Software suspend</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Enable the possibility of suspending the machine.
+	Enable machine suspension.
 	</para>
+<!--
+
+  AO: There is really no explanation of the option here. Instead,
+  there is just a rather mysterious procedure that must be executed at
+  reboot. But why reboot?
+
+-->
 
 	<para>
-	When suspending the machine, an image is saved in your active swap.
+	When the machine is suspended, an image is saved in your active swap.
 	Upon next boot, pass the <literal>resume=/dev/swappartition</literal>
 	argument to the kernel to have it detect the saved image, restore
 	memory state from it, and continue to run as before. If you do not want
-	the previous state to be reloaded, then use the
+	the previous state to be reloaded, use the
 	<literal>noresume</literal> kernel argument. However, note that your
-	partitions will be fsck'd and you must re-mkswap your swap partitions.
-	It does not work with swap files.
+	partitions will be <command>fsck</command>'d and you must
+	issue <command>mkswap</command> on your swap partitions again.
+	The procedure does not work with swap files.
 	</para>
 
 	<para>
-	Right now you may boot without resuming and then later resume but
-	in meantime you cannot use those swap partitions/files which were
-	involved in suspending. Also in this case there is a risk that buffers
+	Right now you may boot without resuming and then resume later, but
+	in the meantime you cannot use those swap partitions/files which were
+	involved in suspending. In this case, also, there is a risk that buffers
 	on disk won't match with saved ones.
 	</para>
 
@@ -989,9 +1027,9 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	Advanced Configuration and Power Interface (ACPI) support for Linux
-	requires an ACPI compliant platform (hardware/firmware), and assumes
+	requires ACPI-compliant hardware and firmware, and assumes
 	the presence of OS-directed configuration and power management (OSPM)
-	software.  This option will enlarge your kernel by about 70K.
+	software.  This option will enlarge your kernel by about 70 KB.
 	</para>
 
 	<para>
@@ -1000,26 +1038,25 @@ developers and released under the GPL.
 	Plug-and-Play BIOS specification (PnP BIOS), the MultiProcessor
 	Specification (MPS), and the Advanced Power Management (APM)
 	specification.  If both ACPI and APM support are configured, whichever
-	is loaded first shall be used.
+	is loaded first will be used.
 	</para>
 
 	<para>
-	The ACPI SourceForge project contains the latest source code,
+	The ACPI SourceForge project at
+	<systemitem role="url">http://sourceforge.net/projects/acpi</systemitem> contains the latest source code,
 	documentation, tools, mailing list subscription, and other information.
-	This project is available at:
-	<systemitem role="url">http://sourceforge.net/projects/acpi</systemitem>
 	</para>
 
 	<para>
 	Linux support for ACPI is based on Intel Corporation's ACPI Component
-	Architecture (ACPI CA).  For more information see:
-	<systemitem role="url">http://developer.intel.com/technology/iapc/acpi</systemitem>
+	Architecture (ACPI CA).  For more information, see
+	<systemitem role="url">http://developer.intel.com/technology/iapc/acpi</systemitem>.
 	</para>
 
 	<para>
 	ACPI is an open industry specification co-developed by Compaq, Intel,
-	Microsoft, Phoenix, and Toshiba.  The specification is available at:
-	<systemitem role="url">http://www.acpi.info</systemitem>
+	Microsoft, Phoenix, and Toshiba.  The specification is available at
+	<systemitem role="url">http://www.acpi.info</systemitem>.
 	</para>
 
 </refsect1>
@@ -1028,20 +1065,21 @@ developers and released under the GPL.
 <refentry id="CONFIG_CPU_FREQ">
 <refnamediv>
 	<refname>CPU_FREQ</refname>
-	<refpurpose>CPU Frequency scaling</refpurpose>
+	<refpurpose>CPU frequency scaling</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	CPU Frequency scaling allows you to change the clock speed of CPUs on
-	the fly. This is a nice method to save power, because the lower the CPU
+	CPU frequency scaling allows you to change the clock speed of CPUs on
+	the fly. This can save power, because the lower the CPU
 	clock speed, the less power the CPU consumes.
 	</para>
 
 	<para>
-	Note that this driver doesn't automatically change the CPU clock speed,
-	you need to either enable a dynamic cpufreq governor (see below) after
-	boot, or use a userspace tool.
+	Note that this driver doesn't automatically change the CPU clock speed;
+	you need to either enable a dynamic CPUFreq policy governor
+	(described later) after
+	booting or use a userspace tool.
 	</para>
 
 	<para>
@@ -1060,7 +1098,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Use the CPUFreq governor <literal>performance</literal> as default.
+	Use the CPUFreq <literal>performance</literal> governor.
 	This sets the frequency statically to the highest frequency supported
 	by the CPU.
 	</para>
@@ -1076,9 +1114,9 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Use the CPUFreq governor <literal>userspace</literal> as default. This
-	allows you to set the CPU frequency manually or when an userspace
-	program shall be able to set the CPU dynamically without having to
+	Use the CPUFreq <literal>userspace</literal> governor. This
+	allows you to set the CPU frequency manually, and allows a userspace
+	program to set the CPU dynamically without requiring you to first
 	enable the userspace governor manually.
 	</para>
 
@@ -1088,12 +1126,12 @@ developers and released under the GPL.
 <refentry id="CONFIG_CPU_FREQ_GOV_PERFORMANCE">
 <refnamediv>
 	<refname>CPU_FREQ_GOV_PERFORMANCE</refname>
-	<refpurpose>'performance' governor</refpurpose>
+	<refpurpose>"Performance" CPUFreq policy governor</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This cpufreq governor sets the frequency statically to the
+	This CPUFreq policy governor sets the frequency statically to the
 	highest available CPU frequency.
 	</para>
 
@@ -1103,12 +1141,12 @@ developers and released under the GPL.
 <refentry id="CONFIG_CPU_FREQ_GOV_POWERSAVE">
 <refnamediv>
 	<refname>CPU_FREQ_GOV_POWERSAVE</refname>
-	<refpurpose>'powersave' governor</refpurpose>
+	<refpurpose>"Powersave" CPUFreq policy governor</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This cpufreq governor sets the frequency statically to the lowest
+	This sets the frequency statically to the lowest
 	available CPU frequency.
 	</para>
 
@@ -1118,20 +1156,20 @@ developers and released under the GPL.
 <refentry id="CONFIG_CPU_FREQ_GOV_USERSPACE">
 <refnamediv>
 	<refname>CPU_FREQ_GOV_USERSPACE</refname>
-	<refpurpose>'userspace' governor for userspace frequency scaling</refpurpose>
+	<refpurpose>"Userspace" CPUFreq policy governor</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Enable this cpufreq governor when you either want to set the CPU
-	frequency manually or when an userspace program shall be able to set
-	the CPU dynamically, like on LART
-	<systemitem role="url">http://www.lartmaker.nl/</systemitem>.
+	Enable this CPUFreq policy governor either when you want to set the CPU
+	frequency manually or when a userspace program should be able to set
+	the CPU dynamically, as on LART
+	(<systemitem role="url">http://www.lartmaker.nl</systemitem>).
 	</para>
 
 	<para>
 	For details, take a look at
-	<filename>Documentation/cpu-freq/</filename>.
+	<filename>Documentation/cpu-freq</filename>.
 	</para>
 
 </refsect1>
@@ -1140,15 +1178,15 @@ developers and released under the GPL.
 <refentry id="CONFIG_CPU_FREQ_GOV_ONDEMAND">
 <refnamediv>
 	<refname>CPU_FREQ_GOV_ONDEMAND</refname>
-	<refpurpose>'ondemand' cpufreq policy governor</refpurpose>
+	<refpurpose>"Ondemand" CPUFreq policy governor</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	<literal>ondemand</literal> - This driver adds a dynamic cpufreq policy
-	governor.  The governor does a periodic polling and changes frequency
-	based on the CPU utilization.  The support for this governor depends on
-	CPU capability to do fast frequency switching (i.e, very low latency
+	This driver adds a dynamic  CPUFreq policy
+	governor. The governor polls the CPU and changes its frequency
+	based on CPU utilization. Support for this governor depends on the
+	CPU's ability to do fast frequency switching (i.e, very low latency
 	frequency transitions).
 	</para>
 
@@ -1162,25 +1200,26 @@ developers and released under the GPL.
 <refentry id="CONFIG_CPU_FREQ_GOV_CONSERVATIVE">
 <refnamediv>
 	<refname>CPU_FREQ_GOV_CONSERVATIVE</refname>
-	<refpurpose>'conservative' cpufreq governor</refpurpose>
+	<refpurpose>"Conservative" CPUFreq policy governor</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	<literal>conservative</literal> - this driver is rather similar to the
-	<literal>ondemand</literal> governor both in its source code and its
-	purpose, the difference is its optimisation for better suitability in a
-	battery powered environment.  The frequency is gracefully increased and
+	This driver is similar to the
+	Ondemand governor both in its source code and its
+	purpose. The difference is that the Conservative governor is
+	optimiaed for a
+	battery-powered system.  The frequency is gracefully increased and
 	decreased rather than jumping to 100% when speed is required.
 	</para>
 
 	<para>
-	If you have a desktop machine then you should really be considering
-	the <literal>ondemand</literal> governor instead, however if you are
-	using a laptop, PDA or even an AMD64 based computer (due to the
+	If you are
+	using a laptop, a PDA, or an AMD64-based computer (due to the
 	unacceptable step-by-step latency issues between the minimum and
 	maximum frequency transitions in the CPU) you will probably want to use
-	this governor.
+	this governor. If you have a desktop machine, consider
+	the Ondemand governor instead. 
 	</para>
 
 	<para>
@@ -1198,13 +1237,13 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	PCI is a bus system that the processor uses to talk to internal devices
+	PCI is a bus system used by the processor to talk to internal devices
 	and add-on cards.  It is extremely common and found in almost all
 	modern computers.
 	</para>
 
 	<para>
-	Say yes to this option unless you know what you are doing.
+	Say yes to this option unless you have a special reason not to.
 	</para>
 
 </refsect1>
@@ -1220,8 +1259,8 @@ developers and released under the GPL.
 	<para>
 	Say yes here if you want to attach PCMCIA- or PC-cards to your Linux
 	computer.  These are credit-card size devices such as network cards,
-	modems or hard drives often used with laptops computers.  There are
-	actually two varieties of these cards: 16 bit PCMCIA and 32 bit CardBus
+	modems, or hard drives often used with laptops computers.  There are
+	actually two varieties of these cards: 16-bit PCMCIA and 32-bit CardBus
 	cards.
 	</para>
 
@@ -1243,9 +1282,9 @@ developers and released under the GPL.
 
 	<para>
 	To use 16-bit PCMCIA cards, you will need supporting software in most
-	cases. (see the file
+	cases. See the file
 	<filename>Documentation/Changes</filename> for
-	location and details).
+	location and details.
 	</para>
 
 </refsect1>
@@ -1260,14 +1299,14 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	CardBus is a bus mastering architecture for PC-cards, which allows for
-	32 bit PC-cards (the original PCMCIA standard specifies only a 16 bit
+	32-bit PC-cards (the original PCMCIA standard specifies only a 16-bit
 	wide bus). Many newer PC-cards are actually CardBus cards.
 	</para>
 
 	<para>
-	To use 32 bit PC-cards, you also need a CardBus compatible host bridge.
+	To use 32-bit PC-cards, you also need a CardBus compatible host bridge.
 	Virtually all modern PCMCIA bridges do this, and most of them are
-	"yenta-compatible", so also enable that option.
+	"yenta-compatible," so enable that option too.
 	</para>
 
 </refsect1>
@@ -1276,7 +1315,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_HOTPLUG_PCI">
 <refnamediv>
 	<refname>HOTPLUG_PCI</refname>
-	<refpurpose>Support for PCI Hotplug (EXPERIMENTAL)</refpurpose>
+	<refpurpose>Support for PCI Hotplug (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -1297,7 +1336,8 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Unless you really know what you are doing, you should say yes here.
+	Say yes here unless you are an expert with a really good
+	reason not o.
 	The reason is that some programs need kernel networking support even
 	when running on a stand-alone machine that isn't connected to any other
 	computer.
@@ -1305,15 +1345,15 @@ developers and released under the GPL.
 
 	<para>
 	If you are upgrading from an older kernel, you should consider updating
-	your networking tools too because changes in the kernel and the tools
-	often go hand in hand. The tools are contained in the package
-	net-tools, the location and version number of which are given in
+	your networking tools too, because changes in the kernel and the tools
+	often go hand in hand. The tools are contained in the
+	<literal>net-tools</literal> package, the location and version number of which are given in
 	<filename>Documentation/Changes</filename>.
 	</para>
 
 	<para>
 	For a general introduction to Linux networking, it is highly
-	recommended to read the NET-HOWTO, available from
+	recommended that you read the NET-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
@@ -1331,7 +1371,13 @@ developers and released under the GPL.
 	If you say yes here, you will include support for Unix domain sockets;
 	sockets are the standard Unix mechanism for establishing and accessing
 	network connections.  Many commonly used programs such as the X Window
-	system and syslog use these sockets even if your machine is not
+<!--
+
+  AO: Unix domain sockets are not inet sockets, so being connected to
+  another machine isn't even related to using Unix domain sockets.
+
+-->
+	System and syslog use these sockets even if your machine is not
 	connected to any network.  Unless you are working on an embedded system
 	or something similar, you therefore definitely want to say yes here.
 	</para>
@@ -1348,11 +1394,11 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	These are the protocols used on the Internet and on most local
-	Ethernets. It is highly recommended to say yes here (this will enlarge
-	your kernel by about 144 KB), since some programs (e.g. the X window
-	system) use TCP/IP even if your machine is not connected to any other
-	computer. You will get the so-called loopback device which allows you
-	to ping yourself.
+	Ethernets. It is highly recommended that you say yes here, since some programs (e.g. the X Window
+	System) use TCP/IP even if your machine is not connected to any other
+	computer. They use the so-called <emphasis>loopback
+	device</emphasis>, which this option sets up. It will enlarge
+	your kernel by about 144 KB.
 	</para>
 
 	<para>
@@ -1385,14 +1431,14 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Note that your box can only act as a router if you enable IP forwarding
+	Note that your box can act as a router only if you enable IP forwarding
 	in your kernel; you can do that by saying yes to the
 	<literal>/proc file system support</literal> and
 	<literal>Sysctl support</literal> options and executing the
 	line:
-	<userinput>
+	<screen>
 	echo "1" &gt; /proc/sys/net/ipv4/ip_forward
-	</userinput>
+	</screen>
 	at boot time after the <filename>/proc</filename> file system has been
 	mounted.
 	</para>
@@ -1401,19 +1447,19 @@ developers and released under the GPL.
 	If you turn on IP forwarding, you will also get the rp_filter, which
 	automatically rejects incoming packets if the routing table entry
 	for their source address doesn't match the network interface they're
-	arriving on. This has security advantages because it prevents the
-	so-called IP spoofing, however it can pose problems if you use
+	arriving on. This has security advantages because it prevents
+	IP spoofing; however, it can pose problems if you use
 	asymmetric routing (packets from you to a host take a different path
-	than packets from that host to you) or if you operate a non-routing
-	host which has several IP addresses on different interfaces. To turn
-	rp_filter off use:
-	<userinput>
-	echo 0 &gt; /proc/sys/net/ipv4/conf/device/rp_filter
-	</userinput>
+	from packets that go from that host to you) or if you operate a non-routing
+	host that has several IP addresses on different interfaces. To turn
+	rp_filter off, enter:
+	<screen>
+	echo 0 &gt; /proc/sys/net/ipv4/conf/<replaceable>device</replaceable>/rp_filter
+	</screen>
 	or
-	<userinput>
+	<screen>
 	echo 0 &gt; /proc/sys/net/ipv4/conf/all/rp_filter
-	</userinput>
+	</screen>
 	</para>
 
 </refsect1>
@@ -1422,7 +1468,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_NETFILTER">
 <refnamediv>
 	<refname>NETFILTER</refname>
-	<refpurpose>Network packet filtering (replaces ipchains)</refpurpose>
+	<refpurpose>Network packet filtering</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -1434,34 +1480,41 @@ developers and released under the GPL.
 	<para>
 	The most common use of packet filtering is to run your Linux box as
 	a firewall protecting a local network from the Internet. The type of
-	firewall provided by this kernel support is called a "packet
-	filter", which means that it can reject individual network packets
+	firewall provided by this kernel support is called a <firstterm>packet
+	filter</firstterm>, which means that it can reject individual network packets
 	based on type, source, destination etc. The other kind of firewall,
-	a "proxy-based" one, is more secure but more intrusive and more
+	a <firstterm>proxy-based</firstterm> one, is more secure but more intrusive and more
 	bothersome to set up; it inspects the network traffic much more
-	closely, modifies it and has knowledge about the higher level
+	closely, modifies it, and has knowledge about the higher level
 	protocols, which a packet filter lacks. Moreover, proxy-based
 	firewalls often require changes to the programs running on the local
 	clients. Proxy-based firewalls don't need support by the kernel, but
-	they are often combined with a packet filter, which only works if
+	they are often combined with a packet filter, which works only if
 	you say yes here.
 	</para>
 
 	<para>
+<!--
+
+  AO: The following explanation is probably well known and
+  unnecessary, but I'll leave it up to you to decide whether to cut it
+  down.
+
+-->
 	You should also say yes here if you intend to use your Linux box as
 	the gateway to the Internet for a local network of machines without
-	globally valid IP addresses. This is called "masquerading": if one
+	globally valid IP addresses. This is called <firstterm>masquerading</firstterm>. If one
 	of the computers on your local network wants to send something to
-	the outside, your box can "masquerade" as that computer, i.e. it
+	the outside, your box can "masquerade" as that computer, i.e., it
 	forwards the traffic to the intended outside destination, but
 	modifies the packets to make it look like they came from the
-	firewall box itself. It works both ways: if the outside host
+	firewall box itself. Masquerading works both ways: if the outside host
 	replies, the Linux box will silently forward the traffic to the
 	correct local computer. This way, the computers on your local net
 	are completely invisible to the outside world, even though they can
 	reach the outside and can receive replies. It is even possible to
 	run globally visible servers from within a masqueraded local network
-	using a mechanism called portforwarding. Masquerading is also often
+	using a mechanism called port forwarding. Masquerading is also often
 	called NAT (Network Address Translation).  Other operating systems
 	often call this term PAT (Port Address Translation).
 	</para>
@@ -1477,12 +1530,12 @@ developers and released under the GPL.
 	Yet another use of Netfilter is building a bridging firewall. Using
 	a bridge with Network packet filtering enabled makes iptables "see"
 	the bridged traffic. For filtering on the lower network and Ethernet
-	protocols over the bridge, use ebtables (under bridge netfilter
+	protocols over the bridge, use ebtables (located under bridge Netfilter
 	configuration).
 	</para>
 
 	<para>
-	Various modules exist for netfilter which replace the previous
+	Various modules exist for Netfilter that replace the previous
 	masquerading (<literal>ipmasqadm</literal>), packet filtering
 	(<literal>ipchains</literal>), transparent proxying, and portforwarding
 	mechanisms. Please see <filename>Documentation/Changes</filename> under
@@ -1507,19 +1560,20 @@ developers and released under the GPL.
 	<para>
 	When the kernel has several packets to send out over a network
 	device, it has to decide which ones to send first, which ones to
-	delay, and which ones to drop. This is the job of the queueing
-	disciplines, several different algorithms for how to do this
+	delay, and which ones to drop. This is the job of queueing
+	disciplines. Several different algorithms for how to do this
 	"fairly" have been proposed.
 	</para>
 
 	<para>
-	If you say no here, you will get the standard packet scheduler,
-	which is a FIFO (first come, first served). If you say yes here,
-	you will be able to choose from among several alternative
-	algorithms which can then be attached to different network devices.
-	This is useful for example if some of your network devices are real
-	time devices that need a certain minimum data flow rate, or if you
-	need to limit the maximum data flow rate for traffic which matches
+	If you say no here, you will get the standard packet
+	scheduler, which is a FIFO (first come, first served)
+	scheduler. If you say yes here, you will be able to choose
+	from among several alternative algorithms that can then be
+	attached to different network devices.  This is useful, for
+	example, if some of your network devices are real-time devices
+	that need a certain minimum data flow rate, or if you need to
+	limit the maximum data flow rate for traffic that matches
 	specified criteria.
 	</para>
 
@@ -1533,8 +1587,8 @@ developers and released under the GPL.
 	This Quality of Service (QoS) support will enable you to use
 	Differentiated Services (diffserv) and Resource Reservation
 	Protocol (RSVP) on your Linux router if you also say yes to the
-	corresponding classifiers.  Documentation and software is at
-	<systemitem role="url">http://diffserv.sourceforge.net/</systemitem>.
+	corresponding options.  Documentation and software is at
+	<systemitem role="url">http://diffserv.sourceforge.net</systemitem>.
 	</para>
 
 </refsect1>
@@ -1548,15 +1602,15 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Say yes here if you want to build support for the IrDA (TM)
-	protocols.  The Infrared Data Associations (tm) specifies standards
+	Say yes here if you want to build support for the IrDA
+	protocols.  The Infrared Data Association specifies standards
 	for wireless infrared communication and is supported by most
 	laptops and PDAs.
 	</para>
 
 	<para>
-	To use Linux support for the IrDA (tm) protocols, you will also need
-	some user-space utilities like irattach.  For more information, see
+	To use Linux support for the IrDA protocols, you will also need
+	some user-space utilities such as <command>irattach</command>.  For more information, see
 	the file <filename>Documentation/networking/irda.txt</filename>.
 	You also want to read the IR-HOWTO, available at
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
@@ -1564,8 +1618,8 @@ developers and released under the GPL.
 
 	<para>
 	If you want to exchange bits of data (vCal, vCard) with a PDA, you
-	will need to install some OBEX application, such as OpenObex:
-	<systemitem role="url">http://sourceforge.net/projects/openobex/</systemitem>
+	will need to install an OBEX application, such as OpenObex from
+	<systemitem role="url">http://sourceforge.net/projects/openobex</systemitem>.
 	</para>
 
 </refsect1>
@@ -1585,7 +1639,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	The IrLAN protocol can be used to talk with infrared access points like
+	The IrLAN protocol can be used to talk with infrared access
+	points such as
 	the HP NetbeamIR, or the ESI JetEye NET.  You can also connect to
 	another Linux machine running the IrLAN protocol for ad-hoc networking.
 	</para>
@@ -1603,13 +1658,13 @@ developers and released under the GPL.
 	<para>
 	Say yes here if you want to build support for the IrNET protocol.
 	IrNET is a PPP driver, so you will also need a working PPP subsystem
-	(driver, daemon and config).
+	(driver, daemon, and configuration).
 	</para>
 
 	<para>
 	IrNET is an alternate way to transfer TCP/IP traffic over IrDA.  It
 	uses synchronous PPP over a set of point to point IrDA sockets.  You
-	can use it between Linux machine or with Windows.
+	can use it between Linux machines or with Windows.
 	</para>
 
 </refsect1>
@@ -1625,9 +1680,8 @@ developers and released under the GPL.
 	<para>
 	Say yes here if you want to build support for the IrCOMM protocol.
 	IrCOMM implements serial port emulation, and makes it possible to use
-	all existing applications that understands TTY's with an infrared link.
-	Thus you should be able to use application like PPP, minicom and
-	others.
+	all existing applications that understand ttys with infrared links.
+	Thus, you should be able to use applications such as PPP and <command>minicom</command>.
 	</para>
 
 </refsect1>
@@ -1661,30 +1715,86 @@ developers and released under the GPL.
 	<para>
 	Bluetooth is low-cost, low-power, short-range wireless technology.  It
 	was designed as a replacement for cables and other short-range
-	technologies like IrDA.  Bluetooth operates in personal area range that
+	technologies such as IrDA.  Bluetooth operates in personal area range that
 	typically extends up to 10 meters.  More information about Bluetooth
 	can be found at
-	<systemitem role="url">http://www.bluetooth.com/</systemitem>.
+	<systemitem role="url">http://www.bluetooth.com</systemitem>.
 	</para>
 
 	<para>
-	Linux Bluetooth subsystem consist of several layers:
-	   Bluetooth Core (HCI device and connection manager, scheduler)
-	   HCI Device drivers (Interface to the hardware)
-	   SCO Module (SCO audio links)
-	   L2CAP Module (Logical Link Control and Adaptation Protocol)
-	   RFCOMM Module (RFCOMM Protocol)
-	   BNEP Module (Bluetooth Network Encapsulation Protocol)
-	   CMTP Module (CAPI Message Transport Protocol)
-	   HIDP Module (Human Interface Device Protocol)
+	The Linux Bluetooth subsystem consist of several layers:
 	</para>
-
+	<variablelist>
+	   <varlistentry>
+           <term>
+	   Bluetooth Core
+	   </term>
+           <listitem><para>
+	   HCI device and connection manager, scheduler
+           </para></listitem>
+	   </varlistentry>
+	   <varlistentry>
+           <term>
+	   HCI Device drivers
+	   </term>
+           <listitem><para>
+	   Interface to the hardware
+           </para></listitem>
+	   </varlistentry>
+	   <varlistentry>
+           <term>
+	   SCO Module
+	   </term>
+           <listitem><para>
+	   SCO audio links
+           </para></listitem>
+	   </varlistentry>
+	   <varlistentry>
+           <term>
+	   L2CAP Module
+	   </term>
+           <listitem><para>
+	   Logical Link Control and Adaptation Protocol
+           </para></listitem>
+	   </varlistentry>
+	   <varlistentry>
+           <term>
+	   RFCOMM Module
+	   </term>
+           <listitem><para>
+	   RFCOMM Protocol
+           </para></listitem>
+	   </varlistentry>
+	   <varlistentry>
+           <term>
+	   BNEP Module
+	   </term>
+           <listitem><para>
+	   Bluetooth Network Encapsulation Protocol
+           </para></listitem>
+	   </varlistentry>
+	   <varlistentry>
+           <term>
+	   CMTP Module
+	   </term>
+           <listitem><para>
+	   CAPI Message Transport Protocol
+           </para></listitem>
+	   </varlistentry>
+	   <varlistentry>
+           <term>
+	   HIDP Module
+	   </term>
+           <listitem><para>
+	   Human Interface Device Protocol
+           </para></listitem>
+	   </varlistentry>
+	</variablelist>
 	<para>
-	To use Linux Bluetooth subsystem, you will need several user-space
-	utilities like hciconfig and hcid.  These utilities and updates to
-	Bluetooth kernel modules are provided in the BlueZ packages.
-	For more information, see
-	<systemitem role="url">http://www.bluez.org/</systemitem>.
+	To use the Linux Bluetooth subsystem, you will need several user-space
+	utilities such as <command>hciconfig</command> and <command>hcid</command>.  These utilities and updates to
+	Bluetooth kernel modules are provided in the BlueZ packages at
+	<systemitem role="url">http://www.bluez.org</systemitem>.
 	</para>
 
 </refsect1>
@@ -1698,7 +1808,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	This option enables the hardware independent IEEE 802.11
+	This option enables the hardware-independent IEEE 802.11
 	networking stack.
 	</para>
 
@@ -1713,12 +1823,12 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Memory Technology Devices are flash, RAM and similar chips, often
-	used for solid state file systems on embedded devices. This option
-	will provide the generic support for MTD drivers to register
+	Memory Technology Devices are flash, RAM, and similar chips, often
+	used for solid-state file systems on embedded devices. This option
+	provides the generic support for MTD drivers to register
 	themselves with the kernel and for potential users of MTD devices
-	to enumerate the devices which are present and obtain a handle on
-	them. It will also allow you to select individual drivers for
+	to enumerate the devices present and obtain a handle on
+	them. It also allows you to select individual drivers for
 	particular hardware and users of MTD devices.
 	</para>
 
@@ -1734,24 +1844,22 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you want to use devices connected to your machine's parallel port
-	(the connector at the computer with 25 holes), e.g. printer, ZIP
-	drive, PLIP link (Parallel Line Internet Protocol is mainly used to
-	create a mini network by connecting the parallel ports of two local
-	machines) etc., then you need to say yes here; please read
-	<filename>Documentation/parport.txt</filename> and
-	<filename>drivers/parport/BUGS-parport</filename>.
+	(the connector at the computer with 25 holes), e.g. a printer, ZIP
+	drive, or Parallel Line Internet Protocol (PLIP) link, you need to say yes here.
 	</para>
 
 	<para>
-	For extensive information about drivers for many devices attaching
-	to the parallel port see <systemitem role="url">http://www.torque.net/linux-pp.html</systemitem>.
+	Please read
+	<filename>Documentation/parport.txt</filename> and
+	<filename>drivers/parport/BUGS-parport</filename> for more information.	For extensive information about drivers for many devices attaching
+	to the parallel port, see <systemitem role="url">http://www.torque.net/linux-pp.html</systemitem>.
 	</para>
 
 	<para>
 	It is possible to share a single parallel port among several devices
 	and it is safe to compile all the corresponding drivers into the
 	kernel.  If you have more than one parallel port and want to specify
-	which port and IRQ to be used by this driver at module load time, take
+	which port and IRQ will be used by this driver at module load time, take
 	a look at <filename>Documentation/parport.txt</filename>.
 	</para>
 
@@ -1766,9 +1874,9 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Plug and Play (PnP) is a standard for peripherals which allows those
-	peripherals to be configured by software, e.g. assign IRQ's or other
-	parameters. No jumpers on the cards are needed, instead the values
+	Plug and Play (PnP) is a standard for peripherals that allows them
+	to be configured by software, e.g. to assign IRQs or other
+	parameters. No jumpers on the cards are needed; instead, the values
 	are provided to the cards from the BIOS, from the operating system,
 	or using a user-space utility.
 	</para>
@@ -1776,8 +1884,9 @@ developers and released under the GPL.
 	<para>
 	Say yes here if you would like Linux to configure your Plug and
 	Play devices. You should then also say yes to all of the protocols
-	needed.  Alternatively, you can say no here and configure your PnP
-	devices using user space utilities such as the isapnptools package.
+	needed.  Alternatively, you can say no here and configure your
+	Plug and Play
+	devices using user space utilities such as the <command>isapnptools</command> package.
 	</para>
 
 </refsect1>
@@ -1792,13 +1901,13 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	Say yes here if you would like support for ISA Plug and Play devices.
-	Some information is in <filename>Documentation/isapnp.txt</filename>.
+	Some information is available in <filename>Documentation/isapnp.txt</filename>.
 	</para>
 
 	<para>
 	If you use have ISA Plug and Play devices, please use the ISA PnP
-	tools that are found at
-	<systemitem role="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>
+	tools found at
+	<systemitem role="url">http://www.roestock.demon.co.uk/isapnptools</systemitem>
 	to configure them properly.
 	</para>
 
@@ -1808,26 +1917,26 @@ developers and released under the GPL.
 <refentry id="CONFIG_PNPBIOS">
 <refnamediv>
 	<refname>PNPBIOS</refname>
-	<refpurpose>Plug and Play BIOS support (EXPERIMENTAL)</refpurpose>
+	<refpurpose>Plug and Play BIOS support (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Linux uses the PNPBIOS as defined in "Plug and Play BIOS
+	Linux uses the PNPBIOS defined in "Plug and Play BIOS
 	Specification Version 1.0A May 5, 1994" to autodetect built-in
-	mainboard resources (e.g. parallel port resources).
+	mainboard resources (e.g., parallel port resources).
 	</para>
 
 	<para>
 	If you would like the kernel to detect and allocate resources to
 	your mainboard devices (on some systems they are disabled by the
-	BIOS) say yes here.  Also the PNPBIOS can help prevent resource
+	BIOS) say yes here. The PNPBIOS can also help prevent resource
 	conflicts between mainboard devices and other bus devices.
 	</para>
 
 	<para>
-	Note: ACPI is expected to supersede PNPBIOS some day, currently it
-	co-exists nicely.  If you have a non-ISA system that supports ACPI,
+	ACPI is expected to supersede PNPBIOS some day. Currently they
+	co-exist nicely.  If you have a non-ISA system that supports ACPI,
 	you probably don't need PNPBIOS support.
 	</para>
 
@@ -1844,7 +1953,7 @@ developers and released under the GPL.
 	<para>
 	If you say yes here, your kernel will be able to manage low cost mass
 	storage units such as ATA/(E)IDE and ATAPI units. The most common
-	cases are IDE hard drives and ATAPI CD-ROM drives.
+	such devices are IDE hard drives and ATAPI CD-ROM drives.
 	</para>
 
 	<para>
@@ -1853,7 +1962,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Integrated Disk Electronics (IDE aka ATA-1) is a connecting standard
+	Integrated Disk Electronics (IDE, also known as ATA-1) is a connecting standard
 	for mass storage units such as hard disks. It was designed by
 	Western Digital and Compaq Computer in 1984. It was then named
 	ST506. Quite a number of disks use the IDE interface.
@@ -1861,17 +1970,27 @@ developers and released under the GPL.
 
 	<para>
 	AT Attachment (ATA) is the superset of the IDE specifications.
-	ST506 was also called ATA-1.
+	ST506 is also called ATA-1.
 	</para>
 
 	<para>
-	Fast-IDE is ATA-2 (also named Fast ATA), Enhanced IDE (EIDE) is
+	Fast-IDE is ATA-2 (also named Fast ATA).
+	</para>
+
+	<para>
+	Enhanced IDE (EIDE) is
 	ATA-3. It provides support for larger disks (up to 8.4GB by means of
 	the LBA standard), more disks (4 instead of 2) and for other mass
-	storage units such as tapes and cdrom. UDMA/33 (aka UltraDMA/33) is
-	ATA-4 and provides faster (and more CPU friendly) transfer modes
+	storage units such as tapes and cdrom.
+	</para>
+
+	<para>
+
+	UDMA/33 (also known as UltraDMA/33) is
+	ATA-4. By using fast DMA controllers, It provides faster
+	transfer modes (with less load on the CPU)
 	than previous PIO (Programmed processor Input/Output) from previous
-	ATA/IDE standards by means of fast DMA controllers.
+	ATA/IDE standards.
 	</para>
 
 	<para>
@@ -1880,12 +1999,12 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	SMART IDE (Self Monitoring, Analysis and Reporting Technology) was
-	designed in order to prevent data corruption and disk crash by
+	SMART IDE (self-monitoring, analysis, and reporting technology) was
+	designed in order to prevent data corruption and disk crashes by
 	detecting pre hardware failure conditions (heat, access time, and
-	the like...). Disks built since June 1995 may follow this standard.
+	the like). Disks built after June 1995 may follow this standard.
 	The kernel itself doesn't manage this; however there are quite a
-	number of user programs such as smart that can query the status of
+	number of user programs such as <command>smart</command> that can query the status of
 	SMART parameters from disk drives.
 	</para>
 
@@ -1905,7 +2024,7 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you say yes here, you will use the full-featured IDE driver to
-	control up to ten ATA/IDE interfaces, each being able to serve a
+	control up to ten ATA/IDE interfaces, each one able to serve a
 	"master" and a "slave" device, for a total of up to twenty ATA/IDE
 	disk/cdrom/tape/floppy drives.
 	</para>
@@ -1922,8 +2041,8 @@ developers and released under the GPL.
 
 	<para>
 	To fine-tune ATA/IDE drive/interface parameters for improved
-	performance, look for the hdparm package at
-	<systemitem role="url">ftp://ibiblio.org/pub/Linux/system/hardware/</systemitem>.
+	performance, look for the <literal>hdparm</literal> package at
+	<systemitem role="url">ftp://ibiblio.org/pub/Linux/system/hardware</systemitem>.
 	</para>
 
 	<para>
@@ -1984,9 +2103,9 @@ developers and released under the GPL.
 
 	<para>
 	If you say yes here, the CD-ROM drive will be identified at boot
-	time along with other IDE devices, as <literal>hdb</literal> or
-	<literal>hdc</literal>, or something similar (check the boot
-	messages with dmesg). If this is your only CD-ROM drive, you can
+	time along with other IDE devices, as something such as <literal>hdb</literal> or
+	<literal>hdc</literal> (check the boot
+	messages using the <command>dmesg</command> command). If this is your only CD-ROM drive, you can
 	say no to all other CD-ROM options, but be sure to also enable the
 	<literal>ISO 9660 CD-ROM file system support</literal> option.
 	</para>
@@ -1994,7 +2113,7 @@ developers and released under the GPL.
 	<para>
 	Note that older versions of LILO (LInux LOader) cannot properly deal
 	with IDE/ATAPI CD-ROMs, so install LILO 16 or higher, available from
-	<systemitem role="url">http://lilo.go.dyndns.org/</systemitem>.
+	<systemitem role="url">http://lilo.go.dyndns.org</systemitem>.
 	</para>
 
 </refsect1>
@@ -2008,7 +2127,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you have an IDE floppy drive which uses the ATAPI protocol,
+	If you have an IDE floppy drive that uses the ATAPI protocol,
 	answer yes.  ATAPI is a newer protocol used by IDE CD-ROM/tape/floppy
 	drives, similar to the SCSI protocol.
 	</para>
@@ -2025,9 +2144,9 @@ developers and released under the GPL.
 
 	<para>
 	If you say yes here, the FLOPPY drive will be identified along with
-	other IDE devices, as <literal>hdb</literal> or
-	<literal>hdc</literal>, or something similar (check the boot
-	messages with dmesg).
+	other IDE devices, with a name such as <literal>hdb</literal> or
+	<literal>hdc</literal> (check the boot
+	messages using the <command>dmesg</command> command).
 	</para>
 
 </refsect1>
@@ -2041,7 +2160,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or
+	If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM, or
 	any other SCSI device under Linux, say yes and make sure that you know
 	the name of your SCSI host adapter (the card inside your computer
 	that "speaks" the SCSI protocol, also called SCSI controller),
@@ -2049,10 +2168,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	You also need to say yes here if you have a device which speaks
-	the SCSI protocol.  Examples of this include the parallel port
+	You also need to say yes here if you have a device that speaks
+	the SCSI protocol.  Examples of these include the parallel port
 	version of the IOMEGA ZIP drive, USB storage devices, Fibre
-	Channel, FireWire storage and the IDE-SCSI emulation driver.
+	Channel, FireWire storage, and the IDE-SCSI emulation driver.
 	</para>
 
 	<para>
@@ -2073,11 +2192,11 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you want to use SCSI hard disks, Fibre Channel disks,
-	USB storage or the SCSI or parallel port version of
+	USB storage, or the SCSI or parallel port version of
 	the IOMEGA ZIP drive, say yes and read the SCSI-HOWTO,
-	the Disk-HOWTO and the Multi-Disk-HOWTO, available from
+	the Disk-HOWTO, and the Multi-Disk-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
-	This is NOT for SCSI CD-ROMs.
+	This is <emphasis>not</emphasis> for SCSI CD-ROMs.
 	</para>
 
 	<para>
@@ -2101,7 +2220,7 @@ developers and released under the GPL.
 	If you want to use a SCSI tape drive under Linux, say yes and read the
 	SCSI-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>, and
-	<filename>Documentation/scsi/st.txt</filename> in the kernel source.  This is NOT
+	<filename>Documentation/scsi/st.txt</filename> in the kernel source.  This is <emphasis>not</emphasis>
 	for SCSI CD-ROMs.
 	</para>
 
@@ -2118,7 +2237,9 @@ developers and released under the GPL.
 	<para>
 	If you want to use a SCSI or FireWire CD-ROM under Linux,
 	say yes and read the SCSI-HOWTO and the CDROM-HOWTO at
-	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
+	<systemitem
+	role="url">http://www.tldp.org/docs.html#howto</systemitem>
+	for more directions.
 	Also make sure to enable the <literal>ISO 9660 CD-ROM file system
 	support</literal> option.
 	</para>
@@ -2134,22 +2255,22 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you want to use SCSI scanners, synthesizers or CD-writers or just
+	If you want to use SCSI scanners, synthesizers, or CD-writers, or just
 	about anything having "SCSI" in its name other than hard disks,
-	CD-ROMs or tapes, say yes here. These won't be supported by the kernel
-	directly, so you need some additional software which knows how to
+	CD-ROMs, or tapes, say yes here. These won't be supported by the kernel
+	directly, so you need some additional software that knows how to
 	talk to these devices using the SCSI protocol:
 	</para>
 
 	<para>
 	For scanners, look at SANE
-	<systemitem role="url">http://www.sane-project.org/</systemitem>.
+	<systemitem role="url">http://www.sane-project.org</systemitem>.
 	For CD writer software look at Cdrtools
-	<systemitem role="url">http://cdrecord.berlios.de/old/private/cdrecord.html</systemitem>
-	and for burning a "disk at once": CDRDAO
-	<systemitem role="url">http://cdrdao.sourceforge.net/</systemitem>.
+	<systemitem role="url">http://cdrecord.berlios.de/old/private/cdrecord.html</systemitem>,
+	and for burning a "disk at once," check out CDRDAO
+	<systemitem role="url">http://cdrdao.sourceforge.net</systemitem>.
 	Cdparanoia is a high quality digital reader of audio CDs
-	<systemitem role="url">http://www.xiph.org/paranoia/</systemitem>.
+	(<systemitem role="url">http://www.xiph.org/paranoia</systemitem>).
 	For other devices, it's possible that you'll have to write the
 	driver software yourself. Please read the file
 	<filename>Documentation/scsi/scsi-generic.txt</filename> for more information.
@@ -2166,13 +2287,12 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	This is a driver for SCSI media changers.  Most common devices are
-	tape libraries and MOD/CDROM jukeboxes.  *Real* jukeboxes, you
-	don't need this for those tiny 6-slot cdrom changers.  Media
+	This is a driver for SCSI media changers. The most common such devices are
+	tape libraries and MOD/CDROM jukeboxes. This option is for real jukeboxes; you
+	don't need it for tiny 6-slot CD-ROM changers.  Media
 	changers are listed as "Type: Medium Changer" in
 	<filename>/proc/scsi/scsi</filename>.
-	If you have such hardware and want to use it with linux, say yes
-	here.  Check <filename>Documentation/scsi/scsi-changer.txt</filename>
+	Check <filename>Documentation/scsi/scsi-changer.txt</filename>
 	for details.
 	</para>
 
@@ -2187,13 +2307,13 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you have a SCSI device that supports more than one LUN (Logical
-	Unit Number), e.g. a CD jukebox, and only one LUN is detected, you
+	If you have a SCSI device, such as a CD jukebox, that supports more than one LUN (Logical
+	Unit Number), and only one LUN is detected, you
 	can say yes here to force the SCSI driver to probe for multiple LUNs.
 	A SCSI device with multiple LUNs acts logically like multiple SCSI
 	devices. The vast majority of SCSI devices have only one LUN, and
 	so most people can say no here. The <literal>max_luns</literal>
-	boot/module parameter allows to override this setting.
+	boot/module parameter allows you to override this setting.
 	</para>
 
 </refsect1>
@@ -2222,8 +2342,8 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Support multiple physical spindles through a single logical device.
-	Required for RAID and logical volume management.
+	This option supports multiple physical spindles through a
+	single logical device, and is required for RAID and logical volume management.
 	</para>
 
 </refsect1>
@@ -2240,19 +2360,19 @@ developers and released under the GPL.
 	This driver lets you combine several hard disk partitions into one
 	logical block device. This can be used to simply append one
 	partition to another one or to combine several redundant hard disks
-	into a RAID1/4/5 device so as to provide protection against hard
-	disk failures. This is called "Software RAID" since the combining of
-	the partitions is done by the kernel. "Hardware RAID" means that the
+	into a RAID 1, RAID 4, or RAID 5 device to provide protection against hard
+	disk failures. This is called <firstterm>software RAID</firstterm> because the combining of
+	the partitions is done by the kernel. <firstterm>Hardware RAID</firstterm> means that the
 	combining is done by a dedicated controller; if you have such a
 	controller, you do not need to say yes here.
 	</para>
 
 	<para>
-	More information about Software RAID on Linux is contained in the
+	More information about software RAID on Linux is n the
 	Software RAID mini-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
-	There you will also learn where to get the supporting user space
-	utilities raidtools.
+	There you will also learn where to get the supporting userspace raidtools
+	utilities.
 	</para>
 
 </refsect1>
@@ -2268,8 +2388,8 @@ developers and released under the GPL.
 	<para>
 	Device-mapper is a low level volume manager.  It works by allowing
 	people to specify mappings for ranges of logical sectors.  Various
-	mapping types are available, in addition people may write their own
-	modules containing custom mappings if they wish.
+	mapping types are available, in addition to which people may write their own
+	modules containing custom mappings.
 	</para>
 
 	<para>
@@ -2288,14 +2408,14 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	IEEE 1394 describes a high performance serial bus, which is also
-	known as FireWire(tm) or i.Link(tm) and is used for connecting all
-	sorts of devices (most notably digital video cameras) to your
+	known as FireWire or i.Link and is used for connecting all
+	sorts of devices (most notably, digital video cameras) to your
 	computer.
 	</para>
 
 	<para>
 	If you have FireWire hardware and want to use it, say yes here.
-	This is the core support only, you will also need to select a
+	This is the core support only. You will also need to select a
 	driver for your IEEE 1394 adapter.
 	</para>
 
@@ -2311,20 +2431,20 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	The Intelligent Input/Output (I2O) architecture allows hardware
-	drivers to be split into two parts: an operating system specific
-	module called the OSM and an hardware specific module called the
+	drivers to be split into two parts: an operating-system-specific
+	module called the OSM and an hardware-specific module called the
 	HDM. The OSM can talk to a whole range of HDM's, and ideally the
-	HDM's are not OS dependent. This allows for the same HDM driver to
+	HDM's are not OS-dependent. This allows for the same HDM driver to
 	be used under different operating systems if the relevant OSM is in
 	place. In order for this to work, you need to have an I2O interface
 	adapter card in your computer. This card contains a special I/O
-	processor (IOP), thus allowing high speeds since the CPU does not
+	processor (IOP), allowing high speeds because the CPU does not
 	have to deal with I/O.
 	</para>
 
 	<para>
 	If you say yes here, you will get a choice of interface adapter
-	drivers and OSM's that must be enabled.
+	drivers and OSMs and will have to enable the correct ones.
 	</para>
 
 </refsect1>
@@ -2339,20 +2459,21 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	You can say no here if you do not intend to connect your Linux box to
-	any other computer at all.
+	any other computer.
 	</para>
 
 	<para>
 	You'll have to say yes if your computer contains a network card that
-	you want to use under Linux. If you are going to run SLIP or PPP over
+	you want to use under Linux. If you are going to run SLIP or
+	PPP over a
 	telephone line or null modem cable you need say yes here. Connecting
 	two machines with parallel ports using PLIP needs this, as well as
 	AX.25/KISS for sending Internet traffic over amateur radio links.
 	</para>
 
 	<para>
-	See also "The Linux Network Administrator's Guide" by Olaf Kirch and
-	Terry Dawson. Available at
+	See also the <emphasis>Linux Network Administrator's
+	Guide</emphasis> (O'Reilly) available at
 	<systemitem role="url">http://www.tldp.org/guides.html</systemitem>.
 	</para>
 
@@ -2378,9 +2499,8 @@ developers and released under the GPL.
 	hubs), 10BASE-F (10 Mbps over optical fiber links, using hubs),
 	100BASE-TX (100 Mbps over two twisted pair cables, using hubs),
 	100BASE-T4 (100 Mbps over 4 standard voice-grade twisted pair
-	cables, using hubs), 100BASE-FX (100 Mbps over optical fiber links)
-	[the 100BASE varieties are also known as Fast Ethernet], and Gigabit
-	Ethernet (1 Gbps over optical fiber or short copper links).
+	cables, using hubs), 100BASE-FX (100 Mbps over optical fiber links), and Gigabit
+	Ethernet (1 Gbps over optical fiber or short copper links). The 100BASE varieties are also known as Fast Ethernet.
 	</para>
 
 	<para>
@@ -2404,26 +2524,31 @@ developers and released under the GPL.
 <refentry id="CONFIG_NET_RADIO">
 <refnamediv>
 	<refname>NET_RADIO</refname>
-	<refpurpose>Wireless LAN drivers (non-hamradio) &amp; Wireless Extensions</refpurpose>
+	<refpurpose>Wireless LAN drivers (non-hamradio) and Wireless Extensions</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Support for wireless LANs and everything having to do with radio,
+	Support for wireless LANs and everything having to do with
+<!--
+
+  AO: I hope the added word below is correct.
+
+-->
+	packet radio,
 	but not with amateur radio or FM broadcasting.
 	</para>
 
 	<para>
-	Saying yes here also enables the Wireless Extensions (creates
-	/proc/net/wireless and enables iwconfig access). The Wireless
-	Extension is a generic API allowing a driver to expose to the user
-	space configuration and statistics specific to common Wireless LANs.
-	The beauty of it is that a single set of tool can support all the
-	variations of Wireless LANs, regardless of their type (as long as
-	the driver supports Wireless Extension). Another advantage is that
+	Saying yes here also enables the Wireless Extensions, creating
+	<filename>/proc/net/wireless</filename> and enabling <command>iwconfig</command> access). The Wireless
+	Extensions are a generic API that allows a driver to expose configuration and statistics for common wireless LANs to userspace.
+	Wireless Extensions provide a single set of tools that can support all the
+	variations of wireless LANs, regardless of their type (as long as
+	the driver supports Wireless Extensions). Another advantage is that
 	these parameters may be changed on the fly without restarting the
-	driver (or Linux). If you wish to use Wireless Extensions with
-	wireless PCMCIA (PC-) cards, you need to say yes here; you can fetch
+	driver or operating system. If you wish to use Wireless Extensions with
+	wireless PCMCIA cards (PC-cards), you need to say yes here. You can fetch
 	the tools from
 	<systemitem role="url">http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html</systemitem>.
 	</para>
@@ -2439,18 +2564,18 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	PPP (Point to Point Protocol) is a newer and better SLIP.  It serves
-	the same purpose: sending Internet traffic over telephone (and other
+	PPP (Point to Point Protocol) sends Internet traffic over telephone (and other
 	serial) lines.  Ask your access provider if they support it, because
-	otherwise you can't use it; most Internet access providers these
+	otherwise you can't use it. An older protocol with the same
+	purpose is called SLIP. Most Internet access providers these
 	days support PPP rather than SLIP.
 	</para>
 
 	<para>
-	To use PPP, you need an additional program called pppd as described
+	To use PPP, you need an additional program called <command>pppd</command> as described
 	in the PPP-HOWTO, available at
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
-	Make sure that you have the version of pppd recommended in
+	Make sure that you have the version of <command>pppd</command> recommended in
 	<filename>Documentation/Changes</filename>.  The PPP option
 	enlarges your kernel by about 16 KB.
 	</para>
@@ -2458,7 +2583,7 @@ developers and released under the GPL.
 	<para>
 	There are actually two versions of PPP: the traditional PPP for
 	asynchronous lines, such as regular analog phone lines, and
-	synchronous PPP which can be used over digital ISDN lines for
+	synchronous PPP, which can be used over digital ISDN lines for
 	example.  If you want to use PPP over phone lines or other
 	asynchronous serial lines, you need to enable the <literal>PPP
 	support for async serial ports</literal> option.
@@ -2470,7 +2595,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_PPPOE">
 <refnamediv>
 	<refname>PPPOE</refname>
-	<refpurpose>PPP over Ethernet (EXPERIMENTAL)</refpurpose>
+	<refpurpose>PPP over Ethernet (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -2479,12 +2604,12 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	This driver requires the latest version of pppd from the CVS
-	repository at cvs.samba.org.  Alternatively, see the
+	This driver requires the latest version of <command>pppd</command> from the CVS
+	repository at <emphasis>cvs.samba.org</emphasis>.  Alternatively, see the
 	RoaringPenguin package
-	<systemitem role="url">http://www.roaringpenguin.com/pppoe</systemitem>
-	which contains instruction on how to use this driver (under the
-	heading "Kernel mode PPPoE").
+	<systemitem role="url">http://www.roaringpenguin.com/pppoe</systemitem>,
+	which contains instruction on hows to use this driver under the
+	heading "Kernel mode PPPoE."
 	</para>
 
 </refsect1>
@@ -2501,13 +2626,13 @@ developers and released under the GPL.
 	ISDN ("Integrated Services Digital Networks", called RNIS in France)
 	is a special type of fully digital telephone service; it's mostly
 	used to connect to your Internet service provider (with SLIP or
-	PPP).  The main advantage is that the speed is higher than ordinary
+	PPP).  The main advantage of ISDN is that the speed is higher than ordinary
 	modem/telephone connections, and that you can have voice
-	conversations while downloading stuff.  It only works if your
+	conversations while downloading stuff.  It works only if your
 	computer is equipped with an ISDN card and both you and your service
 	provider purchased an ISDN line from the phone company.  For
 	details, read
-	<systemitem role="url">http://www.alumni.caltech.edu/~dank/isdn/</systemitem>.
+	<systemitem role="url">http://www.alumni.caltech.edu/~dank/isdn</systemitem>.
 	</para>
 
 	<para>
@@ -2529,10 +2654,12 @@ developers and released under the GPL.
 	you to use a regular phone for voice-over-IP applications.
 	</para>
 
+	<note>
 	<para>
-	Note: this has nothing to do with modems.  You do not need to say
+	This option has nothing to do with modems.  You do not need to say
 	yes here in order to be able to use a modem under Linux.
 	</para>
+	</note>
 
 </refsect1>
 </refentry>
@@ -2547,7 +2674,7 @@ developers and released under the GPL.
 	<para>
 	Say yes here if you have any input device (mouse, keyboard, tablet,
 	joystick, steering wheel ...) connected to your system and want
-	it to be available to applications. This includes standard PS/2
+	it to be available to applications. This includes a standard PS/2
 	keyboard and mouse.
 	</para>
 
@@ -2571,26 +2698,10 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say yes here, you will get support for terminal devices with
+	Say yes here to get support for terminal devices with
 	display and keyboard devices. These are called "virtual" because you
 	can run several virtual terminals (also called virtual consoles) on
-	one physical terminal. This is rather useful, for example one
-	virtual terminal can collect system messages and warnings, another
-	one can be used for a text-mode user session, and a third could run
-	an X session, all in parallel. Switching between virtual terminals
-	is done with certain key combinations, usually Alt-function key.
-	</para>
-
-	<para>
-	The setterm command (<userinput>man setterm</userinput>) can be
-	used to change the properties (such as colors or beeping) of a
-	virtual terminal. The man page console_codes(4) (<userinput>man
-	console_codes</userinput>) contains the special character sequences
-	that can be used to change those properties directly. The fonts
-	used on virtual terminals can be changed with the setfont
-	(<userinput>man setfont</userinput>) command and the key bindings
-	are defined with the loadkeys (<userinput>man loadkeys</userinput>)
-	command.
+	one physical terminal.
 	</para>
 
 	<para>
@@ -2602,7 +2713,31 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	If unsure, say yes, or else you won't be able to do much with your
+	Virtual terminals are useful because, for example, one
+	virtual terminal can display system messages and warnings, another
+	one can be used for a text-mode user session, and a third could run
+	an X session, all in parallel. Switching between virtual terminals
+	is done with certain key combinations, usually Alt-function key.
+	</para>
+
+<!--
+
+  AO: I actually think the following paragraph is outside the scope of
+  the book.
+
+-->
+	<para>
+	The <command>setterm</command> command can be
+	used to change the properties (such as colors or beeping) of a
+	virtual terminal. The <emphasis>console_codes</emphasis>(4)
+	manpage lists the special character sequences
+	that can be used to change those properties directly. The fonts
+	used on virtual terminals can be changed with the
+	<command>setfont</command> command and the key bindings can be defined with <command>loadkeys</command>.
+	</para>
+
+	<para>
+	If you are unsure, say yes, or else you won't be able to do much with your
 	Linux system.
 	</para>
 
@@ -2617,24 +2752,29 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	The system console is the device which receives all kernel messages
-	and warnings and which allows logins in single user mode. If you
+	The system console is the device that receives all kernel messages
+	and warnings and allows logins in single user mode. If you
 	answer yes here, a virtual terminal (the device used to interact with
 	a physical terminal) can be used as system console. This is the most
-	common mode of operations, so you should say yes here unless you want
+	common mode of operations, so you should say yes unless you want
 	the kernel messages be output only to a serial port (in which case
 	you should also enable the <literal>Console on 8250/16550 and compatible serial
 	port</literal> option).
 	</para>
 
 	<para>
-	If you do say yes here, by default the currently visible virtual
+	If you say yes here, by default, the currently visible virtual
 	terminal (<filename>/dev/tty0</filename>) will be used as system console. You can change
 	that with a kernel command line option such as
-	<literal>console=tty3</literal> which would use the third virtual
-	terminal as system console. (Try <userinput>man
-	bootparam</userinput> or see the documentation of your boot loader
-	about how to pass options to the kernel at boot time.)
+	<literal>console=tty3</literal>, which specified the third virtual
+	terminal as the system console. (Read the 
+<!--
+
+  AO: See what I said earlier about bootparam.
+
+-->
+	<emphasis>bootparam</emphasis> manpage or see the documentation of your boot loader
+	for information on how to pass options to the kernel at boot time.
 	</para>
 
 </refsect1>
@@ -2650,24 +2790,25 @@ developers and released under the GPL.
 	<para>
 	This selects whether you want to include the driver for the standard
 	serial ports.  The standard answer is yes.  People who might say no
-	here are those that are setting up dedicated Ethernet WWW/FTP
+	here are those setting up dedicated Ethernet WWW/FTP
 	servers, or users that have one of the various bus mice instead of a
 	serial mouse and don't intend to use their machine's standard serial
-	port for anything.  (Note that the Cyclades and Stallion multi
-	serial port drivers do not need this driver built in for them to
-	work.)
+	port for anything. In addition, the Cyclades and Stallion multi
+	serial port drivers do not need this driver.
 	</para>
 
+	<note>
 	<para>
-	WARNING: Do not compile this driver as a module if you are using
-	non-standard serial ports, since the configuration information will
+	Do not compile this driver as a module if you are using
+	non-standard serial ports, because the configuration information will
 	be lost when the driver is unloaded.  This limitation may be lifted
 	in the future.
 	</para>
+	</note>
 
 	<para>
 	Most people will say yes here, so that they can use serial mice,
-	modems and similar devices connecting to the standard serial ports.
+	modems, and similar devices connected to the standard serial ports.
 	</para>
 
 </refsect1>
@@ -2681,7 +2822,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	AGP (Accelerated Graphics Port) is a bus system mainly used to
+	AGP (Accelerated Graphics Port) is a bus system used mainly to
 	connect graphics cards to the rest of the system.
 	</para>
 
@@ -2699,9 +2840,10 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Note that this is the only means to have X/GLX use
-	write-combining with MTRR support on the AGP bus. Without it, OpenGL
-	direct rendering will be a lot slower but still faster than PIO.
+	Note that this is the only way to have X and GLX use
+	write-combining with MTRR support on the AGP bus. Without this
+	option, OpenGL
+	direct rendering will be a lot slower, but still faster than PIO.
 	</para>
 
 	<para>
@@ -2719,13 +2861,14 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Kernel-level support for the Direct Rendering Infrastructure (DRI)
+	Kernel-level support for the Direct Rendering Infrastructure
+	(DRI) was
 	introduced in XFree86 4.0. If you say yes here, you need to select
 	the module that's right for your graphics card from the list.
 	These modules provide support for synchronization, security, and
 	DMA transfers. Please see
-	<systemitem role="url">http://dri.sourceforge.net/</systemitem>
-	for more details.  You should also select and configure AGP
+	<systemitem role="url">http://dri.sourceforge.net</systemitem>
+	for details.  You should also select and configure AGP
 	(<filename>/dev/agpgart</filename>) support.
 	</para>
 
@@ -2740,22 +2883,24 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	I2C (pronounce: I-square-C) is a slow serial bus protocol used in
-	many micro controller applications and developed by Philips.  SMBus,
-	or System Management Bus is a subset of the I2C protocol.  More
+	I2C (pronounced "I-square-C") is a slow serial bus protocol
+	developed by Philips and used in
+	many micro controller applications.  SMBus,
+	or System Management Bus, is a subset of the I2C protocol.  More
 	information is contained in the directory
-	<filename>Documentation/i2c/</filename>,
-	especially in the file called <filename>summary</filename> there.
+	<filename>Documentation/i2c</filename>,
+	especially in the file there called <filename>summary</filename>.
 	</para>
 
 	<para>
-	Both I2C and SMBus are supported here. You will need this for
-	hardware sensors support, and also for Video For Linux support.
+	Both I2C and SMBus are supported by this option. You will need it for
+	hardware sensors support and Video For Linux support.
 	</para>
 
 	<para>
-	If you want I2C support, you should say yes here and also to the
-	specific driver for your bus adapter(s).
+	If you want I2C support, in addition to saying yes here, you
+	must also select the
+	specific drivers for your bus adapters.
 	</para>
 
 </refsect1>
@@ -2769,24 +2914,24 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	The "Serial Peripheral Interface" is a low level synchronous
+	The Serial Peripheral Interface (SPI) is a low level synchronous
 	protocol.  Chips that support SPI can have data transfer rates
-	up to several tens of Mbit/sec.  Chips are addressed with a
+	up to several tens of Mbps.  Chips are addressed with a
 	controller and a chipselect.  Most SPI slaves don't support
 	dynamic device discovery; some are even write-only or read-only.
 	</para>
 
 	<para>
-	SPI is widely used by microcontollers to talk with sensors,
-	eeprom and flash memory, codecs and various other controller
-	chips, analog to digital (and d-to-a) converters, and more.
+	SPI is widely used by microcontrollers to talk with sensors,
+	EEPROM and flash memory, codecs and various other controller
+	chips, analog-to-digital and digital-to-analog converters, and more.
 	MMC and SD cards can be accessed using SPI protocol; and for
 	DataFlash cards used in MMC sockets, SPI must always be used.
 	</para>
 
 	<para>
-	SPI is one of a family of similar protocols using a four wire
-	interface (select, clock, data in, data out) including Microwire
+	SPI is one of a family of similar protocols using a four-wire
+	interface (select, clock, data in, and data out), including Microwire
 	(half duplex), SSP, SSI, and PSP.  This driver framework should
 	work with most such devices and controllers.
 	</para>
@@ -2797,7 +2942,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_HWMON">
 <refnamediv>
 	<refname>HWMON</refname>
-	<refpurpose>Hardware Monitoring support</refpurpose>
+	<refpurpose>Hardware monitoring support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -2805,10 +2950,10 @@ developers and released under the GPL.
 	Hardware monitoring devices let you monitor the hardware health
 	of a system. Most modern motherboards include such a device. It
 	can include temperature sensors, voltage sensors, fan speed
-	sensors and various additional features such as the ability to
+	sensors, and various additional features such as the ability to
 	control the speed of the fans.  If you want this support you
-	should say yes here and also to the specific driver(s) for your
-	sensors chip(s).
+	should say yes here and also to the specific driver for your
+	sensor chip.
 	</para>
 
 </refsect1>
@@ -2822,25 +2967,22 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Support for audio/video capture and overlay devices and FM radio
+	This option enables support for audio/video capture and overlay devices and FM radio
 	cards. The exact capabilities of each device vary.
 	</para>
 
 	<para>
-	This kernel includes support for the new Video for Linux Two API,
+	The kernel includes support for the new Video for Linux Two API,
 	(V4L2) as well as the original system. Drivers and applications
 	need to be rewritten to use V4L2, but drivers for popular cards
 	and applications for most video capture functions already exist.
 	</para>
 
 	<para>
-	Additional info and docs are available on the web at
-	<systemitem role="url">http://linuxtv.org</systemitem>
-	</para>
-
-	<para>
-	Documentation for V4L2 is also available on the web at
-	<systemitem role="url">http://bytesex.org/v4l/</systemitem>.
+	Additional info and docs are available at
+	<systemitem role="url">http://linuxtv.org</systemitem>.
+	Documentation for V4L2 is also available at
+	<systemitem role="url">http://bytesex.org/v4l</systemitem>.
 	</para>
 
 </refsect1>
@@ -2854,14 +2996,14 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	Support Digital Video Broadcasting hardware.  Enable this if you
-	own a DVB adapter and want to use it or if you compile Linux for
-	a digital SetTopBox.
+	This option enables support for Digital Video Broadcasting hardware.  Enable this if you
+	own a DVB adapter and want to use it or if you are compiling Linux for
+	a digital set-top box.
 	</para>
 
 	<para>
 	API specs and user tools are available from
-	<systemitem role="url">http://www.linuxtv.org/</systemitem>.
+	<systemitem role="url">http://www.linuxtv.org</systemitem>.
 	</para>
 
 </refsect1>
@@ -2892,7 +3034,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	You need an utility program called fbset to make full use of frame
+	You need a program called <command>fbset</command> to make full use of frame
 	buffer devices. Please read <filename>Documentation/fb/framebuffer.txt</filename>
 	and the Framebuffer-HOWTO at
 	<systemitem role="url">http://www.tldp.org/HOWTO/Framebuffer-HOWTO.html</systemitem>
@@ -2901,15 +3043,20 @@ developers and released under the GPL.
 
 	<para>
 	Say yes here and to the driver for your graphics board if you
-	are compiling a kernel for a non-x86 architecture.
+	are compiling a kernel for a non-x86 architecture. If you are compiling for the x86 architecture, you can say yes if you
+<!--
+
+  AO: What does it mean to play with something?
+
+-->
+	want to play with the frame buffer, but it is not essential.
 	</para>
 
 	<para>
-	If you are compiling for the x86 architecture, you can say yes if you
-	want to play with it, but it is not essential. Please note that
+	Please note that
 	running graphical applications that directly touch the hardware
-	(e.g. an accelerated X server) and that are not frame buffer
-	device-aware may cause unexpected results.
+	(e.g. an accelerated X server) and that are not attuned to the frame buffer
+	device may cause unexpected results.
 	</para>
 
 </refsect1>
@@ -2931,7 +3078,7 @@ developers and released under the GPL.
 	<para>
 	The program SVGATextMode can be used to utilize SVGA video cards to
 	their full potential in text mode. Download it from
-	<systemitem role="url">ftp://ibiblio.org/pub/Linux/utils/console/</systemitem>.
+	<systemitem role="url">ftp://ibiblio.org/pub/Linux/utils/console</systemitem>.
 	</para>
 
 </refsect1>
@@ -2963,26 +3110,27 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	If you have a sound card in your computer, i.e. if it can say more
-	than an occasional beep, say yes.  Be sure to have all the information
+	than an isolated beep, say yes.  Be sure to have all the information
 	about your sound card and its configuration down (I/O port,
 	interrupt and DMA channel), because you will be asked for it.
 	</para>
 
 	<para>
-	You want to read the Sound-HOWTO, available from
+	Read the Sound-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>. General information about
-	the modular sound system is contained in the files
+	the modular sound system is contained in the file
 	<filename>Documentation/sound/oss/Introduction</filename>.  The file
 	<filename>Documentation/sound/oss/README.OSS</filename> contains some slightly
 	outdated but still useful information as well.  Newer sound
-	driver documentation is found in <filename>Documentation/sound/alsa/*</filename>.
+	driver documentation can be found in files in the
+	<filename>Documentation/sound/alsa</filename> directory.
 	</para>
 
 	<para>
 	If you have a PnP sound card and you want to configure it at boot
 	time using the ISA PnP tools (read
-	<systemitem role="url">http://www.roestock.demon.co.uk/isapnptools/</systemitem>),
-	then you need to compile the sound card support as a module and load
+	<systemitem role="url">http://www.roestock.demon.co.uk/isapnptools</systemitem>),
+	you need to compile sound card support as a module and load
 	that module after the PnP configuration is finished.  To do this
 	properly, read
 	<filename>Documentation/sound/oss/README.modules</filename>
@@ -2990,10 +3138,10 @@ developers and released under the GPL.
 
 	<para>
 	I'm told that even without a sound card, you can make your computer
-	say more than an occasional beep, by programming the PC speaker.
-	Kernel patches and supporting utilities to do that are in the pcsp
+	say more than an occasional beep by programming the PC speaker.
+	Kernel patches and supporting utilities to do that are in the <literal>pcsp</literal>
 	package, available at
-	<systemitem role="url">ftp://ftp.infradead.org/pub/pcsp/</systemitem>.
+	<systemitem role="url">ftp://ftp.infradead.org/pub/pcsp</systemitem>.
 	</para>
 
 </refsect1>
@@ -3002,7 +3150,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_SND">
 <refnamediv>
 	<refname>SND</refname>
-	<refpurpose>Advanced Linux Sound Architecture</refpurpose>
+	<refpurpose>Advanced Linux sound architecture</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -3012,7 +3160,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	For more information, see <systemitem role="url">http://www.alsa-project.org/</systemitem>
+	For more information, see <systemitem role="url">http://www.alsa-project.org</systemitem>.
 	</para>
 
 </refsect1>
@@ -3042,7 +3190,7 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	Universal Serial Bus (USB) is a specification for a serial bus
-	subsystem which offers higher speeds and more features than the
+	subsystem that offers higher speeds and more features than the
 	traditional PC serial port.  The bus supplies power to peripherals
 	and allows for hot swapping.  Up to 127 USB peripherals can be
 	connected to a single USB host in a tree structure.
@@ -3050,7 +3198,7 @@ developers and released under the GPL.
 
 	<para>
 	The USB host is the root of the tree, the peripherals are the
-	leaves and the inner nodes are special USB devices called hubs.
+	leaves, and the inner nodes are special USB devices called hubs.
 	Most PCs now have USB host ports, used to connect peripherals
 	such as scanners, keyboards, mice, modems, cameras, disks,
 	flash memory, network links, and printers to the PC.
@@ -3059,7 +3207,7 @@ developers and released under the GPL.
 	<para>
 	Say yes here if your computer has a host-side USB port and you want
 	to use USB devices.  You then need to say yes to at least one of the
-	Host Controller Driver (HCD) options below.  Choose a USB 1.1
+	Host Controller Driver (HCD) options that follow.  Choose a USB 1.1
 	controller, such as <literal>UHCI HCD support</literal> or
 	<literal>OHCI HCD support</literal>, and
 	<literal>EHCI HCD (USB 2.0) support</literal> except for older
@@ -3074,9 +3222,9 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	After choosing your HCD, then select drivers for the USB peripherals
+	After choosing your HCD, select drivers for the USB peripherals
 	you'll be using.  You may want to check out the information provided
-	in <filename>Documentation/usb/</filename> and especially the links given in
+	in <filename>Documentation/usb</filename> and especially the links given in
 	<filename>Documentation/usb/usb-help.txt</filename>.
 	</para>
 
@@ -3097,8 +3245,8 @@ developers and released under the GPL.
 	likely want to configure this Host Controller Driver.  At the time
 	of this writing, the primary implementation of EHCI is a chip from
 	NEC, widely available in add-on PCI cards, but implementations are
-	in the works from other vendors including Intel and Philips.
-	Motherboard support is appearing.
+	in the works from other vendors, including Intel and Philips.
+	Motherboard support is emerging.
 	</para>
 
 	<para>
@@ -3135,7 +3283,7 @@ developers and released under the GPL.
 	systems, and on x86 hardware that's not using a USB controller from
 	Intel or VIA, this is appropriate.  If your host controller doesn't
 	use PCI, this is probably appropriate.  For a PCI based system
-	where you're not sure, the <userinput>lspci -v</userinput> entry
+	where you're not sure, the <command>lspci -v</command> command
 	will list the right <literal>prog-if</literal> for your USB
 	controller(s):  EHCI, OHCI, or UHCI.
 	</para>
@@ -3151,13 +3299,14 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	The Universal Host Controller Interface is a standard by Intel for
+	The Universal Host Controller Interface is a standard created by Intel for
 	accessing the USB hardware in the PC (which is also called the USB
 	host controller). If your USB host controller conforms to this
 	standard, you may want to say yes. All recent boards with Intel PCI
-	chipsets (like intel 430TX, 440FX, 440LX, 440BX, i810, i820)
-	conform to this standard. Also all VIA PCI chipsets (like VIA VP2,
-	VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro 133).
+	chipsets (such as intel 430TX, 440FX, 440LX, 440BX, i810, i820)
+	conform to this standard. All VIA PCI chipsets (like VIA VP2,
+	VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro 133) also
+	use the standard.
 	</para>
 
 </refsect1>
@@ -3166,7 +3315,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_USB_STORAGE">
 <refnamediv>
 	<refname>USB_STORAGE</refname>
-	<refpurpose>USB Mass Storage support</refpurpose>
+	<refpurpose>USB mass storage support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -3180,7 +3329,7 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	This option 'selects' (turns on, enables) the
+	This option enables the
 	<literal>SCSI</literal> option, but you probably also need
 	<literal>SCSI device support: SCSI disk support</literal> for most
 	USB storage devices to work properly.
@@ -3192,7 +3341,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_USB_SERIAL">
 <refnamediv>
 	<refname>USB_SERIAL</refname>
-	<refpurpose>USB Serial Converter support</refpurpose>
+	<refpurpose>USB serial converter support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -3226,12 +3375,12 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	Linux can run in the host, or in the peripheral.  In both cases you
-	need a low level bus controller driver, and some software talking
-	to it.  Peripheral controllers are often discrete silicon, or are
+	Linux can run in the host or in the peripheral.  In both cases you
+	need a low level bus controller driver, and some software that talks
+	to it.  Peripheral controllers can be either discrete silicon or
 	integrated with the CPU in a microcontroller.  The more familiar
-	host side controllers have names like like "EHCI", "OHCI", or
-	"UHCI", and are usually integrated into southbridges on PC
+	host side controllers have names like such as EHCI, OHCI, or
+	UHCI, and are usually integrated into southbridges on PC
 	motherboards.
 	</para>
 
@@ -3295,22 +3444,22 @@ developers and released under the GPL.
 <refentry id="CONFIG_EDAC">
 <refnamediv>
 	<refname>EDAC</refname>
-	<refpurpose>EDAC core system error reporting (EXPERIMENTAL)</refpurpose>
+	<refpurpose>EDAC core system error reporting (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	EDAC is designed to report errors in the core system.
-	These are low-level errors that are reported in the CPU or
+	These are low-level errors that are reported by the CPU or
 	supporting chipset: memory errors, cache errors, PCI errors,
-	thermal throttling, etc..
+	thermal throttling, etc.
 	</para>
 
 	<para>
 	If this code is reporting problems on your system, please
-	see the EDAC project web pages for more information at:
-	<systemitem role="url">http://bluesmoke.sourceforge.net/</systemitem>
-	and:
+	see the EDAC project web pages for more information:
+	<systemitem role="url">http://bluesmoke.sourceforge.net</systemitem>
+	and
 	<systemitem role="url">http://buttersideup.com/edacwiki</systemitem>
 	</para>
 
@@ -3320,20 +3469,30 @@ developers and released under the GPL.
 <refentry id="CONFIG_EXT2_FS">
 <refnamediv>
 	<refname>EXT2_FS</refname>
-	<refpurpose>Second extended fs support</refpurpose>
+	<refpurpose>Second extended filesystem support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Ext2 is a standard Linux file system for hard disks.
+	<literal>ext2</literal> is a standard Linux file system for
+	hard disks. Most systems use the upgrade,
+	<literal>ext3</literal>, instead.
 	</para>
 
+<!--
+
+  AO: One instance of this is enough, particularly if we call it out
+  as a note.
+
+-->
+	<note>
 	<para>
-	Be aware however that the file system of your root partition (the
+	Note that the file system of your root partition (the
 	one containing the directory <filename>/</filename>) cannot be
 	compiled as a module without using a special boot process, so
 	building it as a module could be dangerous.
 	</para>
+	</note>
 
 </refsect1>
 </refentry>
@@ -3341,19 +3500,17 @@ developers and released under the GPL.
 <refentry id="CONFIG_EXT3_FS">
 <refnamediv>
 	<refname>EXT3_FS</refname>
-	<refpurpose>Ext3 journalling file system support</refpurpose>
+	<refpurpose>Third extended file system support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	This is the journaling version of the Second extended file system
-	(often called ext3), the de facto standard Linux file system
-	(method to organize files on a storage device) for hard disks.
+	This is the journaling version (called <literal>ext3</literal>) of the second extended file system, the de facto standard Linux file system for hard disks.
 	</para>
 
 	<para>
 	The journaling code included in this driver means you do not have
-	to run e2fsck (file system checker) on your file systems after a
+	to run <command>fsck</command> (file system checker) on your file systems after a
 	crash.  The journal keeps track of any changes that were being made
 	at the time the system crashed, and can ensure that your file system
 	is consistent without the need for a lengthy check.
@@ -3361,28 +3518,24 @@ developers and released under the GPL.
 
 	<para>
 	Other than adding the journal to the file system, the on-disk format
-	of ext3 is identical to ext2.  It is possible to freely switch
-	between using the ext3 driver and the ext2 driver, as long as the
-	file system has been cleanly unmounted, or e2fsck is run on the file
-	system.
+	of <literal>ext3</literal> is identical to <literal>ext2</literal>.  It is possible to freely switch
+	between using the <literal>ext3</literal> driver and the <literal>ext2</literal> driver, as long as the
+	file system has been cleanly unmounted, or <command>fsck</command> is run on the file
+<!--
+
+  AO: Or after the switch?
+
+-->
+	system before the switch.
 	</para>
 
 	<para>
-	To add a journal on an existing ext2 file system or change the
-	behavior of ext3 file systems, you can use the tune2fs utility
-	(<userinput>man	tune2fs</userinput>).  To modify attributes of
-	files and directories on ext3 file systems, use chattr
-	(<userinput>man	chattr</userinput>).  You need to be using
+	To add a journal on an existing <literal>ext2</literal> file system or change the
+	behavior of <literal>ext3</literal> file systems, you can use the <command>tune2fs</command> utility.  To modify attributes of
+	files and directories on <literal>ext3</literal> file systems, use <command>chattr</command>.  You need
 	<literal>e2fsprogs</literal> version 1.20 or later in order to
-	create ext3 journals (available at
-	<systemitem role="url">http://sourceforge.net/projects/e2fsprogs/</systemitem>).
-	</para>
-
-	<para>
-	Be aware however that the file system of your root partition (the
-	one containing the directory <filename>/</filename>) cannot be
-	compiled as a module without using a special boot process, so
-	building it as a module could be dangerous.
+	create <literal>ext3</literal> journals (available at
+	<systemitem role="url">http://sourceforge.net/projects/e2fsprogs</systemitem>).
 	</para>
 
 </refsect1>
@@ -3391,7 +3544,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_REISERFS_FS">
 <refnamediv>
 	<refname>REISERFS_FS</refname>
-	<refpurpose>Reiserfs support</refpurpose>
+	<refpurpose>ReiserFS support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -3403,15 +3556,8 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	In general, ReiserFS is as fast as ext2, but is more efficient with
+	In general, ReiserFS is as fast as <literal>ext2</literal>, but is more efficient with
 	large directories and small files.
-	</para>
-
-	<para>
-	Be aware however that the file system of your root partition (the
-	one containing the directory <filename>/</filename>) cannot be
-	compiled as a module without using a special boot process, so
-	building it as a module could be dangerous.
 	</para>
 
 </refsect1>
@@ -3440,25 +3586,19 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	XFS is a high performance journaling filesystem which originated
+	XFS is a high performance journaling filesystem that originated
 	on the SGI IRIX platform.  It is completely multi-threaded, can
-	support large files and large filesystems, extended attributes,
-	variable block sizes, is extent based, and makes extensive use of
-	Btrees (directories, extents, free space) to aid both performance
+	support large files and large filesystems, extended
+	attributes, and
+	variable block sizes, is extent based, makes extensive use of
+	B-trees, and uses directories, extents, and free space to aid both performance
 	and scalability.
 	</para>
 
 	<para>
-	Refer to the documentation at <systemitem role="url">http://oss.sgi.com/projects/xfs/</systemitem>
+	Refer to the documentation at <systemitem role="url">http://oss.sgi.com/projects/xfs</systemitem>
 	for complete details.  This implementation is on-disk compatible
 	with the IRIX version of XFS.
-	</para>
-
-	<para>
-	Be aware however that the file system of your root partition (the
-	one containing the directory <filename>/</filename>) cannot be
-	compiled as a module without using a special boot process, so
-	building it as a module could be dangerous.
 	</para>
 
 </refsect1>
@@ -3467,26 +3607,29 @@ developers and released under the GPL.
 <refentry id="CONFIG_OCFS2_FS">
 <refnamediv>
 	<refname>OCFS2_FS</refname>
-	<refpurpose>OCFS2 file system support (EXPERIMENTAL)</refpurpose>
+	<refpurpose>OCFS2 file system support (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	OCFS2 is a general purpose extent based shared disk cluster file
-	system with many similarities to ext3. It supports 64 bit inode
-	numbers, and has automatically extending metadata groups which may
+	OCFS2 is a general-purpose, extent-based, shared-disk cluster file
+	system with many similarities to <literal>ext3</literal>. It supports 64 bit inode
+	numbers, and has automatically extending metadata groups, which may
 	also make it attractive for non-clustered use.
 	</para>
 
 	<para>
 	You'll want to install the ocfs2-tools package in order to at least
-	get the <filename>mount.ocfs2</filename> program.
+	get the <command>mount.ocfs2</command> program.
 	</para>
 
 	<para>
-	Project web page:    <systemitem role="url">http://oss.oracle.com/projects/ocfs2</systemitem>
-	Tools web page:      <systemitem role="url">http://oss.oracle.com/projects/ocfs2-tools</systemitem>
-	OCFS2 mailing lists: <systemitem role="url">http://oss.oracle.com/projects/ocfs2/mailman/</systemitem>
+	The project web page is <systemitem
+	role="url">http://oss.oracle.com/projects/ocfs2</systemitem>
+	and the
+	tools web page is <systemitem
+	role="url">http://oss.oracle.com/projects/ocfs2-tools</systemitem>. 
+	OCFS2 mailing lists can be found at <systemitem role="url">http://oss.oracle.com/projects/ocfs2/mailman</systemitem>.
 	</para>
 
 </refsect1>
@@ -3495,23 +3638,23 @@ developers and released under the GPL.
 <refentry id="CONFIG_INOTIFY">
 <refnamediv>
 	<refname>INOTIFY</refname>
-	<refpurpose>Inotify file change notification support</refpurpose>
+	<refpurpose>inotify file change notification support</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
 	Say yes here to enable inotify support and the associated system
-	calls.  Inotify is a file change notification system and a
-	replacement for dnotify.  Inotify fixes numerous shortcomings in
+	calls.  inotify is a file change notification system and a
+	replacement for dnotify.  inotify fixes numerous shortcomings in
 	dnotify and introduces several new features.  It allows monitoring
-	of both files and directories via a single open fd.  Other features
+	of both files and directories via a single open <literal>fd</literal> object.  Other features
 	include multiple file events, one-shot support, and unmount
 	notification.
 	</para>
 
 	<para>
 	For more information, see
-	<filename>Documentation/filesystems/inotify.txt</filename>
+	<filename>Documentation/filesystems/inotify.txt</filename>.
 	</para>
 
 </refsect1>
@@ -3525,15 +3668,15 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	If you say yes here, you will be able to set per user limits for disk
+	If you say yes here, you will be able to set per-user limits for disk
 	usage (also called disk quotas). Currently, it works for the
-	ext2, ext3, and reiserfs file system. ext3 also supports journalled
-	quotas for which you don't need to run quotacheck(8) after an unclean
+	<literal>ext2</literal>, <literal>ext3</literal>, and ReiserFS file system. <literal>ext3</literal> also supports journalled
+	quotas, for which you don't need to run <command>quotacheck</command> after an unclean
 	shutdown.
 	For further details, read the Quota mini-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>,
-	or the documentation provided with the quota tools. Probably the
-	quota support is only useful for multi user systems.
+	or the documentation provided with the quota tools. 
+	Quota support is probably useful only for multi-user systems.
 	</para>
 
 </refsect1>
@@ -3547,15 +3690,20 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	The automounter is a tool to automatically mount remote file systems
+<!--
+
+  AO: Also local file systems, such as CDs, right?
+
+-->
+	The automounter is a tool that automatically mounts remote file systems
 	on demand. This implementation is partially kernel-based to reduce
-	overhead in the already-mounted case; this is unlike the BSD
-	automounter (amd), which is a pure user space daemon.
+	overhead when a system is already mounted; this is unlike the BSD
+	automounter (<literal>amd</literal>), which is a pure user space daemon.
 	</para>
 
 	<para>
-	To use the automounter you need the user-space tools from the
-	autofs package; you can find the location in
+	To use the automounter, you need the user-space tools from the
+	<literal>autofs</literal> package; you can find the location in
 	<filename>Documentation/Changes</filename>.  You also want to
 	answer yes to the <literal>NFS file system support</literal>
 	option.
@@ -3588,18 +3736,19 @@ developers and released under the GPL.
 	</para>
 
 	<para>
-	There's also companion library: libfuse.  This library along with
-	utilities is available from the FUSE homepage:
-	<systemitem role="url">http://fuse.sourceforge.net/</systemitem>
+	There's also companion library named <emphasis>libfuse</emphasis>.  This library, along with
+	utilities, is available from the FUSE homepage:
+	<systemitem role="url">http://fuse.sourceforge.net</systemitem>.
 	</para>
 
 	<para>
 	See <filename>Documentation/filesystems/fuse.txt</filename> for more information.
-	See <filename>Documentation/Changes</filename> for needed library/utility version.
+	See <filename>Documentation/Changes</filename> for
+	library/utility version you need.
 	</para>
 
 	<para>
-	If you want to develop a userspace FS, or if you want to use a
+	If you want to develop a userspace filesystem, or if you want to use a
 	filesystem based on FUSE, answer yes here.
 	</para>
 
@@ -3615,24 +3764,23 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	SMB (Server Message Block) is the protocol Windows for Workgroups
-	(WfW), Windows 95/98, Windows NT and OS/2 Lan Manager use to share
+	(WfW), Windows 95/98, Windows NT and later variants, and OS/2 Lan Manager use to share
 	files and printers over local networks.  Saying yes here allows you
 	to mount their file systems (often called "shares" in this context)
 	and access them just like any other Unix directory.  Currently,
 	this works only if the Windows machines use TCP/IP as the
-	underlying transport protocol, and not NetBEUI.  For details, read
+	underlying transport protocol, not NetBEUI.  For details, read
 	<filename>Documentation/filesystems/smbfs.txt</filename> and the
 	SMB-HOWTO, available from
 	<systemitem role="url">http://www.tldp.org/docs.html#howto</systemitem>.
 	</para>
 
 	<para>
-	Note: if you just want your box to act as an SMB *server* and make
+	If you just want your box to act as an SMB server and make
 	files and printing services available to Windows clients (which
 	need to have a TCP/IP stack), you don't need to say yes here; you
-	can use the program SAMBA (available from
-	<systemitem role="url">ftp://ftp.samba.org/pub/samba/</systemitem>)
-	for that.
+	can use the Samba set of daemons and programs (available from
+	<systemitem role="url">ftp://ftp.samba.org/pub/samba</systemitem>).
 	</para>
 
 </refsect1>
@@ -3647,29 +3795,36 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	This is the client VFS module for the Common Internet File System
-	(CIFS) protocol which is the successor to the Server Message Block
+	(CIFS) protocol, which is the successor to the Server Message Block
 	(SMB) protocol, the native file sharing mechanism for most early PC
 	operating systems.  The CIFS protocol is fully supported by file
 	servers such as Windows 2000 (including Windows 2003, NT 4  and
 	Windows XP) as well by Samba (which provides excellent CIFS server
 	support for Linux and many other operating systems). Limited
 	support for Windows ME and similar servers is provided as well.
-	You must use the smbfs client filesystem to access older SMB
+	You must use the <literal>smbfs</literal> client filesystem to access older SMB
 	servers such as OS/2 and DOS.
 	</para>
 
 	<para>
-	The intent of the cifs module is to provide an advanced network
-	file system client for mounting to CIFS compliant servers,
-	including support for dfs (hierarchical name space), secure
+	The intent of the <literal>cifs</literal> module is to provide an advanced network
+	file system client for mounting local filesystems to CIFS compliant servers,
+	including support for DFS (hierarchical name space), secure
 	per-user session establishment, safe distributed caching (oplock),
 	optional packet signing, Unicode and other internationalization
 	improvements, and optional Winbind (nsswitch) integration. You do
-	not need to enable cifs if running only a (Samba) server. It is
-	possible to enable both smbfs and cifs (e.g. if you are using CIFS
-	for accessing Windows 2003 and Samba 3 servers, and smbfs for
+<!--
+
+  AO: I don't understand this paragraph because the phrase "mount to"
+  is ambiguous. Clients mount directories from servers. Servers export
+  directories to clients.
+
+-->
+	not need to enable <literal>cifs</literal> if you are running only a server (Samba). It is
+	possible to enable both <literal>smbfs</literal> and <literal>cifs</literal> (e.g. if you are using CIFS
+	for accessing Windows 2003 and Samba 3 servers, and <literal>smbfs</literal> for
 	accessing old servers). If you need to mount to Samba or Windows
-	from this machine, say yes.
+	from this machine, say yes to this option.
 	</para>
 
 </refsect1>
@@ -3678,7 +3833,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_PROFILING">
 <refnamediv>
 	<refname>PROFILING</refname>
-	<refpurpose>Profiling support (EXPERIMENTAL)</refpurpose>
+	<refpurpose>Profiling support (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -3693,7 +3848,7 @@ developers and released under the GPL.
 <refentry id="CONFIG_OPROFILE">
 <refnamediv>
 	<refname>OPROFILE</refname>
-	<refpurpose>OProfile system profiling (EXPERIMENTAL)</refpurpose>
+	<refpurpose>OProfile system profiling (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
@@ -3707,7 +3862,7 @@ developers and released under the GPL.
 	For more information, and links to the userspace tools needed to
 	use OProfile properly, see the main project page at
 	<systemitem
-	role="url">http://oprofile.sourceforge.net/news/</systemitem>.
+	role="url">http://oprofile.sourceforge.net/news</systemitem>.
 	</para>
 
 </refsect1>
@@ -3716,15 +3871,15 @@ developers and released under the GPL.
 <refentry id="CONFIG_KPROBES">
 <refnamediv>
 	<refname>KPROBES</refname>
-	<refpurpose>Kprobes (EXPERIMENTAL)</refpurpose>
+	<refpurpose>Kprobes (experimental)</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	Kprobes allows you to trap at almost any kernel address and execute
-	a callback function.  register_kprobe() establishes a probepoint
+	Kprobes allows you to trap the CPU at almost any kernel address and execute
+	a callback function.  <literal>register_kprobe()</literal> establishes a probepoint
 	and specifies the callback.  Kprobes is useful for kernel
-	debugging, non-intrusive instrumentation and testing.
+	debugging, non-intrusive instrumentation, and testing.
 	</para>
 
 </refsect1>
@@ -3739,7 +3894,7 @@ developers and released under the GPL.
 	<title>Description</title>
 	<para>
 	Selecting this option causes timing information to be included in
-	printk output.  This allows you to measure the interval between
+	<literal>printk</literal> (kernel message) output.  This allows you to measure the interval between
 	kernel operations, including bootup operations.  This is useful for
 	identifying long delays in kernel startup.
 	</para>
@@ -3758,9 +3913,9 @@ developers and released under the GPL.
 	If you say yes here, you will have some control over the system
 	even if the system crashes for example during kernel debugging
 	(e.g., you will be able to flush the buffer cache to disk, reboot
-	the system immediately or dump some status information). This is
-	accomplished by pressing various keys while holding SysRq
-	(Alt+PrintScreen). It also works on a serial console (on PC
+	the system immediately, or dump some status information). This is
+	accomplished by pressing various keys while holding down the SysRq
+	(Alt+PrintScreen) key. It also works on a serial console (on PC
 	hardware at least), if you send a BREAK and then within 5 seconds a
 	command keypress. The keys are documented in
 	<filename>Documentation/sysrq.txt</filename>. Don't say yes unless
@@ -3793,13 +3948,13 @@ developers and released under the GPL.
 <refentry id="CONFIG_DEBUG_FS">
 <refnamediv>
 	<refname>DEBUG_FS</refname>
-	<refpurpose>Debug Filesystem</refpurpose>
+	<refpurpose>Debug filesystem</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
 	<para>
-	debugfs is a virtual file system that kernel developers use to put
-	debugging files into.  Enable this option to be able to read and
+	debugfs is a virtual file system where kernel developers put
+	debugging files.  Enable this option to be able to read and
 	write to these files.
 	</para>
 
@@ -3814,8 +3969,7 @@ developers and released under the GPL.
 <refsect1>
 	<title>Description</title>
 	<para>
-	This allows you to choose different security modules to be
-	configured into your kernel.
+	This allows you to configure different security modules into your kernel.
 	</para>
 
 	<para>
@@ -3838,7 +3992,7 @@ developers and released under the GPL.
 	You will also need a policy configuration and a labeled filesystem.
 	You can obtain the policy compiler (checkpolicy), the utility for
 	labeling filesystems (setfiles), and an example policy configuration
-	from <systemitem role="url">http://www.nsa.gov/selinux/</systemitem>.
+	from <systemitem role="url">http://www.nsa.gov/selinux</systemitem>.
 	</para>
 
 </refsect1>
