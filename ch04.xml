@@ -3,22 +3,45 @@
 <title>
 Retrieving the kernel source
 </title>
+<!--
+
+  AO: I tried to add some simple but meaningful introductory
+  text. Feel free to substitute your own opinions.
+
+-->
+
+<para>
+
+When you're building your own kernel, you want the latest stable
+release. Many distributions provide their own packages of kernel
+sources, but these are rarely the most cutting-enge, recent
+versions. The distribution packages have the advantage of being built
+to be compatible with the compiler and other tools provided by the
+distribution
+(<xref linkend="LKN-chapter-requirements" /> explains the importance
+of their being compatible) but they may not end up providing the
+functionality or performance you want. If you can create your own
+environment with the latest kernel, compiler, and other tools, you
+will be able to build exactly what you want. This chapter focuses on
+determining which kernel sources to download, and how to obtain them.
+ 
+</para>
 
 <sect1>
 <title>What tree to use</title>
 
 <para>
-In the past, the Linux kernel was split into only two different trees, the
-"development" branch, and the "stable" branch.  The development branch was
-denoted by using an odd number for the second release number, while the
+In the past, the Linux kernel was split into only two trees, the
+"development" branch and the "stable" branch.  The development branch was
+denoted by an odd number for the second release number, while the
 stable branch used even numbers.  So, as an example, the 2.5.25 release was
 a development kernel, while the 2.4.25 release is a stable release.
 </para>
 
 <para>
 But after the 2.6 series was created, the kernel developers decided to
-abandon this method of having two separate trees, and declared that all of
-the 2.6 kernel release would be considered "stable", no matter how quickly
+abandon this method of having two separate trees, and declared that all
+2.6 kernel releases would be considered "stable", no matter how quickly
 development was happening.  The few months between the major 2.6
 releases would allow kernel developers the time to add new features and
 then stabilize them in time for the next release.  Combined with this, a
@@ -28,30 +51,30 @@ release happens.
 </para>
 
 <para>
-This is all best explained with an example:
+This is all best explained with some examples, illustrated in <xref
+linkend="kernel_releases-screenshot" />.
+The kernel team released the 2.6.17 kernel as a stable release.  Then the
+developers started working on new features and started releasing the
+<literal>-rc</literal> versions as development kernels so that people could
+help test and debug the changes.  After everyone agreed that the
+development release was stable enough, it was released as the 2.6.18 kernel.
+This whole cycle usually takes about two to three months, depending on a
+variety of factors.
+</para>
+
 <figure id="kernel_releases-screenshot">
 <title>Kernel development release cycle</title>
 <graphic fileref="images/kernel_releases.png" scalefit="1"/>
 </figure>
 
-The kernel team releases the 2.6.17 kernel as a stable release.  Then the
-developers go off and start working on new features and start releasing the
-<literal>-rc</literal> versions as a development kernel so that people can
-help test and debug the new changes.  After everyone agrees that the
-development release is stable enough, it is released as the 2.6.18 kernel
-release.
-This whole cycle usually takes about two to three months, depending on a
-variety of factors.
+<para>
+While the development of the new features was happening, the
+2.6.17.1, 2.6.17.2, and other stable kernel versions were released,
+containing bug fixes and security updates.
 </para>
 
 <para>
-While the development of the new features was happening the
-2.6.17.1, 2.6.17.2, and other stable kernel versions were released which
-contained bug fixes and security updates.
-</para>
-
-<para>
-If you wish to just use the latest kernel release, it is recommended that
+If you wish to just use the latest kernel for your work, it is recommended that
 you use the stable kernel releases.  If you wish to help the kernel
 developers test the features of the next kernel release and give them
 feedback, use the development kernel release.  For the purpose of this
@@ -60,13 +83,13 @@ chapter, we will assume that you are using a stable kernel release.
 </sect1>
 
 <sect1>
-<title>Where to find it</title>
+<title>Where to find the kernel source</title>
 
 <para>
-All of the source code for the Linux kernel can be found on the kernel.org
-site.  kernel.org is a worldwide network of servers that mirror the Linux
-source code all around the world, enabling everyone to find a local server
-that is close to them.  This allows the main kernel servers to be
+All of the source code for the Linux kernel can be found on one of the
+<emphasis>kernel.org</emphasis> sites, a worldwide network of servers that mirror the Linux
+source code, enabling everyone to find a local server
+close to him.  This allows the main kernel servers to be
 responsive to the mirror sites, and lets users download the needed files as
 quickly as possible.
 </para>
@@ -74,7 +97,7 @@ quickly as possible.
 <para>
 The main <systemitem role="url">http://www.kernel.org</systemitem>.
 site shows all of the current kernel versions for the various different
-kernel trees:
+kernel trees, as shown in <xref linkend="kernel.org-screenshot" />.
 
 <figure id="kernel.org-screenshot">
 <title>The main kernel.org web site</title>
@@ -85,9 +108,11 @@ kernel trees:
 <para>
 To download the latest stable kernel version, click on the
 <emphasis>F</emphasis> character on the line for the kernel version.  This
-will download the full source tree.  Or you can traverse to the proper
+will download the full source tree.  Or you can navigate to the proper
 subdirectory for all of the 2.6 kernel versions,
-<systemitem role="url">http://www.us.kernel.org/pub/linux/kernel/v2.6/</systemitem>: 
+<systemitem
+role="url">http://www.us.kernel.org/pub/linux/kernel/v2.6/</systemitem>,
+shown in <xref linkend="kernel.org-v2.6-screenshot" />.
 
 <figure id="kernel.org-v2.6-screenshot">
 <title>The 2.6 kernel source directory</title>
@@ -97,12 +122,13 @@ subdirectory for all of the 2.6 kernel versions,
 
 <para>
 It is also possible to download the kernel source from the command line,
-using the <literal>wget</literal> or <literal>curl</literal> utilities,
+using the <command>wget</command> or <command>curl</command> utilities,
 both of which should come with your Linux distribution.
 </para>
 
 <para>
-To download the 2.6.17.8 kernel version using wget:
+To download the 2.6.17.8 kernel version using <command>wget</command>,
+enter:
 <screen>
 $ <userinput>wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.17.8.tar.gz</userinput>
 --17:44:55--  http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.17.8.tar.gz
@@ -117,8 +143,7 @@ Length: 51,707,742 (49M) [application/x-gzip]
 18:02:48 (47.12 KB/s) - `linux-2.6.17.8.tar.gz' saved [51707742/51707742]
 </screen>
 
-
-Or to download it using curl:
+To download it using <command>curl</command>:
 <screen>
 $ <userinput>curl http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.17.8.tar.gz -o linux-2.6.17.8.tar.gz</userinput>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -128,9 +153,11 @@ $ <userinput>curl http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.17.8.tar
 </para>
 
 <para>
-If you wish to determine the latest kernel version in a simpler manner, use
+For a quick and easy way to determine the latest kernel versions, use
 the information available at
-<systemitem role="url">http://www.kernel.org/kdist/finger_banner</systemitem>:
+<systemitem
+role="url">http://www.kernel.org/kdist/finger_banner</systemitem>,
+illustrated by <xref linkend="kernel.org-finger_banner-screenshot" />.
 
 <figure id="kernel.org-finger_banner-screenshot">
 <title>Latest kernel version</title>
@@ -141,8 +168,15 @@ the information available at
 </sect1>
 
 <sect1>
-<title>What to do with it</title>
+<title>What to do with the source</title>
 <para>
+<!--
+
+  AO: I actually think a couple sentences are all you need
+  here. People who can't even manipulate a directory on a Linux system
+  can't hope to understand the kernel.
+
+-->
 Now that you have downloaded the proper kernel source, where is it supposed
 to go?  We suggest creating a local directory in your home directory called
 <filename>linux/</filename> to hold all of the different kernel source
@@ -165,7 +199,7 @@ the tree:
 <screen>
 $ <userinput>tar -xzvf linux-2.6.17.8.tar.gz</userinput>
 </screen>
-The screen will be filled with files that are uncompressed, and then you
+The screen will be filled with files that are uncompressed, and you
 will be left with the following in the <filename>linux/</filename>
 directory:
 <screen>

@@ -5,10 +5,11 @@ Configuring and Building
 </title>
 
 <para>
-Now that you have the source for your selected kernel version successfully
-downloaded and installed into a local directory, it is time to build the
-code.  But before the kernel can be built, it needs to be configured with
-the appropriate options.
+Now that you have
+downloaded the source for your selected kernel version and installed it into a local directory, it is time to build the
+code. The first step is to configure the kernel with
+the appropriate options; the kernel can then be compiled. Both tasks
+are done through the standard <command>make</command> utility.
 </para>
 
 <sect1>
@@ -17,20 +18,27 @@ the appropriate options.
 <para>
 The kernel configuration is kept in a file called
 <filename>.config</filename> in the top directory of the kernel source
-tree.  If you have just expanded the kernel source code, there will not be
-a <filename>.config</filename> file present in the directory, so it needs
-to be created.  This file can be created from scratch, created by basing it
-on the "default configuration", taken from a running kernel version, or
+tree.  If you have just expanded the kernel source code, there will be
+no <filename>.config</filename> file, so it needs
+to be created.  It can be created from scratch, created by basing it
+on the "default configuration," taken from a running kernel version,
+or taken
 from a distribution kernel release.  We will cover the first two methods
-here, and the last two methods are covered in <xref linkend="LKN-custom" />.
+here, and the last two methods in <xref linkend="LKN-custom" />.
 </para>
 
 <sect2>
-<title>Configure from scratch</title>
+<title>Configuring from scratch</title>
 
 <para>
-The most basic method of configuring a kernel is to use the <literal>make
-config</literal> method.:
+<!--
+
+  AO: So unless you start with a default kernel built by somebody
+  else, you can't use gconfig or xconfig?
+
+-->
+The most basic method of configuring a kernel is to use the <command>make
+config</command> method:
 <screen>
 $ <userinput>cd linux-2.6.17.10</userinput>
 $ <userinput>make config</userinput>
@@ -51,18 +59,65 @@ Automatically append version information to the version string (LOCALVERSION_AUT
 ...
 </screen>
 The kernel configuration program will step through every configuration
-option and ask you if you wish to enable this option or not.  Some options
-will have a choice of <literal>[Y/m/n/?]</literal>, and if
-<literal>m</literal> is selected, the option will be built as a kernel
-module, not built directly into the kernel as the <literal>Y</literal>
-selection would do.  If you just hit the <literal>Enter</literal> key, the
-capitalized letter will be selected as it was the default option.
+option and ask you if you wish to enable this option or
+not. Typically, your choices for each option
+are shown in the format <literal>[Y/m/n/?]</literal> The capitalized
+letter is the default, and can be selected by just pressing the Enter
+key. The four choices are:
 </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<literal>y</literal>
+</term>
+<listitem>
+<para>
+Build directly into the kernel.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>n</literal>
+</term>
+<listitem>
+<para>
+Leave entirely out of the kernel.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>m</literal>
+</term>
+<listitem>
+<para>
+Build as a module, to be loaded if needed.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<literal>?</literal>
+</term>
+<listitem>
+<para>
+Print a brief descriptive message and repeat the prompt.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
 
 <para>
 The kernel contains almost two thousand different configuration options, so
 being asked for every individual one will take a very long time.
-Luckily, there is an easier way to configure a kernel, base the
+Luckily, there is an easier way to configure a kernel: base the
 configuration on a pre-built configuration.
 </para>
 
@@ -76,7 +131,7 @@ Every kernel version comes with a "default" kernel configuration.  This
 configuration is loosely based on the defaults that the kernel maintainer
 of that architecture feels are the best options to be used.  In some cases,
 it is merely the configuration that is used by the kernel maintainer
-themself for their personal machines.  This is true for the i386
+himself for his personal machines.  This is true for the i386
 architecture, where the default kernel configuration matches closely what
 Linus Torvalds uses for his main development machine.
 </para>
@@ -110,9 +165,9 @@ select the options you wish to change.
 </para>
 
 <para>
-There are three different interactive kernel configuration tools, a
-terminal based one called <literal>menuconfig</literal>, a GTK+ based
-graphical one called <literal>gconfig</literal>, and a QT based graphical
+There are three different interactive kernel configuration tools: a
+terminal-based one called <literal>menuconfig</literal>, a GTK+-based
+graphical one called <literal>gconfig</literal>, and a QT-based graphical
 one called <literal>xconfig</literal>.
 </para>
 
@@ -120,24 +175,24 @@ one called <literal>xconfig</literal>.
 <title>Console configuration method</title>
 
 <para>
-The <literal>menuconfig</literal> way of configuring a kernel is a console
-based program that offers a way to move around the kernel configuration
+The <literal>menuconfig</literal> way of configuring a kernel is a console-based program that offers a way to move around the kernel configuration
 using the arrow keys on the keyboard.  To start up this configuration mode,
-do:
+enter:
 <screen>
 $ <userinput>make menuconfig</userinput>
 </screen>
-And you will be shown a screen much like this one:
+You will be shown a screen much like <xref linkend="menuconfig_1" />.
+</para>
+
 <figure id="menuconfig_1">
 <title>Initial menuconfig screen</title>
 <graphic fileref="images/menuconfig_1.png" scalefit="1"/>
 </figure>
-</para>
 
 <para>
-The instructions for how to navigate through the program and the
-description of what the different characters mean are shown at the top of
-the screen, with the rest of the screen containing the different kernel
+The instructions for navigating through the program, and the
+meanings of the different characters, are shown at the top of
+the screen. The rest of the screen containing the different kernel
 configuration options.
 </para>
 
@@ -146,16 +201,18 @@ The kernel configuration is divided up into sections.  Each section
 contains options that correspond to a specific topic.  Within those
 sections can be sub-sections for various specialized topics.  As an
 example, all kernel device drivers can be found under the main menu option
-of <literal>Device Drivers</literal>.  To go into that menu, move the arrow
+<literal>Device Drivers</literal>.  To enter that menu, move the arrow
 key down nine times until the line
-<literal>Device Drivers  ---&gt;</literal> is highlighted:
+<literal>Device Drivers  ---&gt;</literal> is highlighted, as shown in
+<xref linkend="menuconfig_2" />.
+
 <figure id="menuconfig_2">
 <title>Device Drivers option selected</title>
 <graphic fileref="images/menuconfig_2.png" scalefit="1"/>
 </figure>
-Then press the <literal>Enter</literal> key and you will move into the
-<literal>Device Drivers</literal> submenu and see it displayed on the
-screen:
+Then press the Enter key. It will move you into the
+<literal>Device Drivers</literal> submenu and show it as illustrated in
+<xref linkend="menuconfig_3" />.
 <figure id="menuconfig_3">
 <title>Device Drivers submenu</title>
 <graphic fileref="images/menuconfig_3.png" scalefit="1"/>
@@ -163,42 +220,40 @@ screen:
 </para>
 
 <para>
+You can continue to move down through the menu hierarchy the same way.
 To see the <literal>Generic Driver Options</literal> submenu, press
-<literal>Enter</literal> again, and you will see the following three
-options:
+Enter again, and you will see the three
+options shown in <xref linkend="menuconfig_4" />.
 <figure id="menuconfig_4">
 <title>Generic Driver Options submenu</title>
 <graphic fileref="images/menuconfig_4.png" scalefit="1"/>
 </figure>
-</para>
 
-<para>
 The first two options have a <literal>[*]</literal> mark by them.  That
 means that this option is selected (by virtue of the <literal>*</literal>
-being in the middle of the <literal>[ ]</literal> characters), and this
-option is a yes or no option.  The third option has a
+being in the middle of the <literal>[ ]</literal> characters), and that this
+option is a yes-or-no option.  The third option has a
 <literal>&lt; &gt;</literal> marking, showing that this option can be
-selected to be either <literal>Y</literal>, <literal>M</literal>, or
-<literal>N</literal> meaning that the option would be built into the
-kernel, or as a module, or not at all respectively.
+built into the kernel (<literal>Y</literal>), built as a module
+(<literal>M</literal>), or left out altogether (<literal>N</literal>).
 </para>
 
 <para>
-If the option is selected with a <literal>Y</literal> then a
-<literal>*</literal> character will be shown.  If it is selected as a
-module with a <literal>M</literal>, it will contain a <literal>M</literal>
-character.  If it is disabled with a <literal>N</literal>, then it will
-show only a blank in between the characters.
+If the option is selected with <literal>Y</literal>, the angle
+brackets will contian a
+<literal>*</literal> character.  If it is selected as a
+module with a <literal>M</literal>, they will contain an <literal>M</literal>
+character. If it is disabled with <literal>N</literal>, they will
+show only a blank space.
 </para>
 
 <para>
 So, if we wish to change these three options to select only drivers that
 do not need external firmware at compile time, disable the option to
-prevent firmware from being built, and make the userspace firmware loader
-be built as a module, we would press <literal>Y</literal> for the first
+prevent firmware from being built, and build the userspace firmware loader
+as a module, we would press <literal>Y</literal> for the first
 option, <literal>N</literal> for the second option, and
-<literal>M</literal> for the third, making the screen look like the
-following:
+<literal>M</literal> for the third, making the screen look like <xref linkend="menuconfig_5" />.
 <figure id="menuconfig_5">
 <title>Generic Driver Options submenu changed</title>
 <graphic fileref="images/menuconfig_5.png" scalefit="1"/>
@@ -206,95 +261,103 @@ following:
 </para>
 
 <para>
-Now that we are done with our changes, press either the
-<literal>Esc</literal> key or the right arrow followed by the
-<literal>Enter</literal> key to leave this submenu.  All of the different
+After you are done with your changes to this screen, press either the
+Escape key or the right arrow followed by the
+Enter key to leave this submenu.  All of the different
 kernel options can be explored in this manner.
 </para>
 
 <para>
 When you are finished making all of the changes you wish to make to the
 kernel configuration, exit the program by pressing the
-<literal>Esc</literal> key on the main menu.  You will be shown the
-following screen asking if you wish to save your changed kernel
-configuration:
+Escape key on the main menu.  You will be shown the screen in <xref linkend="menuconfig_6" />, asking whether you wish to save your changed kernel
+configuration.
 <figure id="menuconfig_6">
 <title>Saving kernel options</title>
 <graphic fileref="images/menuconfig_6.png" scalefit="1"/>
 </figure>
-Press <literal>Enter</literal> to save the configuration, or if you wish to
+Press Enter to save the configuration, or if you wish to
 discard any changes made, press the right arrow to move to the
-<literal>&lt;No&gt;</literal> selection, and then press
-<literal>Enter</literal>.
+<literal>&lt;No&gt;</literal> selection and then press
+Enter.
 </para>
 
 </sect2>
 
 <sect2>
-<title>Graphical configuration method</title>
+<title>Graphical configuration methods</title>
 
 <para>
 The <literal>gconfig</literal> and <literal>xconfig</literal> methods of
 configuring a kernel use a graphical program to allow you to modify the
-kernel configuration.  Both of these methods are almost identical, the only
-difference being the different graphical toolkit that the two methods are
-written in.  <literal>gconfig</literal> is written using the GTK+ toolkit
-and has a two-pane screen looking like this:
+kernel configuration.  The two methods are almost identical, the only
+difference being the different graphical toolkit with which they are
+written.  <literal>gconfig</literal> is written using the GTK+ toolkit
+and has a two-pane screen looking like <xref linkend="gconfig_1" />.
 <figure id="gconfig_1">
-<title><literal>gconfig</literal> default screen</title>
+<title>make gconfig screen</title>
 <graphic fileref="images/gconfig_1.png" scalefit="1"/>
 </figure>
-While the <literal>xconfig</literal> method is written using the QT toolkit
-and has a three-pane screen looking like this:
+The <literal>xconfig</literal> method is written using the QT toolkit
+and has a three-pane screen looking like <xref linkend="xconfig_1" />.
 <figure id="xconfig_1">
-<title><literal>xconfig</literal> default screen</title>
+<title>make xconfig screen</title>
 <graphic fileref="images/xconfig_1.png" scalefit="1"/>
 </figure>
 </para>
 
 <para>
-The mouse is how the different submenus are navigated, and the options
-selected.  Use it to select the <literal>Generic Driver Options</literal>
+Use the mouse to navigate the submenus and select options. For
+instance, you can use it in <xref linkend="xconfig_1" /> to select the <literal>Generic Driver Options</literal>
 submenu of the <literal>Device Drivers</literal> menu.  This will change
-the <literal>gconfig</literal> screen to look like:
-<figure id="gconfig_2">
-<title><literal>gconfig</literal> Generic Driver Options</title>
-<graphic fileref="images/gconfig_2.png" scalefit="1"/>
-</figure>
-
-And the <literal>xconfig</literal> screen to look like:
+the <literal>xconfig</literal> screen to look like <xref linkend="xconfig_2" />.
 <figure id="xconfig_2">
-<title><literal>xconfig</literal> Generic Driver Options</title>
+<title>make xconfig Generic Driver Options</title>
 <graphic fileref="images/xconfig_2.png" scalefit="1"/>
 </figure>
+<!--
+
+  AO: I changed the order because only xconfig lets you directly
+  select the Generic Driver Options option.
+
+-->
+
+The corresponding <literal>gconfig</literal> screen is <xref linkend="gconfig_2" />.
+<figure id="gconfig_2">
+<title>make gconfig Generic Driver Options</title>
+<graphic fileref="images/gconfig_2.png" scalefit="1"/>
+</figure>
 </para>
 
 <para>
-Changing this submenu to disable the second option, and make the third
-option be built as a module causes the different screens to look like:
-<figure id="gconfig_3">
-<title><literal>gconfig</literal> Generic Driver Options changed</title>
-<graphic fileref="images/gconfig_3.png" scalefit="1"/>
-</figure>
-and:
+Changing this submenu to disable the second option and make the third
+option be built as a module causes the screens to look like <xref
+linkend="xconfig_3" /> and <xref linkend="gconfig_3" />.
+</para>
+
 <figure id="xconfig_3">
-<title><literal>xconfig</literal> Generic Driver Options changed</title>
+<title>make xconfig Generic Driver Options changed</title>
 <graphic fileref="images/xconfig_3.png" scalefit="1"/>
 </figure>
-</para>
+<figure id="gconfig_3">
+<title>make gconfig Generic Driver Options changed</title>
+<graphic fileref="images/gconfig_3.png" scalefit="1"/>
+</figure>
 
 <para>
-Please note that to enable an option as a module using the
-<literal>gconfig</literal> method, there will be a line though the box,
-instead of it being checked which signifies that the option will be built
-into the kernel.  Using the <literal>xconfig</literal> method, a module
+Please note that in the <literal>gconfig</literal> method,
+a checked box signifies that the option will be built
+into the kernel, whereas a line though the box means the option will be built
+as a module.
+In the <literal>xconfig</literal> method, an option built as a module
 will be shown with a dot in the box.
 </para>
 
 <para>
 Both of these methods will prompt you to save your changed configuration
-when exiting the program, and they both have options to write that
-configuration out to a different file if you so desire.
+when exiting the program, and offer the option to write that
+configuration out to a different file. In that way you can create
+multiple, differing configurations.
 </para>
 
 </sect2>
@@ -305,8 +368,9 @@ configuration out to a different file if you so desire.
 <title>Building the kernel</title>
 
 <para>
-Now that you have created a kernel configuration that you wish to use, the
-kernel needs to be built.  This is as simple as entering one command:
+Now that you have created a kernel configuration that you wish to use,
+you need to build the
+kernel.  This is as simple as entering a one-word command:
 <screen>
 $ <userinput>make</userinput>
   CHK     include/linux/version.h
@@ -332,24 +396,23 @@ $ <userinput>make</userinput>
   CC      init/do_mounts.o
 ...
 </screen>
-Running <literal>make</literal> will cause the kernel build system to use
-the configuration that you have selected to build a kernel and all modules
-that are needed to support that configuration.
+Running <command>make</command> will cause the kernel build system to use
+the configuration you have selected to build a kernel and all modules needed to support that configuration.
 <footnote>
 <para>
 Older kernel versions prior to the 2.6 release required the additional step
-of <literal>make modules</literal> to build all needed kernel modules.
+of <command>make modules</command> to build all needed kernel modules.
 That is no longer required.
 </para>
 </footnote>
-While the kernel is building, it will display the individual file names of
+While the kernel is building, <command>make</command> will display the individual file names of
 what is currently happening, along with any build warnings or errors.
 </para>
 
 <para>
 If the kernel build finished without any errors, you have successfully
-created a kernel image that needs to be installed properly so that it can
-be used.  See <xref linkend="LKN-installing" /> for how to do this.
+created a kernel image. However, it needs to be installed properly
+before you try to boot from it.  See <xref linkend="LKN-installing" /> for how to do this.
 </para>
 
 <para>
@@ -367,15 +430,15 @@ do this.
 <para>
 The kernel build system allows you to do many more things than just build
 the full kernel and modules.  <xref linkend="LKN-build-command-line" />
-gives the full list of options that the kernel build system provides.  In
+includes the full list of options that the kernel build system provides.  In
 this section, we will discuss some of these advanced build options.  To see
 a full description of how to use other advanced build options, refer to the
-in-kernel documentation on the build system which can be found in the
-<filename>Documentation/kbuild/</filename> directory.
+in-kernel documentation on the build system, which can be found in the
+<filename>Documentation/kbuild/</filename> directory of the sources.
 </para>
 
 <sect2>
-<title>Build faster on multiprocessor machines</title>
+<title>Building faster on multiprocessor machines</title>
 <para>
 The kernel build system works very well as a task that can be split up into
 little pieces and given to different processors.  By doing this, you can
@@ -384,9 +447,9 @@ time considerably.
 </para>
 
 <para>
-To build the kernel in a multithreaded way, use the <literal>-j</literal>
-option to the <literal>make</literal> program.  It is best to give a number
-to the <literal>-j</literal> option that corresponds to twice the number of
+To build the kernel in a multithreaded way, use the <option>-j</option>
+option to the <command>make</command> program.  It is best to give a number
+to the <option>-j</option> option that corresponds to twice the number of
 processors in the system.  So, for a machine with 2 processors present,
 use:
 <screen>
@@ -396,33 +459,35 @@ and for a machine with four processors, use:
 <screen>
 $ <userinput>make -j8</userinput>
 </screen>
-If you do not pass an option to the <literal>-j</literal> option, the build
-system will create a new thread for every subdirectory in the kernel tree:
+If you do not pass a numerical value to the <option>-j</option> option
 <screen>
 $ <userinput>make -j</userinput>
 </screen>
+the build
+system will create a new thread for every subdirectory in the kernel tree,
 which can easily cause your machine to become unresponsive and take a much
-longer time to complete the build.  Because of this, it is always
-recommended that you pass a number to the <literal>-j</literal> option.
+longer time to complete the build.  Because of this, it is
+recommended that you always pass a number to the <option>-j</option> option.
 </para>
 </sect2>
 
 
 <sect2>
-<title>Build only a portion of the kernel</title>
+<title>Building only a portion of the kernel</title>
 
 <para>
-When doing kernel development, sometimes you only wish to build a specific
+When doing kernel development, sometimes you wish to build only a specific
 subdirectory or a single file within the whole kernel tree.  The kernel
-build system allows you to easily do this.  To only build a specific
-directory, specify it on the build command line.  For example, to only
+build system allows you to easily do this.  To selectively build a specific
+directory, specify it on the build command line.  For example, to
 build the files in the <filename>drivers/usb/serial</filename> directory,
-do:
+enter:
 <screen>
 $ <userinput>make drivers/usb/serial</userinput>
 </screen>
-Using this syntax however, will not build the final module images in that
-directory.  To do that, you can use the <literal>M=</literal> option:
+Using this syntax, however, will not build the final module images in that
+directory.  To do that, you can use the <literal>M=</literal>
+argument:
 <screen>
 $ <userinput>make M=drivers/usb/serial</userinput>
 </screen>
@@ -431,21 +496,27 @@ module images.
 </para>
 
 <para>
-When using these options, please note that the final kernel image is not
-relinked together, so any changes that were made to the subdirectories will
+When you build a single directory in one of the ways shown, the final kernel image is not
+relinked together. Therefore, any changes that were made to the subdirectories will
 not affect the final kernel image, which is probably not what you desire.
-Do a final:
+Execute a final:
 <screen>
 $ <userinput>make</userinput>
 </screen>
 to have the build system check all changed object files and do the final
-kernel image link properly to resolve this issue.
+kernel image link properly.
 </para>
 
 <para>
-To only build a specific file in the kernel tree, just pass it as the
-option to <literal>make</literal>.  For example, if you wish to only build
-the <filename>drivers/usb/serial/visor.ko</filename> kernel module do:
+<!--
+
+  AO: Does the following cause a final link if the file specified is
+  built-in, or only if the file is a module?
+
+-->
+To build only a specific file in the kernel tree, just pass it as the
+argument to <command>make</command>.  For example, if you wish to build only
+the <filename>drivers/usb/serial/visor.ko</filename> kernel module, enter:
 <screen>
 $ <userinput>make drivers/usb/serial/visor.ko</userinput>
 </screen>
@@ -460,19 +531,19 @@ create the module.
 <title>Source in one place, output in another</title>
 <para>
 Sometimes it is easier to have the source code for the kernel tree in a
-read-only location (like on a cdrom, or in a source code control system),
-and have the output of the kernel build system be placed elsewhere, so that
+read-only location (such as on a CD-ROM, or in a source code control system),
+and place the output of the kernel build elsewhere, so that
 you do not disturb the original source tree.  The kernel build system
-handles this easily, by only requiring a single option
+handles this easily, by requiring only the single argument
 <literal>O=</literal> to tell it where to place the output of the build.
-As an example, if the kernel source was located on a cdrom mounted on
+For example, if the kernel source is located on a CD-ROM mounted on
 <filename>/mnt/cdrom/</filename> and you wish to place the built files in
-your local directory, do:
+your local directory, enter:
 <screen>
 $ <userinput>cd /mnt/cdrom/linux-2.6.17.11/</userinput>
 $ <userinput>make O=~/linux/linux-2.6.17.11</userinput>
 </screen>
-Then all of the build files will be created in the
+All of the build files will be created in the
 <filename>~/linux/linux-2.6.17.11/</filename> directory.  Please note that
 this <literal>O=</literal> option should also be passed to the
 configuration options of the build so that the configuration is correctly
@@ -486,26 +557,26 @@ source code.
 <title>Different architectures</title>
 
 <para>
-It is very useful to build the kernel in a cross-compile manner to allow a
+It is very useful to build the kernel in a cross-compiled manner to allow a
 more powerful machine to build a kernel for a smaller embedded system, or
-just to provide a method to build the kernel for a different architecture
+just to check a build for a different architecture
 to ensure that a change to the source code did not break something
 unexpected.  The kernel build system allows you to specify a different
-architecture from the one that the current system is with the
-<literal>ARCH=</literal> option.  The build system also allows you to
-specify the specific compiler that you wish to build the kernel with by
-using the <literal>CC=</literal> option or a cross-compile toolchain with
-the <literal>CROSS_COMPILE</literal> option.
+architecture from the current system with the
+<literal>ARCH=</literal> argument.  The build system also allows you to
+specify the specific compiler that you wish to use for the build by
+using the <literal>CC=</literal> argument or a cross-compile toolchain with
+the <literal>CROSS_COMPILE</literal> argument.
 </para>
 
 <para>
 For example, to get the default kernel configuration of the x86_64
-architecture, you would do:
+architecture, you would enter:
 <screen>
 $ <userinput>make ARCH=x86_64 defconfig</userinput>
 </screen>
 To build the whole kernel with an ARM toolchain located in
-<filename>/usr/local/bin/</filename> you would do:
+<filename>/usr/local/bin/</filename> you would enter:
 <screen>
 $ <userinput>make ARCH=arm CROSS_COMPILE=/usr/local/bin/arm-linux-</userinput>
 </screen>
@@ -513,15 +584,15 @@ $ <userinput>make ARCH=arm CROSS_COMPILE=/usr/local/bin/arm-linux-</userinput>
 
 <para>
 It is useful even for a non-cross-compiled kernel to change what the build
-system uses for the compiler.  Examples of this is using the
-<literal>distcc</literal> or <literal>ccache</literal> programs, both of
+system uses for the compiler.  Examples of this are using the
+<command>distcc</command> or <command>ccache</command> programs, both of
 which help greatly reduce the time it takes to build a kernel.  To use the
-<literal>ccache</literal> program as part of the build system, do:
+<command>ccache</command> program as part of the build system, enter:
 <screen>
 $ <userinput>make CC="ccache gcc"</userinput>
 </screen>
-To use both <literal>distcc</literal> and <literal>ccache</literal>
-together do:
+To use both <command>distcc</command> and <command>ccache</command>
+together, enter:
 <screen>
 $ <userinput>make CC="ccache distcc"</userinput>
 </screen>
