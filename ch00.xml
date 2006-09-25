@@ -91,12 +91,9 @@ a reference to the different kernel command line options, the kernel build
 options, and a select few of the different kernel configuration options.
 </para>
 
-<!--
-	Should I do something like the following for every chapter?
-
 <para>
 Chapter 1, <literal>Introduction</literal>, explains when and why
-you'd want to build the kernel.
+you would want to build the kernel.
 </para>
 
 <para>
@@ -107,12 +104,64 @@ different programs that are tied very closely to the kernel, how to
 determine the needed version of the programs, and where to find them.
 </para>
 
-  AO: That's the general idea.
+<para>
+Chapter 3, <literal>Retrieving the kernel source</literal> discusses how
+the different Linux kernel versions relate to each other, where to retrieve
+the Linux kernel source code from, and how to download it properly.
+</para>
 
 <para>
-Chapter 3, <literal>Retrieving the kernel source</literal>...
+Chapter 4, <literal>Configuring and Building</literal> explains how to
+configure and properly build the Linux kernel.
 </para>
--->
+
+<para>
+Chapter 5, <literal>Installing and Booting from a Kernel</literal> shows
+how to install the kernel that has been built properly, and then boot into
+that kernel version.
+</para>
+
+<para>
+Chapter 6, <literal>Upgrading a Kernel</literal> explains how to upgrade a
+kernel that was previously built to a newer version without having to start
+over from nothing.
+</para>
+
+<para>
+Chapter 7, <literal>Customizing a Kernel</literal> discusses how to
+customize the kernel for the hardware that is present on the system.  It
+goes over a variety of different ways to determine what options should be
+selected and provides some simple scripts to help with the task.
+</para>
+
+<para>
+Chapter 8, <literal>Kernel Configuration Recipes</literal> explains how to
+configure the kernel for a variety of common situations.
+</para>
+
+<para>
+Chapter 9, <literal>Kernel boot command-line parameter reference</literal>
+details all of the different command-line options that can be passed to the
+kernel, and what the different options do.
+</para>
+
+<para>
+Chapter 10, <literal>Kernel build command line reference</literal>
+describes the different command line options that are available when
+building the kernel and how to use them.
+</para>
+
+<para>
+Chapter 11, <literal>Kernel Configuration Option Reference</literal>
+focuses on a few of the more popular and important Linux kernel
+configuration options.
+</para>
+
+<para>
+Appendix A, <literal>Helpful Utilities</literal> introduces a number of
+very good and handy tools that everyone who wishes to track the latest
+Linux kernel version should use.
+</para>
 
 </sect1>
 
@@ -242,7 +291,7 @@ time to work on this book.  Without their support and prodding, this book
 would have never been completed.  Special thanks to Shannon for getting me
 into Linux kernel development in the first place.  Without her effort, I
 would be still doing some odd embedded programming job, and would have
-never discovered this wonderful community in which to work in.
+never discovered this great community in which to work in.
 </para>
 
 <para>
@@ -271,7 +320,8 @@ Michael Boerner,
 Rik van Riel, and
 Robert Day.
 <!-- did I forget anyone?
-     AO: I just added Rik.  -->
+     AO: I just added Rik.
+     gkh: and I added Jean, so that should be it.  -->
 Any remaining problems are due to me, and not their excellent skills.
 </para>
 
@@ -281,14 +331,14 @@ with a fine tooth comb and pointing out issues in that chapter.  Also to
 Kay Sievers, who helped immensely with all of the chapter on customizing
 the kernel, and who provided the script at the end of that same chapter.
 Without his <literal>sysfs</literal> help and knowledge, that chapter would
-not have been possible.
+not have been feasible.
 </para>
 
 <para>
 And a final special thanks to my 6th grade English teacher, Ms. Gruber, for
 teaching me that writing was something that was possible to do, and showing
 me the enjoyment in doing it.  Without that start, none of this would have
-been possible.
+been attainable.
 </para>
 
 
