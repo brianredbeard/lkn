@@ -22,6 +22,7 @@ needed on a running system, where the proper drivers are already bound to
 <!--
 
   AO: I hope I did not change the sense of this paragraph.
+  gkh: nope, looks good to me.
 
 -->
 the hardware.
@@ -119,6 +120,7 @@ different from your machine; it is to be expected.
 <!--
 
   AO: The following is fairly general, so I moved it up in the chapter.
+  gkh: that's fine.
 
 -->
 
@@ -443,6 +445,11 @@ be built.
   AO: Why shouldn't this come first, before the manual method? You
   should supply a reason for using the manual method, even if the
   reason is just educational.
+
+  gkh: Hm, it is educational, and the information produced below doesn't
+  give you everything you need, you still need to follow the steps learned
+  above to do something with the information (figure out based on the
+  module name, what config option to enable.)
 
 -->
 
@@ -1143,6 +1150,8 @@ Given the information in the <command>mount</command> command, you need to
 
   AO: You said sda3 below.
 
+  gkh: good catch.
+
 -->
 ensure that the <literal>sda2</literal> device is configured properly.  Because
 this is a partition (disk partitions are numbered, while main block devices
@@ -1182,6 +1191,9 @@ find where the driver is that controls the hardware:
 <!--
 
   AO: Append a "grep '^driver'" to the command?
+
+  gkh: no, I don't think that will work, but I might be confused as to what
+  you are referring to here.
 
 -->
 $ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0</userinput>
