@@ -1,24 +1,29 @@
 <chapter id="LKN-custom">
 
 <title>
-Customizing a kernel
+Customizing a Kernel
 </title>
 
 <para>
 One of the hardest parts of building your own version of the Linux kernel
 is determining exactly which drivers and configuration options are needed
-in order for your machine to work properly.  This chapter will walk you
+for your machine to work properly.  This chapter will walk you
 through this process of finding and selecting the correct drivers.
 </para>
 
 <sect1>
-<title>Using a distribution kernel</title>
+<title>Using a Distribution Kernel</title>
 
 <para>
-One of the easiest ways of determining which modules are necessary, is to
-work off of the kernel configuration that comes with your distribution's
-kernel package.  It is also much easier to determine which drivers are
+One of the easiest ways to determine which modules are necessary is to
+start with the kernel configuration that comes with your distribution's
+kernel package. It is also much easier to determine which drivers are
 needed on a running system, where the proper drivers are already bound to
+<!--
+
+  AO: I hope I did not change the sense of this paragraph.
+
+-->
 the hardware.
 </para>
 
@@ -31,20 +36,20 @@ working properly.
 </para>
 
 <sect2>
-<title>Where is the kernel configuration</title>
+<title>Where Is the Kernel Configuration?</title>
 
 <para>
 Almost all distributions provide the kernel configuration files as part of
 the distribution kernel package.  Read the distribution-specific
-documentation for how to find these configurations, as it is usually buried
+documentation for how to find these configurations. It is usually
 somewhere below the <filename>/usr/src/linux/</filename> directory tree.
 </para>
 
 <para>
-If the kernel configuration is not easy to find, look in the kernel itself.
+If the kernel configuration is hard to find, look in the kernel itself.
 Most distribution kernels are built to include the configuration within the
 <filename>/proc</filename> filesystem.  To determine if this is true for
-your running kernel, do the following:
+your running kernel, enter:
 <screen>
 $ <userinput>ls /proc/config.gz</userinput>
 /proc/config.gz
@@ -57,10 +62,10 @@ $ <userinput>cd ~/linux</userinput>
 $ <userinput>gzip -dv config.gz</userinput>
 config.gz:       74.9% -- replaced with config
 </screen>
-Then copy this config file into your kernel directory and rename it to
+Copy this configuration file into your kernel directory and rename it to
 <filename>.config</filename>.  Then use it as the basis of the kernel
 configuration to build the kernel as described in
-chapter <xref linkend="LKN-chapter-building" />.
+<xref linkend="LKN-chapter-building" />.
 </para>
 
 <para>
@@ -69,7 +74,7 @@ for your machine.  The disadvantage of this kernel image is that you will
 have built almost every kernel module and driver that is present in the
 kernel source tree.  This is almost never needed for a single machine, so
 you can start to turn off different drivers and options that are not
-needed.  It is recommended that you only disable options that you are sure
+needed.  It is recommended that you disable  only those options that you are sure
 you do not need, as there might be parts of the system that rely on
 specific options to be enabled.
 </para>
@@ -77,24 +82,25 @@ specific options to be enabled.
 </sect2>
 
 <sect2>
-<title>Finding what module is needed</title>
+<title>Finding Which Module Is Needed</title>
 
 <para>
-When using a configuration file that comes from a distribution, it takes a
-very long time to build due to all of the different drivers being built.
-You only want to build the drivers for the hardware that you have, which
+A configuration file that comes from a distribution takes a
+very long time to build, because of all of the different drivers being built.
+You want to build only the drivers for the hardware that you have, which
 will save time on building the kernel, and allows you to build some or all
 of the drivers into the kernel itself, possibly saving a bit of memory, and
-on some architectures, making for a faster running system.  To do this, you
+on some architectures, making for a faster running system.  To cut
+your drivers down, you
 need to determine which modules are needed to drive your hardware.  We will
 walk though two examples of how to find out what driver is needed to
 control what piece of hardware.
 </para>
 
 <para>
-There are many different locations that are useful for determining what
-devices are bound to what drivers in a running kernel.  The most important
-one is a virtual filesystem called <literal>sysfs</literal>.
+Several locations on your system store useful information for determining which
+devices are bound to which drivers in a running kernel.  The most important
+location is a virtual filesystem called <literal>sysfs</literal>.
 <literal>sysfs</literal> should always be mounted at the
 <filename>/sys</filename> location in your filesystem by the initialization
 scripts of your Linux distribution.  <literal>sysfs</literal> provides a
@@ -105,37 +111,52 @@ with many different symlinks pointing all around the filesystem.
 <para>
 In all of the following examples, real <literal>sysfs</literal> paths and
 hardware types are shown.  Your machine will be different, but the
-locations of where the information will be is in the same place.  Do not be
-alarmed if the different file names in <literal>sysfs</literal> are
-different from your machine, it is to be expected.
+relative locations of information will be the same.  Do not be
+alarmed if the file names in <literal>sysfs</literal> are
+different from your machine; it is to be expected.
+</para>
+
+<!--
+
+  AO: The following is fairly general, so I moved it up in the chapter.
+
+-->
+
+<para>
+Additional, the internal structure of the <literal>sysfs</literal> filesystem
+constantly changes around, due to the re-organization of devices and
+rethinking by the kernel developers about how to best display
+internal kernel structures to userspace.  Because of this, over time, some of the symlinks
+previously mentioned in this chapter might not be present.  However the
+information is all still there, just moved around a little bit.
 </para>
 
 <sect3>
-<title>Need a subsection title here?</title>
+<title>Example: determining the network driver</title>
 
 <para>
-One of the most common, and important, devices in the system is the network
-device.  It is imperative that we figure out which driver is controlling
-this device, and enable it in our kernel configuration so that networking
+One of the most common and important devices in the system is the network
+interface card.  It is imperative to figure out which driver is controlling
+this device and enable it in your kernel configuration so that networking
 works properly.
 </para>
 
 <para>
-First, let us work backward from the network connection name to find out
-what PCI device is controlling it.  To do this, look at the different
+First, work backward from the network connection name to find out
+which PCI device is controlling it.  To do this, look at the different
 network names:
 <screen>
 $ <userinput>ls /sys/class/net/</userinput>
 eth0  eth1  eth2  lo
 </screen>
-The device <literal>lo</literal> is the network loopback device, and is not
-attached to any real network device.  The devices <literal>eth0</literal>,
-<literal>eth1</literal>, and <literal>eth2</literal> are what you should
-pay attention to, as they represent "real" network devices.
+The <literal>lo</literal> directory represents the network loopback device, and is not
+attached to any real network device.  The <literal>eth0</literal>,
+<literal>eth1</literal>, and <literal>eth2</literal> directories are what you should
+pay attention to, as they represent real network devices.
 </para>
 
 <para>
-To look further at these network devices, to figure out which one we care
+To look further at these network devices in order to figure out which you care
 about, use the <literal>ifconfig</literal> utility:
 <screen>
 $ <userinput>/sbin/ifconfig -a</userinput>
@@ -170,32 +191,29 @@ lo        Link encap:Local Loopback
           collisions:0 txqueuelen:0 
           RX bytes:13409 (13.0 Kb)  TX bytes:13409 (13.0 Kb)
 </screen>
-From this list, the <literal>eth0</literal> device is the network device
+From this list, you can tell that the <literal>eth0</literal> device is the network device
 that is active and working, as can be seen by the lines:
 <screen>
 eth0      Link encap:Ethernet  HWaddr 00:12:3F:65:7D:C2  
           inet addr:192.168.0.13  Bcast:192.168.0.255  Mask:255.255.255.0
 </screen>
-that show this is an ethernet device, with a valid network address assigned
+These show this is an Ethernet device with valid IP (<literal>inet</literal>) address assigned
 to it.
 </para>
 
 <para>
 Now that we have determined that we want to make sure the
 <literal>eth0</literal> device will be working in our new kernel, we need
-to find which driver is controlling it.  That is simply a matter of walking
-the different links in the <literal>sysfs</literal> filesystem.  This can
-be done in one line:
+to find which driver is controlling it.  This is simply a matter of walking
+the different links in the <literal>sysfs</literal> filesystem, which can
+be done in a one-line command:
 <screen>
 $ <userinput>basename `readlink /sys/class/net/eth0/device/driver/module`</userinput>
 e1000
 </screen>
 This shows that the module named <literal>e1000</literal> is controlling
 the <literal>eth0</literal> network device.
-</para>
-
-<para>
-That <command>basename...</command> command above compresses the following
+The <command>basename...</command> command shown compresses the following
 steps into a single command line:
 
 <orderedlist>
@@ -211,7 +229,7 @@ be a symlink on the newer versions of the kernel.
 <listitem>
 <para>
 Within the directory that describes the device in <literal>sysfs</literal>,
-there is a symlink to the driver that is bound to this device.  That
+there is a symlink to the driver bound to this device.  That
 symlink is called <filename>driver</filename>, so we follow that link.
 </para>
 </listitem>
@@ -220,8 +238,8 @@ symlink is called <filename>driver</filename>, so we follow that link.
 Within the directory that describes the driver in <literal>sysfs</literal>,
 there is a symlink to the module that this driver is contained within.
 That symlink is called <filename>module</filename>.  We want the target of
-that symlink, and to get the target, we use the <command>readlink</command>
-command:
+that symlink. To get the target, we use the <command>readlink</command>
+command, which produces output such as:
 <screen>
 $ <userinput>readlink /sys/class/net/eth0/device/driver/module</userinput>
 ../../../../module/e1000
@@ -230,10 +248,11 @@ $ <userinput>readlink /sys/class/net/eth0/device/driver/module</userinput>
 </listitem>
 <listitem>
 <para>
-As we only care about the name of the module, we want to strip the rest of
+As we care only about the name of the module, we want to strip the rest of
 the path off the output of the <command>readlink</command> command, and
 only save the rightmost portion.  That is what the
-<command>basename</command> command does:
+<command>basename</command> command does. Executed directly on a
+pathname, it would produce:
 <screen>
 $ <userinput>basename ../../../../module/e1000</userinput>
 e1000
@@ -249,8 +268,8 @@ program, enabling the whole process to be done in one line.
 <para>
 Now that we have the module name, we need to find the kernel configuration
 option that controls it.  You can look through the different network
-device configuration menus, or you can search the kernel source code
-instead to make sure:
+device configuration menus or search the kernel source code itself
+to make sure you have the right option:
 <screen>
 $ <userinput>cd ~/linux/linux-2.6.17.8</userinput>
 $ <userinput>find -type f -name Makefile | xargs grep e1000</userinput>
@@ -258,44 +277,46 @@ $ <userinput>find -type f -name Makefile | xargs grep e1000</userinput>
 ./drivers/net/e1000/Makefile:obj-$(CONFIG_E1000) += e1000.o
 ./drivers/net/e1000/Makefile:e1000-objs := e1000_main.o e1000_hw.o e1000_ethtool.o e1000_param.o
 </screen>
-Note, please replace <literal>e1000</literal> with the name of the module
+Remember to replace the <literal>e1000</literal> used for this example with the name of the module
 that you are looking to find.
 </para>
 
 <para>
-The important thing to be looking for in the output of the above command is
+The important thing to look for in the output of the previous <command>find</command> command is
 any line that has the term <literal>CONFIG_</literal> in it.  That is the
 configuration option that the kernel needs to have enabled in order to
 build the module.  In the above example, the option
-<literal>CONFIG_E1000</literal> is the configuration option that we are
+<literal>CONFIG_E1000</literal> is the configuration option that you are
 looking for.
 </para>
 
 <para>
-Take the configuration option that we have found, and run the kernel
+Now you have the information you need to configure the kernel. Run the
 menu configuration tool:
 <screen>
 $ <userinput>make menuconfig</userinput>
 </screen>
-Then press the <literal>/</literal> key and type in the configuration
-option, minus the <literal>CONFIG_</literal> portion of the string:
+Then press the <literal>/</literal> key (which initiates a search) and type in the configuration
+option, minus the <literal>CONFIG_</literal> portion of the
+string. This process is shown in <xref linkend="config_search" />.
+</para>
 <figure id="config_search">
 <title>Searching in menuconfig</title>
 <graphic fileref="images/config_search.png" scalefit="1"/>
 </figure>
-</para>
 
 <para>
-The kernel configuration system will then tell you the exact location where
-to select the option to enable this module:
+The kernel configuration system will then tell you exactly where
+to select the option to enable this module. See <xref linkend="config_search_found" />.
+</para>
 <figure id="config_search_found">
 <title>Result of searching in menuconfig</title>
 <graphic fileref="images/config_search_found.png" scalefit="1"/>
 </figure>
-</para>
 
 <para>
-So, to enable the module <literal>e1000</literal> to be built into the
+The first item in the display exactly matches what you
+searched for. The location information in the display tells you that to build the module <literal>e1000</literal> into the,
 kernel the following configuration option must be enabled:
 <screen>
 Device Drivers
@@ -306,41 +327,47 @@ Device Drivers
 </screen>
 </para>
 
+<para>
+These steps will work for any type of device active in the kernel. 
+</para>
+
 </sect3>
 
 <sect3>
-<title>Another subsection title?</title>
+<title>Example: a USB device</title>
 
 <para>
-The steps above will work for any type of working device in the kernel.  As
+As
 another example, let us look at a USB-to-serial converter that is present
-in the system.  It is currently connected to the
-<literal>/dev/ttyUSB0</literal> port, so we need to look in the
+in our example system.  It is currently connected to the
+<literal>/dev/ttyUSB0</literal> port, so you need to look in the
 <literal>sysfs</literal> tty section:
 <screen>
 $ <userinput>ls /sys/class/tty/ | grep USB</userinput>
 ttyUSB0
 </screen>
-And we can trace through <literal>sysfs</literal> for this device to find
-the controlling module:
+You can trace through <literal>sysfs</literal> for this device to find
+the controlling module, as shown in the previous section:
 <screen>
 $ <userinput>basename `readlink /sys/class/tty/ttyUSB0/device/driver/module`</userinput>
 pl2303
 </screen>
-Then search the kernel source tree to find the configuration option that we
+Then search the kernel source tree to find the configuration option that you
 need to enable:
 <screen>
 $ <userinput>cd ~/linux/linux-2.6.17.8</userinput>
 $ <userinput>find -type f -name Makefile | xargs grep pl2303</userinput>
 ./drivers/usb/serial/Makefile:obj-$(CONFIG_USB_SERIAL_PL2303) += pl2303.o
 </screen>
-Then use the kernel configuration tool to find the proper option to enable
-in order to set the <literal>CONFIG_USB_SERIAL_PL2303</literal> option:
+Use the kernel configuration tool, as shown in <xref
+linkend="config_search_pl2303" />, to find the proper option to enable
+in order to set the <literal>CONFIG_USB_SERIAL_PL2303</literal> option.
 <figure id="config_search_pl2303">
 <title>Searching for <literal>USB_SERIAL_PL2303</literal></title>
 <graphic fileref="images/config_search_pl2303.png" scalefit="1"/>
 </figure>
-which results in the following information:
+In our case, this displays the screen shown in  <xref
+linkend="config_search_pl2303_found" />.
 <figure id="config_search_pl2303_found">
 <title>Result of searching for <literal>USB_SERIAL_PL2303</literal></title>
 <graphic fileref="images/config_search_pl2303_found.png" scalefit="1"/>
@@ -353,7 +380,7 @@ properly.
 </sect3>
 
 <sect3>
-<title>summary of steps title?</title>
+<title>Summary of device discovery</title>
 
 <para>
 In summary, here are the steps needed to find the driver for a device that
@@ -364,9 +391,9 @@ has a working driver already bound to it:
 <para>
 Find the proper <literal>sysfs</literal> class device that the device is
 bound to.  Network devices are listed in
-<filename>/sys/class/net</filename> and tty devices are listed in
+<filename>/sys/class/net</filename> and tty devices in
 <filename>/sys/class/tty</filename>.  Other types of devices are listed in
-other directories in <literal>/sys/class</literal> depending on the type of
+other directories in <literal>/sys/class</literal>, depending on the type of
 device.
 </para>
 </listitem>
@@ -375,11 +402,11 @@ device.
 <para>
 Trace through the <literal>sysfs</literal> tree to find the module name
 that controls this device.  It will be found in the
-<filename>/sys/CLASS_NAME/DEVICE_NAME/device/driver/module</filename>, and can be
-displayed using the <literal>readlink</literal> and
-<literal>basename</literal> applications:
+<filename>/sys/class/</filename><replaceable>class_name/device_name</replaceable><filename>/device/driver/module</filename>, and can be
+displayed using the <command>readlink</command> and
+<command>basename</command> applications:
 <screen>
-$ <userinput>basename `readlink /sys/class/CLASS_NAME/DEVICE_NAME/device/driver/module`</userinput>
+$ <userinput>basename `readlink /sys/class/<replaceable>class_name/device_name</replaceable>/device/driver/module`</userinput>
 </screen>
 </para>
 </listitem>
@@ -387,10 +414,10 @@ $ <userinput>basename `readlink /sys/class/CLASS_NAME/DEVICE_NAME/device/driver/
 <listitem>
 <para>
 Search the kernel Makefiles for the <literal>CONFIG_</literal> rule that
-builds this module name by using <literal>find</literal> and
-<literal>grep</literal>:
+builds this module name by using <command>find</command> and
+<command>grep</command>:
 <screen>
-$ <userinput>find -type f -name Makefile | xargs grep MODULE_NAME</userinput>
+$ <userinput>find -type f -name Makefile | xargs grep <replaceable>module_name</replaceable></userinput>
 </screen>
 </para>
 </listitem>
@@ -411,10 +438,17 @@ be built.
 
 <sect3>
 <title>Let the kernel tell us what we need</title>
+<!--
+
+  AO: Why shouldn't this come first, before the manual method? You
+  should supply a reason for using the manual method, even if the
+  reason is just educational.
+
+-->
 
 <para>
-Now that we have gone through all of the steps poking around in
-<literal>sysfs</literal>, following symlinks to module names, here is a
+Now that we have gone through all of the steps of poking around in
+<literal>sysfs</literal> and following symlinks to module names, here is a
 very simple script that will do all of that work, in a different way:
 <screen>
 #!/bin/bash
@@ -427,10 +461,10 @@ done | rev | cut -f 1 -d '/' | rev | sort -u
 </screen>
 This script goes through <literal>sysfs</literal> and finds all files
 called <filename>modalias</filename>.  The <filename>modalias</filename>
-file contains the module alias that describes to the
-<command>modprobe</command> command, what module should be loaded to
+file contains the module alias that tells the
+<command>modprobe</command> command which module should be loaded to
 control this device.  The module alias is made up of a combination of
-device manufacturer, id, class type, and other unique identifiers for that
+device manufacturer, ID, class type, and other unique identifiers for that
 specific type of device.  All kernel driver modules have an internal list
 of devices that they support that is generated automatically by the list of
 devices the driver tells the kernel it supports.  The
@@ -444,7 +478,7 @@ driver loading functionalty in Linux works.)
 The script has the <command>modprobe</command> program stop before actually
 loading the module, and just print out what actions it would take.  This
 gives us a list of all of the modules that are needed to control all
-devices in the system.  A little cleaning up of the list by sorting it and
+devices in the system.  A little cleaning up of the list, by sorting it and
 finding the proper field to display, results in this output:
 <screen>
 $ <userinput>find_all_modules.sh</userinput>
@@ -482,7 +516,7 @@ The script will also probably print out some error messages that look like:
 FATAL: Module pci:v00008086d00002592sv000010CFsd000012E2bc03sc00i00 not found.
 FATAL: Module serio:ty01pr00id00ex00 not found.
 </screen>
-Which means that it could not find a module that will control that device.
+Which means that it could not find a module that can control that device.
 Do not be concerned about this, as some devices do not have kernel drivers
 that will work for them.
 </para>
@@ -493,7 +527,7 @@ that will work for them.
 </sect1>
 
 <sect1>
-<title>No help from the distro</title>
+<title>Determining the Correct Module From Scratch</title>
 
 <para>
 Sometimes you do not have the option of getting a distribution kernel
@@ -505,66 +539,61 @@ that configuration option to get the hardware up and running.
 </para>
 
 <para>
-The easiest way to figure out which driver controls a new device, is to
+The easiest way to figure out which driver controls a new device is to
 build all of the different drivers of that type in the kernel source tree
-as modules, and let the <literal>udev</literal> startup process match up
-the driver to the device properly.  Once this happens, you should be able
+as modules, and let the <literal>udev</literal> startup process match
+the driver to the device.  Once this happens, you should be able
 to work backwards using the steps just discussed to determine the proper
-driver needed, and then go back and only enable that driver in the kernel
+driver needed, and then go back and enable just that driver in the kernel
 configuration.
 </para>
 
 <para>
 But if you do not want to build all drivers, or this does not work for some
-reason, it will require a bit more work in trying to determine the proper
-driver that is needed.  The steps below are complex and require digging in
+reason, it will require a bit more work to determine the proper
+driver that is needed.  The following steps are complex and require digging in
 the kernel source code at times.  Do not be afraid of this, it will only
 help you understand your hardware and the kernel source better.
 </para>
 
 <para>
-The steps involved in determining the driver to device match differ
+The steps involved in matching the driver to the device differ
 depending on the type of device that you are working with.  We will discuss
-the two most common forms of devices right now, PCI and USB devices.  The
+the two most common forms of devices in this chapter: PCI and USB devices.  The
 methods described here will also work with other types of devices.
 </para>
 
 <para>
-Also, it is very important to have the kernel be able to find all of the
+Also, it is very important for the kernel to be able to find all of the
 filesystems in the system, the most important one being the root
-filesystem.  We will go into how to do this in the last section.
+filesystem.  We will go into how to do this toward the end of the
+chapter in <xref linkend="LKN-custom_rootfs" />.
 </para>
 
 <sect2>
 <title>PCI devices</title>
 
 <para>
+PCI devices are distinguished by vendor ID and device ID; each
+combination of vendor and device ID could require a unique
+driver. This is the basis for the research this section shows you how
+to do.
+</para>
+
+<para>
 For this example, let us use a PCI network card that is not working with
 the currently running kernel version.  This example will be different from
-your situation, with different PCI device and bus id values, but the steps
+your situation, with different PCI device and bus ID values, but the steps
 involved should be relevant to any type of PCI device you wish to find a
 working driver for.
 </para>
 
 <para>
-First, let us find the PCI device in the system that is not working.  To
-get a list of all PCI devices , use the <literal>lspci</literal> program.
-<footnote>
-<para>
-Almost all distributions place the <literal>lspci</literal> program in the
-<filename>/usr/sbin/</filename> directory, but some place it in other
-locations.  To find out where it is located, do:
-<screen>
-$ <userinput>which lspci</userinput>
-/usr/sbin/lspci
-</screen>
-If you are using a distribution that puts it somewhere else,
-please use that path for whenever we discuss using <literal>lspci</literal>
-</para>
-</footnote>
-But as we only care about the ethernet PCI devices, we will narrow our
-search of the PCI devices down by only searching for anything with the term
-"Ethernet" in it:
+First, find the PCI device in the system that is not working.  To
+get a list of all PCI devices, use the <command>lspci</command> program.
+Because we care only about Ethernet PCI devices, we will narrow our
+search of the PCI devices by searching only for strings containing the term
+<literal>Ethernet</literal> (case-insensitive):
 <screen>
 $ <userinput>/usr/sbin/lspci | grep -i ethernet </userinput>
 06:04.0 Ethernet controller: Realtek Semiconductor Co., Ltd.  RTL-8139/8139C/8139C+ (rev 10)
@@ -575,22 +604,34 @@ This is the device we wish to get working.
 Note that you can just try searching through the kernel configuration for a
 device that matches the string described here, a device from Realtek
 Semiconductor with a product name of
-<literal>RTL-8139/8139C/8139C+</literal> but sometimes this does not always
-work.  That is why we are taking the long way around in this chapter.
+<literal>RTL-8139/8139C/8139C+</literal>, but this does not always
+work. That is why we are taking the long way around in this chapter.
 </para>
 </footnote>
+</para><note>
+<para>
+Almost all distributions place the <command>lspci</command> program in the
+<filename>/usr/sbin/</filename> directory, but some place it in other
+locations.  To find out where it is located, enter:
+<screen>
+$ <userinput>which lspci</userinput>
+/usr/sbin/lspci
+</screen>
+If you are using a distribution that puts it somewhere else,
+please use that path whenever we discuss using <command>lspci</command>
 </para>
+</note>
 
 <para>
-The first few bits of the <literal>lspci</literal> output show the PCI bus
-id for this device, <literal>06:04.0</literal>.  That value is what we will
-use in looking through <literal>sysfs</literal> in order to find out more
+The first few bits of the <command>lspci</command> output show the PCI bus
+id for this device, <literal>06:04.0</literal>.  That is the value we will
+use when looking through <literal>sysfs</literal> in order to find out more
 information about this device.
 </para>
 
 <para>
 Go into <literal>sysfs</literal> where all of the different PCI devices are
-listed, and look at the names of all of them:
+listed, and look at their names:
 <screen>
 $ <userinput>cd /sys/bus/pci/devices/</userinput>
 $ <userinput>ls</userinput>
@@ -600,20 +641,20 @@ $ <userinput>ls</userinput>
 0000:00:1b.0  0000:00:1d.7  0000:00:1f.2  0000:06:03.2  0000:06:05.0
 </screen>
 The kernel numbers PCI devices with a leading <literal>0000:</literal> that
-does not show up in the output of the <literal>lspci</literal> program.
+does not show up in the output of the <command>lspci</command> program.
 <footnote>
 <para>
 Some 64bit processors will show the leading bus number for PCI devices in
-the output of <literal>lspci</literal>, but for the majority of the common
+the output of <command>lspci</command>, but for the majority of the common
 Linux machines, it will not show up by default.
 </para>
 </footnote>
-So add the leading <literal>0000:</literal> onto the number that we found
+So add the leading <literal>0000:</literal> onto the number that you found
 using <literal>lspci</literal> and go into that directory:
 <screen>
 $ <userinput>cd 0000:06:04.0</userinput>
 </screen>
-In this directory, we want to know the values of the
+In this directory, you want to know the values of the
 <filename>vendor</filename> and <filename>device</filename> filenames:
 <screen>
 $ <userinput>cat vendor</userinput>
@@ -621,35 +662,35 @@ $ <userinput>cat vendor</userinput>
 $ <userinput>cat device</userinput>
 0x8139
 </screen>
-These are the vendor and device ids for this PCI device.  The kernel uses
+These are the vendor and device IDs for this PCI device.  The kernel uses
 these values to match a driver to a device properly.  PCI drivers tell the
-kernel which vendor and device ids that they will support so that the
+kernel which vendor and device IDs they will support so that the
 kernel knows how to bind the driver to the proper device.  Write them down
 somewhere, as we will refer to them later.
 </para>
 
 <para>
-Now that we know the vendor and product id for this PCI device, we need to
+Now that we know the vendor and product ID for this PCI device, we need to
 find the proper kernel driver that advertises that it supports this device.
 Go back to the kernel source directory:
 <screen>
 $ <userinput>cd ~/linux/linux-2.6.17.8/</userinput>
 </screen>
-The first location that a large number of PCI ids are located in the kernel
-source tree, is in the <filename>include/linux/pci_ids.h</filename> file.
+The monst common location for PCI IDs in the kernel
+source tree is <filename>include/linux/pci_ids.h</filename>.
 Search that file for our vendor product number:
 <screen>
 $ <userinput>grep -i 0x10ec include/linux/pci_ids.h</userinput>
 #define PCI_VENDOR_ID_REALTEK           0x10ec
 </screen>
 The defined value here, <literal>PCI_VENDOR_ID_REALTEK</literal> is what
-will probably be used in any kernel driver that puports to support devices
+will probably be used in any kernel driver that purports to support devices
 from this manufacturer.
 </para>
 
 <para>
-To be safe, also look in this file for our device id, as it is sometimes
-described in there too:
+To be safe, also look in this file for our device ID, as it is also sometimes
+described there:
 <screen>
 $ <userinput>grep -i 0x8139 include/linux/pci_ids.h</userinput>
 #define PCI_DEVICE_ID_REALTEK_8139      0x8139
@@ -658,7 +699,7 @@ That definition will be useful later.
 </para>
 
 <para>
-So, look for drivers that use this vendor definition in them:
+Now look for driver source files referring to this vendor definition:
 <screen>
 $ <userinput>grep -Rl PCI_VENDOR_ID_REALTEK *</userinput>
 include/linux/pci_ids.h
@@ -667,17 +708,17 @@ drivers/net/8139too.c
 drivers/net/8139cp.c
 </screen>
 The first file listed here, <filename>pci_ids.h</filename> does not need to
-be looked at, as that is where we originally found the original definition.
-But the files, <filename>r8139.c</filename>,
+be looked at, as that is where we found the original definition.
+But the files <filename>r8139.c</filename>,
 <filename>8139too.c</filename>, and <filename>8169cp.c</filename> in the
 <filename>drivers/net/</filename> subdirectory should be examined more
 closely.
 </para>
 
 <para>
-Open one of these files in an editor and search for where the
-<literal>PCI_VENDOR_ID_REALTEK</literal> was found.  In the file
-<filename>drivers/net/r8169.c</filename> it shows up in this section of
+Open one of these files in an editor and search for
+<literal>PCI_VENDOR_ID_REALTEK</literal>.  In the file
+<filename>drivers/net/r8169.c</filename>, it shows up in this section of
 code:
 <programlisting>
 static struct pci_device_id rtl8169_pci_tbl[] = {
@@ -692,18 +733,18 @@ static struct pci_device_id rtl8169_pci_tbl[] = {
 All PCI drivers contain a list of the different devices that they support.
 That list is contained in a structure of
 <literal>struct pci_device_id</literal> values, just like this one.  That
-is what we need to look at in order to determine if our device is supported
+is what we need to look at in order to determine whether our device is supported
 by this driver.  The vendor value matches here, but the second value after
 the vendor is the device value.  Our device has the value
 <literal>0x8139</literal>, while this driver supports the device values of
 <literal>0x8169</literal> and <literal>0x8129</literal> for devices with
-the vendor id of <literal>PCI_VENDOR_ID_REALTEK</literal>.  So this driver
+the vendor ID of <literal>PCI_VENDOR_ID_REALTEK</literal>.  So this driver
 will not support our device.
 </para>
 
 <para>
 Moving on to the next file <filename>drivers/net/8139too.c</filename>, we
-find the use of <literal>PCI_VENDOR_ID_REALTEK</literal> to be found in the
+find the string <literal>PCI_VENDOR_ID_REALTEK</literal> in the
 following bit of code:
 <programlisting>
 if (pdev->vendor == PCI_VENDOR_ID_REALTEK &amp;&amp;
@@ -716,14 +757,14 @@ if (pdev->vendor == PCI_VENDOR_ID_REALTEK &amp;&amp;
 }
 </programlisting>
 The use of the <literal>PCI_VENDOR_ID_REALTEK</literal> value here also
-corresponds with the code checking to see if the PCI device id matches the
+corresponds with the code that checks whether the PCI device id matches the
 <literal>PCI_DEVICE_ID_REALTEK_8139</literal> value.  If it does, the
 driver is to print out a message that says:
 <quote>
 Use the 8139cp driver for improved performance and stability.
 </quote>
 Perhaps we should look at that driver next.  Even if we did not have such a
-visible clue, this driver does not have the vendor and device id pair that
+visible clue, the <filename>8139too.c</filename> driver does not have the vendor and device ID pair that
 we are looking for in a <literal>struct pci_device_id</literal> variable,
 so that gives us the clue that it will not support our device.
 </para>
@@ -742,33 +783,33 @@ static struct pci_device_id cp_pci_tbl[] = {
 };
 MODULE_DEVICE_TABLE(pci, cp_pci_tbl);
 </programlisting>
-Here is a use of both our vendor and device id values, in a <literal>struct
+Here is a use of both our vendor and device ID values in a <literal>struct
 pci_device_id</literal> variable.  This driver should support our device.
 </para>
 
 <para>
-Now that we have the driver name, we can work backwards as shown in the
+Now that we have the driver name, we can work backward, as shown in the
 first section in this chapter to find the proper kernel configuration value
 that should be enabled to build this driver.
 </para>
 
 <para>
 In summary, here are the steps needed in order to find which PCI driver
-will control a specific PCI device:
+can control a specific PCI device:
 
 <orderedlist>
 
 <listitem>
 <para>
-Find the PCI bus id of the device you want to find the driver for using
-<literal>lspci</literal>.
+Find the PCI bus ID of the device for which you want to find the driver, using
+<command>lspci</command>.
 </para>
 </listitem>
 
 <listitem>
 <para>
-Go into the <filename>/sys/bus/pci/devices/0000:BUS_ID/</filename> directory,
-where <literal>BUS_ID</literal> is the PCI bus id found in the previous
+Go into the <filename>/sys/bus/pci/devices/0000:</filename><replaceable>bus_id</replaceable> directory,
+where <replaceable>bus_id</replaceable> is the PCI bus ID found in the previous
 step.
 </para>
 </listitem>
@@ -782,16 +823,16 @@ Read the values of the <filename>vendor</filename> and
 
 <listitem>
 <para>
-Move back to the kernel source tree and look in the
+Move back to the kernel source tree and look in
 <filename>include/linux/pci_ids.h</filename> for the PCI vendor and device
-ids found in the last step.
+IDs found in the previous step.
 </para>
 </listitem>
 
 <listitem>
 <para>
-Search the kernel source tree for usages of those values in drivers.  Both
-the vendor and device id should be in a
+Search the kernel source tree for references to those values in drivers.  Both
+the vendor and device ID should be in a
 <literal>struct pci_device_id</literal> definition.
 </para>
 </listitem>
@@ -799,8 +840,8 @@ the vendor and device id should be in a
 <listitem>
 <para>
 Search the kernel Makefiles for the <literal>CONFIG_</literal> rule that
-builds this driver by using <literal>find</literal> and
-<literal>grep</literal>:
+builds this driver by using <command>find</command> and
+<command>grep</command>:
 <screen>
 $ <userinput>find -type f -name Makefile | xargs grep DRIVER_NAME</userinput>
 </screen>
@@ -809,7 +850,7 @@ $ <userinput>find -type f -name Makefile | xargs grep DRIVER_NAME</userinput>
 
 <listitem>
 <para>
-Search in the kernel configuration system for that config value and go to
+Search in the kernel configuration system for that configuration value and go to
 the location in the menu that it specifies to enable that driver to be
 built.
 </para>
@@ -827,27 +868,27 @@ built.
 <para>
 Finding the specific driver for a USB device is much like finding the
 driver for a PCI device as described in the previous section, with only
-minor differences in finding the bus id values.
+minor differences in finding the bus ID values.
 </para>
 
 <para>
 In this example, let us find the driver that is needed for a USB wireless
 device.  As with the PCI device example, the details in this example will
 be different from your situation, but the steps involved should be relevant
-to any type of USB device you wish to find a working driver for.
+to any type of USB device for which you wish to find a working driver.
 </para>
 
 <para>
-As with the PCI device, the bus id must be found for the USB device that we
+As with the PCI device, the bus ID must be found for the USB device you
 wish to find the driver for.  To do this, you can use the
-<literal>lsusb</literal> program that comes in the
+<command>lsusb</command> program that comes in the
 <literal>usbutils</literal> package.
 </para>
 
 <para>
-The <literal>lsusb</literal> program will show all USB devices attached to
-the system.  As we do not know what the specific device we are looking for
-is called, let us look at all devices:
+The <command>lsusb</command> program shows all USB devices attached to
+the system.  As  willou do not know what the specific device your are looking for
+is called, start by looking at all devices:
 <screen>
 $ <userinput>/usr/sbin/lsusb</userinput>
 Bus 002 Device 003: ID 045e:0023 Microsoft Corp. Trackball Optical
@@ -860,9 +901,9 @@ Bus 004 Device 001: ID 0000:0000
 Bus 003 Device 001: ID 0000:0000  
 Bus 001 Device 001: ID 0000:0000  
 </screen>
-The devices with the id of <literal>0000:0000</literal> can be ignored, as
-they are USB host controllers that drive the bus itself.  So, filtering
-them away leaves us with 4 devices:
+The devices with an ID of <literal>0000:0000</literal> can be ignored, as
+they are USB host controllers that drive the bus itself.  Filtering
+them away leaves us with four devices:
 <screen>
 $ <userinput>/usr/sbin/lsusb | grep -v 0000:0000</userinput>
 Bus 002 Device 003: ID 045e:0023 Microsoft Corp. Trackball Optical
@@ -870,7 +911,7 @@ Bus 005 Device 003: ID 0409:0058 NEC Corp. HighSpeed Hub
 Bus 004 Device 003: ID 157e:300d  
 Bus 004 Device 002: ID 045e:001c Microsoft Corp.
 </screen>
-As USB devices are easy to remove, unplug the device you want to find the
+Because USB devices are easy to remove, unplug the device you want to find the
 driver for and run <literal>lsusb</literal> again:
 <screen>
 $ <userinput>/usr/sbin/lsusb | grep -v 0000:0000</userinput>
@@ -882,30 +923,30 @@ The third device is now missing, which means the device shown as:
 <screen>
 Bus 004 Device 003: ID 157e:300d
 </screen>
-Is the device we want to find the driver for.
+is the device you want to find the driver for.
 </para>
 
 <para>
 If you replace the device and look at the output of
-<literal>lsusb</literal> again, the device number will have changed:
+<command>lsusb</command> again, the device number will have changed:
 <screen>
 $ <userinput>/usr/sbin/lsusb | grep 157e</userinput>
 Bus 004 Device 004: ID 157e:300d
 </screen>
-This is because the USB device numbers are not unique and change for every
-time they are plugged in.  What is stable is the vendor and product id,
-which is shown here by <literal>lsusb</literal> as the two four digit
-values with the <literal>:</literal> between them.  For this device, the
-vendor id is <literal>157e</literal> and the product id is
-<literal>300d</literal>.  Write these values down as we will use them in
+This is because the USB device numbers are not unique, but change every
+time they are plugged in.  What is stable is the vendor and product ID,
+shown here by <command>lsusb</command> as two four-digit
+values with a <literal>:</literal> between them.  For this device, the
+vendor ID is <literal>157e</literal> and the product ID is
+<literal>300d</literal>.  Write down the values you find, as you will use them in
 future steps.
 </para>
 
 <para>
 As with the PCI device, we will search the kernel source code for the USB
-vendor and product ids in order to find the proper driver to control this
-device.  Unfortunately, there is no single file that contains all of the USB
-vendor ids, like PCI has.  So a search of the whole kernel source tree is
+vendor and product IDs in order to find the proper driver to control this
+device.  Unfortunately, no single file contains all of the USB
+vendor IDs, as PCI has.  So a search of the whole kernel source tree is
 necessary:
 <screen>
 $ <userinput>grep -i -R  -l 157e drivers/*</userinput>
@@ -918,14 +959,15 @@ drivers/scsi/ql1280_fw.h
 drivers/scsi/qlogicpti_asm.c
 </screen>
 We know this is a USB wireless device, and not an ATM or SCSI device, so we
-can safely ignore the files found in those directories.  That leaves the
+can safely ignore the files found in the <filename>atm</filename> and
+<filename>scsi</filename> directories.  That leaves the
 <filename>drivers/net/wireless/zd1211rw/zd_usb.c</filename> filename to
 investigate.
 </para>
 
 <para>
-Looking at the <filename>zd_usb.c</filename> file, the string
-<literal>157e</literal> is used in the following location:
+<filename>zd_usb.c</filename> shows the string
+<literal>157e</literal> in the following chunk of code:
 <programlisting>
 static struct usb_device_id usb_ids[] = {
         /* ZD1211 */
@@ -944,17 +986,17 @@ static struct usb_device_id usb_ids[] = {
 Like PCI drivers, USB drivers tell the kernel what devices they support in
 order for the kernel to bind the driver to the device.  This is done by
 using a <literal>struct usb_device_id</literal> variable, as shown here.
-This is a list of the different vendor and product ids that are supported
+This is a list of the different vendor and product IDs that are supported
 by this driver.  The line:
 <programlisting>
         { USB_DEVICE(0x157e, 0x300b), .driver_info = DEVICE_ZD1211 },
 </programlisting>
-shows that our vendor and product ids are supported by this driver.
+shows that our vendor and product IDs are supported by this driver.
 </para>
 
 <para>
-Now that we have the driver name that is necessary to control this device,
-work backwards through the kernel Makefiles, as described earlier in the
+Once you have the driver name that is necessary to control this device,
+work backward through the kernel Makefiles, as described earlier in the
 chapter, to determine how to enable this driver to be built properly.
 </para>
 
@@ -966,16 +1008,16 @@ will control a specific USB device are:
 
 <listitem>
 <para>
-Find the USB vendor and product id of device you want to find the driver for using
-<literal>lsusb</literal> by adding and removing the device to see what
+Find the USB vendor and product ID of device for which you want to find the driver, using
+<command>lsusb</command> after adding and then removing the device to see what
 changes in the list.
 </para>
 </listitem>
 
 <listitem>
 <para>
-Search the kernel source tree for the vendor and product id of the USB
-device.  Both the vendor and product id should be in a <literal>struct
+Search the kernel source tree for the vendor and product ID of the USB
+device.  Both the vendor and product ID should be in a <literal>struct
 usb_device_id</literal> definition.
 </para>
 </listitem>
@@ -983,8 +1025,8 @@ usb_device_id</literal> definition.
 <listitem>
 <para>
 Search the kernel Makefiles for the <literal>CONFIG_</literal> rule that
-builds this driver by using <literal>find</literal> and
-<literal>grep</literal>:
+builds this driver by using <command>find</command> and
+<command>grep</command>:
 <screen>
 $ <userinput>find -type f -name Makefile | xargs grep DRIVER_NAME</userinput>
 </screen>
@@ -1004,40 +1046,44 @@ be built.
 
 </sect2>
 
-<sect2>
-<title>Root filesystem</title>
+<sect2 id="LKN-custom_rootfs">
+<title>Root Filesystem</title>
 
 <para>
 The root filesystem is the filesystem that the kernel boots the main
-portion of the running system from.  It contains all of the initial
-programs that start up the distro and it also usually contains all of the
-system configuration for the machine.  In short, it is a very important
-thing, and must be able to be found by the kernel at boot time in order for
+portion of the running system.  It contains all of the initial
+programs that start up the distro, and also usually contains the entire
+system configuration for the machine.  In short, it is very important, and must be able to be found by the kernel at boot time in order for
 things to work properly.
 </para>
 
 <para>
-If your newly configured kernel dies at boot time with the following error:
+If your newly configured kernel dies at boot time with an error such as:
 <screen>
 VFS: Cannot open root device hda2 (03:02)
 Please append a correct "root=" boot option
 Kernal panic: VFS: Unable to mount root fs on 03:02
 </screen>
-then the root filesystem is unable to be found.  If you are not using a
+then the root filesystem wasn't found.  If you are not using a
 ramdisk image at boot time, it is usually recommended that you build both
 the filesystem that you use for your root partition, and the disk
-controller for that disk into the kernel, instead of having it as a module.
+controller for that disk, into the kernel, instead of having it as a module.
 If you use a ramdisk at boot time, then you should be safe building these
 portions as modules.
 <footnote>
 <para>
-How to determine if you are using a ramdisk at boot time?  In
-<xref linkend="LKN-installing" /> we discuss using the distribution install
-script to install the kernel, or doing it on your own.  If you are using
-the distribution install script, you are probably using a ramdisk.  If you
+How can you determine whether you are using a ramdisk at boot time?  In
+<xref linkend="LKN-installing" /> we mention using the distribution installation
+script to install the kernel versus doing the installation on your own.  If you are using
+the distribution installation script, you are probably using a ramdisk.  If you
 are installing it on your own, then you are probably not.
 </para>
 </footnote>
+</para>
+
+<para>
+The following subsections show how to let the kernel find
+the root filesystem during boot.
 </para>
 
 <sect3>
@@ -1052,7 +1098,7 @@ $ <userinput>mount | grep " / "</userinput>
 /dev/sda2 on / type ext3 (rw,noatime)
 </screen>
 We are interested in the type of the filesystem, which is shown after the
-word <literal>type</literal>.  In this example it is
+word <literal>type</literal>.  In this example, it is
 <literal>ext3</literal>.  This is the type of filesystem that the root
 partition is using.  Go into the kernel configuration system and make sure
 that this filesystem type is enabled as described in
@@ -1064,12 +1110,12 @@ that this filesystem type is enabled as described in
 <title>Disk controller</title>
 
 <para>
-In the output of the <command>mount</command> command above, the first
+In the output of the <command>mount</command> command shown earlier, the first
 portion of the line shows which block device the root filesystem is mounted
-on.  In this example that would be <literal>/dev/sda2</literal>.  Now that
+on.  In this example, it's <literal>/dev/sda2</literal>.  Now that
 the filesystem is configured properly in your kernel, you must also make
 sure that this block device will also work correctly.  To find out which
-drivers are needed for this, we need to look at <literal>sysfs</literal>
+drivers are needed for this, you need to look at <literal>sysfs</literal>
 again.
 </para>
 
@@ -1078,7 +1124,7 @@ All block devices show up in <literal>sysfs</literal> in either
 <filename>/sys/block/</filename> or in
 <filename>/sys/class/block/</filename>, depending on the version of the
 kernel you are using.  In either location, the block devices are a tree,
-the main block device with the different partitions children of the main
+with the different partitions being children of the main
 device:
 <screen>
 $ <userinput>tree -d /sys/block/ | egrep "hd|sd"</userinput>
@@ -1092,11 +1138,16 @@ $ <userinput>tree -d /sys/block/ | egrep "hd|sd"</userinput>
 </para>
 
 <para>
-From the information in the <command>mount</command> command, we need to
-ensure that the <literal>sda3</literal> device is configured properly.  As
+Given the information in the <command>mount</command> command, you need to
+<!--
+
+  AO: You said sda3 below.
+
+-->
+ensure that the <literal>sda2</literal> device is configured properly.  Because
 this is a partition (disk partitions are numbered, while main block devices
-are not), the whole <literal>sda</literal> device must be configured
-(without the main block device, there is no way to access the individual
+are not), the whole <literal>sda</literal> device must be configured.
+(Without the main block device, there is no way to access the individual
 partitions on that device.)
 </para>
 
@@ -1111,8 +1162,8 @@ $ <userinput>ls -l /sys/block/sda</userinput>
 device -> ../../devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/0:0:0:0
   ...
 </screen>
-Now we need to start walking up the chain of devices in sysfs to find out
-what driver is controlling this device:
+Now you need to start walking up the chain of devices in <literal>sysfs</literal> to find out
+which driver is controlling this device:
 <screen>
 $ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/0:0:0:0</userinput>
   ...
@@ -1121,13 +1172,18 @@ driver -> ../../../../../../bus/scsi/drivers/sd
 </screen>
 Here we see that the SCSI disk controller driver is responsible for making
 this device work.  So we know we need to configure SCSI disk support into
-our kernel configuration now.
+our kernel configuration.
 </para>
 
 <para>
-Continuing up the directory chain in <literal>sysfs</literal> we try to
+Continuing up the directory chain in <literal>sysfs</literal>, try to
 find where the driver is that controls the hardware:
 <screen>
+<!--
+
+  AO: Append a "grep '^driver'" to the command?
+
+-->
 $ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0</userinput>
   ...
 </screen>
@@ -1144,14 +1200,14 @@ $ <userinput>ls -l /sys/devices/pci0000:00/0000:00:1f.2</userinput>
 driver -> ../../../bus/pci/drivers/ata_piix
   ...
 </screen>
-There, this is the disk controller that we need to ensure is in our kernel
+There! This is the disk controller we need to ensure is in our kernel
 configuration.
 </para>
 
 <para>
-So, for this root filesystem, we need to configure in the
+So for this root filesystem, we need to enable the
 <literal>ext3</literal>, <literal>sd</literal>, and
-<literal>ata_piix</literal> kernel drivers so that we will be able to
+<literal>ata_piix</literal> drivers in our kernel configuration so that we will be able to
 successfully boot our kernel on this hardware.
 </para>
 
@@ -1159,19 +1215,12 @@ successfully boot our kernel on this hardware.
 </sect2>
 
 <sect2>
-<title>Helper script</title>
+<title>Helper Script</title>
 
 <para>
-The internal structure of the <literal>sysfs</literal> filesystem
-constantly changes around, due to the organization of devices and
-refinements over time from the kernel developers in showing how the
-different internal kernel structures should be displayed to userspace in
-the best manner.  Because of this, over time, some of the symlinks
-previously mentioned in this chapter might not be present.  However the
-information is all still there, just moved around a little bit.
-</para>
-
-<para>
+As mentioned near the beginning of this chapter, files and directories
+within <literal>sysfs</literal> change from one release of the kernel
+to another.
 Here is a script that is handy in determining the needed kernel driver and
 module module name for any device node in the system.  It has been
 developed with the kernel developers responsible for
@@ -1180,7 +1229,8 @@ versions of the 2.6 kernel.
 </para>
 
 <para>
-It also makes short work of the previous example trying to get all of the
+For instance, it makes short work of the previous example, when you
+had to get all of the
 proper drivers for the <literal>sda</literal> block device:
 <screen>
 $ <userinput>get-driver.sh sda</userinput>
@@ -1188,8 +1238,9 @@ looking at sysfs device: /sys/devices/pci0000:00/0000:00:1f.2/host0/target0:0:0/
 found driver: sd
 found driver: ata_piix
 </screen>
-As well as finding all of the proper drivers needed for complex things like
-USB to serial devices:
+I can also find all of the proper drivers needed for complex things
+such as
+USB-to-serial devices:
 <screen>
 $ <userinput>get-driver.sh ttyUSB0</userinput>
 looking at sysfs device: /sys/devices/pci0000:00/0000:00:1d.3/usb4/4-2/4-2.3/4-2.3:1.0/ttyUSB0
@@ -1204,6 +1255,9 @@ found driver: uhci_hcd from module: uhci_hcd
 </para>
 
 <para>
+The script follows.
+</para>
+
 <programlisting>
 #!/bin/sh
 #
@@ -1278,7 +1332,6 @@ while test "$DEVPATH" != "/"; do
 	DEVPATH=$(dirname $DEVPATH)
 done
 </programlisting>
-</para>
 
 </sect2>
 
