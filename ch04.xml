@@ -8,6 +8,8 @@ Retrieving the kernel source
   AO: I tried to add some simple but meaningful introductory
   text. Feel free to substitute your own opinions.
 
+  gkh: looks good to me.
+
 -->
 
 <para>
@@ -175,6 +177,8 @@ illustrated by <xref linkend="kernel.org-finger_banner-screenshot" />.
   AO: I actually think a couple sentences are all you need
   here. People who can't even manipulate a directory on a Linux system
   can't hope to understand the kernel.
+
+  gkh: that's fine.
 
 -->
 Now that you have downloaded the proper kernel source, where is it supposed

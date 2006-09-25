@@ -36,6 +36,9 @@ here, and the last two methods in <xref linkend="LKN-custom" />.
   AO: So unless you start with a default kernel built by somebody
   else, you can't use gconfig or xconfig?
 
+  gkh:  No, you need a configuration file from somewhere for xconfig and
+  gconfig to be useful, otherwise it's just a mess.
+
 -->
 The most basic method of configuring a kernel is to use the <command>make
 config</command> method:
@@ -320,6 +323,8 @@ the <literal>xconfig</literal> screen to look like <xref linkend="xconfig_2" />.
   AO: I changed the order because only xconfig lets you directly
   select the Generic Driver Options option.
 
+  gkh: fine.
+
 -->
 
 The corresponding <literal>gconfig</literal> screen is <xref linkend="gconfig_2" />.
@@ -512,6 +517,9 @@ kernel image link properly.
 
   AO: Does the following cause a final link if the file specified is
   built-in, or only if the file is a module?
+
+  gkh: as you are asking for the final linked module, it will do that.  If you
+  ask for the built-in linked file, it will create that too.
 
 -->
 To build only a specific file in the kernel tree, just pass it as the
