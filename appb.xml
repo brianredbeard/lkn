@@ -1,11 +1,11 @@
 <appendix id="LKN-appendix-making-changes">
 
 <title>
-Helpful utilities
+Helpful Utilities
 </title>
 
 <para>
-The act of retrieving, building, updating, and maintaining a Linux kernel
+Retrieving, building, updating, and maintaining a Linux kernel
 source tree involves a lot of different steps, as this book has shown.
 Developers being naturally lazy creatures, they have created some programs
 to help with the various routine tasks.  Here we describe a few of these
@@ -44,7 +44,7 @@ kernel development release schedule.
 
 -->
 Resolving any merge conflicts between changes you have made and changes
-made by other people and
+made by other people.
 </para>
 </listitem>
 
@@ -149,7 +149,7 @@ Generate your original patch, as in the previous example.
 <listitem>
 <para>
 Using the official patch from
-<systemitem role="url">kernel.org</systemitem>, move the old kernel version
+<emphasis>kernel.org</emphasis>, move the old kernel version
 forward one release:
 </para>
 
@@ -199,10 +199,10 @@ people.
 
 <para>
 If you use this development process, I highly recommend getting the
-excellent <command>patchutils</command> set of programs (found at
+excellent <literal>patchutils</literal> set of programs (found at
 <systemitem role="url">http://cyberelk.net/tim/patchutils</systemitem>). These
 programs enable you to manipulate text patches easily in all sorts of
-useful ways, and they have saved kernel developers many hours of tedious
+useful ways, and have saved kernel developers many hours of tedious
 work.
 </para>
 
@@ -210,7 +210,7 @@ work.
 </sect1>
 
 <sect1>
-<title>Managing your patches with quilt</title>
+<title>Managing Your Patches With quilt</title>
 
 <para>
 Kernel development using <command>patch</command> and
@@ -267,14 +267,14 @@ that will be modifed by this new patch.  To do this, use the
 $ <userinput>quilt add Makefile</userinput>
 File Makefile added to patch patches/patch1
 </screen>
-Edit the file <filename>Makefile</filename> and modify the
-<literal>EXTRAVERSION</literal> line and save the change.
-After completed, tell <command>quilt</command> to refresh the patch:
+Edit the file <filename>Makefile</filename>, modify the
+<literal>EXTRAVERSION</literal> line, and save the change.
+After you finish, tell <command>quilt</command> to refresh the patch:
 <screen>
 $ <userinput>quilt refresh</userinput>
 Refreshed patch patches/patch1
 </screen>
-If you look at the file <filename>patches/patch1</filename> it will contain
+The file <filename>patches/patch1</filename> will contain
 a patch with the changes that you have just made:
 <screen>
 $ <userinput>cat patches/patch1</userinput>
@@ -299,7 +299,7 @@ Index: linux-2.6.19/Makefile
 You can continue on, working with this single patch, or create a new one to
 go on top of this patch.  As an example, if three different patches had
 been created, <filename>patch1</filename>, <filename>patch2</filename>, and
-<filename>patch3</filename>, they will be applied one on top of each other.
+<filename>patch3</filename>, they will be applied one on top of one another.
 </para>
 
 <para>
@@ -421,7 +421,7 @@ options.
 </para>
 
 <para>
-If you are wanting to do any kind of kernel development,
+If you want to do any kind of kernel development,
 <command>quilt</command> is strongly recommended, even for tracking a
 few patches, instead of using the more difficult <command>diff</command>
 and <command>patch</command> method.  It is much simpler and will save you
@@ -429,8 +429,8 @@ much time and effort.
 </para>
 
 <para>
-On a personal note, this author can not recommend this tool enough, as he
-uses it every day to manage hundreds of patches in different development
+On a personal note, I cannot recommend this tool enough, as I
+use it every day to manage hundreds of patches in different development
 trees.  It is also used by numerous Linux distributions to maintain their
 kernel packages, and has an involved and responsive development community.
 </para>
@@ -445,13 +445,13 @@ kernel packages, and has an involved and responsive development community.
 <command>git</command> is a source code control tool that was originally
 written by Linus Torvalds when the Linux kernel was looking for a new
 source code control system.  It is a distributed system, which differs from
-traditional source code control systems like <command>cvs</command> in that
+traditional source code control systems such as <command>cvs</command> in that
 it is not required to be connected to a server in order to make a commit to
 the repository.
 </para>
 
 <para>
-It is one of the most powerful, flexible, and fast source code control
+<command>git</command> is one of the most powerful, flexible, and fast source code control
 systems currently available, and has an active development team working
 behind it.  The main web page for <command>git</command> can be found at
 <systemitem role="url">http://git.or.cz/</systemitem>.  It is recommended
@@ -461,10 +461,10 @@ works, and how to use it properly.
 </para>
 
 <para>
-The Linux kernel is developed using <command>git</command> and the latest
+The Linux kernel is developed using <command>git</command>, and the latest
 <command>git</command> kernel tree can be found at
 <systemitem role="url">http://www.kernel.org/git/</systemitem>, along with
-a large list of other kernel developer's <command>git</command> repository.
+a large list of other kernel developer's <command>git</command> repositories.
 </para>
 
 <para>
@@ -482,7 +482,7 @@ that caused the bug to happen.  If so, follow the directions in the
 <title>ketchup</title>
 
 <para>
-<command>ketchup</command> is a very handy tool that is used to update or
+<command>ketchup</command> is a very handy tool used to update or
 switch between different versions of the Linux kernel source tree.  It has
 the ability to:
 <itemizedlist>
@@ -499,19 +499,19 @@ version, by patching the tree to the proper version.
 </listitem>
 <listitem>
 <para>
-It can handle the different development and stable branches of the kernel
-tree, including the -mm and -stable trees.
+Handle the different development and stable branches of the kernel
+tree, including the <literal>-mm</literal> and <literal>-stable</literal> trees.
 </para>
 </listitem>
 <listitem>
 <para>
-It will download any patches or tarballs needed to do the update, if they
+Download any patches or tarballs needed to do the update, if they
 are not present on the machine already.
 </para>
 </listitem>
 <listitem>
 <para>
-It checks the GPG signatures of the tarball and patches to verify that it
+Check the GPG signatures of the tarball and patches to verify that it
 has downloaded a correct file.
 </para>
 </listitem>
@@ -522,7 +522,7 @@ has downloaded a correct file.
 <command>ketchup</command> can be found at
 <systemitem role="url">http://www.selenic.com/ketchup/</systemitem>
 and has lots of additional documentation in the wiki at
-<systemitem role="url">http://www.selenic.com/ketchup/wiki/</systemitem>
+<systemitem role="url">http://www.selenic.com/ketchup/wiki/</systemitem>.
 .
 </para>
 
@@ -530,13 +530,13 @@ and has lots of additional documentation in the wiki at
 Here is a set of steps that show how simple it is to use
 <command>ketchup</command> to download a specific kernel version, and then
 have it switch the directory to another kernel version with only a minimal
-number of commands needed:
+number of commands.
 </para>
 
 <para>
 To have <command>ketchup</command> download the 2.6.16.24 version of the
-kernel source tree into a directory do, and rename the directory to be the
-same as the kernel version do:
+kernel source tree into a directory, and rename the directory to be the
+same as the kernel version, enter:
 <screen>
 $ <userinput>mkdir foo</userinput>
 $ <userinput>cd foo</userinput>
@@ -550,8 +550,8 @@ Current directory renamed to /home/gregkh/linux/linux-2.6.16.24
 </para>
 
 <para>
-Now to upgrade this kernel to contain the latest stable kernel version just
-do:
+Now, to upgrade this kernel to contain the latest stable kernel version, just
+enter:
 <screen>
 $ <userinput>ketchup -r 2.6</userinput>
 2.6.16.24 -> 2.6.17.11
@@ -602,7 +602,8 @@ in finding where on the server the correct patch file is, and automatically
 will apply the patch in the properly format, after checking that the
 downloaded file is properly signed.  Combine <command>ketchup</command>
 with <command>quilt</command> and you have a very powerful setup that
-contains everything that you need in order to be an effective Linux kernel
+contains everything that you need in order to deal effectively with
+kernel sources as a Linux kernel
 developer.
 </para>
 
