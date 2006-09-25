@@ -423,8 +423,7 @@ before you try to boot from it.  See <xref linkend="LKN-installing" /> for how t
 <para>
 It is very unusual to get any build errors when building a released kernel
 version.  If you do, please report them to the Linux kernel developers so
-they can be fixed.  See <xref linkend="LKN-appendix-bugreports" /> for how to
-do this.
+they can be fixed.
 </para>
 
 </sect1>
