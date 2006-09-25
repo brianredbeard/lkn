@@ -71,7 +71,7 @@ the kernel developers and released under the GPL.
 <refentry id="CONFIG_LOCALVERSION">
 <refnamediv>
 	<refname>LOCALVERSION</refname>
-	<refpurpose>Local version&mdash;append to kernel release</refpurpose>
+	<refpurpose>Local version -- append to kernel release</refpurpose>
 </refnamediv>
 <refsect1>
 	<title>Description</title>
