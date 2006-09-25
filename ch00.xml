@@ -10,7 +10,7 @@ needed in order to build, install, and customize the Linux kernel, as it
 seemed to be a very simple task to me.
 <footnote>
 <para>
-Disclaimer, I'm a Linux kernel developer by trade, so things that seem
+Disclaimer: I'm a Linux kernel developer by trade, so things that seem
 basic and simple to me at times are completely incomprehensible by most
 people, as my family continues to remind me at times.
 </para>
@@ -27,10 +27,10 @@ exactly what they were looking in the first place.
 </para>
 
 <para>
-So, this book was created with the goal to consolidate all of the existing
-information already scattered around the internet about building the Linux
-kernel, and add a lot of new and useful information that was not written
-down anywhere, but had been learned by trial and error over my years of
+So this book was created with the goal of consolidating all of the existing
+information already scattered around the Internet about building the Linux
+kernel, as well as adding a lot of new and useful information that was not written
+down anywhere but had been learned by trial and error over my years of
 doing kernel development.
 </para>
 
@@ -39,7 +39,7 @@ My secret goal of this book is to bring more people into the Linux kernel
 development fold.  The act of building a customized kernel for your machine
 is one of the basic tasks needed to become a Linux kernel developer.  The
 more people that try this out, and realize that there is not any real magic
-behind the whole Linux kernel process, the more that will be willing to
+behind the whole Linux kernel process, the more people will be willing to
 jump in and help out in making the kernel the best that it can be.
 </para>
 
@@ -48,6 +48,7 @@ jump in and help out in making the kernel the best that it can be.
 
 <!--
 	gkh: This section seems a bit light, is more needed here?
+        AO: This is fine, it's actually comprehensive.
 -->
 <para>
 This book is intended to cover everything that is needed to know in order
@@ -56,13 +57,13 @@ experience is needed to understand and use this book.
 </para>
 
 <para>
-Some familiarity with how to use Linux, and some basic command line usage
-is expected by the reader.
+Some familiarity with how to use Linux, and some basic command-line usage
+is expected of the reader.
 </para>
 
 <para>
 This book is not intended to go into the programming aspects of the Linux
-kernel, there are many other good books listed in the Bibliography that
+kernel; there are many other good books listed in the Bibliography that
 already cover this topic.
 </para>
 
@@ -73,12 +74,13 @@ already cover this topic.
 
 <para>
 There are three major parts to this book.  The first part is composed of
-Chapters 1 through 6, which cover everything needed to know about
-retrieving, building, installing, and upgrading the Linux kernel.
+Chapters 1 through 6, which cover everything you need to know about
+retrieving, building, installing, and upgrading the Linux kernel, in
+more or less step-by-step fashion.
 </para>
 
 <para>
-The second part consists of Chapters 7 and 8 which describe how to properly
+The second part consists of Chapters 7 and 8, which describe how to properly
 configure the kernel based on the hardware present in the system, and
 provides a number of different "recipes" for common configurations.
 </para>
@@ -93,17 +95,19 @@ options, and a select few of the different kernel configuration options.
 	Should I do something like the following for every chapter?
 
 <para>
-Chapter 1, <literal>Introduction</literal>, gives a very general overview
-...
+Chapter 1, <literal>Introduction</literal>, explains when and why
+you'd want to build the kernel.
 </para>
 
 <para>
-Chapter 2, <literal>Requirements for building and using the
-kernel</literal>, covers the different programs and tools that are needed
+Chapter 2, <literal>Requirements For Building and Using the
+Kernel</literal>, covers the different programs and tools that are needed
 in order to properly build the kernel.  It also covers a number of
 different programs that are tied very closely to the kernel, how to
 determine the needed version of the programs, and where to find them.
 </para>
+
+  AO: That's the general idea.
 
 <para>
 Chapter 3, <literal>Retrieving the kernel source</literal>...
@@ -120,7 +124,7 @@ Chapter 3, <literal>Retrieving the kernel source</literal>...
 This book is freely available under the Creative Commons
 "Attribution-ShareAlike" license, Version 2.5.  This license can be seen in
 its entirety in <xref linkend="license" />.  The full book is also
-available online and can be found at
+available online at
 <systemitem role="url">http://www.kroah.com/lkn</systemitem>.
 </para>
 </sect1>
@@ -136,8 +140,17 @@ This book uses the following typographical conventions:
 <term><firstterm>Italic</firstterm></term>
 <listitem>
 <para>
-Indicates nomenclature that we've not previously used.  Also used to
-emphasise some points.
+<!--
+
+  AO: The following reflects what will happen (I hope) when the
+  filename, command, and option tags are formatted correctly.
+
+  gkh: gotta trust the tools people...
+
+-->
+Indicates commands and command options, files, directories, usernames, and
+hostnames. Also indicates nomenclature that we've not previously used,
+emphasized words, and new terms.
 </para>
 </listitem>
 </varlistentry>
@@ -146,8 +159,9 @@ emphasise some points.
 <term><literal>Constant Width</literal></term>
 <listitem>
 <para>
-Indicates commands and command options, files, directories, usernames, and
-hostnames.  Also used to show the command output, and the contents of text
+Indicates strings used for kernel configuration, as well as a few
+special terms such as device names and distribution packages. Also
+used to show the command output, and the contents of text
 and program files.
 </para>
 </listitem>
@@ -252,9 +266,11 @@ Christian Benvenuti,
 Christian Morgner,
 Golden G. Richard III,
 Jerry Cooperstein,
-Michael Boerner, and
+Michael Boerner,
+Rik van Riel, and
 Robert Day.
-<!-- did I forget anyone?  -->
+<!-- did I forget anyone?
+     AO: I just added Rik.  -->
 Any remaining problems are due to me, and not their excellent skills.
 </para>
 
