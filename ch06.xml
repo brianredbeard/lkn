@@ -1,15 +1,18 @@
 <chapter id="LKN-installing">
 
 <title>
-Installing a kernel and booting with it
+Installing and Booting From a Kernel
 </title>
 
 <para>
-Now that you have a kernel successfully built, it is time to install it and
-attempt to boot your new kernel.  Note, for this chapter, all of the
-commands need to be run as the root user, which is different from the other
-chapters.  This can either be done by using the <command>sudo</command>
-program, or the <command>su</command> command.
+Previous chapters showed you how to download and build your
+kernel. Now that you have an executable file&mdash;along with any
+modules you built&mdash;it is time to install the kernel and
+attempt to boot it.  In this chapter, unlike earlier ones, all of the
+commands need to be run as the root user.  This can be done by
+prefixing each command with <command>sudo</command>, by using the
+<command>su</command> command to become <emphasis>root</emphasis>, or actually by logging
+in as <emphasis>root</emphasis>.
 </para>
 
 <para>
@@ -21,8 +24,8 @@ Password:
 Makefile
 </screen>
 Enter either your own password at the password prompt, or the password of
-the system administrator (root).  It depends on how the
-<command>sudo</command> command is set up as to which is necessary.  If
+the system administrator (root). The choice depends on how the
+<command>sudo</command> command is set up.  If
 this is successful, and you see the line containing:
 <screen>
 Makefile
@@ -40,15 +43,14 @@ Password:
 exit
 $
 </screen>
-At the password prompt, enter in the password of the system administrator
-(root).  When the <command>su</command> program successfully accepts the
+At the password prompt, enter the password of the system administrator
+(<emphasis>root</emphasis>).  When the <command>su</command> program successfully accepts the
 password, you are transferred to running everything with full root
-privileges.  Be very careful while as root, and only do the minimum needed
-and then exit the program to continue back as your normal user account.
+privileges.  Be very careful while as <emphasis>root</emphasis>, and do only the minimum needed; then exit the program to continue back as your normal user account.
 </para>
 
 <sect1>
-<title>Using the distro install scripts</title>
+<title>Using a Distribution's Installation Scripts</title>
 <para>
 Almost all distributions come with a script called
 <command>installkernel</command> that can be used by the kernel build
@@ -57,26 +59,28 @@ modify the bootloader so that nothing extra needs to be done by the
 developer.
 <footnote>
 <para>
-Notable ones to this exception are Gentoo and other "from scratch" type
-distributions, which expect the user to know how to install their kernel on
-their own.  These types of distributions always include documentation on
-how to install a new kernel, so it should be consulted for the exact method
+Notable exceptions to this rule are Gentoo and other "from scratch" types
+distributions, which expect users to know how to install kernels on
+their own.  These types of distributions include documentation on
+how to install a new kernel, so consult it for the exact method
 required.
 </para>
-<para>
-For distributions that do have this script, it is usually contained in a
-package called <literal>mkinitrd</literal>, so try to install that if you
-can not find the script on your machine.
-</para>
 </footnote>
-To use this method of installing a kernel, first do:
+<note>
+<para>
+Distributions that offer <command>installkernel</command> usually put it in a
+package called <literal>mkinitrd</literal>, so try install that package if you
+cannot find the script on your machine.
+</para>
+</note>
+If you have built any modules and want to use use this method to install a kernel, first enter:
 <screen>
 # <userinput>make modules_install</userinput>
 </screen>
-This will install all of the modules that you have built and place them in
+This will install all the modules that you have built and place them in
 the proper location in the filesystem for the new kernel to properly find.
-Modules are placed in the <filename>/lib/modules/KERNEL_VERSION/</filename>
-directory, where <literal>KERNEL_VERSION</literal> is the kernel version of
+Modules are placed in the <filename>/lib/modules/</filename><replaceable>KERNEL_VERSION</replaceable>
+directory, where <replaceable>KERNEL_VERSION</replaceable> is the kernel version of
 the new kernel you have just built.
 </para>
 
@@ -86,7 +90,7 @@ must be installed:
 <screen>
 # <userinput>make install</userinput>
 </screen>
-This will cause the following steps to happen:
+This will kick off the following process:
 <itemizedlist>
 <listitem>
 <para>
@@ -96,14 +100,20 @@ built properly.
 </listitem>
 <listitem>
 <para>
-The build system will install the static kernel portion into /boot
-directory and name it based on the kernel version of the built kernel.
+The build system will install the static kernel portion into the <filename>/boot</filename>
+directory and name this executable file based on the kernel version of the built kernel.
 </para>
 </listitem>
 
 <listitem>
 <para>
-Any needed initial ram disk images will be automatically created, using the
+<!--
+
+  AO: I usually see "ramdisk" as one word (including in this book), so
+  I'm going to keep that consistent.
+
+-->
+Any needed initial ramdisk images will be automatically created, using the
 modules that have just been installed during the
 <literal>modules_install</literal> phase.
 </para>
@@ -112,7 +122,8 @@ modules that have just been installed during the
 <listitem>
 <para>
 The bootloader program will be properly notified that a new kernel is
-present and it will be added to the approiate menu to be selected from the
+present, and it will be added to the appropriate menu so the user can
+select it the
 next the machine is booted.
 </para>
 </listitem>
@@ -123,7 +134,7 @@ next the machine is booted.
 <para>
 After this is finished, the kernel is successfully installed, and you can
 safely reboot and try out your new kernel image.  Note that this
-installation does not overwrite any older kernel images so if there is a
+installation does not overwrite any older kernel images, so if there is a
 problem with your new kernel image, the old kernel can be selected at boot
 time.
 </para>
@@ -131,12 +142,12 @@ time.
 </sect1>
 
 <sect1>
-<title>Installing by hand</title>
+<title>Installing By Hand</title>
 
 <para>
-If your distro does not have a <command>installkernel</command> command, or
-you wish to just do it all by hand to understand the steps involved, here
-are the steps involved to do this.
+If your distributtion does not have a <command>installkernel</command> command, or
+you wish to just do the work by hand to understand the steps involved, here
+are the steps involved.
 </para>
 
 <orderedlist>
@@ -152,44 +163,44 @@ The modules must be installed:
 <listitem>
 <para>
 The static kernel image must be copied into the <filename>/boot</filename>
-directory.  To do this for a <literal>i386</literal> based kernel, do the
+directory. For an <literal>i386</literal>-based kernel, do the
 following:
 <screen>
 # <userinput>make kernelversion</userinput>
 2.6.17.11
 </screen>
 Note that the kernel version will probably be different for your kernel.
-Use this value in place of the text <literal>KERNEL_VERSION</literal> in
+Use this value in place of the text <replaceable>KERNEL_VERSION</replaceable> in
 all of the following steps:
 <screen>
-# <userinput>cp arch/i386/boot/bzImage /boot/bzImage-KERNEL_VERSION</userinput>
-# <userinput>cp System.map /boot/System.map-KERNEL_VERSION</userinput>
+# <userinput>cp arch/i386/boot/bzImage /boot/bzImage-<replaceable>KERNEL_VERSION</replaceable></userinput>
+# <userinput>cp System.map /boot/System.map-<replaceable>KERNEL_VERSION</replaceable></userinput>
 </screen>
 </para>
 </listitem>
 
 <listitem>
 <para>
-Modify the bootloader to have it know about the new kernel.  See the
-different sections below for how to do this.
+Modify the bootloader so it knows about the new kernel. This involves
+editing a configuration file for the bootloader you use, and is
+covered later in <xref linkend="LKN-installing-bootloader" /> for the
+GRUB and LILO bootloaders.
 </para>
 </listitem>
 </orderedlist>
 
 <para>
-If, after booting the new kernel, the boot process does not work properly,
-usually a initial ramdisk image is needed.  To create this properly, use
+If the boot process does not work properly, it's usually because an initial ramdisk image is needed.  To create this properly, use
 the steps in the beginning of this chapter for installing a kernel
-automatically, as the distribution install scripts know how to properly
-create the ramdisk using the needed scripts and tools.  As each
+automatically, because the distribution install scripts know how to properly
+create the ramdisk using the needed scripts and tools.  Because each
 distribution does this differently, it is beyond the scope of this book to
-cover all of the different methods of building the ramdisk image to work
-properly.
+cover all of the different methods of building the ramdisk image.
 </para>
 
 <para>
 Here is a handy script that can be used to install the kernel automatically
-instead of having to type the above commands all the time:
+instead of having to type the previous commands all the time:
 <programlisting>
 #!/bin/sh
 #
@@ -203,7 +214,7 @@ for TAG in VERSION PATCHLEVEL SUBLEVEL EXTRAVERSION ; do
 done
 SRC_RELEASE=$VERSION.$PATCHLEVEL.$SUBLEVEL$EXTRAVERSION
 
-# figure out the arch
+# figure out the architecture
 ARCH=`grep "CONFIG_ARCH " include/linux/autoconf.h | cut -f 2 -d "\""`
 
 # copy the kernel image
@@ -218,33 +229,32 @@ echo "Installed $SRC_RELEASE for $ARCH"
 
 </sect1>
 
-<sect1>
-<title>Modifying the bootloader for the new kernel</title>
+<sect1 id="LKN-installing-bootloader">
+<title>Modifying the Bootloader For the New Kernel</title>
 
 <para>
-There are two common Linux kernel bootloaders, <command>grub</command> and
-<command>lilo</command>.  <command>grub</command> is the more commonly used
-one in modern distributions, and does some things a little easier than
-<command>lilo</command>, but <command>lilo</command> is still used in many
-different places.
+There are two common Linux kernel bootloaders: GRUB and LILO.  GRUB
+is the one more commonly used
+in modern distributions, and does some things a little more easily than
+LILO, but LILO is still seen as well. We'll cover both in this section.
 </para>
 
 <para>
-To determine which kind of bootloader you use to boot with, look in the
+To determine which bootloader your system uses, look in the
 <filename>/boot/</filename> directory.  If there is a
 <filename>grub</filename> subdirectory:
 <screen>
 $ <userinput>ls -F /boot | grep grub</userinput>
 grub/
 </screen>
-then you are using the <command>grub</command> program to boot with.  If
-this directory is not present, then look for the presence of the
+then you are using the GRUB program to boot with.  If
+this directory is not present, look for the presence of the
 <filename>/etc/lilo.conf</filename> file:
 <screen>
 $ <userinput>ls /etc/lilo.conf</userinput>
 /etc/lilo.conf
 </screen>
-If this is present, then you are using the <command>lilo</command> program
+If this is present, you are using the LILO program
 to boot with.
 </para>
 
@@ -255,13 +265,13 @@ are using.
 </para>
 
 <sect2>
-<title><command>grub</command></title>
+<title>GRUB</title>
 
 <para>
-To let <command>grub</command> know that a new kernel is present, all that
-is needed is to modify the <filename>/boot/grub/menu.lst</filename> file.
+To let GRUB know that a new kernel is present, all you need
+to do is modify the <filename>/boot/grub/menu.lst</filename> file.
 For full details on the structure of this file, and all of the different
-options available, please see the <command>grub</command> info pages:
+options available, please see the GRUB info pages:
 <screen>
 $ <userinput>info grub</userinput>
 </screen>
@@ -269,7 +279,7 @@ $ <userinput>info grub</userinput>
 
 <para>
 The easiest way to add a new kernel entry to the
-<filename>/boot/grub/menu.lst</filename> file, is to copy an existing
+<filename>/boot/grub/menu.lst</filename> file is to copy an existing
 entry.  For example, consider the following <filename>menu.lst</filename>
 file from a Gentoo system:
 <programlisting>
@@ -287,17 +297,24 @@ title 2.6.16
 	kernel /bzImage-2.6.16 root=/dev/sda2 vga=0x0305
 </programlisting>
 The line starting with the word <literal>title</literal> defines a new
-kernel entry.  Simply copy the lines from one instance of the
-<literal>title</literal> word to the next one:
+kernel entry, so this file contains two entries.  Simply copy the lines from one instance of the
+<literal>title</literal> word to the next one, such as :
 <programlisting>
 title 2.6.16.11
 	root (hd0,0)
 	kernel /bzImage-2.6.16.11 root=/dev/sda2 vga=0x0305
 </programlisting>
 to the end of the file, and edit the version number to contain the version
-number of the new kernel you just installed.  In our example, we installed
+number of the new kernel you just installed.
+<!--
+
+  AO: I thought the following detail was worth some explanation.
+
+-->
+The title does not matter, so long as it is unique, but it is
+displayed in the boot menu, so you should make it something meaningful. In our example, we installed
 the <literal>2.6.17.11</literal> kernel, so the final copy of the file
-would look like:
+looks like:
 <programlisting>
 timeout 300
 default 0
@@ -319,9 +336,9 @@ title 2.6.17.11
 </para>
 
 <para>
-When finished editing the file, reboot the system and ensure that the new
-kernel image name comes up in the boot menu.  Use the down arrow to
-highlight the new kernel version, and press <literal>Enter</literal> to
+After you save the file, reboot the system and ensure that the new
+kernel image's title comes up in the boot menu.  Use the down arrow to
+highlight the new kernel version, and press Enter to
 boot the new kernel image.
 </para>
 
@@ -329,21 +346,26 @@ boot the new kernel image.
 	Should I show an example of a SuSE and Fedora grub file here?  They
 	are more complex.  If so, can someone send me a Fedora grub file, I
 	don't have any around...
+
+	AO: I think one file is enough. I have both Ubuntu and Fedora
+	GRUB files, but I think you've said enough for people to be
+	able to make their edits.
+
 -->
 
 </sect2>
 
 
 <sect2>
-<title><command>lilo</command></title>
+<title>LILO</title>
 
 <para>
-To let <command>lilo</command> know that a new kernel is present, the
-<filename>/etc/lilo.conf</filename> file must be modified, and the
-<command>lilo</command> program must be run to apply the changes made to
+To let LILO know that a new kernel is present, you must modify the
+<filename>/etc/lilo.conf</filename> configuration file and then run the
+<command>lilo</command> command to apply the changes made to
 the configuration file.  For full details on the structure of the
-<command>lilo</command> configuration file, please see the
-<command>lilo</command> man page:
+LILO configuration file, please see the
+LILO man page:
 <screen>
 $ <userinput>man lilo</userinput>
 </screen>
@@ -351,8 +373,8 @@ $ <userinput>man lilo</userinput>
 
 <para>
 The easiest way to add a new kernel entry to the
-<filename>/etc/lilo.conf</filename> file, is to copy an existing
-entry.  For example, consider the following <command>lilo</command>
+<filename>/etc/lilo.conf</filename> file is to copy an existing
+entry.  For example, consider the following LILO
 configuration file from a Gentoo system:
 <programlisting>
 boot=/dev/hda
@@ -371,8 +393,8 @@ image=/boot/bzImage-2.6.12
 	root=/dev/hda2
 </programlisting>
 The line starting with the word <literal>image=</literal> defines a new
-kernel entry.  Simply copy the lines from one instance of the
-<literal>image=</literal> word to the next one:
+kernel entry, so this file contains two entries.  Simply copy the lines from one instance of the
+<literal>image=</literal> word to the next one, such as:
 <programlisting>
 image=/boot/bzImage-2.6.15
 	label=2.6.15
@@ -380,9 +402,10 @@ image=/boot/bzImage-2.6.15
 	root=/dev/hda2
 </programlisting>
 to the end of the file, and edit the version number to contain the version
-number of the new kernel you just installed.  In our example, we installed
+number of the new kernel you just installed. The label does not matter, so long as it is unique, but it is
+displayed in the boot menu, so you should make it something meaningful. In our example, we installed
 the <literal>2.6.17.11</literal> kernel, so the final copy of the file
-would look like:
+looks like:
 <programlisting>
 boot=/dev/hda
 prompt
@@ -407,15 +430,15 @@ image=/boot/bzImage-2.6.17
 </para>
 
 <para>
-When finished editing the file, the <filename>/sbin/lilo</filename> program
-must be run to write the configuration changes out to the boot section of
+After you save the file, run the <filename>/sbin/lilo</filename> program
+to write the configuration changes out to the boot section of
 the disk:
 <screen>
 # /sbin/lilo
 </screen>
 Now the system can be safely rebooted.  The new kernel choice can be seen
 in the list of kernels that are available at boot time.  Use the down arrow
-to highlight the new kernel version, and press <literal>Enter</literal> to
+to highlight the new kernel version, and press Enter to
 boot the new kernel image.
 </para>
 
@@ -426,13 +449,22 @@ boot the new kernel image.
 
 	I feel this is a bit short, but I can't think of anything else that
 	is needed.  It is sufficient?
+
+	AO: I think this is fine; it really is simple in real life.
 -->
 
 </sect2>
 </sect1>
 
 <!-- Do we need a "what to do when it goes wrong" section here?  Or are we
-out of space? -->
+out of space?
+
+AO: Besides forgetting to run LILO, the main thing that can go wrong
+ is the initrd, and you've already said it's out of scope. I suppose
+ people could have problems with modules too, but I think you've
+ covered what they need. So you've written enough.
+
+ -->
 
 
 
