@@ -3,7 +3,7 @@
 <title>Introduction</title>
 
 <para>
-Despite it's large code base (over 7 million lines of code), the Linux
+Despite its large code base (over 7 million lines of code), the Linux
 kernel is the most flexible operating system that has ever been created.
 It can be tuned for a wide range of different systems, running on
 everything from a radio-controlled model helicoptor, to a cellphone, to the
@@ -58,20 +58,19 @@ books and material that can give you more background.
 <sect1>
 <title>Using this book</title>
 
-<para>
-The most important thing to remember while working through the steps in
-this book is
-</para>
 <warning>
 <para>
 Do not configure or build your kernel with superuser permissions enabled!
 </para>
 </warning>
+
 <para>
+The previous warning is the most important thing to remember while working through the steps in
+this book.
 Everything in this book, from downloading the kernel source code,
-uncompressing it, configuring the kernel and building it should be done as
+uncompressing it, configuring the kernel, and building it should be done as
 a normal user on the machine.  Only the two or three commands it takes to
-install a new kernel should be done as the superuser (root).
+install a new kernel should be done as the superuser (<emphasis>root</emphasis>).
 </para>
 
 <para>
@@ -80,20 +79,18 @@ special files in the <filename>/dev</filename> directory to be deleted if
 the user had superuser permissions while building the Linux kernel.
 <footnote>
 <para>
-This took quite a while to fix as none of the primary kernel developers
-were suffering from the issue because they do not build kernels as root.
+This took quite a while to fix, as none of the primary kernel
+developers build kernels as root, so they did not suffer from the bug.
 A number of weeks went by before it was finally determined that the act of
 building the kernel was the problem.
-</para>
-<para>
-A number of kernel developers half-heartily suggested that the bug remain
+A number of kernel developers half-jokingly suggested that the bug remain
 in, to help prevent anyone from building the kernel as root, but calmer
 heads prevailed and the bug in the build system was fixed.
 </para>
 </footnote>
 There are also issues that can easily arise when uncompressing the Linux
 kernel with superuser rights, as some of the files in the kernel
-source package will not end up with the proper permissions and cause build
+source package will not end up with the proper permissions and will cause build
 errors later.
 </para>
 
