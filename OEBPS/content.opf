@@ -4,9 +4,9 @@
         <dc:identifier xmlns:dc="http://purl.org/dc/elements/1.1/" id="bookid">urn:isbn:0-59610-079-5</dc:identifier>
         <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">Linux Kernel in a Nutshell</dc:title>
         <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf" opf:file-as="Kroah-Hartman, Greg">Greg Kroah-Hartman</dc:creator>
-        <dc:date event="publication">2006-12-24</dc:date>
-        <dc:date event="modification">2014-08-28</dc:date>
-        <dc:date event="creation">2014-08-28</dc:date>
+        <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/" event="publication">2006-12-24</dc:date>
+        <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/" event="modification">2014-08-28</dc:date>
+        <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/" event="creation">2014-08-28</dc:date>
         <dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">en</dc:language>
         <meta name="cover" content="cover-image"/>
     </metadata>
